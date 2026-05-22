@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debt-Free.World — Your Personalized Path to Financial Freedom</title>
+  <meta name="description" content="Get your free personalized 90-day debt-free plan. Country-specific resources, government support, and benefits — in your language. No credit card required." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────────────── */
+    :root {
+      --green:       #166534;
+      --green-light: #dcfce7;
+      --green-mid:   #bbf7d0;
+      --green-dark:  #0f4a26;
+      --text:        #111111;
+      --muted:       #6b7280;
+      --border:      #d1fae5;
+      --bg:          #ffffff;
+      --card-bg:     #f0fdf4;
+      --radius:      12px;
+      --shadow:      0 4px 24px rgba(22,101,52,0.10);
+    }
+
+    /* ── RESET ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { cursor: pointer; font-family: inherit; border: none; }
+
+    /* ── NAV ────────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--green);
+      letter-spacing: -0.01em;
+    }
+    .nav-tagline {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: none;
+    }
+    @media (min-width: 640px) { .nav-tagline { display: block; } }
+
+    /* ── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      padding: 72px 24px 56px;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: var(--green); }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      color: var(--green);
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── FORM CARD ──────────────────────────────────────────────── */
+    .form-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow);
+    }
+    @media (max-width: 480px) { .form-card { padding: 28px 20px; } }
+
+    .form-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .form-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .free-badge {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+    }
+
+    .field-group { margin-bottom: 18px; }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .required { color: var(--green); margin-left: 2px; }
+    select, input[type="text"], input[type="number"], input[type="email"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: #111111;
+      background: #fff;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    select:focus, input:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(22,101,52,0.12);
+    }
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: "▾";
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 0.9rem;
+    }
+
+    .fields-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 480px) { .fields-row { grid-template-columns: 1fr; } }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--green);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+    .submit-btn:hover { background: var(--green-dark); }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+    .form-note strong { color: var(--text); }
+
+    /* ── LOADING ────────────────────────────────────────────────── */
+    #loading {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 3px solid var(--green-mid);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading p { color: var(--muted); font-size: 0.95rem; }
+
+    /* ── RESULT ─────────────────────────────────────────────────── */
+    #result { display: none; }
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .result-icon {
+      width: 44px; height: 44px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .result-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+    .result-subtitle { font-size: 0.85rem; color: var(--muted); }
+
+    .plan-content {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+    .plan-content::-webkit-scrollbar { width: 6px; }
+    .plan-content::-webkit-scrollbar-track { background: var(--green-light); border-radius: 3px; }
+    .plan-content::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
+
+    /* ── EMAIL CAPTURE ──────────────────────────────────────────── */
+    .email-section {
+      margin-top: 24px;
+      background: var(--green);
+      border-radius: var(--radius);
+      padding: 28px;
+      color: #fff;
+    }
+    .email-section h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+    .email-section p { font-size: 0.88rem; opacity: 0.85; margin-bottom: 16px; }
+    .email-row { display: flex; gap: 10px; }
+    .email-row input[type="email"] {
+      flex: 1;
+      color: #111;
+    }
+    .email-submit {
+      padding: 12px 20px;
+      background: #fff;
+      color: var(--green);
+      font-weight: 600;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .email-submit:hover { opacity: 0.9; }
+    .email-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .email-success { color: var(--green-mid); font-size: 0.9rem; margin-top: 10px; display: none; }
+
+    .reset-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .reset-btn:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── ERROR ──────────────────────────────────────────────────── */
+    .error-msg {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      border-radius: var(--radius);
+      padding: 16px;
+      color: #dc2626;
+      font-size: 0.9rem;
+      margin-top: 16px;
+    }
+
+    /* ── PRICING ────────────────────────────────────────────────── */
+    .pricing-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      text-align: center;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 48px;
+      font-size: 1rem;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+
+    .plan-card {
+      border-radius: 16px;
+      padding: 32px 28px;
+      position: relative;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+    }
+    .plan-card.featured {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .plan-card.coming-soon {
+      background: #f9fafb;
+      border-color: #e5e7eb;
+      opacity: 0.7;
+    }
+    .plan-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .plan-card:not(.featured):not(.coming-soon) .plan-badge { background: var(--green-light); color: var(--green-dark); }
+    .plan-card.featured .plan-badge { background: rgba(255,255,255,0.2); color: #fff; }
+    .plan-card.coming-soon .plan-badge { background: #e5e7eb; color: #9ca3af; }
+
+    .plan-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+    .plan-price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .plan-price span { font-size: 1rem; font-weight: 400; }
+    .plan-desc {
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+    .plan-card.featured .plan-desc { color: rgba(255,255,255,0.8); }
+    .plan-card.coming-soon .plan-name,
+    .plan-card.coming-soon .plan-price,
+    .plan-card.coming-soon .plan-desc { color: #6b7280; }
+
+    .plan-features { list-style: none; margin-bottom: 28px; }
+    .plan-features li {
+      display: flex; gap: 10px;
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+    .plan-features li::before {
+      content: "✓";
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .plan-card:not(.featured) .plan-features li::before { color: var(--green); }
+    .plan-card.featured .plan-features li { color: rgba(255,255,255,0.9); }
+    .plan-card.featured .plan-features li::before { color: var(--green-mid); }
+    .plan-card.coming-soon .plan-features li { color: #9ca3af; }
+    .plan-card.coming-soon .plan-features li::before { color: #9ca3af; }
+
+    .plan-cta {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+      font-family: inherit;
+      border: none;
+    }
+    .plan-card:not(.featured) .plan-cta {
+      background: var(--green);
+      color: #fff;
+    }
+    .plan-card:not(.featured) .plan-cta:hover { background: var(--green-dark); }
+    .plan-card.featured .plan-cta {
+      background: #fff;
+      color: var(--green);
+    }
+    .plan-card.featured .plan-cta:hover { background: var(--green-light); }
+    .plan-card.coming-soon .plan-cta {
+      background: #e5e7eb;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+    .disclaimer {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* ── TOGETHER BAR ───────────────────────────────────────────── */
+    .together-bar {
+      text-align: center;
+      padding: 60px 24px;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 80px;
+    }
+    .together-bar p {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--green);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    footer strong { color: var(--green); }
+
+    /* ── TRANSITIONS ────────────────────────────────────────────── */
+    .fade-in { animation: fadeIn 0.4s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Debt-Free.World</div>
+    <div class="nav-tagline">We do this together ✦</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Free · No credit card · 20+ languages</div>
+    <h1>You deserve to be<br /><span>debt-free.</span><br />Let's get you there.</h1>
+    <p>Get your personalized 90-day plan — with country-specific support services, government benefits, and resources. In your language. In minutes.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">90</div>
+        <div class="stat-label">Day plan</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Languages</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0 €</div>
+        <div class="stat-label">Always free</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="free-badge">Free Plan</div>
+      <h2 class="form-title">Create your plan</h2>
+      <p class="form-subtitle">Fill in your details — we'll build a personalized plan in seconds.</p>
+
+      <!-- FORM STATE -->
+      <div id="form-state">
+        <!-- Language -->
+        <div class="field-group">
+          <label for="language">Language <span class="required">*</span></label>
+          <div class="select-wrap">
+            <select id="language" required>
+              <option value="en">English</option>
+              <option value="fi">Suomi</option>
+              <option value="sv">Svenska</option>
+              <option value="de">Deutsch</option>
+              <option value="fr">Français</option>
+              <option value="es">Español</option>
+              <option value="pt">Português</option>
+              <option value="it">Italiano</option>
+              <option value="nl">Nederlands</option>
+              <option value="pl">Polski</option>
+              <option value="ru">Русский</option>
+              <option value="uk">Українська</option>
+              <option value="ro">Română</option>
+              <option value="hu">Magyar</option>
+              <option value="cs">Čeština</option>
+              <option value="tr">Türkçe</option>
+              <option value="ar">العربية</option>
+              <option value="hi">हिन्दी</option>
+              <option value="zh">中文</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Country -->
+        <div class="field-group">
+          <label for="country">Country of residence <span class="required">*</span></label>
+          <div class="select-wrap">
+            <select id="country" required>
+              <option value="">Select your country…</option>
+              <option value="Finland">Finland</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Norway">Norway</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Spain">Spain</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Italy">Italy</option>
+              <option value="Poland">Poland</option>
+              <option value="Czech Republic">Czech Republic</option>
+              <option value="Hungary">Hungary</option>
+              <option value="Romania">Romania</option>
+              <option value="Austria">Austria</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="United States">United States</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="South Africa">South Africa</option>
+              <option value="India">India</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Turkey">Turkey</option>
+              <option value="Ukraine">Ukraine</option>
+              <option value="Russia">Russia</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Debt & Income -->
+        <div class="fields-row">
+          <div class="field-group">
+            <label for="debt_amount">Total debt (€) <span class="required">*</span></label>
+            <input type="number" id="debt_amount" placeholder="e.g. 8500" min="1" required />
+          </div>
+          <div class="field-group">
+            <label for="income">Monthly income (€) <span class="required">*</span></label>
+            <input type="number" id="income" placeholder="e.g. 1800" min="0" required />
+          </div>
+        </div>
+
+        <!-- Debt type -->
+        <div class="field-group">
+          <label for="debt_type">Type of debt</label>
+          <div class="select-wrap">
+            <select id="debt_type">
+              <option value="mixed">Mixed / Multiple types</option>
+              <option value="credit card">Credit card debt</option>
+              <option value="consumer loan">Consumer loan</option>
+              <option value="student loan">Student loan</option>
+              <option value="medical debt">Medical debt</option>
+              <option value="mortgage">Mortgage</option>
+              <option value="tax debt">Tax debt</option>
+              <option value="rent arrears">Rent arrears</option>
+              <option value="overdraft">Overdraft</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="generatePlan()">
+          Get my free plan →
+        </button>
+
+        <div class="error-msg" id="error-msg"></div>
+
+        <p class="form-note">
+          <strong>100% free.</strong> No credit card. No hidden fees.<br />
+          Your data is used only to generate your plan.
+        </p>
+      </div>
+
+      <!-- LOADING STATE -->
+      <div id="loading">
+        <div class="spinner"></div>
+        <p>Building your personalized plan…<br />This takes about 15–20 seconds.</p>
+      </div>
+
+      <!-- RESULT STATE -->
+      <div id="result" class="fade-in">
+        <div class="result-header">
+          <div class="result-icon">📋</div>
+          <div>
+            <div class="result-title">Your 90-Day Plan</div>
+            <div class="result-subtitle">Personalized for your situation</div>
+          </div>
+        </div>
+
+        <div class="plan-content" id="plan-content"></div>
+
+        <!-- Email capture -->
+        <div class="email-section">
+          <h3>Save your plan</h3>
+          <p>Enter your email to receive a copy — and get weekly tips to stay on track.</p>
+          <div class="email-row">
+            <input type="email" id="email-input" placeholder="your@email.com" />
+            <button class="email-submit" id="email-submit-btn" onclick="subscribeEmail()">Send →</button>
+          </div>
+          <div class="email-success" id="email-success">✓ Sent! Check your inbox.</div>
+        </div>
+
+        <button class="reset-btn" onclick="resetForm()">← Create a new plan</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOGETHER BAR -->
+  <div class="together-bar">
+    <p>"We do this together ✦"</p>
+  </div>
+
+  <!-- PRICING -->
+  <section class="pricing-section">
+    <div class="section-label">Plans</div>
+    <h2 class="section-title">Start free. Go further when ready.</h2>
+    <p class="section-sub">No pressure. The free plan is genuinely free — forever.</p>
+
+    <div class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="plan-card">
+        <div class="plan-badge">Free forever</div>
+        <div class="plan-name">Free</div>
+        <div class="plan-price">0 €</div>
+        <div class="plan-desc">Everything you need to start your journey.</div>
+        <ul class="plan-features">
+          <li>Personalized 90-day debt plan</li>
+          <li>Country-specific support services & links</li>
+          <li>Government benefits you may qualify for</li>
+          <li>Works in 20+ languages</li>
+          <li>No credit card. No hidden fees.</li>
+        </ul>
+        <button class="plan-cta" onclick="document.querySelector('.form-card').scrollIntoView({behavior:'smooth'})">Get started free</button>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="plan-card featured">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">27 € <span>one-time</span></div>
+        <div class="plan-desc">Or 9 €/month. Full household support.</div>
+        <ul class="plan-features">
+          <li>Everything in Free</li>
+          <li>Full household budget analysis</li>
+          <li>Monthly progress tracking</li>
+          <li>Bank negotiation guides</li>
+          <li>Creditor communication templates</li>
+        </ul>
+        <button class="plan-cta">Coming soon</button>
+      </div>
+
+      <!-- INCOME BUILDER -->
+      <div class="plan-card coming-soon">
+        <div class="plan-badge">Coming soon</div>
+        <div class="plan-name">Income Builder</div>
+        <div class="plan-price">19 € <span>/month</span></div>
+        <div class="plan-desc">Build income. Break the cycle.</div>
+        <ul class="plan-features">
+          <li>Everything in Premium</li>
+          <li>Private anonymous community</li>
+          <li>Monthly live Q&A</li>
+          <li>Remote work opportunities by skill level</li>
+          <li>Daily check-in &amp; accountability</li>
+        </ul>
+        <button class="plan-cta" disabled>Notify me</button>
+      </div>
+
+    </div>
+
+    <p class="disclaimer">* Bank guides and creditor templates are general models, not country-specific legal advice.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Debt-Free.World</strong> · Founded by Vilma Paasikivi, Nokia, Finland</p>
+    <p style="margin-top: 8px;">© 2026 Debt-Free.World · Privacy Policy · Terms of Service</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const WORKER = "https://debt-free-proxy.amlivbusiness.workers.dev";
+
+    function showState(state) {
+      document.getElementById("form-state").style.display  = state === "form"    ? "block" : "none";
+      document.getElementById("loading").style.display     = state === "loading" ? "block" : "none";
+      document.getElementById("result").style.display      = state === "result"  ? "block" : "none";
+    }
+
+    function showError(msg) {
+      const el = document.getElementById("error-msg");
+      el.textContent = msg;
+      el.style.display = "block";
+      document.getElementById("submit-btn").disabled = false;
+    }
+
+    function hideError() {
+      document.getElementById("error-msg").style.display = "none";
+    }
+
+    async function generatePlan() {
+      hideError();
+
+      const country    = document.getElementById("country").value.trim();
+      const debt_amount = document.getElementById("debt_amount").value.trim();
+      const income     = document.getElementById("income").value.trim();
+      const debt_type  = document.getElementById("debt_type").value;
+      const language   = document.getElementById("language").value;
+
+      if (!country) return showError("Please select your country.");
+      if (!debt_amount || Number(debt_amount) <= 0) return showError("Please enter a valid debt amount.");
+      if (!income || Number(income) < 0) return showError("Please enter your monthly income.");
+
+      document.getElementById("submit-btn").disabled = true;
+      showState("loading");
+
+      try {
+        const res = await fetch(`${WORKER}/api/plan`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ country, debt_amount, income, debt_type, language }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || data.error) {
+          showState("form");
+          showError(data.error || "Something went wrong. Please try again.");
+          return;
+        }
+
+        document.getElementById("plan-content").textContent = data.plan;
+        showState("result");
+        document.querySelector(".form-card").scrollIntoView({ behavior: "smooth" });
+
+      } catch (err) {
+        showState("form");
+        showError("Network error. Please check your connection and try again.");
+      }
+    }
+
+    async function subscribeEmail() {
+      const email   = document.getElementById("email-input").value.trim();
+      const country = document.getElementById("country").value;
+      const language = document.getElementById("language").value;
+      const btn     = document.getElementById("email-submit-btn");
+
+      if (!email || !email.includes("@")) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+
+      try {
+        const res = await fetch(`${WORKER}/api/subscribe`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, country, language }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && !data.error) {
+          document.getElementById("email-success").style.display = "block";
+          document.getElementById("email-input").style.display   = "none";
+          btn.style.display = "none";
+        } else {
+          btn.disabled = false;
+          btn.textContent = "Send →";
+          alert(data.error || "Could not subscribe. Please try again.");
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = "Send →";
+        alert("Network error. Please try again.");
+      }
+    }
+
+    function resetForm() {
+      document.getElementById("country").value     = "";
+      document.getElementById("debt_amount").value = "";
+      document.getElementById("income").value      = "";
+      document.getElementById("email-input").value = "";
+      document.getElementById("email-success").style.display = "none";
+      document.getElementById("email-input").style.display   = "";
+      document.getElementById("email-submit-btn").style.display = "";
+      document.getElementById("email-submit-btn").disabled = false;
+      document.getElementById("email-submit-btn").textContent = "Send →";
+      document.getElementById("submit-btn").disabled = false;
+      showState("form");
+    }
+
+    // Init
+    showState("form");
+  </script>
+</body>
+</html>
