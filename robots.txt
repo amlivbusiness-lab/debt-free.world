@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.debt-free.world/sitemap.xml
