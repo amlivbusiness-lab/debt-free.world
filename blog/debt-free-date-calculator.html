@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Debt-Free Date Calculator — When Will You Actually Be Debt-Free?</title>
+<meta name="description" content="Find your exact debt-free date in seconds. Free calculator shows you when you'll pay off every debt — and how to get there faster. No signup required."/>
+<link rel="canonical" href="https://www.debt-free.world/blog/debt-free-date-calculator"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Debt-Free Date Calculator — When Will You Actually Be Debt-Free?"/>
+<meta property="og:description" content="Enter your debt, interest rate, and payment. Get your exact debt-free date instantly — free."/>
+<meta property="og:url" content="https://www.debt-free.world/blog/debt-free-date-calculator"/>
+<meta property="og:site_name" content="Debt-Free.world"/>
+<meta property="article:published_time" content="2026-05-26T00:00:00Z"/>
+<meta property="article:author" content="Vilma Paasikivi"/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Article",
+      "headline":"Debt-Free Date Calculator — When Will You Actually Be Debt-Free?",
+      "datePublished":"2026-05-26",
+      "dateModified":"2026-05-26",
+      "author":{"@type":"Person","name":"Vilma Paasikivi"},
+      "publisher":{"@type":"Organization","name":"Debt-Free.world","logo":{"@type":"ImageObject","url":"https://www.debt-free.world/favicon.svg"}},
+      "mainEntityOfPage":{"@type":"WebPage","@id":"https://www.debt-free.world/blog/debt-free-date-calculator"}
+    },
+    {
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://www.debt-free.world"},
+        {"@type":"ListItem","position":2,"name":"Blog","item":"https://www.debt-free.world/blog"},
+        {"@type":"ListItem","position":3,"name":"Debt-Free Date Calculator","item":"https://www.debt-free.world/blog/debt-free-date-calculator"}
+      ]
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question","name":"How do I calculate my debt-free date?",
+          "acceptedAnswer":{"@type":"Answer","text":"Use the free calculator on this page: enter your current balance, interest rate (APR), and monthly payment. The calculator shows your exact payoff date and total interest paid. You can also try different payment amounts to see how much faster you'd be debt-free."}
+        },
+        {
+          "@type":"Question","name":"What happens if I pay more than the minimum?",
+          "acceptedAnswer":{"@type":"Answer","text":"Paying even €50–100 extra per month can cut years off your debt timeline. The calculator lets you test different payment amounts and instantly shows the difference in months and total interest saved."}
+        },
+        {
+          "@type":"Question","name":"What if I don't know my interest rate?",
+          "acceptedAnswer":{"@type":"Answer","text":"Check your loan agreement, bank app, or latest statement. Credit cards typically show APR. If you truly can't find it, use 18% as a conservative estimate for credit card debt and 8% for personal loans."}
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P67WN08EMJ');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#166534;--green-light:#dcfce7;--green-mid:#16a34a;
+  --text:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;
+  --bg:#ffffff;--bg-soft:#f9fafb;
+  --serif:'DM Serif Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+  --max:740px;
+}
+html{font-size:17px;scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased;}
+.site-nav{border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-logo{font-family:var(--serif);font-size:1.15rem;color:var(--green);text-decoration:none;}
+.nav-cta{background:var(--green);color:#fff;padding:8px 18px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;transition:background 0.2s;}
+.nav-cta:hover{background:#14532d;}
+.article-outer{max-width:var(--max);margin:0 auto;padding:0 20px 80px;}
+.breadcrumb{font-size:0.8rem;color:var(--muted);padding:20px 0 0;}
+.breadcrumb a{color:var(--muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--green);}
+.breadcrumb span{margin:0 6px;}
+.article-hero{padding:32px 0 28px;border-bottom:1px solid var(--border);margin-bottom:40px;}
+.article-tag{display:inline-block;background:var(--green-light);color:var(--green);font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:14px;}
+h1.article-title{font-family:var(--serif);font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.2;color:var(--text);margin-bottom:16px;letter-spacing:-0.02em;}
+.article-intro{font-size:1.1rem;color:#374151;max-width:640px;margin-bottom:20px;line-height:1.7;}
+.article-meta{font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.article-meta strong{color:var(--text);}
+.toc{background:var(--bg-soft);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:8px;padding:20px 24px;margin-bottom:48px;}
+.toc-title{font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px;}
+.toc ol{padding-left:20px;display:flex;flex-direction:column;gap:6px;}
+.toc li{font-size:0.95rem;}
+.toc a{color:var(--green);text-decoration:none;font-weight:500;}
+.toc a:hover{text-decoration:underline;}
+.article-body h2{font-family:var(--serif);font-size:1.6rem;line-height:1.25;color:var(--text);margin:52px 0 16px;letter-spacing:-0.015em;}
+.article-body h3{font-size:1.05rem;font-weight:600;color:var(--text);margin:32px 0 10px;}
+.article-body p{margin-bottom:20px;color:#1f2937;}
+.article-body ul,.article-body ol{padding-left:22px;margin-bottom:20px;display:flex;flex-direction:column;gap:8px;}
+.article-body li{color:#1f2937;}
+.article-body strong{color:var(--text);}
+.article-body a{color:var(--green);text-decoration:underline;text-underline-offset:3px;}
+.article-body a:hover{color:var(--green-mid);}
+.callout{border-radius:8px;padding:18px 22px;margin:28px 0;font-size:0.97rem;}
+.callout-green{background:var(--green-light);border-left:4px solid var(--green);}
+.callout-gray{background:var(--bg-soft);border:1px solid var(--border);}
+.callout-title{font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;color:var(--green);}
+.callout-gray .callout-title{color:var(--muted);}
+
+/* ── CALCULATOR ── */
+.calc-card{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:28px 28px 24px;margin:32px 0;}
+.calc-title{font-family:var(--serif);font-size:1.3rem;margin-bottom:20px;color:var(--text);}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:520px){.calc-grid{grid-template-columns:1fr;}}
+.calc-field{display:flex;flex-direction:column;gap:5px;}
+.calc-field label{font-size:0.82rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
+.calc-field input{border:1.5px solid var(--border);border-radius:7px;padding:10px 12px;font-family:var(--sans);font-size:1rem;color:var(--text);outline:none;transition:border-color 0.2s;}
+.calc-field input:focus{border-color:var(--green);}
+.calc-hint{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.calc-btn{margin-top:18px;background:var(--green);color:#fff;border:none;border-radius:8px;padding:13px 28px;font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer;width:100%;transition:background 0.2s;}
+.calc-btn:hover{background:#14532d;}
+.calc-result{display:none;margin-top:22px;background:#fff;border:2px solid var(--green);border-radius:10px;padding:22px 24px;}
+.calc-result.show{display:block;}
+.result-date{font-family:var(--serif);font-size:1.8rem;color:var(--green);margin-bottom:6px;}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr 1fr;}}
+.result-item{text-align:center;padding:12px 8px;background:var(--bg-soft);border-radius:8px;}
+.result-num{font-family:var(--serif);font-size:1.3rem;color:var(--text);}
+.result-label{font-size:0.75rem;color:var(--muted);margin-top:2px;}
+.result-faster{margin-top:16px;padding:12px 16px;background:var(--green-light);border-radius:8px;font-size:0.9rem;color:var(--green);font-weight:600;text-align:center;}
+.calc-cta-link{display:block;text-align:center;margin-top:14px;font-size:0.9rem;}
+.table-wrap{overflow-x:auto;margin:28px 0;}
+table{width:100%;border-collapse:collapse;font-size:0.9rem;}
+thead th{background:var(--green);color:#fff;text-align:left;padding:11px 14px;font-weight:600;}
+tbody tr:nth-child(even){background:var(--bg-soft);}
+tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;vertical-align:top;}
+.tag-good{color:#15803d;font-weight:600;}
+.cta-block{background:var(--green);color:#fff;border-radius:12px;padding:36px 32px;text-align:center;margin:52px 0 40px;}
+.cta-block p{font-size:1.05rem;opacity:0.9;margin-bottom:20px;color:#fff;}
+.cta-block .cta-headline{font-family:var(--serif);font-size:1.7rem;margin-bottom:12px;color:#fff;}
+.cta-btn{display:inline-block;background:#fff;color:var(--green);font-weight:700;font-size:1rem;padding:13px 28px;border-radius:8px;text-decoration:none;transition:transform 0.15s,box-shadow 0.15s;}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+.cta-sub{margin-top:12px;font-size:0.8rem;opacity:0.7;color:#fff!important;}
+.faq{margin:40px 0;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:18px 0;font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-q .icon{color:var(--green);font-size:1.4rem;flex-shrink:0;transition:transform 0.2s;}
+.faq-q[aria-expanded="true"] .icon{transform:rotate(45deg);}
+.faq-a{display:none;padding-bottom:16px;color:#374151;font-size:0.97rem;line-height:1.7;}
+.faq-a.open{display:block;}
+.related{border-top:1px solid var(--border);padding-top:32px;margin-top:52px;}
+.related-title{font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:16px;}
+.related-links{display:flex;flex-direction:column;gap:10px;}
+.related-links a{color:var(--green);text-decoration:none;font-weight:500;font-size:0.97rem;}
+.related-links a:hover{text-decoration:underline;}
+.site-footer{border-top:1px solid var(--border);text-align:center;padding:28px 20px;font-size:0.8rem;color:var(--muted);}
+.site-footer a{color:var(--muted);text-decoration:none;}
+.site-footer a:hover{color:var(--green);}
+@media(max-width:480px){h1.article-title{font-size:1.75rem;}.cta-block{padding:28px 20px;}.cta-block .cta-headline{font-size:1.4rem;}}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Site navigation">
+  <a href="https://www.debt-free.world" class="nav-logo">Debt-Free ✦ World</a>
+  <a href="https://www.debt-free.world/#get-started" class="nav-cta">Get Free Plan →</a>
+</nav>
+<main>
+<div class="article-outer">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="https://www.debt-free.world">Home</a><span>›</span>
+    <a href="https://www.debt-free.world/blog">Blog</a><span>›</span>
+    Debt-Free Date Calculator
+  </nav>
+  <header class="article-hero">
+    <div class="article-tag">Calculator</div>
+    <h1 class="article-title">Debt-Free Date Calculator — When Will You Actually Be Debt-Free?</h1>
+    <p class="article-intro">Most people have no idea when their debt will actually be gone. This calculator tells you exactly — and shows you how much faster you could get there with a small payment increase.</p>
+    <div class="article-meta">
+      <span>By <strong>Vilma Paasikivi</strong></span><span>·</span>
+      <span>Updated <strong>May 2026</strong></span><span>·</span>
+      <span>5 min read + calculator</span>
+    </div>
+  </header>
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#calculator">Free debt-free date calculator</a></li>
+      <li><a href="#how-it-works">How the calculation works</a></li>
+      <li><a href="#what-affects-date">What actually moves your debt-free date</a></li>
+      <li><a href="#multiple-debts">Calculating with multiple debts</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </nav>
+
+  <article class="article-body">
+
+    <h2 id="calculator">Free debt-free date calculator</h2>
+    <p>Enter your balance, interest rate, and monthly payment. Your exact payoff date appears instantly.</p>
+
+    <div class="calc-card">
+      <div class="calc-title">Debt-Free Date Calculator</div>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label for="c-balance">Current balance (€)</label>
+          <input type="number" id="c-balance" placeholder="e.g. 8500" min="1"/>
+        </div>
+        <div class="calc-field">
+          <label for="c-rate">Interest rate (APR %)</label>
+          <input type="number" id="c-rate" placeholder="e.g. 14.9" step="0.1" min="0"/>
+          <div class="calc-hint">Find this on your statement or bank app</div>
+        </div>
+        <div class="calc-field">
+          <label for="c-payment">Monthly payment (€)</label>
+          <input type="number" id="c-payment" placeholder="e.g. 250" min="1"/>
+        </div>
+        <div class="calc-field">
+          <label for="c-extra">Extra monthly payment (€)</label>
+          <input type="number" id="c-extra" placeholder="e.g. 50 (optional)" min="0"/>
+          <div class="calc-hint">See how much faster you'd be free</div>
+        </div>
+      </div>
+      <button class="calc-btn" onclick="calculateDebtFree()">Calculate my debt-free date →</button>
+      <div class="calc-result" id="calc-result">
+        <div id="result-headline" style="font-size:0.9rem;color:var(--muted);margin-bottom:6px;">At your current payment, you'll be debt-free on:</div>
+        <div class="result-date" id="result-date">—</div>
+        <div class="result-grid">
+          <div class="result-item"><div class="result-num" id="result-months">—</div><div class="result-label">Months to payoff</div></div>
+          <div class="result-item"><div class="result-num" id="result-interest">—</div><div class="result-label">Total interest paid</div></div>
+          <div class="result-item"><div class="result-num" id="result-total">—</div><div class="result-label">Total amount paid</div></div>
+        </div>
+        <div class="result-faster" id="result-faster" style="display:none;"></div>
+        <a class="calc-cta-link" href="https://www.debt-free.world/#get-started">
+          Want a full AI-powered plan for all your debts? <strong>Get it free →</strong>
+        </a>
+      </div>
+    </div>
+
+    <h2 id="how-it-works">How the calculation works</h2>
+    <p>The formula behind every debt payoff calculator is the same one banks use. Each month, interest is applied to your remaining balance, then your payment reduces it.</p>
+    <p>For a balance of <strong>B</strong>, monthly rate of <strong>r</strong> (APR ÷ 12 ÷ 100), and monthly payment of <strong>P</strong>:</p>
+    <div class="callout callout-gray">
+      <div class="callout-title">The math</div>
+      New balance each month = (Previous balance × (1 + r)) − P<br/><br/>
+      Payoff month = log(P / (P − B×r)) / log(1 + r)<br/><br/>
+      This is why the minimum payment trap is so dangerous: when P is barely above B×r, it takes decades.
+    </div>
+    <p>At 19.9% APR on a €5,000 balance, the minimum payment of roughly €100/month means over 8 years to pay off. Raising that to €200/month cuts it to 2.5 years and saves over €2,400 in interest.</p>
+
+    <h2 id="what-affects-date">What actually moves your debt-free date</h2>
+    <p>Three variables control your payoff date. Here's the leverage each gives you:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Variable</th><th>Impact</th><th>How to change it</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monthly payment</strong></td><td class="tag-good">High ✓</td><td>Budget reallocation, side income, cutting subscriptions</td></tr>
+          <tr><td><strong>Interest rate</strong></td><td class="tag-good">High ✓</td><td>Negotiate with creditor, balance transfer, refinance</td></tr>
+          <tr><td><strong>Starting balance</strong></td><td>Moderate</td><td>Lump-sum payments from windfalls, savings</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Payment amount is the most actionable lever. Even €50/month extra on a €8,000 debt at 14% APR shaves 14 months off the timeline and saves €800+ in interest. Run the numbers in the calculator above — the results are consistently surprising.</p>
+    <div class="callout callout-green">
+      <div class="callout-title">Rate negotiation — underused</div>
+      Call your bank and ask for a rate reduction. State your track record, mention you're considering a balance transfer. This works around 60% of the time for customers with 12+ months of on-time payments. A 4% rate reduction on €6,000 saves over €700.
+    </div>
+
+    <h2 id="multiple-debts">Calculating with multiple debts</h2>
+    <p>The calculator above handles one debt at a time. For multiple debts — the realistic situation for most people — there are two approaches:</p>
+    <ol>
+      <li><strong>Calculate each debt separately</strong> and track the total. Works, but misses the compound effect of rolling freed payments to the next debt (the avalanche/snowball strategy).</li>
+      <li><strong>Use an AI-powered full plan</strong> that calculates across all debts simultaneously, optimizes the payment order, and gives you a single debt-free date for everything. That's what <a href="https://www.debt-free.world/#get-started">Debt-Free.world's free plan</a> does.</li>
+    </ol>
+    <p>The difference matters. Someone with three debts totaling €15,000 might see a "last debt paid off" date of 2029 using method 1, but 2028 using method 2 — because rolling freed payments accelerates the final debts significantly.</p>
+    <p>See also: <a href="https://www.debt-free.world/blog/how-to-get-out-of-debt-fast">How to get out of debt fast — snowball vs. avalanche compared</a></p>
+
+    <div class="cta-block">
+      <p class="cta-headline">Get your full debt-free plan — all debts, one date</p>
+      <p>AI calculates across all your debts and tells you the fastest route to zero. Free, takes 3 minutes.</p>
+      <a href="https://www.debt-free.world/#get-started" class="cta-btn">Get my free plan →</a>
+      <p class="cta-sub">No account. No credit card. 19 languages.</p>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">How do I calculate my debt-free date?<span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq1">Use the free calculator above: enter your balance, interest rate, and monthly payment. Your exact payoff date appears instantly. You can also test different payment amounts to see how much faster you'd be debt-free.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">What happens if I pay more than the minimum?<span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq2">Paying even €50–100 extra per month can cut years off your timeline. The calculator shows the exact difference in months and total interest saved — try it with your own numbers.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">What if I don't know my interest rate?<span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq3">Check your loan agreement, bank app, or latest statement. Credit cards show APR. If you can't find it, use 18% as a conservative estimate for credit cards and 8% for personal loans. Your actual rate is almost certainly in your bank's app under "loan details."</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">What is APR and how is it different from the monthly rate?<span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq4">APR is the annual percentage rate — the yearly cost of your debt. The monthly rate is APR divided by 12. A 19.9% APR means roughly 1.66% charged per month on your remaining balance. The calculator handles this conversion automatically.</div>
+      </div>
+    </div>
+    <div class="related">
+      <div class="related-title">Related articles</div>
+      <div class="related-links">
+        <a href="https://www.debt-free.world/blog/how-to-get-out-of-debt-fast">How to get out of debt fast — free tools & strategies</a>
+        <a href="https://www.debt-free.world/blog/free-debt-help-by-country">Free debt help by country — your rights and resources</a>
+        <a href="https://www.debt-free.world/blog/90-day-debt-plan">The 90-day debt plan that actually works</a>
+      </div>
+    </div>
+  </article>
+</div>
+</main>
+<footer class="site-footer">
+  <p>© 2026 Debt-Free.world — Amliv Oy, Nokia, Finland · VAT FI32503518 &nbsp;|&nbsp; <a href="https://www.debt-free.world/privacy">Privacy</a> &nbsp;|&nbsp; <a href="https://www.debt-free.world/terms">Terms</a> &nbsp;|&nbsp; <a href="mailto:support@debt-free.world">support@debt-free.world</a></p>
+  <p style="margin-top:6px;">We do this together ✦</p>
+</footer>
+<script>
+function calculateDebtFree(){
+  const B=parseFloat(document.getElementById('c-balance').value)||0;
+  const apr=parseFloat(document.getElementById('c-rate').value)||0;
+  const P=parseFloat(document.getElementById('c-payment').value)||0;
+  const extra=parseFloat(document.getElementById('c-extra').value)||0;
+  if(!B||!P){alert('Please enter balance and monthly payment.');return;}
+  const r=apr/12/100;
+  function calcMonths(bal,rate,pmt){
+    if(pmt<=0)return Infinity;
+    if(rate===0)return Math.ceil(bal/pmt);
+    if(pmt<=bal*rate)return Infinity;
+    return Math.ceil(Math.log(pmt/(pmt-bal*rate))/Math.log(1+rate));
+  }
+  function totalInterest(bal,rate,pmt,months){
+    let b=bal,interest=0;
+    for(let i=0;i<months;i++){const int=b*rate;interest+=int;b=b+int-pmt;if(b<=0)break;}
+    return interest;
+  }
+  const months=calcMonths(B,r,P);
+  if(months===Infinity){document.getElementById('calc-result').classList.add('show');document.getElementById('result-date').textContent='Never at this rate';document.getElementById('result-months').textContent='∞';document.getElementById('result-interest').textContent='—';document.getElementById('result-total').textContent='—';return;}
+  const interest=totalInterest(B,r,P,months);
+  const d=new Date();d.setMonth(d.getMonth()+months);
+  const fmt=new Intl.DateTimeFormat('en-GB',{month:'long',year:'numeric'});
+  document.getElementById('result-date').textContent=fmt.format(d);
+  document.getElementById('result-months').textContent=months+' mo';
+  document.getElementById('result-interest').textContent='€'+Math.round(interest).toLocaleString();
+  document.getElementById('result-total').textContent='€'+Math.round(B+interest).toLocaleString();
+  const rf=document.getElementById('result-faster');
+  if(extra>0){
+    const m2=calcMonths(B,r,P+extra);
+    const saved=months-m2;
+    const i2=totalInterest(B,r,P+extra,m2);
+    const savedInterest=Math.round(interest-i2);
+    rf.style.display='block';
+    rf.textContent=`With €${extra}/month extra: ${saved} months faster, €${savedInterest.toLocaleString()} less in interest`;
+  } else {rf.style.display='none';}
+  document.getElementById('calc-result').classList.add('show');
+}
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const exp=btn.getAttribute('aria-expanded')==='true';
+    document.querySelectorAll('.faq-q').forEach(b=>{b.setAttribute('aria-expanded','false');document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');});
+    if(!exp){btn.setAttribute('aria-expanded','true');document.getElementById(btn.getAttribute('aria-controls')).classList.add('open');}
+  });
+});
+</script>
+</body>
+</html>
