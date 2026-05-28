@@ -42,7 +42,10 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
 .nav-logo{font-family:var(--serif);font-size:1.15rem;color:var(--green);text-decoration:none;}
 .nav-links{display:flex;align-items:center;gap:20px;}
 .nav-link{color:var(--muted);text-decoration:none;font-size:0.88rem;font-weight:500;}
-.nav-link:hover,.nav-link.active{color:var(--green);}
+.nav-link:hover{color:var(--green);}
+.nav-link.active{color:var(--muted);}
+.nav-link-home{color:var(--green);text-decoration:none;font-size:0.88rem;font-weight:500;}
+.nav-link-home:hover{color:var(--green-mid);}
 .nav-cta{background:var(--green);color:#fff;padding:8px 18px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;}
 .nav-cta:hover{background:#14532d;}
 /* Page header */
@@ -109,7 +112,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
 <nav class="site-nav" aria-label="Site navigation">
   <a href="https://www.debt-free.world" class="nav-logo">Debt-Free ✦ World</a>
   <div class="nav-links">
-    <a href="https://www.debt-free.world" class="nav-link">Home</a>
+    <a href="https://www.debt-free.world" class="nav-link-home">Home</a>
     <a href="https://www.debt-free.world/blog" class="nav-link active">Blog</a>
     <a href="https://www.debt-free.world/#get-started" class="nav-cta">Get Free Plan →</a>
   </div>
