@@ -18,6 +18,9 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-f
 nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;}
 .nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;}
 .nav-logo em{font-style:italic;color:var(--green);}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 0;}
+.nav-blog:hover{text-decoration:underline;}
 .lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
 .hero{padding:2.5rem 0 2rem;text-align:center;}
 .hero h1{font-family:var(--serif);font-size:clamp(34px,6vw,50px);line-height:1.08;letter-spacing:-1px;margin-bottom:1.25rem;}
@@ -129,7 +132,10 @@ loadGA4();
 
 <nav>
   <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <select class="lang-sel" id="langSel"></select>
+  <div class="nav-right">
+     <a href="/blog/" class="nav-blog">Blog</a>
+     <select class="lang-sel" id="langSel"></select>
+   </div></select>
 </nav>
 
 <!-- GLOBES -->
