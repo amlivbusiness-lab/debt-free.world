@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Debt-Free.world — Your way out starts here</title>
+<meta name="description" content="Get a free personalized 90-day debt exit plan built for your situation and your life."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
+.page{max-width:720px;margin:0 auto;padding:0 24px;}
+nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.25rem 0;}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;justify-self:start;}
+.nav-logo em{font-style:italic;color:var(--green);}
+.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;justify-self:center;}
+.nav-blog:hover{background:var(--green-bg);}
+.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;justify-self:end;}
+.hero{padding:2.5rem 0 2rem;text-align:center;}
+.hero h1{font-family:var(--serif);font-size:clamp(34px,6vw,50px);line-height:1.08;letter-spacing:-1px;margin-bottom:1.25rem;}
+.hero h1 em{font-style:italic;color:var(--green);}
+.hero-sub{font-size:17px;line-height:1.7;color:#111;max-width:500px;margin:0 auto 1.25rem;font-weight:300;}
+.hero-together{font-size:13px;color:var(--green);letter-spacing:1px;margin-bottom:1.25rem;font-weight:500;display:block;}
+.hero-note{font-size:13px;color:#444;margin-top:0.75rem;}
+.btn{background:var(--green);color:#fff;border:none;border-radius:30px;padding:14px 36px;font-size:15px;font-weight:500;cursor:pointer;font-family:var(--sans);}
+.btn-full{background:var(--green);color:#fff;border:none;border-radius:30px;padding:14px;font-size:15px;font-weight:500;cursor:pointer;font-family:var(--sans);width:100%;display:block;text-align:center;}
+.flags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:0.5rem 0 1.75rem;}
+.trust-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;padding:0.5rem 0 2.5rem;}
+.trust-card{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:1rem;text-align:center;}
+.trust-num{font-family:var(--serif);font-size:28px;color:var(--green);margin-bottom:4px;}
+.trust-label{font-size:12px;color:#111;line-height:1.4;}
+.section{padding:2rem 0;}
+.section-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1.5rem;}
+.story-card{border-left:3px solid var(--green);padding:1.75rem 1.75rem 1.75rem 1.5rem;}
+.story-inner{display:flex;gap:1.5rem;align-items:flex-start;}
+.story-photo{width:160px;height:160px;border-radius:50%;border:3px solid var(--green-border);flex-shrink:0;overflow:hidden;}
+.story-photo img{width:160px;height:160px;object-fit:cover;object-position:center top;display:block;}
+.story-text{font-family:var(--sans);font-size:15px;line-height:1.8;color:#333;margin-bottom:0;font-weight:300;}
+.story-author{font-size:13px;color:#333;margin-top:0.75rem;line-height:1.6;}
+.ribbon{background:var(--green);color:#fff;border-radius:8px;padding:0.875rem 1.25rem;font-size:13px;line-height:1.6;margin-bottom:1.5rem;text-align:center;}
+.price-grid{display:flex;gap:14px;}
+@media(max-width:600px){.price-grid{flex-direction:column;}}
+.price-wrapper{flex:1;min-width:0;display:flex;flex-direction:column;}
+.price-value-label{font-size:10px;letter-spacing:1.5px;font-weight:500;text-align:center;padding:4px 0 8px;height:32px;display:flex;align-items:flex-end;justify-content:center;}
+.price-card{border:0.5px solid var(--border);border-radius:12px;padding:1.375rem;background:#fff;display:flex;flex-direction:column;flex:1;}
+.price-badge-row{height:28px;display:flex;align-items:flex-end;margin-bottom:8px;}
+.price-card-header{}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10000;align-items:center;justify-content:center;padding:1.5rem;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#fff;border-radius:20px;padding:3rem 2.5rem 2.5rem;max-width:520px;width:100%;text-align:center;box-shadow:0 12px 60px rgba(0,0,0,0.22);position:relative;}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:24px;cursor:pointer;color:#aaa;line-height:1;}
+.modal-icon{font-size:56px;margin-bottom:1.25rem;line-height:1;}
+.modal-title{font-family:var(--serif);font-size:26px;color:#111;margin-bottom:0.875rem;}
+.modal-sub{font-size:15px;color:#444;line-height:1.75;margin-bottom:1rem;}
+.modal-note{font-size:14px;color:#111;font-weight:500;margin-bottom:0.625rem;}
+.modal-home{display:inline-block;color:var(--green);font-size:14px;font-weight:600;text-decoration:underline;cursor:pointer;margin-top:0.5rem;border:none;background:none;font-family:var(--sans);}
+.price-card.featured{border:2px solid var(--green);background:var(--green-bg);}
+.price-card.dim{background:#fafafa;border-color:#eee;}
+.price-badge{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;background:var(--green-light);color:#0f4d26;margin-bottom:10px;}
+.coming-badge{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;background:#eee;color:#aaa;margin-bottom:10px;}
+.price-name{font-size:15px;font-weight:600;margin-bottom:4px;color:#111;}
+.price-name.dim{color:#bbb;}
+.price-main{font-size:28px;font-weight:600;color:#111;margin:8px 0 4px;line-height:1.1;}
+.price-main.dim{color:#ccc;}
+.price-sub{font-size:12px;color:#555;margin-bottom:14px;line-height:1.5;}
+.price-sub.dim{color:#bbb;}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin:8px 0 16px;flex:1;}
+.price-features li{font-size:13px;color:#111;display:flex;gap:7px;align-items:flex-start;line-height:1.45;}
+.price-features li.dim-li{color:#ccc;}
+.price-features li svg{flex-shrink:0;margin-top:2px;}
+.check{width:14px;height:14px;color:var(--green);}
+.clock{width:14px;height:14px;color:#ccc;}
+.price-disclaimer{font-size:11px;color:#888;padding-bottom:8px;font-style:italic;line-height:1.5;}
+.price-cta{margin-top:auto;background:var(--green);color:#fff;border:none;border-radius:30px;padding:11px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);width:100%;white-space:nowrap;}
+.price-cta.disabled{background:#ddd;color:#999;cursor:not-allowed;}
+.bridge{background:var(--green);color:#fff;padding:1.5rem;text-align:center;border-radius:10px;margin:1.5rem 0 2rem;}
+.intake-wrap{background:var(--green-bg);border-radius:14px;padding:2.25rem;border:0.5px solid var(--green-border);}
+.intake-h{font-family:var(--serif);font-size:26px;margin-bottom:0.625rem;color:#111;text-align:center;}
+.intake-sub{font-size:14px;color:#111;margin-bottom:1.75rem;line-height:1.65;text-align:center;}
+.intake-form{display:flex;flex-direction:column;gap:11px;max-width:460px;margin:0 auto;}
+.group-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-top:0.875rem;font-weight:500;}
+.intake-form select,.intake-form input{width:100%;font-family:var(--sans);font-size:14px;border:1.5px solid var(--green);border-radius:8px;padding:11px 13px;background:#fff;color:#111;outline:none;-webkit-appearance:none;}
+.intake-form input::placeholder{color:#777;font-style:italic;}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.input-hint{font-size:12px;color:#555;margin-top:-5px;font-style:italic;padding-left:2px;}
+.gdpr-box{background:#f9f9f9;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin-top:4px;cursor:pointer;}
+.gdpr-inner{display:flex;gap:10px;align-items:flex-start;}
+.gdpr-checkbox{width:18px;height:18px;min-width:18px;border:2px solid var(--green);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;transition:all 0.15s;flex-shrink:0;}
+.gdpr-text{font-size:13px;color:#333;line-height:1.5;}
+.gdpr-text a{color:var(--green);}
+.plan-wrap{display:none;margin-top:1.75rem;}
+.loading-state{text-align:center;padding:2.5rem;color:#111;font-size:15px;}
+.thanks-box{text-align:center;padding:2.5rem 1rem 1.5rem;}
+.thanks-icon{font-size:36px;margin-bottom:1rem;}
+.thanks-title{font-family:var(--serif);font-size:24px;color:#111;margin-bottom:0.75rem;}
+.thanks-sub{font-size:15px;color:#444;line-height:1.7;max-width:400px;margin:0 auto 0.75rem;}
+.thanks-note{font-size:13px;color:var(--green);font-weight:500;}
+footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:0.5px solid #eee;margin-top:1rem;}
+.footer-logo{font-family:var(--serif);font-size:17px;color:#111;}
+.footer-logo em{font-style:italic;color:var(--green);}
+.footer-note{font-size:12px;color:#888;}
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;}
+.cookie-banner a{color:#86c9a0;text-decoration:underline;}
+.cookie-btn{padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:500;}
+.cookie-btn.accept{background:#166534;color:#fff;}
+.cookie-btn.decline{background:transparent;color:#ccc;border:1px solid #444;}
+@media(max-width:520px){.hero h1{font-size:32px;}.input-row{grid-template-columns:1fr;}.story-inner{flex-direction:column;}.intake-wrap{padding:1.5rem 1.25rem;}}
+</style>
+<!-- GA4 loads only after cookie consent -->
+<script>
+function loadGA4(){
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+  }
+}
+loadGA4();
+</script>
+</head>
+<body>
+<div class="page">
+
+<nav>
+  <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
+  <a href="/blog/" class="nav-blog">Blog</a>
+  <select class="lang-sel" id="langSel"></select>
+</nav>
+
+<!-- GLOBES -->
+<div style="display:flex;justify-content:center;gap:20px;padding:1.5rem 0 0.5rem;">
+  <div style="display:flex;flex-direction:column;align-items:center;"><div style="font-size:30px;line-height:1;">&#127757;</div><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:500;margin-top:5px;">FREE</div></div>
+  <div style="display:flex;flex-direction:column;align-items:center;"><div style="font-size:30px;line-height:1;">&#127758;</div><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:500;margin-top:5px;">GLOBAL</div></div>
+  <div style="display:flex;flex-direction:column;align-items:center;"><div style="font-size:30px;line-height:1;">&#127759;</div><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:500;margin-top:5px;">HONEST</div></div>
+</div>
+
+<section class="hero">
+  <h1 id="h-h1">You deserve to be<br><em>debt-free.</em><br>Let&#8217;s get you there.</h1>
+  <p class="hero-sub" id="h-sub">Tell us your real numbers. Get a personalized plan built for your situation and your life.</p>
+  <span class="hero-together" id="h-together">&#10038; We do this together &#10038;</span>
+  <button class="btn" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})" id="h-cta">Get my free plan &#8212; no card needed</button>
+  <div class="hero-note" id="h-note">Real numbers in. Real plan out. Real local help included.</div>
+</section>
+
+<div class="flags">
+  <span>&#127467;&#127470;</span><span>&#127480;&#127466;</span><span>&#127475;&#127476;</span><span>&#127465;&#127466;</span><span>&#127465;&#127466;</span><span>&#127468;&#127463;</span><span>&#127467;&#127479;</span><span>&#127466;&#127480;</span><span>&#127477;&#127481;</span><span>&#127470;&#127481;</span><span>&#127475;&#127473;</span><span>&#127477;&#127473;</span><span>&#127482;&#127480;</span><span>&#127463;&#127479;</span><span>&#127474;&#127485;</span><span>&#127475;&#127468;</span><span>&#127472;&#127466;</span><span>&#127487;&#127462;</span><span>&#127470;&#127465;</span><span>&#127477;&#127469;</span><span>&#127470;&#127475;</span><span>&#127464;&#127475;</span><span>&#127471;&#127477;</span><span>&#127462;&#127479;</span>
+</div>
+
+<div class="trust-row">
+  <div class="trust-card"><div class="trust-num" id="t1-num">Free</div><div class="trust-label" id="t1">Always. No tricks.</div></div>
+  <div class="trust-card"><div class="trust-num">90</div><div class="trust-label" id="t2">Day roadmap for you</div></div>
+  <div class="trust-card"><div class="trust-num">20+</div><div class="trust-label" id="t3">Languages supported</div></div>
+  <div class="trust-card"><div class="trust-num" id="t4-num">Local</div><div class="trust-label" id="t4">Help for your country</div></div>
+</div>
+
+<!-- FOUNDER STORY -->
+<div class="section">
+  <div class="section-label" id="why-label">Why this exists</div>
+  <div class="story-card">
+    <div class="story-inner">
+      <div class="story-photo"><img src="https://raw.githubusercontent.com/amlivbusiness-lab/debt-free.world/main/vilma.png" alt="Vilma Paasikivi"/></div>
+      <div style="flex:1;">
+        <div id="story-short">
+          <div id="story-en">
+          <p class="story-text">&#8220;I&#8217;m not an expert who studied financial hardship from the outside. I lived it &#8212; more than once.</p>
+          <p class="story-text" style="margin-top:0.875rem;">I&#8217;m a mother of three, navigating the same messy, exhausting, beautiful chaos that millions of families know well. Over the years, I&#8217;ve lost around &#8364;45,000 through corporate fraud, broken contracts, and construction scams&#8230;&#8221;</p>
+          </div>
+          <div id="story-translated" style="display:none;"><p class="story-text" id="story-translated-text"></p></div>
+        </div>
+        <button onclick="toggleStory()" id="story-toggle-btn" style="background:none;border:none;color:var(--green);font-size:13px;font-weight:500;cursor:pointer;padding:0.5rem 0;font-family:var(--sans);text-decoration:underline;display:block;">Read full story</button>
+        <div id="story-full" style="display:none;">
+          <div id="story-full-en">
+          <p class="story-text" style="margin-top:0.875rem;">&#8220;&#8230;not in one blow, but in the way these things usually happen: gradually, then all at once, each time thinking it couldn&#8217;t happen again.</p>
+          <p class="story-text" style="margin-top:0.875rem;">But somewhere alongside all of that, I kept showing up for the people around me. Not because I had extra resources. I didn&#8217;t. But because that&#8217;s just what you do &#8212; you show up.</p>
+          <p class="story-text" style="margin-top:0.875rem;">I&#8217;ve spent years building community around me: running a charity event that has now reached over 3,000 people, creating spaces where kids could just be kids, supporting families in the quiet ways that don&#8217;t make headlines but matter deeply.</p>
+          <p class="story-text" style="margin-top:0.875rem;">That&#8217;s the world I believe in. One where we figure it out together.</p>
+          <p class="story-text" style="margin-top:0.875rem;">And this tool is part of that. I built it because honest, free, practical financial help shouldn&#8217;t be a privilege. It should just exist. For everyone &#8212; including people exactly like me, who worked hard, tried to do right, and still found themselves buried under debt they didn&#8217;t fully choose.</p>
+          </div>
+          <p class="story-text" style="margin-top:0.875rem;">If that&#8217;s where you are right now, you&#8217;re not alone. And you don&#8217;t have to figure it out alone.&#8221;</p>
+        </div>
+        <div class="story-author" style="margin-top:0.75rem;"><strong>Vilma Paasikivi</strong><br>Founder, Debt-Free.world<br>Nokia, Finland &#183; Mother of three</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="section" id="plans">
+  <div class="section-label" id="plans-label">Plans</div>
+  <div class="ribbon" id="ribbon">Debt-Free.world &#8212; Because financial freedom belongs to everyone.</div>
+
+  <div class="price-grid">
+
+    <!-- FREE -->
+    <div class="price-wrapper">
+      <div class="price-value-label" style="color:#888;" id="pt-free">CONSULTANT VALUE: 300&#8211;500 &#8364;</div>
+      <div class="price-card">
+        <div class="price-badge-row"></div>
+        <div class="price-card-header">
+          <div class="price-name" id="pn-free">Free</div>
+          <div class="price-main">0 <span style="font-size:16px;font-weight:400;color:#888;">&#8364;</span> <span style="font-size:14px;font-weight:400;color:#888;" id="p-forever">forever</span></div>
+          <div class="price-sub" id="ps-free">No card. No catch. Always.</div>
+        </div>
+        <ul class="price-features">
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf1">Personalized 90-day plan with your exact numbers</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf2">Your Debt-Free Day &#8212; exact date</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf3">What happens if you do nothing &#8212; real numbers</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf4">Your legal rights facing creditors</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf5">Local support services &#8212; your region</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf6">One concrete action you can take today</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf7">Plan sent to your email</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf8">Works in 20+ languages</span></li>
+        </ul>
+        <button class="price-cta" onclick="document.getElementById('intake').scrollIntoView({behavior:'smooth'})" id="free-cta">Get my free plan</button>
+      </div>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="price-wrapper">
+      <div class="price-value-label" style="color:var(--green);" id="pt-premium">ADVISOR VALUE: 500&#8211;1&#8202;000 &#8364;</div>
+      <div class="price-card featured">
+        <div class="price-badge-row"><div class="price-badge" id="popular-badge">Most popular</div></div>
+        <div class="price-card-header">
+          <div class="price-name" id="pn-premium">Premium</div>
+          <div class="price-main">17 <span style="font-size:16px;font-weight:400;color:#555;">&#8364;</span></div>
+          <div class="price-sub" id="pv-premium">One payment. 3 months access.<br>No subscription. No auto-renewal.</div>
+        </div>
+        <ul class="price-features">
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf9">Everything in Free</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf10">AI letters to your creditors</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf11">Spending cut simulator</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf12">Snowball vs avalanche strategy</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf13">Debt collection process map</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf14">Monthly progress update &#8212; automatic</span></li>
+          <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="pf15">Bank guides + creditor templates</span></li>
+        </ul>
+        <div class="price-disclaimer" id="disclaimer">General models &#8212; not country-specific legal advice.</div>
+        <button class="price-cta" onclick="alert('Premium coming soon via Stripe!')" id="premium-cta">Get Premium</button>
+      </div>
+    </div>
+
+    <!-- INCOME BUILDER -->
+    <div class="price-wrapper">
+      <div class="price-value-label" style="color:#bbb;" id="pt-ib">SPECIALIST VALUE: 1&#8202;500&#8211;2&#8202;000 &#8364;</div>
+      <div class="price-card dim">
+        <div class="price-badge-row"><div class="coming-badge" id="coming-soon">Coming Q3 2026</div></div>
+        <div class="price-card-header">
+          <div class="price-name dim" id="pn-ib">Income Builder</div>
+          <div class="price-main dim">49 <span style="font-size:14px;font-weight:400;color:#ccc;">&#8364;</span> <span style="font-size:12px;color:#ccc;" id="p-3mo">/ 3 mo</span></div>
+          <div class="price-sub dim" id="ps-ib">or 89 &#8364; / 6 months &#8212; save 9 &#8364;<br>One payment. No auto-renewal.</div>
+        </div>
+        <ul class="price-features">
+          <li class="dim-li"><svg class="clock" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span id="pf16">Everything in Premium</span></li>
+          <li class="dim-li"><svg class="clock" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span id="pf17">Global remote work list &#8212; phone only</span></li>
+          <li class="dim-li"><svg class="clock" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span id="pf18">Easy / Medium / Senior skill levels</span></li>
+          <li class="dim-li"><svg class="clock" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span id="pf19">Time-to-income calculator</span></li>
+          <li class="dim-li"><svg class="clock" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span id="pf20">Daily check-in &#8212; behavioural science</span></li>
+          <li class="dim-li"><svg class="clock" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span id="pf21">Anonymous community + live Q&amp;A with Vilma</span></li>
+        </ul>
+        <button class="price-cta disabled" disabled id="ib-cta">Coming Q3 2026</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BRIDGE -->
+<div class="bridge">
+  <div style="font-family:var(--serif);font-size:20px;margin-bottom:6px;" id="bridge-title">You deserve to be debt-free.</div>
+  <div style="font-size:13px;opacity:0.85;" id="bridge-sub">Millions of families are figuring this out. Let&#8217;s get you started &#8212; free, in your language, right now.</div>
+</div>
+
+<!-- INTAKE FORM -->
+<div class="section" id="intake">
+  <div class="intake-wrap">
+    <h2 class="intake-h" id="intake-h">Your way out starts here</h2>
+    <p class="intake-sub" id="intake-sub">Enter your real numbers. The more honest you are, the more useful your plan will be.</p>
+    <div class="intake-form">
+
+      <div class="group-label" id="gl-lang">Report language</div>
+      <select id="q-lang" onchange="setLang(this.value);document.getElementById('langSel').value=this.value;"></select>
+
+      <div class="group-label" id="gl-country">Your location</div>
+      <select id="q-country" onchange="onCountryChange(this)"></select>
+      <input type="text" id="q-country-other" style="display:none" placeholder="Type your country..."/>
+
+      <div class="group-label" id="gl-income">Your income</div>
+      <div class="input-row">
+        <input type="number" id="q-income" min="0" placeholder="Monthly income"/>
+        <select id="q-currency"></select>
+      </div>
+      <div class="input-hint" id="income-hint">After tax, per month</div>
+      <select id="q-employment"></select>
+
+      <div class="group-label" id="gl-household">Your household</div>
+      <select id="q-household"></select>
+      <select id="q-housing"></select>
+
+      <div class="group-label" id="gl-costs">Your monthly costs</div>
+      <input type="number" id="q-rent" min="0" placeholder="Rent / mortgage / maintenance charge"/>
+      <input type="number" id="q-fixed" min="0" placeholder="Other fixed costs (food, transport, bills)"/>
+      <div class="input-hint" id="costs-hint">Exact amounts help us calculate your real gap</div>
+
+      <div class="group-label" id="gl-debts">Your debts</div>
+      <input type="number" id="q-debt" min="0" placeholder="Total debt amount"/>
+      <select id="q-debttype"></select>
+      <input type="number" id="q-interest" min="0" max="200" step="0.1" placeholder="Interest rate % (type 0 if unsure)"/>
+      <input type="number" id="q-payment" min="0" placeholder="Monthly debt payment"/>
+
+      <div class="group-label" id="gl-goal">Your goal</div>
+      <select id="q-goal"></select>
+
+      <input type="email" id="q-email" placeholder="Your email &#8212; we send your plan here"/>
+
+      <!-- GDPR consent -->
+      <div class="gdpr-box" id="gdpr-box-outer" onclick="toggleGdpr()">
+        <div class="gdpr-inner">
+          <div class="gdpr-checkbox" id="gdpr-visual">
+            <span id="gdpr-check" style="display:none;color:#fff;font-size:13px;font-weight:700;">&#10003;</span>
+          </div>
+          <span class="gdpr-text" id="gdpr-text">I agree to the
+            <a href="/privacy_policy.html" target="_blank" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()">Privacy Policy</a>.
+            I understand my data is used to generate my plan and I may receive relevant updates. I can unsubscribe anytime.
+          </span>
+        </div>
+        <input type="checkbox" id="gdpr-consent" style="display:none;"/>
+      </div>
+
+      <button class="btn-full" onclick="handleSubmit()"><span id="submit-text">Build my free plan</span> &#8594;</button>
+    </div>
+
+    <div class="plan-wrap" id="planWrap" style="display:none;">
+      <div id="planOutput" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Debt-<em>Free</em>.world</div>
+  <div class="footer-note" id="footer-note">Built with honesty. Free forever for those who need it most. &#127757;</div>
+</footer>
+
+</div>
+
+<!-- THANK YOU MODAL -->
+<div class="modal-overlay" id="thanksModal" onclick="handleModalBackdrop(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&#10005;</button>
+    <div class="modal-icon">&#127758;</div>
+    <div class="modal-title" id="modal-title">Your plan is on its way.</div>
+    <div class="modal-sub" id="modal-sub">Check your email &#8212; your personalized 90-day plan is waiting for you there.</div>
+    <div class="modal-note" id="modal-note">We do this together</div>
+    <button class="modal-home" onclick="closeModal()" id="modal-home">Etusivulle</button>
+  </div>
+</div>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner" style="display:none;">
+  <span id="cookie-text">We use Google Analytics to understand how visitors use our site. No advertising trackers. <a href="/privacy_policy.html" target="_blank">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button class="cookie-btn decline" onclick="setCookieConsent('declined')">Decline</button>
+    <button class="cookie-btn accept" onclick="setCookieConsent('accepted')">Accept analytics</button>
+  </div>
+</div>
+
+<script>
+const CURRENCIES={"Finland": "€", "Sweden": "kr", "Norway": "kr", "Denmark": "kr", "Germany": "€", "France": "€", "Spain": "€", "Portugal": "€", "Italy": "€", "Netherlands": "€", "Belgium": "€", "Austria": "€", "Poland": "zł", "United Kingdom": "£", "United States": "$", "Canada": "$", "Australia": "$", "New Zealand": "$", "Brazil": "R$", "Mexico": "$", "Argentina": "$", "Colombia": "$", "Chile": "$", "Nigeria": "₦", "Kenya": "KSh", "South Africa": "R", "Ghana": "₵", "Ethiopia": "Br", "Tanzania": "TSh", "Indonesia": "Rp", "Philippines": "₱", "India": "₹", "Bangladesh": "৳", "Pakistan": "Rs", "Sri Lanka": "Rs", "China": "¥", "Japan": "¥", "South Korea": "₩", "Vietnam": "₫", "Thailand": "฿", "Malaysia": "RM", "Turkey": "₺", "Egypt": "£", "Saudi Arabia": "SR", "UAE": "AED", "Morocco": "MAD", "Other": "$"};
+const COUNTRIES=["Finland", "Sweden", "Norway", "Denmark", "Germany", "France", "Spain", "Portugal", "Italy", "Netherlands", "Belgium", "Austria", "Poland", "United Kingdom", "United States", "Canada", "Australia", "New Zealand", "Brazil", "Mexico", "Argentina", "Colombia", "Chile", "Nigeria", "Kenya", "South Africa", "Ghana", "Ethiopia", "Tanzania", "Indonesia", "Philippines", "India", "Bangladesh", "Pakistan", "Sri Lanka", "China", "Japan", "South Korea", "Vietnam", "Thailand", "Malaysia", "Turkey", "Egypt", "Saudi Arabia", "UAE", "Morocco", "Other"];
+const T={"EN":{"label":"English","dir":"ltr","globesTag":"FREE · GLOBAL · HONEST","h1":"You deserve to be <em>debt-free.</em><br>Let’s get you there.","sub":"Tell us your real numbers. Get a personalized plan built for your situation and your life.","together":"✶ We do this together ✶","cta":"Get my free plan — no card needed","note":"Real numbers in. Real plan out. Real local help included.","why":"Why this exists","plans":"Plans","popular":"Most popular","coming":"Coming Q3 2026","forever":"forever","intakeH":"Your way out starts here","intakeSub":"Enter your real numbers. The more honest you are, the more useful your plan will be.","glLang":"Report language","glCountry":"Your location","glIncome":"Your income","glHousehold":"Your household","glCosts":"Your monthly costs","glDebts":"Your debts","glGoal":"Your goal","incomeHint":"After tax, per month","costsHint":"Exact amounts help us calculate your real gap","countryPh":"Select your country...","countryOtherPh":"Type your country here...","incomePh":"Monthly income","rentPh":"Rent / mortgage / maintenance charge","fixedPh":"Other fixed costs (food, transport, bills)","debtPh":"Total debt amount","interestPh":"Interest rate % — type 0 if unsure","paymentPh":"Monthly debt payment","emailPh":"Your email — we send your plan here","emp0":"What best describes your current work and income situation?","emp1":"Full-time employment","emp2":"Part-time or gig work","emp3":"Self-employed or business owner","emp4":"Receiving government benefits or financial assistance","emp5":"Unemployed","emp6":"Unable to work due to illness or disability","hh0":"Select your household...","hh1":"Just me","hh2":"Me and a partner","hh3":"Me and 1 child","hh4":"Me and 2 children","hh5":"Me and 3 or more children","hh6":"I support other dependants","hs0":"Select your housing situation...","hs1":"I rent","hs2":"I own with a mortgage","hs3":"I own outright","hs4":"I live with family","dt0":"Select your main debt type...","dt1":"Credit cards / consumer loans","dt2":"Student loans","dt3":"Mortgage / housing loan","dt4":"Medical bills","dt5":"Tax debt","dt6":"Multiple types mixed","goal0":"Select what you need most...","goal1":"Stop the stress — I need a plan now","goal2":"Pay off everything as fast as possible","goal3":"Lower my monthly payments first","submit":"Build my free plan","loading":"Building your personalized plan…","planEyebrow":"Your personalized plan","planTitle":"90 days to clarity","dfdLabel":"Your Debt-Free Day","dfdNote":"Keep your current payment plan","upsellTitle":"Ready to go deeper?","upsellValue":"A financial advisor charges 500–1 000 € for this. Your investment: 17 €.","upsellSub":"Get the full toolkit — AI creditor letters, spending simulator, debt strategy comparison, and monthly automatic updates.","upsellBtn":"Get Premium — 17 €","freeCta":"Get my free plan","premiumCta":"Get Premium","ibCta":"Coming Q3 2026","bridgeTitle":"You deserve to be debt-free.","bridgeSub":"Millions of families are figuring this out. Let's get you started — free, in your language, right now.","cookieText":"We use Google Analytics to understand how visitors use our site. No advertising trackers.","gdprText":"I agree to the <a href='/privacy_policy.html' target='_blank' style='color:var(--green)'>Privacy Policy</a>. I understand that my data is used to generate my debt exit plan and may be used to send me relevant updates from Debt-Free.world. I can unsubscribe at any time.","t1num":"Free","t4num":"Local","storyText":"“I spent my whole life helping others — thousands of families, communities, people in hard times. But I never valued or protected myself. I lost 25,000 € to fraud. My savings. My security. Three children, unemployed, more debt than assets. I wasn’t alone. Millions are living this exact story. So I built the tool I wish I had. Honest. Free. For everyone.”","t1":"Always. No tricks.","t2":"Day roadmap for you","t3":"Languages supported","t4":"Help for your country","thanksTitle":"Your plan is on its way.","thanksSub":"Check your email — your personalized 90-day plan is waiting for you there.","thanksNote":"We do this together ✶","footer":"Built with honesty. Free forever for those who need it most. 🌍","ribbon":"Debt-Free.world — Because financial freedom belongs to everyone.","pn_free":"Free","pt_free":"CONSULTANT VALUE: 300–500 €","ps_free":"No card. No catch. Always.","pn_premium":"Premium","pt_premium":"ADVISOR VALUE: 500–1 000 €","pv_premium":"One payment. 3 months access. No subscription. No auto-renewal.","pn_ib":"Income Builder","pt_ib":"SPECIALIST VALUE: 1 500–2 000 €","ps_ib":"or 89 € / 6 months — save 9 €\nOne payment. No auto-renewal.","p_forever":"forever","p_3mo":"/ 3 mo","disclaimer":"General models — not country-specific legal advice.","pf1":"Personalized 90-day plan with your exact numbers","pf2":"Your Debt-Free Day — exact date you become debt-free","pf3":"What happens if you do nothing — real numbers","pf4":"Your legal rights facing creditors","pf5":"Local support services — your region, your language","pf6":"One concrete action you can take today","pf7":"Plan sent to your email — yours to keep","pf8":"Works in 20+ languages","pf9":"Everything in Free","pf10":"AI letters to your creditors","pf11":"Spending cut simulator — real-time impact","pf12":"Snowball vs avalanche — which is right for you","pf13":"Debt collection process map","pf14":"Monthly progress update — automatic","pf15":"Bank guides + creditor templates","pf16":"Everything in Premium","pf17":"Global remote work list — smartphone only","pf18":"Easy / Medium / Senior skill levels","pf19":"Time-to-income calculator","pf20":"Daily check-in — behavioural science","pf21":"Anonymous community + live Q&A with Vilma","modalHome":"Back to home"},"FI":{"label":"Suomi","dir":"ltr","globesTag":"ILMAINEN · GLOBAALI · REHELLINEN","h1":"Ansaitset olla<br><em>velaton.</em><br>Tehdään se yhdessä.","sub":"Kerro todelliset lukusi. Saat henkilökohtaisen suunnitelman tilanteellesi ja elämällesi.","together":"✶ Teemme tämän yhdessä ✶","cta":"Hae ilmainen suunnitelmani — ei korttia","note":"Oikeat luvut sisään. Oikea suunnitelma ulos. Oikea paikallinen apu mukana.","why":"Miksi tämä on olemassa","plans":"Paketit","popular":"Suosituin","coming":"Tulossa Q3/2026","forever":"ikuisesti","intakeH":"Tiesi ulos alkaa tästä","intakeSub":"Syötä todelliset lukusi. Mitä rehellisempi olet, sitä hyödyllisempi suunnitelmasi on.","glLang":"Raportin kieli","glCountry":"Sijaintisi","glIncome":"Tulosi","glHousehold":"Kotitaloutesi","glCosts":"Kuukausikulusi","glDebts":"Velkasi","glGoal":"Tavoitteesi","incomeHint":"Verojen jälkeen, kuukaudessa","costsHint":"Tarkat summat auttavat laskemaan todellisen tilanteesi","countryPh":"Valitse maasi...","countryOtherPh":"Kirjoita maasi tähän...","incomePh":"Kuukausitulosi","rentPh":"Vuokra / lainan lyhennys / vastike","fixedPh":"Muut kiinteät kulut (ruoka, liikenne, laskut)","debtPh":"Velkojen kokonaissumma","interestPh":"Korko % — kirjoita 0 jos et tiedä","paymentPh":"Kuukausittainen velanmaksu","emailPh":"Sähköpostisi — lähetämme suunnitelman tänne","emp0":"Mikä kuvaa parhaiten nykyistä työ- ja tulotilannettasi?","emp1":"Kokopäivätyö","emp2":"Osa-aikatyö tai keikkatyö","emp3":"Yrittäjä tai yrityksen omistaja","emp4":"Saan valtion tukea tai sosiaaliturvaa","emp5":"Työtön","emp6":"Työkyvytön sairauden tai vamman vuoksi","hh0":"Valitse kotitaloutesi...","hh1":"Vain minä","hh2":"Minä ja kumppani","hh3":"Minä ja 1 lapsi","hh4":"Minä ja 2 lasta","hh5":"Minä ja 3 lasta tai enemmän","hh6":"Huolehdin muista omaisista","hs0":"Valitse asumistilanne...","hs1":"Vuokraan","hs2":"Omistan asuntolainalla","hs3":"Omistan ilman lainaa","hs4":"Asun perheeni luona","dt0":"Valitse pääasiallisin velkatyyppi...","dt1":"Luottokortti / kulutusluotto","dt2":"Opintolaina","dt3":"Asuntolaina","dt4":"Sairaanhoitokulut","dt5":"Verovelka","dt6":"Useita velkatyyppejä","goal0":"Valitse tärkein tarpeesi...","goal1":"Lopeta stressi — tarvitsen suunnitelman heti","goal2":"Maksa kaikki mahdollisimman nopeasti","goal3":"Pienennä kuukausimaksuja ensin","submit":"Rakenna ilmainen suunnitelmani","loading":"Rakennetaan henkilökohtaista suunnitelmaasi…","planEyebrow":"Sinun henkilökohtainen suunnitelmasi","planTitle":"90 päivää selkeyteen","dfdLabel":"Velattomuuspäiväsi","dfdNote":"Jatka nykyistä maksusuunnitelmaasi","upsellTitle":"Haluatko syvemmän analyysin?","upsellValue":"Talousneuvoja laskuttaisi tästä 500–1 000 €. Sinun investointisi: 17 €.","upsellSub":"Hanki täysi paketti — AI-kirjeet velkojille, kulusimullaattori, velkastrategiavertailu ja kuukausittaiset automaattiset päivitykset.","upsellBtn":"Hanki Premium — 17 €","freeCta":"Hae ilmainen suunnitelmani","premiumCta":"Get Premium","ibCta":"Tulossa Q3 2026","bridgeTitle":"Ansaitset olla velaton.","bridgeSub":"Miljoonat perheet selviytyvät tästä. Aloitetaan — ilmaiseksi, omalla kielelläsi, juuri nyt.","cookieText":"Käytämme Google Analyticsia ymmärtääksemme miten kävijät käyttävät sivustoamme. Ei mainosseurantaa.","gdprText":"Hyväksyn tietosuojaselosteen. Ymmärrän, että tietojani käytetään velkasuunnitelmani tuottamiseen ja minulle voidaan lähettää relevantteja päivityksiä Debt-Free.worldista. Voin peruuttaa tilauksen milloin tahansa.","t1num":"Ilmainen","t4num":"Paikallinen","storyText":"“Käytin koko elämäni muiden auttamiseen — tuhansille perheille, yhteisöille, ihmisille vaikeissa tilanteissa. Mutta en koskaan arvostanut tai suojellut itseäni. Menetin 25 000 € petokseen. Säästöni. Turvani. Kolme lasta, työtön, enemmän velkaa kuin varallisuutta. En ollut yksin. Miljoonat elävät tätä samaa tarinaa. Joten rakensin työkalun jota olisin itse tarvinnut. Rehellinen. Ilmainen. Kaikille.”","t1":"Aina. Ei temppuja.","t2":"Päivän suunnitelma","t3":"Kieltä tuettu","t4":"Paikallinen apu","thanksTitle":"Suunnitelmasi on matkalla.","thanksSub":"Tarkista sähköpostisi — henkilökohtainen 90 päivän suunnitelmasi odottaa sinua siellä.","thanksNote":"Teemme tämän yhdessä ✶","footer":"Rakennettu rehellisyydellä. Ilmainen ikuisesti. 🌍","ribbon":"Debt-Free.world — Koska taloudellinen tasa-arvo kuuluu kaikille.","pn_free":"Ilmainen","pt_free":"KONSULTIN ARVO: 300–500 €","ps_free":"Ei korttia. Ei temppuja. Aina.","pn_premium":"Premium","pt_premium":"NEUVOJAN ARVO: 500–1 000 €","pv_premium":"Yksi maksu. 3 kuukauden pääsy. Ei tilausta. Ei automaattista veloitusta.","pn_ib":"Income Builder","pt_ib":"ASIANTUNTIJAN ARVO: 1 500–2 000 €","ps_ib":"tai 89 € / 6 kk — säästät 9 €\nYksi maksu. Ei automaattista uusiutumista.","p_forever":"ikuisesti","p_3mo":"/ 3 kk","disclaimer":"Oppaat ovat yleisiä malleja, ei maakohtaisia juridisia neuvoja.","pf1":"Henkilökohtainen 90 päivän suunnitelma omilla luvuillasi","pf2":"Velattomuuspäiväsi — täsmällinen päivämäärä","pf3":"Mitä tapahtuu jos et tee mitään — oikeat luvut","pf4":"Oikeutesi velkojan edessä","pf5":"Paikalliset tukipalvelut — sinun alueellasi","pf6":"Yksi konkreettinen toimenpide jonka voit tehdä tänään","pf7":"Suunnitelma sähköpostiisi — jää sinulle talteen","pf8":"Toimii 20+ kielellä","pf9":"Kaikki ilmaisessa","pf10":"AI-kirjeet velkojillesi","pf11":"Kulujen leikkaussimulaattori — reaaliaikainen vaikutus","pf12":"Lumipallo vs vyörytys — kumpi sopii sinulle","pf13":"Perintäprosessin kartta","pf14":"Kuukausittainen edistymispäivitys — automaattinen","pf15":"Pankkioppaat + velkojamallit","pf16":"Kaikki Premiumissa","pf17":"Globaali etätyölista — vain älypuhelin riittää","pf18":"Easy / Medium / Senior osaamistasot","pf19":"Aika-ansio -laskuri","pf20":"Päivittäinen check-in — käyttäytymistiede","pf21":"Anonyymi yhteisö + live Q&A Vilman kanssa","modalHome":"Etusivulle"},"ES":{"label":"Español","dir":"ltr","globesTag":"GRATIS · GLOBAL · HONESTO","h1":"Mereces estar<br><em>libre de deudas.</em><br>Lleguemos juntos.","sub":"Dinos tus números reales. Obtén un plan personalizado para tu situación y tu vida.","together":"✶ Lo hacemos juntos ✶","cta":"Obtener mi plan gratis — sin tarjeta","note":"Números reales. Plan real. Ayuda local real.","why":"Por qué existe esto","plans":"Planes","popular":"Más popular","coming":"Próximamente Q3/2026","forever":"siempre","intakeH":"Tu salida empieza aquí","intakeSub":"Ingresa tus números reales. Cuanto más honesto seas, más útil será tu plan.","glLang":"Idioma del informe","glCountry":"Tu ubicación","glIncome":"Tus ingresos","glHousehold":"Tu hogar","glCosts":"Tus costos mensuales","glDebts":"Tus deudas","glGoal":"Tu objetivo","incomeHint":"Después de impuestos, por mes","costsHint":"Los montos exactos nos ayudan a calcular tu situación real","countryPh":"Selecciona tu país...","countryOtherPh":"Escribe tu país aquí...","incomePh":"Ingresos mensuales","rentPh":"Alquiler o pago hipotecario","fixedPh":"Otros costos fijos","debtPh":"Deuda total","interestPh":"Tasa de interés % — escribe 0 si no sabes","paymentPh":"Pago mensual de deuda","emailPh":"Tu email — enviamos tu plan aquí","emp0":"¿Qué describe mejor tu situación laboral e ingresos actual?","emp1":"Empleo a tiempo completo","emp2":"Medio tiempo o trabajo eventual","emp3":"Trabajador autónomo o propietario de negocio","emp4":"Recibiendo beneficios gubernamentales o asistencia financiera","emp5":"Desempleado","emp6":"No puede trabajar debido a enfermedad o discapacidad","hh0":"Selecciona tu hogar...","hh1":"Solo yo","hh2":"Yo y mi pareja","hh3":"Yo y 1 hijo","hh4":"Yo y 2 hijos","hh5":"Yo y 3 o más hijos","hh6":"Mantengo otros dependientes","hs0":"Selecciona vivienda...","hs1":"Alquilo","hs2":"Propietario con hipoteca","hs3":"Propietario sin deuda","hs4":"Vivo con familia","dt0":"Selecciona tipo de deuda...","dt1":"Tarjetas / préstamos de consumo","dt2":"Préstamos estudiantiles","dt3":"Hipoteca","dt4":"Facturas médicas","dt5":"Deuda fiscal","dt6":"Tipos mixtos","goal0":"Selecciona lo que más necesitas...","goal1":"Parar el estrés — necesito un plan ahora","goal2":"Pagar todo lo más rápido posible","goal3":"Reducir pagos mensuales primero","submit":"Crear mi plan gratis","loading":"Construyendo tu plan personalizado…","planEyebrow":"Tu plan personalizado","planTitle":"90 días hacia la claridad","dfdLabel":"Tu día libre de deudas","dfdNote":"Mantén tu plan de pago actual","upsellTitle":"¿Listo para ir más profundo?","upsellValue":"Un asesor financiero cobra 500–1 000 € por esto. Tu inversión: 17 €.","upsellSub":"Kit completo — cartas IA a acreedores, simulador de gastos, comparación de estrategias y actualizaciones automáticas mensuales.","upsellBtn":"Obtener Premium — 17 €","storyText":"“Dediqué toda mi vida a ayudar a otros — a miles de familias, comunidades, personas en momentos difíciles. Pero nunca me valoré ni me protégí a mí misma. Perdí 25.000 € por un fraude. Mis ahorros. Mi seguridad. Tres hijos, desempleada, más deudas que activos. No estaba sola. Millones viven exactamente esta historia. Así que construí la herramienta que desearía haber tenido. Honesta. Gratuita. Para todos.”","t1":"Siempre. Sin trucos.","t2":"Días de plan","t3":"Idiomas","t4":"Ayuda local","footer":"Construido con honestidad. Gratuito para siempre. 🌍","ribbon":"Debt-Free.world — Porque la libertad financiera es para todos.","pn_free":"Gratis","pt_free":"VALOR CONSULTOR: 300–500 €","ps_free":"Sin tarjeta. Sin trucos. Siempre.","pn_premium":"Premium","pt_premium":"VALOR ASESOR: 500–1 000 €","pv_premium":"Un pago. 3 meses de acceso. Sin suscripción. Sin renovación automática.","pn_ib":"Income Builder","pt_ib":"VALOR ESPECIALISTAS: 1 500–2 000 €","ps_ib":"o 89 € / 6 meses — ahorra 9 €\nUn pago. Sin renovación automática.","p_forever":"siempre","p_3mo":"/ 3 meses","disclaimer":"Guías generales — no son asesoramiento legal específico.","pf1":"Plan personalizado de 90 días con tus números exactos","pf2":"Tu día libre de deudas — fecha exacta","pf3":"Qué pasa si no haces nada — números reales","pf4":"Tus derechos ante los acreedores","pf5":"Servicios de apoyo locales","pf6":"Una acción concreta que puedes tomar hoy","pf7":"Plan enviado a tu email","pf8":"Funciona en 20+ idiomas","pf9":"Todo en Gratis","pf10":"Cartas IA a tus acreedores","pf11":"Simulador de recorte de gastos","pf12":"Bola de nieve vs avalancha","pf13":"Mapa del proceso de cobro","pf14":"Actualización mensual — automática","pf15":"Guías bancarias y plantillas","pf16":"Todo en Premium","pf17":"Lista global de trabajo remoto — solo smartphone","pf18":"Niveles Easy / Medium / Senior","pf19":"Calculadora tiempo-ingreso","pf20":"Check-in diario — ciencia del comportamiento","pf21":"Comunidad anónima + Q&A en vivo con Vilma","thanksTitle":"Tu plan está en camino.","thanksSub":"Revisa tu email — tu plan personalizado de 90 días te espera ahí.","thanksNote":"Lo hacemos juntos ✶","modalHome":"Volver al inicio","freeCta":"Obtener mi plan gratis","premiumCta":"Obtener Premium"},"SV":{"label":"Svenska","dir":"ltr","globesTag":"GRATIS · GLOBALT · ÄRLIKT","h1":"Du förtjänar att vara<br><em>skuldfri.</em><br>Låt oss ta dig dit.","sub":"Berätta dina riktiga siffror. Få en personlig plan för din situation och ditt liv.","together":"✶ Vi gör detta tillsammans ✶","cta":"Få min gratis plan — inget kort behövs","note":"Riktiga siffror in. Riktigt plan ut.","why":"Varför detta finns","plans":"Planer","popular":"Mest populär","coming":"Kommer Q3 2026","forever":"för alltid","intakeH":"Din väg ut börjar här","intakeSub":"Ange dina riktiga siffror. Ju mer ärlig du är, desto mer användbar blir din plan.","glLang":"Rapportens språk","glCountry":"Din plats","glIncome":"Din inkomst","glHousehold":"Ditt hushåll","glCosts":"Dina månadskostnader","glDebts":"Dina skulder","glGoal":"Ditt mål","incomeHint":"Efter skatt, per månad","costsHint":"Exakta belopp hjälper oss beräkna din situation","countryPh":"Välj ditt land...","countryOtherPh":"Skriv ditt land här...","incomePh":"Månadsinkomst","rentPh":"Hyra eller bolånets betalning","fixedPh":"Andra fasta kostnader","debtPh":"Total skuld","interestPh":"Ränta % — skriv 0 om du inte vet","paymentPh":"Månatlig skuldbetalning","emailPh":"Din e-post — vi skickar din plan här","emp0":"Vad beskriver bäst din nuvarande arbets- och inkomstsituation?","emp1":"Heltidsanställd","emp2":"Deltid eller gigarbete","emp3":"Egenföretagare eller företagare","emp4":"Tar emot statliga förmåner eller ekonomiskt stöd","emp5":"Arbetslös","emp6":"Oförmögen att arbeta på grund av sjukdom eller funktionshinder","hh0":"Välj hushåll...","hh1":"Bara jag","hh2":"Jag och en partner","hh3":"Jag och 1 barn","hh4":"Jag och 2 barn","hh5":"Jag och 3+ barn","hh6":"Jag försörjer andra","hs0":"Välj boendesituation...","hs1":"Jag hyr","hs2":"Jag äger med bolån","hs3":"Jag äger utan lån","hs4":"Jag bor med familj","dt0":"Välj skuldtyp...","dt1":"Kreditkort / konsumentlån","dt2":"Studielån","dt3":"Bolån","dt4":"Sjukvårdsräkningar","dt5":"Skatteskuld","dt6":"Blandade skulder","goal0":"Välj vad du behöver mest...","goal1":"Stoppa stressen — jag behöver en plan nu","goal2":"Betala av allt så snabbt som möjligt","goal3":"Sänk månadsbetalningarna först","submit":"Bygg min gratis plan","loading":"Bygger din personliga plan…","planEyebrow":"Din personliga plan","planTitle":"90 dagar till klarhet","dfdLabel":"Din skuldfrihetsdag","dfdNote":"Håll din nuvarande betalningsplan","upsellTitle":"Redo att gå djupare?","upsellValue":"En finansrådgivare tar 500–1 000 € för detta. Din investering: 17 €.","upsellSub":"Hela verktygslådan — AI-brev till borgenärer, utgiftssimulator och automatiska månatliga uppdateringar.","upsellBtn":"Skaffa Premium — 17 €","storyText":"“Jag tillbringade hela mitt liv med att hjälpa andra — tusentals familjer, samhällen, människor i svåra tider. Men jag värderade eller skyddade aldrig mig själv. Jag förlorade 25 000 € på bedrägeri. Mina besparingar. Min trygghet. Tre barn, arbetslös, mer skulder än tillgångar. Jag var inte ensam. Miljöner lever exakt den här historien. Så jag byggde verktyget jag önskar att jag hade haft. Ärligt. Gratis. För alla.”","t1":"Alltid. Inga tricks.","t2":"Dagars färdplan","t3":"Språk","t4":"Lokal hjälp","footer":"Byggt med ärlighet. Gratis för alltid. 🌍","ribbon":"Debt-Free.world — Därför att ekonomisk frihet tillhör alla.","pn_free":"Gratis","pt_free":"KONSULTVÄRDE: 300–500 €","ps_free":"Inget kort. Inga tricks. Alltid.","pn_premium":"Premium","pt_premium":"RÅDGIVARVÄRDE: 500–1 000 €","pv_premium":"En betalning. 3 månaders åtkomst. Ingen prenumeration.","pn_ib":"Income Builder","pt_ib":"SPECIALISTVÄRDE: 1 500–2 000 €","ps_ib":"eller 89 € / 6 månader\nEn betalning. Ingen automatisk förnyelse.","p_forever":"för alltid","p_3mo":"/ 3 mån","disclaimer":"Allmänna modeller — inte landsspecifik juridisk rådgivning.","pf1":"Personlig 90-dagarsplan","pf2":"Din skuldfrihetsdag — exakt datum","pf3":"Vad händer om du inte gör något","pf4":"Dina rättigheter mot borgenärer","pf5":"Lokala stödtjänster","pf6":"En konkret åtgärd du kan ta idag","pf7":"Plan levererad till din e-post","pf8":"Fungerar på 20+ språk","pf9":"Allt i Gratis","pf10":"AI-förhandlingsassistent","pf11":"Utgiftssimulator","pf12":"Snöboll vs lawina","pf13":"Karta över indrivningsprocess","pf14":"Månadsuppdatering — automatisk","pf15":"Bankguider och mallar","pf16":"Allt i Premium","pf17":"Global lista för distansarbete","pf18":"Easy / Medium / Senior nivåer","pf19":"Tid-till-inkomst-kalkylator","pf20":"Daglig incheckning — beteendevetenskap","pf21":"Anonym gemenskap + live Q&A med Vilma","thanksTitle":"Din plan är på väg.","thanksSub":"Kolla din e-post — din personliga 90-dagarsplan väntar på dig där.","thanksNote":"Vi gör detta tillsammans ✶","modalHome":"Till startsidan","freeCta":"Få min gratis plan","premiumCta":"Skaffa Premium"},"DE":{"label":"Deutsch","dir":"ltr","globesTag":"KOSTENLOS · GLOBAL · EHRLICH","h1":"Du verdienst es,<br><em>schuldenfrei</em> zu sein.<br>Lass uns das zusammen schaffen.","sub":"Gib deine echten Zahlen an. Erhalte einen personalisierten Plan für deine Situation.","together":"✶ Wir machen das zusammen ✶","cta":"Meinen kostenlosen Plan holen","note":"Echte Zahlen. Echter Plan. Echte lokale Hilfe.","why":"Warum es das gibt","plans":"Pakete","popular":"Beliebteste","coming":"Kommt Q3 2026","forever":"für immer","intakeH":"Dein Weg hinaus beginnt hier","intakeSub":"Gib deine echten Zahlen ein. Je ehrlicher du bist, desto nützlicher ist dein Plan.","glLang":"Berichtssprache","glCountry":"Dein Standort","glIncome":"Dein Einkommen","glHousehold":"Dein Haushalt","glCosts":"Deine monatlichen Kosten","glDebts":"Deine Schulden","glGoal":"Dein Ziel","incomeHint":"Nach Steuern, pro Monat","costsHint":"Genaue Beträge helfen uns deine Situation zu berechnen","countryPh":"Wähle dein Land...","countryOtherPh":"Gib dein Land hier ein...","incomePh":"Monatliches Einkommen","rentPh":"Miete oder Hypothekenzahlung","fixedPh":"Andere Fixkosten","debtPh":"Gesamtverschuldung","interestPh":"Zinssatz % — 0 eingeben wenn unbekannt","paymentPh":"Monatliche Schuldenzahlung","emailPh":"Deine E-Mail — wir senden deinen Plan hierher","emp0":"Was beschreibt deine aktuelle Arbeits- und Einkommenssituation am besten?","emp1":"Vollzeitbeschäftigung","emp2":"Teilzeit oder Gelegenheitsarbeit","emp3":"Selbstständig oder Unternehmer","emp4":"Staatliche Leistungen oder finanzielle Unterstützung","emp5":"Arbeitslos","emp6":"Arbeitsunfähig aufgrund von Krankheit oder Behinderung","hh0":"Haushalt wählen...","hh1":"Nur ich","hh2":"Ich und ein Partner","hh3":"Ich und 1 Kind","hh4":"Ich und 2 Kinder","hh5":"Ich und 3+ Kinder","hh6":"Ich versorge andere","hs0":"Wohnsituation wählen...","hs1":"Ich miete","hs2":"Ich besitze mit Hypothek","hs3":"Ich besitze ohne Kredit","hs4":"Ich wohne bei Familie","dt0":"Hauptschuldentyp wählen...","dt1":"Kreditkarten / Konsumkredite","dt2":"Studienkredite","dt3":"Hypothek","dt4":"Krankheitskosten","dt5":"Steuerschulden","dt6":"Gemischte Schulden","goal0":"Was brauchst du am meisten...","goal1":"Stress stoppen — ich brauche jetzt einen Plan","goal2":"Alles so schnell wie möglich abbezahlen","goal3":"Monatliche Zahlungen zuerst senken","submit":"Meinen kostenlosen Plan erstellen","loading":"Dein personalisierter Plan wird erstellt…","planEyebrow":"Dein personalisierter Plan","planTitle":"90 Tage zur Klarheit","dfdLabel":"Dein Schuldenfreiheitstag","dfdNote":"Halte deinen aktuellen Zahlungsplan","upsellTitle":"Bereit für mehr?","upsellValue":"Ein Finanzberater berechnet 500–1 000 € dafür. Deine Investition: 17 €.","upsellSub":"Das volle Toolkit — KI-Gläubigerbriefe, Ausgabensimulator und automatische monatliche Updates.","upsellBtn":"Premium holen — 17 €","storyText":"“Ich verbrachte mein ganzes Leben damit, anderen zu helfen — Tausenden von Familien, Gemeinschaften, Menschen in schweren Zeiten. Aber ich schätzte und schützte mich selbst nie. Ich verlor 25.000 € durch Betrug. Meine Ersparnisse. Meine Sicherheit. Drei Kinder, arbeitslos, mehr Schulden als Vermögen. Ich war nicht allein. Millionen leben genau diese Geschichte. Also baute ich das Werkzeug, das ich mir gewünscht hätte. Ehrlich. Kostenlos. Für alle.”","t1":"Immer. Keine Tricks.","t2":"Tage Fahrplan","t3":"Sprachen","t4":"Lokale Hilfe","footer":"Mit Ehrlichkeit gebaut. Für immer kostenlos. 🌍","ribbon":"Debt-Free.world — Denn finanzielle Freiheit gehört allen.","pn_free":"Kostenlos","pt_free":"BERATERWERT: 300–500 €","ps_free":"Kein Karte. Keine Tricks. Immer.","pn_premium":"Premium","pt_premium":"BERATER WERT: 500–1 000 €","pv_premium":"Eine Zahlung. 3 Monate Zugang. Kein Abonnement.","pn_ib":"Income Builder","pt_ib":"SPEZIALISTENWERT: 1 500–2 000 €","ps_ib":"oder 89 € / 6 Monate\nEine Zahlung. Keine automatische Verlängerung.","p_forever":"für immer","p_3mo":"/ 3 Mo","disclaimer":"Allgemeine Modelle — keine länderspezifische Rechtsberatung.","pf1":"Personalisierter 90-Tage-Plan","pf2":"Dein Schuldenfreiheitstag","pf3":"Was passiert wenn du nichts tust","pf4":"Deine Rechte gegenüber Gläubigern","pf5":"Lokale Unterstützungsdienste","pf6":"Eine konkrete Aktion die du heute tun kannst","pf7":"Plan an deine E-Mail geliefert","pf8":"Funktioniert in 20+ Sprachen","pf9":"Alles in Kostenlos","pf10":"KI-Verhandlungsassistent","pf11":"Ausgabensimulator","pf12":"Schneeball vs Lawine","pf13":"Karte des Inkassoprozesses","pf14":"Monatliches Update — automatisch","pf15":"Bankführer und Vorlagen","pf16":"Alles in Premium","pf17":"Globale Liste für Fernarbeit","pf18":"Easy / Medium / Senior Niveaus","pf19":"Zeit-zu-Einnahmen-Rechner","pf20":"Tägliches Check-in — Verhaltenswissenschaft","pf21":"Anonyme Gemeinschaft + Live Q&A mit Vilma","thanksTitle":"Dein Plan ist unterwegs.","thanksSub":"Schau in deine E-Mail — dein persönlicher 90-Tage-Plan wartet auf dich.","thanksNote":"Wir machen das zusammen ✶","modalHome":"Zur Startseite","freeCta":"Meinen kostenlosen Plan holen","premiumCta":"Premium holen"},"FR":{"label":"Français","dir":"ltr","globesTag":"GRATUIT · MONDIAL · HONNÊTE","h1":"Vous méritez d'être<br><em>libre de dettes.</em><br>Faisons-le ensemble.","sub":"Dites-nous vos vrais chiffres. Obtenez un plan personnalisé pour votre situation.","together":"✶ Nous le faisons ensemble ✶","cta":"Obtenir mon plan gratuit","note":"Vrais chiffres. Vrai plan. Aide locale réelle.","why":"Pourquoi ça existe","plans":"Plans","popular":"Le plus populaire","coming":"Bientôt Q3/2026","forever":"pour toujours","intakeH":"Votre sortie commence ici","intakeSub":"Entrez vos vrais chiffres. Plus vous êtes honnête, plus votre plan sera utile.","glLang":"Langue du rapport","glCountry":"Votre emplacement","glIncome":"Vos revenus","glHousehold":"Votre ménage","glCosts":"Vos coûts mensuels","glDebts":"Vos dettes","glGoal":"Votre objectif","incomeHint":"Après impôts, par mois","costsHint":"Les montants exacts nous aident à calculer votre situation","countryPh":"Sélectionnez votre pays...","countryOtherPh":"Tapez votre pays ici...","incomePh":"Revenu mensuel","rentPh":"Loyer ou remboursement hypothécaire","fixedPh":"Autres coûts fixes","debtPh":"Montant total de la dette","interestPh":"Taux d'intérêt % — tapez 0 si inconnu","paymentPh":"Paiement mensuel de la dette","emailPh":"Votre email — nous envoyons votre plan ici","emp0":"Qu'est-ce qui décrit le mieux votre situation professionnelle et de revenus actuelle?","emp1":"Emploi à temps plein","emp2":"Temps partiel ou travail à la demande","emp3":"Travailleur indépendant ou chef d'entreprise","emp4":"Bénéficiaire d'aides gouvernementales ou d'une assistance financière","emp5":"Sans emploi","emp6":"Incapable de travailler en raison d'une maladie ou d'un handicap","hh0":"Sélectionnez votre ménage...","hh1":"Juste moi","hh2":"Moi et un partenaire","hh3":"Moi et 1 enfant","hh4":"Moi et 2 enfants","hh5":"Moi et 3 enfants ou plus","hh6":"Je soutiens d'autres dépendants","hs0":"Sélectionnez votre logement...","hs1":"Je loue","hs2":"Je suis propriétaire avec hypothèque","hs3":"Je suis propriétaire sans emprunt","hs4":"Je vis avec ma famille","dt0":"Sélectionnez le type de dette...","dt1":"Cartes de crédit / prêts à la consommation","dt2":"Prêts étudiants","dt3":"Hypothèque","dt4":"Factures médicales","dt5":"Dette fiscale","dt6":"Types mixtes","goal0":"Sélectionnez ce dont vous avez le plus besoin...","goal1":"Arrêter le stress — j'ai besoin d'un plan maintenant","goal2":"Rembourser tout le plus vite possible","goal3":"Réduire d'abord les paiements mensuels","submit":"Créer mon plan gratuit","loading":"Construction de votre plan personnalisé…","planEyebrow":"Votre plan personnalisé","planTitle":"90 jours vers la clarté","dfdLabel":"Votre jour sans dettes","dfdNote":"Maintenez votre plan de paiement actuel","upsellTitle":"Prêt à aller plus loin?","upsellValue":"Un conseiller financier facture 500–1 000 € pour cela. Votre investissement: 17 €.","upsellSub":"La boîte à outils complète — lettres IA aux créanciers, simulateur de dépenses et mises à jour mensuelles automatiques.","upsellBtn":"Obtenir Premium — 17 €","storyText":"“J’ai consacré toute ma vie à aider les autres — des milliers de familles, de communautés, de personnes dans les moments difficiles. Mais je ne me suis jamais valuée ni protégée. J’ai perdu 25 000 € à cause d’une fraude. Mes économies. Ma sécurité. Trois enfants, sans emploi, plus de dettes que d’actifs. Je n’étais pas seule. Des millions vivent exactement cette histoire. Alors j’ai construit l’outil que j’aurais voulu avoir. Honnête. Gratuit. Pour tous.”","t1":"Toujours. Sans astuces.","t2":"Jours de feuille de route","t3":"Langues","t4":"Aide locale","footer":"Construit avec honnêteté. Gratuit pour toujours. 🌍","ribbon":"Debt-Free.world — Parce que la liberté financière appartient à tous.","pn_free":"Gratuit","pt_free":"VALEUR CONSULTANT: 300–500 €","ps_free":"Sans carte. Sans astuces. Toujours.","pn_premium":"Premium","pt_premium":"VALEUR CONSEILLER: 500–1 000 €","pv_premium":"Un paiement. 3 mois d'accès. Sans abonnement.","pn_ib":"Income Builder","pt_ib":"VALEUR SPÉCIALISTES: 1 500–2 000 €","ps_ib":"ou 89 € / 6 mois\nUn paiement. Sans renouvellement automatique.","p_forever":"toujours","p_3mo":"/ 3 mois","disclaimer":"Guides généraux — pas de conseils juridiques spécifiques au pays.","pf1":"Plan personnalisé de 90 jours","pf2":"Votre jour sans dettes — date exacte","pf3":"Ce qui se passe si vous ne faites rien","pf4":"Vos droits face aux créanciers","pf5":"Services de soutien locaux","pf6":"Une action concrète que vous pouvez faire aujourd'hui","pf7":"Plan livré à votre email","pf8":"Fonctionne en 20+ langues","pf9":"Tout dans Gratuit","pf10":"Assistant de négociation IA","pf11":"Simulateur de réduction des dépenses","pf12":"Boule de neige vs avalanche","pf13":"Carte du processus de recouvrement","pf14":"Mise à jour mensuelle — automatique","pf15":"Guides bancaires et modèles","pf16":"Tout dans Premium","pf17":"Liste mondiale de travail à distance","pf18":"Niveaux Easy / Medium / Senior","pf19":"Calculateur temps-revenus","pf20":"Check-in quotidien — science comportementale","pf21":"Communauté anonyme + Q&A en direct avec Vilma","thanksTitle":"Votre plan est en route.","thanksSub":"Vérifiez votre email — votre plan personnalisé de 90 jours vous y attend.","thanksNote":"Nous le faisons ensemble ✶","modalHome":"Retour à l'accueil","freeCta":"Obtenir mon plan gratuit","premiumCta":"Obtenir Premium"},"PT":{"label":"Português","dir":"ltr","globesTag":"GRÁTIS · GLOBAL · HONESTO","h1":"Você merece estar<br><em>livre de dívidas.</em><br>Vamos chegar lá juntos.","sub":"Diga-nos seus números reais. Obtenha um plano personalizado para sua situação.","together":"✶ Fazemos isso juntos ✶","cta":"Obter meu plano gratuito","note":"Números reais. Plano real. Ajuda local real.","why":"Por que isso existe","plans":"Planos","popular":"Mais popular","coming":"Em breve Q3/2026","forever":"para sempre","intakeH":"Sua saída começa aqui","intakeSub":"Digite seus números reais. Quanto mais honesto, mais útil será seu plano.","glLang":"Idioma do relatório","glCountry":"Sua localização","glIncome":"Sua renda","glHousehold":"Seu domicílio","glCosts":"Seus custos mensais","glDebts":"Suas dívidas","glGoal":"Seu objetivo","incomeHint":"Após impostos, por mês","costsHint":"Valores exatos nos ajudam a calcular sua situação","countryPh":"Selecione seu país...","countryOtherPh":"Digite seu país aqui...","incomePh":"Renda mensal","rentPh":"Aluguel ou pagamento de hipoteca","fixedPh":"Outros custos fixos","debtPh":"Total da dívida","interestPh":"Taxa de juros % — digite 0 se não souber","paymentPh":"Pagamento mensal da dívida","emailPh":"Seu email — enviamos seu plano aqui","emp0":"O que melhor descreve sua situação atual de trabalho e renda?","emp1":"Emprego em tempo integral","emp2":"Meio período ou trabalho eventual","emp3":"Autônomo ou empresário","emp4":"Recebendo benefícios governamentais ou assistência financeira","emp5":"Desempregado","emp6":"Incapaz de trabalhar devido a doença ou deficiência","hh0":"Selecione seu domicílio...","hh1":"Apenas eu","hh2":"Eu e parceiro","hh3":"Eu e 1 filho","hh4":"Eu e 2 filhos","hh5":"Eu e 3 ou mais filhos","hh6":"Sustento outros dependentes","hs0":"Selecione situação de moradia...","hs1":"Alugo","hs2":"Possuo com hipoteca","hs3":"Possuo sem dívida","hs4":"Moro com família","dt0":"Selecione tipo de dívida...","dt1":"Cartões / empréstimos","dt2":"Empréstimos estudantis","dt3":"Hipoteca","dt4":"Contas médicas","dt5":"Dívida fiscal","dt6":"Tipos mistos","goal0":"Selecione o que mais precisa...","goal1":"Parar o estresse — preciso de um plano agora","goal2":"Pagar tudo o mais rápido possível","goal3":"Reduzir pagamentos mensais primeiro","submit":"Criar meu plano gratuito","loading":"Construindo seu plano personalizado…","planEyebrow":"Seu plano personalizado","planTitle":"90 dias para a clareza","dfdLabel":"Seu dia livre de dívidas","dfdNote":"Mantenha seu plano de pagamento atual","upsellTitle":"Pronto para ir mais fundo?","upsellValue":"Um consultor financeiro cobra 500–1 000 € por isso. Seu investimento: 17 €.","upsellSub":"O kit completo — cartas IA para credores, simulador de gastos e atualizações mensais automáticas.","upsellBtn":"Obter Premium — 17 €","storyText":"“Passei toda a minha vida ajudando os outros — milhares de famílias, comunidades, pessoas em momentos difíceis. Mas nunca me valorizei ou me protegi. Perdi 25.000 € em uma fraude. Minhas economias. Minha segurança. Três filhos, desempregada, mais dívidas do que ativos. Não estava sozinha. Milhões vivem exatamente essa história. Então construí a ferramenta que gostaria de ter tido. Honesta. Gratuita. Para todos.”","t1":"Sempre. Sem truques.","t2":"Dias de roteiro","t3":"Idiomas","t4":"Ajuda local","footer":"Construído com honestidade. Gratuito para sempre. 🌍","ribbon":"Debt-Free.world — Porque a liberdade financeira é para todos.","pn_free":"Grátis","pt_free":"VALOR CONSULTOR: 300–500 €","ps_free":"Sem cartão. Sem truques. Sempre.","pn_premium":"Premium","pt_premium":"VALOR ASSESSOR: 500–1 000 €","pv_premium":"Um pagamento. 3 meses de acesso. Sem assinatura.","pn_ib":"Income Builder","pt_ib":"VALOR ESPECIALISTAS: 1 500–2 000 €","ps_ib":"ou 89 € / 6 meses\nUm pagamento. Sem renovação automática.","p_forever":"para sempre","p_3mo":"/ 3 meses","disclaimer":"Guias gerais — não são aconselhamento jurídico específico.","pf1":"Plano personalizado de 90 dias","pf2":"Seu dia livre de dívidas — data exata","pf3":"O que acontece se você não fizer nada","pf4":"Seus direitos perante credores","pf5":"Serviços de apoio locais","pf6":"Uma ação concreta que você pode tomar hoje","pf7":"Plano entregue ao seu email","pf8":"Funciona em 20+ idiomas","pf9":"Tudo no Grátis","pf10":"Assistente de negociação IA","pf11":"Simulador de corte de gastos","pf12":"Bola de neve vs avalanche","pf13":"Mapa do processo de cobrança","pf14":"Atualização mensal — automática","pf15":"Guias bancários e modelos","pf16":"Tudo no Premium","pf17":"Lista global de trabalho remoto","pf18":"Níveis Easy / Medium / Senior","pf19":"Calculadora tempo-renda","pf20":"Check-in diário — ciência comportamental","pf21":"Comunidade anônima + Q&A ao vivo com Vilma","thanksTitle":"Seu plano está a caminho.","thanksSub":"Verifique seu email — seu plano personalizado de 90 dias está esperando você.","thanksNote":"Fazemos isso juntos ✶","modalHome":"Voltar ao início","freeCta":"Obter meu plano gratuito","premiumCta":"Obter Premium"},"IT":{"label":"Italiano","dir":"ltr","globesTag":"GRATUITO · GLOBALE · ONESTO","h1":"Meriti di essere<br><em>libero dai debiti.</em><br>Arriviamoci insieme.","sub":"Dicci i tuoi numeri reali. Ottieni un piano personalizzato per la tua situazione.","together":"✶ Lo facciamo insieme ✶","cta":"Ottieni il mio piano gratuito","note":"Numeri reali. Piano reale. Aiuto locale reale.","why":"Perché esiste","plans":"Piani","popular":"Più popolare","coming":"Prossimamente Q3/2026","forever":"per sempre","intakeH":"La tua uscita inizia qui","intakeSub":"Inserisci i tuoi numeri reali. Più sei onesto, più utile sarà il tuo piano.","glLang":"Lingua del rapporto","glCountry":"La tua posizione","glIncome":"Il tuo reddito","glHousehold":"La tua famiglia","glCosts":"I tuoi costi mensili","glDebts":"I tuoi debiti","glGoal":"Il tuo obiettivo","incomeHint":"Al netto delle tasse, al mese","costsHint":"Gli importi esatti ci aiutano a calcolare la tua situazione","countryPh":"Seleziona il tuo paese...","countryOtherPh":"Scrivi il tuo paese qui...","incomePh":"Reddito mensile","rentPh":"Affitto o pagamento mutuo","fixedPh":"Altri costi fissi","debtPh":"Debito totale","interestPh":"Tasso di interesse % — scrivi 0 se non sai","paymentPh":"Pagamento mensile del debito","emailPh":"La tua email — ti inviamo il piano qui","emp0":"Cosa descrive meglio la tua attuale situazione lavorativa e reddituale?","emp1":"Lavoro a tempo pieno","emp2":"Part-time o lavoro occasionale","emp3":"Lavoratore autonomo o titolare d'azienda","emp4":"Ricezione di sussidi governativi o assistenza finanziaria","emp5":"Disoccupato","emp6":"Impossibilitato a lavorare per malattia o disabilità","hh0":"Seleziona il tuo nucleo familiare...","hh1":"Solo io","hh2":"Io e un partner","hh3":"Io e 1 figlio","hh4":"Io e 2 figli","hh5":"Io e 3 o più figli","hh6":"Mantengo altri dipendenti","hs0":"Seleziona la situazione abitativa...","hs1":"Affitto","hs2":"Proprietà con mutuo","hs3":"Proprietà senza mutuo","hs4":"Vivo con la famiglia","dt0":"Seleziona il tipo di debito...","dt1":"Carte di credito / prestiti al consumo","dt2":"Prestiti studenteschi","dt3":"Mutuo","dt4":"Spese mediche","dt5":"Debiti fiscali","dt6":"Tipi misti","goal0":"Seleziona ciò di cui hai più bisogno...","goal1":"Fermare lo stress — ho bisogno di un piano ora","goal2":"Pagare tutto il più velocemente possibile","goal3":"Ridurre prima i pagamenti mensili","submit":"Crea il mio piano gratuito","loading":"Costruendo il tuo piano personalizzato…","planEyebrow":"Il tuo piano personalizzato","planTitle":"90 giorni verso la chiarezza","dfdLabel":"Il tuo giorno senza debiti","dfdNote":"Mantieni il tuo attuale piano di pagamento","upsellTitle":"Pronto ad andare più in profondità?","upsellValue":"Un consulente finanziario chiede 500–1 000 € per questo. Il tuo investimento: 17 €.","upsellSub":"Il toolkit completo — lettere IA ai creditori, simulatore di spese e aggiornamenti mensili automatici.","upsellBtn":"Ottieni Premium — 17 €","storyText":"“Ho trascorso tutta la mia vita ad aiutare gli altri — migliaia di famiglie, comunità, persone nei momenti difficili. Ma non ho mai valorizzato o protetto me stessa. Ho perso 25.000 € a causa di una truffa. I miei risparmi. La mia sicurezza. Tre figli, disoccupata, più debiti che attivi. Non ero sola. Milioni vivono esattamente questa storia. Così ho costruito lo strumento che avrei voluto avere. Onesto. Gratuito. Per tutti.”","t1":"Sempre. Nessun trucco.","t2":"Giorni di tabella di marcia","t3":"Lingue","t4":"Aiuto locale","footer":"Costruito con onestà. Gratuito per sempre. 🌍","ribbon":"Debt-Free.world — Perché la libertà finanziaria appartiene a tutti.","pn_free":"Gratuito","pt_free":"VALORE CONSULENTE: 300–500 €","ps_free":"Senza carta. Senza trucchi. Sempre.","pn_premium":"Premium","pt_premium":"VALORE CONSULENTE FINANZIARIO: 500–1 000 €","pv_premium":"Un pagamento. 3 mesi di accesso. Senza abbonamento.","pn_ib":"Income Builder","pt_ib":"VALORE SPECIALISTI: 1 500–2 000 €","ps_ib":"o 89 € / 6 mesi\nUn pagamento. Senza rinnovo automatico.","p_forever":"per sempre","p_3mo":"/ 3 mesi","disclaimer":"Guide generali — non consulenza legale specifica per paese.","pf1":"Piano personalizzato di 90 giorni","pf2":"Il tuo giorno senza debiti — data esatta","pf3":"Cosa succede se non fai nulla","pf4":"I tuoi diritti di fronte ai creditori","pf5":"Servizi di supporto locali","pf6":"Un'azione concreta che puoi fare oggi","pf7":"Piano consegnato alla tua email","pf8":"Funziona in 20+ lingue","pf9":"Tutto nel Gratuito","pf10":"Assistente di negoziazione IA","pf11":"Simulatore di taglio spese","pf12":"Palla di neve vs valanga","pf13":"Mappa del processo di recupero crediti","pf14":"Aggiornamento mensile — automatico","pf15":"Guide bancarie e modelli","pf16":"Tutto nel Premium","pf17":"Lista globale di lavoro remoto","pf18":"Livelli Easy / Medium / Senior","pf19":"Calcolatore tempo-reddito","pf20":"Check-in quotidiano — scienza comportamentale","pf21":"Comunità anonima + Q&A dal vivo con Vilma","thanksTitle":"Il tuo piano è in arrivo.","thanksSub":"Controlla la tua email — il tuo piano personale di 90 giorni ti aspetta.","thanksNote":"Lo facciamo insieme ✶","modalHome":"Torna alla home","freeCta":"Ottieni il mio piano gratuito","premiumCta":"Ottieni Premium"},"NL":{"label":"Nederlands","dir":"ltr","globesTag":"GRATIS · WERELDWIJD · EERLIJK","h1":"Je verdient het om<br><em>schuldenvrij</em> te zijn.<br>Laten we er samen komen.","sub":"Vertel ons je echte cijfers. Krijg een gepersonaliseerd plan voor jouw situatie.","together":"✶ We doen dit samen ✶","cta":"Mijn gratis plan ophalen","note":"Echte cijfers. Echt plan. Echte lokale hulp.","why":"Waarom dit bestaat","plans":"Plannen","popular":"Meest populair","coming":"Binnenkort Q3/2026","forever":"voor altijd","intakeH":"Jouw uitweg begint hier","intakeSub":"Voer je echte cijfers in. Hoe eerlijker je bent, hoe nuttiger je plan.","glLang":"Rapporttaal","glCountry":"Jouw locatie","glIncome":"Jouw inkomen","glHousehold":"Jouw huishouden","glCosts":"Jouw maandelijkse kosten","glDebts":"Jouw schulden","glGoal":"Jouw doel","incomeHint":"Na belasting, per maand","costsHint":"Exacte bedragen helpen ons jouw situatie te berekenen","countryPh":"Selecteer jouw land...","countryOtherPh":"Typ jouw land hier...","incomePh":"Maandelijks inkomen","rentPh":"Huur of hypotheekbetaling","fixedPh":"Andere vaste kosten","debtPh":"Totale schuld","interestPh":"Rente % — typ 0 als je het niet weet","paymentPh":"Maandelijkse schuldenbetaling","emailPh":"Jouw email — we sturen je plan hier naartoe","emp0":"Wat beschrijft jouw huidige werk- en inkomenssituatie het beste?","emp1":"Voltijdse werkgelegenheid","emp2":"Deeltijd of kluswerk","emp3":"Zelfstandige of bedrijfseigenaar","emp4":"Ontvangt overheidsuitkeringen of financiële ondersteuning","emp5":"Werkloos","emp6":"Niet in staat te werken door ziekte of handicap","hh0":"Selecteer huishouden...","hh1":"Alleen ik","hh2":"Ik en een partner","hh3":"Ik en 1 kind","hh4":"Ik en 2 kinderen","hh5":"Ik en 3 of meer kinderen","hh6":"Ik onderhoud andere afhankelijken","hs0":"Selecteer woonsituatie...","hs1":"Ik huur","hs2":"Ik bezit met hypotheek","hs3":"Ik bezit zonder lening","hs4":"Ik woon bij familie","dt0":"Selecteer hoofdschuldtype...","dt1":"Creditcards / consumptieleningen","dt2":"Studieleningen","dt3":"Hypotheek","dt4":"Medische rekeningen","dt5":"Belastingschuld","dt6":"Gemengde typen","goal0":"Selecteer wat je het meest nodig hebt...","goal1":"Stop de stress — ik heb nu een plan nodig","goal2":"Alles zo snel mogelijk afbetalen","goal3":"Eerst maandelijkse betalingen verlagen","submit":"Maak mijn gratis plan","loading":"Jouw gepersonaliseerde plan wordt gebouwd…","planEyebrow":"Jouw gepersonaliseerde plan","planTitle":"90 dagen naar duidelijkheid","dfdLabel":"Jouw schuldenvrije dag","dfdNote":"Houd je huidige betalingsplan aan","upsellTitle":"Klaar om dieper te gaan?","upsellValue":"Een financieel adviseur rekent 500–1 000 € hiervoor. Jouw investering: 17 €.","upsellSub":"De volledige toolkit — AI-brieven aan schuldeisers, uitgavensimulator en automatische maandelijkse updates.","upsellBtn":"Premium halen — 17 €","storyText":"“Ik heb mijn hele leven besteed aan het helpen van anderen — duizenden gezinnen, gemeenschappen, mensen in moeilijke tijden. Maar ik heb mezelf nooit gewaardeerd of beschermd. Ik verloor 25.000 € door fraude. Mijn spaargeld. Mijn zekerheid. Drie kinderen, werkloos, meer schulden dan bezittingen. Ik was niet alleen. Miljoenen leven precies dit verhaal. Dus bouwde ik het hulpmiddel dat ik had gewild. Eerlijk. Gratis. Voor iedereen.”","t1":"Altijd. Geen trucs.","t2":"Dagen routekaart","t3":"Talen","t4":"Lokale hulp","footer":"Gebouwd met eerlijkheid. Gratis voor altijd. 🌍","ribbon":"Debt-Free.world — Omdat financiële vrijheid voor iedereen is.","pn_free":"Gratis","pt_free":"WAARDE BIJ CONSULTANT: 300–500 €","ps_free":"Geen kaart. Geen trucs. Altijd.","pn_premium":"Premium","pt_premium":"WAARDE BIJ ADVISEUR: 500–1 000 €","pv_premium":"Één betaling. 3 maanden toegang. Geen abonnement.","pn_ib":"Income Builder","pt_ib":"WAARDE BIJ SPECIALISTEN: 1 500–2 000 €","ps_ib":"of 89 € / 6 maanden\nEén betaling. Geen automatische verlenging.","p_forever":"voor altijd","p_3mo":"/ 3 mnd","disclaimer":"Algemene modellen — geen landsspecifiek juridisch advies.","pf1":"Gepersonaliseerd 90-dagenplan","pf2":"Jouw schuldenvrije dag","pf3":"Wat er gebeurt als je niets doet","pf4":"Jouw rechten tegenover schuldeisers","pf5":"Lokale ondersteuningsdiensten","pf6":"Één concrete actie die je vandaag kunt doen","pf7":"Plan bezorgd aan jouw email","pf8":"Werkt in 20+ talen","pf9":"Alles in Gratis","pf10":"AI-onderhandelingsassistent","pf11":"Uitgavenverlagingssimulator","pf12":"Sneeuwbal vs lawine","pf13":"Kaart van het incassoproces","pf14":"Maandelijkse update — automatisch","pf15":"Bankgidsen en sjablonen","pf16":"Alles in Premium","pf17":"Wereldwijde lijst voor thuiswerken","pf18":"Easy / Medium / Senior niveaus","pf19":"Tijd-tot-inkomen calculator","pf20":"Dagelijkse check-in — gedragswetenschap","pf21":"Anonieme gemeenschap + live Q&A met Vilma","thanksTitle":"Jouw plan is onderweg.","thanksSub":"Controleer je email — jouw persoonlijke 90-dagenplan wacht op je.","thanksNote":"We doen dit samen ✶","modalHome":"Terug naar home","freeCta":"Mijn gratis plan ophalen","premiumCta":"Premium halen"},"PL":{"label":"Polski","dir":"ltr","globesTag":"BEZPŁATNIE · GLOBALNIE · UCZCIWIE","h1":"Zasługujesz na to,<br>by być <em>wolnym od długów.</em><br>Dojdźmy do tego razem.","sub":"Podaj nam swoje prawdziwe liczby. Otrzymaj spersonalizowany plan dla swojej sytuacji.","together":"✶ Robimy to razem ✶","cta":"Pobierz mój bezpłatny plan","note":"Prawdziwe liczby. Prawdziwy plan. Prawdziwa pomoc.","why":"Dlaczego to istnieje","plans":"Plany","popular":"Najpopularniejszy","coming":"Wkrótce Q3/2026","forever":"na zawsze","intakeH":"Twoja droga wyjścia zaczyna się tutaj","intakeSub":"Wprowadź swoje prawdziwe liczby. Im bardziej jesteś szczery, tym bardziej przydatny będzie twój plan.","glLang":"Język raportu","glCountry":"Twoja lokalizacja","glIncome":"Twój dochód","glHousehold":"Twój dom","glCosts":"Twoje miesięczne koszty","glDebts":"Twoje długi","glGoal":"Twój cel","incomeHint":"Po podatkach, miesięcznie","costsHint":"Dokładne kwoty pomagają nam obliczyć twoją sytuację","countryPh":"Wybierz swój kraj...","countryOtherPh":"Wpisz swój kraj tutaj...","incomePh":"Miesięczny dochód","rentPh":"Czynsz lub spłata kredytu","fixedPh":"Inne stałe koszty","debtPh":"Całkowity dług","interestPh":"Oprocentowanie % — wpisz 0 jeśli nie wiesz","paymentPh":"Miesięczna spłata długu","emailPh":"Twój email — wysyłamy plan tutaj","emp0":"Co najlepiej opisuje Twoją obecną sytuację zawodową i dochodową?","emp1":"Zatrudnienie w pełnym wymiarze godzin","emp2":"Niepełny etat lub praca dorywcza","emp3":"Samozatrudniony lub właściciel firmy","emp4":"Otrzymuje świadczenia rządowe lub pomoc finansową","emp5":"Bezrobotny","emp6":"Niezdolny do pracy z powodu choroby lub niepełnosprawności","hh0":"Wybierz swój dom...","hh1":"Tylko ja","hh2":"Ja i partner","hh3":"Ja i 1 dziecko","hh4":"Ja i 2 dzieci","hh5":"Ja i 3 lub więcej dzieci","hh6":"Utrzymuję innych","hs0":"Wybierz sytuację mieszkaniową...","hs1":"Wynajmuję","hs2":"Własność z kredytem","hs3":"Własność bez kredytu","hs4":"Mieszkam z rodziną","dt0":"Wybierz główny typ długu...","dt1":"Karty kredytowe / pożyczki","dt2":"Pożyczki studenckie","dt3":"Kredyt hipoteczny","dt4":"Rachunki medyczne","dt5":"Dług podatkowy","dt6":"Mieszane typy","goal0":"Wybierz czego najbardziej potrzebujesz...","goal1":"Zatrzymać stres — potrzebuję planu teraz","goal2":"Spłacić wszystko jak najszybciej","goal3":"Najpierw obniżyć miesięczne płatności","submit":"Utwórz mój bezpłatny plan","loading":"Budowanie spersonalizowanego planu…","planEyebrow":"Twój spersonalizowany plan","planTitle":"90 dni do jasności","dfdLabel":"Twój dzień bez długów","dfdNote":"Utrzymaj swój obecny plan spłat","upsellTitle":"Gotowy na więcej?","upsellValue":"Doradca finansowy pobiera 500–1 000 € za to. Twój wkład: 17 €.","upsellSub":"Pełny zestaw narzędzi — listy AI do wierzycieli, symulator wydatków i automatyczne miesięczne aktualizacje.","upsellBtn":"Uzyskaj Premium — 17 €","storyText":"“Spędziłam całe życie pomagając innym — tysiącom rodzin, społeczności, ludziom w trudnych chwilach. Ale nigdy nie ceniłam ani nie chroniłam siebie. Straciłam 25.000 € w wyniku oszustwa. Moje oszczędności. Moje bezpieczeństwo. Troje dzieci, bezrobotna, więcej długów niż majątku. Nie byłam sama. Miliony żyją dokładnie tą historią. Więc zbudowałam narzędzie, które chciałabym mieć. Uczciwe. Bezpłatne. Dla wszystkich.”","t1":"Zawsze. Bez sztuczek.","t2":"Dni planu działania","t3":"Języki","t4":"Lokalna pomoc","footer":"Zbudowane z uczciwością. Zawsze bezpłatne. 🌍","ribbon":"Debt-Free.world — Bo wolność finansowa należy do wszystkich.","pn_free":"Bezpłatny","pt_free":"WARTOŚĆ U KONSULTANTA: 300–500 €","ps_free":"Bez karty. Bez sztuczek. Zawsze.","pn_premium":"Premium","pt_premium":"WARTOŚĆ U DORADCY: 500–1 000 €","pv_premium":"Jedna płatność. 3 miesiące dostępu. Bez subskrypcji.","pn_ib":"Income Builder","pt_ib":"WARTOŚĆ U SPECJALISTÓW: 1 500–2 000 €","ps_ib":"lub 89 € / 6 miesięcy\nJedna płatność. Bez automatycznego odnowienia.","p_forever":"na zawsze","p_3mo":"/ 3 mies","disclaimer":"Ogólne modele — nie porady prawne specyficzne dla kraju.","pf1":"Spersonalizowany 90-dniowy plan","pf2":"Twój dzień bez długów","pf3":"Co się stanie jeśli nic nie zrobisz","pf4":"Twoje prawa wobec wierzycieli","pf5":"Lokalne usługi wsparcia","pf6":"Jedno konkretne działanie dziś","pf7":"Plan dostarczony na twój email","pf8":"Działa w 20+ językach","pf9":"Wszystko w Bezpłatnym","pf10":"Asystent negocjacji AI","pf11":"Symulator cięć wydatków","pf12":"Kula śniegowa vs lawina","pf13":"Mapa procesu windykacji","pf14":"Miesięczna aktualizacja — automatyczna","pf15":"Przewodniki bankowe i szablony","pf16":"Wszystko w Premium","pf17":"Globalna lista pracy zdalnej","pf18":"Poziomy Easy / Medium / Senior","pf19":"Kalkulator czasu do dochodu","pf20":"Codzienny check-in — nauka zachowania","pf21":"Anonimowa społeczność + live Q&A z Vilmą","thanksTitle":"Twój plan jest w drodze.","thanksSub":"Sprawdź swój email — Twój osobisty 90-dniowy plan czeka na Ciebie.","thanksNote":"Robimy to razem ✶","modalHome":"Wróć na stronę główną","freeCta":"Pobierz mój bezpłatny plan","premiumCta":"Uzyskaj Premium"},"TR":{"label":"Türkçe","dir":"ltr","globesTag":"ÜCRETSİZ · KÜRESEL · DÜRÜST","h1":"Borçsuz olmayı<br><em>hak ediyorsunuz.</em><br>Birlikte yapalım.","sub":"Gerçek rakamlarınızı bize söyleyin. Durumunuz için kişisel bir plan alın.","together":"✶ Bunu birlikte yapıyoruz ✶","cta":"Bedava planımı al","note":"Gerçek rakamlar. Gerçek plan. Gerçek yerel yardım.","why":"Neden var","plans":"Planlar","popular":"En popüler","coming":"Yakında Q3/2026","forever":"sonsuza kadar","intakeH":"Çıkışınız burada başlıyor","intakeSub":"Gerçek rakamlarınızı girin. Ne kadar dürüst olursanız, planınız o kadar kullanışlı olur.","glLang":"Rapor dili","glCountry":"Konumunuz","glIncome":"Geliriniz","glHousehold":"Haneniz","glCosts":"Aylık giderleriniz","glDebts":"Borçlarınız","glGoal":"Hedefiniz","incomeHint":"Vergiler sonrası, aylık","costsHint":"Kesin tutarlar gerçek durumunuzu hesaplamamızı sağlar","countryPh":"Ülkenizi seçin...","countryOtherPh":"Ülkenizi buraya yazın...","incomePh":"Aylık geliriniz","rentPh":"Kira veya ipotek ödemesi","fixedPh":"Diğer sabit giderler","debtPh":"Toplam borç","interestPh":"Faiz oranı % — bilmiyorsanız 0 yazın","paymentPh":"Aylık borç ödemesi","emailPh":"E-posta adresiniz — planı buraya gönderiyoruz","emp0":"Mevcut çalışma ve gelir durumunuzu en iyi ne tanımlıyor?","emp1":"Tam zamanlı istihdam","emp2":"Yarı zamanlı veya esnek çalışma","emp3":"Serbest meslek veya işletme sahibi","emp4":"Devlet yardımı veya mali destek alıyor","emp5":"İşsiz","emp6":"Hastalık veya engellilik nedeniyle çalışamıyor","hh0":"Hanenizi seçin...","hh1":"Sadece ben","hh2":"Ben ve eşim","hh3":"Ben ve 1 çocuk","hh4":"Ben ve 2 çocuk","hh5":"Ben ve 3 veya daha fazla çocuk","hh6":"Diğer bağımlıları geçindiriyorum","hs0":"Konut durumunu seçin...","hs1":"Kiracıyım","hs2":"Mortgajlı ev sahibiyim","hs3":"Mortgagesiz ev sahibiyim","hs4":"Aileyle birlikte yaşıyorum","dt0":"Ana borç türü seçin...","dt1":"Kredi kartı / tüketici kredisi","dt2":"Öğrenci kredisi","dt3":"İpotek","dt4":"Tıbbi faturalar","dt5":"Vergi borcu","dt6":"Karma türler","goal0":"En çok neye ihtiyacınız var...","goal1":"Stresi durdurun — şimdi bir plana ihtiyacım var","goal2":"Her şeyi mümkün olduğunca çabuk ödemek","goal3":"Önce aylık ödemeleri düşürmek","submit":"Bedava planımı oluştur","loading":"Kişisel planınız hazırlanıyor…","planEyebrow":"Kişisel planınız","planTitle":"Açıklığa doğru 90 gün","dfdLabel":"Borçsuz gününüz","dfdNote":"Mevcut ödeme planınızı koruyun","upsellTitle":"Daha derine inmek ister misiniz?","upsellValue":"Bir finansal danışman bunun için 500–1 000 € alır. Yatırımınız: 17 €.","upsellSub":"Tam araç seti — alacaklılara yapay zeka mektupları, harcama simülatörü ve otomatik aylık güncellemeler.","upsellBtn":"Premium'u al — 17 €","storyText":"“Tüm hayatımı başkalarına yardım etmeye geçirdim — binlerce aile, topluluk, zor zamanlar geçiren insanlar. Ama kendimi hiç değerlemedim ya da korumadım. Bir dolandırıcılık sonucu 25.000 € kaybettim. Birikimlerim. Güvencemi. Üç çocuk, işsiz, varlıktan çok borcu olan biri. Yalnız değeldim. Milyonlar tam olarak bu hikayeyi yaşıyor. Bu yüzden sahip olmayı dilediğim aracı yaptım. Dürüst. Ücretssiz. Herkes için.”","t1":"Her zaman. Hile yok.","t2":"Günlük yol haritası","t3":"Dil","t4":"Yerel yardım","footer":"Dürüstlükle inşa edildi. Sonsuza kadar ücretsiz. 🌍","ribbon":"Debt-Free.world — Çünkü mali özgürlük herkese aittir.","pn_free":"Ücretsiz","pt_free":"KONSULTAN DEĞERİ: 300–500 €","ps_free":"Kart yok. Hile yok. Her zaman.","pn_premium":"Premium","pt_premium":"DANIŞMAN DEĞERİ: 500–1 000 €","pv_premium":"Tek ödeme. 3 aylık erişim. Abonelik yok.","pn_ib":"Income Builder","pt_ib":"UZMAN DEĞERİ: 1 500–2 000 €","ps_ib":"veya 89 € / 6 ay\nTek ödeme. Otomatik yenileme yok.","p_forever":"sonsuza kadar","p_3mo":"/ 3 ay","disclaimer":"Kılavuzlar genel modellerdir, ülkeye özgü hukuki tavsiye değildir.","pf1":"Kişisel 90 günlük plan","pf2":"Borçsuz gününüz — kesin tarih","pf3":"Hiçbir şey yapmazsanız ne olur","pf4":"Alacaklılara karşı haklarınız","pf5":"Yerel destek hizmetleri","pf6":"Bugün yapabileceğiniz somut bir eylem","pf7":"Plan e-posta adresinize gönderildi","pf8":"20+ dilde çalışır","pf9":"Ücretsiz'deki her şey","pf10":"Yapay zeka müzakere asistanı","pf11":"Harcama kesme simülatörü","pf12":"Kar topı vs çığ","pf13":"Tahsilat süreci haritası","pf14":"Aylık güncelleme — otomatik","pf15":"Banka kılavuzları ve şablonlar","pf16":"Premium'daki her şey","pf17":"Küresel uzaktan çalışma listesi","pf18":"Easy / Medium / Senior seviyeleri","pf19":"Zaman-gelir hesaplayıcısı","pf20":"Günlük check-in — davranış bilimi","pf21":"Anonim topluluk + Vilma ile canlı S&A","thanksTitle":"Planınız yolda.","thanksSub":"E-postanızı kontrol edin — kişisel 90 günlük planınız sizi bekliyor.","thanksNote":"Bunu birlikte yapıyoruz ✶","modalHome":"Ana sayfaya dön","freeCta":"Bedava planımı al","premiumCta":"Premium'u al"},"RU":{"label":"Русский","dir":"ltr","globesTag":"БЕСПЛАТНО · ГЛОБАЛЬНО · ЧЕСТНО","h1":"Вы заслуживаете<br><em>жизни без долгов.</em><br>Давайте достигнем этого вместе.","sub":"Расскажите нам свои реальные цифры. Получите персональный план для вашей ситуации.","together":"✶ Мы делаем это вместе ✶","cta":"Получить мой бесплатный план","note":"Реальные цифры. Реальный план. Реальная местная помощь.","why":"Почему это существует","plans":"Планы","popular":"Самый популярный","coming":"Скоро Q3/2026","forever":"навсегда","intakeH":"Ваш выход начинается здесь","intakeSub":"Введите свои реальные цифры. Чем честнее вы будете, тем полезнее будет ваш план.","glLang":"Язык отчёта","glCountry":"Ваше местоположение","glIncome":"Ваш доход","glHousehold":"Ваше домохозяйство","glCosts":"Ваши ежемесячные расходы","glDebts":"Ваши долги","glGoal":"Ваша цель","incomeHint":"После налогов, в месяц","costsHint":"Точные суммы помогают нам рассчитать вашу ситуацию","countryPh":"Выберите вашу страну...","countryOtherPh":"Введите вашу страну здесь...","incomePh":"Ежемесячный доход","rentPh":"Аренда или ипотечный платёж","fixedPh":"Другие фиксированные расходы","debtPh":"Общий долг","interestPh":"Процентная ставка % — введите 0 если не знаете","paymentPh":"Ежемесячный платёж по долгу","emailPh":"Ваш email — мы отправим план сюда","emp0":"Что лучше всего описывает вашу текущую ситуацию с работой и доходом?","emp1":"Полная занятость","emp2":"Частичная занятость или подработка","emp3":"Самозанятый или владелец бизнеса","emp4":"Получает государственные пособия или финансовую помощь","emp5":"Безработный","emp6":"Не может работать из-за болезни или инвалидности","hh0":"Выберите домохозяйство...","hh1":"Только я","hh2":"Я и партнёр","hh3":"Я и 1 ребёнок","hh4":"Я и 2 детей","hh5":"Я и 3 или более детей","hh6":"Я содержу других иждивенцев","hs0":"Выберите жилищную ситуацию...","hs1":"Я снимаю","hs2":"Я владею с ипотекой","hs3":"Я владею без кредита","hs4":"Живу с семьёй","dt0":"Выберите основной тип долга...","dt1":"Кредитные карты / потребительские кредиты","dt2":"Студенческие кредиты","dt3":"Ипотека","dt4":"Медицинские счета","dt5":"Налоговый долг","dt6":"Смешанные типы","goal0":"Выберите что вам нужно больше всего...","goal1":"Остановить стресс — мне нужен план сейчас","goal2":"Выплатить всё как можно быстрее","goal3":"Сначала снизить ежемесячные платежи","submit":"Создать мой бесплатный план","loading":"Составляем ваш персональный план…","planEyebrow":"Ваш персональный план","planTitle":"90 дней к ясности","dfdLabel":"Ваш день без долгов","dfdNote":"Придерживайтесь текущего плана платежей","upsellTitle":"Готовы идти глубже?","upsellValue":"Финансовый консультант берёт за это 500–1 000 €. Ваши инвестиции: 17 €.","upsellSub":"Полный набор инструментов — письма ИИ кредиторам, симулятор расходов и автоматические ежемесячные обновления.","upsellBtn":"Получить Premium — 17 €","storyText":"“Я посвятила всю жизнь помощи другим. Но я никогда не ценила себя. Я потеряла 25 000 € из-за мошенничества. Трое детей, безработная, больше долгов. Миллионы живут эту историю. Честно. Бесплатно. Для всех.”","t1":"Всегда. Без обмана.","t2":"Дней плана","t3":"Языков","t4":"Местная помощь","footer":"Построено честно. Бесплатно навсегда. 🌍","ribbon":"Debt-Free.world — Потому что финансовая свобода принадлежит всем.","pn_free":"Бесплатно","pt_free":"СТОИМОСТЬ У КОНСУЛЬТАНТА: 300–500 €","ps_free":"Без карты. Без обмана. Всегда.","pn_premium":"Премиум","pt_premium":"СТОИМОСТЬ У СОВЕТНИКА: 500–1 000 €","pv_premium":"Один платёж. 3 месяца доступа. Без подписки.","pn_ib":"Income Builder","pt_ib":"СТОИМОСТЬ У СПЕЦИАЛИСТОВ: 1 500–2 000 €","ps_ib":"или 89 € / 6 месяцев\nОдин платёж. Без автоматического продления.","p_forever":"навсегда","p_3mo":"/ 3 мес","disclaimer":"Общие модели — не юридические советы для конкретной страны.","pf1":"Персональный 90-дневный план","pf2":"Ваш день без долгов — точная дата","pf3":"Что произойдёт если вы ничего не сделаете","pf4":"Ваши права перед кредиторами","pf5":"Местные службы поддержки","pf6":"Одно конкретное действие которое вы можете предпринять сегодня","pf7":"План доставлен на ваш email","pf8":"Работает на 20+ языках","pf9":"Всё в Бесплатном","pf10":"Помощник по переговорам ИИ","pf11":"Симулятор сокращения расходов","pf12":"Снежный ком vs лавина","pf13":"Карта процесса взыскания","pf14":"Ежемесячное обновление — автоматическое","pf15":"Банковские руководства и шаблоны","pf16":"Всё в Премиум","pf17":"Глобальный список удалённой работы","pf18":"Уровни Easy / Medium / Senior","pf19":"Калькулятор времени до дохода","pf20":"Ежедневный чекин — поведенческая наука","pf21":"Анонимное сообщество + прямой Q&A с Вилмой","thanksTitle":"Ваш план в пути.","thanksSub":"Проверьте свой email — ваш персональный 90-дневный план ждёт вас.","thanksNote":"Мы делаем это вместе ✶","modalHome":"На главную","freeCta":"Получить мой бесплатный план","premiumCta":"Получить Premium"},"AR":{"label":"العربية","dir":"rtl","globesTag":"مجاني · عالمي · صادق","h1":"تستحق أن تكون<br><em>خالياً من الديون.</em><br>دعنا نصل إلى ذلك معاً.","sub":"أخبرنا بأرقامك الحقيقية. احصل على خطة شخصية لوضعك وحياتك.","together":"✶ نفعل هذا معاً ✶","cta":"احصل على خطتي المجانية","note":"أرقام حقيقية. خطة حقيقية. مساعدة محلية حقيقية.","why":"لماذا يوجد هذا","plans":"الخطط","popular":"الأكثر شعبية","coming":"قريباً Q3/2026","forever":"للأبد","intakeH":"طريق خروجك يبدأ هنا","intakeSub":"أدخل أرقامك الحقيقية. كلما كنت صادقاً، كانت خطتك أكثر فائدة.","glLang":"لغة التقرير","glCountry":"موقعك","glIncome":"دخلك","glHousehold":"منزلك","glCosts":"تكاليفك الشهرية","glDebts":"ديونك","glGoal":"هدفك","incomeHint":"بعد الضرائب، شهرياً","costsHint":"المبالغ الدقيقة تساعدنا على حساب وضعك الحقيقي","countryPh":"حدد بلدك...","countryOtherPh":"اكتب بلدك هنا...","incomePh":"دخلك الشهري","rentPh":"الإيجار أو سداد الرهن","fixedPh":"تكاليف ثابتة أخرى","debtPh":"إجمالي الدين","interestPh":"معدل الفائدة % - اكتب 0 إذا لم تعرف","paymentPh":"الدفعة الشهرية للدين","emailPh":"بريدك الإلكتروني - سنرسل خطتك هنا","emp0":"ما الذي يصف بشكل أفضل وضعك الحالي في العمل والدخل؟","emp1":"توظيف بدوام كامل","emp2":"دوام جزئي أو عمل حر","emp3":"عمل حر أو صاحب عمل","emp4":"يتلقى إعانات حكومية أو مساعدة مالية","emp5":"عاطل عن العمل","emp6":"غير قادر على العمل بسبب المرض أو الإعاقة","hh0":"حدد منزلك...","hh1":"فقط أنا","hh2":"أنا وشريك","hh3":"أنا وطفل 1","hh4":"أنا وطفلان","hh5":"أنا و3 أطفال أو أكثر","hh6":"أعول آخرين","hs0":"حدد وضع السكن...","hs1":"أستأجر","hs2":"مالك برهن عقاري","hs3":"مالك بدون دين","hs4":"أسكن مع العائلة","dt0":"حدد نوع الدين...","dt1":"بطاقات ائتمان / قروض","dt2":"قروض طلابية","dt3":"رهن عقاري","dt4":"فواتير طبية","dt5":"دين ضريبي","dt6":"أنواع مختلطة","goal0":"حدد ما تحتاجه أكثر...","goal1":"إيقاف التوتر - أحتاج خطة الآن","goal2":"سداد كل شيء بأسرع وقت","goal3":"تخفيض الدفعات الشهرية أولاً","submit":"إنشاء خطتي المجانية","loading":"بناء خطتك الشخصية…","planEyebrow":"خطتك الشخصية","planTitle":"90 يوماً نحو الوضوح","dfdLabel":"يوم خلوصك من الديون","dfdNote":"حافظ على خطة الدفع الحالية","upsellTitle":"مستعد للمزيد?","upsellValue":"مستشار مالي يتقاضى 500–1 000 € لهذا. استثمارك: 17 €.","upsellSub":"مجموعة الأدوات الكاملة - رسائل ذكاء اصطناعي للدائنين ومحاكي الإنفاق وتحديثات شهرية تلقائية.","upsellBtn":"احصل على Premium - 17 €","storyText":"“قضيت حياتي كلها في مساعدة الآخرين. لكنني لم أحمي نفسي. خسرت 25 000 €. ثلاثة أطفال، عاطلة، ديون أكثر. الملايين يعيشون هذا. بنيت الأداة التي كنت أتمنى. صادقة. مجانية. للجميع.”","t1":"دائماً. بدون خداع.","t2":"يوم خطة الطريق","t3":"لغة","t4":"مساعدة محلية","footer":"مبني بصدق. مجاني للأبد. 🌍","ribbon":"Debt-Free.world - لأن الحرية المالية تنتمي للجميع.","pn_free":"مجاني","pt_free":"القيمة عند المستشار: 300-500 €","ps_free":"بدون بطاقة. بدون خداع. دائماً.","pn_premium":"Premium","pt_premium":"القيمة عند المستشار المالي: 500-1000 €","pv_premium":"دفعة واحدة. 3 أشهر وصول. بدون اشتراك.","pn_ib":"Income Builder","pt_ib":"القيمة عند المتخصصين: 1500-2000 €","ps_ib":"أو 89 € / 6 أشهر\nدفعة واحدة. بدون تجديد تلقائي.","p_forever":"للأبد","p_3mo":"/ 3 أشهر","disclaimer":"أدلة عامة - ليست استشارة قانونية خاصة بالبلد.","pf1":"خطة شخصية 90 يوماً","pf2":"يوم خلوصك من الديون - التاريخ الدقيق","pf3":"ماذا يحدث إذا لم تفعل شيئاً","pf4":"حقوقك أمام الدائنين","pf5":"خدمات الدعم المحلية","pf6":"إجراء ملموس واحد يمكنك اتخاذه اليوم","pf7":"الخطة مُسلَّمة إلى بريدك الإلكتروني","pf8":"يعمل بأكثر من 20 لغة","pf9":"كل شيء في المجاني","pf10":"مساعد تفاوض ذكاء اصطناعي","pf11":"محاكي خفض الإنفاق","pf12":"كرة الثلج مقابل الانهيار الجليدي","pf13":"خريطة عملية التحصيل","pf14":"تحديث شهري - تلقائي","pf15":"أدلة البنك والقوالب","pf16":"كل شيء في Premium","pf17":"قائمة عمل عن بُعد عالمية","pf18":"مستويات Easy / Medium / Senior","pf19":"حاسبة الوقت للدخل","pf20":"تسجيل يومي - علم السلوك","pf21":"مجتمع مجهول + Q&A مباشر مع Vilma","thanksTitle":"خطتك في الطريق.","thanksSub":"تحقق من بريدك الإلكتروني — خطتك الشخصية لمدة 90 يومًا تنتظرك هناك.","thanksNote":"نفعل هذا معاً ✶","modalHome":"العودة إلى الرئيسية","freeCta":"احصل على خطتي المجانية","premiumCta":"احصل على Premium"},"HI":{"label":"हिन्दी","dir":"ltr","globesTag":"मुफ्त · वैश्विक · ईमानदार","h1":"आप <em>कर्जमुक्त</em> होने के<br>हकदार हैं।<br>मिलकर वहाँ पहुँचते हैं।","sub":"अपने वास्तविक नंबर बताएं। अपनी स्थिति के लिए व्यक्तिगत योजना पाएं।","together":"✶ हम यह मिलकर करते हैं ✶","cta":"मेरी मुफ्त योजना पाएं","note":"वास्तविक नंबर। वास्तविक योजना। वास्तविक स्थानीय सहायता।","why":"यह क्यों है","plans":"योजनाएं","popular":"सबसे लोकप्रिय","coming":"जल्द आ रहा है Q3/2026","forever":"हमेशा के लिए","intakeH":"आपका रास्ता यहाँ से शुरू होता है","intakeSub":"अपने वास्तविक नंबर दर्ज करें। जितना ईमानदार होंगे, योजना उतनी उपयोगी होगी।","glLang":"रिपोर्ट भाषा","glCountry":"आपका स्थान","glIncome":"आपकी आय","glHousehold":"आपका घर","glCosts":"मासिक खर्चे","glDebts":"आपके कर्ज","glGoal":"आपका लक्ष्य","incomeHint":"कर के बाद, प्रति माह","costsHint":"सही राशि आपकी वास्तविक स्थिति समझने में मदद करती है","countryPh":"अपना देश चुनें...","countryOtherPh":"अपना देश यहाँ लिखें...","incomePh":"मासिक आय","rentPh":"किराया या लोन भुगतान","fixedPh":"अन्य निश्चित खर्चे","debtPh":"कुल कर्ज","interestPh":"ब्याज दर % - 0 लिखें यदि नहीं पता","paymentPh":"मासिक कर्ज भुगतान","emailPh":"आपका ईमेल - योजना यहाँ भेजेंगे","emp0":"आपकी वर्तमान कार्य और आय स्थिति का सबसे अच्छा वर्णन क्या है?","emp1":"पूर्णकालिक रोजगार","emp2":"अंशकालिक या गिग काम","emp3":"स्व-नियोजित या व्यवसाय के मालिक","emp4":"सरकारी लाभ या वित्तीय सहायता प्राप्त कर रहे हैं","emp5":"बेरोजगार","emp6":"बीमारी या विकलांगता के कारण काम करने में असमर्थ","hh0":"अपना घर चुनें...","hh1":"सिर्फ मैं","hh2":"मैं और साथी","hh3":"मैं और 1 बच्चा","hh4":"मैं और 2 बच्चे","hh5":"मैं और 3+ बच्चे","hh6":"अन्य निर्भरों का सहारा","hs0":"आवास स्थिति चुनें...","hs1":"किराये पर","hs2":"होम लोन से","hs3":"बिना लोन","hs4":"परिवार के साथ","dt0":"मुख्य कर्ज प्रकार चुनें...","dt1":"क्रेडिट कार्ड / उपभोक्ता ऋण","dt2":"छात्र ऋण","dt3":"गृह ऋण","dt4":"चिकित्सा बिल","dt5":"कर ऋण","dt6":"मिश्रित प्रकार","goal0":"सबसे जरूरी क्या है...","goal1":"तनाव रोकें - अभी योजना चाहिए","goal2":"जल्द से जल्द सब चुकाएं","goal3":"पहले मासिक भुगतान घटाएं","submit":"मेरी मुफ्त योजना बनाएं","loading":"आपकी व्यक्तिगत योजना बन रही है…","planEyebrow":"आपकी व्यक्तिगत योजना","planTitle":"90 दिन स्पष्टता की ओर","dfdLabel":"आपका कर्जमुक्त दिन","dfdNote":"अपनी वर्तमान भुगतान योजना जारी रखें","upsellTitle":"और गहराई से जानना चाहते हैं?","upsellValue":"एक वित्तीय सलाहकार इसके लिए 500–1 000 € लेता है। आपका निवेश: 17 €।","upsellSub":"पूरा टूलकिट - AI पत्र, खर्च सिम्युलेटर और स्वचालित मासिक अपडेट।","upsellBtn":"Premium पाएं - 17 €","storyText":"“मैंने अपनी पूरी ज़िंदगी दूसरों की मदद में लगाई। लेकिन मैंने खुद को कभी नहीं संजोया। 25,000 € गंवाए। तीन बच्चे। बेरोजगार। लाखों लोग यही कहानी जी रहे हैं। इसलिए मैंने यह उपकरण बनाया। ईमानदार। मुफ्त। सबके लिए।”","t1":"हमेशा। कोई चाल नहीं।","t2":"दिन की योजना","t3":"भाषाएं","t4":"स्थानीय सहायता","footer":"ईमानदारी से बनाया। हमेशा के लिए मुफ्त। 🌍","ribbon":"Debt-Free.world - क्योंकि आर्थिक स्वतंत्रता सबकी है।","pn_free":"मुफ्त","pt_free":"सलाहकार मूल्य: 300-500 €","ps_free":"कोई कार्ड नहीं। कोई चाल नहीं। हमेशा।","pn_premium":"Premium","pt_premium":"सलाहकार मूल्य: 500-1000 €","pv_premium":"एक भुगतान। 3 महीने की पहुंच। कोई सदस्यता नहीं।","pn_ib":"Income Builder","pt_ib":"विशेषज्ञ मूल्य: 1500-2000 €","ps_ib":"या 89 € / 6 महीने\nएक भुगतान। कोई स्वचालित नवीनीकरण नहीं।","p_forever":"हमेशा के लिए","p_3mo":"/ 3 माह","disclaimer":"सामान्य मॉडल - देश-विशिष्ट कानूनी सलाह नहीं।","pf1":"90 दिन की व्यक्तिगत योजना","pf2":"आपका कर्जमुक्त दिन - सटीक तारीख","pf3":"कुछ न करने पर क्या होगा","pf4":"लेनदारों के सामने आपके अधिकार","pf5":"स्थानीय सहायता सेवाएं","pf6":"आज एक ठोस कार्रवाई","pf7":"योजना आपके ईमेल पर भेजी","pf8":"20+ भाषाओं में काम करता है","pf9":"मुफ्त में सब कुछ","pf10":"AI वार्ता सहायक","pf11":"खर्च कटौती सिम्युलेटर","pf12":"स्नोबॉल बनाम हिमस्खलन","pf13":"वसूली प्रक्रिया का नक्शा","pf14":"मासिक अपडेट - स्वचालित","pf15":"बैंक गाइड और टेम्पलेट","pf16":"Premium में सब कुछ","pf17":"वैश्विक दूरस्थ कार्य सूची","pf18":"Easy / Medium / Senior स्तर","pf19":"समय-आय कैलकुलेटर","pf20":"दैनिक चेक-इन - व्यवहार विज्ञान","pf21":"गुमनाम समुदाय + Vilma के साथ live Q&A","thanksTitle":"आपकी योजना रास्ते में है।","thanksSub":"अपना ईमेल जांचें — आपकी व्यक्तिगत 90-दिवसीय योजना वहाँ आपका इंतजार कर रही है।","thanksNote":"हम यह मिलकर करते हैं ✶","modalHome":"होम पर वापस जाएं","freeCta":"मेरी मुफ्त योजना पाएं","premiumCta":"Premium पाएं"},"ZH":{"label":"中文","dir":"ltr","globesTag":"免费 · 全球 · 诚实","h1":"您应该<em>无负债地生活。</em><br>让我们共同实现吧。","sub":"告诉我们您的真实数字。获取针对您情况的个性化计划。","together":"✶ 我们一起实现 ✶","cta":"获取我的免费计划","note":"真实数字。真实计划。真实本地帮助。","why":"为什么存在","plans":"方案","popular":"最受欢迎","coming":"即将推出 Q3/2026","forever":"永远","intakeH":"您的出路从这里开始","intakeSub":"输入您的真实数字。越诚实，计划越有用。","glLang":"报告语言","glCountry":"您的位置","glIncome":"您的收入","glHousehold":"您的家庭","glCosts":"每月费用","glDebts":"您的债务","glGoal":"您的目标","incomeHint":"税后，每月","costsHint":"精确金额帮助我们计算您的真实情况","countryPh":"选择您的国家...","countryOtherPh":"在这里输入您的国家...","incomePh":"月收入","rentPh":"房租或按揭还款","fixedPh":"其他固定费用","debtPh":"总债务","interestPh":"利率 % - 不知道请输入 0","paymentPh":"每月还债额","emailPh":"您的邮箱 - 我们将计划发送到这里","emp0":"哪项最能描述您目前的工作和收入状况？","emp1":"全职就业","emp2":"兼职或零工","emp3":"自雇或企业主","emp4":"领取政府福利或财务援助","emp5":"失业","emp6":"因疾病或残障无法工作","hh0":"选择您的家庭...","hh1":"只有我","hh2":"我和伴侣","hh3":"我和1个孩子","hh4":"我和2个孩子","hh5":"我和3个或更多孩子","hh6":"我赡养其他人","hs0":"选择住房情况...","hs1":"我租房","hs2":"有按揭的业主","hs3":"无贷款业主","hs4":"与家人同住","dt0":"选择主要债务类型...","dt1":"信用卡 / 消费贷款","dt2":"学生贷款","dt3":"房贷","dt4":"医疗账单","dt5":"税务债务","dt6":"多种类型","goal0":"选择您最需要什么...","goal1":"停止压力 - 我现在需要一个计划","goal2":"尽快还清一切","goal3":"先降低月还款","submit":"制作我的免费计划","loading":"正在构建您的个性化计划…","planEyebrow":"您的个性化计划","planTitle":"90天走向清晰","dfdLabel":"您的无债务日","dfdNote":"保持您当前的还款计划","upsellTitle":"准备深入了解?","upsellValue":"财务顾问为此收费 500–1 000 €。您的投资：17 €。","upsellSub":"完整工具包 - AI债权人信函、支出模拟器和每月自动更新。","upsellBtn":"获取 Premium - 17 €","storyText":"“我把整个人生都用来帮助别人。但我从未重视自己。我因诈骗损失了25,000€。三个孩子，失业，负债多于资产。数百万人都在经历同样的故事。所以我建造了我希望拥有的工具。诚实。免费。为所有人。”","t1":"始终。没有技巧。","t2":"天路线图","t3":"语言","t4":"本地帮助","footer":"以诚实建造。永远免费。 🌍","ribbon":"Debt-Free.world - 因为财务自由属于所有人。","pn_free":"免费","pt_free":"顾问价值：300-500 €","ps_free":"无卡。无技巧。始终。","pn_premium":"Premium","pt_premium":"顾问价值：500-1000 €","pv_premium":"一次付款。3个月访问。无订阅。","pn_ib":"Income Builder","pt_ib":"专家价值：1500-2000 €","ps_ib":"或 89 € / 6个月\n一次付款。无自动续订。","p_forever":"永远","p_3mo":"/ 3个月","disclaimer":"通用模型 - 非国家特定法律建议。","pf1":"个性化90天计划","pf2":"您的无债务日 - 确切日期","pf3":"什么都不做会怎样","pf4":"您面对债权人的权利","pf5":"本地支持服务","pf6":"今天可以采取的一个具体行动","pf7":"计划发送到您的邮箱","pf8":"支持20+种语言","pf9":"免费版的一切","pf10":"AI谈判助手","pf11":"削减支出模拟器","pf12":"雪球vs雪崩","pf13":"催收流程图","pf14":"月度更新 - 自动","pf15":"银行指南和模板","pf16":"Premium的一切","pf17":"全球远程工作列表","pf18":"Easy / Medium / Senior级别","pf19":"时间-收入计算器","pf20":"每日签到 - 行为科学","pf21":"匿名社区 + 与Vilma的直播Q&A","thanksTitle":"您的计划正在路上。","thanksSub":"请查看您的邮箱——您的个人90天计划正在那里等您。","thanksNote":"我们一起实现 ✶","modalHome":"返回首页","freeCta":"获取我的免费计划","premiumCta":"获取Premium"},"JA":{"label":"日本語","dir":"ltr","globesTag":"無料 · グローバル · 正直","h1":"あなたは<em>無負債</em>になる<br>資格があります。<br>一緒に実現しましょう。","sub":"実際の数字を教えてください。あなたの状況に合わせた個人プランを取得しましょう。","together":"✶ 一緒に実現します ✶","cta":"無料プランを取得","note":"実際の数字。実際のプラン。実際の地元サポート。","why":"なぜ存在するのか","plans":"プラン","popular":"最人気","coming":"近日公開 Q3/2026","forever":"永遠に","intakeH":"出口はここから始まります","intakeSub":"実際の数字を入力してください。正直であるほど、プランは役立ちます。","glLang":"レポート言語","glCountry":"あなたの場所","glIncome":"収入","glHousehold":"世帯","glCosts":"月次小払","glDebts":"負債","glGoal":"目標","incomeHint":"税引後、月額","costsHint":"正確な金額が実状況の計算に役立ちます","countryPh":"国を選択...","countryOtherPh":"国名を入力...","incomePh":"月収","rentPh":"家賃または住宅ローン返済","fixedPh":"その他固定費","debtPh":"総負債","interestPh":"金利 % - 不明なら 0 を入力","paymentPh":"月次返済額","emailPh":"メールアドレス - ここにプランを送ります","emp0":"現在の仕事と収入の状況を最もよく表すものはどれですか？","emp1":"フルタイム雇用","emp2":"パートタイムまたはギグワーク","emp3":"自営業または事業主","emp4":"政府給付または財政支援を受けている","emp5":"失業中","emp6":"病気または障害のため働けない","hh0":"世帯を選択...","hh1":"私一人","hh2":"パートナーと","hh3":"1人の子どもと","hh4":"2人の子どもと","hh5":"3人以上の子どもと","hh6":"他の被扶養者","hs0":"住居状況を選択...","hs1":"賃貸","hs2":"住宅ローンあり","hs3":"ローンなし","hs4":"家族と同居","dt0":"主な負債種別を選択...","dt1":"クレジットカード / 消費者ローン","dt2":"学生ローン","dt3":"住宅ローン","dt4":"医療費","dt5":"税金負債","dt6":"複数種別","goal0":"最も必要なことを選択...","goal1":"ストレスを止める - 今すぐプランが必要","goal2":"できるだけ早く全て返済","goal3":"まず月次返済を下げる","submit":"無料プランを作成","loading":"個人プランを作成中…","planEyebrow":"あなたの個人プラン","planTitle":"明瞭への90日間","dfdLabel":"無負債の日","dfdNote":"現在の返済計画を維持してください","upsellTitle":"もっと深く知りたいですか?","upsellValue":"ファイナンシャルアドバイザーはこれに500–1 000 €を請求します。あなたの投資：17 €。","upsellSub":"完全なツールキット - AI債権者書簡、支出シミュレーター、月次自動更新。","upsellBtn":"Premiumを取得 - 17 €","storyText":"“私は人生全体を他者の支援に捨てました。しかし自分自身を大切にしませんでした。詐欺で 25,000€ を失いました。こども三人、失業中、負債が多い。何百万もの人が同じストーリーを生きています。自分が持っていたかったツールを作りました。正直に。無料で。みんなのために。”","t1":"常に。トリックなし。","t2":"日間ロードマップ","t3":"言語","t4":"地元サポート","footer":"誠実さで構築。永遠に無料。 🌍","ribbon":"Debt-Free.world - 財務の自由は皆のもの。","pn_free":"無料","pt_free":"コンサルタント価格：300-500 €","ps_free":"カードなし。トリックなし。常に。","pn_premium":"Premium","pt_premium":"アドバイザー価格：500-1000 €","pv_premium":"一回払い。3ヶ月アクセス。サブスクなし。","pn_ib":"Income Builder","pt_ib":"スペシャリスト価格：1500-2000 €","ps_ib":"または 89 € / 6ヶ月\n一回払い。自動更新なし。","p_forever":"永遠に","p_3mo":"/ 3ヶ月","disclaimer":"一般的なモデル - 国別法的アドバイスではありません。","pf1":"個人90日プラン","pf2":"無負債の日 - 正確な日付","pf3":"何もしないとどうなるか","pf4":"債権者に対するあなたの権利","pf5":"地元サポートサービス","pf6":"今日できる具体的なアクション","pf7":"メールに届くプラン","pf8":"20+言語対応","pf9":"無料の全て","pf10":"AI交渉アシスタント","pf11":"支出削減シミュレーター","pf12":"スノーボール vs アバランチ","pf13":"回収プロセスマップ","pf14":"月次更新 - 自動","pf15":"銀行ガイドとテンプレート","pf16":"Premiumの全て","pf17":"グローバルリモートワークリスト","pf18":"Easy / Medium / Seniorレベル","pf19":"時間収益計算機","pf20":"毎日チェックイン - 行動科学","pf21":"匿名コミュニティ + Vilmaとのライブ Q&A","thanksTitle":"プランが届いています。","thanksSub":"メールをご確認ください — あなた専用の90日間プランがお待ちしています。","thanksNote":"一緒に実現します ✶","modalHome":"ホームに戻る","freeCta":"無料プランを取得","premiumCta":"Premiumを取得"},"KO":{"label":"한국어","dir":"ltr","globesTag":"무료 · 글로벌 · 정직","h1":"당신은 <em>무부채</em> 삶을<br>살 자격이 있습니다.<br>함께 이루어봅시다.","sub":"실제 숫자를 알려주세요. 당신의 상황에 맞는 맞춤 계획을 받으세요.","together":"✶ 우리는 함께 합니다 ✶","cta":"무료 플랜 받기","note":"실제 숫자. 실제 계획. 실제 지역 도움.","why":"왜 존재하는가","plans":"플랜","popular":"가장 인기","coming":"곧 출시 Q3/2026","forever":"영원히","intakeH":"탈출구는 여기서 시작됩니다","intakeSub":"실제 숫자를 입력하세요. 더 솔직할수록, 계획이 더 유용해집니다.","glLang":"보고서 언어","glCountry":"위치","glIncome":"수입","glHousehold":"가구","glCosts":"월별 비용","glDebts":"부채","glGoal":"목표","incomeHint":"세금 후, 월별","costsHint":"정확한 금액이 실제 상황 계산에 도움이 됩니다","countryPh":"국가 선택...","countryOtherPh":"국가를 여기에 입력...","incomePh":"월 수입","rentPh":"임대료 또는 주택담보대출 상환","fixedPh":"기타 고정 비용","debtPh":"총 부채","interestPh":"이자율 % - 모르면 0 입력","paymentPh":"월별 부채 상환","emailPh":"이메일 - 여기로 계획을 보냅니다","emp0":"현재 직업 및 소득 상황을 가장 잘 설명하는 것은 무엇입니까?","emp1":"정규직 취업","emp2":"파트타임 또는 긱 워크","emp3":"자영업자 또는 사업주","emp4":"정부 혜택 또는 재정 지원 수령 중","emp5":"실업","emp6":"질병이나 장애로 인해 일할 수 없음","hh0":"가구 선택...","hh1":"나 혼자","hh2":"나와 파트너","hh3":"나와 자녀 1명","hh4":"나와 자녀 2명","hh5":"나와 자녀 3명 이상","hh6":"다른 부양가족 부양","hs0":"주거 상황 선택...","hs1":"임대","hs2":"담보대출 소유자","hs3":"대출없는 소유자","hs4":"가족과 동거","dt0":"주요 부채 유형 선택...","dt1":"신용카드 / 소비자 대출","dt2":"학자금 대출","dt3":"주택담보대출","dt4":"의료비","dt5":"세금 부채","dt6":"혼합 유형","goal0":"가장 필요한 것 선택...","goal1":"스트레스 멈추기 - 지금 계획 필요","goal2":"최대한 빨리 모두 상환","goal3":"먼저 월별 상환금 낮추기","submit":"무료 계획 만들기","loading":"맞춤 계획 구성 중…","planEyebrow":"맞춤 계획","planTitle":"명확함을 향한 90일","dfdLabel":"무부채의 날","dfdNote":"현재 상환 계획 유지","upsellTitle":"더 깊이 알고 싶으신가요?","upsellValue":"재무 상담사는 이에 대해 500–1 000 €를 청구합니다. 투자: 17 €。","upsellSub":"완전한 툴킷 - AI 채권자 편지, 지출 시뮬레이터, 자동 월별 업데이트.","upsellBtn":"Premium 받기 - 17 €","storyText":"“나는 평생을 다른 사람들을 돕는 데 바쳤습니다。하지만 나 자신을 보호한 적이 없었습니다。사기로 25,000€를 잊었습니다。세 자녀, 실업, 빚이 많습니다。수백만 명이 이 이야기를 살아갑니다。그래서 이 도구를 만들었습니다。정직하게。무료로。모두를 위해서。”","t1":"항상. 속임 없음.","t2":"일 로드맵","t3":"언어","t4":"지역 도움","footer":"정직함으로 만들었습니다. 영원히 무료. 🌍","ribbon":"Debt-Free.world - 재정적 자유는 모두의 것입니다.","pn_free":"무료","pt_free":"컨설턴트 가치: 300-500 €","ps_free":"카드 없음. 속임 없음. 항상.","pn_premium":"Premium","pt_premium":"어드바이저 가치: 500-1000 €","pv_premium":"한 번 결제. 3개월 이용. 구독 없음.","pn_ib":"Income Builder","pt_ib":"전문가 가치: 1500-2000 €","ps_ib":"또는 89 € / 6개월\n한 번 결제. 자동 갱신 없음.","p_forever":"영원히","p_3mo":"/ 3개월","disclaimer":"일반 모델 - 국가별 법적 조언 아님.","pf1":"맞춤 90일 계획","pf2":"무부채의 날 - 정확한 날짜","pf3":"아무것도 하지 않으면 어떻게 될지","pf4":"채권자 앞에서 당신의 권리","pf5":"지역 지원 서비스","pf6":"오늘 취할 수 있는 구체적 행동","pf7":"이메일로 전달되는 계획","pf8":"20개 이상 언어 지원","pf9":"무료의 모든 것","pf10":"AI 협상 어시스턴트","pf11":"지출 절감 시뮬레이터","pf12":"스노볼 vs 눈사태","pf13":"추심 프로세스 지도","pf14":"월별 업데이트 - 자동","pf15":"은행 가이드 및 템플릿","pf16":"Premium의 모든 것","pf17":"글로벌 원격 근무 목록","pf18":"Easy / Medium / Senior 레벨","pf19":"시간-수입 계산기","pf20":"일일 체크인 - 행동 과학","pf21":"익명 커뮤니티 + Vilma와 라이브 Q&A","thanksTitle":"귀하의 계획이 전송되었습니다.","thanksSub":"이메일을 확인하세요 — 맞춤형 90일 계획이 기다리고 있습니다.","thanksNote":"우리는 함께 합니다 ✶","modalHome":"홈으로 돌아가기","freeCta":"무료 플랜 받기","premiumCta":"Premium 받기"},"ID":{"label":"Indonesia","dir":"ltr","globesTag":"GRATIS · GLOBAL · JUJUR","h1":"Anda berhak menjadi<br><em>bebas utang.</em><br>Mari kita capai bersama.","sub":"Ceritakan angka nyata Anda. Dapatkan rencana yang dipersonalisasi untuk situasi Anda.","together":"✶ Kita lakukan bersama ✶","cta":"Dapatkan rencana gratis saya","note":"Angka nyata. Rencana nyata. Bantuan lokal nyata.","why":"Mengapa ini ada","plans":"Rencana","popular":"Paling populer","coming":"Segera Q3/2026","forever":"selamanya","intakeH":"Jalan keluar Anda dimulai di sini","intakeSub":"Masukkan angka nyata Anda. Semakin jujur Anda, semakin berguna rencana Anda.","glLang":"Bahasa laporan","glCountry":"Lokasi Anda","glIncome":"Penghasilan Anda","glHousehold":"Rumah tangga Anda","glCosts":"Biaya bulanan Anda","glDebts":"Utang Anda","glGoal":"Tujuan Anda","incomeHint":"Setelah pajak, per bulan","costsHint":"Jumlah tepat membantu kami menghitung situasi nyata Anda","countryPh":"Pilih negara Anda...","countryOtherPh":"Ketik negara Anda di sini...","incomePh":"Penghasilan bulanan","rentPh":"Sewa atau cicilan KPR","fixedPh":"Biaya tetap lainnya","debtPh":"Total utang","interestPh":"Tingkat bunga % - ketik 0 jika tidak tahu","paymentPh":"Cicilan utang bulanan","emailPh":"Email Anda - kami kirim rencana ke sini","emp0":"Apa yang paling menggambarkan situasi kerja dan penghasilan Anda saat ini?","emp1":"Pekerjaan penuh waktu","emp2":"Paruh waktu atau kerja sampingan","emp3":"Wiraswasta atau pemilik bisnis","emp4":"Menerima tunjangan pemerintah atau bantuan keuangan","emp5":"Pengangguran","emp6":"Tidak dapat bekerja karena penyakit atau kecacatan","hh0":"Pilih rumah tangga...","hh1":"Hanya saya","hh2":"Saya dan pasangan","hh3":"Saya dan 1 anak","hh4":"Saya dan 2 anak","hh5":"Saya dan 3 anak atau lebih","hh6":"Saya menanggung orang lain","hs0":"Pilih situasi hunian...","hs1":"Saya menyewa","hs2":"Pemilik dengan KPR","hs3":"Pemilik tanpa utang","hs4":"Tinggal bersama keluarga","dt0":"Pilih jenis utang utama...","dt1":"Kartu kredit / pinjaman konsumen","dt2":"Pinjaman mahasiswa","dt3":"KPR","dt4":"Tagihan medis","dt5":"Utang pajak","dt6":"Jenis campuran","goal0":"Pilih apa yang paling Anda butuhkan...","goal1":"Hentikan stres - saya butuh rencana sekarang","goal2":"Bayar semua secepat mungkin","goal3":"Kurangi cicilan bulanan dulu","submit":"Buat rencana gratis saya","loading":"Membangun rencana pribadi Anda…","planEyebrow":"Rencana pribadi Anda","planTitle":"90 hari menuju kejelasan","dfdLabel":"Hari bebas utang Anda","dfdNote":"Pertahankan rencana pembayaran Anda saat ini","upsellTitle":"Siap untuk lebih dalam?","upsellValue":"Penasihat keuangan membebankan 500–1 000 € untuk ini. Investasi Anda: 17 €.","upsellSub":"Toolkit lengkap - surat AI kepada kreditur, simulator pengeluaran, dan pembaruan bulanan otomatis.","upsellBtn":"Dapatkan Premium - 17 €","storyText":"“Saya menghabiskan seluruh hidup saya untuk membantu orang lain. Tapi saya tidak pernah melindungi diri sendiri. Saya kehilangan 25.000€ karena penipuan. Tiga anak, menganggur, lebih banyak utang. Jutaan orang menjalani kisah yang sama. Jadi saya membangun alat ini. Jujur. Gratis. Untuk semua.”","t1":"Selalu. Tanpa trik.","t2":"Hari rencana","t3":"Bahasa","t4":"Bantuan lokal","footer":"Dibangun dengan kejujuran. Gratis selamanya. 🌍","ribbon":"Debt-Free.world - Karena kebebasan finansial milik semua.","pn_free":"Gratis","pt_free":"NILAI KONSULTAN: 300-500 €","ps_free":"Tanpa kartu. Tanpa trik. Selalu.","pn_premium":"Premium","pt_premium":"NILAI PENASIHAT: 500-1000 €","pv_premium":"Satu pembayaran. Akses 3 bulan. Tanpa langganan.","pn_ib":"Income Builder","pt_ib":"NILAI SPESIALIS: 1500-2000 €","ps_ib":"atau 89 € / 6 bulan\nSatu pembayaran. Tanpa perpanjangan otomatis.","p_forever":"selamanya","p_3mo":"/ 3 bln","disclaimer":"Model umum - bukan saran hukum spesifik negara.","pf1":"Rencana 90 hari yang dipersonalisasi","pf2":"Hari bebas utang Anda - tanggal tepat","pf3":"Apa yang terjadi jika Anda tidak melakukan apa-apa","pf4":"Hak Anda menghadapi kreditur","pf5":"Layanan dukungan lokal","pf6":"Satu tindakan konkret yang bisa Anda lakukan hari ini","pf7":"Rencana dikirim ke email Anda","pf8":"Bekerja dalam 20+ bahasa","pf9":"Semua di Gratis","pf10":"Asisten negosiasi AI","pf11":"Simulator pemotongan pengeluaran","pf12":"Bola salju vs longsoran","pf13":"Peta proses penagihan","pf14":"Pembaruan bulanan - otomatis","pf15":"Panduan bank dan template","pf16":"Semua di Premium","pf17":"Daftar kerja jarak jauh global","pf18":"Tingkat Easy / Medium / Senior","pf19":"Kalkulator waktu-pendapatan","pf20":"Check-in harian - ilmu perilaku","pf21":"Komunitas anonim + Q&A langsung dengan Vilma","thanksTitle":"Rencana Anda sedang dalam perjalanan.","thanksSub":"Periksa email Anda — rencana pribadi 90 hari Anda menunggu di sana.","thanksNote":"Kita lakukan bersama ✶","modalHome":"Kembali ke beranda","freeCta":"Dapatkan rencana gratis saya","premiumCta":"Dapatkan Premium"},"SW":{"label":"Kiswahili","dir":"ltr","globesTag":"BURE · ULIMWENGUNI · UAMINIFU","h1":"Unastahili kuwa<br><em>huru na madeni.</em><br>Tufike huko pamoja.","sub":"Tuambie nambari zako halisi. Pata mpango ulioobinafsishwa kwa hali yako.","together":"✶ Tunafanya hivi pamoja ✶","cta":"Pata mpango wangu wa bure","note":"Nambari halisi. Mpango halisi. Msaada wa ndani halisi.","why":"Kwa nini hii ipo","plans":"Mipango","popular":"Maarufu zaidi","coming":"Inakuja Q3/2026","forever":"milele","intakeH":"Njia yako ya nje inaanza hapa","intakeSub":"Ingiza nambari zako halisi. Kadri unavyokuwa mkweli, ndivyo mpango wako unavyokuwa na manufaa.","glLang":"Lugha ya ripoti","glCountry":"Mahali pako","glIncome":"Mapato yako","glHousehold":"Nyumba yako","glCosts":"Gharama za kila mwezi","glDebts":"Madeni yako","glGoal":"Lengo lako","incomeHint":"Baada ya kodi, kwa mwezi","costsHint":"Kiasi halisi husaidia kuhesabu hali yako halisi","countryPh":"Chagua nchi yako...","countryOtherPh":"Andika nchi yako hapa...","incomePh":"Mapato ya kila mwezi","rentPh":"Kodi au malipo ya mkopo wa nyumba","fixedPh":"Gharama nyingine za kawaida","debtPh":"Jumla ya madeni","interestPh":"Kiwango cha riba % - andika 0 kama hujui","paymentPh":"Malipo ya kila mwezi ya deni","emailPh":"Barua pepe yako - tunatuma mpango hapa","emp0":"Ni nini kinachofafanua vizuri zaidi hali yako ya sasa ya kazi na mapato?","emp1":"Ajira ya muda wote","emp2":"Muda wa nusu au kazi ya ziada","emp3":"Kujitegemea au mmiliki wa biashara","emp4":"Anapokea manufaa ya serikali au msaada wa kifedha","emp5":"Bila kazi","emp6":"Huwezi kufanya kazi kwa sababu ya ugonjwa au ulemavu","hh0":"Chagua nyumba yako...","hh1":"Mimi tu","hh2":"Mimi na mwenzi","hh3":"Mimi na mtoto 1","hh4":"Mimi na watoto 2","hh5":"Mimi na watoto 3 au zaidi","hh6":"Ninategemeza wengine","hs0":"Chagua hali ya makazi...","hs1":"Napanga","hs2":"Mmiliki na mkopo","hs3":"Mmiliki bila deni","hs4":"Ninaishi na familia","dt0":"Chagua aina kuu ya deni...","dt1":"Kadi za mkopo / mikopo ya watumiaji","dt2":"Mikopo ya masomo","dt3":"Mkopo wa nyumba","dt4":"Bili za matibabu","dt5":"Deni la kodi","dt6":"Aina mchanganyiko","goal0":"Chagua unachohitaji zaidi...","goal1":"Simamisha msongo - ninahitaji mpango sasa","goal2":"Lipa kila kitu haraka iwezekanavyo","goal3":"Punguza malipo ya kila mwezi kwanza","submit":"Unda mpango wangu wa bure","loading":"Kujenga mpango wako wa kibinafsi…","planEyebrow":"Mpango wako wa kibinafsi","planTitle":"Siku 90 kuelekea uwazi","dfdLabel":"Siku yako bila madeni","dfdNote":"Endelea na mpango wako wa malipo wa sasa","upsellTitle":"Uko tayari kwenda kwa kina zaidi?","upsellValue":"Mshauri wa fedha anachaji 500–1 000 € kwa hili. Uwekezaji wako: 17 €.","upsellSub":"Kifaa kamili - barua za AI kwa wadai, kisimulezi cha matumizi, na masasisho ya kila mwezi ya kiotomatiki.","upsellBtn":"Pata Premium - 17 €","t1":"Daima. Bila mbinu.","t2":"Siku za ramani","t3":"Lugha","t4":"Msaada wa ndani","footer":"Imejengwa kwa uaminifu. Bure milele. 🌍","ribbon":"Debt-Free.world - Kwa sababu uhuru wa fedha ni wa wote.","pn_free":"Bure","pt_free":"THAMANI YA MSHAURI: 300-500 €","ps_free":"Bila kadi. Bila mbinu. Daima.","pn_premium":"Premium","pt_premium":"THAMANI YA MSHAURI WA FEDHA: 500-1000 €","pv_premium":"Malipo moja. Upatikanaji wa miezi 3. Bila usajili.","pn_ib":"Income Builder","pt_ib":"THAMANI YA WATAALAMU: 1500-2000 €","ps_ib":"au 89 € / miezi 6\nMalipo moja. Bila upya wa kiotomatiki.","p_forever":"milele","p_3mo":"/ miezi 3","disclaimer":"Mifano ya jumla - si ushauri wa kisheria mahususi kwa nchi.","pf1":"Mpango wa siku 90 ulioobinafsishwa","pf2":"Siku yako bila madeni - tarehe halisi","pf3":"Nini kitatokea ukifanya chochote","pf4":"Haki zako mbele ya wadai","pf5":"Huduma za msaada wa ndani","pf6":"Hatua moja halisi unayoweza kuchukua leo","pf7":"Mpango uliumi barua pepe yako","pf8":"Inafanya kazi katika lugha 20+","pf9":"Kila kitu katika Bure","pf10":"Msaidizi wa mazungumzo wa AI","pf11":"Kisimulezi cha kupunguza matumizi","pf12":"Mpira wa theluji dhidi ya theluji","pf13":"Ramani ya mchakato wa ukusanyaji","pf14":"Sasisha kila mwezi - kiotomatiki","pf15":"Mwongozo wa benki na violezo","pf16":"Kila kitu katika Premium","pf17":"Orodha ya kazi ya mbali duniani","pf18":"Viwango vya Easy / Medium / Senior","pf19":"Kikokotoo cha wakati-mapato","pf20":"Usajili wa kila siku - sayansi ya tabia","pf21":"Jamii ya siri + Q&A moja kwa moja na Vilma","thanksTitle":"Mpango wako uko njiani.","thanksSub":"Angalia barua pepe yako — mpango wako wa kibinafsi wa siku 90 unakungoja.","thanksNote":"Tunafanya hivi pamoja ✶","modalHome":"Rudi nyumbani","freeCta":"Pata mpango wangu wa bure","premiumCta":"Pata Premium"}};
+;
+let lang='EN';
+
+function closeModal(){
+  document.getElementById('thanksModal').classList.remove('active');
+  document.body.style.overflow='';
+  // Reset and hide the form so answers are never visible
+  const form=document.getElementById('intake');
+  if(form){
+    // Reset all inputs and selects
+    form.querySelectorAll('input,select').forEach(function(el){
+      if(el.type==='checkbox'){el.checked=false;}
+      else{el.value='';}
+    });
+    // Reset GDPR visual
+    const gdprVisual=document.getElementById('gdpr-visual');
+    const gdprCheck=document.getElementById('gdpr-check');
+    if(gdprVisual)gdprVisual.style.background='#fff';
+    if(gdprCheck)gdprCheck.style.display='none';
+    // Re-run selects so dropdowns show placeholders again
+    const L=T[lang]||T['EN'];
+    buildSelects(L);
+    buildCountrySelect(L);
+    updateCurrency('Finland');
+    // Hide form section
+    form.style.display='none';
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function handleModalBackdrop(e){
+  if(e.target===document.getElementById('thanksModal'))closeModal();
+}
+
+function toggleGdpr(){
+  const input=document.getElementById('gdpr-consent');
+  const visual=document.getElementById('gdpr-visual');
+  const check=document.getElementById('gdpr-check');
+  input.checked=!input.checked;
+  visual.style.background=input.checked?'var(--green)':'#fff';
+  check.style.display=input.checked?'block':'none';
+}
+
+function toggleStory(){
+  const full=document.getElementById('story-full');
+  const btn=document.getElementById('story-toggle-btn');
+  const open=full.style.display!=='none';
+  full.style.display=open?'none':'block';
+  const L=T[lang]||T['EN'];
+  btn.textContent=open?(L.readMore||'Read full story'):(L.showLess||'Show less');
+}
+
+function setCookieConsent(choice){
+  localStorage.setItem('cookie-consent',choice);
+  document.getElementById('cookieBanner').style.display='none';
+  if(choice==='accepted')loadGA4();
+}
+
+function setLang(code){
+  if(!T[code])return;
+  lang=code;
+  const L=T[code];
+  document.documentElement.dir=L.dir||'ltr';
+  const ids={
+    'h-h1':'h1','h-sub':'sub','h-together':'together',
+    'h-cta':'cta','h-note':'note','why-label':'why','plans-label':'plans',
+    'popular-badge':'popular','coming-soon':'coming','p-forever':'p_forever',
+    'p-3mo':'p_3mo','intake-h':'intakeH','intake-sub':'intakeSub',
+    'gl-lang':'glLang','gl-country':'glCountry','gl-income':'glIncome',
+    'gl-household':'glHousehold','gl-costs':'glCosts','gl-debts':'glDebts','gl-goal':'glGoal',
+    'income-hint':'incomeHint','costs-hint':'costsHint',
+    'submit-text':'submit','loading-text':'loading',
+    'modal-title':'thanksTitle','modal-sub':'thanksSub','modal-note':'thanksNote',
+    'footer-note':'footer','ribbon':'ribbon','disclaimer':'disclaimer',
+    'free-cta':'freeCta','t1-num':'t1num','t4-num':'t4num',
+    't1':'t1','t2':'t2','t3':'t3','t4':'t4',
+    'pn-free':'pn_free','pt-free':'pt_free','ps-free':'ps_free',
+    'pn-premium':'pn_premium','pt-premium':'pt_premium','pv-premium':'pv_premium',
+    'premium-cta':'premiumCta',
+    'pn-ib':'pn_ib','pt-ib':'pt_ib','ps-ib':'ps_ib','ib-cta':'ibCta',
+    'bridge-title':'bridgeTitle','bridge-sub':'bridgeSub',
+    'modal-home':'modalHome',
+    'cookie-text':'cookieText',
+  };
+  Object.entries(ids).forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    if(!el||!L[key])return;
+    if(key==='h1'||key==='gdprText')el.innerHTML=L[key];
+    else el.textContent=L[key];
+  });
+  for(let i=1;i<=21;i++){
+    const el=document.getElementById('pf'+i);
+    if(el&&L['pf'+i])el.textContent=L['pf'+i];
+  }
+  const phs={
+    'q-income':'incomePh','q-rent':'rentPh','q-fixed':'fixedPh',
+    'q-debt':'debtPh','q-interest':'interestPh','q-payment':'paymentPh',
+    'q-email':'emailPh','q-country-other':'countryOtherPh'
+  };
+  Object.entries(phs).forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    if(el&&L[key])el.placeholder=L[key];
+  });
+  // Story: show EN version for EN, translated summary for others
+  const storyEn=document.getElementById('story-en');
+  const storyTr=document.getElementById('story-translated');
+  const storyTrText=document.getElementById('story-translated-text');
+  const storyFullEn=document.getElementById('story-full-en');
+  if(code==='EN'){
+    if(storyEn)storyEn.style.display='';
+    if(storyTr)storyTr.style.display='none';
+    if(storyFullEn)storyFullEn.style.display='';
+  }else{
+    if(storyEn)storyEn.style.display='none';
+    if(storyFullEn)storyFullEn.style.display='none';
+    if(storyTr)storyTr.style.display='';
+    if(storyTrText&&L.storyText)storyTrText.textContent=L.storyText;
+  }
+  buildLangSelect(code);
+  buildCountrySelect(L);
+  buildSelects(L);
+}
+
+function buildLangSelect(current){
+  const nav=document.getElementById('langSel');
+  const form=document.getElementById('q-lang');
+  [nav,form].forEach(sel=>{
+    if(!sel)return;
+    const prev=sel.value||current;
+    sel.innerHTML='';
+    Object.keys(T).forEach(code=>{
+      const o=document.createElement('option');
+      o.value=code;o.textContent=T[code].label;
+      if(code===prev)o.selected=true;
+      sel.appendChild(o);
+    });
+  });
+}
+
+function buildCountrySelect(L){
+  const sel=document.getElementById('q-country');
+  if(!sel)return;
+  const prev=sel.value;
+  sel.innerHTML='';
+  const ph=document.createElement('option');
+  ph.value='';ph.disabled=true;ph.selected=!prev;
+  ph.textContent=L.countryPh||'Select your country...';
+  sel.appendChild(ph);
+  COUNTRIES.forEach(c=>{
+    const o=document.createElement('option');
+    o.value=c;o.textContent=c;
+    if(c===prev)o.selected=true;
+    sel.appendChild(o);
+  });
+}
+
+function buildSelects(L){
+  function build(id,n,prefix){
+    const el=document.getElementById(id);
+    if(!el)return;
+    const prev=el.value;
+    el.innerHTML='';
+    for(let i=0;i<=n;i++){
+      const o=document.createElement('option');
+      o.value=i===0?'':T['EN'][prefix+i]||'';
+      if(i===0){o.disabled=true;o.selected=!prev;}
+      o.textContent=L[prefix+i]||'';
+      if(i>0&&(L[prefix+i]===prev||o.value===prev))o.selected=true;
+      el.appendChild(o);
+    }
+  }
+  build('q-employment',6,'emp');
+  build('q-household',6,'hh');
+  build('q-housing',4,'hs');
+  build('q-debttype',6,'dt');
+  build('q-goal',3,'goal');
+}
+
+function updateCurrency(country){
+  const sym=CURRENCIES[country]||'$';
+  const sel=document.getElementById('q-currency');
+  if(!sel)return;
+  sel.innerHTML='';
+  const o=document.createElement('option');
+  o.value=sym;o.textContent=sym;o.selected=true;
+  sel.appendChild(o);
+  COUNTRIES.forEach(c=>{
+    if(c===country)return;
+    const opt=document.createElement('option');
+    opt.value=CURRENCIES[c]||'$';
+    opt.textContent=(CURRENCIES[c]||'$')+' — '+c;
+    sel.appendChild(opt);
+  });
+}
+
+function onCountryChange(el){
+  updateCurrency(el.value);
+  const other=document.getElementById('q-country-other');
+  if(other)other.style.display=el.value==='Other'?'block':'none';
+}
+
+function calcDFD(debt,payment,rate){
+  try{
+    const P=parseFloat(debt),pmt=parseFloat(payment),r=parseFloat(rate)/100/12;
+    if(!P||!pmt||pmt<=0)return null;
+    let mo=r<=0?Math.ceil(P/pmt):(pmt>P*r?Math.ceil(-Math.log(1-P*r/pmt)/Math.log(1+r)):null);
+    if(!mo||mo>600||mo<1)return null;
+    const d=new Date();d.setMonth(d.getMonth()+mo);return d;
+  }catch(e){return null;}
+}
+
+async function handleSubmit(){
+  const country=document.getElementById('q-country').value;
+  const countryOther=document.getElementById('q-country-other').value;
+  const income=document.getElementById('q-income').value;
+  const currency=document.getElementById('q-currency').value;
+  const employment=document.getElementById('q-employment').value;
+  const household=document.getElementById('q-household').value;
+  const housing=document.getElementById('q-housing').value;
+  const rent=document.getElementById('q-rent').value;
+  const fixed=document.getElementById('q-fixed').value;
+  const debt=document.getElementById('q-debt').value;
+  const debttype=document.getElementById('q-debttype').value;
+  const interest=document.getElementById('q-interest').value;
+  const payment=document.getElementById('q-payment').value;
+  const goal=document.getElementById('q-goal').value;
+  const email=document.getElementById('q-email').value;
+  const reportLang=document.getElementById('q-lang').value||lang;
+  const finalCountry=country==='Other'?countryOther:country;
+
+  // GDPR check
+  const gdpr=document.getElementById('gdpr-consent');
+  if(!gdpr||!gdpr.checked){
+    alert(lang==='FI'?'Hyväksy tietosuojaseloste jatkaaksesi.':'Please accept the Privacy Policy to continue.');
+    return;
+  }
+
+  // Field validation
+  if(!finalCountry||!income||!employment||!household||!housing||!rent||!fixed||!debt||!debttype||!goal||!email){
+    alert(lang==='FI'?'Täytä kaikki kentät.':'Please fill in all fields.');
+    return;
+  }
+
+  const RL=T[reportLang]||T['EN'];
+  const L2=T[lang]||T['EN'];
+
+  // Show thank-you modal IMMEDIATELY
+  const mt=document.getElementById('modal-title');
+  const ms=document.getElementById('modal-sub');
+  const mn=document.getElementById('modal-note');
+  if(mt&&L2.thanksTitle)mt.textContent=L2.thanksTitle;
+  if(ms&&L2.thanksSub)ms.textContent=L2.thanksSub;
+  if(mn&&L2.thanksNote)mn.textContent=L2.thanksNote;
+  document.getElementById('thanksModal').classList.add('active');
+  document.body.style.overflow='hidden';
+
+  // Calculate debt-free date
+  const dfd=calcDFD(debt,payment,interest);
+  const dfdStr=dfd?dfd.toLocaleDateString(
+    reportLang==='FI'?'fi-FI':reportLang==='AR'?'ar-SA':reportLang==='ZH'?'zh-CN':reportLang==='JA'?'ja-JP':reportLang==='KO'?'ko-KR':'en-GB',
+    {year:'numeric',month:'long',day:'numeric'}
+  ):'';
+
+  const gap=(parseFloat(income)||0)-((parseFloat(rent)||0)+(parseFloat(fixed)||0)+(parseFloat(payment)||0));
+  const gapText=gap>=0?Math.round(gap)+' '+currency+' remaining after all costs':Math.abs(Math.round(gap))+' '+currency+' shortfall every month';
+
+  const prompt=`You are Debt-Free.world — warm, honest, direct. Write ENTIRELY in ${RL.label}. Every word in ${RL.label}. No exceptions. Use clean plain text only. No markdown. No bold. No headers with symbols. Use plain numbered steps for actions.
+
+USER DATA: Country: ${finalCountry} | Income: ${income} ${currency}/month | Employment: ${employment} | Household: ${household} | Housing: ${housing} | Rent/mortgage/maintenance: ${rent} ${currency} | Other fixed costs: ${fixed} ${currency} | Monthly debt payment: ${payment||0} ${currency} | Monthly gap: ${gapText} | Total debt: ${debt} ${currency} | Debt type: ${debttype} | Interest rate: ${interest && parseFloat(interest) > 0 ? interest+'%' : 'unknown — do NOT assume interest-free'} | Goal: ${goal}${dfdStr?' | Calculated debt-free date: '+dfdStr:''}
+
+Write these sections with plain text headings on their own line. Keep each section short and clear. No repetition across sections.
+
+YOUR SITUATION RIGHT NOW
+2 to 3 sentences. State the exact monthly numbers clearly and warmly.
+
+DAYS 1 TO 30
+3 numbered steps. One sentence each. Specific to ${finalCountry}.
+
+DAYS 31 TO 60
+3 numbered steps for ${debttype} in ${finalCountry}. Different from above.
+
+DAYS 61 TO 90
+3 numbered steps.${dfdStr?' Reference '+dfdStr+' as the target date.':''} Include one 12-month milestone with actual numbers.
+
+REAL HELP IN ${finalCountry.toUpperCase()}
+3 to 4 specific organizations or helplines in ${finalCountry} only. Format: Name — website or phone. Each mentioned once only.
+
+SUPPORT YOU MAY QUALIFY FOR
+2 to 3 specific benefit programs for ${household} who is ${employment} in ${finalCountry}. Format: Program — how to apply. Do not repeat anything from above.
+
+ONE HONEST NOTE
+2 sentences maximum. When to seek professional help.
+
+End with one sentence of warm encouragement.`;
+
+  // Fire AI + email in background
+  try{
+    const r=await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/api/plan',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:[{role:'user',content:prompt}]})
+    });
+    if(!r.ok)throw new Error('AI '+r.status);
+    const d=await r.json();
+    const text=(d.content||[]).map(i=>i.text||'').join('');
+    subscribeToBrevo(email,finalCountry,RL.label);
+    sendReportByEmail(email,text,finalCountry,reportLang,dfdStr,RL);
+  }catch(e){
+    console.error('Plan error:',e);
+    // Thank-you is already shown — email delivery may still work if retried
+  }
+}
+
+async function subscribeToBrevo(email,country,language){
+  try{
+    await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/api/subscribe',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,country,language})
+    });
+  }catch(e){console.log('Subscribe:',e);}
+}
+
+async function sendReportByEmail(email,plan,country,langCode,dfdStr,RL){
+  try{
+    await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/api/sendreport',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,plan,country,language:langCode,debtFreeDate:dfdStr||''})
+    });
+  }catch(e){console.log('Email:',e);}
+}
+
+// INIT
+const navSel=document.getElementById('langSel');
+navSel.onchange=function(){
+  setLang(this.value);
+  const ql=document.getElementById('q-lang');
+  if(ql)ql.value=this.value;
+};
+updateCurrency('Finland');
+setLang('EN');
+if(!localStorage.getItem('cookie-consent')){
+  document.getElementById('cookieBanner').style.display='flex';
+}
+</script>
+</body>
+</html>
