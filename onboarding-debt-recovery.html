@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Plan — Debt-Free.world</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #14532d;
+      --green:      #166534;
+      --green-mid:  #15803d;
+      --green-light:#dcfce7;
+      --green-pale: #f0fdf4;
+      --gold:       #d97706;
+      --gold-light: #fef3c7;
+      --gray-900:   #111827;
+      --gray-700:   #374151;
+      --gray-500:   #6b7280;
+      --gray-300:   #d1d5db;
+      --gray-100:   #f3f4f6;
+      --white:      #ffffff;
+      --radius:     14px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'DM Sans',sans-serif; background:var(--green-pale); color:var(--gray-900); min-height:100vh; }
+
+    .header { background:var(--white); border-bottom:1px solid var(--gray-300); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+    .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green); text-decoration:none; }
+    .step-indicator { font-size:13px; color:var(--gray-500); font-weight:500; }
+
+    .progress-wrap { max-width:640px; margin:0 auto; padding:24px 20px 0; }
+    .progress-track { background:var(--gray-300); border-radius:100px; height:6px; }
+    .progress-fill { background:var(--green); border-radius:100px; height:6px; transition:width 0.4s ease; }
+    .progress-labels { display:flex; justify-content:space-between; margin-top:8px; }
+    .progress-labels span { font-size:11px; color:var(--gray-500); font-weight:600; text-transform:uppercase; letter-spacing:0.06em; }
+    .progress-labels span.active { color:var(--green); }
+
+    .wrap { max-width:640px; margin:0 auto; padding:32px 20px 80px; }
+
+    .block { background:var(--white); border-radius:20px; padding:32px 28px; margin-bottom:24px; box-shadow:0 2px 16px rgba(22,101,52,0.06); display:none; }
+    .block.active { display:block; }
+    .block-header { margin-bottom:24px; }
+    .block-num { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--green); margin-bottom:6px; }
+    .block-title { font-family:'DM Serif Display',serif; font-size:24px; color:var(--green-dark); margin-bottom:6px; line-height:1.2; }
+    .block-desc { font-size:14px; color:var(--gray-500); line-height:1.6; }
+
+    .field { margin-bottom:18px; }
+    .field label { display:block; font-size:13px; font-weight:600; color:var(--gray-700); margin-bottom:7px; }
+    .field input, .field select, .field textarea {
+      width:100%; border:1.5px solid var(--gray-300); border-radius:10px;
+      padding:12px 16px; font-family:'DM Sans',sans-serif; font-size:15px;
+      color:var(--gray-900); background:var(--white); outline:none; transition:border 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--green); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .form-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+
+    /* INCOME + CURRENCY ROW */
+    .income-row { display:flex; gap:10px; }
+    .income-row input { flex:1; }
+    .income-row select { width:140px; flex-shrink:0; }
+
+    .options { display:grid; gap:10px; }
+    .options.cols2 { grid-template-columns:1fr 1fr; }
+    .options.cols3 { grid-template-columns:1fr 1fr 1fr; }
+    .opt-btn {
+      border:1.5px solid var(--gray-300); border-radius:10px; padding:12px 16px;
+      background:var(--white); cursor:pointer; text-align:left; font-family:'DM Sans',sans-serif;
+      font-size:14px; color:var(--gray-700); transition:all 0.15s; line-height:1.4;
+    }
+    .opt-btn:hover { border-color:var(--green); background:var(--green-pale); }
+    .opt-btn.selected { border-color:var(--green); background:var(--green-pale); color:var(--green-dark); font-weight:600; }
+    .opt-btn .opt-label { display:block; font-weight:600; font-size:13px; }
+    .opt-btn .opt-desc { display:block; font-size:12px; color:var(--gray-500); margin-top:2px; }
+
+    .field-hint { font-size:12px; color:var(--gray-500); margin-bottom:8px; font-style:italic; }
+    .req { color:#dc2626; margin-left:2px; }
+    .divider { height:1px; background:var(--gray-100); margin:20px 0; }
+
+    .nav-row { display:flex; gap:12px; justify-content:space-between; margin-top:28px; }
+    .btn-back { background:transparent; color:var(--green); border:2px solid var(--green-light); border-radius:10px; padding:13px 24px; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+    .btn-back:hover { border-color:var(--green); background:var(--green-pale); }
+    .btn-next { background:var(--green); color:var(--white); border:none; border-radius:10px; padding:14px 32px; font-size:15px; font-weight:700; cursor:pointer; transition:background 0.2s; flex:1; }
+    .btn-next:hover { background:var(--green-dark); }
+    .btn-submit { background:var(--green); color:var(--white); border:none; border-radius:10px; padding:16px 32px; font-size:16px; font-weight:700; cursor:pointer; transition:background 0.2s; width:100%; margin-top:24px; }
+    .btn-submit:hover { background:var(--green-dark); }
+    .btn-submit:disabled { background:var(--gray-300); cursor:not-allowed; }
+
+    .loading-wrap { text-align:center; padding:60px 20px; display:none; }
+    .loading-wrap.show { display:block; }
+    .spinner { width:48px; height:48px; border:4px solid var(--green-light); border-top-color:var(--green); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 24px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .loading-wrap h2 { font-family:'DM Serif Display',serif; font-size:24px; color:var(--green-dark); margin-bottom:10px; }
+    .loading-wrap p { font-size:15px; color:var(--gray-500); line-height:1.6; }
+
+    .impact-note { background:var(--green-pale); border-radius:10px; padding:14px 16px; font-size:13px; color:var(--green-dark); margin-bottom:20px; line-height:1.5; border:1px solid var(--green-light); }
+
+    @media(max-width:600px) {
+      .form-row, .form-row-3 { grid-template-columns:1fr; }
+      .options.cols2, .options.cols3 { grid-template-columns:1fr; }
+      .block { padding:24px 18px; }
+      .income-row { flex-direction:column; }
+      .income-row select { width:100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <a href="https://www.debt-free.world" class="logo">✦ Debt-Free.world</a>
+  <span class="step-indicator" id="stepLabel">Step 1 of 4</span>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:25%"></div></div>
+  <div class="progress-labels">
+    <span id="pl1" class="active">You</span>
+    <span id="pl2">Debts</span>
+    <span id="pl3">Finances</span>
+    <span id="pl4">Goals</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- BLOCK 1 -->
+  <div class="block active" id="block1">
+    <div class="block-header">
+      <div class="block-num" id="b1num">Step 1 of 4</div>
+      <div class="block-title" id="b1title">Let's start with you</div>
+      <div class="block-desc" id="b1desc">Your plan will be personalised to your situation, country, and language.</div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label id="lbl_firstname">First name <span class="req">*</span></label>
+        <input type="text" id="f_firstname" placeholder="Anna">
+      </div>
+      <div class="field">
+        <label id="lbl_email">Email address <span class="req">*</span></label>
+        <input type="email" id="f_email" placeholder="anna@email.com">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label id="lbl_language">Language <span class="req">*</span></label>
+        <select id="f_language" onchange="setLanguage(this.value)">
+          <option value="EN">English</option>
+          <option value="FI">Suomi</option>
+          <option value="SV">Svenska</option>
+          <option value="DE">Deutsch</option>
+          <option value="NO">Norsk</option>
+          <option value="DA">Dansk</option>
+          <option value="NL">Nederlands</option>
+          <option value="ES">Español</option>
+          <option value="FR">Français</option>
+          <option value="IT">Italiano</option>
+          <option value="PL">Polski</option>
+          <option value="PT">Português</option>
+          <option value="CS">Čeština</option>
+          <option value="ET">Eesti</option>
+          <option value="LV">Latviešu</option>
+          <option value="LT">Lietuvių</option>
+          <option value="HU">Magyar</option>
+          <option value="RO">Română</option>
+          <option value="HR">Hrvatski</option>
+        </select>
+      </div>
+      <div class="field">
+        <label id="lbl_country">Country <span class="req">*</span></label>
+        <select id="f_country">
+          <option value="" data-t="Select country">Select country</option>
+          <option value="Finland">🇫🇮 Finland</option>
+          <option value="Sweden">🇸🇪 Sweden</option>
+          <option value="Norway">🇳🇴 Norway</option>
+          <option value="Denmark">🇩🇰 Denmark</option>
+          <option value="Germany">🇩🇪 Germany</option>
+          <option value="Netherlands">🇳🇱 Netherlands</option>
+          <option value="Belgium">🇧🇪 Belgium</option>
+          <option value="France">🇫🇷 France</option>
+          <option value="Spain">🇪🇸 Spain</option>
+          <option value="Portugal">🇵🇹 Portugal</option>
+          <option value="Italy">🇮🇹 Italy</option>
+          <option value="Poland">🇵🇱 Poland</option>
+          <option value="Czech Republic">🇨🇿 Czech Republic</option>
+          <option value="Estonia">🇪🇪 Estonia</option>
+          <option value="Latvia">🇱🇻 Latvia</option>
+          <option value="Lithuania">🇱🇹 Lithuania</option>
+          <option value="Hungary">🇭🇺 Hungary</option>
+          <option value="Romania">🇷🇴 Romania</option>
+          <option value="Croatia">🇭🇷 Croatia</option>
+          <option value="United Kingdom">🇬🇧 United Kingdom</option>
+          <option value="Ireland">🇮🇪 Ireland</option>
+          <option value="Austria">🇦🇹 Austria</option>
+          <option value="Switzerland">🇨🇭 Switzerland</option>
+          <option value="Greece">🇬🇷 Greece</option>
+          <option value="Bulgaria">🇧🇬 Bulgaria</option>
+          <option value="Slovakia">🇸🇰 Slovakia</option>
+          <option value="Slovenia">🇸🇮 Slovenia</option>
+          <option value="United States">🇺🇸 United States</option>
+          <option value="Canada">🇨🇦 Canada</option>
+          <option value="Australia">🇦🇺 Australia</option>
+          <option value="New Zealand">🇳🇿 New Zealand</option>
+          <option value="South Africa">🇿🇦 South Africa</option>
+          <option value="Brazil">🇧🇷 Brazil</option>
+          <option value="Mexico">🇲🇽 Mexico</option>
+          <option value="Argentina">🇦🇷 Argentina</option>
+          <option value="India">🇮🇳 India</option>
+          <option value="Indonesia">🇮🇩 Indonesia</option>
+          <option value="Philippines">🇵🇭 Philippines</option>
+          <option value="Other">🌍 Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_situation">What brought you here today? <span class="req">*</span></label>
+      <div class="field-hint" id="hint_situation">Select all that apply</div>
+      <div class="options cols2" id="opts_situation">
+        <button class="opt-btn" onclick="toggleMulti(this,'situation')"><span class="opt-label" data-t="Over-indebted">Over-indebted</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'situation')"><span class="opt-label" data-t="Unemployed / lost income">Unemployed / lost income</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'situation')"><span class="opt-label" data-t="Divorce / separation">Divorce / separation</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'situation')"><span class="opt-label" data-t="Illness / sick leave">Illness / sick leave</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'situation')"><span class="opt-label" data-t="Business failure">Business failure</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'situation')"><span class="opt-label" data-t="Other life change">Other life change</span></button>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-next" id="btn_next1" onclick="goNext(1)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- BLOCK 2 -->
+  <div class="block" id="block2">
+    <div class="block-header">
+      <div class="block-num" id="b2num">Step 2 of 4</div>
+      <div class="block-title" id="b2title">Your debt situation</div>
+      <div class="block-desc" id="b2desc">This shapes your entire recovery strategy. All information is private.</div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label id="lbl_employment">Employment status <span class="req">*</span></label>
+        <select id="f_employment">
+          <option value="" data-t="Select employment">Select</option>
+          <option value="employed_full" data-t="Employed full-time">Employed full-time</option>
+          <option value="employed_part" data-t="Employed part-time">Employed part-time</option>
+          <option value="self_employed" data-t="Self-employed / freelancer / business owner">Self-employed / freelancer / business owner</option>
+          <option value="unemployed" data-t="Unemployed">Unemployed</option>
+          <option value="student" data-t="Student">Student</option>
+          <option value="retired" data-t="Retired">Retired</option>
+          <option value="sick_leave" data-t="On sick leave">On sick leave</option>
+          <option value="parental_leave" data-t="On parental leave">On parental leave</option>
+        </select>
+      </div>
+      <div class="field">
+        <label id="lbl_household">Household type <span class="req">*</span></label>
+        <select id="f_household">
+          <option value="" data-t="Select household">Select</option>
+          <option value="single" data-t="Single, no children">Single, no children</option>
+          <option value="single_kids" data-t="Single parent with children">Single parent with children</option>
+          <option value="couple" data-t="Couple, no children">Couple, no children</option>
+          <option value="couple_kids" data-t="Couple with children">Couple with children</option>
+          <option value="other" data-t="Other household">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_children">Number of minor children (under 18) living at the same address <span class="req">*</span></label>
+      <select id="f_children">
+        <option value="" data-t="Select children">Select</option>
+        <option value="0" data-t="0 — no minor children at home">0 — no minor children at home</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5+">5 or more</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label id="lbl_housing">Housing situation <span class="req">*</span></label>
+        <select id="f_housing">
+          <option value="" data-t="Select housing">Select</option>
+          <option value="renting" data-t="Renting">Renting</option>
+          <option value="mortgage" data-t="Owner with mortgage">Owner with mortgage</option>
+          <option value="owner_free" data-t="Owner, no mortgage">Owner, no mortgage</option>
+          <option value="living_with_family" data-t="Living with family">Living with family</option>
+          <option value="other" data-t="Other housing">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label id="lbl_debt_type">Primary debt type <span class="req">*</span></label>
+        <select id="f_debt_type">
+          <option value="" data-t="Select debt type">Select</option>
+          <option value="consumer_loan" data-t="Consumer loan">Consumer loan</option>
+          <option value="credit_card" data-t="Credit card debt">Credit card debt</option>
+          <option value="mortgage" data-t="Mortgage arrears">Mortgage arrears</option>
+          <option value="student_loan" data-t="Student loan">Student loan</option>
+          <option value="tax_debt" data-t="Tax debt">Tax debt</option>
+          <option value="medical" data-t="Medical debt">Medical debt</option>
+          <option value="business" data-t="Business debt">Business debt</option>
+          <option value="multiple" data-t="Multiple types">Multiple types</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label id="lbl_debt_total">Total debt amount <span class="req">*</span></label>
+        <select id="f_debt_total">
+          <option value="" data-t="Select range">Select range</option>
+          <option value="under_1000" data-t="Under 1,000">Under 1,000</option>
+          <option value="1000_5000" data-t="1,000 – 5,000">1,000 – 5,000</option>
+          <option value="5000_15000" data-t="5,000 – 15,000">5,000 – 15,000</option>
+          <option value="15000_50000" data-t="15,000 – 50,000">15,000 – 50,000</option>
+          <option value="50000_100000" data-t="50,000 – 100,000">50,000 – 100,000</option>
+          <option value="100000_250000" data-t="100,000 – 250,000">100,000 – 250,000</option>
+          <option value="over_250000" data-t="Over 250,000">Over 250,000</option>
+        </select>
+      </div>
+      <div class="field">
+        <label id="lbl_debt_count">Number of debts <span class="req">*</span></label>
+        <select id="f_debt_count">
+          <option value="" data-t="Select count">Select</option>
+          <option value="1" data-t="1 debt">1</option>
+          <option value="2_3" data-t="2 – 3 debts">2 – 3</option>
+          <option value="4_6" data-t="4 – 6 debts">4 – 6</option>
+          <option value="7_plus" data-t="7 or more debts">7 or more</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_interest">Average interest rate % <span class="req">*</span></label>
+      <input type="number" id="f_interest" placeholder="e.g. 18 — enter 0 if unknown" min="0" max="100" step="0.1">
+    </div>
+
+    <div class="field">
+      <label id="lbl_collections">Is any debt in collections or enforcement? <span class="req">*</span></label>
+      <div class="options cols2" id="opts_collections">
+        <button class="opt-btn" onclick="selectOpt(this,'collections')"><span class="opt-label" data-t="Yes — enforcement / bailiff">Yes — enforcement / bailiff</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'collections')"><span class="opt-label" data-t="Yes — collections agency">Yes — collections agency</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'collections')"><span class="opt-label" data-t="No">No</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'collections')"><span class="opt-label" data-t="I don't know">I don't know</span></button>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" id="btn_back2" onclick="goBack(2)">← Back</button>
+      <button class="btn-next" id="btn_next2" onclick="goNext(2)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- BLOCK 3 -->
+  <div class="block" id="block3">
+    <div class="block-header">
+      <div class="block-num" id="b3num">Step 3 of 4</div>
+      <div class="block-title" id="b3title">Your finances</div>
+      <div class="block-desc" id="b3desc">We use this to build a realistic repayment plan — not an optimistic one.</div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_income">Monthly net income <span class="req">*</span></label>
+      <div class="field-hint" id="hint_income">Enter amount, then select your currency — we'll use it throughout your plan</div>
+      <div class="income-row">
+        <input type="number" id="f_income_amount" placeholder="e.g. 2400" min="0">
+        <select id="f_currency" onchange="saveCurrency(this.value)">
+          <option value="EUR">EUR — Euro</option>
+          <option value="GBP">GBP — British Pound</option>
+          <option value="SEK">SEK — Swedish Krona</option>
+          <option value="NOK">NOK — Norwegian Krone</option>
+          <option value="DKK">DKK — Danish Krone</option>
+          <option value="CHF">CHF — Swiss Franc</option>
+          <option value="PLN">PLN — Polish Zloty</option>
+          <option value="CZK">CZK — Czech Koruna</option>
+          <option value="HUF">HUF — Hungarian Forint</option>
+          <option value="RON">RON — Romanian Leu</option>
+          <option value="HRK">HRK — Croatian Kuna</option>
+          <option value="BGN">BGN — Bulgarian Lev</option>
+          <option value="USD">USD — US Dollar</option>
+          <option value="CAD">CAD — Canadian Dollar</option>
+          <option value="AUD">AUD — Australian Dollar</option>
+          <option value="NZD">NZD — New Zealand Dollar</option>
+          <option value="ZAR">ZAR — South African Rand</option>
+          <option value="BRL">BRL — Brazilian Real</option>
+          <option value="MXN">MXN — Mexican Peso</option>
+          <option value="ARS">ARS — Argentine Peso</option>
+          <option value="CLP">CLP — Chilean Peso</option>
+          <option value="COP">COP — Colombian Peso</option>
+          <option value="PEN">PEN — Peruvian Sol</option>
+          <option value="INR">INR — Indian Rupee</option>
+          <option value="IDR">IDR — Indonesian Rupiah</option>
+          <option value="PHP">PHP — Philippine Peso</option>
+          <option value="THB">THB — Thai Baht</option>
+          <option value="MYR">MYR — Malaysian Ringgit</option>
+          <option value="SGD">SGD — Singapore Dollar</option>
+          <option value="HKD">HKD — Hong Kong Dollar</option>
+          <option value="JPY">JPY — Japanese Yen</option>
+          <option value="CNY">CNY — Chinese Yuan</option>
+          <option value="KRW">KRW — South Korean Won</option>
+          <option value="TWD">TWD — Taiwan Dollar</option>
+          <option value="TRY">TRY — Turkish Lira</option>
+          <option value="RUB">RUB — Russian Ruble</option>
+          <option value="UAH">UAH — Ukrainian Hryvnia</option>
+          <option value="ILS">ILS — Israeli Shekel</option>
+          <option value="AED">AED — UAE Dirham</option>
+          <option value="SAR">SAR — Saudi Riyal</option>
+          <option value="QAR">QAR — Qatari Riyal</option>
+          <option value="KWD">KWD — Kuwaiti Dinar</option>
+          <option value="EGP">EGP — Egyptian Pound</option>
+          <option value="NGN">NGN — Nigerian Naira</option>
+          <option value="KES">KES — Kenyan Shilling</option>
+          <option value="GHS">GHS — Ghanaian Cedi</option>
+          <option value="TZS">TZS — Tanzanian Shilling</option>
+          <option value="MAD">MAD — Moroccan Dirham</option>
+          <option value="PKR">PKR — Pakistani Rupee</option>
+          <option value="BDT">BDT — Bangladeshi Taka</option>
+          <option value="LKR">LKR — Sri Lankan Rupee</option>
+          <option value="NPR">NPR — Nepalese Rupee</option>
+          <option value="VND">VND — Vietnamese Dong</option>
+          <option value="MMK">MMK — Myanmar Kyat</option>
+          <option value="KHR">KHR — Cambodian Riel</option>
+          <option value="MNT">MNT — Mongolian Tugrik</option>
+          <option value="GEL">GEL — Georgian Lari</option>
+          <option value="AMD">AMD — Armenian Dram</option>
+          <option value="AZN">AZN — Azerbaijani Manat</option>
+          <option value="KZT">KZT — Kazakhstani Tenge</option>
+          <option value="UZS">UZS — Uzbekistani Som</option>
+          <option value="DZD">DZD — Algerian Dinar</option>
+          <option value="TND">TND — Tunisian Dinar</option>
+          <option value="LYD">LYD — Libyan Dinar</option>
+          <option value="ETB">ETB — Ethiopian Birr</option>
+          <option value="UGX">UGX — Ugandan Shilling</option>
+          <option value="RWF">RWF — Rwandan Franc</option>
+          <option value="XOF">XOF — West African CFA Franc</option>
+          <option value="XAF">XAF — Central African CFA Franc</option>
+          <option value="MZN">MZN — Mozambican Metical</option>
+          <option value="ZMW">ZMW — Zambian Kwacha</option>
+          <option value="BWP">BWP — Botswana Pula</option>
+          <option value="MUR">MUR — Mauritian Rupee</option>
+          <option value="PGK">PGK — Papua New Guinean Kina</option>
+          <option value="FJD">FJD — Fijian Dollar</option>
+          <option value="OTHER">Other currency</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label id="lbl_housing_cost">Monthly housing cost <span class="req">*</span></label>
+        <div class="field-hint" id="hint_housing_cost">Rent, mortgage payment, or maintenance charge</div>
+        <input type="number" id="f_housing_cost" placeholder="e.g. 750" min="0">
+      </div>
+      <div class="field">
+        <label id="lbl_other_costs">Other fixed monthly costs <span class="req">*</span></label>
+        <div class="field-hint">Food, transport, utilities, subscriptions</div>
+        <input type="number" id="f_other_costs" placeholder="e.g. 600" min="0">
+      </div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_debt_payment">Current monthly debt payment <span class="req">*</span></label>
+      <input type="number" id="f_debt_payment" placeholder="e.g. 300" min="0">
+    </div>
+
+    <div class="field">
+      <label id="lbl_savings">Do you have any savings or financial buffer? <span class="req">*</span></label>
+      <div class="options cols2" id="opts_savings">
+        <button class="opt-btn" onclick="selectOpt(this,'savings')"><span class="opt-label" data-t="None at all">None at all</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'savings')"><span class="opt-label" data-t="Under 500">Under 500</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'savings')"><span class="opt-label" data-t="500 – 2000">500 – 2,000</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'savings')"><span class="opt-label" data-t="Over 2000">Over 2,000</span></button>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" id="btn_back3" onclick="goBack(3)">← Back</button>
+      <button class="btn-next" id="btn_next3" onclick="goNext(3)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- BLOCK 4 -->
+  <div class="block" id="block4">
+    <div class="block-header">
+      <div class="block-num" id="b4num">Step 4 of 4</div>
+      <div class="block-title" id="b4title">Your mindset & goals</div>
+      <div class="block-desc" id="b4desc">This shapes the tone and focus of your personal plan.</div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_barrier">What has been your biggest barrier so far? <span class="req">*</span></label>
+      <div class="options cols2" id="opts_barrier">
+        <button class="opt-btn" onclick="selectOpt(this,'barrier')"><span class="opt-label" data-t="Don't know where to start">Don't know where to start</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'barrier')"><span class="opt-label" data-t="Fear of contacting creditors">Fear of contacting creditors</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'barrier')"><span class="opt-label" data-t="Shame or stigma">Shame or stigma</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'barrier')"><span class="opt-label" data-t="Stress and exhaustion">Stress and exhaustion</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'barrier')"><span class="opt-label" data-t="Feels hopeless">Feels hopeless</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'barrier')"><span class="opt-label" data-t="No time">No time</span></button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_life_situation">What else is happening in your life right now?</label>
+      <div class="field-hint" id="hint_multiselect">Select all that apply</div>
+      <div class="options cols2" id="opts_life">
+        <button class="opt-btn" onclick="toggleMulti(this,'life')"><span class="opt-label" data-t="Looking for work">Looking for work</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'life')"><span class="opt-label" data-t="Recently got a job">Recently got a job</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'life')"><span class="opt-label" data-t="Considering career change">Considering career change</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'life')"><span class="opt-label" data-t="Family to support">Family to support</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'life')"><span class="opt-label" data-t="Health challenges">Health challenges</span></button>
+        <button class="opt-btn" onclick="toggleMulti(this,'life')"><span class="opt-label" data-t="Things are otherwise stable">Things are otherwise stable</span></button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label id="lbl_reminder">Send me a monthly progress reminder</label>
+      <div class="options cols2" id="opts_reminder">
+        <button class="opt-btn selected" onclick="selectOpt(this,'reminder')"><span class="opt-label" data-t="Yes — keep me on track">Yes — keep me on track</span></button>
+        <button class="opt-btn" onclick="selectOpt(this,'reminder')"><span class="opt-label" data-t="Not right now">Not right now</span></button>
+      </div>
+    </div>
+
+    <div class="impact-note" id="impact_note">
+      ✦ Your answers help build a plan tailored exactly to your needs — and help us measure our real-world impact.
+    </div>
+
+    <div class="nav-row" style="margin-bottom:0;">
+      <button class="btn-back" id="btn_back4" onclick="goBack(4)">← Back</button>
+    </div>
+    <button class="btn-submit" id="submitBtn" onclick="submitForm()" style="margin-top:16px;">
+      <span id="submitText">Build My Debt Recovery Plan →</span>
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="spinner"></div>
+    <h2 id="loading_title">Building your plan…</h2>
+    <p id="loading_desc">Your personalised 90-day Debt Recovery plan is being created. This takes about 30 seconds.</p>
+  </div>
+
+</div>
+
+<script>
+const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
+
+// Translations
+const T = {
+  EN: { b1num:"Step 1 of 4",b1title:"Let's start with you",b1desc:"Your plan will be personalised to your situation, country, and language.",b2num:"Step 2 of 4",b2title:"Your debt situation",b2desc:"This shapes your entire recovery strategy. All information is private.",b3num:"Step 3 of 4",b3title:"Your finances",b3desc:"We use this to build a realistic repayment plan — not an optimistic one.",b4num:"Step 4 of 4",b4title:"Your mindset & goals",b4desc:"This shapes the tone and focus of your personal plan.",lbl_firstname:"First name",lbl_email:"Email address",lbl_language:"Language",lbl_country:"Country",lbl_situation:"What brought you here today?",hint_situation:"Select all that apply",lbl_employment:"Employment status",lbl_household:"Household type",lbl_children:"Minor children (under 18) at same address",lbl_housing:"Housing situation",lbl_debt_type:"Primary debt type",lbl_debt_total:"Total debt amount",lbl_debt_count:"Number of debts",lbl_interest:"Average interest rate %",lbl_collections:"Is any debt in collections or enforcement?",lbl_income:"Monthly net income",hint_income:"Enter amount, then select your currency — we'll use it throughout your plan",lbl_housing_cost:"Monthly housing cost",hint_housing_cost:"Rent, mortgage payment, or maintenance charge",lbl_other_costs:"Other fixed monthly costs",lbl_debt_payment:"Current monthly debt payment",lbl_savings:"Do you have any savings or financial buffer?",lbl_barrier:"What has been your biggest barrier so far?",lbl_life_situation:"What else is happening in your life right now?",hint_multiselect:"Select all that apply",lbl_reminder:"Send me a monthly progress reminder",impact_note:"✦ Your answers help build a plan tailored exactly to your needs — and help us measure our real-world impact.",submit:"Build My Debt Recovery Plan →",loading_title:"Building your plan…",loading_desc:"Your personalised 90-day Debt Recovery plan is being created. This takes about 30 seconds.",pl1:"You",pl2:"Debts",pl3:"Finances",pl4:"Goals",stepLabel:"Step 1 of 4",step:"Step",of:"of",btn_back:"← Back",btn_next:"Continue →" },
+  FI: { b1num:"Vaihe 1/4",b1title:"Aloitetaan sinusta",b1desc:"Suunnitelmasi räätälöidään tilanteesi, maasi ja kielesi mukaan.",b2num:"Vaihe 2/4",b2title:"Velkatilanne",b2desc:"Tämä määrittää koko palautumisstrategiasi. Kaikki tiedot ovat yksityisiä.",b3num:"Vaihe 3/4",b3title:"Taloudellinen tilanne",b3desc:"Käytämme tätä realistisen maksusuunnitelman rakentamiseen.",b4num:"Vaihe 4/4",b4title:"Asenne ja tavoitteet",b4desc:"Tämä määrittää henkilökohtaisen suunnitelmasi sävyn.",lbl_firstname:"Etunimi",lbl_email:"Sähköpostiosoite",lbl_language:"Kieli",lbl_country:"Maa",lbl_situation:"Mikä toi sinut tänne tänään?",hint_situation:"Valitse kaikki sopivat",lbl_employment:"Työtilanne",lbl_household:"Kotitaloustyyppi",lbl_children:"Alaikäiset lapset (alle 18) samassa osoitteessa",lbl_housing:"Asumistilanne",lbl_debt_type:"Tärkein velkatyyppi",lbl_debt_total:"Velkojen kokonaismäärä",lbl_debt_count:"Velkasuhteita yhteensä",lbl_interest:"Keskikorko %",lbl_collections:"Onko jokin velka perinnässä tai ulosotossa?",lbl_income:"Kuukausittaiset nettotulot",hint_income:"Syötä summa ja valitse valuuttasi — käytämme sitä kaikkialla suunnitelmassasi",lbl_housing_cost:"Asumiskustannukset kuukaudessa",hint_housing_cost:"Vuokra, asuntolainan lyhennys tai yhtiövastike",lbl_other_costs:"Muut kiinteät kuukausikulut",lbl_debt_payment:"Nykyinen velanmaksu kuukaudessa",lbl_savings:"Onko sinulla säästöjä tai puskuria?",lbl_barrier:"Mikä on ollut suurin esteesi tähän asti?",lbl_life_situation:"Mitä muuta elämässäsi tapahtuu juuri nyt?",hint_multiselect:"Valitse kaikki sopivat",lbl_reminder:"Lähetä minulle kuukausittainen edistymismuistutus",impact_note:"✦ Vastauksesi auttavat rakentamaan juuri sinun tarpeisiin vastaavan suunnitelman ja mittaamaan todellista vaikutustamme.",submit:"Rakenna velkasuunnitelmani →",loading_title:"Rakennetaan suunnitelmaasi…",loading_desc:"Henkilökohtaista 90 päivän suunnitelmaasi luodaan. Tämä kestää noin 30 sekuntia.",pl1:"Sinä",pl2:"Velat",pl3:"Talous",pl4:"Tavoitteet",stepLabel:"Vaihe 1/4",step:"Vaihe",of:"/",btn_back:"← Takaisin",btn_next:"Jatka →",
+    opts: {
+      "Over-indebted":"Ylivelkaantunut","Unemployed / lost income":"Työtön / tulot pudonneet",
+      "Divorce / separation":"Avioero / ero","Illness / sick leave":"Sairaus / sairausloma",
+      "Business failure":"Yritystoiminnan lopetus","Other life change":"Muu elämänmuutos",
+      "Yes — enforcement / bailiff":"Kyllä — ulosotto","Yes — collections agency":"Kyllä — perintätoimisto",
+      "No":"Ei","I don't know":"En tiedä",
+      "None at all":"Ei lainkaan","Under 500":"Alle 500","500 – 2,000":"500 – 2 000","Over 2,000":"Yli 2 000",
+      "Don't know where to start":"En tiedä mistä aloittaa","Fear of contacting creditors":"Pelko ottaa yhteyttä velkojiin",
+      "Shame or stigma":"Häpeä","Stress and exhaustion":"Stressi ja uupumus",
+      "Feels hopeless":"Tilanne tuntuu toivottomalta","No time":"Ei ole aikaa",
+      "Looking for work":"Etsin töitä","Recently got a job":"Sain juuri töitä",
+      "Considering career change":"Harkitsen uranvaihtoa","Family to support":"Perhe josta huolehtia",
+      "Health challenges":"Terveyshaasteet","Things are otherwise stable":"Muuten kaikki on ok",
+      "Yes — keep me on track":"Kyllä — pidä minut kurssilla","Not right now":"En juuri nyt"
+    },
+    sel: {
+      "Select country":"Valitse maa","Select employment":"Valitse","Employed full-time":"Kokopäiväinen työ","Employed part-time":"Osa-aikainen työ",
+      "Self-employed / freelancer / business owner":"Yrittäjä / freelancer / toiminimi",
+      "Unemployed":"Työtön","Student":"Opiskelija","Retired":"Eläkkeellä",
+      "On sick leave":"Sairauslomalla","On parental leave":"Vanhempainvapaalla",
+      "Select household":"Valitse","Single, no children":"Yksin, ei lapsia",
+      "Single parent with children":"Yksinhuoltaja","Couple, no children":"Pari, ei lapsia",
+      "Couple with children":"Pari ja lapsia","Other household":"Muu",
+      "Select children":"Valitse","0 — no minor children at home":"0 — ei alaikäisiä lapsia kotona",
+      "1 child":"1","2 children":"2","3 children":"3","4 children":"4","5 or more children":"5 tai enemmän",
+      "Select housing":"Valitse","Renting":"Vuokralla","Owner with mortgage":"Omistaja, asuntolaina",
+      "Owner, no mortgage":"Omistaja, ei lainaa","Living with family":"Asuu sukulaisten luona","Other housing":"Muu",
+      "Select debt type":"Valitse","Consumer loan":"Kulutusluotto","Credit card debt":"Luottokorttivelka",
+      "Mortgage arrears":"Asuntolainan maksuviivästys","Student loan":"Opintolaina",
+      "Tax debt":"Verovelka","Medical debt":"Hoitovelka","Business debt":"Yritysvelka","Multiple types":"Useita tyyppejä",
+      "Select range":"Valitse","Under 1,000":"Alle 1 000","1,000 – 5,000":"1 000 – 5 000",
+      "5,000 – 15,000":"5 000 – 15 000","15,000 – 50,000":"15 000 – 50 000",
+      "50,000 – 100,000":"50 000 – 100 000","100,000 – 250,000":"100 000 – 250 000","Over 250,000":"Yli 250 000",
+      "Select count":"Valitse","1 debt":"1","2 – 3 debts":"2 – 3","4 – 6 debts":"4 – 6","7 or more debts":"7 tai enemmän"
+    } },
+  SV: { b1num:"Steg 1 av 4",b1title:"Låt oss börja med dig",b1desc:"Din plan anpassas efter din situation, ditt land och ditt språk.",b2num:"Steg 2 av 4",b2title:"Din skuldsituation",b2desc:"Detta formar hela din återhämtningsstrategi.",b3num:"Steg 3 av 4",b3title:"Din ekonomi",b3desc:"Vi använder detta för att bygga en realistisk återbetalningsplan.",b4num:"Steg 4 av 4",b4title:"Din inställning och mål",b4desc:"Detta formar tonen i din personliga plan.",lbl_firstname:"Förnamn",lbl_email:"E-postadress",lbl_language:"Språk",lbl_country:"Land",lbl_situation:"Vad fick dig att komma hit idag?",hint_situation:"Välj alla som stämmer",lbl_employment:"Sysselsättning",lbl_household:"Hushållstyp",lbl_children:"Minderåriga barn (under 18) på samma adress",lbl_housing:"Boendesituation",lbl_debt_type:"Primär skuldtyp",lbl_debt_total:"Total skuld",lbl_debt_count:"Antal skulder",lbl_interest:"Genomsnittlig ränta %",lbl_collections:"Är någon skuld hos inkasso eller kronofogden?",lbl_income:"Månatlig nettoinkomst",hint_income:"Ange belopp och välj din valuta",lbl_housing_cost:"Månatlig boendekostnad",hint_housing_cost:"Hyra, amortering eller avgift",lbl_other_costs:"Övriga fasta månadskostnader",lbl_debt_payment:"Nuvarande månatlig skuldbetalning",lbl_savings:"Har du några besparingar?",lbl_barrier:"Vad har varit ditt största hinder?",lbl_life_situation:"Vad annat händer i ditt liv?",hint_multiselect:"Välj alla som stämmer",lbl_reminder:"Skicka månadsvis påminnelse",impact_note:"✦ Dina svar hjälper oss bygga en plan som passar just dig — och mäta vår verkliga påverkan.",submit:"Bygg min skuldplan →",loading_title:"Bygger din plan…",loading_desc:"Din personliga plan skapas. Det tar ungefär 30 sekunder.",pl1:"Du",pl2:"Skulder",pl3:"Ekonomi",pl4:"Mål",stepLabel:"Steg 1 av 4",step:"Steg",of:"av",btn_back:"← Tillbaka",btn_next:"Fortsätt →",
+    opts: {
+      "Over-indebted":"Överskuldsatt","Unemployed / lost income":"Arbetslös / förlorad inkomst",
+      "Divorce / separation":"Skilsmässa / separation","Illness / sick leave":"Sjukdom / sjukskrivning",
+      "Business failure":"Företagskonkurs","Other life change":"Annan livsförändring",
+      "Yes — enforcement / bailiff":"Ja — kronofogden","Yes — collections agency":"Ja — inkassobolag",
+      "No":"Nej","I don't know":"Vet inte",
+      "None at all":"Inga alls","Under 500":"Under 500","500 – 2,000":"500 – 2 000","Over 2,000":"Över 2 000",
+      "Don't know where to start":"Vet inte var jag ska börja","Fear of contacting creditors":"Rädsla att kontakta borgenärer",
+      "Shame or stigma":"Skam","Stress and exhaustion":"Stress och utmattning",
+      "Feels hopeless":"Känns hopplöst","No time":"Ingen tid",
+      "Looking for work":"Söker jobb","Recently got a job":"Fick nyligen jobb",
+      "Considering career change":"Funderar på karriärbyte","Family to support":"Familj att försörja",
+      "Health challenges":"Hälsoutmaningar","Things are otherwise stable":"Annars är allt ok",
+      "Yes — keep me on track":"Ja — håll mig på rätt spår","Not right now":"Inte just nu"
+    },
+    sel: {
+      "Select country":"Välj land","Select employment":"Välj","Employed full-time":"Heltidsanställd","Employed part-time":"Deltidsanställd",
+      "Self-employed / freelancer / business owner":"Egenföretagare / frilanser",
+      "Unemployed":"Arbetslös","Student":"Student","Retired":"Pensionär",
+      "On sick leave":"Sjukskriven","On parental leave":"Föräldraledig",
+      "Select household":"Välj","Single, no children":"Ensamstående, inga barn",
+      "Single parent with children":"Ensamstående förälder","Couple, no children":"Par, inga barn",
+      "Couple with children":"Par med barn","Other household":"Annat",
+      "Select children":"Välj","0 — no minor children at home":"0 — inga minderåriga barn hemma",
+      "1 child":"1","2 children":"2","3 children":"3","4 children":"4","5 or more children":"5 eller fler",
+      "Select housing":"Välj","Renting":"Hyresrätt","Owner with mortgage":"Ägare med bolån",
+      "Owner, no mortgage":"Ägare utan bolån","Living with family":"Bor med familj","Other housing":"Annat",
+      "Select debt type":"Välj","Consumer loan":"Konsumtionslån","Credit card debt":"Kreditkortsskuld",
+      "Mortgage arrears":"Bolånerestans","Student loan":"Studielån",
+      "Tax debt":"Skatteskuld","Medical debt":"Sjukvårdsskuld","Business debt":"Företagsskuld","Multiple types":"Flera typer",
+      "Select range":"Välj intervall","Under 1,000":"Under 1 000","1,000 – 5,000":"1 000 – 5 000",
+      "5,000 – 15,000":"5 000 – 15 000","15,000 – 50,000":"15 000 – 50 000",
+      "50,000 – 100,000":"50 000 – 100 000","100,000 – 250,000":"100 000 – 250 000","Over 250,000":"Över 250 000",
+      "Select count":"Välj","1 debt":"1","2 – 3 debts":"2 – 3","4 – 6 debts":"4 – 6","7 or more debts":"7 eller fler"
+    } },
+  DE: { b1num:"Schritt 1 von 4",b1title:"Fangen wir mit Ihnen an",b1desc:"Ihr Plan wird auf Ihre Situation zugeschnitten.",b2num:"Schritt 2 von 4",b2title:"Ihre Schuldsituation",b2desc:"Dies bestimmt Ihre gesamte Erholungsstrategie.",b3num:"Schritt 3 von 4",b3title:"Ihre Finanzen",b3desc:"Wir nutzen dies für einen realistischen Rückzahlungsplan.",b4num:"Schritt 4 von 4",b4title:"Ihre Einstellung und Ziele",b4desc:"Dies bestimmt den Ton Ihres Plans.",lbl_firstname:"Vorname",lbl_email:"E-Mail-Adresse",lbl_language:"Sprache",lbl_country:"Land",lbl_situation:"Was hat Sie heute hierher gebracht?",hint_situation:"Mehrfachauswahl möglich",lbl_employment:"Beschäftigungsstatus",lbl_household:"Haushaltstyp",lbl_children:"Minderjährige Kinder (unter 18) an derselben Adresse",lbl_housing:"Wohnsituation",lbl_debt_type:"Hauptschuldenart",lbl_debt_total:"Gesamtschulden",lbl_debt_count:"Anzahl der Schulden",lbl_interest:"Durchschnittlicher Zinssatz %",lbl_collections:"Befindet sich eine Schuld beim Inkasso?",lbl_income:"Monatliches Nettoeinkommen",hint_income:"Betrag eingeben und Währung wählen",lbl_housing_cost:"Monatliche Wohnkosten",hint_housing_cost:"Miete, Kreditrate oder Hausgeld",lbl_other_costs:"Sonstige feste Monatskosten",lbl_debt_payment:"Aktuelle monatliche Schuldzahlung",lbl_savings:"Haben Sie Ersparnisse?",lbl_barrier:"Was war Ihr größtes Hindernis?",lbl_life_situation:"Was passiert sonst in Ihrem Leben?",hint_multiselect:"Mehrfachauswahl möglich",lbl_reminder:"Monatliche Erinnerung senden",impact_note:"✦ Ihre Antworten helfen uns, einen Plan zu erstellen, der genau auf Ihre Bedürfnisse zugeschnitten ist — und unsere Wirkung zu messen.",submit:"Meinen Plan erstellen →",loading_title:"Plan wird erstellt…",loading_desc:"Ihr persönlicher Plan wird erstellt. Das dauert etwa 30 Sekunden.",pl1:"Sie",pl2:"Schulden",pl3:"Finanzen",pl4:"Ziele",stepLabel:"Schritt 1 von 4",step:"Schritt",of:"von",btn_back:"← Zurück",btn_next:"Weiter →",
+    opts: {
+      "Over-indebted":"Überschuldet","Unemployed / lost income":"Arbeitslos / Einkommensverlust",
+      "Divorce / separation":"Scheidung / Trennung","Illness / sick leave":"Krankheit / Krankenstand",
+      "Business failure":"Unternehmensinsolvenz","Other life change":"Andere Lebensveränderung",
+      "Yes — enforcement / bailiff":"Ja — Vollstreckung / Gerichtsvollzieher","Yes — collections agency":"Ja — Inkassobüro",
+      "No":"Nein","I don't know":"Weiß nicht",
+      "None at all":"Keine","Under 500":"Unter 500","500 – 2,000":"500 – 2.000","Over 2,000":"Über 2.000",
+      "Don't know where to start":"Weiß nicht wo ich anfangen soll","Fear of contacting creditors":"Angst vor Kontakt mit Gläubigern",
+      "Shame or stigma":"Scham","Stress and exhaustion":"Stress und Erschöpfung",
+      "Feels hopeless":"Fühlt sich hoffnungslos an","No time":"Keine Zeit",
+      "Looking for work":"Suche Arbeit","Recently got a job":"Kürzlich Arbeit gefunden",
+      "Considering career change":"Erwäge Karrierewechsel","Family to support":"Familie zu versorgen",
+      "Health challenges":"Gesundheitliche Herausforderungen","Things are otherwise stable":"Sonst ist alles stabil",
+      "Yes — keep me on track":"Ja — halten Sie mich auf Kurs","Not right now":"Nicht jetzt"
+    },
+    sel: {
+      "Select country":"Land auswählen","Select employment":"Auswählen","Employed full-time":"Vollzeitbeschäftigt","Employed part-time":"Teilzeitbeschäftigt",
+      "Self-employed / freelancer / business owner":"Selbstständig / Freiberufler / Unternehmer",
+      "Unemployed":"Arbeitslos","Student":"Student","Retired":"Rentner",
+      "On sick leave":"Krankgeschrieben","On parental leave":"Elternzeit",
+      "Select household":"Auswählen","Single, no children":"Allein, keine Kinder",
+      "Single parent with children":"Alleinerziehend","Couple, no children":"Paar, keine Kinder",
+      "Couple with children":"Paar mit Kindern","Other household":"Sonstiges",
+      "Select children":"Auswählen","0 — no minor children at home":"0 — keine minderjährigen Kinder",
+      "1 child":"1","2 children":"2","3 children":"3","4 children":"4","5 or more children":"5 oder mehr",
+      "Select housing":"Auswählen","Renting":"Miete","Owner with mortgage":"Eigentümer mit Kredit",
+      "Owner, no mortgage":"Eigentümer ohne Kredit","Living with family":"Bei Familie","Other housing":"Sonstiges",
+      "Select debt type":"Auswählen","Consumer loan":"Konsumentenkredit","Credit card debt":"Kreditkartenschulden",
+      "Mortgage arrears":"Hypothekenrückstand","Student loan":"Studiendarlehen",
+      "Tax debt":"Steuerschulden","Medical debt":"Medizinische Schulden","Business debt":"Unternehmensschulden","Multiple types":"Mehrere Arten",
+      "Select range":"Bereich wählen","Under 1,000":"Unter 1.000","1,000 – 5,000":"1.000 – 5.000",
+      "5,000 – 15,000":"5.000 – 15.000","15,000 – 50,000":"15.000 – 50.000",
+      "50,000 – 100,000":"50.000 – 100.000","100,000 – 250,000":"100.000 – 250.000","Over 250,000":"Über 250.000",
+      "Select count":"Auswählen","1 debt":"1","2 – 3 debts":"2 – 3","4 – 6 debts":"4 – 6","7 or more debts":"7 oder mehr"
+    } }
+};
+
+// Remaining languages inherit from EN with key overrides
+const langOverrides = {
+  NO: {b1title:"La oss starte med deg",b2title:"Din gjeldssituasjon",b3title:"Din økonomi",b4title:"Din innstilling",submit:"Bygg min gjeldsplan →",loading_title:"Bygger planen din…",pl1:"Deg",pl2:"Gjeld",pl3:"Økonomi",pl4:"Mål",stepLabel:"Trinn 1 av 4",step:"Trinn",of:"av"},
+  DA: {b1title:"Lad os starte med dig",b2title:"Din gældssituation",b3title:"Din økonomi",b4title:"Din indstilling",submit:"Byg min gældsplan →",loading_title:"Bygger din plan…",pl1:"Dig",pl2:"Gæld",pl3:"Økonomi",pl4:"Mål",stepLabel:"Trin 1 af 4",step:"Trin",of:"af"},
+  NL: {b1title:"Laten we beginnen met jou",b2title:"Jouw schuldsituatie",b3title:"Jouw financiën",b4title:"Jouw instelling",submit:"Bouw mijn plan →",loading_title:"Plan wordt gebouwd…",pl1:"Jij",pl2:"Schulden",pl3:"Financiën",pl4:"Doelen",stepLabel:"Stap 1 van 4",step:"Stap",of:"van"},
+  ES: {b1title:"Empecemos contigo",b2title:"Tu situación de deuda",b3title:"Tus finanzas",b4title:"Tu mentalidad",submit:"Construir mi plan →",loading_title:"Construyendo tu plan…",pl1:"Tú",pl2:"Deudas",pl3:"Finanzas",pl4:"Objetivos",stepLabel:"Paso 1 de 4",step:"Paso",of:"de"},
+  FR: {b1title:"Commençons par vous",b2title:"Votre situation d'endettement",b3title:"Vos finances",b4title:"Votre état d'esprit",submit:"Construire mon plan →",loading_title:"Construction du plan…",pl1:"Vous",pl2:"Dettes",pl3:"Finances",pl4:"Objectifs",stepLabel:"Étape 1 sur 4",step:"Étape",of:"sur"},
+  IT: {b1title:"Iniziamo da te",b2title:"La tua situazione debitoria",b3title:"Le tue finanze",b4title:"La tua mentalità",submit:"Costruisci il mio piano →",loading_title:"Creazione del piano…",pl1:"Tu",pl2:"Debiti",pl3:"Finanze",pl4:"Obiettivi",stepLabel:"Passo 1 di 4",step:"Passo",of:"di"},
+  PL: {b1title:"Zacznijmy od ciebie",b2title:"Twoja sytuacja zadłużenia",b3title:"Twoje finanse",b4title:"Twoje nastawienie",submit:"Zbuduj mój plan →",loading_title:"Tworzenie planu…",pl1:"Ty",pl2:"Długi",pl3:"Finanse",pl4:"Cele",stepLabel:"Krok 1 z 4",step:"Krok",of:"z"},
+  PT: {b1title:"Vamos começar com você",b2title:"Sua situação de dívida",b3title:"Suas finanças",b4title:"Sua mentalidade",submit:"Construir meu plano →",loading_title:"Construindo seu plano…",pl1:"Você",pl2:"Dívidas",pl3:"Finanças",pl4:"Objetivos",stepLabel:"Passo 1 de 4",step:"Passo",of:"de"},
+  CS: {b1title:"Začněme s vámi",b2title:"Vaše dluhová situace",b3title:"Vaše finance",b4title:"Váš přístup",submit:"Vytvořit můj plán →",loading_title:"Vytváření plánu…",pl1:"Vy",pl2:"Dluhy",pl3:"Finance",pl4:"Cíle",stepLabel:"Krok 1 ze 4",step:"Krok",of:"ze"},
+  ET: {b1title:"Alustame sinuga",b2title:"Sinu võlgade olukord",b3title:"Sinu rahandus",b4title:"Sinu suhtumine",submit:"Loo minu plaan →",loading_title:"Plaani loomine…",pl1:"Sina",pl2:"Võlad",pl3:"Rahandus",pl4:"Eesmärgid",stepLabel:"Samm 1/4",step:"Samm",of:"/"},
+  LV: {b1title:"Sāksim ar tevi",b2title:"Tava parāda situācija",b3title:"Tavas finanses",b4title:"Tava attieksme",submit:"Izveidot manu plānu →",loading_title:"Plāna izveide…",pl1:"Tu",pl2:"Parādi",pl3:"Finanses",pl4:"Mērķi",stepLabel:"Solis 1 no 4",step:"Solis",of:"no"},
+  LT: {b1title:"Pradėkime nuo tavęs",b2title:"Tavo skolų situacija",b3title:"Tavo finansai",b4title:"Tavo požiūris",submit:"Sukurti mano planą →",loading_title:"Plano kūrimas…",pl1:"Tu",pl2:"Skolos",pl3:"Finansai",pl4:"Tikslai",stepLabel:"Žingsnis 1 iš 4",step:"Žingsnis",of:"iš"},
+  HU: {b1title:"Kezdjük veled",b2title:"Az adóssághelyzeted",b3title:"A pénzügyeid",b4title:"A hozzáállásod",submit:"Elkészíti a tervemet →",loading_title:"Terv készítése…",pl1:"Te",pl2:"Adósságok",pl3:"Pénzügyek",pl4:"Célok",stepLabel:"1. lépés / 4",step:"Lépés",of:"/"},
+  RO: {b1title:"Să începem cu tine",b2title:"Situația ta de datorii",b3title:"Finanțele tale",b4title:"Atitudinea ta",submit:"Construiește planul meu →",loading_title:"Se construiește planul…",pl1:"Tu",pl2:"Datorii",pl3:"Finanțe",pl4:"Obiective",stepLabel:"Pasul 1 din 4",step:"Pasul",of:"din"},
+  HR: {b1title:"Krenimo od tebe",b2title:"Tvoja situacija s dugovima",b3title:"Tvoje financije",b4title:"Tvoj stav",submit:"Izgradi moj plan →",loading_title:"Izrađujem tvoj plan…",pl1:"Ti",pl2:"Dugovi",pl3:"Financije",pl4:"Ciljevi",stepLabel:"Korak 1 od 4",step:"Korak",of:"od"}
+};
+T['NO'] = {...T.EN, ...langOverrides['NO'], btn_back:"← Tilbake", btn_next:"Fortsett →", opts: {"Over-indebted": "Overgjeld", "Unemployed / lost income": "Arbeidsledig / tapt inntekt", "Divorce / separation": "Skilsmisse / separasjon", "Illness / sick leave": "Sykdom / sykmelding", "Business failure": "Bedriftskonkurs", "Other life change": "Annen livsendring", "Yes — enforcement / bailiff": "Ja — namsmanden", "Yes — collections agency": "Ja — inkassobyrå", "No": "Nei", "I don't know": "Vet ikke", "None at all": "Ingen", "Under 500": "Under 500", "500 – 2,000": "500 – 2 000", "Over 2,000": "Over 2 000", "Don't know where to start": "Vet ikke hvor jeg skal begynne", "Fear of contacting creditors": "Frykt for å kontakte kreditorer", "Shame or stigma": "Skam", "Stress and exhaustion": "Stress og utmattelse", "Feels hopeless": "Føles håpløst", "No time": "Ingen tid", "Looking for work": "Søker jobb", "Recently got a job": "Fikk nylig jobb", "Considering career change": "Vurderer karriereskifte", "Family to support": "Familie å forsørge", "Health challenges": "Helseproblemer", "Things are otherwise stable": "Ellers er alt stabilt", "Yes — keep me on track": "Ja — hold meg på sporet", "Not right now": "Ikke akkurat nå"}, sel: {"Select country": "Velg land", "Select employment": "Velg", "Employed full-time": "Fulltidsansatt", "Employed part-time": "Deltidsansatt", "Self-employed / freelancer / business owner": "Selvstendig / frilanser / bedriftseier", "Unemployed": "Arbeidsledig", "Student": "Student", "Retired": "Pensjonist", "On sick leave": "Sykemeldt", "On parental leave": "Foreldrepermisjon", "Select household": "Velg", "Single, no children": "Enslig, ingen barn", "Single parent with children": "Enslig forsørger", "Couple, no children": "Par, ingen barn", "Couple with children": "Par med barn", "Other household": "Annet", "Select children": "Velg", "0 — no minor children at home": "0 — ingen mindreårige barn hjemme", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 eller flere", "Select housing": "Velg", "Renting": "Leier", "Owner with mortgage": "Eier med lån", "Owner, no mortgage": "Eier uten lån", "Living with family": "Bor hos familie", "Other housing": "Annet", "Select debt type": "Velg", "Consumer loan": "Forbrukslån", "Credit card debt": "Kredittkortgjeld", "Mortgage arrears": "Boliglånsrestanse", "Student loan": "Studielån", "Tax debt": "Skattegjeld", "Medical debt": "Medisinsk gjeld", "Business debt": "Bedriftsgjeld", "Multiple types": "Flere typer", "Select range": "Velg område", "Under 1,000": "Under 1 000", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "Over 250 000", "Select count": "Velg", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 eller flere"}};
+T['DA'] = {...T.EN, ...langOverrides['DA'], btn_back:"← Tilbage", btn_next:"Fortsæt →", opts: {"Over-indebted": "Overgældet", "Unemployed / lost income": "Arbejdsløs / tabt indkomst", "Divorce / separation": "Skilsmisse / separation", "Illness / sick leave": "Sygdom / sygemelding", "Business failure": "Virksomhedskonkurs", "Other life change": "Anden livsændring", "Yes — enforcement / bailiff": "Ja — fogedretten", "Yes — collections agency": "Ja — inkassobureau", "No": "Nej", "I don't know": "Ved ikke", "None at all": "Ingen", "Under 500": "Under 500", "500 – 2,000": "500 – 2.000", "Over 2,000": "Over 2.000", "Don't know where to start": "Ved ikke hvor jeg skal starte", "Fear of contacting creditors": "Frygt for at kontakte kreditorer", "Shame or stigma": "Skam", "Stress and exhaustion": "Stress og udmattelse", "Feels hopeless": "Føles håbløst", "No time": "Ingen tid", "Looking for work": "Søger job", "Recently got a job": "Fik for nylig job", "Considering career change": "Overvejer karriereskifte", "Family to support": "Familie at forsørge", "Health challenges": "Sundhedsudfordringer", "Things are otherwise stable": "Ellers er alt stabilt", "Yes — keep me on track": "Ja — hold mig på sporet", "Not right now": "Ikke lige nu"}, sel: {"Select country": "Vælg land", "Select employment": "Vælg", "Employed full-time": "Fuldtidsansat", "Employed part-time": "Deltidsansat", "Self-employed / freelancer / business owner": "Selvstændig / freelancer / virksomhedsejer", "Unemployed": "Arbejdsløs", "Student": "Studerende", "Retired": "Pensionist", "On sick leave": "Sygemeldt", "On parental leave": "Barselsorlov", "Select household": "Vælg", "Single, no children": "Enlig, ingen børn", "Single parent with children": "Enlig forsørger", "Couple, no children": "Par, ingen børn", "Couple with children": "Par med børn", "Other household": "Andet", "Select children": "Vælg", "0 — no minor children at home": "0 — ingen mindreårige hjemme", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 eller flere", "Select housing": "Vælg", "Renting": "Lejer", "Owner with mortgage": "Ejer med lån", "Owner, no mortgage": "Ejer uden lån", "Living with family": "Bor hos familie", "Other housing": "Andet", "Select debt type": "Vælg", "Consumer loan": "Forbrugslån", "Credit card debt": "Kreditkortgæld", "Mortgage arrears": "Boliglånsrestance", "Student loan": "Studielån", "Tax debt": "Skattegæld", "Medical debt": "Lægegæld", "Business debt": "Erhvervsgæld", "Multiple types": "Flere typer", "Select range": "Vælg interval", "Under 1,000": "Under 1.000", "1,000 – 5,000": "1.000 – 5.000", "5,000 – 15,000": "5.000 – 15.000", "15,000 – 50,000": "15.000 – 50.000", "50,000 – 100,000": "50.000 – 100.000", "100,000 – 250,000": "100.000 – 250.000", "Over 250,000": "Over 250.000", "Select count": "Vælg", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 eller flere"}};
+T['NL'] = {...T.EN, ...langOverrides['NL'], btn_back:"← Terug", btn_next:"Doorgaan →", opts: {"Over-indebted": "Overmatig in schulden", "Unemployed / lost income": "Werkloos / inkomen verloren", "Divorce / separation": "Scheiding / separatie", "Illness / sick leave": "Ziekte / ziekteverlof", "Business failure": "Bedrijfsfaillissement", "Other life change": "Andere levensverandering", "Yes — enforcement / bailiff": "Ja — deurwaarder", "Yes — collections agency": "Ja — incassobureau", "No": "Nee", "I don't know": "Weet niet", "None at all": "Geen", "Under 500": "Onder 500", "500 – 2,000": "500 – 2.000", "Over 2,000": "Boven 2.000", "Don't know where to start": "Weet niet waar te beginnen", "Fear of contacting creditors": "Angst om schuldeisers te contacteren", "Shame or stigma": "Schaamte", "Stress and exhaustion": "Stress en uitputting", "Feels hopeless": "Voelt hopeloos", "No time": "Geen tijd", "Looking for work": "Zoek werk", "Recently got a job": "Onlangs een baan gevonden", "Considering career change": "Overweeg loopbaanwijziging", "Family to support": "Familie te onderhouden", "Health challenges": "Gezondheidsuitdagingen", "Things are otherwise stable": "Verder is alles stabiel", "Yes — keep me on track": "Ja — houd me op koers", "Not right now": "Niet nu"}, sel: {"Select country": "Selecteer land", "Select employment": "Selecteer", "Employed full-time": "Voltijds in dienst", "Employed part-time": "Deeltijds in dienst", "Self-employed / freelancer / business owner": "Zelfstandige / freelancer / ondernemer", "Unemployed": "Werkloos", "Student": "Student", "Retired": "Gepensioneerd", "On sick leave": "Ziek thuis", "On parental leave": "Ouderschapsverlof", "Select household": "Selecteer", "Single, no children": "Alleenstaand, geen kinderen", "Single parent with children": "Alleenstaande ouder", "Couple, no children": "Stel, geen kinderen", "Couple with children": "Stel met kinderen", "Other household": "Anders", "Select children": "Selecteer", "0 — no minor children at home": "0 — geen minderjarige kinderen thuis", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 of meer", "Select housing": "Selecteer", "Renting": "Huurder", "Owner with mortgage": "Eigenaar met hypotheek", "Owner, no mortgage": "Eigenaar zonder hypotheek", "Living with family": "Bij familie", "Other housing": "Anders", "Select debt type": "Selecteer", "Consumer loan": "Consumptiekrediet", "Credit card debt": "Creditcardschuld", "Mortgage arrears": "Hypotheekachterstand", "Student loan": "Studielening", "Tax debt": "Belastingschuld", "Medical debt": "Medische schuld", "Business debt": "Bedrijfsschuld", "Multiple types": "Meerdere types", "Select range": "Selecteer", "Under 1,000": "Onder 1.000", "1,000 – 5,000": "1.000 – 5.000", "5,000 – 15,000": "5.000 – 15.000", "15,000 – 50,000": "15.000 – 50.000", "50,000 – 100,000": "50.000 – 100.000", "100,000 – 250,000": "100.000 – 250.000", "Over 250,000": "Boven 250.000", "Select count": "Selecteer", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 of meer"}};
+// Remaining languages (ES,FR,IT,PL,PT,CS,ET,LV,LT,HU,RO,HR) get opts/sel below
+T['ES'] = {...T.EN, ...langOverrides['ES'], btn_back:"← Atrás", btn_next:"Continuar →", opts: {"Over-indebted": "Sobreendeudado", "Unemployed / lost income": "Desempleado / ingresos perdidos", "Divorce / separation": "Divorcio / separación", "Illness / sick leave": "Enfermedad / baja médica", "Business failure": "Quiebra empresarial", "Other life change": "Otro cambio vital", "Yes — enforcement / bailiff": "Sí — ejecución judicial", "Yes — collections agency": "Sí — agencia de cobros", "No": "No", "I don't know": "No lo sé", "None at all": "Ninguno", "Under 500": "Menos de 500", "500 – 2,000": "500 – 2.000", "Over 2,000": "Más de 2.000", "Don't know where to start": "No sé por dónde empezar", "Fear of contacting creditors": "Miedo a contactar acreedores", "Shame or stigma": "Vergüenza / estigma", "Stress and exhaustion": "Estrés y agotamiento", "Feels hopeless": "Parece sin solución", "No time": "Sin tiempo", "Looking for work": "Buscando trabajo", "Recently got a job": "Encontré trabajo recientemente", "Considering career change": "Pensando en cambio de carrera", "Family to support": "Familia que mantener", "Health challenges": "Problemas de salud", "Things are otherwise stable": "Por lo demás todo estable", "Yes — keep me on track": "Sí — mantenme en camino", "Not right now": "Ahora no"}, sel: {"Select country": "Seleccionar país", "Select employment": "Seleccionar", "Employed full-time": "Empleado a tiempo completo", "Employed part-time": "Empleado a tiempo parcial", "Self-employed / freelancer / business owner": "Autónomo / freelancer / empresario", "Unemployed": "Desempleado", "Student": "Estudiante", "Retired": "Jubilado", "On sick leave": "De baja médica", "On parental leave": "Baja parental", "Select household": "Seleccionar", "Single, no children": "Soltero, sin hijos", "Single parent with children": "Padre/madre soltero", "Couple, no children": "Pareja, sin hijos", "Couple with children": "Pareja con hijos", "Other household": "Otro", "Select children": "Seleccionar", "0 — no minor children at home": "0 — sin menores en casa", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 o más", "Select housing": "Seleccionar", "Renting": "Alquilando", "Owner with mortgage": "Propietario con hipoteca", "Owner, no mortgage": "Propietario sin hipoteca", "Living with family": "Viviendo con familia", "Other housing": "Otro", "Select debt type": "Seleccionar", "Consumer loan": "Préstamo personal", "Credit card debt": "Deuda de tarjeta", "Mortgage arrears": "Atrasos hipotecarios", "Student loan": "Préstamo estudiantil", "Tax debt": "Deuda fiscal", "Medical debt": "Deuda médica", "Business debt": "Deuda empresarial", "Multiple types": "Varios tipos", "Select range": "Seleccionar", "Under 1,000": "Menos de 1.000", "1,000 – 5,000": "1.000 – 5.000", "5,000 – 15,000": "5.000 – 15.000", "15,000 – 50,000": "15.000 – 50.000", "50,000 – 100,000": "50.000 – 100.000", "100,000 – 250,000": "100.000 – 250.000", "Over 250,000": "Más de 250.000", "Select count": "Seleccionar", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 o más"}};
+T['FR'] = {...T.EN, ...langOverrides['FR'], btn_back:"← Retour", btn_next:"Continuer →", opts: {"Over-indebted": "Surendetté", "Unemployed / lost income": "Sans emploi / revenus perdus", "Divorce / separation": "Divorce / séparation", "Illness / sick leave": "Maladie / arrêt de travail", "Business failure": "Faillite d'entreprise", "Other life change": "Autre changement de vie", "Yes — enforcement / bailiff": "Oui — huissier de justice", "Yes — collections agency": "Oui — agence de recouvrement", "No": "Non", "I don't know": "Je ne sais pas", "None at all": "Aucune", "Under 500": "Moins de 500", "500 – 2,000": "500 – 2 000", "Over 2,000": "Plus de 2 000", "Don't know where to start": "Ne sais pas par où commencer", "Fear of contacting creditors": "Peur de contacter les créanciers", "Shame or stigma": "Honte / stigmatisation", "Stress and exhaustion": "Stress et épuisement", "Feels hopeless": "Semble sans issue", "No time": "Pas de temps", "Looking for work": "Cherche du travail", "Recently got a job": "Vient de trouver un emploi", "Considering career change": "Envisage un changement de carrière", "Family to support": "Famille à charge", "Health challenges": "Problèmes de santé", "Things are otherwise stable": "Sinon tout est stable", "Yes — keep me on track": "Oui — gardez-moi sur la bonne voie", "Not right now": "Pas maintenant"}, sel: {"Select country": "Sélectionner pays", "Select employment": "Sélectionner", "Employed full-time": "Employé à temps plein", "Employed part-time": "Employé à temps partiel", "Self-employed / freelancer / business owner": "Indépendant / freelance / chef d'entreprise", "Unemployed": "Sans emploi", "Student": "Étudiant", "Retired": "Retraité", "On sick leave": "En arrêt maladie", "On parental leave": "En congé parental", "Select household": "Sélectionner", "Single, no children": "Célibataire, sans enfants", "Single parent with children": "Parent isolé", "Couple, no children": "Couple, sans enfants", "Couple with children": "Couple avec enfants", "Other household": "Autre", "Select children": "Sélectionner", "0 — no minor children at home": "0 — pas d'enfants mineurs", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 ou plus", "Select housing": "Sélectionner", "Renting": "Locataire", "Owner with mortgage": "Propriétaire avec prêt", "Owner, no mortgage": "Propriétaire sans prêt", "Living with family": "Chez la famille", "Other housing": "Autre", "Select debt type": "Sélectionner", "Consumer loan": "Prêt à la consommation", "Credit card debt": "Dette de carte bancaire", "Mortgage arrears": "Arriérés de prêt immobilier", "Student loan": "Prêt étudiant", "Tax debt": "Dette fiscale", "Medical debt": "Dette médicale", "Business debt": "Dette professionnelle", "Multiple types": "Plusieurs types", "Select range": "Sélectionner", "Under 1,000": "Moins de 1 000", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "Plus de 250 000", "Select count": "Sélectionner", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 ou plus"}};
+T['IT'] = {...T.EN, ...langOverrides['IT'], btn_back:"← Indietro", btn_next:"Continua →", opts: {"Over-indebted": "Sovraindebitato", "Unemployed / lost income": "Disoccupato / reddito perso", "Divorce / separation": "Divorzio / separazione", "Illness / sick leave": "Malattia / congedo per malattia", "Business failure": "Fallimento aziendale", "Other life change": "Altro cambiamento di vita", "Yes — enforcement / bailiff": "Sì — esecuzione forzata", "Yes — collections agency": "Sì — agenzia di recupero crediti", "No": "No", "I don't know": "Non lo so", "None at all": "Nessuno", "Under 500": "Meno di 500", "500 – 2,000": "500 – 2.000", "Over 2,000": "Oltre 2.000", "Don't know where to start": "Non so da dove iniziare", "Fear of contacting creditors": "Paura di contattare i creditori", "Shame or stigma": "Vergogna / stigma", "Stress and exhaustion": "Stress e esaurimento", "Feels hopeless": "Sembra senza speranza", "No time": "Nessun tempo", "Looking for work": "Cerco lavoro", "Recently got a job": "Ho trovato lavoro di recente", "Considering career change": "Considero un cambio di carriera", "Family to support": "Famiglia da mantenere", "Health challenges": "Sfide di salute", "Things are otherwise stable": "Altrimenti tutto è stabile", "Yes — keep me on track": "Sì — tienimi in carreggiata", "Not right now": "Non ora"}, sel: {"Select country": "Seleziona paese", "Select employment": "Seleziona", "Employed full-time": "Dipendente a tempo pieno", "Employed part-time": "Dipendente a tempo parziale", "Self-employed / freelancer / business owner": "Autonomo / freelance / imprenditore", "Unemployed": "Disoccupato", "Student": "Studente", "Retired": "Pensionato", "On sick leave": "In malattia", "On parental leave": "In congedo parentale", "Select household": "Seleziona", "Single, no children": "Single, senza figli", "Single parent with children": "Genitore single", "Couple, no children": "Coppia, senza figli", "Couple with children": "Coppia con figli", "Other household": "Altro", "Select children": "Seleziona", "0 — no minor children at home": "0 — nessun minore in casa", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 o più", "Select housing": "Seleziona", "Renting": "In affitto", "Owner with mortgage": "Proprietario con mutuo", "Owner, no mortgage": "Proprietario senza mutuo", "Living with family": "Con la famiglia", "Other housing": "Altro", "Select debt type": "Seleziona", "Consumer loan": "Prestito personale", "Credit card debt": "Debito carta di credito", "Mortgage arrears": "Arretrati mutuo", "Student loan": "Prestito studentesco", "Tax debt": "Debito fiscale", "Medical debt": "Debito medico", "Business debt": "Debito aziendale", "Multiple types": "Più tipi", "Select range": "Seleziona", "Under 1,000": "Meno di 1.000", "1,000 – 5,000": "1.000 – 5.000", "5,000 – 15,000": "5.000 – 15.000", "15,000 – 50,000": "15.000 – 50.000", "50,000 – 100,000": "50.000 – 100.000", "100,000 – 250,000": "100.000 – 250.000", "Over 250,000": "Oltre 250.000", "Select count": "Seleziona", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 o più"}};
+T['PL'] = {...T.EN, ...langOverrides['PL'], btn_back:"← Wstecz", btn_next:"Kontynuuj →", opts: {"Over-indebted": "Nadmierne zadłużenie", "Unemployed / lost income": "Bezrobotny / utrata dochodów", "Divorce / separation": "Rozwód / separacja", "Illness / sick leave": "Choroba / zwolnienie lekarskie", "Business failure": "Upadłość firmy", "Other life change": "Inna zmiana życiowa", "Yes — enforcement / bailiff": "Tak — komornik", "Yes — collections agency": "Tak — firma windykacyjna", "No": "Nie", "I don't know": "Nie wiem", "None at all": "Żadnych", "Under 500": "Poniżej 500", "500 – 2,000": "500 – 2 000", "Over 2,000": "Powyżej 2 000", "Don't know where to start": "Nie wiem od czego zacząć", "Fear of contacting creditors": "Strach przed kontaktem z wierzycielami", "Shame or stigma": "Wstyd / stygmat", "Stress and exhaustion": "Stres i wyczerpanie", "Feels hopeless": "Wydaje się beznadziejne", "No time": "Brak czasu", "Looking for work": "Szukam pracy", "Recently got a job": "Niedawno znalazłem pracę", "Considering career change": "Rozważam zmianę kariery", "Family to support": "Rodzina na utrzymaniu", "Health challenges": "Problemy zdrowotne", "Things are otherwise stable": "Poza tym wszystko stabilne", "Yes — keep me on track": "Tak — trzymaj mnie na kursie", "Not right now": "Nie teraz"}, sel: {"Select country": "Wybierz kraj", "Select employment": "Wybierz", "Employed full-time": "Zatrudniony na pełen etat", "Employed part-time": "Zatrudniony na część etatu", "Self-employed / freelancer / business owner": "Samozatrudniony / freelancer / przedsiębiorca", "Unemployed": "Bezrobotny", "Student": "Student", "Retired": "Emeryt", "On sick leave": "Na zwolnieniu lekarskim", "On parental leave": "Na urlopie rodzicielskim", "Select household": "Wybierz", "Single, no children": "Singiel, bez dzieci", "Single parent with children": "Samotny rodzic", "Couple, no children": "Para, bez dzieci", "Couple with children": "Para z dziećmi", "Other household": "Inne", "Select children": "Wybierz", "0 — no minor children at home": "0 — bez nieletnich dzieci w domu", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 lub więcej", "Select housing": "Wybierz", "Renting": "Wynajmuję", "Owner with mortgage": "Właściciel z kredytem", "Owner, no mortgage": "Właściciel bez kredytu", "Living with family": "Mieszkam z rodziną", "Other housing": "Inne", "Select debt type": "Wybierz", "Consumer loan": "Kredyt konsumencki", "Credit card debt": "Dług na karcie kredytowej", "Mortgage arrears": "Zaległości hipoteczne", "Student loan": "Kredyt studencki", "Tax debt": "Dług podatkowy", "Medical debt": "Dług medyczny", "Business debt": "Dług firmowy", "Multiple types": "Wiele typów", "Select range": "Wybierz zakres", "Under 1,000": "Poniżej 1 000", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "Powyżej 250 000", "Select count": "Wybierz", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 lub więcej"}};
+T['PT'] = {...T.EN, ...langOverrides['PT'], btn_back:"← Voltar", btn_next:"Continuar →", opts: {"Over-indebted": "Superendividado", "Unemployed / lost income": "Desempregado / renda perdida", "Divorce / separation": "Divórcio / separação", "Illness / sick leave": "Doença / licença médica", "Business failure": "Falência empresarial", "Other life change": "Outra mudança de vida", "Yes — enforcement / bailiff": "Sim — execução judicial", "Yes — collections agency": "Sim — agência de cobrança", "No": "Não", "I don't know": "Não sei", "None at all": "Nenhuma", "Under 500": "Menos de 500", "500 – 2,000": "500 – 2.000", "Over 2,000": "Mais de 2.000", "Don't know where to start": "Não sei por onde começar", "Fear of contacting creditors": "Medo de contactar credores", "Shame or stigma": "Vergonha / estigma", "Stress and exhaustion": "Stresse e exaustão", "Feels hopeless": "Parece sem esperança", "No time": "Sem tempo", "Looking for work": "Procuro trabalho", "Recently got a job": "Encontrei emprego recentemente", "Considering career change": "Considero mudança de carreira", "Family to support": "Família para sustentar", "Health challenges": "Desafios de saúde", "Things are otherwise stable": "De resto tudo estável", "Yes — keep me on track": "Sim — mantenha-me no caminho", "Not right now": "Agora não"}, sel: {"Select country": "Selecionar país", "Select employment": "Selecionar", "Employed full-time": "Empregado a tempo inteiro", "Employed part-time": "Empregado a tempo parcial", "Self-employed / freelancer / business owner": "Independente / freelancer / empresário", "Unemployed": "Desempregado", "Student": "Estudante", "Retired": "Reformado", "On sick leave": "De baixa médica", "On parental leave": "Licença parental", "Select household": "Selecionar", "Single, no children": "Solteiro, sem filhos", "Single parent with children": "Pai/mãe solteiro", "Couple, no children": "Casal, sem filhos", "Couple with children": "Casal com filhos", "Other household": "Outro", "Select children": "Selecionar", "0 — no minor children at home": "0 — sem menores em casa", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 ou mais", "Select housing": "Selecionar", "Renting": "A arrendar", "Owner with mortgage": "Proprietário com hipoteca", "Owner, no mortgage": "Proprietário sem hipoteca", "Living with family": "Com família", "Other housing": "Outro", "Select debt type": "Selecionar", "Consumer loan": "Empréstimo pessoal", "Credit card debt": "Dívida de cartão", "Mortgage arrears": "Atrasos hipotecários", "Student loan": "Empréstimo estudantil", "Tax debt": "Dívida fiscal", "Medical debt": "Dívida médica", "Business debt": "Dívida empresarial", "Multiple types": "Vários tipos", "Select range": "Selecionar", "Under 1,000": "Menos de 1.000", "1,000 – 5,000": "1.000 – 5.000", "5,000 – 15,000": "5.000 – 15.000", "15,000 – 50,000": "15.000 – 50.000", "50,000 – 100,000": "50.000 – 100.000", "100,000 – 250,000": "100.000 – 250.000", "Over 250,000": "Mais de 250.000", "Select count": "Selecionar", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 ou mais"}};
+T['CS'] = {...T.EN, ...langOverrides['CS'], btn_back:"← Zpět", btn_next:"Pokračovat →", opts: {"Over-indebted": "Předlužen", "Unemployed / lost income": "Nezaměstnaný / ztráta příjmu", "Divorce / separation": "Rozvod / rozchod", "Illness / sick leave": "Nemoc / nemocenská", "Business failure": "Úpadek podnikání", "Other life change": "Jiná životní změna", "Yes — enforcement / bailiff": "Ano — exekutor", "Yes — collections agency": "Ano — inkasní agentura", "No": "Ne", "I don't know": "Nevím", "None at all": "Žádné", "Under 500": "Pod 500", "500 – 2,000": "500 – 2 000", "Over 2,000": "Nad 2 000", "Don't know where to start": "Nevím kde začít", "Fear of contacting creditors": "Strach kontaktovat věřitele", "Shame or stigma": "Stud / stigma", "Stress and exhaustion": "Stres a vyčerpání", "Feels hopeless": "Zdá se beznadějné", "No time": "Nemám čas", "Looking for work": "Hledám práci", "Recently got a job": "Nedávno jsem našel práci", "Considering career change": "Uvažuji o změně kariéry", "Family to support": "Rodina na živobytí", "Health challenges": "Zdravotní problémy", "Things are otherwise stable": "Jinak je vše stabilní", "Yes — keep me on track": "Ano — držte mě na kurzu", "Not right now": "Teď ne"}, sel: {"Select country": "Vyberte zemi", "Select employment": "Vyberte", "Employed full-time": "Zaměstnanec na plný úvazek", "Employed part-time": "Zaměstnanec na částečný úvazek", "Self-employed / freelancer / business owner": "OSVČ / freelancer / podnikatel", "Unemployed": "Nezaměstnaný", "Student": "Student", "Retired": "Důchodce", "On sick leave": "Na nemocenské", "On parental leave": "Na rodičovské dovolené", "Select household": "Vyberte", "Single, no children": "Svobodný, bez dětí", "Single parent with children": "Samoživitel", "Couple, no children": "Pár, bez dětí", "Couple with children": "Pár s dětmi", "Other household": "Jiné", "Select children": "Vyberte", "0 — no minor children at home": "0 — žádné nezletilé děti doma", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 nebo více", "Select housing": "Vyberte", "Renting": "Nájemník", "Owner with mortgage": "Vlastník s hypotékou", "Owner, no mortgage": "Vlastník bez hypotéky", "Living with family": "Bydlím s rodinou", "Other housing": "Jiné", "Select debt type": "Vyberte", "Consumer loan": "Spotřebitelský úvěr", "Credit card debt": "Dluh na kreditní kartě", "Mortgage arrears": "Nedoplatky na hypotéce", "Student loan": "Studentský úvěr", "Tax debt": "Daňový dluh", "Medical debt": "Zdravotní dluh", "Business debt": "Firemní dluh", "Multiple types": "Více typů", "Select range": "Vyberte", "Under 1,000": "Pod 1 000", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "Nad 250 000", "Select count": "Vyberte", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 nebo více"}};
+T['ET'] = {...T.EN, ...langOverrides['ET'], btn_back:"← Tagasi", btn_next:"Jätka →", opts: {"Over-indebted": "Ülekoormatud võlgadega", "Unemployed / lost income": "Töötu / sissetulek kadunud", "Divorce / separation": "Lahutus / lahkuminek", "Illness / sick leave": "Haigus / haiguslehel", "Business failure": "Ettevõtte pankrot", "Other life change": "Muu eluline muutus", "Yes — enforcement / bailiff": "Jah — kohtutäitur", "Yes — collections agency": "Jah — inkassofirma", "No": "Ei", "I don't know": "Ei tea", "None at all": "Üldse mitte", "Under 500": "Alla 500", "500 – 2,000": "500 – 2 000", "Over 2,000": "Üle 2 000", "Don't know where to start": "Ei tea kust alustada", "Fear of contacting creditors": "Hirm võlausaldajatega ühendust võtta", "Shame or stigma": "Häbi / stigma", "Stress and exhaustion": "Stress ja kurnatus", "Feels hopeless": "Tundub lootusetu", "No time": "Pole aega", "Looking for work": "Otsin tööd", "Recently got a job": "Leidsin hiljuti töö", "Considering career change": "Kaalun karjäärimuutust", "Family to support": "Pere ülalpidamine", "Health challenges": "Terviseprobleemid", "Things are otherwise stable": "Muidu on kõik stabiilne", "Yes — keep me on track": "Jah — hoidke mind rajal", "Not right now": "Mitte praegu"}, sel: {"Select country": "Vali riik", "Select employment": "Vali", "Employed full-time": "Täiskohaga töötaja", "Employed part-time": "Osalise koormusega töötaja", "Self-employed / freelancer / business owner": "FIE / vabakutseline / ettevõtja", "Unemployed": "Töötu", "Student": "Üliõpilane", "Retired": "Pensionär", "On sick leave": "Haiguslehel", "On parental leave": "Lapsehoolduspuhkusel", "Select household": "Vali", "Single, no children": "Üksik, ilma lasteta", "Single parent with children": "Üksikvanem", "Couple, no children": "Paar, ilma lasteta", "Couple with children": "Paar lastega", "Other household": "Muu", "Select children": "Vali", "0 — no minor children at home": "0 — kodus pole alaealiseid lapsi", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 või rohkem", "Select housing": "Vali", "Renting": "Üürnik", "Owner with mortgage": "Omanik laenuga", "Owner, no mortgage": "Omanik ilma laenuta", "Living with family": "Elan perega", "Other housing": "Muu", "Select debt type": "Vali", "Consumer loan": "Tarbimislaen", "Credit card debt": "Krediitkaardi võlg", "Mortgage arrears": "Hüpoteegi võlgnevus", "Student loan": "Õppelaen", "Tax debt": "Maksuvõlg", "Medical debt": "Ravikulude võlg", "Business debt": "Ettevõtte võlg", "Multiple types": "Mitu tüüpi", "Select range": "Vali", "Under 1,000": "Alla 1 000", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "Üle 250 000", "Select count": "Vali", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 või rohkem"}};
+T['LV'] = {...T.EN, ...langOverrides['LV'], btn_back:"← Atpakaļ", btn_next:"Turpināt →", opts: {"Over-indebted": "Pārmērīgi parādos", "Unemployed / lost income": "Bezdarbnieks / zaudēti ienākumi", "Divorce / separation": "Šķiršanās / atdalīšanās", "Illness / sick leave": "Slimība / slimības lapa", "Business failure": "Uzņēmuma bankrots", "Other life change": "Citas dzīves pārmaiņas", "Yes — enforcement / bailiff": "Jā — tiesu izpildītājs", "Yes — collections agency": "Jā — parādu piedziņas aģentūra", "No": "Nē", "I don't know": "Nezinu", "None at all": "Nekādu", "Under 500": "Mazāk par 500", "500 – 2,000": "500 – 2 000", "Over 2,000": "Vairāk par 2 000", "Don't know where to start": "Nezinu kur sākt", "Fear of contacting creditors": "Bailes sazināties ar kreditoriem", "Shame or stigma": "Kauns / stigma", "Stress and exhaustion": "Stress un izsīkums", "Feels hopeless": "Šķiet bezcerīgi", "No time": "Nav laika", "Looking for work": "Meklēju darbu", "Recently got a job": "Nesen atradu darbu", "Considering career change": "Apsverot karjeras maiņu", "Family to support": "Ģimene jāuztur", "Health challenges": "Veselības problēmas", "Things are otherwise stable": "Citādi viss ir stabili", "Yes — keep me on track": "Jā — turiet mani uz pareizā ceļa", "Not right now": "Ne tagad"}, sel: {"Select country": "Izvēlēties valsti", "Select employment": "Izvēlēties", "Employed full-time": "Pilna laika darbinieks", "Employed part-time": "Nepilna laika darbinieks", "Self-employed / freelancer / business owner": "Pašnodarbinātais / frilanceris / uzņēmējs", "Unemployed": "Bezdarbnieks", "Student": "Students", "Retired": "Pensionārs", "On sick leave": "Slimības lapā", "On parental leave": "Bērna kopšanas atvaļinājumā", "Select household": "Izvēlēties", "Single, no children": "Vientuļš, bez bērniem", "Single parent with children": "Vientuļais vecāks", "Couple, no children": "Pāris, bez bērniem", "Couple with children": "Pāris ar bērniem", "Other household": "Cits", "Select children": "Izvēlēties", "0 — no minor children at home": "0 — mājās nav nepilngadīgu bērnu", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 vai vairāk", "Select housing": "Izvēlēties", "Renting": "Īrnieks", "Owner with mortgage": "Īpašnieks ar hipotēku", "Owner, no mortgage": "Īpašnieks bez hipotēkas", "Living with family": "Dzīvoju ar ģimeni", "Other housing": "Cits", "Select debt type": "Izvēlēties", "Consumer loan": "Patēriņa kredīts", "Credit card debt": "Kredītkartes parāds", "Mortgage arrears": "Hipotēkas parāds", "Student loan": "Studenta kredīts", "Tax debt": "Nodokļu parāds", "Medical debt": "Medicīnas parāds", "Business debt": "Uzņēmuma parāds", "Multiple types": "Vairāki veidi", "Select range": "Izvēlēties", "Under 1,000": "Mazāk par 1 000", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "Vairāk par 250 000", "Select count": "Izvēlēties", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 vai vairāk"}};
+T['LT'] = {...T.EN, ...langOverrides['LT'], btn_back:"← Atgal", btn_next:"Tęsti →", opts: {"Over-indebted": "Pernelyg įsiskolinęs", "Unemployed / lost income": "Bedarbis / prarastos pajamos", "Divorce / separation": "Skyrybos / išsiskyrimas", "Illness / sick leave": "Liga / nedarbingumas", "Business failure": "Verslo bankrotas", "Other life change": "Kitas gyvenimo pokytis", "Yes — enforcement / bailiff": "Taip — antstolis", "Yes — collections agency": "Taip — skolų išieškojimo įmonė", "No": "Ne", "I don't know": "Nežinau", "None at all": "Visiškai jokių", "Under 500": "Mažiau nei 500", "500 – 2,000": "500 – 2 000", "Over 2,000": "Daugiau nei 2 000", "Don't know where to start": "Nežinau nuo ko pradėti", "Fear of contacting creditors": "Baimė kreiptis į kreditorius", "Shame or stigma": "Gėda / stigma", "Stress and exhaustion": "Stresas ir išsekimas", "Feels hopeless": "Atrodo beviltiška", "No time": "Nėra laiko", "Looking for work": "Ieškau darbo", "Recently got a job": "Neseniai radau darbą", "Considering career change": "Svarstau karjeros keitimą", "Family to support": "Šeima išlaikymui", "Health challenges": "Sveikatos problemos", "Things are otherwise stable": "Kitaip viskas stabilu", "Yes — keep me on track": "Taip — laikykite mane kelyje", "Not right now": "Ne dabar"}, sel: {"Select country": "Pasirinkite šalį", "Select employment": "Pasirinkti", "Employed full-time": "Dirbantis visą darbo dieną", "Employed part-time": "Dirbantis ne visą dieną", "Self-employed / freelancer / business owner": "Savarankiškai dirbantis / laisvai samdomas / verslininkas", "Unemployed": "Bedarbis", "Student": "Studentas", "Retired": "Pensininkas", "On sick leave": "Nedarbingumo atostogose", "On parental leave": "Tėvystės atostogose", "Select household": "Pasirinkti", "Single, no children": "Vienas, be vaikų", "Single parent with children": "Vienas iš tėvų", "Couple, no children": "Pora, be vaikų", "Couple with children": "Pora su vaikais", "Other household": "Kita", "Select children": "Pasirinkti", "0 — no minor children at home": "0 — namuose nėra nepilnamečių", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 ar daugiau", "Select housing": "Pasirinkti", "Renting": "Nuomininkas", "Owner with mortgage": "Savininkas su paskola", "Owner, no mortgage": "Savininkas be paskolos", "Living with family": "Gyvenu su šeima", "Other housing": "Kita", "Select debt type": "Pasirinkti", "Consumer loan": "Vartojimo paskola", "Credit card debt": "Kredito kortelės skola", "Mortgage arrears": "Hipotekos skola", "Student loan": "Studijų paskola", "Tax debt": "Mokesčių skola", "Medical debt": "Medicinos skola", "Business debt": "Verslo skola", "Multiple types": "Keli tipai", "Select range": "Pasirinkti", "Under 1,000": "Mažiau nei 1 000", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "Daugiau nei 250 000", "Select count": "Pasirinkti", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 ar daugiau"}};
+T['HU'] = {...T.EN, ...langOverrides['HU'], btn_back:"← Vissza", btn_next:"Tovább →", opts: {"Over-indebted": "Túlzott eladósodottság", "Unemployed / lost income": "Munkanélküli / elveszett jövedelem", "Divorce / separation": "Válás / különélés", "Illness / sick leave": "Betegség / betegszabadság", "Business failure": "Vállalkozás csődje", "Other life change": "Egyéb életváltozás", "Yes — enforcement / bailiff": "Igen — végrehajtó", "Yes — collections agency": "Igen — behajtó cég", "No": "Nem", "I don't know": "Nem tudom", "None at all": "Egyáltalán semmi", "Under 500": "500 alatt", "500 – 2,000": "500 – 2 000", "Over 2,000": "2 000 felett", "Don't know where to start": "Nem tudom hol kezdjem", "Fear of contacting creditors": "Félek felvenni a kapcsolatot a hitelezőkkel", "Shame or stigma": "Szégyen / stigma", "Stress and exhaustion": "Stressz és kimerültség", "Feels hopeless": "Reménytelennek tűnik", "No time": "Nincs időm", "Looking for work": "Munkát keresek", "Recently got a job": "Nemrég munkát találtam", "Considering career change": "Pályamódosítást fontolgatom", "Family to support": "Eltartandó család", "Health challenges": "Egészségügyi kihívások", "Things are otherwise stable": "Egyébként minden stabil", "Yes — keep me on track": "Igen — tartsatok pályán", "Not right now": "Most nem"}, sel: {"Select country": "Válasszon országot", "Select employment": "Kiválaszt", "Employed full-time": "Teljes munkaidős alkalmazott", "Employed part-time": "Részmunkaidős alkalmazott", "Self-employed / freelancer / business owner": "Önfoglalkoztató / szabadúszó / vállalkozó", "Unemployed": "Munkanélküli", "Student": "Diák", "Retired": "Nyugdíjas", "On sick leave": "Betegszabadságon", "On parental leave": "Szülői szabadságon", "Select household": "Kiválaszt", "Single, no children": "Egyedülálló, gyermek nélkül", "Single parent with children": "Egyedülálló szülő", "Couple, no children": "Pár, gyermek nélkül", "Couple with children": "Pár gyermekkel", "Other household": "Egyéb", "Select children": "Kiválaszt", "0 — no minor children at home": "0 — nincs kiskorú gyermek otthon", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 vagy több", "Select housing": "Kiválaszt", "Renting": "Bérlő", "Owner with mortgage": "Tulajdonos jelzáloggal", "Owner, no mortgage": "Tulajdonos jelzálog nélkül", "Living with family": "Családdal élek", "Other housing": "Egyéb", "Select debt type": "Kiválaszt", "Consumer loan": "Fogyasztási hitel", "Credit card debt": "Hitelkártya adósság", "Mortgage arrears": "Jelzálog hátralék", "Student loan": "Diákhitel", "Tax debt": "Adótartozás", "Medical debt": "Egészségügyi tartozás", "Business debt": "Vállalkozói adósság", "Multiple types": "Több típus", "Select range": "Kiválaszt", "Under 1,000": "1 000 alatt", "1,000 – 5,000": "1 000 – 5 000", "5,000 – 15,000": "5 000 – 15 000", "15,000 – 50,000": "15 000 – 50 000", "50,000 – 100,000": "50 000 – 100 000", "100,000 – 250,000": "100 000 – 250 000", "Over 250,000": "250 000 felett", "Select count": "Kiválaszt", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 vagy több"}};
+T['RO'] = {...T.EN, ...langOverrides['RO'], btn_back:"← Înapoi", btn_next:"Continuați →", opts: {"Over-indebted": "Supraîndatorat", "Unemployed / lost income": "Șomer / venituri pierdute", "Divorce / separation": "Divorț / separare", "Illness / sick leave": "Boală / concediu medical", "Business failure": "Faliment afacere", "Other life change": "Altă schimbare de viață", "Yes — enforcement / bailiff": "Da — executor judecătoresc", "Yes — collections agency": "Da — agenție de recuperare", "No": "Nu", "I don't know": "Nu știu", "None at all": "Deloc", "Under 500": "Sub 500", "500 – 2,000": "500 – 2.000", "Over 2,000": "Peste 2.000", "Don't know where to start": "Nu știu de unde să încep", "Fear of contacting creditors": "Frică de a contacta creditorii", "Shame or stigma": "Rușine / stigmat", "Stress and exhaustion": "Stres și epuizare", "Feels hopeless": "Pare fără speranță", "No time": "Nu am timp", "Looking for work": "Caut un loc de muncă", "Recently got a job": "Am găsit recent un loc de muncă", "Considering career change": "Iau în considerare o schimbare de carieră", "Family to support": "Familie de întreținut", "Health challenges": "Provocări de sănătate", "Things are otherwise stable": "Altfel totul este stabil", "Yes — keep me on track": "Da — țineti-mă pe drumul cel bun", "Not right now": "Nu acum"}, sel: {"Select country": "Selectați țara", "Select employment": "Selectați", "Employed full-time": "Angajat cu normă întreagă", "Employed part-time": "Angajat cu jumătate de normă", "Self-employed / freelancer / business owner": "Independent / freelancer / antreprenor", "Unemployed": "Șomer", "Student": "Student", "Retired": "Pensionar", "On sick leave": "În concediu medical", "On parental leave": "În concediu parental", "Select household": "Selectați", "Single, no children": "Singur, fără copii", "Single parent with children": "Părinte singur", "Couple, no children": "Cuplu, fără copii", "Couple with children": "Cuplu cu copii", "Other household": "Altul", "Select children": "Selectați", "0 — no minor children at home": "0 — fără minori acasă", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 sau mai mult", "Select housing": "Selectați", "Renting": "Chiriaș", "Owner with mortgage": "Proprietar cu ipotecă", "Owner, no mortgage": "Proprietar fără ipotecă", "Living with family": "Cu familia", "Other housing": "Altul", "Select debt type": "Selectați", "Consumer loan": "Credit de consum", "Credit card debt": "Datorie card de credit", "Mortgage arrears": "Restanțe ipotecare", "Student loan": "Împrumut studențesc", "Tax debt": "Datorie fiscală", "Medical debt": "Datorie medicală", "Business debt": "Datorie de afaceri", "Multiple types": "Mai multe tipuri", "Select range": "Selectați", "Under 1,000": "Sub 1.000", "1,000 – 5,000": "1.000 – 5.000", "5,000 – 15,000": "5.000 – 15.000", "15,000 – 50,000": "15.000 – 50.000", "50,000 – 100,000": "50.000 – 100.000", "100,000 – 250,000": "100.000 – 250.000", "Over 250,000": "Peste 250.000", "Select count": "Selectați", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 sau mai mult"}};
+T['HR'] = {...T.EN, ...langOverrides['HR'], btn_back:"← Natrag", btn_next:"Nastavi →", opts: {"Over-indebted": "Prezadužen", "Unemployed / lost income": "Nezaposlen / izgubio prihode", "Divorce / separation": "Razvod / rastava", "Illness / sick leave": "Bolest / bolovanje", "Business failure": "Stečaj tvrtke", "Other life change": "Druga životna promjena", "Yes — enforcement / bailiff": "Da — ovršni postupak", "Yes — collections agency": "Da — agencija za naplatu", "No": "Ne", "I don't know": "Ne znam", "None at all": "Nikakvih", "Under 500": "Ispod 500", "500 – 2,000": "500 – 2.000", "Over 2,000": "Iznad 2.000", "Don't know where to start": "Ne znam odakle početi", "Fear of contacting creditors": "Strah od kontaktiranja vjerovnika", "Shame or stigma": "Sram / stigma", "Stress and exhaustion": "Stres i iscrpljenost", "Feels hopeless": "Čini se beznadnim", "No time": "Nema vremena", "Looking for work": "Tražim posao", "Recently got a job": "Nedavno sam našao posao", "Considering career change": "Razmatram promjenu karijere", "Family to support": "Obitelj za uzdržavanje", "Health challenges": "Zdravstveni izazovi", "Things are otherwise stable": "Inače je sve stabilno", "Yes — keep me on track": "Da — drži me na putu", "Not right now": "Ne sada"}, sel: {"Select country": "Odaberi zemlju", "Select employment": "Odaberi", "Employed full-time": "Zaposlen puno radno vrijeme", "Employed part-time": "Zaposlen nepuno radno vrijeme", "Self-employed / freelancer / business owner": "Samozaposlen / freelancer / poduzetnik", "Unemployed": "Nezaposlen", "Student": "Student", "Retired": "Umirovljenik", "On sick leave": "Na bolovanju", "On parental leave": "Na roditeljskom dopustu", "Select household": "Odaberi", "Single, no children": "Samac, bez djece", "Single parent with children": "Samohrani roditelj", "Couple, no children": "Par, bez djece", "Couple with children": "Par s djecom", "Other household": "Ostalo", "Select children": "Odaberi", "0 — no minor children at home": "0 — nema maloljetne djece kod kuće", "1 child": "1", "2 children": "2", "3 children": "3", "4 children": "4", "5 or more children": "5 ili više", "Select housing": "Odaberi", "Renting": "Najamnik", "Owner with mortgage": "Vlasnik s hipotekom", "Owner, no mortgage": "Vlasnik bez hipoteke", "Living with family": "Živim s obitelji", "Other housing": "Ostalo", "Select debt type": "Odaberi", "Consumer loan": "Potrošački kredit", "Credit card debt": "Dug na kreditnoj kartici", "Mortgage arrears": "Zaostaci hipoteke", "Student loan": "Studentski kredit", "Tax debt": "Porezni dug", "Medical debt": "Medicinski dug", "Business debt": "Poslovni dug", "Multiple types": "Više vrsta", "Select range": "Odaberi", "Under 1,000": "Ispod 1.000", "1,000 – 5,000": "1.000 – 5.000", "5,000 – 15,000": "5.000 – 15.000", "15,000 – 50,000": "15.000 – 50.000", "50,000 – 100,000": "50.000 – 100.000", "100,000 – 250,000": "100.000 – 250.000", "Over 250,000": "Iznad 250.000", "Select count": "Odaberi", "1 debt": "1", "2 – 3 debts": "2 – 3", "4 – 6 debts": "4 – 6", "7 or more debts": "7 ili više"}};
+
+
+let currentLang = 'EN';
+let formData = {};
+let multiSelects = { situation: [], life: [] };
+
+function setLanguage(lang) {
+  currentLang = lang;
+  const t = T[lang] || T.EN;
+
+  // 1. Label elements by id
+  Object.keys(t).forEach(k => {
+    if (typeof t[k] !== 'object') {
+      const el = document.getElementById(k);
+      if (el) el.textContent = t[k];
+    }
+  });
+  const submitEl = document.getElementById('submitText');
+  if (submitEl && t.submit) submitEl.textContent = t.submit;
+
+  // 2. opt-btn labels via data-t
+  document.querySelectorAll('.opt-btn [data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    el.textContent = (t.opts && t.opts[key]) ? t.opts[key] : key;
+  });
+
+  // 3. Select options via data-t
+  document.querySelectorAll('select option[data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    el.textContent = (t.sel && t.sel[key]) ? t.sel[key] : key;
+  });
+
+  // 4. Nav buttons
+  ['btn_back2','btn_back3','btn_back4'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && t.btn_back) el.textContent = t.btn_back;
+  });
+  ['btn_next1','btn_next2','btn_next3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && t.btn_next) el.textContent = t.btn_next;
+  });
+}
+
+function saveCurrency(val) {
+  formData.currency = val;
+  // Update all currency hints throughout the form
+  document.querySelectorAll('.currency-symbol').forEach(el => el.textContent = val);
+}
+
+function selectOpt(btn, field) {
+  const group = btn.closest('.options');
+  group.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  formData[field] = btn.querySelector('[data-t]')?.getAttribute('data-t') || btn.textContent.trim();
+}
+
+function toggleMulti(btn, field) {
+  btn.classList.toggle('selected');
+  const val = btn.querySelector('[data-t]')?.getAttribute('data-t') || btn.textContent.trim();
+  if (!multiSelects[field]) multiSelects[field] = [];
+  if (btn.classList.contains('selected')) {
+    if (!multiSelects[field].includes(val)) multiSelects[field].push(val);
+  } else {
+    multiSelects[field] = multiSelects[field].filter(v => v !== val);
+  }
+}
+
+function goNext(block) {
+  if (!validateBlock(block)) return;
+  collectBlock(block);
+  showBlock(block + 1);
+}
+
+function goBack(block) { showBlock(block - 1); }
+
+function showBlock(num) {
+  document.querySelectorAll('.block').forEach(b => b.classList.remove('active'));
+  document.getElementById('block' + num)?.classList.add('active');
+  const pcts = {1:25, 2:50, 3:75, 4:100};
+  document.getElementById('progressFill').style.width = (pcts[num] || 100) + '%';
+  const t = T[currentLang] || T.EN;
+  document.getElementById('stepLabel').textContent = `${t.step||'Step'} ${num} ${t.of||'of'} 4`;
+  ['pl1','pl2','pl3','pl4'].forEach((id,i) => {
+    document.getElementById(id)?.classList.toggle('active', i < num);
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function validateBlock(block) {
+  const required = {
+    1: ['f_firstname','f_email','f_language','f_country'],
+    2: ['f_employment','f_household','f_children','f_housing','f_debt_type','f_debt_total','f_debt_count','f_interest'],
+    3: ['f_income_amount','f_housing_cost','f_other_costs','f_debt_payment']
+  };
+  const optRequired = { 2: ['collections'], 3: ['savings'] };
+  let ok = true;
+  (required[block]||[]).forEach(id => {
+    const el = document.getElementById(id);
+    if (!el || !el.value.trim()) { el?.style.setProperty('border-color','#dc2626'); ok = false; }
+    else { el.style.borderColor = ''; }
+  });
+  (optRequired[block]||[]).forEach(field => { if (!formData[field]) ok = false; });
+  if (block === 1 && multiSelects.situation.length === 0) ok = false;
+  return ok;
+}
+
+function collectBlock(block) {
+  const ids = {
+    1: ['f_firstname','f_email','f_language','f_country'],
+    2: ['f_employment','f_household','f_children','f_housing','f_debt_type','f_debt_total','f_debt_count','f_interest'],
+    3: ['f_income_amount','f_currency','f_housing_cost','f_other_costs','f_debt_payment']
+  };
+  (ids[block]||[]).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) formData[id.replace('f_','')] = el.value;
+  });
+  if (block === 1) formData.situation = multiSelects.situation.join(', ');
+}
+
+async function submitForm() {
+  formData.barrier = formData.barrier || '';
+  formData.life_situation = multiSelects.life.join(', ') || 'not specified';
+  formData.reminder = formData.reminder || 'Yes';
+  formData.currency = formData.currency || document.getElementById('f_currency').value || 'EUR';
+  formData.language = document.getElementById('f_language').value;
+
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('block4').classList.remove('active');
+  document.getElementById('loadingWrap').classList.add('show');
+
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id') || 'direct';
+
+  try {
+    const res = await fetch(`${WORKER_URL}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2500,
+        messages: [{ role: 'user', content: buildPrompt(formData) }]
+      })
+    });
+    const data = await res.json();
+    const plan = data.content?.[0]?.text || '';
+
+    await fetch(`${WORKER_URL}/onboarding/save`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId, email: formData.email, plan, onboarding: formData })
+    });
+
+    window.location.replace(
+      `https://www.debt-free.world/member/?email=${encodeURIComponent(formData.email)}`
+    );
+  } catch(e) {
+    document.getElementById('loadingWrap').classList.remove('show');
+    document.getElementById('block4').classList.add('active');
+    document.getElementById('submitBtn').disabled = false;
+    alert('Something went wrong. Please try again or contact support@debt-free.world');
+  }
+}
+
+function buildPrompt(d) {
+  const cur = d.currency || 'EUR';
+  return `You are a compassionate but direct financial recovery coach. Write a personalised 90-day Debt Recovery plan in ${getLanguageName(d.language)}.
+
+USER PROFILE:
+- Name: ${d.firstname}
+- Country: ${d.country}
+- Situation(s): ${d.situation}
+- Employment: ${d.employment}
+- Household: ${d.household}
+- Minor children at home: ${d.children}
+- Housing: ${d.housing} (cost: ${d.housing_cost} ${cur}/month)
+- Primary debt type: ${d.debt_type}
+- Total debt: ${d.debt_total} ${cur}
+- Number of debts: ${d.debt_count}
+- Interest rate: ${d.interest}%
+- Monthly net income: ${d.income_amount} ${cur}
+- Other fixed costs: ${d.other_costs} ${cur}/month
+- Current debt payment: ${d.debt_payment} ${cur}/month
+- Savings/buffer: ${d.savings} ${cur}
+- Collections/enforcement: ${d.collections}
+- Biggest barrier: ${d.barrier}
+- Life situation: ${d.life_situation}
+- Monthly reminders: ${d.reminder}
+- Currency: ${cur}
+
+CALCULATION:
+Available for debt repayment = income - housing cost - other costs - current debt payment
+Show this calculation explicitly.
+
+INSTRUCTIONS:
+1. Address ${d.firstname} directly, warmly but firmly.
+2. Calculate available monthly surplus.
+3. Show THREE scenarios (use ${cur} throughout):
+   SCENARIO A — "With this plan": projected debt-free date with optimised payments
+   SCENARIO B — "Without changes": projected date at current pace
+   SCENARIO C — "The honest truth": if goal is mathematically unrealistic, say so clearly but compassionately. Show exactly how many months/years faster they can be vs doing nothing.
+4. Give 5 concrete action steps for the FIRST 7 DAYS — specific to their debt type, country (${d.country}), and situation.
+5. If debt is in collections or enforcement, make step 1 specifically address that immediately.
+6. If children at home: acknowledge this context in the plan.
+7. Mention 2-3 specific country resources for ${d.country}.
+8. End with one sentence in brand voice: warm, honest, direct. "We do this together ✦"
+9. Format with clear headers. Max 600 words. Write entirely in ${getLanguageName(d.language)}.`;
+}
+
+function getLanguageName(code) {
+  const n = {EN:'English',FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',ES:'Spanish',FR:'French',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
+  return n[code] || 'English';
+}
+
+window.addEventListener('load', () => {
+  formData.reminder = 'Yes';
+  formData.currency = 'EUR';
+});
+</script>
+</body>
+</html>
