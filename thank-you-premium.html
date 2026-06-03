@@ -3,356 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Debt Recovery — Debt-Free.world</title>
+  <title>Payment Confirmed — Debt-Free.world</title>
   <meta name="robots" content="noindex, nofollow">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --green-dark:  #14532d;
-      --green:       #166534;
-      --green-mid:   #15803d;
-      --green-light: #dcfce7;
-      --green-pale:  #f0fdf4;
-      --gold:        #d97706;
-      --gold-light:  #fef3c7;
-      --gray-900:    #111827;
-      --gray-700:    #374151;
-      --gray-500:    #6b7280;
-      --gray-300:    #d1d5db;
-      --gray-100:    #f3f4f6;
-      --white:       #ffffff;
+      --green-dark: #14532d;
+      --green:      #166534;
+      --green-light:#dcfce7;
+      --green-pale: #f0fdf4;
+      --gray-900:   #111827;
+      --gray-700:   #374151;
+      --gray-500:   #6b7280;
+      --gray-300:   #d1d5db;
+      --gray-100:   #f3f4f6;
+      --white:      #ffffff;
     }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'DM Sans',sans-serif; background:var(--green-pale); color:var(--gray-900); min-height:100vh; display:flex; flex-direction:column; }
+    .header { background:var(--white); border-bottom:1px solid var(--gray-300); padding:16px 24px; text-align:center; }
+    .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green); text-decoration:none; }
+    .main { flex:1; display:flex; align-items:center; justify-content:center; padding:40px 20px; }
+    .card { background:var(--white); border-radius:24px; padding:48px 40px; max-width:560px; width:100%; box-shadow:0 8px 48px rgba(22,101,52,0.10); text-align:center; }
+    .success-icon { width:72px; height:72px; background:var(--green-light); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:32px; }
+    h1 { font-family:'DM Serif Display',serif; font-size:clamp(26px,4vw,34px); color:var(--green-dark); margin-bottom:12px; line-height:1.2; }
+    .subtitle { font-size:16px; color:var(--gray-500); line-height:1.6; margin-bottom:32px; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* EMAIL HIGHLIGHT BOX */
+    .email-box {
+      background:var(--green-pale);
+      border:2px solid var(--green-light);
+      border-radius:16px;
+      padding:24px 28px;
+      margin-bottom:28px;
+      text-align:left;
+    }
+    .email-box-label {
+      font-size:11px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:0.1em;
+      color:var(--green);
+      margin-bottom:10px;
+    }
+    .email-box-title {
+      font-family:'DM Serif Display',serif;
+      font-size:20px;
+      color:var(--green-dark);
+      margin-bottom:8px;
+    }
+    .email-box-desc {
+      font-size:14px;
+      color:var(--gray-700);
+      line-height:1.6;
+    }
+    .email-box-desc strong { color:var(--green-dark); }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--green-pale);
-      color: var(--gray-900);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    /* STEPS */
+    .steps { text-align:left; margin-bottom:28px; }
+    .steps-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-500); margin-bottom:14px; }
+    .step { display:flex; gap:14px; align-items:flex-start; margin-bottom:14px; }
+    .step:last-child { margin-bottom:0; }
+    .step-num { width:28px; height:28px; background:var(--green); color:var(--white); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+    .step-content strong { display:block; font-size:15px; color:var(--gray-900); margin-bottom:2px; }
+    .step-content span { font-size:13px; color:var(--gray-500); line-height:1.4; }
 
-    /* ── HEADER ── */
-    .header {
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-300);
-      padding: 16px 24px;
-      text-align: center;
-    }
-    .logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px;
-      color: var(--green);
-      text-decoration: none;
-    }
+    /* RECEIPT */
+    .receipt { background:var(--gray-100); border-radius:12px; padding:16px 20px; margin-bottom:28px; text-align:left; }
+    .receipt-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--gray-500); margin-bottom:12px; }
+    .receipt-row { display:flex; justify-content:space-between; font-size:14px; margin-bottom:8px; }
+    .receipt-row:last-child { margin-bottom:0; }
+    .receipt-row .label { color:var(--gray-500); }
+    .receipt-row .value { color:var(--gray-900); font-weight:600; }
+    .receipt-row.total .label { color:var(--gray-900); font-weight:700; }
+    .receipt-row.total .value { color:var(--green); font-size:16px; }
 
-    /* ── MAIN ── */
-    .main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: 24px;
-      padding: 48px 40px;
-      max-width: 580px;
-      width: 100%;
-      box-shadow: 0 8px 48px rgba(22,101,52,0.10);
-      text-align: center;
-    }
-
-    /* ── SUCCESS ICON ── */
-    .success-icon {
-      width: 72px;
-      height: 72px;
-      background: var(--green-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 32px;
-    }
-
-    /* ── HEADING ── */
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(28px, 4vw, 36px);
-      color: var(--green-dark);
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-    .subtitle {
-      font-size: 16px;
-      color: var(--gray-500);
-      line-height: 1.6;
-      margin-bottom: 32px;
-    }
-
-    /* ── STEPS ── */
-    .steps {
-      background: var(--green-pale);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 32px;
-      text-align: left;
-    }
-    .steps-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--green);
-      margin-bottom: 16px;
-      text-align: center;
-    }
-    .step {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-    .step:last-child { margin-bottom: 0; }
-    .step-num {
-      width: 28px;
-      height: 28px;
-      background: var(--green);
-      color: var(--white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .step-content { flex: 1; }
-    .step-content strong {
-      display: block;
-      font-size: 15px;
-      color: var(--gray-900);
-      margin-bottom: 2px;
-    }
-    .step-content span {
-      font-size: 13px;
-      color: var(--gray-500);
-      line-height: 1.4;
-    }
-
-    /* ── EMAIL NOTE ── */
-    .email-note {
-      background: var(--gold-light);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 28px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      text-align: left;
-    }
-    .email-note-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-    .email-note-text { font-size: 14px; color: var(--gold); line-height: 1.5; }
-    .email-note-text strong { display: block; margin-bottom: 2px; color: #92400e; }
-
-    /* ── CTA ── */
-    .btn-home {
-      display: block;
-      width: 100%;
-      background: var(--green);
-      color: var(--white);
-      border: none;
-      border-radius: 12px;
-      padding: 16px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-      margin-bottom: 12px;
-    }
-    .btn-home:hover { background: var(--green-dark); }
-
-    .btn-support {
-      display: block;
-      width: 100%;
-      background: transparent;
-      color: var(--green);
-      border: 2px solid var(--green-light);
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-support:hover { border-color: var(--green); background: var(--green-pale); }
-
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: var(--gray-100);
-      margin: 28px 0;
-    }
-
-    /* ── RECEIPT ── */
-    .receipt {
-      text-align: left;
-      background: var(--gray-100);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 28px;
-    }
-    .receipt-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      color: var(--gray-500);
-      margin-bottom: 12px;
-    }
-    .receipt-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-    .receipt-row:last-child { margin-bottom: 0; }
-    .receipt-row .label { color: var(--gray-500); }
-    .receipt-row .value { color: var(--gray-900); font-weight: 600; }
-    .receipt-row.total .label { color: var(--gray-900); font-weight: 700; }
-    .receipt-row.total .value { color: var(--green); font-size: 16px; }
-
-    /* ── TAGLINE ── */
-    .tagline {
-      font-size: 13px;
-      color: var(--gray-500);
-      margin-top: 20px;
-      line-height: 1.6;
-    }
-    .tagline a { color: var(--green); text-decoration: none; }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 24px 20px;
-      font-size: 12px;
-      color: var(--gray-500);
-      background: var(--white);
-      border-top: 1px solid var(--gray-300);
-    }
-
-    @media (max-width: 480px) {
-      .card { padding: 32px 20px; }
-    }
+    .btn-home { display:block; width:100%; background:var(--green); color:var(--white); border:none; border-radius:12px; padding:16px; font-size:16px; font-weight:700; cursor:pointer; text-decoration:none; transition:background 0.2s; margin-bottom:12px; }
+    .btn-home:hover { background:var(--green-dark); }
+    .btn-support { display:block; width:100%; background:transparent; color:var(--green); border:2px solid var(--green-light); border-radius:12px; padding:14px; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.2s; }
+    .btn-support:hover { border-color:var(--green); background:var(--green-pale); }
+    .tagline { font-size:13px; color:var(--gray-500); margin-top:20px; line-height:1.6; }
+    .tagline a { color:var(--green); text-decoration:none; }
+    footer { text-align:center; padding:24px 20px; font-size:12px; color:var(--gray-500); background:var(--white); border-top:1px solid var(--gray-300); }
+    @media(max-width:480px) { .card { padding:32px 20px; } }
   </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <header class="header">
   <a href="https://www.debt-free.world" class="logo">✦ Debt-Free.world</a>
 </header>
-
-<!-- MAIN -->
 <main class="main">
   <div class="card">
-
-    <!-- SUCCESS ICON -->
     <div class="success-icon">✦</div>
+    <h1>Payment confirmed.</h1>
+    <p class="subtitle">Your access is ready. Check your email to get started.</p>
 
-    <!-- HEADING -->
-    <h1>You're in. Welcome to Debt Recovery.</h1>
-    <p class="subtitle">
-      Your payment was successful. Your personalised 90-day<br>
-      Debt Recovery plan is being prepared right now.
-    </p>
-
-    <!-- RECEIPT -->
-    <div class="receipt">
-      <div class="receipt-title">Order summary</div>
-      <div class="receipt-row">
-        <span class="label">Product</span>
-        <span class="value">Debt Recovery</span>
-      </div>
-      <div class="receipt-row">
-        <span class="label">Access period</span>
-        <span class="value">90 days</span>
-      </div>
-      <div class="receipt-row">
-        <span class="label">Seller</span>
-        <span class="value">Amliv Oy · VAT FI32503518</span>
-      </div>
-      <div class="receipt-row total">
-        <span class="label">Total paid</span>
-        <span class="value">19€</span>
+    <div class="email-box">
+      <div class="email-box-label">Next step</div>
+      <div class="email-box-title">Open your email now</div>
+      <div class="email-box-desc">
+        We've sent your <strong>personal access link</strong> to your inbox.<br><br>
+        Click the link in the email to open your Premium Member Area — where you'll build your personalised 90-day Debt Recovery plan.
       </div>
     </div>
 
-    <!-- EMAIL NOTE -->
-    <div class="email-note">
-      <div class="email-note-icon">📬</div>
-      <div class="email-note-text">
-        <strong>Check your inbox now</strong>
-        Your Premium Member Area link is on its way to your email.
-        It may take 1–2 minutes. Check your spam folder if needed.
-      </div>
-    </div>
-
-    <!-- STEPS -->
     <div class="steps">
       <div class="steps-title">What happens next</div>
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>Open the email from Debt-Free.world</strong>
-          <span>Your personal magic link is inside — it opens your Premium Member Area directly.</span>
+          <strong>Check your inbox</strong>
+          <span>Look for an email from insights@debt-free.world. Check spam if needed — it arrives within 1–2 minutes.</span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <strong>Access your 90-day plan</strong>
-          <span>Your personalised Debt Recovery plan, creditor letter tools, and progress tracker are ready.</span>
+          <strong>Click your personal access link</strong>
+          <span>The link opens your Premium Member Area. Takes 2 minutes to set up your plan.</span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <strong>Follow the plan. One step at a time.</strong>
-          <span>You don't have to figure this out alone. We do this together. ✦</span>
+          <strong>Your 90-day plan is generated</strong>
+          <span>Answer a few questions and your personalised Debt Recovery plan is ready immediately. ✦</span>
         </div>
       </div>
     </div>
 
-    <!-- CTA BUTTONS -->
-    <a href="https://www.debt-free.world" class="btn-home">Back to Debt-Free.world</a>
-    <a href="mailto:support@debt-free.world" class="btn-support">Need help? Contact support</a>
+    <div class="receipt">
+      <div class="receipt-title">Order summary</div>
+      <div class="receipt-row"><span class="label">Product</span><span class="value">Debt Recovery</span></div>
+      <div class="receipt-row"><span class="label">Access period</span><span class="value">90 days</span></div>
+      <div class="receipt-row"><span class="label">Seller</span><span class="value">Amliv Oy · VAT FI32503518</span></div>
+      <div class="receipt-row total"><span class="label">Total paid</span><span class="value">19€</span></div>
+    </div>
 
-    <!-- TAGLINE -->
+    <a href="https://www.debt-free.world" class="btn-home">Back to Debt-Free.world</a>
+    <a href="mailto:support@debt-free.world" class="btn-support">Questions? Contact support</a>
+
     <p class="tagline">
-      Amliv Oy · VAT FI32503518 · Nokia, Finland<br>
       <a href="/terms-of-service.html">Terms</a> ·
       <a href="/privacy-policy.html">Privacy</a> ·
       <a href="/refund-policy.html">Refund Policy</a><br><br>
       We do this together ✦
     </p>
-
   </div>
 </main>
-
-<!-- FOOTER -->
-<footer>
-  Debt-Free.world is operated by Amliv Oy · VAT FI32503518 · Nokia, Finland ·
-  <a href="mailto:support@debt-free.world" style="color:#166534;">support@debt-free.world</a>
-</footer>
+<footer>Amliv Oy · VAT FI32503518 · Nokia, Finland · <a href="mailto:support@debt-free.world" style="color:#166534;">support@debt-free.world</a></footer>
 
 <script>
   // GA4 purchase event
@@ -366,13 +165,8 @@
       items: [{ item_name: 'Debt Recovery', price: 19, quantity: 1 }]
     });
   }
-
-  // Estä Back-painike palaamasta checkoutiin
   history.pushState(null, '', window.location.href);
-  window.addEventListener('popstate', function() {
-    history.pushState(null, '', window.location.href);
-  });
+  window.addEventListener('popstate', () => history.pushState(null, '', window.location.href));
 </script>
-
 </body>
 </html>
