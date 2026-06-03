@@ -850,9 +850,16 @@ async function submitForm() {
       body: JSON.stringify({ session_id: sessionId, email: formData.email, plan, onboarding: formData })
     });
 
-    window.location.replace(
-      `https://www.debt-free.world/member/?email=${encodeURIComponent(formData.email)}`
-    );
+    // Redirect to member area with token (preferred) or email fallback
+    if (memberToken) {
+      window.location.replace(
+        `https://www.debt-free.world/member/?token=${memberToken}`
+      );
+    } else {
+      window.location.replace(
+        `https://www.debt-free.world/member/?email=${encodeURIComponent(formData.email)}`
+      );
+    }
   } catch(e) {
     document.getElementById('loadingWrap').classList.remove('show');
     document.getElementById('block4').classList.add('active');
