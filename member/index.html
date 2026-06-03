@@ -739,6 +739,15 @@ async function validateToken() {
     }
 
     const data = await res.json();
+
+    // VARIANT B: If onboarding not complete, redirect to onboarding form
+    if (!data.onboarding_complete) {
+      window.location.replace(
+        `/onboarding-debt-recovery.html?token=${token}`
+      );
+      return;
+    }
+
     launchDashboard(data);
 
   } catch (e) {
@@ -753,7 +762,7 @@ async function validateToken() {
         debt_total: '5000_15000',
         situation: 'Over-indebted',
         collections: 'No',
-        barrier: 'Don\'t know where to start',
+        barrier: "Don't know where to start",
         onboarding_complete: true,
         debt_recovery_plan: 'Test plan content here.'
       });
