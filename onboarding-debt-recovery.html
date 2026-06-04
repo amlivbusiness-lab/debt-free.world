@@ -828,8 +828,7 @@ async function submitForm() {
   document.getElementById('block4').classList.remove('active');
   document.getElementById('loadingWrap').classList.add('show');
 
-  const params = new URLSearchParams(window.location.search);
-  const sessionId = params.get('session_id') || 'direct';
+  // sessionId and memberToken declared at top level
 
   try {
     // Generate AI plan — if rate limited, save empty plan and proceed
@@ -928,6 +927,11 @@ function getLanguageName(code) {
   const n = {EN:'English',FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',ES:'Spanish',FR:'French',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
   return n[code] || 'English';
 }
+
+// Get token and session_id from URL
+const params = new URLSearchParams(window.location.search);
+const sessionId = params.get('session_id') || 'direct';
+const memberToken = params.get('token') || null;
 
 window.addEventListener('load', () => {
   formData.reminder = 'Yes';
