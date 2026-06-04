@@ -78,8 +78,9 @@
     .receipt-row.total .label { color:var(--gray-900); font-weight:700; }
     .receipt-row.total .value { color:var(--green); font-size:16px; }
 
-    .btn-home { display:block; width:100%; background:var(--green); color:var(--white); border:none; border-radius:12px; padding:16px; font-size:16px; font-weight:700; cursor:pointer; text-decoration:none; transition:background 0.2s; margin-bottom:12px; }
-    .btn-home:hover { background:var(--green-dark); }
+    .btn-start { display:block; width:100%; background:var(--green); color:var(--white); border:none; border-radius:12px; padding:18px; font-size:17px; font-weight:700; cursor:pointer; text-decoration:none; transition:background 0.2s; margin-bottom:16px; }
+    .btn-start:hover { background:var(--green-dark); }
+    .email-note-small { font-size:13px; color:var(--gray-500); margin-bottom:24px; line-height:1.5; }
     .btn-support { display:block; width:100%; background:transparent; color:var(--green); border:2px solid var(--green-light); border-radius:12px; padding:14px; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.2s; }
     .btn-support:hover { border-color:var(--green); background:var(--green-pale); }
     .tagline { font-size:13px; color:var(--gray-500); margin-top:20px; line-height:1.6; }
@@ -96,40 +97,14 @@
   <div class="card">
     <div class="success-icon">✦</div>
     <h1>Payment confirmed.</h1>
-    <p class="subtitle">Your access is ready. Check your email to get started.</p>
+    <p class="subtitle">Your Debt Recovery plan is waiting. Build it now — it takes 2 minutes.</p>
 
-    <div class="email-box">
-      <div class="email-box-label">Next step</div>
-      <div class="email-box-title">Open your email now</div>
-      <div class="email-box-desc">
-        We've sent your <strong>personal access link</strong> to your inbox.<br><br>
-        Click the link in the email to open your Premium Member Area — where you'll build your personalised 90-day Debt Recovery plan.
-      </div>
-    </div>
+    <a href="#" class="btn-start" id="btn-start-now" onclick="startNow()">
+      Build My Plan Now →
+    </a>
 
-    <div class="steps">
-      <div class="steps-title">What happens next</div>
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <strong>Check your inbox</strong>
-          <span>Look for an email from insights@debt-free.world. Check spam if needed — it arrives within 1–2 minutes.</span>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <strong>Click your personal access link</strong>
-          <span>The link opens your Premium Member Area. Takes 2 minutes to set up your plan.</span>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <strong>Your 90-day plan is generated</strong>
-          <span>Answer a few questions and your personalised Debt Recovery plan is ready immediately. ✦</span>
-        </div>
-      </div>
+    <div class="email-note-small">
+      We've also sent a personal access link to your email — so you can return anytime.
     </div>
 
     <div class="receipt">
@@ -140,7 +115,6 @@
       <div class="receipt-row total"><span class="label">Total paid</span><span class="value">19€</span></div>
     </div>
 
-    <a href="https://www.debt-free.world" class="btn-home">Back to Debt-Free.world</a>
     <a href="mailto:support@debt-free.world" class="btn-support">Questions? Contact support</a>
 
     <p class="tagline">
@@ -154,9 +128,10 @@
 <footer>Amliv Oy · VAT FI32503518 · Nokia, Finland · <a href="mailto:support@debt-free.world" style="color:#166534;">support@debt-free.world</a></footer>
 
 <script>
-  // GA4 purchase event
   const params = new URLSearchParams(window.location.search);
   const sessionId = params.get('session_id');
+
+  // GA4 purchase event
   if (sessionId && typeof gtag !== 'undefined') {
     gtag('event', 'purchase', {
       transaction_id: sessionId,
@@ -165,6 +140,15 @@
       items: [{ item_name: 'Debt Recovery', price: 19, quantity: 1 }]
     });
   }
+
+  // Set up direct link to onboarding
+  function startNow() {
+    const url = sessionId
+      ? `/onboarding-debt-recovery.html?session_id=${sessionId}`
+      : `/onboarding-debt-recovery.html`;
+    window.location.href = url;
+  }
+
   history.pushState(null, '', window.location.href);
   window.addEventListener('popstate', () => history.pushState(null, '', window.location.href));
 </script>
