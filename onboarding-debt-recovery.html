@@ -301,7 +301,7 @@
           <option value="" data-t="Select debt type">Select</option>
           <option value="consumer_loan" data-t="Consumer loan">Consumer loan</option>
           <option value="credit_card" data-t="Credit card debt">Credit card debt</option>
-          <option value="mortgage" data-t="Mortgage arrears">Mortgage arrears</option>
+          <option value="mortgage" data-t="Mortgage / home loan">Mortgage / home loan</option>
           <option value="student_loan" data-t="Student loan">Student loan</option>
           <option value="tax_debt" data-t="Tax debt">Tax debt</option>
           <option value="medical" data-t="Medical debt">Medical debt</option>
@@ -583,7 +583,7 @@ const T = {
       "Select housing":"Valitse","Renting":"Vuokralla","Owner with mortgage":"Omistaja, asuntolaina",
       "Owner, no mortgage":"Omistaja, ei lainaa","Living with family":"Asuu sukulaisten luona","Other housing":"Muu",
       "Select debt type":"Valitse","Consumer loan":"Kulutusluotto","Credit card debt":"Luottokorttivelka",
-      "Mortgage arrears":"Asuntolainan maksuviivästys","Student loan":"Opintolaina",
+      "Mortgage / home loan":"Asuntolaina","Student loan":"Opintolaina",
       "Tax debt":"Verovelka","Medical debt":"Hoitovelka","Business debt":"Yritysvelka","Multiple types":"Useita tyyppejä",
       "Select range":"Valitse","Under 1,000":"Alle 1 000","1,000 – 5,000":"1 000 – 5 000",
       "5,000 – 15,000":"5 000 – 15 000","15,000 – 50,000":"15 000 – 50 000",
@@ -619,7 +619,7 @@ const T = {
       "Select housing":"Välj","Renting":"Hyresrätt","Owner with mortgage":"Ägare med bolån",
       "Owner, no mortgage":"Ägare utan bolån","Living with family":"Bor med familj","Other housing":"Annat",
       "Select debt type":"Välj","Consumer loan":"Konsumtionslån","Credit card debt":"Kreditkortsskuld",
-      "Mortgage arrears":"Bolånerestans","Student loan":"Studielån",
+      "Mortgage / home loan":"Bolån","Student loan":"Studielån",
       "Tax debt":"Skatteskuld","Medical debt":"Sjukvårdsskuld","Business debt":"Företagsskuld","Multiple types":"Flera typer",
       "Select range":"Välj intervall","Under 1,000":"Under 1 000","1,000 – 5,000":"1 000 – 5 000",
       "5,000 – 15,000":"5 000 – 15 000","15,000 – 50,000":"15 000 – 50 000",
@@ -655,7 +655,7 @@ const T = {
       "Select housing":"Auswählen","Renting":"Miete","Owner with mortgage":"Eigentümer mit Kredit",
       "Owner, no mortgage":"Eigentümer ohne Kredit","Living with family":"Bei Familie","Other housing":"Sonstiges",
       "Select debt type":"Auswählen","Consumer loan":"Konsumentenkredit","Credit card debt":"Kreditkartenschulden",
-      "Mortgage arrears":"Hypothekenrückstand","Student loan":"Studiendarlehen",
+      "Mortgage / home loan":"Hypothek / Wohnungsbaudarlehen","Student loan":"Studiendarlehen",
       "Tax debt":"Steuerschulden","Medical debt":"Medizinische Schulden","Business debt":"Unternehmensschulden","Multiple types":"Mehrere Arten",
       "Select range":"Bereich wählen","Under 1,000":"Unter 1.000","1,000 – 5,000":"1.000 – 5.000",
       "5,000 – 15,000":"5.000 – 15.000","15,000 – 50,000":"15.000 – 50.000",
@@ -832,34 +832,45 @@ async function submitForm() {
   const sessionId = params.get('session_id') || 'direct';
 
   try {
-    const res = await fetch(`${WORKER_URL}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 2500,
-        messages: [{ role: 'user', content: buildPrompt(formData) }]
-      })
-    });
-    const data = await res.json();
-    const plan = data.content?.[0]?.text || '';
-
-    await fetch(`${WORKER_URL}/onboarding/save`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session_id: sessionId, email: formData.email, plan, onboarding: formData })
-    });
-
-    // Redirect to member area with token (preferred) or email fallback
-    if (memberToken) {
-      window.location.replace(
-        `https://www.debt-free.world/member/?token=${memberToken}`
-      );
-    } else {
-      window.location.replace(
-        `https://www.debt-free.world/member/?email=${encodeURIComponent(formData.email)}`
-      );
+    // Generate AI plan — if rate limited, save empty plan and proceed
+    let plan = '';
+    try {
+      const aiRes = await fetch(`${WORKER_URL}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 2500,
+          messages: [{ role: 'user', content: buildPrompt(formData) }]
+        })
+      });
+      if (aiRes.ok) {
+        const aiData = await aiRes.json();
+        plan = aiData.content?.[0]?.text || '';
+      }
+      // If 429 or other error — plan stays empty, user still proceeds
+    } catch(aiErr) {
+      // Silent — proceed without plan, it can be generated later
     }
+
+    // Save onboarding data — always attempt even if plan is empty
+    try {
+      await fetch(`${WORKER_URL}/onboarding/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId, email: formData.email, plan, onboarding: formData })
+      });
+    } catch(saveErr) {
+      // Silent — proceed to member area regardless
+    }
+
+    // Always redirect to member area
+    if (memberToken) {
+      window.location.replace(`https://www.debt-free.world/member/?token=${memberToken}`);
+    } else {
+      window.location.replace(`https://www.debt-free.world/member/?email=${encodeURIComponent(formData.email)}`);
+    }
+
   } catch(e) {
     document.getElementById('loadingWrap').classList.remove('show');
     document.getElementById('block4').classList.add('active');
