@@ -719,7 +719,17 @@ function getFirstTask(data) {
 
 async function validateToken() {
   const params = new URLSearchParams(window.location.search);
-  const token = params.get('token');
+  let token = params.get('token');
+
+  // If token is in the URL: store it in sessionStorage, then strip from URL immediately.
+  // This prevents the token appearing in browser history, screenshots, or analytics.
+  if (token) {
+    sessionStorage.setItem('dfw_member_token', token);
+    window.history.replaceState({}, document.title, window.location.pathname);
+  } else {
+    // Recover from sessionStorage on page refresh
+    token = sessionStorage.getItem('dfw_member_token');
+  }
 
   if (!token) {
     showGateError('No access token found. Please use the link from your email.');
@@ -942,9 +952,14 @@ async function generateLetter() {
   const prompt = `Write a professional formal letter for a ${typeLabels[type]} situation.\nCreditor: ${creditor}\nDebt amount: ${amount ? amount : 'not specified'}\nCountry: ${country}\nContext: ${situation || 'none'}\nRequirements: formal, include relevant legal references for ${country}, firm but respectful, include placeholders [YOUR NAME] [YOUR ADDRESS] [DATE], 200-350 words, plain text only, start directly with the letter.`;
 
   try {
+    // Retrieve stored token (was stripped from URL on first load — see validateToken)
+    const storedToken = sessionStorage.getItem('dfw_member_token');
     const res = await fetch(`${WORKER_URL}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(storedToken ? { 'x-member-token': storedToken } : {})
+      },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] })
     });
     const data = await res.json();
