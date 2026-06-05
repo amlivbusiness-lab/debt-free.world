@@ -1,733 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Premium Member Area — Debt-Free.world</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --green: #166534;
-    --green-mid: #15803d;
-    --green-light: #dcfce7;
-    --green-pale: #f0fdf4;
-    --gold: #b45309;
-    --gold-light: #fef3c7;
-    --text: #111827;
-    --muted: #6b7280;
-    --border: #e5e7eb;
-    --white: #ffffff;
-    --radius: 12px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: #f8faf9; color: var(--text); min-height: 100vh; }
+:root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--muted:#888;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:#f8faf9;-webkit-font-smoothing:antialiased;}
 
-  /* ── GATE ── */
-  #gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--green-pale); }
-  .gate-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 56px 48px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 4px 40px rgba(22,101,52,0.08); }
-  .gate-logo { font-family: 'DM Serif Display', serif; color: var(--green); font-size: 1.1rem; margin-bottom: 32px; display: block; }
-  .gate-icon { width: 56px; height: 56px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 1.5rem; }
-  .gate-card h1 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--green); margin-bottom: 12px; line-height: 1.2; }
-  .gate-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; }
-  .gate-error { background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 14px 18px; color: #dc2626; font-size: 0.9rem; display: none; }
-  .gate-loading { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--muted); font-size: 0.9rem; }
-  .spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ── GATE ── */
+#gate{display:flex;min-height:100vh;align-items:center;justify-content:center;background:var(--green-bg);padding:2rem;}
+.gate-card{background:var(--white);border-radius:20px;padding:3rem 2.5rem;max-width:440px;width:100%;text-align:center;box-shadow:0 4px 32px rgba(22,101,52,0.08);}
+.gate-logo{font-family:var(--serif);font-size:1.15rem;color:var(--green);margin-bottom:2rem;display:block;}
+.gate-icon{font-size:48px;margin-bottom:1.25rem;line-height:1;}
+.gate-title{font-family:var(--serif);font-size:22px;color:var(--text);margin-bottom:0.5rem;}
+.gate-sub{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;}
+.gate-error{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:1rem;font-size:13px;color:#b91c1c;line-height:1.5;margin-top:1rem;}
+.gate-spinner{width:36px;height:36px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1.25rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-  /* ── WELCOME POPUP ── */
-  #welcome-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  #welcome-overlay.show { display: flex; }
-  .welcome-popup {
-    background: var(--white);
-    border-radius: 24px;
-    padding: 44px 40px;
-    max-width: 520px;
-    width: 100%;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-    text-align: center;
-    position: relative;
-    animation: popIn 0.3s ease;
-  }
-  @keyframes popIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .welcome-close {
-    position: absolute;
-    top: 16px; right: 16px;
-    width: 32px; height: 32px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--muted);
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s;
-  }
-  .welcome-close:hover { background: var(--green-pale); color: var(--green); }
-  .welcome-icon { font-size: 44px; margin-bottom: 16px; }
-  .welcome-popup h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.8rem;
-    color: var(--green);
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-  .welcome-popup .welcome-sub {
-    font-size: 0.95rem;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-  .welcome-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  .welcome-stat {
-    background: var(--green-pale);
-    border-radius: 12px;
-    padding: 14px 12px;
-    text-align: center;
-  }
-  .welcome-stat .stat-value {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    color: var(--green);
-    display: block;
-    margin-bottom: 2px;
-  }
-  .welcome-stat .stat-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .welcome-cta {
-    width: 100%;
-    background: var(--green);
-    color: var(--white);
-    border: none;
-    border-radius: 12px;
-    padding: 15px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-    margin-bottom: 10px;
-  }
-  .welcome-cta:hover { background: var(--green-mid); }
-  .welcome-skip {
-    font-size: 0.85rem;
-    color: var(--muted);
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .welcome-skip:hover { color: var(--green); }
-  .welcome-today {
-    background: var(--gold-light);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  .welcome-today .today-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-  .welcome-today .today-task {
-    font-size: 0.9rem;
-    color: var(--text);
-    line-height: 1.5;
-    font-weight: 500;
-  }
+/* ── TOPBAR ── */
+#dashboard{display:none;}
+.topbar{background:var(--white);border-bottom:0.5px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-logo{font-family:var(--serif);font-size:1.05rem;color:var(--green);cursor:default;}
+.topbar-badge{font-size:11px;font-weight:600;background:var(--green-light);color:var(--green-dark);padding:3px 10px;border-radius:20px;letter-spacing:0.5px;}
+.topbar-expiry{font-size:11px;color:var(--muted);}
 
-  /* ── DASHBOARD ── */
-  #dashboard { display: none; }
-  .topbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-  .topbar-logo { font-family: 'DM Serif Display', serif; color: var(--green); font-size: 1.15rem; text-decoration: none; }
-  .topbar-center { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
-  .premium-badge { background: var(--gold-light); color: var(--gold); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
-  .expires-label { font-size: 0.82rem; color: var(--muted); }
-  .topbar-right { display: flex; align-items: center; gap: 16px; }
-  .main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+/* ── LAYOUT ── */
+.dash-wrap{max-width:720px;margin:0 auto;padding:2rem 24px 4rem;}
 
-  /* ── WELCOME ROW ── */
-  .welcome-row { margin-bottom: 32px; }
-  .welcome-row h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--green); margin-bottom: 6px; }
-  .welcome-row p { color: var(--muted); font-size: 0.95rem; }
+/* ── WELCOME HEADER ── */
+.dash-header{margin-bottom:2rem;}
+.dash-title{font-family:var(--serif);font-size:clamp(26px,4vw,34px);line-height:1.1;margin-bottom:0.5rem;}
+.dash-title em{color:var(--green);font-style:italic;}
+.dash-sub{font-size:15px;color:#444;font-weight:300;line-height:1.6;}
 
-  /* ── TODAY'S TASK CARD ── */
-  .today-card {
-    background: var(--green);
-    border-radius: var(--radius);
-    padding: 24px 28px;
-    color: var(--white);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  .today-card-left h3 {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.7;
-    margin-bottom: 6px;
-  }
-  .today-card-left p {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.2rem;
-    font-weight: 400;
-    line-height: 1.3;
-  }
-  .today-card-btn {
-    background: var(--white);
-    color: var(--green);
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: opacity 0.15s;
-    flex-shrink: 0;
-  }
-  .today-card-btn:hover { opacity: 0.88; }
+/* ── PROGRESS ── */
+.progress-bar-wrap{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;}
+.progress-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px;}
+.progress-bar{background:var(--green-light);border-radius:20px;height:8px;overflow:hidden;}
+.progress-fill{background:var(--green);height:100%;width:0;transition:width 1s ease;border-radius:20px;}
 
-  /* ── PROGRESS ── */
-  .progress-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 32px; }
-  .progress-card h2 { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--text); margin-bottom: 14px; font-weight: 400; }
-  .progress-bar-track { background: var(--green-light); border-radius: 100px; height: 10px; margin-bottom: 10px; }
-  .progress-bar-fill { background: var(--green); border-radius: 100px; height: 10px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); width: 0%; }
-  .progress-meta { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--muted); }
+/* ── PLAN CARD ── */
+.plan-card{background:var(--white);border:0.5px solid var(--border);border-left:3px solid var(--green);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;}
+.plan-card-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:0.75rem;}
+.plan-card-title{font-family:var(--serif);font-size:20px;margin-bottom:1rem;}
+.plan-content{font-size:14px;line-height:1.8;color:#333;white-space:pre-wrap;font-weight:300;max-height:400px;overflow:hidden;position:relative;}
+.plan-content.expanded{max-height:none;}
+.plan-content::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--white));pointer-events:none;}
+.plan-content.expanded::after{display:none;}
+.plan-expand{display:inline-block;margin-top:0.75rem;font-size:13px;color:var(--green);font-weight:500;cursor:pointer;border:none;background:none;font-family:var(--sans);padding:0;}
+.plan-empty{font-size:14px;color:var(--muted);line-height:1.6;padding:0.5rem 0;}
+.plan-start-btn{display:inline-block;margin-top:1rem;background:var(--green);color:#fff;border:none;border-radius:30px;padding:10px 24px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;}
 
-  /* ── PLAN CARD ── */
-  .plan-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 32px;
-  }
-  .plan-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-  .plan-card-header h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.2rem;
-    color: var(--green);
-    font-weight: 400;
-  }
-  .plan-badge {
-    background: var(--green-light);
-    color: var(--green);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-  .plan-content {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: var(--text);
-    white-space: pre-wrap;
-    max-height: 320px;
-    overflow-y: auto;
-  }
-  .plan-content.expanded { max-height: none; }
-  .plan-expand {
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    color: var(--green);
-    cursor: pointer;
-    margin-top: 14px;
-    transition: background 0.15s;
-  }
-  .plan-expand:hover { background: var(--green-pale); }
-  .plan-empty {
-    text-align: center;
-    padding: 32px 20px;
-    color: var(--muted);
-  }
-  .plan-empty a {
-    color: var(--green);
-    font-weight: 600;
-    text-decoration: none;
-  }
+/* ── SECTION LABEL ── */
+.section-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#111;font-weight:500;margin:2rem 0 1rem;}
 
-  /* ── TOOLS GRID ── */
-  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 32px; }
-  .tool-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; position: relative; }
-  .tool-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(22,101,52,0.1); border-color: var(--green-mid); }
-  .tool-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 16px; }
-  .tool-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text); margin-bottom: 6px; font-weight: 400; }
-  .tool-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.5; }
-  .tool-new { position: absolute; top: 16px; right: 16px; background: var(--green); color: var(--white); font-size: 0.7rem; font-weight: 600; padding: 3px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+/* ── TOOL GRID ── */
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;}
+@media(max-width:520px){.tool-grid{grid-template-columns:1fr;}}
+.tool-card{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:1.25rem;cursor:pointer;transition:border-color 0.15s,background 0.15s;}
+.tool-card:hover{border-color:var(--green-border);background:var(--green-bg);}
+.tool-card.active{border-color:var(--green);background:var(--green-bg);}
+.tool-icon{font-size:22px;margin-bottom:8px;line-height:1;}
+.tool-name{font-size:13px;font-weight:600;color:#111;margin-bottom:4px;line-height:1.3;}
+.tool-desc{font-size:12px;color:#555;line-height:1.5;}
+.tool-badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;background:var(--green-light);color:var(--green-dark);font-weight:600;margin-top:6px;}
 
-  /* ── PANELS ── */
-  .tool-panel { display: none; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; margin-bottom: 32px; }
-  .tool-panel.active { display: block; }
-  .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-  .panel-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--green); font-weight: 400; }
-  .panel-close { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 8px; background: none; cursor: pointer; font-size: 1rem; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
-  .panel-close:hover { background: var(--green-pale); }
-  .letter-form { display: grid; gap: 16px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .field label { font-size: 0.82rem; font-weight: 500; color: var(--text); display: block; margin-bottom: 6px; }
-  .field select, .field input, .field textarea { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--white); transition: border-color 0.15s; outline: none; }
-  .field select:focus, .field input:focus, .field textarea:focus { border-color: var(--green); }
-  .field textarea { resize: vertical; min-height: 80px; }
-  .btn-primary { background: var(--green); color: var(--white); border: none; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: background 0.15s; display: inline-flex; align-items: center; gap: 8px; }
-  .btn-primary:hover { background: var(--green-mid); }
-  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
-  .btn-secondary { background: var(--white); color: var(--green); border: 1px solid var(--green); border-radius: 8px; padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: background 0.15s; }
-  .btn-secondary:hover { background: var(--green-pale); }
-  .letter-output { background: var(--green-pale); border: 1px solid #bbf7d0; border-radius: 10px; padding: 24px; margin-top: 20px; font-size: 0.9rem; line-height: 1.7; white-space: pre-wrap; display: none; color: var(--text); }
-  .letter-output.visible { display: block; }
-  .letter-actions { display: none; gap: 10px; margin-top: 14px; }
-  .letter-actions.visible { display: flex; }
-  .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .sim-result-card { background: var(--green-pale); border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px; text-align: center; }
-  .sim-result-card .big-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--green); display: block; margin-bottom: 4px; }
-  .sim-result-card .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  .sim-better { background: var(--gold-light); border: 1px solid #fde68a; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; color: var(--gold); margin-top: 16px; font-weight: 500; }
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--border); }
-  .tl-item { position: relative; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px dashed var(--border); }
-  .tl-item:last-child { border-bottom: none; }
-  .tl-dot { position: absolute; left: -27px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--border); border: 2px solid var(--white); }
-  .tl-dot.done { background: var(--green); }
-  .tl-dot.current { background: var(--gold); }
-  .tl-item h4 { font-weight: 600; font-size: 0.92rem; margin-bottom: 4px; }
-  .tl-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
-  .country-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-  .tab { padding: 8px 16px; border: 1px solid var(--border); border-radius: 20px; background: var(--white); font-size: 0.85rem; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
-  .tab.active { background: var(--green); color: var(--white); border-color: var(--green); }
-  .guide-content { display: none; }
-  .guide-content.active { display: block; }
-  .guide-step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
-  .guide-step:last-child { border-bottom: none; }
-  .step-num { width: 28px; height: 28px; min-width: 28px; background: var(--green); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
-  .guide-step h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
-  .guide-step p { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
-  .update-card { background: var(--green-pale); border-left: 4px solid var(--green); border-radius: 0 10px 10px 0; padding: 20px 24px; margin-bottom: 16px; }
-  .update-card .date { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .update-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--green); margin-bottom: 8px; font-weight: 400; }
-  .update-card p { font-size: 0.87rem; color: var(--text); line-height: 1.6; }
-  .method-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-  .method-card { border: 2px solid var(--border); border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.15s; }
-  .method-card.selected { border-color: var(--green); background: var(--green-pale); }
-  .method-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
-  .method-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+/* ── TOOL PANELS ── */
+.tool-panels{margin-bottom:2rem;}
+.tool-panel{display:none;background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:1.5rem;margin-top:-6px;}
+.tool-panel.active{display:block;}
+.panel-title{font-family:var(--serif);font-size:18px;margin-bottom:0.875rem;}
+.panel-form{display:flex;flex-direction:column;gap:10px;}
+.panel-form select,.panel-form input,.panel-form textarea{width:100%;font-family:var(--sans);font-size:14px;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;outline:none;color:#111;background:var(--white);}
+.panel-form select:focus,.panel-form input:focus,.panel-form textarea:focus{border-color:var(--green);}
+.panel-form textarea{resize:vertical;min-height:80px;}
+.panel-btn{background:var(--green);color:#fff;border:none;border-radius:30px;padding:11px 24px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);}
+.panel-btn:disabled{background:#ccc;cursor:not-allowed;}
+.panel-output{background:#f9f9f9;border:0.5px solid var(--border);border-radius:8px;padding:1.25rem;font-size:13px;line-height:1.75;color:#333;white-space:pre-wrap;margin-top:1rem;display:none;}
+.panel-copy{background:transparent;border:1.5px solid var(--green);color:var(--green);border-radius:30px;padding:8px 20px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);margin-top:0.75rem;display:none;}
+.panel-hint{font-size:12px;color:var(--muted);line-height:1.6;margin-top:0.75rem;}
 
-  @media (max-width: 640px) {
-    .topbar { padding: 0 16px; }
-    .main { padding: 24px 16px 60px; }
-    .form-row, .sim-grid, .method-compare { grid-template-columns: 1fr; }
-    .tool-panel { padding: 24px 20px; }
-    .welcome-row h1 { font-size: 1.5rem; }
-    .expires-label { display: none; }
-    .welcome-popup { padding: 32px 24px; }
-    .welcome-stats { grid-template-columns: 1fr; }
-    .today-card { flex-direction: column; align-items: flex-start; }
-  }
+/* ── SNOWBALL/AVALANCHE ── */
+.strat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem;}
+@media(max-width:480px){.strat-grid{grid-template-columns:1fr;}}
+.strat-box{border-radius:10px;padding:1.25rem;border:0.5px solid var(--border);}
+.strat-box.snow{background:#eff6ff;border-color:#93c5fd;}
+.strat-box.aval{background:#fef3c7;border-color:#fbbf24;}
+.strat-title{font-size:13px;font-weight:600;margin-bottom:6px;}
+.strat-text{font-size:12px;color:#444;line-height:1.6;}
+
+/* ── SIMPLE INFO PANELS ── */
+.info-block{background:var(--green-bg);border-radius:10px;padding:1.25rem;margin-bottom:1rem;border:0.5px solid var(--green-border);}
+.info-block h4{font-size:14px;font-weight:600;margin-bottom:8px;color:#111;}
+.info-block p,.info-block li{font-size:13px;color:#333;line-height:1.7;}
+.info-block ul{padding-left:1.2rem;}
+.info-block li{margin-bottom:4px;}
+.phase-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;}
+.phase-item{display:flex;gap:12px;align-items:flex-start;background:var(--white);border-radius:8px;padding:0.875rem;border:0.5px solid var(--border);}
+.phase-num{font-size:11px;font-weight:700;background:var(--green);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.phase-text{font-size:13px;color:#333;line-height:1.5;}
+.phase-text strong{display:block;font-weight:600;color:#111;margin-bottom:2px;}
+
+/* ── FOOTER ── */
+.dash-footer{text-align:center;padding:2rem 0 1rem;border-top:0.5px solid var(--border);margin-top:2rem;}
+.dash-footer a{color:var(--green);font-size:12px;text-decoration:none;margin:0 8px;}
+.dash-footer p{font-size:11px;color:var(--muted);margin-top:0.5rem;}
 </style>
 </head>
 <body>
 
-<!-- GATE -->
+<!-- ── GATE ── -->
 <div id="gate">
   <div class="gate-card">
     <span class="gate-logo">✦ Debt-Free.world</span>
-    <div class="gate-icon">🔐</div>
-    <h1>Verifying your access</h1>
-    <p>Checking your Premium link.<br>This takes only a moment.</p>
-    <div class="gate-loading">
-      <div class="spinner"></div>
-      <span>Verifying…</span>
-    </div>
-    <div class="gate-error" id="gateError"></div>
+    <div class="gate-spinner" id="gateSpinner"></div>
+    <div class="gate-icon" id="gateIcon" style="display:none;">🔐</div>
+    <div class="gate-title" id="gateTitle">Verifying your access</div>
+    <div class="gate-sub" id="gateSub">Checking your Premium link. This takes only a moment.</div>
+    <div class="gate-error" id="gateError" style="display:none;"></div>
   </div>
 </div>
 
-<!-- WELCOME POPUP -->
-<div id="welcome-overlay">
-  <div class="welcome-popup">
-    <button class="welcome-close" onclick="closeWelcome()">✕</button>
-    <div class="welcome-icon" id="welcomeIcon">✦</div>
-    <h2 id="welcomeTitle">Welcome to your plan</h2>
-    <p class="welcome-sub" id="welcomeSub">Your personalised Debt Recovery plan is ready.</p>
-
-    <div class="welcome-today" id="welcomeToday" style="display:none;">
-      <div class="today-label">Your first step — do this today</div>
-      <div class="today-task" id="welcomeTodayTask"></div>
-    </div>
-
-    <div class="welcome-stats" id="welcomeStats" style="display:none;">
-      <div class="welcome-stat">
-        <span class="stat-value" id="statCountry">—</span>
-        <span class="stat-label">Your country</span>
-      </div>
-      <div class="welcome-stat">
-        <span class="stat-value" id="statDebt">—</span>
-        <span class="stat-label">Debt range</span>
-      </div>
-      <div class="welcome-stat">
-        <span class="stat-value" id="statDays">90</span>
-        <span class="stat-label">Days in your plan</span>
-      </div>
-      <div class="welcome-stat">
-        <span class="stat-value" id="statTools">6</span>
-        <span class="stat-label">Tools available</span>
-      </div>
-    </div>
-
-    <button class="welcome-cta" onclick="closeWelcome()">Open my Dashboard →</button>
-    <br>
-    <button class="welcome-skip" onclick="closeWelcome()">Skip intro</button>
-  </div>
-</div>
-
-<!-- DASHBOARD -->
+<!-- ── DASHBOARD ── -->
 <div id="dashboard">
-  <nav class="topbar">
-    <span class="topbar-logo" style="cursor:default;">✦ Debt-Free.world</span>
-    <span class="topbar-center">Premium Member Area — Debt Recovery</span>
-    <div class="topbar-right">
-      <span class="expires-label" id="expiresLabel">Access expires: —</span>
-      <span class="premium-badge">✦ Premium</span>
-    </div>
-  </nav>
 
-  <div class="main">
+  <!-- Topbar -->
+  <div class="topbar">
+    <span class="topbar-logo">✦ Debt-Free.world</span>
+    <span class="topbar-badge">✦ Premium</span>
+    <span class="topbar-expiry" id="expiresLabel">—</span>
+  </div>
 
-    <!-- WELCOME ROW -->
-    <div class="welcome-row">
-      <h1 id="dashTitle">Your Debt Recovery Dashboard</h1>
-      <p id="dashSubtitle">Everything you need to eliminate debt — AI letters, tools, and step-by-step guides.</p>
-    </div>
+  <div class="dash-wrap">
 
-    <!-- TODAY'S TASK -->
-    <div class="today-card" id="todayCard" style="display:none;">
-      <div class="today-card-left">
-        <h3>Your task for today</h3>
-        <p id="todayTaskText">Open your personalised plan and identify your first creditor to contact.</p>
-      </div>
-      <button class="today-card-btn" onclick="openTool('letters')">Start now →</button>
+    <!-- Welcome -->
+    <div class="dash-header">
+      <h1 class="dash-title" id="dashTitle">Your <em>Debt Recovery</em> Dashboard</h1>
+      <p class="dash-sub" id="dashSub">Everything you need to eliminate debt — AI letters, tools, and step-by-step guides.</p>
     </div>
 
-    <!-- PROGRESS -->
-    <div class="progress-card">
-      <h2>Your 90-Day Debt Recovery Journey</h2>
-      <div class="progress-bar-track">
-        <div class="progress-bar-fill" id="progressFill"></div>
-      </div>
+    <!-- Progress -->
+    <div class="progress-bar-wrap">
       <div class="progress-meta">
         <span id="progressDays">Day 1 of 90</span>
         <span id="progressPct">1%</span>
       </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     </div>
 
-    <!-- PERSONALISED PLAN -->
+    <!-- Personalised Plan -->
     <div class="plan-card" id="planCard" style="display:none;">
-      <div class="plan-card-header">
-        <h2>Your Personalised Debt Recovery Plan</h2>
-        <span class="plan-badge">AI-generated</span>
-      </div>
+      <div class="plan-card-label" id="planCardLabel">Your personalised 90-day plan</div>
+      <div class="plan-card-title" id="planCardTitle">Your Debt Recovery Plan</div>
       <div class="plan-content" id="planContent"></div>
-      <button class="plan-expand" id="planExpandBtn" onclick="togglePlan()">Read full plan ↓</button>
+      <button class="plan-expand" id="planExpandBtn" onclick="expandPlan()">Read full plan ↓</button>
     </div>
 
-    <!-- TOOLS GRID -->
-    <div class="tools-grid">
+    <!-- No plan yet -->
+    <div class="plan-card" id="noPlanCard" style="display:none;">
+      <div class="plan-card-label">Your personalised 90-day plan</div>
+      <div class="plan-card-title">Generate your plan</div>
+      <p class="plan-empty" id="noPlanText">Your personalised plan is generated when you complete the intake form. It takes 2 minutes.</p>
+      <a href="#" class="plan-start-btn" id="planStartBtn" onclick="goToOnboarding()">Complete my plan setup →</a>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="section-label" id="toolsLabel">Your tools</div>
+
+    <div class="tool-grid">
       <div class="tool-card" onclick="openTool('letters')">
         <div class="tool-icon">✉️</div>
-        <span class="tool-new">AI</span>
-        <h3>AI Letters to Creditors</h3>
-        <p>Generate professional negotiation letters in seconds. Hardship, settlement, stop-contact requests.</p>
+        <div class="tool-name" id="tLettersName">AI Letters to Creditors</div>
+        <div class="tool-desc" id="tLettersDesc">Hardship, settlement, stop-contact, dispute — 7 letter types.</div>
+        <span class="tool-badge">AI</span>
       </div>
       <div class="tool-card" onclick="openTool('simulator')">
         <div class="tool-icon">📊</div>
-        <h3>Expense Simulator</h3>
-        <p>See exactly how cutting one expense accelerates your debt-free date.</p>
+        <div class="tool-name" id="tSimName">Crisis Budget Tool</div>
+        <div class="tool-desc" id="tSimDesc">See how expense cuts accelerate your debt-free date.</div>
       </div>
-      <div class="tool-card" onclick="openTool('methods')">
+      <div class="tool-card" onclick="openTool('strategies')">
         <div class="tool-icon">❄️</div>
-        <h3>Snowball vs Avalanche</h3>
-        <p>Calculate which repayment strategy saves you more money and time.</p>
+        <div class="tool-name" id="tStratName">Snowball vs Avalanche</div>
+        <div class="tool-desc" id="tStratDesc">Which repayment strategy saves you more money and time?</div>
       </div>
-      <div class="tool-card" onclick="openTool('map')">
+      <div class="tool-card" onclick="openTool('collection')">
         <div class="tool-icon">🗺️</div>
-        <h3>Debt Collection Map</h3>
-        <p>Understand every stage of the debt collection process and your rights at each step.</p>
+        <div class="tool-name" id="tCollName">Debt Collection Map</div>
+        <div class="tool-desc" id="tCollDesc">Every stage of the process and your rights at each step.</div>
       </div>
-      <div class="tool-card" onclick="openTool('updates')">
-        <div class="tool-icon">📅</div>
-        <h3>Monthly Updates</h3>
-        <p>New resources, law changes, and strategies added every month.</p>
+      <div class="tool-card" onclick="openTool('challenge')">
+        <div class="tool-icon">🎯</div>
+        <div class="tool-name" id="tChalName">90-Day Challenge</div>
+        <div class="tool-desc" id="tChalDesc">Daily actions and weekly milestones to stay on track.</div>
       </div>
-      <div class="tool-card" onclick="openTool('banks')">
+      <div class="tool-card" onclick="openTool('psychology')">
+        <div class="tool-icon">🧠</div>
+        <div class="tool-name" id="tPsychName">Behavioural Tools</div>
+        <div class="tool-desc" id="tPsychDesc">Habit building, impulse control, and stress management.</div>
+      </div>
+      <div class="tool-card" onclick="openTool('situations')">
+        <div class="tool-icon">🆘</div>
+        <div class="tool-name" id="tSitName">Crisis Action Plans</div>
+        <div class="tool-desc" id="tSitDesc">Unemployment, divorce, sick leave — step-by-step plans.</div>
+      </div>
+      <div class="tool-card" onclick="openTool('bankguides')">
         <div class="tool-icon">🏦</div>
-        <h3>Bank Guides by Country</h3>
-        <p>Step-by-step negotiations with major banks in Finland, Sweden, Germany, and more.</p>
+        <div class="tool-name" id="tBankName">Bank Guides &amp; Updates</div>
+        <div class="tool-desc" id="tBankDesc">Country-specific guides and monthly updated resources.</div>
       </div>
     </div>
 
-    <!-- PANEL: AI LETTERS -->
-    <div class="tool-panel" id="panel-letters">
-      <div class="panel-header">
-        <h2>✉️ AI Letters to Creditors</h2>
-        <button class="panel-close" onclick="closeTool('letters')">✕</button>
+    <!-- TOOL PANELS -->
+    <div class="tool-panels">
+
+      <!-- Letters -->
+      <div class="tool-panel" id="panel-letters">
+        <div class="panel-title" id="panelLettersTitle">✉️ AI Letters to Creditors</div>
+        <div class="panel-form">
+          <select id="letterType">
+            <option value="">Select letter type…</option>
+            <option value="hardship">Hardship / payment difficulty</option>
+            <option value="settlement">Debt settlement offer</option>
+            <option value="stop_contact">Stop contact request</option>
+            <option value="dispute">Debt dispute</option>
+            <option value="payment_plan">Propose a payment plan</option>
+            <option value="payment_holiday">Request a payment holiday</option>
+            <option value="negotiation">General debt negotiation</option>
+          </select>
+          <input type="text" id="letterCreditor" placeholder="Creditor name (e.g. Nordea, HSBC)"/>
+          <select id="letterCountry">
+            <option value="Finland">Finland</option><option value="Sweden">Sweden</option><option value="Germany">Germany</option><option value="France">France</option><option value="Spain">Spain</option><option value="Portugal">Portugal</option><option value="Italy">Italy</option><option value="Netherlands">Netherlands</option><option value="Poland">Poland</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Other">Other</option>
+          </select>
+          <input type="number" id="letterAmount" placeholder="Debt amount (optional)"/>
+          <textarea id="letterSituation" placeholder="Brief description of your situation (optional — improves the letter)"></textarea>
+          <button class="panel-btn" id="letterBtn" onclick="generateLetter()">Generate letter →</button>
+        </div>
+        <div class="panel-output" id="letterOutput"></div>
+        <button class="panel-copy" id="letterCopy" onclick="copyLetter()">Copy letter</button>
+        <div class="panel-hint" id="letterHint">Review before sending. Letters are a starting point — adjust to your exact situation.</div>
       </div>
-      <div class="letter-form">
-        <div class="form-row">
-          <div class="field">
-            <label>Letter type</label>
-            <select id="letterType">
-              <option value="hardship">Hardship / payment difficulty</option>
-              <option value="settlement">Debt settlement offer</option>
-              <option value="stop_contact">Stop contact request</option>
-              <option value="dispute">Debt dispute</option>
-              <option value="payment_plan">Payment plan request</option>
-              <option value="payment_holiday">Payment holiday request</option>
-              <option value="negotiation">Debt negotiation</option>
-            </select>
+
+      <!-- Simulator / Budget -->
+      <div class="tool-panel" id="panel-simulator">
+        <div class="panel-title">📊 Crisis Budget Tool</div>
+        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:1.25rem;" id="simDesc">Enter your numbers to see how changes affect your debt-free date.</p>
+        <div class="panel-form">
+          <input type="number" id="simDebt" placeholder="Total debt (€)"/>
+          <input type="number" id="simPayment" placeholder="Current monthly payment (€)"/>
+          <input type="number" id="simRate" placeholder="Average interest rate % (type 0 if unsure)"/>
+          <input type="number" id="simExtra" placeholder="Extra monthly amount you could pay (€)"/>
+          <button class="panel-btn" onclick="runSimulator()">Calculate →</button>
+        </div>
+        <div class="panel-output" id="simOutput"></div>
+      </div>
+
+      <!-- Strategies -->
+      <div class="tool-panel" id="panel-strategies">
+        <div class="panel-title">❄️ Snowball vs 🔥 Avalanche</div>
+        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:1.25rem;" id="stratDesc">Two proven debt strategies — here's which fits your situation.</p>
+        <div class="strat-grid">
+          <div class="strat-box snow">
+            <div class="strat-title">❄️ Snowball method</div>
+            <div class="strat-text" id="snowText">Pay the <strong>smallest debt first</strong>, regardless of interest rate. Builds momentum with quick wins. Best if you need motivation to stay committed.</div>
           </div>
-          <div class="field">
-            <label>Creditor name</label>
-            <input type="text" id="creditorName" placeholder="e.g. OP Bank, Klarna">
+          <div class="strat-box aval">
+            <div class="strat-title">🔥 Avalanche method</div>
+            <div class="strat-text" id="avalText">Pay the <strong>highest interest debt first</strong>. Saves the most money long-term. Best if you have high-interest credit cards or consumer loans.</div>
           </div>
         </div>
-        <div class="form-row">
-          <div class="field">
-            <label>Debt amount</label>
-            <input type="number" id="debtAmount" placeholder="e.g. 3500">
-          </div>
-          <div class="field">
-            <label>Your country</label>
-            <select id="letterCountry">
-              <option value="Finland">Finland</option>
-              <option value="Sweden">Sweden</option>
-              <option value="Germany">Germany</option>
-              <option value="Netherlands">Netherlands</option>
-              <option value="France">France</option>
-              <option value="Spain">Spain</option>
-              <option value="Poland">Poland</option>
-              <option value="UK">United Kingdom</option>
-              <option value="USA">United States</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+        <div class="panel-form" style="margin-top:1.25rem;">
+          <input type="number" id="stratDebt1" placeholder="Debt 1 amount (€)"/>
+          <input type="number" id="stratRate1" placeholder="Debt 1 interest rate %"/>
+          <input type="number" id="stratDebt2" placeholder="Debt 2 amount (€)"/>
+          <input type="number" id="stratRate2" placeholder="Debt 2 interest rate %"/>
+          <input type="number" id="stratPayment" placeholder="Total monthly payment available (€)"/>
+          <button class="panel-btn" onclick="runStrategy()">Compare strategies →</button>
         </div>
-        <div class="field">
-          <label>Briefly describe your situation (optional)</label>
-          <textarea id="situation" placeholder="e.g. Lost job 3 months ago, looking to negotiate a reduced settlement…"></textarea>
-        </div>
-        <button class="btn-primary" id="generateBtn" onclick="generateLetter()">
-          <span id="btnText">Generate Letter</span>
-        </button>
+        <div class="panel-output" id="stratOutput"></div>
       </div>
-      <div class="letter-output" id="letterOutput"></div>
-      <div class="letter-actions" id="letterActions">
-        <button class="btn-secondary" onclick="copyLetter()">📋 Copy letter</button>
-        <button class="btn-secondary" onclick="generateLetter()">🔄 Regenerate</button>
-      </div>
-    </div>
 
-    <!-- PANEL: SIMULATOR -->
-    <div class="tool-panel" id="panel-simulator">
-      <div class="panel-header">
-        <h2>📊 Expense Simulator</h2>
-        <button class="panel-close" onclick="closeTool('simulator')">✕</button>
-      </div>
-      <div style="display:grid;gap:16px;margin-bottom:24px">
-        <div class="form-row">
-          <div class="field"><label>Total debt</label><input type="number" id="simDebt" placeholder="10000" oninput="calcSim()"></div>
-          <div class="field"><label>Current monthly payment</label><input type="number" id="simPayment" placeholder="200" oninput="calcSim()"></div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Interest rate (%)</label><input type="number" id="simRate" placeholder="18" oninput="calcSim()"></div>
-          <div class="field"><label>Extra monthly amount</label><input type="number" id="simExtra" placeholder="50" oninput="calcSim()"></div>
+      <!-- Collection Map -->
+      <div class="tool-panel" id="panel-collection">
+        <div class="panel-title">🗺️ Debt Collection Process Map</div>
+        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:1rem;" id="collDesc">Understanding the process removes the fear. Know what comes next — and your rights at each stage.</p>
+        <ol class="phase-list">
+          <li class="phase-item"><span class="phase-num">1</span><span class="phase-text"><strong>Missed payment</strong>You miss one payment. The creditor sends a reminder. No negative credit impact yet.</span></li>
+          <li class="phase-item"><span class="phase-num">2</span><span class="phase-text"><strong>Overdue notice</strong>14–30 days: formal overdue letter with fees. Respond in writing — this is the best time to negotiate.</span></li>
+          <li class="phase-item"><span class="phase-num">3</span><span class="phase-text"><strong>Debt passed to collections</strong>60–90 days: creditor sells or transfers debt to a collection agency. Your rights remain the same.</span></li>
+          <li class="phase-item"><span class="phase-num">4</span><span class="phase-text"><strong>Collection letters</strong>Agency contacts you by letter and phone. You can request all communication in writing only.</span></li>
+          <li class="phase-item"><span class="phase-num">5</span><span class="phase-text"><strong>Legal action threat</strong>Agency may threaten court proceedings. Often a negotiation tactic — many settle before court.</span></li>
+          <li class="phase-item"><span class="phase-num">6</span><span class="phase-text"><strong>Court judgment</strong>If no agreement: court may issue a payment order. You have the right to dispute it within the deadline.</span></li>
+          <li class="phase-item"><span class="phase-num">7</span><span class="phase-text"><strong>Enforcement</strong>Only after a court judgment. Enforcement agency may garnish wages or bank accounts. Negotiate a payment plan immediately.</span></li>
+        </ol>
+        <div class="info-block" style="margin-top:1.25rem;">
+          <h4>🔑 Your rights at every stage</h4>
+          <ul>
+            <li>Request all communication in writing</li>
+            <li>Request proof that the debt is valid and belongs to you</li>
+            <li>Negotiate a payment plan — creditors usually prefer this over legal action</li>
+            <li>Use our AI Letter generator to respond professionally</li>
+          </ul>
         </div>
       </div>
-      <div class="sim-grid" id="simResults" style="display:none">
-        <div class="sim-result-card"><span class="big-num" id="simMonths1">—</span><span class="label">Months without extra</span></div>
-        <div class="sim-result-card"><span class="big-num" id="simMonths2">—</span><span class="label">Months with extra</span></div>
-        <div class="sim-result-card"><span class="big-num" id="simInterest1">—</span><span class="label">Total interest (current)</span></div>
-        <div class="sim-result-card"><span class="big-num" id="simInterest2">—</span><span class="label">Total interest (with extra)</span></div>
+
+      <!-- 90-Day Challenge -->
+      <div class="tool-panel" id="panel-challenge">
+        <div class="panel-title">🎯 90-Day Debt-Free Challenge</div>
+        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:1rem;" id="chalDesc">Small consistent actions compound. Here's your framework.</p>
+        <div class="info-block"><h4>Week 1–2: Clarity</h4>
+          <ul><li>List every debt: creditor, balance, rate, minimum payment</li><li>Calculate your exact monthly surplus (income − all costs)</li><li>Decide: Snowball or Avalanche?</li><li>Write one letter to your highest-priority creditor using the AI tool</li></ul></div>
+        <div class="info-block"><h4>Week 3–4: First wins</h4>
+          <ul><li>Make your first extra payment, however small</li><li>Cancel one non-essential subscription</li><li>Set up a separate "debt" savings pot — even 10 €/month matters</li><li>Track: screenshot your balance</li></ul></div>
+        <div class="info-block"><h4>Month 2: Build momentum</h4>
+          <ul><li>Review and renegotiate one debt's interest rate</li><li>Find one additional income source (sell something, extra hours)</li><li>Apply the Avalanche or Snowball payment to next priority debt</li><li>Update your debt-free date estimate</li></ul></div>
+        <div class="info-block"><h4>Month 3: Systemise</h4>
+          <ul><li>Automate your extra debt payment</li><li>Set a 6-month milestone review date</li><li>Celebrate progress — you've changed your financial trajectory</li></ul></div>
       </div>
-      <div class="sim-better" id="simSaving" style="display:none"></div>
+
+      <!-- Psychology / Habits -->
+      <div class="tool-panel" id="panel-psychology">
+        <div class="panel-title">🧠 Behavioural &amp; Habit Tools</div>
+        <div class="info-block"><h4>Impulse spending control</h4>
+          <ul><li><strong>24-hour rule:</strong> any non-essential purchase over 20 € waits 24 hours</li><li><strong>Cost-per-hour:</strong> convert prices to hours worked — "this costs 3 hours of my life"</li><li><strong>Remove friction:</strong> delete saved card details from online shops</li><li><strong>Replace the trigger:</strong> identify what emotion precedes spending — find a free alternative action</li></ul></div>
+        <div class="info-block"><h4>Financial habit building</h4>
+          <ul><li>Schedule a weekly 15-minute money check — same time, same day</li><li>Keep a spending diary for 2 weeks — awareness alone reduces spending 10–15%</li><li>Use the "pay yourself first" rule: move debt payment on payday, not end of month</li></ul></div>
+        <div class="info-block"><h4>Financial stress management</h4>
+          <ul><li>Separate "debt admin time" from your personal life — check once a week, not constantly</li><li>Write down your worst-case scenario fully — most fears are less catastrophic when explicit</li><li>Identify one person you can talk to openly — social support is the strongest protective factor</li><li>If stress is affecting your health: contact your GP. Financial stress is a medical concern.</li></ul></div>
+      </div>
+
+      <!-- Crisis Situations -->
+      <div class="tool-panel" id="panel-situations">
+        <div class="panel-title">🆘 Crisis Action Plans</div>
+        <div class="info-block"><h4>If you've just lost your job</h4>
+          <ol style="padding-left:1.2rem;"><li>Register as unemployed immediately — benefits often start from day 1 of registration, not job loss</li><li>Contact your creditors within the first 2 weeks — before you miss a payment</li><li>Request a payment pause or reduced minimum — most lenders have hardship processes</li><li>List all income sources: unemployment benefit, partner income, side income</li><li>Use the AI Letter tool: "Hardship / payment difficulty"</li></ol></div>
+        <div class="info-block"><h4>If you're going through divorce/separation</h4>
+          <ol style="padding-left:1.2rem;"><li>Get a written list of all joint debts and accounts</li><li>Freeze joint credit card limits if possible</li><li>Contact each creditor to separate or reassign joint debts</li><li>Prioritise housing cost — roof first, everything else second</li><li>Seek free legal advice on debt liability split before signing anything</li></ol></div>
+        <div class="info-block"><h4>If you're on sick leave / unable to work</h4>
+          <ol style="padding-left:1.2rem;"><li>Check your sick pay entitlement — statutory and employer</li><li>Check insurance policies: some cover loan payments during illness</li><li>Contact creditors immediately with a doctor's letter — most have compassion policies</li><li>Apply for disability benefits if absence will exceed 3 months</li><li>Use "Hardship" letter from the AI tool</li></ol></div>
+        <div class="info-block"><h4>Emergency kit — do this now if in crisis</h4>
+          <ul><li>Pay rent/mortgage first — everything else is negotiable, housing is not</li><li>Keep food and utilities on — call utility providers for payment plans</li><li>Stop all non-essential direct debits today</li><li>Contact National Debt Helpline or local equivalent (free, confidential)</li><li>Do not ignore letters — open everything, date-stamp, keep copies</li></ul></div>
+      </div>
+
+      <!-- Bank Guides -->
+      <div class="tool-panel" id="panel-bankguides">
+        <div class="panel-title">🏦 Bank Guides &amp; Monthly Updates</div>
+        <div class="info-block"><h4>Negotiating with your bank</h4>
+          <ul><li>Always ask to speak with the <strong>hardship or arrears team</strong> — not general customer service</li><li>Prepare before calling: debt amount, monthly income, monthly expenses, what you can realistically pay</li><li>Ask specifically for: reduced interest rate, payment holiday, extended repayment term, or balance settlement</li><li>Get any agreement in writing before ending the call</li><li>Use our AI Letter tool to follow up in writing after every call</li></ul></div>
+        <div class="info-block"><h4>What banks can offer (most will, if asked)</h4>
+          <ul><li>Payment holiday: 1–3 months with no payment required</li><li>Reduced minimum payment: pay interest only for a period</li><li>Interest freeze: for customers in genuine hardship</li><li>Reduced settlement: offer 40–70% of balance for full settlement</li></ul></div>
+        <div class="info-block"><h4>Monthly resources</h4>
+          <p>New guides, law changes, and country-specific updates are added each month. Check back monthly or contact <a href="mailto:support@debt-free.world" style="color:var(--green);">support@debt-free.world</a> for the latest resources in your country.</p></div>
+      </div>
+
+    </div><!-- /tool-panels -->
+
+    <!-- Footer -->
+    <div class="dash-footer">
+      <div><a href="https://www.debt-free.world">debt-free.world</a><a href="mailto:support@debt-free.world">support@debt-free.world</a></div>
+      <p>Debt-Free.world · Amliv Oy · VAT FI32503518</p>
     </div>
 
-    <!-- PANEL: METHODS -->
-    <div class="tool-panel" id="panel-methods">
-      <div class="panel-header">
-        <h2>❄️ Snowball vs Avalanche</h2>
-        <button class="panel-close" onclick="closeTool('methods')">✕</button>
-      </div>
-      <div class="method-compare">
-        <div class="method-card selected" id="methodSnowball" onclick="selectMethod('snowball')">
-          <h3>❄️ Snowball</h3>
-          <p>Pay smallest debts first. Builds momentum and quick wins. Best for motivation.</p>
-        </div>
-        <div class="method-card" id="methodAvalanche" onclick="selectMethod('avalanche')">
-          <h3>🔥 Avalanche</h3>
-          <p>Pay highest-interest debts first. Mathematically optimal. Saves the most money.</p>
-        </div>
-      </div>
-      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:20px"><strong>The honest answer:</strong> Avalanche saves more money. Snowball saves more motivation. Both beat doing nothing by 10×.</p>
-      <div style="background:var(--green-pale);border-radius:10px;padding:20px">
-        <h3 style="font-family:'DM Serif Display',serif;color:var(--green);font-size:1rem;margin-bottom:12px;font-weight:400">Typical result: Avalanche vs Snowball</h3>
-        <p style="font-size:0.87rem;color:var(--muted);line-height:1.6">On 15 000 € of mixed debt at 15–25% interest with 400 €/month payments, Avalanche typically saves 800 €–1 400 € in interest. The debt-free date is 2–4 months earlier.</p>
-      </div>
-    </div>
-
-    <!-- PANEL: DEBT MAP -->
-    <div class="tool-panel" id="panel-map">
-      <div class="panel-header">
-        <h2>🗺️ Debt Collection Process Map</h2>
-        <button class="panel-close" onclick="closeTool('map')">✕</button>
-      </div>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-dot done"></div><h4>Stage 1 — Missed payment</h4><p>You miss a payment. Creditor sends a reminder. No legal action yet. <strong>Your right:</strong> contact them immediately to negotiate.</p></div>
-        <div class="tl-item"><div class="tl-dot done"></div><h4>Stage 2 — Debt collection agency</h4><p>After 30–90 days, debt may be sold to a collector. <strong>Your right:</strong> request debt validation in writing within 30 days.</p></div>
-        <div class="tl-item"><div class="tl-dot current"></div><h4>Stage 3 — Formal demand letter</h4><p>Official legal-sounding letter arrives. Still pre-legal. <strong>Your right:</strong> negotiate a settlement (often 40–60% of original). Use the AI letter generator above.</p></div>
-        <div class="tl-item"><div class="tl-dot"></div><h4>Stage 4 — Court proceedings</h4><p>Creditor files a claim. <strong>Do not ignore court notices.</strong> Seek legal aid in your country immediately.</p></div>
-        <div class="tl-item"><div class="tl-dot"></div><h4>Stage 5 — Enforcement / bailiff</h4><p>Court order obtained. Wages or assets may be seized. <strong>Even at this stage</strong> you can negotiate with the enforcement authority.</p></div>
-        <div class="tl-item"><div class="tl-dot"></div><h4>Stage 6 — Statute of limitations</h4><p>Debts expire after 3–10 years depending on country. The clock resets if you make a payment or acknowledge the debt in writing.</p></div>
-      </div>
-    </div>
-
-    <!-- PANEL: UPDATES -->
-    <div class="tool-panel" id="panel-updates">
-      <div class="panel-header">
-        <h2>📅 Monthly Updates</h2>
-        <button class="panel-close" onclick="closeTool('updates')">✕</button>
-      </div>
-      <div class="update-card">
-        <div class="date">June 2026 — New</div>
-        <h3>EU Debt Collection Directive — Changes Effective June 2026</h3>
-        <p>New EU rules limit collector contact to 3 times per week maximum. Written contact must include the total amount claimed with full fee breakdown.</p>
-      </div>
-      <div class="update-card">
-        <div class="date">May 2026</div>
-        <h3>Finland: KELA Livelihood Support — Expanded Eligibility</h3>
-        <p>KELA expanded eligibility for debt-related hardship support. If housing debt exceeds 40% of net income, you may now qualify regardless of employment status.</p>
-      </div>
-      <div class="update-card">
-        <div class="date">April 2026</div>
-        <h3>Klarna & Afterpay — New Settlement Policy</h3>
-        <p>Both platforms now accept lump-sum settlements at 50–65% of outstanding balance through their hardship teams.</p>
-      </div>
-    </div>
-
-    <!-- PANEL: BANK GUIDES -->
-    <div class="tool-panel" id="panel-banks">
-      <div class="panel-header">
-        <h2>🏦 Bank Guides by Country</h2>
-        <button class="panel-close" onclick="closeTool('banks')">✕</button>
-      </div>
-      <div class="country-tabs">
-        <button class="tab active" onclick="showGuide('fi', event)">🇫🇮 Finland</button>
-        <button class="tab" onclick="showGuide('se', event)">🇸🇪 Sweden</button>
-        <button class="tab" onclick="showGuide('de', event)">🇩🇪 Germany</button>
-        <button class="tab" onclick="showGuide('nl', event)">🇳🇱 Netherlands</button>
-      </div>
-      <div class="guide-content active" id="guide-fi">
-        <div class="guide-step"><div class="step-num">1</div><div><h4>Contact OP, Nordea, or S-Pankki Hardship Team</h4><p>Ask specifically for "maksuvaikeusneuvonta". Do not use the standard debt line.</p></div></div>
-        <div class="guide-step"><div class="step-num">2</div><div><h4>Request a payment holiday (lyhennysvapaa)</h4><p>Finnish banks offer 1–12 month payment holidays on mortgage and consumer loans.</p></div></div>
-        <div class="guide-step"><div class="step-num">3</div><div><h4>Apply to Takuu-Säätiö</h4><p>Free debt counseling and consolidated loan negotiation. takuusaatio.fi</p></div></div>
-        <div class="guide-step"><div class="step-num">4</div><div><h4>Municipal debt counseling (velkaneuvolat)</h4><p>Every Finnish municipality offers free debt counseling. Contact your local social services office.</p></div></div>
-      </div>
-      <div class="guide-content" id="guide-se">
-        <div class="guide-step"><div class="step-num">1</div><div><h4>Contact Konsumentverket</h4><p>Free service with personalized guidance on debt rights in Sweden. hallakonsument.se</p></div></div>
-        <div class="guide-step"><div class="step-num">2</div><div><h4>Kronofogden — betalningsplan</h4><p>Apply for a voluntary payment arrangement to stop enforcement action.</p></div></div>
-        <div class="guide-step"><div class="step-num">3</div><div><h4>Skuldsanering</h4><p>After 3 years of reduced payments, remaining debt is eliminated. Apply through Kronofogden.</p></div></div>
-      </div>
-      <div class="guide-content" id="guide-de">
-        <div class="guide-step"><div class="step-num">1</div><div><h4>Schuldnerberatung — Free counseling</h4><p>Find a free debt counseling center at schuldnerberatung.de.</p></div></div>
-        <div class="guide-step"><div class="step-num">2</div><div><h4>Out-of-court settlement</h4><p>Required step before Privatinsolvenz. Your counselor prepares this.</p></div></div>
-        <div class="guide-step"><div class="step-num">3</div><div><h4>Privatinsolvenz — 3-year discharge</h4><p>After 3 years of good-faith repayment, remaining debt is fully discharged.</p></div></div>
-      </div>
-      <div class="guide-content" id="guide-nl">
-        <div class="guide-step"><div class="step-num">1</div><div><h4>Gemeentelijke schuldhulpverlening</h4><p>Your local gemeente negotiates collectively with all your creditors simultaneously.</p></div></div>
-        <div class="guide-step"><div class="step-num">2</div><div><h4>WSNP — Debt restructuring</h4><p>If creditors refuse voluntary settlement, apply through the court. Leads to full discharge.</p></div></div>
-      </div>
-    </div>
-
-  </div>
-</div>
+  </div><!-- /dash-wrap -->
+</div><!-- /dashboard -->
 
 <script>
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 
-// Debt total labels for display
-const DEBT_LABELS = {
-  'under_1000': 'Under 1,000',
-  '1000_5000': '1,000–5,000',
-  '5000_15000': '5,000–15,000',
-  '15000_50000': '15,000–50,000',
-  '50000_100000': '50,000–100,000',
-  '100000_250000': '100,000–250,000',
-  'over_250000': 'Over 250,000'
-};
-
-// First task based on collections status
-function getFirstTask(data) {
-  if (data.collections && data.collections.includes('enforcement')) {
-    return 'Contact the enforcement authority today. Use the AI Letter tool → "Stop contact / dispute" to buy time.';
-  }
-  if (data.collections && data.collections.includes('collections')) {
-    return 'Send a debt validation request to your collections agency. Open AI Letters → "Stop contact request".';
-  }
-  if (data.barrier && data.barrier.includes('Fear')) {
-    return 'You don\'t need to call anyone. Open AI Letters and generate your first written contact — it takes 2 minutes.';
-  }
-  return 'Open your personalised plan below and identify your highest-priority creditor to contact first.';
+function showGateError(msg) {
+  document.getElementById('gateSpinner').style.display = 'none';
+  document.getElementById('gateIcon').style.display = 'block';
+  document.getElementById('gateError').textContent = msg;
+  document.getElementById('gateError').style.display = 'block';
+  document.getElementById('gateTitle').textContent = 'Access not found';
+  document.getElementById('gateSub').textContent = '';
 }
 
 async function validateToken() {
   const params = new URLSearchParams(window.location.search);
   let token = params.get('token');
 
-  // If token is in the URL: store it in sessionStorage, then strip from URL immediately.
-  // This prevents the token appearing in browser history, screenshots, or analytics.
   if (token) {
     sessionStorage.setItem('dfw_member_token', token);
     window.history.replaceState({}, document.title, window.location.pathname);
   } else {
-    // Recover from sessionStorage on page refresh
     token = sessionStorage.getItem('dfw_member_token');
   }
 
@@ -749,52 +413,25 @@ async function validateToken() {
     }
 
     const data = await res.json();
-
-    // Always launch dashboard — welcome popup handles onboarding prompt if needed
-    // User can choose to complete onboarding or skip and use tools immediately
     launchDashboard(data);
 
-  } catch (e) {
-    // Local dev fallback
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      launchDashboard({
-        email: 'test@example.com',
-        expires_at: Date.now() + 90*24*60*60*1000,
-        created_at: Date.now(),
-        firstname: 'Anna',
-        country: 'Finland',
-        debt_total: '5000_15000',
-        situation: 'Over-indebted',
-        collections: 'No',
-        barrier: "Don't know where to start",
-        onboarding_complete: true,
-        debt_recovery_plan: 'Test plan content here.'
-      });
-    } else {
-      showGateError('Unable to verify access. Please try again or contact support@debt-free.world');
-    }
+  } catch(e) {
+    showGateError('Connection error. Please refresh the page.');
   }
-}
-
-function showGateError(msg) {
-  document.querySelector('.gate-loading').style.display = 'none';
-  const el = document.getElementById('gateError');
-  el.textContent = msg;
-  el.style.display = 'block';
 }
 
 function launchDashboard(data) {
   document.getElementById('gate').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
 
-  // Topbar expiry
+  // Expiry
   if (data.expires_at) {
     const d = new Date(data.expires_at);
     document.getElementById('expiresLabel').textContent =
-      `Access expires: ${d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'})}`;
+      `Access expires: ${d.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'})}`;
   }
 
-  // Progress bar
+  // Progress
   if (data.created_at) {
     const daysPassed = Math.max(1, Math.floor((Date.now() - data.created_at) / 86400000));
     const pct = Math.min(100, Math.round((daysPassed / 90) * 100));
@@ -803,158 +440,98 @@ function launchDashboard(data) {
     document.getElementById('progressPct').textContent = `${pct}%`;
   }
 
-  // Personalised welcome heading
-  const name = data.firstname;
-  if (name) {
-    document.getElementById('dashTitle').textContent = `Welcome back, ${name} ✦`;
-    document.getElementById('dashSubtitle').textContent =
-      `Your 90-day Debt Recovery plan is active. Here are your tools.`;
+  // Welcome
+  if (data.firstname) {
+    document.getElementById('dashTitle').innerHTML = `Welcome back, ${data.firstname} <em>✦</em>`;
   }
 
-  // Pre-fill letter tool with user's country
+  // Pre-fill letter country
   if (data.country) {
     const sel = document.getElementById('letterCountry');
     for (let i = 0; i < sel.options.length; i++) {
-      if (sel.options[i].value === data.country) {
-        sel.selectedIndex = i;
-        break;
-      }
+      if (sel.options[i].value === data.country) { sel.selectedIndex = i; break; }
     }
   }
 
-  // Today's task card
-  if (data.onboarding_complete) {
-    const task = getFirstTask(data);
-    document.getElementById('todayTaskText').textContent = task;
-    document.getElementById('todayCard').style.display = 'flex';
-  }
-
-  // Personalised plan
-  if (data.debt_recovery_plan) {
-    document.getElementById('planContent').textContent = data.debt_recovery_plan;
+  // Show plan or prompt
+  const plan = data.debt_recovery_plan || data.member_plan;
+  if (plan) {
+    document.getElementById('planContent').textContent = plan;
     document.getElementById('planCard').style.display = 'block';
-  }
-
-  // Show welcome popup
-  showWelcomePopup(data);
-}
-
-function showWelcomePopup(data) {
-  const name = data.firstname;
-  const overlay = document.getElementById('welcome-overlay');
-
-  // Title
-  document.getElementById('welcomeTitle').textContent =
-    name ? `Welcome, ${name} ✦` : 'Welcome to your plan ✦';
-
-  if (data.onboarding_complete && data.debt_recovery_plan) {
-    // Full personalised welcome
-    document.getElementById('welcomeSub').textContent =
-      'Your personalised 90-day Debt Recovery plan is ready. Here is where you start.';
-
-    // First task
-    const task = getFirstTask(data);
-    document.getElementById('welcomeTodayTask').textContent = task;
-    document.getElementById('welcomeToday').style.display = 'block';
-
-    // Stats
-    if (data.country) document.getElementById('statCountry').textContent = data.country;
-    if (data.debt_total) {
-      document.getElementById('statDebt').textContent =
-        (DEBT_LABELS[data.debt_total] || data.debt_total);
-    }
-    document.getElementById('welcomeStats').style.display = 'grid';
-
-    document.getElementById('welcomeIcon').textContent = '✦';
-
   } else {
-    // Onboarding not done — prompt to complete it, but allow skipping
-    document.getElementById('welcomeIcon').textContent = '📋';
-    document.getElementById('welcomeTitle').textContent = 'One last step';
-    document.getElementById('welcomeSub').textContent =
-      'To generate your personalised 90-day plan, we need a few details. Takes 2 minutes — or skip and use the tools now.';
-
-    const cta = document.querySelector('.welcome-cta');
-    cta.textContent = 'Complete my plan setup →';
-    cta.onclick = () => {
-      // Use stored token from sessionStorage (URL was already cleaned)
-      const storedTok = sessionStorage.getItem('dfw_member_token') || '';
-      window.location.href = `/onboarding-debt-recovery.html?token=${storedTok}`;
-    };
-    document.getElementById('welcomeStats').style.display = 'none';
-    document.getElementById('welcomeToday').style.display = 'none';
-
-    // Show skip button
-    const skipBtn = document.querySelector('.welcome-skip');
-    if (skipBtn) {
-      skipBtn.textContent = 'Skip — use tools now';
-      skipBtn.style.display = 'block';
-      skipBtn.onclick = closeWelcome;
+    document.getElementById('noPlanCard').style.display = 'block';
+    if (!data.onboarding_complete) {
+      const storedToken = sessionStorage.getItem('dfw_member_token') || '';
+      document.getElementById('planStartBtn').href = `/onboarding-debt-recovery.html?token=${storedToken}`;
     }
   }
-
-  // Only show on first visit (once per session)
-  const shownKey = 'dfw_welcome_shown_' + (data.email || 'user');
-  if (!sessionStorage.getItem(shownKey)) {
-    overlay.classList.add('show');
-    sessionStorage.setItem(shownKey, '1');
-  }
 }
 
-function closeWelcome() {
-  document.getElementById('welcome-overlay').classList.remove('show');
+function goToOnboarding() {
+  const storedToken = sessionStorage.getItem('dfw_member_token') || '';
+  window.location.href = `/onboarding-debt-recovery.html?token=${storedToken}`;
 }
 
-// Close popup on overlay click
-document.getElementById('welcome-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closeWelcome();
-});
-
-function openTool(id) {
-  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
-  const panel = document.getElementById('panel-' + id);
-  if (panel) {
-    panel.classList.add('active');
-    setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-  }
-}
-
-function closeTool(id) {
-  document.getElementById('panel-' + id)?.classList.remove('active');
-}
-
-function togglePlan() {
+function expandPlan() {
   const content = document.getElementById('planContent');
   const btn = document.getElementById('planExpandBtn');
   content.classList.toggle('expanded');
-  btn.textContent = content.classList.contains('expanded') ? 'Collapse ↑' : 'Read full plan ↓';
+  btn.textContent = content.classList.contains('expanded') ? 'Show less ↑' : 'Read full plan ↓';
 }
 
+// ── TOOL NAVIGATION ──
+function openTool(id) {
+  // Close all panels and deactivate all cards
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tool-card').forEach(c => c.classList.remove('active'));
+
+  const panel = document.getElementById('panel-' + id);
+  if (panel) {
+    panel.classList.add('active');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// ── AI LETTER GENERATOR ──
 async function generateLetter() {
   const type = document.getElementById('letterType').value;
-  const creditor = document.getElementById('creditorName').value || 'the creditor';
-  const amount = document.getElementById('debtAmount').value;
+  const creditor = document.getElementById('letterCreditor').value;
   const country = document.getElementById('letterCountry').value;
-  const situation = document.getElementById('situation').value;
-  const typeLabels = {
-    hardship: 'financial hardship / payment difficulty',
-    settlement: 'debt settlement offer',
-    stop_contact: 'stop contact / cease and desist',
-    dispute: 'formal debt dispute',
-    payment_plan: 'payment plan request',
-    payment_holiday: 'payment holiday request',
-    negotiation: 'debt negotiation'
-  };
-  const btn = document.getElementById('generateBtn');
-  const btnText = document.getElementById('btnText');
-  btn.disabled = true; btnText.textContent = 'Generating…';
-  document.getElementById('letterOutput').classList.remove('visible');
-  document.getElementById('letterActions').classList.remove('visible');
+  const amount = document.getElementById('letterAmount').value;
+  const situation = document.getElementById('letterSituation').value;
 
-  const prompt = `Write a professional formal letter for a ${typeLabels[type]} situation.\nCreditor: ${creditor}\nDebt amount: ${amount ? amount : 'not specified'}\nCountry: ${country}\nContext: ${situation || 'none'}\nRequirements: formal, include relevant legal references for ${country}, firm but respectful, include placeholders [YOUR NAME] [YOUR ADDRESS] [DATE], 200-350 words, plain text only, start directly with the letter.`;
+  if (!type || !creditor) {
+    alert('Please select a letter type and enter the creditor name.');
+    return;
+  }
+
+  const typeLabels = {
+    hardship: 'hardship / payment difficulty',
+    settlement: 'debt settlement offer',
+    stop_contact: 'stop contact / harassment',
+    dispute: 'debt dispute / verification request',
+    payment_plan: 'proposed payment plan',
+    payment_holiday: 'payment holiday request',
+    negotiation: 'general debt negotiation'
+  };
+
+  const btn = document.getElementById('letterBtn');
+  btn.disabled = true;
+  btn.textContent = 'Generating…';
+
+  const output = document.getElementById('letterOutput');
+  output.textContent = '';
+  output.style.display = 'none';
+  document.getElementById('letterCopy').style.display = 'none';
+
+  const prompt = `Write a professional formal letter for a ${typeLabels[type]} situation.
+Creditor: ${creditor}
+Debt amount: ${amount ? amount + ' EUR' : 'not specified'}
+Country: ${country}
+Context: ${situation || 'none provided'}
+Requirements: formal tone, include relevant legal references for ${country}, firm but respectful, include placeholders [YOUR NAME] [YOUR ADDRESS] [DATE], 200-350 words, plain text only, start directly with the letter.`;
 
   try {
-    // Retrieve stored token (was stripped from URL on first load — see validateToken)
     const storedToken = sessionStorage.getItem('dfw_member_token');
     const res = await fetch(`${WORKER_URL}/api/chat`, {
       method: 'POST',
@@ -962,65 +539,105 @@ async function generateLetter() {
         'Content-Type': 'application/json',
         ...(storedToken ? { 'x-member-token': storedToken } : {})
       },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] })
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
     });
     const data = await res.json();
     const text = data.content?.[0]?.text || 'Error generating letter. Please try again.';
-    document.getElementById('letterOutput').textContent = text;
-    document.getElementById('letterOutput').classList.add('visible');
-    document.getElementById('letterActions').classList.add('visible');
-  } catch {
-    document.getElementById('letterOutput').textContent = 'Unable to generate letter. Please try again.';
-    document.getElementById('letterOutput').classList.add('visible');
+    output.textContent = text;
+    output.style.display = 'block';
+    document.getElementById('letterCopy').style.display = 'inline-block';
+  } catch(e) {
+    output.textContent = 'Connection error. Please try again.';
+    output.style.display = 'block';
   }
-  btn.disabled = false; btnText.textContent = 'Generate Letter';
+
+  btn.disabled = false;
+  btn.textContent = 'Generate letter →';
 }
 
 function copyLetter() {
-  navigator.clipboard.writeText(document.getElementById('letterOutput').textContent).then(() => {
-    const btn = event.target; const orig = btn.textContent;
-    btn.textContent = '✅ Copied!'; setTimeout(() => btn.textContent = orig, 2000);
+  const text = document.getElementById('letterOutput').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('letterCopy');
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = 'Copy letter', 2000);
   });
 }
 
-function calcSim() {
-  const debt = parseFloat(document.getElementById('simDebt').value);
-  const payment = parseFloat(document.getElementById('simPayment').value);
-  const rate = parseFloat(document.getElementById('simRate').value) / 100 / 12;
+// ── BUDGET SIMULATOR ──
+function runSimulator() {
+  const debt = parseFloat(document.getElementById('simDebt').value) || 0;
+  const payment = parseFloat(document.getElementById('simPayment').value) || 0;
+  const rate = parseFloat(document.getElementById('simRate').value) || 0;
   const extra = parseFloat(document.getElementById('simExtra').value) || 0;
-  if (!debt || !payment || !rate || payment <= debt * rate) {
-    document.getElementById('simResults').style.display = 'none'; return;
+
+  if (!debt || !payment) {
+    alert('Please enter at least your debt amount and monthly payment.');
+    return;
   }
-  function calcMonths(d, p, r) { return Math.ceil(-Math.log(1 - (d * r) / p) / Math.log(1 + r)); }
-  const m1 = calcMonths(debt, payment, rate);
-  const m2 = calcMonths(debt, payment + extra, rate);
-  const i1 = (payment * m1) - debt;
-  const i2 = ((payment + extra) * m2) - debt;
-  document.getElementById('simMonths1').textContent = m1 + ' mo';
-  document.getElementById('simMonths2').textContent = m2 + ' mo';
-  document.getElementById('simInterest1').textContent = '€' + Math.round(i1).toLocaleString();
-  document.getElementById('simInterest2').textContent = '€' + Math.round(i2).toLocaleString();
-  document.getElementById('simResults').style.display = 'grid';
-  const saved = i1 - i2;
-  const savingEl = document.getElementById('simSaving');
-  if (extra > 0 && saved > 0) {
-    savingEl.textContent = `Adding €${extra}/month saves you €${Math.round(saved).toLocaleString()} in interest and gets you debt-free ${m1 - m2} months sooner. ✦`;
-    savingEl.style.display = 'block';
-  } else { savingEl.style.display = 'none'; }
+
+  function monthsToPayOff(P, pmt, r) {
+    if (pmt <= 0) return null;
+    const monthly_r = r / 100 / 12;
+    if (monthly_r === 0) return Math.ceil(P / pmt);
+    if (pmt <= P * monthly_r) return null;
+    return Math.ceil(-Math.log(1 - P * monthly_r / pmt) / Math.log(1 + monthly_r));
+  }
+
+  const m1 = monthsToPayOff(debt, payment, rate);
+  const m2 = extra > 0 ? monthsToPayOff(debt, payment + extra, rate) : null;
+
+  let result = '';
+  if (!m1) {
+    result = 'With your current payment, the debt is not reducing (payment may not cover interest). Increase your monthly payment.';
+  } else {
+    const y1 = Math.floor(m1/12), mo1 = m1 % 12;
+    result = `Current payment (${payment} €/month): debt-free in ${y1}y ${mo1}m (${m1} months).`;
+    if (m2 !== null) {
+      const y2 = Math.floor(m2/12), mo2 = m2 % 12;
+      const saved = m1 - m2;
+      result += `\n\nWith +${extra} €/month (${payment+extra} € total): debt-free in ${y2}y ${mo2}m (${m2} months).\n→ You save ${saved} months.`;
+    }
+  }
+
+  const out = document.getElementById('simOutput');
+  out.textContent = result;
+  out.style.display = 'block';
 }
 
-function selectMethod(method) {
-  document.getElementById('methodSnowball').classList.toggle('selected', method === 'snowball');
-  document.getElementById('methodAvalanche').classList.toggle('selected', method === 'avalanche');
+// ── STRATEGY CALCULATOR ──
+function runStrategy() {
+  const d1 = parseFloat(document.getElementById('stratDebt1').value) || 0;
+  const r1 = parseFloat(document.getElementById('stratRate1').value) || 0;
+  const d2 = parseFloat(document.getElementById('stratDebt2').value) || 0;
+  const r2 = parseFloat(document.getElementById('stratRate2').value) || 0;
+  const pmt = parseFloat(document.getElementById('stratPayment').value) || 0;
+
+  if (!d1 || !d2 || !pmt) {
+    alert('Please enter both debts and your monthly payment.');
+    return;
+  }
+
+  const out = document.getElementById('stratOutput');
+
+  // Snowball: pay smallest first (d1 vs d2 by amount)
+  const snowballFirst = d1 <= d2 ? `Debt 1 (${d1} €)` : `Debt 2 (${d2} €)`;
+  // Avalanche: pay highest rate first
+  const avalancheFirst = r1 >= r2 ? `Debt 1 (${r1}% interest)` : `Debt 2 (${r2}% interest)`;
+
+  const recommendation = r1 > 5 || r2 > 5
+    ? 'With interest rates above 5%, Avalanche saves you more money. Choose Snowball only if you need quick motivational wins.'
+    : 'With low interest rates, both methods cost roughly the same. Choose Snowball for motivation — the difference is minimal.';
+
+  out.textContent = `❄️ Snowball: pay ${snowballFirst} first → quick win, then roll payment to next debt.\n\n🔥 Avalanche: pay ${avalancheFirst} first → saves the most on interest.\n\n💡 Recommendation: ${recommendation}`;
+  out.style.display = 'block';
 }
 
-function showGuide(country, e) {
-  document.querySelectorAll('.guide-content').forEach(g => g.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('guide-' + country).classList.add('active');
-  e.target.classList.add('active');
-}
-
+// ── INIT ──
 validateToken();
 </script>
 </body>
