@@ -867,11 +867,14 @@ async function submitForm() {
       // Silent — proceed to member area regardless
     }
 
-    // Always redirect to member area
+    // Always redirect to member area with token
+    // If no token (shouldn't happen in normal flow), go to member area — user can log in via email link
     if (memberToken) {
       window.location.replace(`https://www.debt-free.world/member/?token=${memberToken}`);
     } else {
-      window.location.replace(`https://www.debt-free.world/member/?email=${encodeURIComponent(formData.email)}`);
+      // No token available — this means user arrived without a magic link
+      // Direct them to the member area; they'll need to use the magic link from their email
+      window.location.replace(`https://www.debt-free.world/member/`);
     }
 
   } catch(e) {
