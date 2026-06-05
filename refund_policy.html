@@ -1,121 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Refund Policy — Debt-Free.world</title>
-  <meta name="robots" content="noindex">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'DM Sans', sans-serif; background: #f0fdf4; color: #1a2e1a; }
-    .header { background: #fff; border-bottom: 1px solid #d1d5db; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: 'DM Serif Display', serif; font-size: 20px; color: #166534; text-decoration: none; }
-    .back { font-size: 14px; color: #166534; text-decoration: none; font-weight: 500; }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
-    .doc-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: #14532d; margin-bottom: 8px; }
-    .doc-meta { font-size: 14px; color: #6b7280; margin-bottom: 48px; }
-    h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: #14532d; margin: 40px 0 12px; }
-    p { font-size: 15px; line-height: 1.8; color: #374151; margin-bottom: 14px; }
-    ul { padding-left: 20px; margin-bottom: 14px; }
-    ul li { font-size: 15px; line-height: 1.8; color: #374151; margin-bottom: 6px; }
-    a { color: #166534; }
-    .legal-box { background: #fef3c7; border-left: 4px solid #d97706; padding: 20px 24px; border-radius: 0 12px 12px 0; margin: 24px 0; }
-    .legal-box p { margin: 0; color: #92400e; font-weight: 500; line-height: 1.7; }
-    .goodwill-box { background: #f0fdf4; border: 2px solid #166534; border-radius: 12px; padding: 24px; margin: 24px 0; }
-    .goodwill-box h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: #166534; margin-bottom: 10px; }
-    .goodwill-box p { margin: 0; color: #374151; }
-    .process-steps { margin: 20px 0; }
-    .process-step { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
-    .step-num { width: 32px; height: 32px; background: #166534; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
-    .step-body strong { display: block; font-size: 15px; color: #14532d; margin-bottom: 4px; }
-    .step-body span { font-size: 14px; color: #6b7280; line-height: 1.5; }
-    footer { text-align: center; padding: 32px 20px; font-size: 13px; color: #9ca3af; background: #fff; border-top: 1px solid #e5e7eb; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Refund Policy — Debt-Free.world</title>
+<meta name="description" content="Refund Policy for Debt-Free.world. We treat every customer fairly — read our goodwill commitment."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
+.page{max-width:720px;margin:0 auto;padding:0 24px;}
+nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.25rem 0;}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;justify-self:start;}
+.nav-logo em{font-style:italic;color:var(--green);}
+.nav-back{font-size:13px;font-weight:500;color:var(--green);text-decoration:none;justify-self:end;}
+.nav-back:hover{text-decoration:underline;}
+.hero{padding:2.5rem 0 2rem;}
+.hero-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1rem;}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,5vw,42px);line-height:1.1;letter-spacing:-0.5px;margin-bottom:0.75rem;}
+.hero-meta{font-size:13px;color:#888;}
+.section{padding:1.75rem 0;border-top:none;}
+.section-num{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#111;font-weight:500;margin-bottom:0.625rem;}
+.section h2{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:0.875rem;}
+.prose{font-size:15px;line-height:1.85;color:#333;font-weight:300;}
+.prose p{margin-bottom:1rem;}
+.prose p:last-child{margin-bottom:0;}
+.prose ul,.prose ol{padding-left:1.25rem;margin-bottom:1rem;}
+.prose li{margin-bottom:0.375rem;line-height:1.7;}
+.prose strong{font-weight:600;color:#111;}
+.highlight-box{background:var(--green-bg);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:1.125rem 1.5rem;margin:1rem 0;}
+.highlight-box p{font-size:14px;line-height:1.75;color:#333;}
+.highlight-box strong{color:var(--green-dark);}
+.step-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:0.75rem;}
+.step-item{display:flex;gap:14px;align-items:flex-start;padding:1rem;border:0.5px solid var(--border);border-radius:10px;background:#fff;}
+.step-num{font-size:11px;font-weight:700;background:var(--green);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-body{font-size:14px;color:#333;line-height:1.6;}
+.step-body strong{display:block;font-weight:600;color:#111;margin-bottom:3px;}
+.check-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;margin-top:0.75rem;}
+.check-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#333;line-height:1.6;padding:0.625rem 0.875rem;background:#f9f9f9;border-radius:8px;}
+.check-list li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
+footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:0.5px solid #eee;margin-top:2rem;}
+.footer-logo{font-family:var(--serif);font-size:17px;color:#111;}
+.footer-logo em{font-style:italic;color:var(--green);}
+.footer-note{font-size:12px;color:#888;}
+@media(max-width:520px){nav{grid-template-columns:1fr 1fr;}}
+</style>
 </head>
 <body>
-<header class="header">
-  <a href="https://www.debt-free.world" class="logo">✦ Debt-Free.world</a>
-  <a href="https://www.debt-free.world" class="back">← Back to home</a>
-</header>
-<div class="wrap">
-  <h1 class="doc-title">Refund Policy</h1>
-  <p class="doc-meta">Debt-Free.world · Amliv Oy · Last updated: 2 June 2026</p>
+<div class="page">
 
-  <p>We want every customer to feel confident purchasing from Debt-Free.world. This Refund Policy explains your rights and how we handle refund requests.</p>
+<nav>
+  <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
+  <a href="/" class="nav-back">← Back to home</a>
+</nav>
 
-  <h2>1. Legal Position — EU Directive 2011/83/EU Art. 16(m)</h2>
-  <div class="legal-box">
-    <p>Under EU Directive 2011/83/EU Article 16(m), consumers do not have a right of withdrawal for digital content that is not supplied on a tangible medium, where performance has begun with the consumer's prior express consent and acknowledgement that they thereby lose their right of withdrawal.<br><br>
-    At the point of purchase, you expressly consented to the immediate delivery of your personalised digital content and acknowledged the loss of your right of withdrawal. This consent was recorded at checkout.<br><br>
-    Therefore, Debt-Free.world is not legally obligated to provide refunds for completed purchases.</p>
+<section class="hero">
+  <div class="hero-label">Legal</div>
+  <h1>Refund Policy</h1>
+  <p class="hero-meta">Debt-Free.world · Amliv Oy · Last updated: 2 June 2026</p>
+</section>
+
+<div class="section">
+  <p class="prose">We want every customer to feel confident purchasing from Debt-Free.world. This policy explains your rights and how we handle refund requests.</p>
+</div>
+
+<div class="section">
+  <div class="section-num">01</div>
+  <h2>Legal position — EU Art. 16(m)</h2>
+  <div class="highlight-box">
+    <p>Under EU Directive 2011/83/EU Article 16(m), consumers do not have a right of withdrawal for digital content that is not supplied on a tangible medium, where performance has begun with the consumer's prior express consent and acknowledgement that they thereby lose their right of withdrawal.</p>
+    <p style="margin-top:0.75rem;">At the point of purchase, you expressly consented to the immediate delivery of your personalised digital content and acknowledged the loss of your right of withdrawal. This consent was recorded at checkout.</p>
+    <p style="margin-top:0.75rem;"><strong>Therefore, Debt-Free.world is not legally obligated to provide refunds for completed purchases.</strong></p>
   </div>
+</div>
 
-  <h2>2. Our Goodwill Commitment</h2>
-  <div class="goodwill-box">
-    <h3>We do this together ✦</h3>
+<div class="section">
+  <div class="section-num">02</div>
+  <h2>Our goodwill commitment</h2>
+  <div class="prose">
     <p>Despite the legal position above, we are committed to treating every customer fairly. We understand that financial stress is real, and we believe in the value of what we deliver. If you are genuinely unsatisfied, we will always listen and find a fair solution — because your trust matters more than any single transaction.</p>
+    <p style="font-style:italic;color:var(--green);font-weight:400;">We do this together ✦</p>
   </div>
+</div>
 
-  <h2>3. When We Will Issue a Refund</h2>
-  <p>We will issue a full refund without question in the following situations:</p>
-  <ul>
+<div class="section">
+  <div class="section-num">03</div>
+  <h2>When we will issue a refund</h2>
+  <p class="prose" style="margin-bottom:0.75rem;">We will issue a full refund without question in any of the following situations:</p>
+  <ul class="check-list">
     <li>You were charged but did not receive your access link or report within 24 hours</li>
     <li>You were charged twice for the same purchase</li>
     <li>A technical error prevented you from accessing your Premium Member Area</li>
     <li>The content delivered was materially different from what was described</li>
   </ul>
+</div>
 
-  <h2>4. Case-by-Case Review</h2>
-  <p>We review all other refund requests individually and with genuine care. While we cannot guarantee refunds outside the situations above, we commit to:</p>
-  <ul>
-    <li>Responding to every refund request within 3 business days</li>
-    <li>Treating every case with fairness and human judgment</li>
-    <li>Offering alternative solutions where a full refund is not appropriate (e.g. extended access, personalised support)</li>
-  </ul>
-
-  <h2>5. How to Request a Refund</h2>
-  <div class="process-steps">
-    <div class="process-step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <strong>Email us at support@debt-free.world</strong>
-        <span>Include your email address used at purchase and a brief description of the issue. Subject line: "Refund request"</span>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <strong>We respond within 3 business days</strong>
-        <span>We will review your case and respond with our decision or a request for more information.</span>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <strong>Refund processed within 5–10 business days</strong>
-        <span>Approved refunds are returned to your original payment method via Stripe. Timing depends on your bank.</span>
-      </div>
-    </div>
+<div class="section">
+  <div class="section-num">04</div>
+  <h2>Case-by-case review</h2>
+  <div class="prose">
+    <p>We review all other refund requests individually and with genuine care. While we cannot guarantee refunds outside the situations above, we commit to:</p>
+    <ul>
+      <li>Responding to every refund request within 3 business days</li>
+      <li>Treating every case with fairness and human judgment</li>
+      <li>Offering alternative solutions where a full refund is not appropriate — for example, extended access or personalised support</li>
+    </ul>
   </div>
+</div>
 
-  <h2>6. Community Access Program</h2>
-  <p>If you genuinely cannot afford Debt Recovery but need help, you may apply to our Community Access Program — which provides free Premium access in exchange for feedback and participation in our development process. Contact us at <a href="mailto:support@debt-free.world">support@debt-free.world</a> with subject line "Community Access".</p>
+<div class="section">
+  <div class="section-num">05</div>
+  <h2>How to request a refund</h2>
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-num">1</span>
+      <div class="step-body"><strong>Email us at support@debt-free.world</strong>Include your email address used at purchase and a brief description of the issue. Subject line: "Refund request"</div>
+    </li>
+    <li class="step-item">
+      <span class="step-num">2</span>
+      <div class="step-body"><strong>We respond within 3 business days</strong>We will review your case and respond with our decision or a request for more information.</div>
+    </li>
+    <li class="step-item">
+      <span class="step-num">3</span>
+      <div class="step-body"><strong>Refund processed within 5–10 business days</strong>Approved refunds are returned to your original payment method via Stripe. Timing depends on your bank.</div>
+    </li>
+  </ol>
+</div>
 
-  <h2>7. Dispute Resolution</h2>
-  <p>If you are not satisfied with our response, you have the right to escalate your complaint to:</p>
-  <ul>
-    <li><strong>Finnish Consumer Disputes Board:</strong> <a href="https://www.kuluttajariitalautakunta.fi" target="_blank">kuluttajariitalautakunta.fi</a></li>
-    <li><strong>EU Online Dispute Resolution:</strong> <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a></li>
-  </ul>
-  <p>These services are free of charge for consumers and available to all EU residents.</p>
+<div class="section">
+  <div class="section-num">06</div>
+  <h2>Community Access Program</h2>
+  <div class="prose">
+    <p>If you genuinely cannot afford Debt Recovery but need help, you may apply to our Community Access Program — which provides free Premium access in exchange for feedback and participation in our development process.</p>
+    <p>Contact us at <a href="mailto:support@debt-free.world" style="color:var(--green);">support@debt-free.world</a> with the subject line "Community Access".</p>
+  </div>
+</div>
 
-  <h2>8. Contact</h2>
-  <p>For any refund or billing questions:<br>
-  <a href="mailto:support@debt-free.world">support@debt-free.world</a><br>
-  Amliv Oy · Lauttakorventie 7 E 36, 37130 Nokia, Finland</p>
+<div class="section">
+  <div class="section-num">07</div>
+  <h2>Dispute resolution</h2>
+  <div class="prose">
+    <p>If you are not satisfied with our response, you have the right to escalate to:</p>
+    <ul>
+      <li><strong>Finnish Consumer Disputes Board:</strong> <a href="https://www.kuluttajariitalautakunta.fi" target="_blank" style="color:var(--green);">kuluttajariitalautakunta.fi</a></li>
+      <li><strong>EU Online Dispute Resolution:</strong> <a href="https://ec.europa.eu/consumers/odr" target="_blank" style="color:var(--green);">ec.europa.eu/consumers/odr</a></li>
+    </ul>
+    <p>These services are free of charge for consumers and available to all EU residents.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">08</div>
+  <h2>Contact</h2>
+  <div class="prose">
+    <p>For any refund or billing question: <a href="mailto:support@debt-free.world" style="color:var(--green);">support@debt-free.world</a></p>
+    <p>Amliv Oy · Lauttakorventie 7 E 36, 37130 Nokia, Finland</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Debt-<em>Free</em>.world</div>
+  <div class="footer-note">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
+</footer>
 
 </div>
-<footer>Amliv Oy · VAT FI32503518 · Nokia, Finland · We do this together ✦</footer>
 </body>
 </html>
