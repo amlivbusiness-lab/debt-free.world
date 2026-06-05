@@ -856,7 +856,11 @@ async function submitForm() {
     try {
       await fetch(`${WORKER_URL}/onboarding/save`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          // Send member token so Worker can verify ownership before writing to KV
+          ...(memberToken ? { 'x-member-token': memberToken } : {})
+        },
         body: JSON.stringify({ session_id: sessionId, email: formData.email, plan, onboarding: formData })
       });
     } catch(saveErr) {
