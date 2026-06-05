@@ -422,7 +422,7 @@
 <!-- DASHBOARD -->
 <div id="dashboard">
   <nav class="topbar">
-    <a class="topbar-logo" href="https://www.debt-free.world">✦ Debt-Free.world</a>
+    <span class="topbar-logo" style="cursor:default;">✦ Debt-Free.world</span>
     <span class="topbar-center">Premium Member Area — Debt Recovery</span>
     <div class="topbar-right">
       <span class="expires-label" id="expiresLabel">Access expires: —</span>
@@ -609,7 +609,7 @@
       <p style="font-size:0.85rem;color:var(--muted);margin-bottom:20px"><strong>The honest answer:</strong> Avalanche saves more money. Snowball saves more motivation. Both beat doing nothing by 10×.</p>
       <div style="background:var(--green-pale);border-radius:10px;padding:20px">
         <h3 style="font-family:'DM Serif Display',serif;color:var(--green);font-size:1rem;margin-bottom:12px;font-weight:400">Typical result: Avalanche vs Snowball</h3>
-        <p style="font-size:0.87rem;color:var(--muted);line-height:1.6">On €15,000 of mixed debt at 15–25% interest with €400/month payments, Avalanche typically saves €800–€1,400 in interest. The debt-free date is 2–4 months earlier.</p>
+        <p style="font-size:0.87rem;color:var(--muted);line-height:1.6">On 15 000 € of mixed debt at 15–25% interest with 400 €/month payments, Avalanche typically saves 800 €–1 400 € in interest. The debt-free date is 2–4 months earlier.</p>
       </div>
     </div>
 
@@ -750,14 +750,8 @@ async function validateToken() {
 
     const data = await res.json();
 
-    // VARIANT B: If onboarding not complete, redirect to onboarding form
-    if (!data.onboarding_complete) {
-      window.location.replace(
-        `/onboarding-debt-recovery.html?token=${token}`
-      );
-      return;
-    }
-
+    // Always launch dashboard — welcome popup handles onboarding prompt if needed
+    // User can choose to complete onboarding or skip and use tools immediately
     launchDashboard(data);
 
   } catch (e) {
@@ -874,21 +868,29 @@ function showWelcomePopup(data) {
     document.getElementById('welcomeIcon').textContent = '✦';
 
   } else {
-    // Onboarding not done — prompt to complete it
+    // Onboarding not done — prompt to complete it, but allow skipping
     document.getElementById('welcomeIcon').textContent = '📋';
     document.getElementById('welcomeTitle').textContent = 'One last step';
     document.getElementById('welcomeSub').textContent =
-      'Your plan needs your personal details to be generated. It takes 2 minutes.';
+      'To generate your personalised 90-day plan, we need a few details. Takes 2 minutes — or skip and use the tools now.';
 
     const cta = document.querySelector('.welcome-cta');
     cta.textContent = 'Complete my plan setup →';
     cta.onclick = () => {
-      const params = new URLSearchParams(window.location.search);
-      const token = params.get('token');
-      window.location.href = `/onboarding-debt-recovery.html?token=${token}`;
+      // Use stored token from sessionStorage (URL was already cleaned)
+      const storedTok = sessionStorage.getItem('dfw_member_token') || '';
+      window.location.href = `/onboarding-debt-recovery.html?token=${storedTok}`;
     };
     document.getElementById('welcomeStats').style.display = 'none';
     document.getElementById('welcomeToday').style.display = 'none';
+
+    // Show skip button
+    const skipBtn = document.querySelector('.welcome-skip');
+    if (skipBtn) {
+      skipBtn.textContent = 'Skip — use tools now';
+      skipBtn.style.display = 'block';
+      skipBtn.onclick = closeWelcome;
+    }
   }
 
   // Only show on first visit (once per session)
