@@ -47,6 +47,14 @@ body{font-family:var(--sans);color:var(--text);background:#f8faf9;-webkit-font-s
 .progress-bar{background:var(--green-light);border-radius:20px;height:8px;overflow:hidden;}
 .progress-fill{background:var(--green);height:100%;width:0;transition:width 1s ease;border-radius:20px;}
 
+/* ── PROFILE CARD ── */
+.profile-card{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:10px;padding:0.875rem 1.25rem;margin-bottom:1.5rem;display:none;}
+.profile-card-inner{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;}
+.profile-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:6px;}
+.profile-chip{font-size:12px;color:#333;display:flex;align-items:center;gap:5px;}
+.profile-chip::before{content:"·";color:var(--green-border);}
+.profile-chip:first-child::before{display:none;}
+
 /* ── PLAN CARD ── */
 .plan-card{background:var(--white);border:0.5px solid var(--border);border-left:3px solid var(--green);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;}
 .plan-card-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:0.75rem;}
@@ -87,6 +95,10 @@ body{font-family:var(--sans);color:var(--text);background:#f8faf9;-webkit-font-s
 .panel-output{background:#f9f9f9;border:0.5px solid var(--border);border-radius:8px;padding:1.25rem;font-size:13px;line-height:1.75;color:#333;white-space:pre-wrap;margin-top:1rem;display:none;}
 .panel-copy{background:transparent;border:1.5px solid var(--green);color:var(--green);border-radius:30px;padding:8px 20px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);margin-top:0.75rem;display:none;}
 .panel-hint{font-size:12px;color:var(--muted);line-height:1.6;margin-top:0.75rem;}
+
+/* ── ERROR / RETRY ── */
+.panel-error{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:1rem 1.25rem;font-size:13px;color:#b91c1c;line-height:1.5;margin-top:1rem;display:none;}
+.panel-retry{background:transparent;border:1.5px solid #b91c1c;color:#b91c1c;border-radius:30px;padding:7px 18px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);margin-top:0.625rem;display:none;}
 
 /* ── SNOWBALL/AVALANCHE ── */
 .strat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem;}
@@ -156,6 +168,12 @@ body{font-family:var(--sans);color:var(--text);background:#f8faf9;-webkit-font-s
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     </div>
 
+    <!-- Profile summary card (shown when onboarding complete) -->
+    <div class="profile-card" id="profileCard">
+      <div class="profile-label" id="profileLabel">Your profile</div>
+      <div class="profile-card-inner" id="profileInner"></div>
+    </div>
+
     <!-- Personalised Plan -->
     <div class="plan-card" id="planCard" style="display:none;">
       <div class="plan-card-label" id="planCardLabel">Your personalised 90-day plan</div>
@@ -167,52 +185,52 @@ body{font-family:var(--sans);color:var(--text);background:#f8faf9;-webkit-font-s
     <!-- No plan yet -->
     <div class="plan-card" id="noPlanCard" style="display:none;">
       <div class="plan-card-label">Your personalised 90-day plan</div>
-      <div class="plan-card-title">Generate your plan</div>
+      <div class="plan-card-title" id="noPlanTitle">Generate your plan</div>
       <p class="plan-empty" id="noPlanText">Your personalised plan is generated when you complete the intake form. It takes 2 minutes.</p>
-      <a href="#" class="plan-start-btn" id="planStartBtn" onclick="goToOnboarding()">Complete my plan setup →</a>
+      <a href="#" class="plan-start-btn" id="planStartBtn">Complete my plan setup →</a>
     </div>
 
     <!-- TOOLS -->
     <div class="section-label" id="toolsLabel">Your tools</div>
 
     <div class="tool-grid">
-      <div class="tool-card" onclick="openTool('letters')">
+      <div class="tool-card" id="card-letters" onclick="openTool('letters')">
         <div class="tool-icon">✉️</div>
         <div class="tool-name" id="tLettersName">AI Letters to Creditors</div>
         <div class="tool-desc" id="tLettersDesc">Hardship, settlement, stop-contact, dispute — 7 letter types.</div>
         <span class="tool-badge">AI</span>
       </div>
-      <div class="tool-card" onclick="openTool('simulator')">
+      <div class="tool-card" id="card-simulator" onclick="openTool('simulator')">
         <div class="tool-icon">📊</div>
         <div class="tool-name" id="tSimName">Crisis Budget Tool</div>
         <div class="tool-desc" id="tSimDesc">See how expense cuts accelerate your debt-free date.</div>
       </div>
-      <div class="tool-card" onclick="openTool('strategies')">
+      <div class="tool-card" id="card-strategies" onclick="openTool('strategies')">
         <div class="tool-icon">❄️</div>
         <div class="tool-name" id="tStratName">Snowball vs Avalanche</div>
         <div class="tool-desc" id="tStratDesc">Which repayment strategy saves you more money and time?</div>
       </div>
-      <div class="tool-card" onclick="openTool('collection')">
+      <div class="tool-card" id="card-collection" onclick="openTool('collection')">
         <div class="tool-icon">🗺️</div>
         <div class="tool-name" id="tCollName">Debt Collection Map</div>
         <div class="tool-desc" id="tCollDesc">Every stage of the process and your rights at each step.</div>
       </div>
-      <div class="tool-card" onclick="openTool('challenge')">
+      <div class="tool-card" id="card-challenge" onclick="openTool('challenge')">
         <div class="tool-icon">🎯</div>
         <div class="tool-name" id="tChalName">90-Day Challenge</div>
         <div class="tool-desc" id="tChalDesc">Daily actions and weekly milestones to stay on track.</div>
       </div>
-      <div class="tool-card" onclick="openTool('psychology')">
+      <div class="tool-card" id="card-psychology" onclick="openTool('psychology')">
         <div class="tool-icon">🧠</div>
         <div class="tool-name" id="tPsychName">Behavioural Tools</div>
         <div class="tool-desc" id="tPsychDesc">Habit building, impulse control, and stress management.</div>
       </div>
-      <div class="tool-card" onclick="openTool('situations')">
+      <div class="tool-card" id="card-situations" onclick="openTool('situations')">
         <div class="tool-icon">🆘</div>
         <div class="tool-name" id="tSitName">Crisis Action Plans</div>
         <div class="tool-desc" id="tSitDesc">Unemployment, divorce, sick leave — step-by-step plans.</div>
       </div>
-      <div class="tool-card" onclick="openTool('bankguides')">
+      <div class="tool-card" id="card-bankguides" onclick="openTool('bankguides')">
         <div class="tool-icon">🏦</div>
         <div class="tool-name" id="tBankName">Bank Guides &amp; Updates</div>
         <div class="tool-desc" id="tBankDesc">Country-specific guides and monthly updated resources.</div>
@@ -244,6 +262,8 @@ body{font-family:var(--sans);color:var(--text);background:#f8faf9;-webkit-font-s
           <textarea id="letterSituation" placeholder="Brief description of your situation (optional — improves the letter)"></textarea>
           <button class="panel-btn" id="letterBtn" onclick="generateLetter()">Generate letter →</button>
         </div>
+        <div class="panel-error" id="letterError"></div>
+        <button class="panel-retry" id="letterRetry" onclick="generateLetter()">Try again</button>
         <div class="panel-output" id="letterOutput"></div>
         <button class="panel-copy" id="letterCopy" onclick="copyLetter()">Copy letter</button>
         <div class="panel-hint" id="letterHint">Review before sending. Letters are a starting point — adjust to your exact situation.</div>
@@ -375,6 +395,211 @@ body{font-family:var(--sans);color:var(--text);background:#f8faf9;-webkit-font-s
 <script>
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 
+// ── Minimal translation strings for member area ──
+// Full T[] not needed — just UI strings. Fallback to EN for unlisted languages.
+const MT = {
+  EN: {
+    verifying: 'Verifying your access',
+    verifyingSub: 'Checking your Premium link. This takes only a moment.',
+    errorExpired: 'This link has expired or is invalid. Please check your email or contact support@debt-free.world',
+    errorConnection: 'Connection error. Please refresh the page.',
+    errorNoToken: 'No access token found. Please use the link from your email.',
+    dashSub: 'Everything you need to eliminate debt — AI letters, tools, and step-by-step guides.',
+    progressOf: 'Day {d} of 90',
+    accessExpires: 'Access expires: {date}',
+    planLabel: 'Your personalised 90-day plan',
+    planTitle: 'Your Debt Recovery Plan',
+    planReadMore: 'Read full plan ↓',
+    planShowLess: 'Show less ↑',
+    noPlanTitle: 'Generate your plan',
+    noPlanText: 'Your personalised plan is generated when you complete the intake form. It takes 2 minutes.',
+    noPlanBtn: 'Complete my plan setup →',
+    toolsLabel: 'Your tools',
+    profileLabel: 'Your profile',
+    letterBtn: 'Generate letter →',
+    letterGenerating: 'Generating…',
+    letterHint: 'Review before sending. Letters are a starting point — adjust to your exact situation.',
+    letterCopy: 'Copy letter',
+    letterCopied: '✓ Copied',
+    letterErrorNoToken: 'Your session has expired. Please open the link from your email again.',
+    letterErrorQuota: 'Daily AI limit reached. Resets at midnight UTC.',
+    letterErrorGeneric: 'Generation failed. Please try again.',
+    letterRetry: 'Try again',
+    simDesc: 'Enter your numbers to see how changes affect your debt-free date.',
+    stratDesc: 'Two proven debt strategies — here\'s which fits your situation.',
+    collDesc: 'Understanding the process removes the fear. Know what comes next — and your rights at each stage.',
+    chalDesc: 'Small consistent actions compound. Here\'s your framework.',
+  },
+  FI: {
+    verifying: 'Tarkistetaan pääsyäsi',
+    verifyingSub: 'Tarkistetaan Premium-linkkisi. Tämä kestää vain hetken.',
+    errorExpired: 'Tämä linkki on vanhentunut tai virheellinen. Tarkista sähköpostisi tai ota yhteyttä support@debt-free.world',
+    errorConnection: 'Yhteysvirhe. Päivitä sivu.',
+    errorNoToken: 'Pääsytunnistetta ei löydy. Käytä sähköpostissasi olevaa linkkiä.',
+    dashSub: 'Kaikki mitä tarvitset veloista eroon pääsemiseen — AI-kirjeet, työkalut ja vaiheittaiset oppaat.',
+    progressOf: 'Päivä {d} / 90',
+    accessExpires: 'Pääsy päättyy: {date}',
+    planLabel: 'Henkilökohtainen 90 päivän suunnitelmasi',
+    planTitle: 'Velkojen palautussuunnitelmasi',
+    planReadMore: 'Lue koko suunnitelma ↓',
+    planShowLess: 'Näytä vähemmän ↑',
+    noPlanTitle: 'Luo suunnitelmasi',
+    noPlanText: 'Henkilökohtainen suunnitelmasi luodaan kun täytät lomakkeen. Se kestää 2 minuuttia.',
+    noPlanBtn: 'Täydennä suunnitelmani asetukset →',
+    toolsLabel: 'Sinun työkalusi',
+    profileLabel: 'Profiilisi',
+    letterBtn: 'Luo kirje →',
+    letterGenerating: 'Luodaan…',
+    letterHint: 'Tarkista ennen lähettämistä. Kirjeet ovat lähtökohta — muokkaa omaan tilanteeseesi.',
+    letterCopy: 'Kopioi kirje',
+    letterCopied: '✓ Kopioitu',
+    letterErrorNoToken: 'Istuntosi on vanhentunut. Avaa linkki sähköpostistasi uudelleen.',
+    letterErrorQuota: 'Päivittäinen AI-raja saavutettu. Nollautuu keskiyöllä UTC-ajassa.',
+    letterErrorGeneric: 'Luominen epäonnistui. Yritä uudelleen.',
+    letterRetry: 'Yritä uudelleen',
+    simDesc: 'Syötä lukusi nähdäksesi miten muutokset vaikuttavat velattomaksi pääsyn päivämäärään.',
+    stratDesc: 'Kaksi todistettua velkastrategiaa — kumpi sopii tilanteeseesi?',
+    collDesc: 'Prosessin ymmärtäminen poistaa pelon. Tiedä mitä on tulossa — ja oikeutesi joka vaiheessa.',
+    chalDesc: 'Pienet johdonmukaiset toimet kertautuvat. Tässä on kehikkosi.',
+  },
+  SV: {
+    verifying: 'Verifierar din åtkomst',
+    verifyingSub: 'Kontrollerar din Premium-länk. Det tar bara ett ögonblick.',
+    errorExpired: 'Den här länken har gått ut eller är ogiltig. Kontrollera din e-post eller kontakta support@debt-free.world',
+    errorConnection: 'Anslutningsfel. Uppdatera sidan.',
+    errorNoToken: 'Ingen åtkomsttoken hittades. Använd länken från ditt e-postmeddelande.',
+    dashSub: 'Allt du behöver för att bli skuldfri — AI-brev, verktyg och steg-för-steg-guider.',
+    progressOf: 'Dag {d} av 90',
+    accessExpires: 'Åtkomst upphör: {date}',
+    planLabel: 'Din personliga 90-dagarsplan',
+    planTitle: 'Din skuldsaneringsplan',
+    planReadMore: 'Läs hela planen ↓',
+    planShowLess: 'Visa mindre ↑',
+    noPlanTitle: 'Skapa din plan',
+    noPlanText: 'Din personliga plan skapas när du fyller i formuläret. Det tar 2 minuter.',
+    noPlanBtn: 'Slutför min planinställning →',
+    toolsLabel: 'Dina verktyg',
+    profileLabel: 'Din profil',
+    letterBtn: 'Skapa brev →',
+    letterGenerating: 'Skapar…',
+    letterHint: 'Granska innan du skickar. Brev är en utgångspunkt — anpassa till din exakta situation.',
+    letterCopy: 'Kopiera brev',
+    letterCopied: '✓ Kopierat',
+    letterErrorNoToken: 'Din session har löpt ut. Öppna länken från ditt e-postmeddelande igen.',
+    letterErrorQuota: 'Daglig AI-gräns nådd. Återställs vid midnatt UTC.',
+    letterErrorGeneric: 'Generering misslyckades. Försök igen.',
+    letterRetry: 'Försök igen',
+    simDesc: 'Ange dina siffror för att se hur förändringar påverkar ditt skuldfrihetsdatum.',
+    stratDesc: 'Två beprövade skuldstrategier — vilken passar din situation?',
+    collDesc: 'Att förstå processen tar bort rädslan. Vet vad som kommer härnäst — och dina rättigheter i varje steg.',
+    chalDesc: 'Små konsekventa åtgärder ackumuleras. Här är ditt ramverk.',
+  },
+  DE: {
+    verifying: 'Zugang wird überprüft',
+    verifyingSub: 'Dein Premium-Link wird geprüft. Das dauert nur einen Moment.',
+    errorExpired: 'Dieser Link ist abgelaufen oder ungültig. Bitte E-Mail prüfen oder support@debt-free.world kontaktieren.',
+    errorConnection: 'Verbindungsfehler. Bitte Seite neu laden.',
+    errorNoToken: 'Kein Zugriffstoken gefunden. Bitte Link aus der E-Mail verwenden.',
+    dashSub: 'Alles was du brauchst um schuldenfrei zu werden — KI-Briefe, Tools und Schritt-für-Schritt-Anleitungen.',
+    progressOf: 'Tag {d} von 90',
+    accessExpires: 'Zugang läuft ab: {date}',
+    planLabel: 'Dein persönlicher 90-Tage-Plan',
+    planTitle: 'Dein Schuldenrückzahlungsplan',
+    planReadMore: 'Vollständigen Plan lesen ↓',
+    planShowLess: 'Weniger anzeigen ↑',
+    noPlanTitle: 'Deinen Plan erstellen',
+    noPlanText: 'Dein persönlicher Plan wird erstellt, wenn du das Formular ausfüllst. Das dauert 2 Minuten.',
+    noPlanBtn: 'Plan-Einrichtung abschließen →',
+    toolsLabel: 'Deine Tools',
+    profileLabel: 'Dein Profil',
+    letterBtn: 'Brief generieren →',
+    letterGenerating: 'Wird generiert…',
+    letterHint: 'Vor dem Senden prüfen. Briefe sind ein Ausgangspunkt — anpassen an deine Situation.',
+    letterCopy: 'Brief kopieren',
+    letterCopied: '✓ Kopiert',
+    letterErrorNoToken: 'Deine Sitzung ist abgelaufen. Bitte den Link aus der E-Mail erneut öffnen.',
+    letterErrorQuota: 'Tägliches KI-Limit erreicht. Setzt um Mitternacht UTC zurück.',
+    letterErrorGeneric: 'Generierung fehlgeschlagen. Bitte erneut versuchen.',
+    letterRetry: 'Erneut versuchen',
+    simDesc: 'Gib deine Zahlen ein um zu sehen wie Änderungen dein Schuldenfreiheitsdatum beeinflussen.',
+    stratDesc: 'Zwei bewährte Schuldenstrategien — welche passt zu deiner Situation?',
+    collDesc: 'Den Prozess zu verstehen nimmt die Angst. Wisse was als nächstes kommt — und deine Rechte in jeder Phase.',
+    chalDesc: 'Kleine konsequente Maßnahmen summieren sich. Hier ist dein Rahmen.',
+  },
+  FR: {
+    verifying: 'Vérification de votre accès',
+    verifyingSub: 'Vérification de votre lien Premium. Cela ne prend qu\'un instant.',
+    errorExpired: 'Ce lien a expiré ou est invalide. Vérifiez votre email ou contactez support@debt-free.world',
+    errorConnection: 'Erreur de connexion. Veuillez actualiser la page.',
+    errorNoToken: 'Aucun token d\'accès trouvé. Veuillez utiliser le lien de votre email.',
+    dashSub: 'Tout ce dont vous avez besoin pour vous libérer de vos dettes — lettres IA, outils et guides étape par étape.',
+    progressOf: 'Jour {d} sur 90',
+    accessExpires: 'Accès expire le : {date}',
+    planLabel: 'Votre plan personnalisé de 90 jours',
+    planTitle: 'Votre Plan de Remboursement',
+    planReadMore: 'Lire le plan complet ↓',
+    planShowLess: 'Afficher moins ↑',
+    noPlanTitle: 'Générer votre plan',
+    noPlanText: 'Votre plan personnalisé est généré quand vous complétez le formulaire. Cela prend 2 minutes.',
+    noPlanBtn: 'Compléter la configuration de mon plan →',
+    toolsLabel: 'Vos outils',
+    profileLabel: 'Votre profil',
+    letterBtn: 'Générer la lettre →',
+    letterGenerating: 'Génération…',
+    letterHint: 'Vérifiez avant d\'envoyer. Les lettres sont un point de départ — adaptez à votre situation.',
+    letterCopy: 'Copier la lettre',
+    letterCopied: '✓ Copié',
+    letterErrorNoToken: 'Votre session a expiré. Veuillez rouvrir le lien de votre email.',
+    letterErrorQuota: 'Limite IA quotidienne atteinte. Réinitialisation à minuit UTC.',
+    letterErrorGeneric: 'Génération échouée. Veuillez réessayer.',
+    letterRetry: 'Réessayer',
+    simDesc: 'Entrez vos chiffres pour voir comment les changements affectent votre date de remboursement.',
+    stratDesc: 'Deux stratégies d\'endettement éprouvées — laquelle correspond à votre situation ?',
+    collDesc: 'Comprendre le processus supprime la peur. Sachez ce qui vient ensuite — et vos droits à chaque étape.',
+    chalDesc: 'De petites actions constantes s\'accumulent. Voici votre cadre.',
+  },
+  ES: {
+    verifying: 'Verificando tu acceso',
+    verifyingSub: 'Comprobando tu enlace Premium. Solo tarda un momento.',
+    errorExpired: 'Este enlace ha caducado o no es válido. Revisa tu email o contacta support@debt-free.world',
+    errorConnection: 'Error de conexión. Por favor recarga la página.',
+    errorNoToken: 'No se encontró token de acceso. Usa el enlace de tu email.',
+    dashSub: 'Todo lo que necesitas para eliminar tus deudas — cartas IA, herramientas y guías paso a paso.',
+    progressOf: 'Día {d} de 90',
+    accessExpires: 'Acceso expira: {date}',
+    planLabel: 'Tu plan personalizado de 90 días',
+    planTitle: 'Tu Plan de Recuperación de Deudas',
+    planReadMore: 'Leer plan completo ↓',
+    planShowLess: 'Mostrar menos ↑',
+    noPlanTitle: 'Genera tu plan',
+    noPlanText: 'Tu plan personalizado se genera cuando completas el formulario. Tarda 2 minutos.',
+    noPlanBtn: 'Completar la configuración de mi plan →',
+    toolsLabel: 'Tus herramientas',
+    profileLabel: 'Tu perfil',
+    letterBtn: 'Generar carta →',
+    letterGenerating: 'Generando…',
+    letterHint: 'Revisa antes de enviar. Las cartas son un punto de partida — ajusta a tu situación.',
+    letterCopy: 'Copiar carta',
+    letterCopied: '✓ Copiado',
+    letterErrorNoToken: 'Tu sesión ha caducado. Por favor abre el enlace de tu email de nuevo.',
+    letterErrorQuota: 'Límite diario de IA alcanzado. Se reinicia a medianoche UTC.',
+    letterErrorGeneric: 'Generación fallida. Por favor inténtalo de nuevo.',
+    letterRetry: 'Intentar de nuevo',
+    simDesc: 'Ingresa tus números para ver cómo los cambios afectan tu fecha de libertad de deudas.',
+    stratDesc: 'Dos estrategias de deuda probadas — ¿cuál se adapta a tu situación?',
+    collDesc: 'Entender el proceso elimina el miedo. Sabe qué viene después — y tus derechos en cada etapa.',
+    chalDesc: 'Pequeñas acciones constantes se acumulan. Aquí está tu marco.',
+  },
+};
+
+// fallback: any language not in MT gets EN
+function getLang(code) {
+  return MT[code] || MT['EN'];
+}
+
+let memberLang = 'EN';
+let L = MT['EN']; // active language strings
+
 function showGateError(msg) {
   document.getElementById('gateSpinner').style.display = 'none';
   document.getElementById('gateIcon').style.display = 'block';
@@ -396,7 +621,7 @@ async function validateToken() {
   }
 
   if (!token) {
-    showGateError('No access token found. Please use the link from your email.');
+    showGateError(L.errorNoToken);
     return;
   }
 
@@ -408,15 +633,24 @@ async function validateToken() {
     });
 
     if (!res.ok) {
-      showGateError('This link has expired or is invalid. Please check your email or contact support@debt-free.world');
+      showGateError(L.errorExpired);
       return;
     }
 
     const data = await res.json();
+
+    // Set language BEFORE launching dashboard so all strings are correct
+    memberLang = data.language || 'EN';
+    L = getLang(memberLang);
+
+    // Update gate strings in correct language in case of slow network
+    document.getElementById('gateTitle').textContent = L.verifying;
+    document.getElementById('gateSub').textContent = L.verifyingSub;
+
     launchDashboard(data);
 
   } catch(e) {
-    showGateError('Connection error. Please refresh the page.');
+    showGateError(L.errorConnection);
   }
 }
 
@@ -424,11 +658,14 @@ function launchDashboard(data) {
   document.getElementById('gate').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
 
+  // Apply language strings to UI
+  applyLanguage(L);
+
   // Expiry
   if (data.expires_at) {
     const d = new Date(data.expires_at);
-    document.getElementById('expiresLabel').textContent =
-      `Access expires: ${d.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'})}`;
+    const dateStr = d.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+    document.getElementById('expiresLabel').textContent = L.accessExpires.replace('{date}', dateStr);
   }
 
   // Progress
@@ -436,11 +673,11 @@ function launchDashboard(data) {
     const daysPassed = Math.max(1, Math.floor((Date.now() - data.created_at) / 86400000));
     const pct = Math.min(100, Math.round((daysPassed / 90) * 100));
     setTimeout(() => { document.getElementById('progressFill').style.width = pct + '%'; }, 300);
-    document.getElementById('progressDays').textContent = `Day ${daysPassed} of 90`;
+    document.getElementById('progressDays').textContent = L.progressOf.replace('{d}', daysPassed);
     document.getElementById('progressPct').textContent = `${pct}%`;
   }
 
-  // Welcome
+  // Welcome title
   if (data.firstname) {
     document.getElementById('dashTitle').innerHTML = `Welcome back, ${data.firstname} <em>✦</em>`;
   }
@@ -452,6 +689,9 @@ function launchDashboard(data) {
       if (sel.options[i].value === data.country) { sel.selectedIndex = i; break; }
     }
   }
+
+  // Profile summary card
+  buildProfileCard(data);
 
   // Show plan or prompt
   const plan = data.debt_recovery_plan || data.member_plan;
@@ -467,6 +707,77 @@ function launchDashboard(data) {
   }
 }
 
+function buildProfileCard(data) {
+  if (!data.onboarding_complete) return;
+
+  const chips = [];
+  if (data.country) chips.push(data.country);
+  if (data.debt_total) {
+    // Convert range key to readable label
+    const debtLabels = {
+      'under_1000': '< 1 000 €',
+      '1000_5000': '1 000–5 000 €',
+      '5000_15000': '5 000–15 000 €',
+      '15000_50000': '15 000–50 000 €',
+      '50000_100000': '50 000–100 000 €',
+      '100000_250000': '100 000–250 000 €',
+      'over_250000': '> 250 000 €',
+    };
+    chips.push(debtLabels[data.debt_total] || data.debt_total);
+  }
+  if (data.employment) {
+    const empLabels = {
+      'employed_full': 'Full-time employed',
+      'employed_part': 'Part-time / gig',
+      'self_employed': 'Self-employed',
+      'unemployed': 'Unemployed',
+      'student': 'Student',
+      'retired': 'Retired',
+      'other': 'Other',
+    };
+    chips.push(empLabels[data.employment] || data.employment);
+  }
+
+  if (chips.length === 0) return;
+
+  const card = document.getElementById('profileCard');
+  const inner = document.getElementById('profileInner');
+  document.getElementById('profileLabel').textContent = L.profileLabel;
+
+  inner.innerHTML = chips.map((c, i) =>
+    `<span class="profile-chip" style="${i===0?'':''}">` +
+    (i > 0 ? '<span style="color:var(--green-border);margin-right:4px;">·</span>' : '') +
+    `${c}</span>`
+  ).join('');
+
+  card.style.display = 'block';
+}
+
+function applyLanguage(strings) {
+  const map = {
+    'dashSub': 'dashSub',
+    'planCardLabel': 'planLabel',
+    'planCardTitle': 'planTitle',
+    'planExpandBtn': 'planReadMore',
+    'noPlanTitle': 'noPlanTitle',
+    'noPlanText': 'noPlanText',
+    'planStartBtn': 'noPlanBtn',
+    'toolsLabel': 'toolsLabel',
+    'profileLabel': 'profileLabel',
+    'letterBtn': 'letterBtn',
+    'letterHint': 'letterHint',
+    'letterCopy': 'letterCopy',
+    'simDesc': 'simDesc',
+    'stratDesc': 'stratDesc',
+    'collDesc': 'collDesc',
+    'chalDesc': 'chalDesc',
+  };
+  Object.entries(map).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el && strings[key]) el.textContent = strings[key];
+  });
+}
+
 function goToOnboarding() {
   const storedToken = sessionStorage.getItem('dfw_member_token') || '';
   window.location.href = `/onboarding-debt-recovery.html?token=${storedToken}`;
@@ -476,29 +787,30 @@ function expandPlan() {
   const content = document.getElementById('planContent');
   const btn = document.getElementById('planExpandBtn');
   content.classList.toggle('expanded');
-  btn.textContent = content.classList.contains('expanded') ? 'Show less ↑' : 'Read full plan ↓';
+  btn.textContent = content.classList.contains('expanded') ? L.planShowLess : L.planReadMore;
 }
 
 // ── TOOL NAVIGATION ──
 function openTool(id) {
-  // Close all panels and deactivate all cards
   document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tool-card').forEach(c => c.classList.remove('active'));
 
   const panel = document.getElementById('panel-' + id);
+  const card = document.getElementById('card-' + id);
   if (panel) {
     panel.classList.add('active');
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+  if (card) card.classList.add('active');
 }
 
 // ── AI LETTER GENERATOR ──
 async function generateLetter() {
   const type = document.getElementById('letterType').value;
-  const creditor = document.getElementById('letterCreditor').value;
+  const creditor = document.getElementById('letterCreditor').value.trim();
   const country = document.getElementById('letterCountry').value;
   const amount = document.getElementById('letterAmount').value;
-  const situation = document.getElementById('letterSituation').value;
+  const situation = document.getElementById('letterSituation').value.trim();
 
   if (!type || !creditor) {
     alert('Please select a letter type and enter the creditor name.');
@@ -516,13 +828,29 @@ async function generateLetter() {
   };
 
   const btn = document.getElementById('letterBtn');
-  btn.disabled = true;
-  btn.textContent = 'Generating…';
-
+  const errorBox = document.getElementById('letterError');
+  const retryBtn = document.getElementById('letterRetry');
   const output = document.getElementById('letterOutput');
+  const copyBtn = document.getElementById('letterCopy');
+
+  btn.disabled = true;
+  btn.textContent = L.letterGenerating || 'Generating…';
+  errorBox.style.display = 'none';
+  retryBtn.style.display = 'none';
   output.textContent = '';
   output.style.display = 'none';
-  document.getElementById('letterCopy').style.display = 'none';
+  copyBtn.style.display = 'none';
+
+  // Check token BEFORE making the request
+  const storedToken = sessionStorage.getItem('dfw_member_token');
+  if (!storedToken || storedToken.length !== 64) {
+    btn.disabled = false;
+    btn.textContent = L.letterBtn || 'Generate letter →';
+    errorBox.textContent = L.letterErrorNoToken || 'Your session has expired. Please open the link from your email again.';
+    errorBox.style.display = 'block';
+    // No retry — user must re-authenticate
+    return;
+  }
 
   const prompt = `Write a professional formal letter for a ${typeLabels[type]} situation.
 Creditor: ${creditor}
@@ -532,12 +860,11 @@ Context: ${situation || 'none provided'}
 Requirements: formal tone, include relevant legal references for ${country}, firm but respectful, include placeholders [YOUR NAME] [YOUR ADDRESS] [DATE], 200-350 words, plain text only, start directly with the letter.`;
 
   try {
-    const storedToken = sessionStorage.getItem('dfw_member_token');
     const res = await fetch(`${WORKER_URL}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(storedToken ? { 'x-member-token': storedToken } : {})
+        'x-member-token': storedToken
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
@@ -545,26 +872,59 @@ Requirements: formal tone, include relevant legal references for ${country}, fir
         messages: [{ role: 'user', content: prompt }]
       })
     });
+
     const data = await res.json();
-    const text = data.content?.[0]?.text || 'Error generating letter. Please try again.';
+
+    // Handle specific error codes from Worker
+    if (!res.ok) {
+      let errMsg = L.letterErrorGeneric || 'Generation failed. Please try again.';
+      if (res.status === 401) errMsg = L.letterErrorNoToken || 'Your session has expired. Please open the link from your email again.';
+      if (res.status === 429) errMsg = data.error || L.letterErrorQuota || 'Daily AI limit reached. Resets at midnight UTC.';
+
+      errorBox.textContent = errMsg;
+      errorBox.style.display = 'block';
+      // Only show retry for non-auth errors
+      if (res.status !== 401) {
+        retryBtn.textContent = L.letterRetry || 'Try again';
+        retryBtn.style.display = 'inline-block';
+      }
+      btn.disabled = false;
+      btn.textContent = L.letterBtn || 'Generate letter →';
+      return;
+    }
+
+    const text = data.content?.[0]?.text;
+    if (!text) {
+      errorBox.textContent = L.letterErrorGeneric || 'Generation failed. Please try again.';
+      errorBox.style.display = 'block';
+      retryBtn.textContent = L.letterRetry || 'Try again';
+      retryBtn.style.display = 'inline-block';
+      btn.disabled = false;
+      btn.textContent = L.letterBtn || 'Generate letter →';
+      return;
+    }
+
     output.textContent = text;
     output.style.display = 'block';
-    document.getElementById('letterCopy').style.display = 'inline-block';
+    copyBtn.style.display = 'inline-block';
+
   } catch(e) {
-    output.textContent = 'Connection error. Please try again.';
-    output.style.display = 'block';
+    errorBox.textContent = L.letterErrorGeneric || 'Generation failed. Please try again.';
+    errorBox.style.display = 'block';
+    retryBtn.textContent = L.letterRetry || 'Try again';
+    retryBtn.style.display = 'inline-block';
   }
 
   btn.disabled = false;
-  btn.textContent = 'Generate letter →';
+  btn.textContent = L.letterBtn || 'Generate letter →';
 }
 
 function copyLetter() {
   const text = document.getElementById('letterOutput').textContent;
+  const btn = document.getElementById('letterCopy');
   navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('letterCopy');
-    btn.textContent = '✓ Copied';
-    setTimeout(() => btn.textContent = 'Copy letter', 2000);
+    btn.textContent = L.letterCopied || '✓ Copied';
+    setTimeout(() => { btn.textContent = L.letterCopy || 'Copy letter'; }, 2000);
   });
 }
 
@@ -622,17 +982,14 @@ function runStrategy() {
     return;
   }
 
-  const out = document.getElementById('stratOutput');
-
-  // Snowball: pay smallest first (d1 vs d2 by amount)
   const snowballFirst = d1 <= d2 ? `Debt 1 (${d1} €)` : `Debt 2 (${d2} €)`;
-  // Avalanche: pay highest rate first
   const avalancheFirst = r1 >= r2 ? `Debt 1 (${r1}% interest)` : `Debt 2 (${r2}% interest)`;
 
   const recommendation = r1 > 5 || r2 > 5
     ? 'With interest rates above 5%, Avalanche saves you more money. Choose Snowball only if you need quick motivational wins.'
     : 'With low interest rates, both methods cost roughly the same. Choose Snowball for motivation — the difference is minimal.';
 
+  const out = document.getElementById('stratOutput');
   out.textContent = `❄️ Snowball: pay ${snowballFirst} first → quick win, then roll payment to next debt.\n\n🔥 Avalanche: pay ${avalancheFirst} first → saves the most on interest.\n\n💡 Recommendation: ${recommendation}`;
   out.style.display = 'block';
 }
