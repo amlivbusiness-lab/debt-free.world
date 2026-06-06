@@ -1,156 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Confirmed — Debt-Free.world</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --green-dark: #14532d;
-      --green:      #166534;
-      --green-light:#dcfce7;
-      --green-pale: #f0fdf4;
-      --gray-900:   #111827;
-      --gray-700:   #374151;
-      --gray-500:   #6b7280;
-      --gray-300:   #d1d5db;
-      --gray-100:   #f3f4f6;
-      --white:      #ffffff;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'DM Sans',sans-serif; background:var(--green-pale); color:var(--gray-900); min-height:100vh; display:flex; flex-direction:column; }
-    .header { background:var(--white); border-bottom:1px solid var(--gray-300); padding:16px 24px; text-align:center; }
-    .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green); text-decoration:none; }
-    .main { flex:1; display:flex; align-items:center; justify-content:center; padding:40px 20px; }
-    .card { background:var(--white); border-radius:24px; padding:48px 40px; max-width:560px; width:100%; box-shadow:0 8px 48px rgba(22,101,52,0.10); text-align:center; }
-    .success-icon { width:72px; height:72px; background:var(--green-light); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:32px; }
-    h1 { font-family:'DM Serif Display',serif; font-size:clamp(26px,4vw,34px); color:var(--green-dark); margin-bottom:12px; line-height:1.2; }
-    .subtitle { font-size:16px; color:var(--gray-500); line-height:1.6; margin-bottom:32px; }
-
-    /* EMAIL HIGHLIGHT BOX */
-    .email-box {
-      background:var(--green-pale);
-      border:2px solid var(--green-light);
-      border-radius:16px;
-      padding:24px 28px;
-      margin-bottom:28px;
-      text-align:left;
-    }
-    .email-box-label {
-      font-size:11px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:0.1em;
-      color:var(--green);
-      margin-bottom:10px;
-    }
-    .email-box-title {
-      font-family:'DM Serif Display',serif;
-      font-size:20px;
-      color:var(--green-dark);
-      margin-bottom:8px;
-    }
-    .email-box-desc {
-      font-size:14px;
-      color:var(--gray-700);
-      line-height:1.6;
-    }
-    .email-box-desc strong { color:var(--green-dark); }
-
-    /* STEPS */
-    .steps { text-align:left; margin-bottom:28px; }
-    .steps-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-500); margin-bottom:14px; }
-    .step { display:flex; gap:14px; align-items:flex-start; margin-bottom:14px; }
-    .step:last-child { margin-bottom:0; }
-    .step-num { width:28px; height:28px; background:var(--green); color:var(--white); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
-    .step-content strong { display:block; font-size:15px; color:var(--gray-900); margin-bottom:2px; }
-    .step-content span { font-size:13px; color:var(--gray-500); line-height:1.4; }
-
-    /* RECEIPT */
-    .receipt { background:var(--gray-100); border-radius:12px; padding:16px 20px; margin-bottom:28px; text-align:left; }
-    .receipt-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--gray-500); margin-bottom:12px; }
-    .receipt-row { display:flex; justify-content:space-between; font-size:14px; margin-bottom:8px; }
-    .receipt-row:last-child { margin-bottom:0; }
-    .receipt-row .label { color:var(--gray-500); }
-    .receipt-row .value { color:var(--gray-900); font-weight:600; }
-    .receipt-row.total .label { color:var(--gray-900); font-weight:700; }
-    .receipt-row.total .value { color:var(--green); font-size:16px; }
-
-    .btn-start { display:block; width:100%; background:var(--green); color:var(--white); border:none; border-radius:12px; padding:18px; font-size:17px; font-weight:700; cursor:pointer; text-decoration:none; transition:background 0.2s; margin-bottom:16px; }
-    .btn-start:hover { background:var(--green-dark); }
-    .email-note-small { font-size:13px; color:var(--gray-500); margin-bottom:24px; line-height:1.5; }
-    .btn-support { display:block; width:100%; background:transparent; color:var(--green); border:2px solid var(--green-light); border-radius:12px; padding:14px; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.2s; }
-    .btn-support:hover { border-color:var(--green); background:var(--green-pale); }
-    .tagline { font-size:13px; color:var(--gray-500); margin-top:20px; line-height:1.6; }
-    .tagline a { color:var(--green); text-decoration:none; }
-    footer { text-align:center; padding:24px 20px; font-size:12px; color:var(--gray-500); background:var(--white); border-top:1px solid var(--gray-300); }
-    @media(max-width:480px) { .card { padding:32px 20px; } }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Payment Confirmed — Debt-Free.world</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);color:var(--text);background:var(--green-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1.5rem;-webkit-font-smoothing:antialiased;}
+.card{background:var(--white);border-radius:20px;padding:3rem 2.5rem;max-width:520px;width:100%;text-align:center;box-shadow:0 4px 32px rgba(22,101,52,0.08);}
+.logo{font-family:var(--serif);font-size:1.1rem;color:var(--green);margin-bottom:2rem;display:block;}
+.icon{font-size:52px;margin-bottom:1.25rem;line-height:1;}
+h1{font-family:var(--serif);font-size:26px;color:var(--text);margin-bottom:0.75rem;line-height:1.2;}
+.sub{font-size:15px;color:#444;line-height:1.75;margin-bottom:1.5rem;font-weight:300;}
+.status-box{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:14px;color:#333;line-height:1.6;}
+.status-box strong{color:var(--green-dark);}
+.spinner{width:20px;height:20px;border:2px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.btn{display:block;width:100%;background:var(--green);color:#fff;border:none;border-radius:30px;padding:14px;font-size:15px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;text-align:center;margin-bottom:0.875rem;}
+.btn:hover{background:var(--green-dark);}
+.btn-outline{display:block;width:100%;background:transparent;color:var(--green);border:1.5px solid var(--green);border-radius:30px;padding:13px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;text-align:center;margin-bottom:0.875rem;}
+.note{font-size:12px;color:#888;line-height:1.6;margin-top:1rem;}
+.note a{color:var(--green);}
+.divider{border:none;border-top:0.5px solid #eee;margin:1.5rem 0;}
+</style>
 </head>
 <body>
-<header class="header">
-  <a href="https://www.debt-free.world" class="logo">✦ Debt-Free.world</a>
-</header>
-<main class="main">
-  <div class="card">
-    <div class="success-icon">✦</div>
-    <h1>Payment confirmed.</h1>
-    <p class="subtitle">Your Debt Recovery plan is waiting. Build it now — it takes 2 minutes.</p>
+<div class="card">
+  <span class="logo">✦ Debt-Free.world</span>
 
-    <a href="#" class="btn-start" id="btn-start-now" onclick="startNow()">
-      Build My Plan Now →
-    </a>
+  <div class="icon" id="mainIcon">✅</div>
+  <h1 id="mainTitle">Payment confirmed.</h1>
+  <p class="sub" id="mainSub">Welcome to Debt Recovery. Your 90-day plan starts now.</p>
 
-    <div class="email-note-small">
-      We've also sent a personal access link to your email — so you can return anytime.
-    </div>
-
-    <div class="receipt">
-      <div class="receipt-title">Order summary</div>
-      <div class="receipt-row"><span class="label">Product</span><span class="value">Debt Recovery</span></div>
-      <div class="receipt-row"><span class="label">Access period</span><span class="value">90 days</span></div>
-      <div class="receipt-row"><span class="label">Seller</span><span class="value">Amliv Oy · VAT FI32503518</span></div>
-      <div class="receipt-row total"><span class="label">Total paid</span><span class="value">19€</span></div>
-    </div>
-
-    <a href="mailto:support@debt-free.world" class="btn-support">Questions? Contact support</a>
-
-    <p class="tagline">
-      <a href="/terms-of-service.html">Terms</a> ·
-      <a href="/privacy-policy.html">Privacy</a> ·
-      <a href="/refund-policy.html">Refund Policy</a><br><br>
-      We do this together ✦
-    </p>
+  <div class="status-box" id="statusBox">
+    <span class="spinner" id="spinner"></span>
+    <span id="statusText">Preparing your access — this takes a few seconds…</span>
   </div>
-</main>
-<footer>Amliv Oy · VAT FI32503518 · Nokia, Finland · <a href="mailto:support@debt-free.world" style="color:#166534;">support@debt-free.world</a></footer>
+
+  <div id="ctaArea" style="display:none;">
+    <a href="#" class="btn" id="buildPlanBtn">Build my 90-day plan now →</a>
+    <a href="#" class="btn-outline" id="goToDashboardBtn">Go to my member area</a>
+  </div>
+
+  <div id="emailFallback" style="display:none;">
+    <p class="sub" style="margin-bottom:1rem;">Your magic link has been sent to your email. Use it to access your member area.</p>
+    <a href="https://www.debt-free.world" class="btn-outline">Back to Debt-Free.world</a>
+  </div>
+
+  <hr class="divider"/>
+  <p class="note">Questions? <a href="mailto:support@debt-free.world">support@debt-free.world</a> · <a href="/refund-policy.html">Refund Policy</a> · Amliv Oy · VAT FI32503518</p>
+</div>
 
 <script>
+const WORKER = 'https://debt-free-proxy.amlivbusiness.workers.dev';
+
+async function init() {
+  // Get Stripe session_id from URL
   const params = new URLSearchParams(window.location.search);
   const sessionId = params.get('session_id');
 
-  // GA4 purchase event
-  if (sessionId && typeof gtag !== 'undefined') {
-    gtag('event', 'purchase', {
-      transaction_id: sessionId,
-      value: 19,
-      currency: 'EUR',
-      items: [{ item_name: 'Debt Recovery', price: 19, quantity: 1 }]
-    });
+  if (!sessionId) {
+    // No session_id — user may have navigated here directly
+    showEmailFallback('No session found. Please check your email for the magic link.');
+    return;
   }
 
-  // Set up direct link to onboarding
-  function startNow() {
-    const url = sessionId
-      ? `/onboarding-debt-recovery.html?session_id=${sessionId}`
-      : `/onboarding-debt-recovery.html`;
-    window.location.href = url;
+  // Poll for token — webhook may take 2–10 seconds after payment
+  let token = null;
+  let attempts = 0;
+  const maxAttempts = 20; // 20 × 1.5s = 30 seconds max
+
+  while (!token && attempts < maxAttempts) {
+    attempts++;
+    try {
+      const res = await fetch(
+        `${WORKER}/member/token-by-session?session_id=${encodeURIComponent(sessionId)}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        if (data.ready && data.token) {
+          token = data.token;
+          break;
+        }
+      }
+    } catch(e) {
+      // Network error — keep trying
+    }
+
+    // Wait 1.5s before retry
+    await new Promise(r => setTimeout(r, 1500));
+
+    // Update status message
+    const dots = '.'.repeat((attempts % 3) + 1);
+    document.getElementById('statusText').textContent =
+      `Preparing your access${dots}`;
   }
 
-  history.pushState(null, '', window.location.href);
-  window.addEventListener('popstate', () => history.pushState(null, '', window.location.href));
+  if (token) {
+    // Store token in sessionStorage — member area and onboarding will pick it up
+    sessionStorage.setItem('dfw_member_token', token);
+
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('statusText').textContent = '✓ Your access is ready.';
+    document.getElementById('statusBox').style.background = 'var(--green-bg)';
+
+    // Set button links
+    document.getElementById('buildPlanBtn').href =
+      `/onboarding-debt-recovery.html?token=${token}`;
+    document.getElementById('goToDashboardBtn').href =
+      `/member/?token=${token}`;
+
+    document.getElementById('ctaArea').style.display = 'block';
+  } else {
+    // Webhook took too long — fall back to email
+    showEmailFallback();
+  }
+}
+
+function showEmailFallback(msg) {
+  document.getElementById('spinner').style.display = 'none';
+  document.getElementById('statusText').textContent =
+    msg || 'Your magic link is on its way by email. It may take a few minutes.';
+  document.getElementById('emailFallback').style.display = 'block';
+}
+
+init();
 </script>
 </body>
 </html>
