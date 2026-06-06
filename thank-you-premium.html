@@ -3,133 +3,207 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Payment Confirmed — Debt-Free.world</title>
+<title>Your Premium Access is Ready — Debt-Free.world</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
 :root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--sans);color:var(--text);background:var(--green-bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1.5rem;-webkit-font-smoothing:antialiased;}
-.card{background:var(--white);border-radius:20px;padding:3rem 2.5rem;max-width:520px;width:100%;text-align:center;box-shadow:0 4px 32px rgba(22,101,52,0.08);}
+body{font-family:var(--sans);color:var(--text);background:var(--green-bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;-webkit-font-smoothing:antialiased;}
+.card{background:var(--white);border-radius:20px;padding:3rem 2.5rem;max-width:460px;width:100%;text-align:center;box-shadow:0 4px 32px rgba(22,101,52,0.08);}
 .logo{font-family:var(--serif);font-size:1.1rem;color:var(--green);margin-bottom:2rem;display:block;}
-.icon{font-size:52px;margin-bottom:1.25rem;line-height:1;}
-h1{font-family:var(--serif);font-size:26px;color:var(--text);margin-bottom:0.75rem;line-height:1.2;}
-.sub{font-size:15px;color:#444;line-height:1.75;margin-bottom:1.5rem;font-weight:300;}
-.status-box{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:14px;color:#333;line-height:1.6;}
-.status-box strong{color:var(--green-dark);}
-.spinner{width:20px;height:20px;border:2px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
+.spinner{width:40px;height:40px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1.5rem;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.btn{display:block;width:100%;background:var(--green);color:#fff;border:none;border-radius:30px;padding:14px;font-size:15px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;text-align:center;margin-bottom:0.875rem;}
+.icon{font-size:52px;margin-bottom:1.25rem;line-height:1;}
+.title{font-family:var(--serif);font-size:24px;color:var(--text);margin-bottom:0.75rem;line-height:1.2;}
+.sub{font-size:15px;color:#444;line-height:1.7;margin-bottom:0.5rem;font-weight:300;}
+.sub-note{font-size:13px;color:#888;margin-bottom:2rem;line-height:1.5;}
+.btn{display:block;width:100%;background:var(--green);color:#fff;border:none;border-radius:30px;padding:14px 24px;font-size:15px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;margin-bottom:12px;transition:background 0.15s;}
 .btn:hover{background:var(--green-dark);}
-.btn-outline{display:block;width:100%;background:transparent;color:var(--green);border:1.5px solid var(--green);border-radius:30px;padding:13px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;text-align:center;margin-bottom:0.875rem;}
-.note{font-size:12px;color:#888;line-height:1.6;margin-top:1rem;}
-.note a{color:var(--green);}
-.divider{border:none;border-top:0.5px solid #eee;margin:1.5rem 0;}
+.btn-secondary{display:block;width:100%;background:transparent;color:var(--green);border:1.5px solid var(--green);border-radius:30px;padding:12px 24px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;}
+.btn-secondary:hover{background:var(--green-bg);}
+.status-text{font-size:13px;color:#888;margin-top:1rem;}
+.error-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:1rem;font-size:13px;color:#b91c1c;line-height:1.6;margin-top:1rem;display:none;text-align:left;}
+.progress-dots{display:flex;justify-content:center;gap:8px;margin-bottom:1.5rem;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green-light);}
+.dot.active{background:var(--green);animation:pulse 1s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.footer{margin-top:2rem;font-size:12px;color:#aaa;}
 </style>
 </head>
 <body>
-<div class="card">
-  <span class="logo">✦ Debt-Free.world</span>
 
-  <div class="icon" id="mainIcon">✅</div>
-  <h1 id="mainTitle">Payment confirmed.</h1>
-  <p class="sub" id="mainSub">Welcome to Debt Recovery. Your 90-day plan starts now.</p>
+<div class="card" id="card">
 
-  <div class="status-box" id="statusBox">
-    <span class="spinner" id="spinner"></span>
-    <span id="statusText">Preparing your access — this takes a few seconds…</span>
+  <!-- State: loading (default) -->
+  <div id="state-loading">
+    <span class="logo">✦ Debt-Free.world</span>
+    <div class="spinner"></div>
+    <div class="progress-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="title">Setting up your access</div>
+    <div class="sub" id="loadingStatus">Payment confirmed. Preparing your Premium Member Area…</div>
+    <div class="status-text" id="statusCounter">This usually takes 5–10 seconds.</div>
   </div>
 
-  <div id="ctaArea" style="display:none;">
-    <a href="#" class="btn" id="buildPlanBtn">Build my 90-day plan now →</a>
-    <a href="#" class="btn-outline" id="goToDashboardBtn">Go to my member area</a>
+  <!-- State: ready -->
+  <div id="state-ready" style="display:none;">
+    <span class="logo">✦ Debt-Free.world</span>
+    <div class="icon">🎉</div>
+    <div class="title">Your access is ready.</div>
+    <div class="sub">Your 90-day Premium Member Area is set up and waiting for you.</div>
+    <div class="sub-note">Your personalised access link has also been sent to your email — use it anytime to sign back in.</div>
+    <a href="#" class="btn" id="btnBuildPlan">Build my 90-day plan now →</a>
+    <a href="/member/" class="btn-secondary" id="btnGoMember">Go to my Member Area</a>
   </div>
 
-  <div id="emailFallback" style="display:none;">
-    <p class="sub" style="margin-bottom:1rem;">Your magic link has been sent to your email. Use it to access your member area.</p>
-    <a href="https://www.debt-free.world" class="btn-outline">Back to Debt-Free.world</a>
+  <!-- State: timeout / error -->
+  <div id="state-error" style="display:none;">
+    <span class="logo">✦ Debt-Free.world</span>
+    <div class="icon">📧</div>
+    <div class="title">Check your email.</div>
+    <div class="sub">Your payment was successful. Your access link is on its way — check your inbox (and spam folder).</div>
+    <div class="sub-note" style="margin-bottom:1.5rem;">If you don't receive it within 10 minutes, contact us at support@debt-free.world with your payment confirmation number.</div>
+    <a href="/" class="btn-secondary">Back to home</a>
+    <div class="error-box" id="errorBox"></div>
   </div>
 
-  <hr class="divider"/>
-  <p class="note">Questions? <a href="mailto:support@debt-free.world">support@debt-free.world</a> · <a href="/refund-policy.html">Refund Policy</a> · Amliv Oy · VAT FI32503518</p>
 </div>
 
+<div class="footer">Amliv Oy · VAT FI32503518 · support@debt-free.world</div>
+
 <script>
-const WORKER = 'https://debt-free-proxy.amlivbusiness.workers.dev';
+const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 
-async function init() {
-  // Get Stripe session_id from URL
-  const params = new URLSearchParams(window.location.search);
-  const sessionId = params.get('session_id');
+// Maximum polling duration: 60 seconds (webhook processing should be < 5s normally)
+const MAX_POLL_MS = 60000;
+const POLL_INTERVAL_MS = 2000;
+const DOTS_MESSAGES = [
+  'Payment confirmed. Preparing your Premium Member Area…',
+  'Setting up your personalised tools…',
+  'Almost there — generating your access…',
+  'Just a moment more…',
+];
 
+let pollCount = 0;
+let pollTimer = null;
+let sessionId = null;
+let memberToken = null;
+
+function showState(name) {
+  ['state-loading', 'state-ready', 'state-error'].forEach(id => {
+    document.getElementById(id).style.display = id === ('state-' + name) ? 'block' : 'none';
+  });
+}
+
+function updateDotAnimation(index) {
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+}
+
+async function pollForToken() {
   if (!sessionId) {
-    // No session_id — user may have navigated here directly
-    showEmailFallback('No session found. Please check your email for the magic link.');
+    showErrorState('No session ID found. Please check your email for your access link.');
     return;
   }
 
-  // Poll for token — webhook may take 2–10 seconds after payment
-  let token = null;
-  let attempts = 0;
-  const maxAttempts = 20; // 20 × 1.5s = 30 seconds max
+  const elapsed = pollCount * POLL_INTERVAL_MS;
 
-  while (!token && attempts < maxAttempts) {
-    attempts++;
-    try {
-      const res = await fetch(
-        `${WORKER}/member/token-by-session?session_id=${encodeURIComponent(sessionId)}`
-      );
-      if (res.ok) {
-        const data = await res.json();
-        if (data.ready && data.token) {
-          token = data.token;
-          break;
-        }
+  if (elapsed >= MAX_POLL_MS) {
+    // Timed out — webhook may have been slow or missed
+    showState('error');
+    return;
+  }
+
+  // Update loading message
+  const msgIndex = Math.min(Math.floor(pollCount / 5), DOTS_MESSAGES.length - 1);
+  document.getElementById('loadingStatus').textContent = DOTS_MESSAGES[msgIndex];
+  updateDotAnimation(pollCount % 3);
+
+  if (elapsed > 10000) {
+    const remaining = Math.ceil((MAX_POLL_MS - elapsed) / 1000);
+    document.getElementById('statusCounter').textContent = `Still checking… (${remaining}s remaining)`;
+  }
+
+  try {
+    const res = await fetch(`${WORKER_URL}/member/token-by-session?session_id=${encodeURIComponent(sessionId)}`);
+
+    if (res.status === 200) {
+      const data = await res.json();
+      if (data.ready && data.token) {
+        // Got the token — store it and show ready state
+        memberToken = data.token;
+        sessionStorage.setItem('dfw_member_token', memberToken);
+
+        // Set up CTA buttons with token
+        document.getElementById('btnBuildPlan').href =
+          `/onboarding-debt-recovery.html?token=${memberToken}`;
+        document.getElementById('btnGoMember').href =
+          `/member/?token=${memberToken}`;
+
+        showState('ready');
+        return; // Stop polling
       }
-    } catch(e) {
-      // Network error — keep trying
     }
 
-    // Wait 1.5s before retry
-    await new Promise(r => setTimeout(r, 1500));
+    if (res.status === 202) {
+      // Not ready yet — keep polling
+      pollCount++;
+      pollTimer = setTimeout(pollForToken, POLL_INTERVAL_MS);
+      return;
+    }
 
-    // Update status message
-    const dots = '.'.repeat((attempts % 3) + 1);
-    document.getElementById('statusText').textContent =
-      `Preparing your access${dots}`;
+    // Unexpected status — fall through to error
+    throw new Error(`Unexpected status: ${res.status}`);
+
+  } catch(e) {
+    // Network error — retry a few times before giving up
+    if (pollCount < 5) {
+      pollCount++;
+      pollTimer = setTimeout(pollForToken, POLL_INTERVAL_MS * 2);
+    } else {
+      showState('error');
+    }
   }
 
-  if (token) {
-    // Store token in sessionStorage — member area and onboarding will pick it up
-    sessionStorage.setItem('dfw_member_token', token);
+  pollCount++;
+}
 
-    document.getElementById('spinner').style.display = 'none';
-    document.getElementById('statusText').textContent = '✓ Your access is ready.';
-    document.getElementById('statusBox').style.background = 'var(--green-bg)';
-
-    // Set button links
-    document.getElementById('buildPlanBtn').href =
-      `/onboarding-debt-recovery.html?token=${token}`;
-    document.getElementById('goToDashboardBtn').href =
-      `/member/?token=${token}`;
-
-    document.getElementById('ctaArea').style.display = 'block';
-  } else {
-    // Webhook took too long — fall back to email
-    showEmailFallback();
+function showErrorState(msg) {
+  showState('error');
+  if (msg) {
+    const box = document.getElementById('errorBox');
+    box.textContent = msg;
+    box.style.display = 'block';
   }
 }
 
-function showEmailFallback(msg) {
-  document.getElementById('spinner').style.display = 'none';
-  document.getElementById('statusText').textContent =
-    msg || 'Your magic link is on its way by email. It may take a few minutes.';
-  document.getElementById('emailFallback').style.display = 'block';
-}
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  sessionId = params.get('session_id');
 
-init();
+  if (!sessionId) {
+    // No session_id — user navigated directly or link is malformed
+    showErrorState('No session found. If you just completed a payment, please check your email for your access link.');
+    showState('error');
+    return;
+  }
+
+  // Start polling
+  pollForToken();
+});
+
+// Cleanup on unload
+window.addEventListener('beforeunload', () => {
+  if (pollTimer) clearTimeout(pollTimer);
+});
 </script>
 </body>
 </html>
