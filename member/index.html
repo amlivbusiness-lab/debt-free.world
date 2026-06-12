@@ -69,6 +69,27 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 /* ════ MAIN LAYOUT ════ */
 .main-wrap{max-width:680px;margin:0 auto;padding:24px 16px 80px;}
 
+/* ════ WELCOME CARD (no-plan state) ════ */
+.welcome-card{background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px 22px;margin-bottom:16px;display:none;}
+.welcome-card.visible{display:block;animation:fadeUp 0.3s ease;}
+.welcome-title{font-family:var(--serif);font-size:20px;line-height:1.25;color:var(--text);margin-bottom:8px;}
+.welcome-sub{font-size:13.5px;color:#444;line-height:1.7;font-weight:300;margin-bottom:18px;}
+.welcome-cta-row{display:flex;flex-direction:column;gap:9px;}
+.welcome-cta-primary{background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px 20px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);text-align:center;text-decoration:none;display:block;transition:background 0.2s;}
+.welcome-cta-primary:hover{background:var(--green-dark);}
+.welcome-cta-secondary{background:none;border:1.5px solid var(--green-border);border-radius:30px;padding:12px 20px;font-size:13.5px;font-weight:500;color:var(--muted);cursor:pointer;font-family:var(--sans);text-align:center;transition:all 0.15s;}
+.welcome-cta-secondary:hover{border-color:var(--green);color:var(--green);}
+
+/* ════ FRESH-PLAN CARD (just completed onboarding) ════ */
+.fresh-plan-card{background:var(--white);border:1px solid var(--green-border);border-left:3px solid var(--green);border-radius:var(--radius);padding:22px 20px 18px;margin-bottom:16px;display:none;}
+.fresh-plan-card.visible{display:block;animation:fadeUp 0.3s ease;}
+.fresh-task-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
+.fresh-task-title{font-family:var(--serif);font-size:17px;color:var(--text);margin-bottom:8px;line-height:1.3;}
+.fresh-task-desc{font-size:13.5px;color:#333;line-height:1.7;font-weight:300;margin-bottom:16px;}
+.fresh-task-opts{display:flex;flex-direction:column;gap:8px;}
+.fresh-task-opt{border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;background:var(--white);cursor:pointer;text-align:left;font-family:var(--sans);font-size:13.5px;font-weight:500;color:#333;transition:all 0.15s;-webkit-tap-highlight-color:transparent;}
+.fresh-task-opt:hover,.fresh-task-opt:active{border-color:var(--green);background:var(--green-bg);color:var(--green-dark);}
+
 /* ════ COMPANION CARD ════ */
 .companion-card{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:var(--radius);padding:20px 20px 16px;margin-bottom:16px;display:none;}
 .companion-card.visible{display:block;animation:fadeUp 0.3s ease;}
@@ -253,7 +274,25 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
   <div class="main-wrap">
 
-    <!-- Companion card (shown when companion_mode = guided) -->
+    <!-- Welcome card — shown when onboarding not complete -->
+    <div class="welcome-card" id="welcomeCard">
+      <div class="welcome-title" id="welcomeTitle">Your plan is waiting to be built.</div>
+      <div class="welcome-sub" id="welcomeSub">It takes about 2 minutes. We'll ask you a few questions about your situation and build a fully personalised 90-day plan — built only for you.</div>
+      <div class="welcome-cta-row">
+        <a href="#" class="welcome-cta-primary" id="welcomeCtaBtn">Build my personalised plan now</a>
+        <button class="welcome-cta-secondary" id="welcomeExploreBtn" onclick="dismissWelcome()">I'd like to explore the tools first</button>
+      </div>
+    </div>
+
+    <!-- Fresh plan card — shown immediately after completing onboarding -->
+    <div class="fresh-plan-card" id="freshPlanCard">
+      <span class="fresh-task-label" id="freshLabel">Your first step</span>
+      <div class="fresh-task-title" id="freshTitle">Ready to begin?</div>
+      <div class="fresh-task-desc" id="freshDesc"></div>
+      <div class="fresh-task-opts" id="freshOpts"></div>
+    </div>
+
+    <!-- Companion card (shown on return visits when companion mode is on) -->
     <div class="companion-card" id="companionCard">
       <div class="companion-q" id="companionQ">Loading your check-in…</div>
       <div class="companion-opts" id="companionOpts"></div>
@@ -541,18 +580,169 @@ async function requestNewLink() {
 
 /* ═══════════════════════════════════════════════
    LAUNCH DASHBOARD
+   Three entry states:
+   A) onboarding_complete = false  → welcome card, no plan yet
+   B) fresh = true (URL param)     → just finished onboarding, show plan + first task
+   C) returning visit              → companion check-in (if on) or plain dashboard
 ═══════════════════════════════════════════════ */
 function launchDashboard() {
   document.getElementById('gate').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
 
+  // Detect entry state
+  const urlParams = new URLSearchParams(window.location.search);
+  const isFresh = urlParams.get('fresh') === '1';
+  // Clean ?fresh param from URL without reload
+  if (isFresh) {
+    const cleanUrl = window.location.pathname;
+    history.replaceState(null, '', cleanUrl);
+  }
+
+  const hasOnboarding = memberData.onboarding_complete;
+  const hasPlan = !!(memberData.debt_recovery_plan || memberData.member_plan);
+
   renderProgress();
   renderPlanCard();
-  renderCompanionCard();
   renderToolGrid();
   renderDrawer();
   renderSettings();
   renderUpdateCard();
+
+  if (!hasOnboarding || !hasPlan) {
+    // STATE A: no onboarding yet — show welcome card, hide companion
+    renderWelcomeCard();
+  } else if (isFresh) {
+    // STATE B: just completed onboarding — show plan full-width + first task below
+    showFreshPlanView();
+  } else {
+    // STATE C: returning visit — show companion check-in if on
+    renderCompanionCard();
+  }
+}
+
+/* ─── State A: Welcome card (no plan) ─── */
+function renderWelcomeCard() {
+  const card = document.getElementById('welcomeCard');
+  const name = memberData.firstname;
+  const title = document.getElementById('welcomeTitle');
+  const sub   = document.getElementById('welcomeSub');
+  const btn   = document.getElementById('welcomeCtaBtn');
+
+  title.textContent = name
+    ? `Welcome, ${name}. Your plan is waiting to be built.`
+    : 'Your personalised plan is waiting to be built.';
+  sub.textContent = 'It takes about 2 minutes. We\'ll ask a few questions about your situation and build a fully personalised 90-day Debt Recovery plan — built only for you.';
+  btn.textContent = 'Build my personalised plan now';
+  btn.href = `/onboarding-debt-recovery.html?token=${memberToken}`;
+
+  card.classList.add('visible');
+  document.getElementById('companionCard').style.display = 'none';
+  document.getElementById('freshPlanCard').style.display = 'none';
+}
+
+function dismissWelcome() {
+  document.getElementById('welcomeCard').style.display = 'none';
+}
+
+/* ─── State B: Fresh plan view (just completed onboarding) ─── */
+function showFreshPlanView() {
+  // Expand the plan card fully so it fills the screen first
+  const planBody = document.getElementById('planBody');
+  if (planBody) {
+    planBody.classList.add('expanded');
+    document.getElementById('planExpandBtn').textContent = L.planCollapse || 'Show less';
+  }
+
+  // Build the first concrete task card below the plan
+  const card = document.getElementById('freshPlanCard');
+  const d = memberData;
+  const collections = d.collections || '';
+  const barrier = d.barrier || '';
+  const name = d.firstname || '';
+
+  let taskTitle = '';
+  let taskDesc  = '';
+  let taskOpts  = [];
+
+  if (collections && collections.includes('Yes')) {
+    // Urgent — collections active
+    taskTitle = 'Your most urgent action: contact the collections agency.';
+    taskDesc  = 'With a debt in collections or enforcement, the first 24–48 hours matter most. A letter stops the clock on most collection activity while a plan is being arranged.';
+    taskOpts  = [
+      { label: 'Write a letter to the collections agency now', action: () => openTool('letters') },
+      { label: 'I need to understand the process first', action: () => openTool('collection') },
+      { label: 'I\'ll come back to this shortly', action: () => hideFreshCard() },
+    ];
+  } else if (barrier && barrier.includes('afraid')) {
+    // Fear/avoidance profile — start tiny
+    taskTitle = 'Start with the smallest possible step.';
+    taskDesc  = 'You don\'t have to contact anyone today. Begin by reading through your plan once and marking the one action that feels most manageable.';
+    taskOpts  = [
+      { label: 'Read my full plan', action: () => { togglePlan(); hideFreshCard(); } },
+      { label: 'Show me my debt collection rights', action: () => openTool('legal') },
+      { label: 'I\'ll take a look around first', action: () => hideFreshCard() },
+    ];
+  } else if (barrier && (barrier.includes('exhausted') || barrier.includes('failed'))) {
+    taskTitle = 'This time, one thing at a time.';
+    taskDesc  = 'Previous attempts failed because the system is hard — not because you are. Today\'s only task: read your plan and identify the one number that matters most to you.';
+    taskOpts  = [
+      { label: 'Read my full plan', action: () => { togglePlan(); hideFreshCard(); } },
+      { label: 'Open the budget calculator', action: () => openTool('budget') },
+      { label: 'I\'ll explore on my own', action: () => hideFreshCard() },
+    ];
+  } else {
+    // Default first task — calculate real numbers
+    taskTitle = 'Step 1: confirm your numbers.';
+    taskDesc  = 'Your plan is built on the figures you provided. The single most useful thing right now is running the budget calculator with your exact current numbers — it will show your real debt-free date.';
+    taskOpts  = [
+      { label: 'Open the budget calculator', action: () => openTool('budget') },
+      { label: 'Write my first creditor letter', action: () => openTool('letters') },
+      { label: 'Read my full plan first', action: () => { togglePlan(); hideFreshCard(); } },
+    ];
+  }
+
+  document.getElementById('freshTitle').textContent = taskTitle;
+  document.getElementById('freshDesc').textContent  = taskDesc;
+
+  const optsEl = document.getElementById('freshOpts');
+  optsEl.innerHTML = taskOpts.map((o, i) =>
+    `<button class="fresh-task-opt" onclick="handleFreshOpt(${i})">${o.label}</button>`
+  ).join('');
+
+  // Store opts for click handler
+  window._freshOpts = taskOpts;
+
+  // Show fresh card only after user has scrolled past the plan card
+  // Use IntersectionObserver to detect when plan card bottom is visible
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        card.classList.add('visible');
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const planCard = document.getElementById('planCard');
+  if (planCard) observer.observe(planCard);
+
+  // Fallback: show after 4s regardless (in case observer doesn't fire on short plans)
+  setTimeout(() => { if (!card.classList.contains('visible')) card.classList.add('visible'); }, 4000);
+}
+
+function handleFreshOpt(i) {
+  const opt = window._freshOpts?.[i];
+  if (opt?.action) opt.action();
+  hideFreshCard();
+}
+
+function hideFreshCard() {
+  const card = document.getElementById('freshPlanCard');
+  card.style.opacity = '0';
+  card.style.transition = 'opacity 0.3s';
+  setTimeout(() => card.style.display = 'none', 300);
+  // Show companion card after fresh card is dismissed (if on)
+  if (companionOn) setTimeout(() => renderCompanionCard(), 400);
 }
 
 /* ─── Progress ─── */
@@ -635,9 +825,11 @@ function renderUpdateCard() {
   }
 }
 
-/* ─── Companion card ─── */
+/* ─── State C: Companion card (returning visits) ─── */
 function renderCompanionCard() {
   const card = document.getElementById('companionCard');
+  // Never show companion if no onboarding yet
+  if (!memberData.onboarding_complete) { card.style.display = 'none'; return; }
   if (!companionOn) { card.style.display = 'none'; return; }
   card.classList.add('visible');
 
