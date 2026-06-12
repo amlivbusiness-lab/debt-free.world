@@ -1206,7 +1206,7 @@ async function submitForm(){
   }catch(e){}
 
   // Redirect
-  if(memberToken){window.location.replace(`https://www.debt-free.world/member/?token=${memberToken}`);}
+  if(memberToken){window.location.replace(`https://www.debt-free.world/member/?token=${memberToken}&fresh=1`);}
   else{window.location.replace(`https://www.debt-free.world/member/`);}
 }
 
