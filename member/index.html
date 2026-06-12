@@ -280,6 +280,25 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 .update-saved{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--green-dark);margin-top:10px;display:none;}
 .update-saved.active{display:block;}
 
+/* ════ BATCH 3 — MOBILE POLISH ════ */
+
+/* All interactive targets minimum 44px touch height */
+.wiz-opt, .wiz-next, .wiz-back, .companion-opt,
+.btn-copy, .btn-reset, .plan-cta, .fresh-task-opt,
+.welcome-cta-primary, .welcome-cta-secondary,
+.drawer-tool, .tool-card { min-height: 44px; }
+
+/* Negotiation chat — handle virtual keyboard on iOS */
+#negChat { position: relative; }
+.neg-input-row input {
+  font-size: 16px; /* prevent iOS zoom on focus */
+  -webkit-appearance: none;
+}
+
+/* Letter wizard debt opts — better spacing on mobile */
+#lw_debt_opts .wiz-opt { padding: 13px 14px; }
+
+/* wiz-amount on narrow screens */
 @media(max-width:480px){
   .main-wrap{padding:16px 12px 80px;}
   .wiz-two{grid-template-columns:1fr;}
@@ -287,7 +306,43 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   .wiz-amount{flex-direction:column;}
   .wiz-amount select{width:100%;}
   .topbar-days{display:none;}
+  /* Strategy compare boxes stack on very narrow */
+  .strategy-compare{grid-template-columns:1fr;}
+  /* Milestone text smaller */
+  .milestone-text{font-size:12.5px;}
+  /* Negotiation chat max-height reduced */
+  .neg-chat{max-height:260px;}
+  /* Letter history items wrap */
+  .letter-history-item{flex-wrap:wrap;}
+  .letter-history-date{width:100%;margin-top:2px;}
+  /* Timeline bar labels narrower */
+  .timeline-bar-label{width:44px;font-size:11px;}
+  .timeline-bar-months{width:44px;font-size:11px;}
+  /* Panel padding tighter */
+  .tool-panel{padding:16px 14px;}
+  /* Cta row in panels */
+  .cta-row{flex-direction:column-reverse;}
+  .btn-back{text-align:center;}
+  /* Fresh plan opts */
+  .fresh-task-opts{gap:7px;}
+  .fresh-task-opt{padding:12px 13px;}
+  /* Drawer width */
+  .tools-drawer{width:min(300px,95vw);}
+  /* Tool grid card padding */
+  .tool-card{padding:13px 12px;}
 }
+
+/* Medium breakpoint — tablets, larger phones */
+@media(max-width:640px){
+  .gate-card{padding:28px 20px;}
+  .wiz-nav{gap:8px;}
+  /* Ensure drawer does not cover full screen */
+  .tools-drawer{width:min(340px,92vw);}
+}
+
+/* Prevent overflow from long creditor names */
+.debt-strategy-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60vw;}
+.letter-history-meta{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;}
 </style>
 </head>
 <body>
@@ -888,57 +943,63 @@ function renderUpdateCard() {
   }
 }
 
-/* ─── State C: Companion card (returning visits) ─── */
+/* ─── State C: Companion card — multilingual, contextual ─── */
 function renderCompanionCard() {
   const card = document.getElementById('companionCard');
-  // Never show companion if no onboarding yet
   if (!memberData.onboarding_complete) { card.style.display = 'none'; return; }
   if (!companionOn) { card.style.display = 'none'; return; }
   card.classList.add('visible');
 
   const day = memberData._dayNum || 1;
   const name = memberData.firstname || '';
-  const barrier = memberData.barrier || '';
   const collections = memberData.collections || '';
+  const CS = COMPANION_STRINGS[lang] || COMPANION_STRINGS.EN;
 
-  // Contextual check-in questions based on day + situation
-  let q = '';
-  let opts = [];
+  let q = '', opts = [];
 
   if (day <= 7) {
-    q = collections.includes('Yes')
-      ? `${name ? name + ', ' : ''}the most urgent step is contacting the collections agency. Have you been able to do that yet?`
-      : `${name ? name + ', ' : ''}your plan is ready. What feels most manageable to start with today?`;
-    opts = collections.includes('Yes')
-      ? ['Yes — I made contact', 'Not yet — I need help with what to say', 'I\'m not ready yet']
-      : ['Looking at my numbers', 'Writing a letter to a creditor', 'Just reading through my plan'];
+    if (collections.includes('Yes')) {
+      q = (name ? name + ', ' : '') + CS.collections_q;
+      opts = CS.collections_opts;
+    } else {
+      q = (name ? name + ', ' : '') + CS.day7_q;
+      opts = CS.day7_opts;
+    }
   } else if (day <= 30) {
-    q = `Day ${day}. How are things going with your plan so far?`;
-    opts = ['Making progress', 'Struggling a little', 'Something has changed in my situation'];
+    q = CS.day30_q.replace('{d}', day);
+    opts = CS.day30_opts;
   } else if (day <= 60) {
-    q = `You\'re ${day} days in — that\'s real progress. What would help most right now?`;
-    opts = ['Update my monthly numbers', 'Write a letter to a creditor', 'Review my strategy'];
+    q = CS.day60_q.replace('{d}', day);
+    opts = CS.day60_opts;
   } else {
-    q = `Day ${day} — you\'re in the final stretch. What are you focused on?`;
-    opts = ['Staying on track', 'Dealing with a setback', 'Planning what comes after 90 days'];
+    q = CS.day90_q.replace('{d}', day);
+    opts = CS.day90_opts;
   }
 
-  document.getElementById('companionQ').textContent = q;
+  const qEl = document.getElementById('companionQ');
+  if (qEl) qEl.textContent = q;
   const optsEl = document.getElementById('companionOpts');
-  optsEl.innerHTML = opts.map((o,i) => `<button class="companion-opt" onclick="handleCompanionOpt(${i},'${o.replace(/'/g,"\\'")}','${encodeURIComponent(o)}')">${o}</button>`).join('');
+  if (optsEl) optsEl.innerHTML = opts.map(function(o, i) { var safe = o.replace(/'/g, '&#39;'); var enc = encodeURIComponent(o); return '<button class="companion-opt" onclick="handleCompanionOpt(' + i + ',\'' + safe + '\',\'' + enc + '\')">'+o+'</button>'; }).join('');
 }
 
 function handleCompanionOpt(i, label, encoded) {
   const decoded = decodeURIComponent(encoded);
-  // Route to relevant tool based on answer
-  if (decoded.includes('letter') || decoded.includes('contact') || decoded.includes('what to say')) openTool('letters');
-  else if (decoded.includes('numbers') || decoded.includes('budget') || decoded.includes('Update my monthly')) openTool('update');
-  else if (decoded.includes('strategy') || decoded.includes('plan')) togglePlan();
-  else {
-    // Dismiss and show acknowledgement
+  const lower = decoded.toLowerCase();
+  if (lower.includes('letter') || lower.includes('kirje') || lower.includes('brev') || lower.includes('brief') || lower.includes('help') || lower.includes('contact') || lower.includes('yhteyttä') || lower.includes('kontakt')) {
+    openTool('letters');
+  } else if (lower.includes('number') || lower.includes('budget') || lower.includes('update') || lower.includes('luku') || lower.includes('siffr') || lower.includes('monat')) {
+    openTool('update');
+  } else if (lower.includes('strategy') || lower.includes('plan') || lower.includes('suunnitelm') || lower.includes('strateg')) {
+    togglePlan();
+  } else if (lower.includes('setback') || lower.includes('struggling') || lower.includes('vastoink') || lower.includes('svårt') || lower.includes('changed') || lower.includes('muuttunut') || lower.includes('crisis')) {
+    openTool('crisis');
+  } else {
     const card = document.getElementById('companionCard');
-    card.innerHTML = `<div class="companion-q" style="font-size:14px;color:var(--muted);">Noted. Your tools are below whenever you need them. ✦</div>`;
-    setTimeout(() => card.style.display = 'none', 3000);
+    const CS = COMPANION_STRINGS[lang] || COMPANION_STRINGS.EN;
+    if (card) {
+      card.innerHTML = '<div class="companion-q" style="font-size:14px;color:var(--muted);padding:4px 0;">' + (CS.noted || 'Noted. Your tools are below whenever you need them.') + ' ✶</div>';
+      setTimeout(() => { card.style.display = 'none'; }, 3000);
+    }
   }
 }
 
@@ -1529,84 +1590,306 @@ function buildPanel(id) {
 }
 
 // ─────────────────────────────────────────────
-// STATIC PANEL BUILDERS (Batch 1 — unchanged)
+// STATIC PANEL BUILDERS (Batch 2 — upgraded)
 // ─────────────────────────────────────────────
+
+// Country data for maakohtainen content
+const COUNTRY_DATA = {
+  // EU
+  'Finland':      { sol: '5 years (yleinen vanhentumisaika)', agencies: ['Takuusäätiö (takuusaatio.fi)', 'Ulosottolaitos (ulosotto.fi)', 'Kilpailu- ja kuluttajavirasto (kkv.fi)'], hours: '7 am – 9 pm', wage_protect: 'Suojaosuus: ~900 €/kk, lapsikorotus ~150 €/lapsi' },
+  'Sweden':       { sol: '3–10 years (preskription)', agencies: ['Kronofogden (kronofogden.se)', 'Konsumentverket (konsumentverket.se)', 'Kommunal budget- och skuldrådgivning'], hours: '8 am – 9 pm', wage_protect: 'Utmätningsfri del: ~5 600 SEK/mån' },
+  'Norway':       { sol: '3 years (foreldelse)', agencies: ['NAV (nav.no)', 'Gjeldsoffer-Alliansen (goa.no)', 'Namsmannen (namsmann.no)'], hours: '9 am – 9 pm', wage_protect: 'Livsoppholdssats beskyttes (ca. 8 000–10 000 NOK/mnd)' },
+  'Denmark':      { sol: '3 years (forældelsesfrist)', agencies: ['Gældsrådgivning Danmark (gaeldsraadgivning.dk)', 'Forbrugerrådet Tænk (taenk.dk)', 'Fogedretten'], hours: '8 am – 9 pm', wage_protect: 'Rimelig løn til leveomkostninger beskyttes' },
+  'Germany':      { sol: '3 years (Verjährung)', agencies: ['Schuldnerberatung (schuldnerberatung.de)', 'Verbraucherzentrale (verbraucherzentrale.de)', 'Amtsgericht (Insolvenzverfahren)'], hours: '7 am – 9 pm', wage_protect: 'Pfändungsfreigrenze ca. 1 400 €/Monat (§ 850c ZPO)' },
+  'Netherlands':  { sol: '5 years (verjaring)', agencies: ['Geldfit (geldfit.nl)', 'Nibud (nibud.nl)', 'Schuldhulpverlening gemeente'], hours: '8 am – 9 pm', wage_protect: 'Beslagvrije voet: ~1 250 €/maand (netto)' },
+  'France':       { sol: '2–5 years (prescription)', agencies: ['Banque de France (banque-france.fr)', 'Point Conseil Budget (mon-budget-service-public.fr)', 'CCAS / CDAD'], hours: '8 am – 9 pm', wage_protect: 'Fraction saisissable: protège SMIC et allocations' },
+  'Spain':        { sol: '5 years (prescripción)', agencies: ['ADICAE (adicae.net)', 'Servicios sociales municipales', 'Juzgado de lo Mercantil (Segunda Oportunidad)'], hours: '9 am – 9 pm', wage_protect: 'Inembargable: SMI (1 134 €/mes en 2024)' },
+  'Italy':        { sol: '5–10 years (prescrizione)', agencies: ['Codacons (codacons.it)', 'OCC (Organismo di Composizione della Crisi)', 'Adiconsum (adiconsum.it)'], hours: '8 am – 9 pm', wage_protect: 'Pignorabile: max 1/5 dello stipendio netto' },
+  'Poland':       { sol: '3–6 years (przedawnienie)', agencies: ['UOKiK (uokik.gov.pl)', 'Federacja Konsumentów (federacja-konsumentow.org.pl)', 'Rzecznicy Konsumentów'], hours: '8 am – 9 pm', wage_protect: 'Minimalne wynagrodzenie netto chronione przed egzekucją' },
+  'Portugal':     { sol: '5 years (prescrição)', agencies: ['DECO (deco.proteste.pt)', 'Santa Casa da Misericórdia', 'Instituto de Apoio às Pequenas e Médias Empresas'], hours: '9 am – 9 pm', wage_protect: 'Impenhorável: salário mínimo (820 €/mês)' },
+  'United Kingdom':{ sol: '6 years (Limitation Act 1980)', agencies: ['StepChange (stepchange.org)', 'National Debtline (nationaldebtline.org)', 'MoneyHelper (moneyhelper.org.uk)', 'Citizens Advice (citizensadvice.org.uk)'], hours: '8 am – 9 pm', wage_protect: 'Breathing Space (60-day protection), protected earnings ca. £426/month' },
+  'Ireland':      { sol: '6 years', agencies: ['MABS (mabs.ie)', 'ISI (isi.gov.ie)', 'Abhaile (abhaile.ie)'], hours: '8 am – 9 pm', wage_protect: 'Protected earnings in attachment of earnings order' },
+  'United States':{ sol: '3–6 years (varies by state)', agencies: ['NFCC (nfcc.org)', 'CFPB (consumerfinance.gov)', 'CCCS (local)', '211.org (helpline)'], hours: 'FDCPA: 8 am – 9 pm (local time)', wage_protect: 'Federal: 75% of disposable earnings or 30× federal minimum wage (whichever is greater)' },
+  'Canada':       { sol: '2–6 years (varies by province)', agencies: ['Credit Counselling Canada (creditcounsellingcanada.ca)', 'FCAC (canada.ca/fcac)', 'OSB (ised.canada.ca)'], hours: '8 am – 9 pm', wage_protect: 'Varies by province — typically 70–80% of net wages' },
+  'Australia':    { sol: '6 years', agencies: ['National Debt Helpline (ndh.org.au)', 'AFCA (afca.org.au)', 'MoneySmart (moneysmart.gov.au)'], hours: 'ACCC guidelines: 7:30 am – 9 pm weekdays', wage_protect: 'Bankruptcy Act protects certain income and essential assets' },
+};
+
+function getCountryData(country) {
+  return COUNTRY_DATA[country] || {
+    sol: '3–6 years (check your country\'s specific rules)',
+    agencies: ['Your national consumer protection authority', 'Your local free debt counselling service', 'Citizens advice or equivalent in your country'],
+    hours: '8 am – 9 pm (local time)',
+    wage_protect: 'A minimum subsistence amount is protected from garnishment in most countries'
+  };
+}
+
 function buildCollectionPanel(d) {
-  return `<div class="tool-panel active" id="panel_collection">
-    <div class="panel-header"><div class="panel-title">Debt Collection Map</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
-    <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px;">Understanding the process removes the fear. Know what comes next — and your rights at every stage.</p>
-    ${[['1','Missed payment notice','The creditor sends a reminder. At this stage: contact them immediately — most will pause collection if you communicate proactively. Right: you can request a payment plan.'],['2','Formal demand letter','A letter before action. Deadline is usually 14–30 days. Right: dispute the debt in writing if you believe it is incorrect or statute-barred.'],['3','Account sold to collections','Debt is passed or sold to a collections agency. The original creditor is no longer your contact. Right: request proof of the debt in writing before making any payment.'],['4','Collections contact','Phone calls, letters, home visits in some countries. Right: in most countries you can request all contact be in writing only.'],['5','Legal proceedings','Creditor files a claim with the court. You will receive court papers — respond within the deadline. Right: attend or respond — ignoring leads to default judgment.'],['6','Court judgment','A court orders you to pay. Right: apply to vary the judgment if you cannot afford the amount ordered.'],['7','Enforcement','Bailiffs, wage garnishment, or bank account freezing. Right: certain income and essential household items are protected from seizure in most jurisdictions.']].map(([n,title,text])=>`<div class="info-stage"><div class="info-stage-num">${n}</div><div class="info-stage-body"><strong>${title}</strong>${text}</div></div>`).join('')}
-  </div>`;
+  const country = d.country || 'your country';
+  const cd = getCountryData(d.country);
+  const collections = d.collections || '';
+  const isInCollections = collections.includes('Yes');
+
+  // Determine which stage the client is likely at
+  let currentStage = 0;
+  if (collections.includes('court') || collections.includes('enforcement')) currentStage = 6;
+  else if (collections.includes('agency')) currentStage = 3;
+
+  const stages = [
+    ['Missed payment notice', 'The creditor sends a reminder. Contact them immediately — most will pause collection if you reach out proactively before this escalates. Your right: request a payment plan in writing.'],
+    ['Formal demand letter', 'A written notice giving a deadline — usually 14–30 days. Your right: dispute the debt in writing if you believe it is incorrect, inflated, or statute-barred. Keep a copy of everything.'],
+    ['Account passed to collections', 'The debt is sold or passed to a collections agency. The original creditor is no longer your contact. Your right: request written proof of the debt before making any payment — do not acknowledge the debt verbally.'],
+    ['Collections contact begins', 'Phone calls, letters, and in some countries home visits. In ' + country + ', collectors must stop contacting you between ' + cd.hours + '. Your right: request that all contact be in writing only — send this in a letter and keep the copy.'],
+    ['Legal claim filed', 'The creditor files a claim with the court. You will receive court papers — respond within the stated deadline. Your right: attend or respond. Ignoring leads to a default judgment automatically.'],
+    ['Court judgment issued', 'A court has ordered you to pay. Your right: apply to vary the judgment amount or instalment if you cannot afford what was ordered — courts routinely grant this.'],
+    ['Enforcement', 'Wage garnishment, bank account freezing, or bailiff visits. In ' + country + ': ' + cd.wage_protect + '. Essential household items are also protected in most jurisdictions.'],
+  ];
+
+  let html = '<div class="tool-panel active" id="panel_collection">';
+  html += '<div class="panel-header"><div class="panel-title">Debt Collection Map</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>';
+
+  if (isInCollections) {
+    const stageNum = currentStage > 0 ? currentStage : 3;
+    html += '<div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-bottom:16px;font-size:13px;color:var(--green-dark);line-height:1.6;">Based on your profile, you appear to be at <strong>Stage ' + stageNum + '</strong>. The steps below are marked to show where you are.</div>';
+  }
+
+  html += '<p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;">Every stage and your rights — specific to ' + country + '.</p>';
+
+  stages.forEach((s, i) => {
+    const stageNum = i + 1;
+    const isCurrent = currentStage === stageNum || (currentStage === 0 && stageNum === 1);
+    const isPast = stageNum < currentStage;
+    const borderStyle = isCurrent ? 'border-left:3px solid var(--green);' : '';
+    const numStyle = isPast ? 'background:var(--muted);' : (isCurrent ? 'background:var(--green);' : 'background:#ddd;color:#666;');
+
+    html += '<div class="info-stage" style="' + borderStyle + 'margin-bottom:8px;">';
+    html += '<div class="info-stage-num" style="' + numStyle + '">' + stageNum + '</div>';
+    html += '<div class="info-stage-body"><strong>' + s[0] + '</strong>' + s[1] + '</div>';
+    html += '</div>';
+  });
+
+  // CTA into letters tool
+  html += '<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool(\'letters\')">Write a letter to your creditor</button>';
+  html += '</div>';
+  return html;
 }
 
 function buildLegalPanel(d) {
-  return `<div class="tool-panel active" id="panel_legal">
-    <div class="panel-header"><div class="panel-title">Legal Protection Guide</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
-    <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px;">Based on your country: <strong>${d.country||'your country'}</strong>. Always verify with a local adviser for your specific situation.</p>
-    <div class="info-block"><h4>What collectors cannot do</h4><ul><li>Contact you at unreasonable hours (typically before 8 am or after 9 pm)</li><li>Use threatening, abusive or harassing language</li><li>Contact your employer without a court order</li><li>Claim to have legal powers they do not have</li><li>Collect a debt that is statute-barred (time-limited)</li></ul></div>
-    <div class="info-block"><h4>Your key rights</h4><ul><li>Request all communication in writing — collectors must comply</li><li>Request proof of the debt (debt validation) before making any payment</li><li>Dispute incorrect debts in writing within the statutory period</li><li>Apply for a repayment plan through the courts if judgment is issued</li><li>Certain income is always protected from garnishment</li></ul></div>
-    <div class="info-block"><h4>Statute of limitations — ${d.country||'your country'}</h4><p>Most unsecured debts become unenforceable after 5–6 years in EU countries, 6 years in the UK, 3–6 years across US states, and 6 years in Australia. If a collector contacts you about an old debt, use the letter generator to request debt validation before making any payment or acknowledgement.</p></div>
-  </div>`;
+  const country = d.country || 'your country';
+  const cd = getCountryData(d.country);
+
+  return '<div class="tool-panel active" id="panel_legal">'
+  + '<div class="panel-header"><div class="panel-title">Legal Protection Guide</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
+  + '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Specific to <strong>' + country + '</strong>. This is general information — not legal advice. For complex situations, contact a qualified adviser.</p>'
+  + '<div class="info-block"><h4>What collectors cannot do in ' + country + '</h4><ul>'
+  + '<li>Contact you outside permitted hours: <strong>' + cd.hours + '</strong></li>'
+  + '<li>Use threatening, abusive or harassing language — this is illegal in virtually every jurisdiction</li>'
+  + '<li>Contact your employer, family or neighbours about your debt without a court order</li>'
+  + '<li>Misrepresent their legal powers or threaten consequences they cannot deliver</li>'
+  + '<li>Collect a statute-barred debt — in ' + country + ', most unsecured debts become unenforceable after <strong>' + cd.sol + '</strong></li>'
+  + '</ul></div>'
+  + '<div class="info-block"><h4>Your key rights</h4><ul>'
+  + '<li>Request all contact in writing — send a letter, keep the copy, and collectors must comply</li>'
+  + '<li>Request written proof of the debt (debt validation) before making any payment or acknowledging the debt</li>'
+  + '<li>Dispute incorrect or inflated debts in writing within the statutory period</li>'
+  + '<li>Apply to vary a court judgment if you cannot afford the ordered amount</li>'
+  + '<li>Income protection: <strong>' + cd.wage_protect + '</strong></li>'
+  + '</ul></div>'
+  + '<div class="info-block"><h4>Free help in ' + country + '</h4><ul>'
+  + cd.agencies.map(a => '<li>' + a + '</li>').join('')
+  + '</ul></div>'
+  + '<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool(\'letters\')">Write a stop contact letter</button>'
+  + '</div>';
 }
 
 function buildChallengePanel(d) {
   const cCur = d.currency || 'EUR';
+  const collections = d.collections || '';
+  const employed = d.employment || '';
+  const isUnemployed = employed.includes('Unemployed') || employed.includes('sick');
+  const hasCollections = collections.includes('Yes');
+
+  // Personalise week 1 based on situation
+  const week1action = hasCollections
+    ? 'Write a formal letter to the collections agency today — this is your single most urgent action. Use the letter generator. Keep a copy.'
+    : isUnemployed
+    ? 'Contact every creditor and request a hardship deferral before anything else. Do this in writing. Then list every debt with its exact balance.'
+    : 'List every debt with its exact balance and interest rate. Calculate your real monthly surplus. Open one letter you have been avoiding.';
+
   const weeks = [
-    ['Days 1–7',  'Foundation week',  'List every debt with the exact balance. Calculate your real monthly surplus. Contact one creditor. Set up a separate debt repayment account.'],
-    ['Days 8–14', 'Communication week','Write at least one creditor letter. Request payment plans for any debts in arrears. Review all direct debits — cancel anything non-essential.'],
-    ['Days 15–21','Budget week',       'Identify 3 spending categories to reduce. Redirect every euro saved to debt. Review your snowball or avalanche order.'],
-    ['Days 22–30','Momentum week',     'Make your first extra payment. Pull your credit report and check for errors. Set a recurring monthly review date.'],
-    ['Days 31–60','Build momentum',    'Increase repayments by 10–20% if possible. Negotiate interest reductions with at least one lender. Track every payment made.'],
-    ['Days 61–90','Breakthrough phase','Recalculate your debt-free date with your current numbers. Build a small emergency buffer (500 ' + cCur + ' minimum). Plan what you do with the freed-up money when this debt is gone.'],
+    ['Days 1–7',  'Foundation week',  week1action],
+    ['Days 8–14', 'Communication week','Write at least one formal creditor letter. Request payment plans for any debts in arrears. Cancel every non-essential direct debit.'],
+    ['Days 15–21','Budget week',       'Identify 3 spending categories to cut. Redirect every ' + cCur + ' saved directly to debt. Run the Snowball vs Avalanche calculator to confirm your repayment order.'],
+    ['Days 22–30','Momentum week',     'Make your first extra debt payment — any amount above the minimum counts. Check your credit report for errors. Set a monthly review date.'],
+    ['Days 31–60','Build momentum',    'Increase repayments by 10–20% if your budget allows. Contact at least one more lender about interest reduction. Track every payment made this month.'],
+    ['Days 61–90','Breakthrough phase','Recalculate your debt-free date using your current numbers. Build a 500 ' + cCur + ' emergency buffer so one unexpected cost does not undo your progress. Write down what you will do with the freed payment when this debt is cleared.'],
   ];
+
   return '<div class="tool-panel active" id="panel_challenge">'
     + '<div class="panel-header"><div class="panel-title">90-Day Challenge</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
-    + weeks.map(function(w){ return '<div class="info-block"><h4>'+w[0]+' \u2014 '+w[1]+'</h4><p>'+w[2]+'</p></div>'; }).join('')
+    + (hasCollections ? '<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#dc2626;margin-bottom:14px;">Your profile shows active collections — Week 1 has been adjusted to prioritise this. Writing that letter is the single most important action right now.</div>' : '')
+    + weeks.map(function(w) { return '<div class="info-block"><h4>' + w[0] + ' \u2014 ' + w[1] + '</h4><p>' + w[2] + '</p></div>'; }).join('')
+    + '<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool(\'letters\')">Write my first creditor letter</button>'
     + '</div>';
 }
 
 function buildPsychPanel(d, cur) {
-  const threshold = Math.round((parseFloat(d.income)||2000)*0.015);
-  return `<div class="tool-panel active" id="panel_psychology">
-    <div class="panel-header"><div class="panel-title">Behavioural Tools</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
-    <div class="info-block"><h4>The 48-hour rule for impulse spending</h4><p>Before any unplanned purchase over ${threshold} ${cur}: wait 48 hours. Write down what it is and why you want it. If you still want it after 48 hours and it fits your budget, it is a considered decision — not an impulse. Research shows that around 70% of impulse purchases are forgotten within 24 hours.</p></div>
-    <div class="info-block"><h4>The debt repayment habit loop</h4><p>Attach your debt payment to an existing daily habit — the same time, the same trigger. Every time you make your morning coffee, open your bank balance and check the number. The visual reminder activates motivation. Small, consistent action over 90 days outperforms large, infrequent effort every single time.</p></div>
-    <div class="info-block"><h4>Managing financial stress</h4><ul><li>Separate the financial problem from your identity — debt is a situation, not who you are</li><li>Set one specific financial task per day, not a list — one task only</li><li>Acknowledge every payment made, however small</li><li>Physical movement (even a 10-minute walk) measurably reduces cortisol, the stress hormone that drives impulsive decisions</li></ul></div>
-    <div class="info-block"><h4>If you have missed a payment</h4><p>Missing a payment is not failure — it is information. It tells you the plan needs adjusting. Contact the creditor the same day. Creditors consistently respond better to proactive contact than to silence — a brief, honest call or letter changes the dynamic entirely.</p></div>
-  </div>`;
+  const threshold = Math.max(20, Math.round((parseFloat(d.income)||2000) * 0.015));
+  const barrier = d.barrier || '';
+
+  // Personalise opening block based on psychological profile
+  const openingBlock = barrier.includes('ashamed')
+    ? '<div class="info-block" style="border-left:3px solid var(--green);"><h4>You reached out — that matters more than you know</h4><p>Most people in debt never tell anyone and never seek help. The fact that you are here, working through this, puts you ahead of where most people remain. Financial shame is one of the most isolating experiences there is — and it is entirely undeserved. Debt is a situation. It is not who you are.</p></div>'
+    : barrier.includes('exhausted') || barrier.includes('failed')
+    ? '<div class="info-block" style="border-left:3px solid var(--green);"><h4>Previous attempts failed for structural reasons — not personal ones</h4><p>Debt systems are deliberately complex. Interest compounds. Creditors have lawyers. The information is scattered. When previous attempts did not work, it was almost never a failure of willpower — it was a failure of the right tools at the right time. This time is structurally different.</p></div>'
+    : barrier.includes('hopeless')
+    ? '<div class="info-block" style="border-left:3px solid var(--green);"><h4>Start with what is within your control — not the whole picture</h4><p>When the numbers feel impossible, looking at the full total is counterproductive. The only question that matters right now is: what is the one smallest possible action today? One letter. One cancelled subscription. One phone call. Progress that feels small is still progress — and it compounds.</p></div>'
+    : '';
+
+  return '<div class="tool-panel active" id="panel_psychology">'
+    + '<div class="panel-header"><div class="panel-title">Behavioural Tools</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
+    + openingBlock
+    + '<div class="info-block"><h4>The ' + threshold + ' ' + cur + ' pause rule</h4>'
+    + '<p>Before any unplanned purchase over ' + threshold + ' ' + cur + ': wait 48 hours. Write down exactly what it is and why you want it. If you still want it after 48 hours and it genuinely fits your budget, it is a considered decision — not an impulse. Around 70% of impulse purchases are forgotten within 24 hours. This rule alone saves most people 50–150 ' + cur + ' per month within the first 30 days.</p></div>'
+    + '<div class="info-block"><h4>The debt repayment habit loop</h4>'
+    + '<p>Attach your debt payment to an existing daily habit — same trigger, same time, every day. Every morning when you make coffee, open your bank balance and look at the number. The visual reminder activates motivation without requiring willpower. Small consistent action over 90 days outperforms large infrequent effort every time — this is not motivation advice, it is how habit formation actually works neurologically.</p></div>'
+    + '<div class="info-block"><h4>Managing financial stress</h4><ul>'
+    + '<li>Separate the financial problem from your identity. Debt is a situation — it is not a character verdict.</li>'
+    + '<li>Set exactly one financial task per day. Not a list. One specific task.</li>'
+    + '<li>Acknowledge every payment made, however small — your brain needs to register progress to stay motivated</li>'
+    + '<li>10 minutes of physical movement measurably reduces cortisol, the stress hormone that directly impairs financial decision-making</li>'
+    + '</ul></div>'
+    + '<div class="info-block"><h4>If you have missed a payment</h4>'
+    + '<p>Missing a payment is not failure — it is information. It tells you the plan needs adjusting. Contact the creditor the same day you realise. Creditors respond dramatically better to proactive contact than silence — a brief honest letter or call changes the relationship entirely and almost always prevents escalation.</p></div>'
+    + '</div>';
 }
 
 function buildCrisisPanel(d) {
-  return `<div class="tool-panel active" id="panel_crisis">
-    <div class="panel-header"><div class="panel-title">Crisis Action Plans</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
-    <div class="wiz-opts" style="margin-bottom:0;">
-      <button class="wiz-opt" onclick="showCrisisPlan('unemployed')">Unemployment</button>
-      <button class="wiz-opt" onclick="showCrisisPlan('divorce')">Divorce / separation</button>
-      <button class="wiz-opt" onclick="showCrisisPlan('sick')">Sick leave</button>
-      <button class="wiz-opt" onclick="showCrisisPlan('emergency')">Financial emergency</button>
-    </div>
-    <div id="crisisPlanContent" style="margin-top:14px;"></div>
-  </div>`;
+  return '<div class="tool-panel active" id="panel_crisis">'
+    + '<div class="panel-header"><div class="panel-title">Crisis Action Plans</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
+    + '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Select the situation closest to yours — the plan will include actions specific to your country.</p>'
+    + '<div class="wiz-opts" style="margin-bottom:0;">'
+    + '<button class="wiz-opt" onclick="showCrisisPlan(\'unemployed\',this)">Unemployment or income loss</button>'
+    + '<button class="wiz-opt" onclick="showCrisisPlan(\'divorce\',this)">Divorce or separation</button>'
+    + '<button class="wiz-opt" onclick="showCrisisPlan(\'sick\',this)">Sick leave or disability</button>'
+    + '<button class="wiz-opt" onclick="showCrisisPlan(\'emergency\',this)">Financial emergency</button>'
+    + '</div>'
+    + '<div id="crisisPlanContent" style="margin-top:14px;"></div>'
+    + '</div>';
 }
 
 function buildEmergencyPanel(d) {
-  return `<div class="tool-panel active" id="panel_emergency">
-    <div class="panel-header"><div class="panel-title">Emergency Action Card</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">If you are in a debt crisis right now — do these in order.</p>
-    ${['Housing first — pay rent or mortgage before anything else. It cannot be negotiated away.','Keep food and utilities running — call providers immediately for emergency payment arrangements.','Stop all non-essential direct debits today — list every one and cancel them one by one.','Do not ignore post or calls — open everything, write the date on it, and keep copies.','Contact a free debt adviser in your country before making any lump-sum payment to a collector.','Do not borrow more to pay off existing debt — this locks you into a cycle that is very hard to break.','Use the letter generator to communicate with every creditor in writing — this creates a paper trail and removes the fear of phone calls.'].map((s,i)=>`<div class="info-stage"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`).join('')}
-    <div style="margin-top:12px;"><button class="btn-copy" onclick="copyEmergencyCard()">Copy card</button></div>
-  </div>`;
+  const country = d.country || 'your country';
+  const cd = getCountryData(d.country);
+  const debtList = d.debts && d.debts.length > 0
+    ? d.debts.map(dbt => (dbt.creditor || dbt.type) + ': ' + (dbt.amount||'?').toLocaleString() + ' ' + (dbt.currency||d.currency||'EUR')).join(', ')
+    : 'not listed';
+
+  const steps = [
+    'Housing first — pay rent or mortgage before anything else. It is the one payment that carries eviction or repossession risk that cannot be negotiated away.',
+    'Food and utilities second — call providers immediately if you cannot pay. Emergency payment arrangements exist and providers are legally required to offer them in most countries.',
+    'Stop all non-essential direct debits today — open your banking app, list every one, and cancel them one by one. Do not wait.',
+    'Open every unopened letter — write today\'s date on each one and keep them. Ignoring letters does not stop deadlines; it removes your ability to respond in time.',
+    'Contact a free debt adviser in ' + country + ' before making any lump-sum payment to a collector: ' + cd.agencies[0] + '.',
+    'Do not borrow more money to cover existing debt — this almost always compounds the problem and costs significantly more in interest.',
+    'Write to every creditor using the letter generator — written contact creates a paper trail, starts the hardship process, and removes the fear of phone calls.',
+  ];
+
+  let html = '<div class="tool-panel active" id="panel_emergency">'
+    + '<div class="panel-header"><div class="panel-title">Emergency Action Card</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
+    + '<p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Do these in order — right now if you are in crisis.</p>';
+
+  steps.forEach((s, i) => {
+    html += '<div class="info-stage"><div class="info-stage-num">' + (i+1) + '</div><div class="info-stage-body">' + s + '</div></div>';
+  });
+
+  if (d.debts && d.debts.length > 0) {
+    html += '<div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-top:12px;font-size:12.5px;color:var(--green-dark);">Your debts from your profile: ' + debtList + '</div>';
+  }
+
+  html += '<div style="margin-top:12px;display:flex;gap:8px;">'
+    + '<button class="btn-copy" onclick="copyEmergencyCard()">Copy card</button>'
+    + '<button class="plan-cta" style="padding:8px 18px;font-size:13px;" onclick="openTool(\'letters\')">Write a deferral letter</button>'
+    + '</div>'
+    + '</div>';
+  return html;
 }
 
 /* ═══════════════════════════════════════════════
-   WIZARD NAVIGATION
+   WIZARD NAVIGATION — fixed regex
 ═══════════════════════════════════════════════ */
 function wizShowStep(prefix, n) {
-  document.querySelectorAll(`[id^="${prefix}"]`).forEach(el=>{
-    if(/^[\d_]/.test(el.id.replace(prefix,''))) el.classList.remove('active');
+  // Find all child steps of this wizard — match prefix + (digit OR underscore+word)
+  const allSteps = document.querySelectorAll('[id^="' + prefix + '"]');
+  allSteps.forEach(el => {
+    const suffix = el.id.slice(prefix.length);
+    // Only hide if it's a step ID (digit, or _word like _generating)
+    if (/^(\d+|_\w+)$/.test(suffix)) el.classList.remove('active');
   });
-  document.getElementById(prefix+n)?.classList.add('active');
+  const target = document.getElementById(prefix + n);
+  if (target) target.classList.add('active');
 }
+
+/* ═══════════════════════════════════════════════
+   COMPANION CARD — multilingual + contextual
+═══════════════════════════════════════════════ */
+const COMPANION_STRINGS = {
+  EN: {
+    collections_q: 'The most urgent step is contacting the collections agency. Have you been able to do that yet?',
+    collections_opts: ['Yes — I made contact', 'Not yet — help me write the letter', 'Not ready yet'],
+    day7_q: 'Your plan is ready. What feels most manageable to start with today?',
+    day7_opts: ['Looking at my numbers', 'Writing a letter to a creditor', 'Reading through my plan first'],
+    day30_q: 'Day {d}. How are things going with your plan so far?',
+    day30_opts: ['Making progress', 'Struggling a little', 'Something has changed in my situation'],
+    day60_q: '{d} days in — that\'s real progress. What would help most right now?',
+    day60_opts: ['Update my monthly numbers', 'Write a letter to a creditor', 'Review my strategy'],
+    day90_q: 'Day {d} — you\'re in the final stretch. What are you focused on?',
+    day90_opts: ['Staying on track', 'Dealing with a setback', 'Planning what comes after 90 days'],
+    noted: 'Noted. Your tools are below whenever you need them.',
+  },
+  FI: {
+    collections_q: 'Kiireellisin askel on ottaa yhteyttä perintätoimistoon. Oletko pystynyt tekemään sen?',
+    collections_opts: ['Kyllä — otin yhteyttä', 'En vielä — auta kirjeen kanssa', 'En ole vielä valmis'],
+    day7_q: 'Suunnitelmasi on valmis. Mikä tuntuu helpoimmalta aloittaa tänään?',
+    day7_opts: ['Katson lukuni', 'Kirjoitan kirjeen velkojalle', 'Luen suunnitelmani ensin'],
+    day30_q: 'Päivä {d}. Kuinka suunnitelma on edennyt?',
+    day30_opts: ['Edistystä on tapahtunut', 'Hieman vaikeaa', 'Tilanteeni on muuttunut'],
+    day60_q: '{d} päivää — se on aitoa edistystä. Mikä auttaisi nyt eniten?',
+    day60_opts: ['Päivitän kuukausilukuni', 'Kirjoitan kirjeen velkojalle', 'Tarkistan strategiani'],
+    day90_q: 'Päivä {d} — olet loppusuoralla. Mihin keskityt?',
+    day90_opts: ['Pysyn kurssilla', 'Käsittelen vastoinkäymistä', 'Suunnittelen mitä tulee 90 päivän jälkeen'],
+    noted: 'Selvä. Työkalusi ovat alla aina tarvittaessa.',
+  },
+  SV: {
+    collections_q: 'Det mest brådskande steget är att kontakta inkassobolaget. Har du kunnat göra det?',
+    collections_opts: ['Ja — jag tog kontakt', 'Inte ännu — hjälp mig skriva brevet', 'Inte redo än'],
+    day7_q: 'Din plan är klar. Vad känns mest hanterbart att börja med idag?',
+    day7_opts: ['Titta på mina siffror', 'Skriva ett brev till en borgenär', 'Läsa igenom min plan först'],
+    day30_q: 'Dag {d}. Hur går det med din plan?',
+    day30_opts: ['Gör framsteg', 'Lite svårt', 'Något har förändrats i min situation'],
+    day60_q: '{d} dagar — det är verkliga framsteg. Vad skulle hjälpa mest nu?',
+    day60_opts: ['Uppdatera mina månadssiffror', 'Skriva ett brev till en borgenär', 'Granska min strategi'],
+    day90_q: 'Dag {d} — du är på slutrakan. Vad fokuserar du på?',
+    day90_opts: ['Hålla kursen', 'Hantera ett bakslag', 'Planera vad som händer efter 90 dagar'],
+    noted: 'Noterat. Dina verktyg finns nedan när du behöver dem.',
+  },
+  DE: {
+    collections_q: 'Der dringendste Schritt ist, das Inkassobüro zu kontaktieren. Haben Sie das schon geschafft?',
+    collections_opts: ['Ja — ich habe Kontakt aufgenommen', 'Noch nicht — hilf mir beim Brief', 'Noch nicht bereit'],
+    day7_q: 'Ihr Plan ist fertig. Was fühlt sich heute am einfachsten an?',
+    day7_opts: ['Meine Zahlen ansehen', 'Einen Brief an einen Gläubiger schreiben', 'Zuerst den Plan lesen'],
+    day30_q: 'Tag {d}. Wie läuft es mit Ihrem Plan?',
+    day30_opts: ['Mache Fortschritte', 'Etwas schwierig', 'Meine Situation hat sich verändert'],
+    day60_q: '{d} Tage — das ist echter Fortschritt. Was würde jetzt am meisten helfen?',
+    day60_opts: ['Monatszahlen aktualisieren', 'Brief an Gläubiger schreiben', 'Strategie überprüfen'],
+    day90_q: 'Tag {d} — Sie sind auf der Zielgeraden. Worauf konzentrieren Sie sich?',
+    day90_opts: ['Auf Kurs bleiben', 'Mit einem Rückschlag umgehen', 'Nach 90 Tagen planen'],
+    noted: 'Verstanden. Ihre Werkzeuge sind unten verfügbar.',
+  },
+};
+// Fallback all other languages to EN
+['NO','DA','NL','ES','FR','IT','PL','PT','CS','ET','LV','LT','HU','RO','HR'].forEach(c => {
+  COMPANION_STRINGS[c] = COMPANION_STRINGS.EN;
+});
 
 // ─── LETTER WIZARD ───
 let lwData = {};
@@ -1626,19 +1909,23 @@ function lwSelectDebt(idx, btn) {
   document.querySelectorAll('#lw_debt_opts .wiz-opt').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
   lwData.debtIdx = idx;
+  const cur = memberData.currency || 'EUR';
   if (idx >= 0 && memberData.debts?.[idx]) {
     const dbt = memberData.debts[idx];
     document.getElementById('lw_creditor').value = dbt.creditor || dbt.type || '';
-    const amtEl = document.getElementById('lw_amount');
-    if (amtEl) amtEl.value = dbt.amount || '';
     lwData.prefilled = dbt;
+    // Pre-set currency to this debt's currency in step 3 when it renders
+    lwData.prefilledCurrency = dbt.currency || cur;
+    lwData.prefilledAmount = dbt.amount || '';
   } else {
     document.getElementById('lw_creditor').value = '';
+    lwData.prefilled = null;
+    lwData.prefilledCurrency = cur;
+    lwData.prefilledAmount = '';
   }
 }
 
 function lwNext(step) {
-  const t = T[lang]||T.EN||{};
   if (step===1) {
     lwData.creditor = document.getElementById('lw_creditor').value.trim();
     if (!lwData.creditor) { showToast('Please enter the creditor name.'); return; }
@@ -1647,10 +1934,17 @@ function lwNext(step) {
   if (step===2) {
     if (!lwData.type) { showToast('Please select a letter type.'); return; }
     wizShowStep('lw',3);
+    // Apply prefilled values now that step 3 is visible
+    const amtEl = document.getElementById('lw_amount');
+    if (amtEl && lwData.prefilledAmount) amtEl.value = lwData.prefilledAmount;
+    const curEl = document.getElementById('lw_currency');
+    if (curEl && lwData.prefilledCurrency) {
+      for (let o of curEl.options) { if (o.value === lwData.prefilledCurrency) { o.selected=true; break; } }
+    }
   }
   if (step===3) {
     lwData.amount   = document.getElementById('lw_amount')?.value;
-    lwData.currency = document.getElementById('lw_currency')?.value;
+    lwData.currency = document.getElementById('lw_currency')?.value || memberData.currency || 'EUR';
     lwData.situation= document.getElementById('lw_situation')?.value.trim();
     wizShowStep('lw',4);
   }
@@ -1974,18 +2268,59 @@ function runIncomeSim() {
 }
 
 // ─── CRISIS PLANS ───
-function showCrisisPlan(type) {
+function showCrisisPlan(type, btn) {
   const d = memberData;
+  const cd = getCountryData(d.country);
+  const country = d.country || 'your country';
+  const agency = cd.agencies[0] || 'your national free debt counselling service';
+
+  // Highlight selected button
+  if (btn) {
+    document.querySelectorAll('#panel_crisis .wiz-opt').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
   const plans = {
-    unemployed: ['Contact every creditor before the first missed payment — most lenders have dedicated hardship teams and will freeze interest immediately if contacted proactively.', 'Apply for every state benefit you are entitled to on the same day you lose income. In most countries this means unemployment benefit, housing benefit and any child-related supplements.', 'Pause all non-essential direct debits immediately.', 'Prioritise in this order: housing, utilities, food, unsecured debt. Unsecured creditors have the least power in the short term.', 'Use the letter generator to send a formal hardship notification to each creditor — this creates a paper trail and starts the negotiation process.', 'Set a review date 30 days out, or sooner if your employment situation changes.'],
-    divorce: ['Separate all joint accounts and notify banks of the change in circumstances immediately — you can be held liable for a joint account even after separation.', 'Get legal advice on shared debt liability as early as possible. Oral agreements between partners have no legal standing.', 'Recalculate your full budget on a single income. Do not use combined pre-separation figures for anything.', 'If you have a joint mortgage or rental, take urgent legal advice on your options — this is time-sensitive.', 'Use the letter generator to formally notify creditors of the change in circumstances.', 'Your own housing security comes first — before negotiating anything else.'],
-    sick: ['Apply for sick pay, disability benefit, or income protection immediately — do not wait to "see how things go". Processing times can be weeks.', 'Notify every creditor in writing that you are on medical leave. Most lenders have a statutory or voluntary hardship process that includes interest freezes.', 'Request a payment holiday of 1–3 months from your main lenders — this is a standard product at most banks and does not require court involvement.', 'Do not cash in savings or pensions unless absolutely necessary — these assets are often protected from creditors in formal insolvency processes.', 'Contact a free debt adviser for a full review if your sick leave is likely to last more than 3 months.', 'Set a review date tied to your expected return-to-work date.'],
-    emergency: ['Stop. Do not make any irreversible financial decision in the first 48 hours — panic leads to mistakes that worsen the situation.', 'List every debt and every payment due in the next 30 days on a single page.', 'Housing security comes before everything else — rent, mortgage, and utility arrears carry eviction and disconnection risk. Unsecured debt does not.', 'Contact a free debt helpline in your country today. Free advice prevents expensive mistakes.', 'Do not borrow more money to cover existing debt — this almost always makes the situation worse.', 'Use the letter generator to request emergency payment deferrals from every creditor — this buys time and creates a record.'],
+    unemployed: [
+      'Contact every creditor before the first missed payment — most lenders have dedicated hardship teams and will freeze interest immediately if you reach out first. Do not wait.',
+      'Apply for every benefit you are entitled to on the same day income stops. In ' + country + ', contact: ' + agency + '. Do this the same week.',
+      'Pause every non-essential direct debit today. Go through your bank statement line by line — subscriptions, memberships, anything that is not housing, food, or utilities.',
+      'Prioritise in this order: housing, then utilities, then food, then unsecured debt. Unsecured creditors have the least legal power in the short term.',
+      'Use the letter generator to send a formal hardship notification to each creditor — this starts the official hardship process and creates a paper trail.',
+      'Set a review date 30 days out. Your action plan changes when your employment status changes — do not let more than 30 days pass without reassessing.',
+    ],
+    divorce: [
+      'Separate all joint accounts and notify banks immediately — you can be held fully liable for a joint account debt even after separation.',
+      'Get legal advice on shared debt liability as early as possible. Verbal agreements between partners have no legal standing and will not protect you.',
+      'Recalculate your complete budget on your individual income alone. Do not use any combined pre-separation figures for planning.',
+      'If you have a joint mortgage or rental agreement, take urgent legal advice on your options — the deadlines in these situations are often shorter than people expect.',
+      'Use the letter generator to formally notify every creditor of the change in circumstances — this is a protective step, not an admission of difficulty.',
+      'Your own housing security is the absolute priority. Everything else — including the debt itself — can be negotiated or deferred. Housing cannot.',
+    ],
+    sick: [
+      'Apply for sick pay, disability benefit, or income protection on day one — not when you feel better. Processing times are typically 2–6 weeks and backdating is not always possible.',
+      'Write to every creditor immediately to notify them of your medical leave. Include a brief factual statement. Most lenders have a statutory hardship process that includes interest freezes.',
+      'Request a payment holiday of 1–3 months from your main lenders — this is a standard product at most banks in ' + country + ' and does not require court involvement or damage your credit history permanently.',
+      'Do not cash in savings, pension, or insurance policies unless absolutely necessary — these assets are typically protected from creditors in formal insolvency processes and you may need them later.',
+      'If your sick leave is expected to exceed 3 months, contact ' + agency + ' for a full review of your options.',
+      'Set a review date tied to your expected return-to-work date — your creditor negotiations will look very different once your income situation is clearer.',
+    ],
+    emergency: [
+      'Stop. Do not make any irreversible financial decision in the first 48 hours. Panic-driven decisions — selling assets, taking out new loans, paying collectors in full — almost always worsen the situation.',
+      'List every debt and every payment due in the next 30 days on a single page. You cannot prioritise what you have not mapped.',
+      'Housing first, always. Rent, mortgage, and utility arrears carry eviction and disconnection risk. Unsecured debt creditors cannot remove your home — secured creditors and landlords can.',
+      'Contact ' + agency + ' today. Free advice prevents expensive mistakes and most advisers can contact creditors on your behalf.',
+      'Do not borrow new money to cover existing debt. This transfers the problem, adds cost, and makes every subsequent step harder.',
+      'Use the letter generator to request emergency payment deferrals from every creditor — written contact creates a paper trail and buys time for a proper plan.',
+    ],
   };
-  const steps = plans[type]||[];
-  document.getElementById('crisisPlanContent').innerHTML = steps.map((s,i)=>`<div class="info-stage" style="margin-top:${i===0?'14':'0'}px;"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`).join('');
-  // Add CTA to letters tool
-  document.getElementById('crisisPlanContent').innerHTML += `<button class="plan-cta" style="margin-top:12px;" onclick="openTool('letters')">Write a letter to your creditor</button>`;
+
+  const steps = plans[type] || [];
+  let html = steps.map((s, i) =>
+    '<div class="info-stage"><div class="info-stage-num">' + (i+1) + '</div><div class="info-stage-body">' + s + '</div></div>'
+  ).join('');
+  html += '<button class="plan-cta" style="margin-top:12px;width:100%;" onclick="openTool(\'letters\')">Write a letter to your creditor</button>';
+  document.getElementById('crisisPlanContent').innerHTML = html;
 }
 
 // ─── NEGOTIATION WIZARD ───
@@ -2192,389 +2527,6 @@ Write 4–5 concrete, numbered actions. If progress was 'crisis', stabilisation 
   } catch(e) {}
 }
 
-function buildPanel(id) {
-  const d = memberData;
-  const cur = d.currency || 'EUR';
-
-  switch(id) {
-
-    /* ── LETTERS ── */
-    case 'letters': return `
-      <div class="tool-panel active" id="panel_letters">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_letters||'AI Creditor Letters'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div id="lw_steps">
-          <div class="wiz-step active" id="lw1">
-            <span class="wiz-eyebrow">Step 1 of 4</span>
-            <div class="wiz-q">${L.lw1q||'Who is the letter for?'}</div>
-            <div class="wiz-hint">${L.lw1h||'This becomes the salutation in your letter.'}</div>
-            <div class="wiz-field">
-              <input type="text" id="lw_creditor" placeholder="e.g. Nordea, Klarna, HMRC, Intrum…" value="${d.debts?.[0]?.creditor||''}" style="font-size:15px;padding:13px 14px;"/>
-            </div>
-            <div class="wiz-nav"><button class="wiz-next" onclick="lwNext(1)">${L.btnNext||'Continue'}</button></div>
-          </div>
-          <div class="wiz-step" id="lw2">
-            <span class="wiz-eyebrow">Step 2 of 4</span>
-            <div class="wiz-q">${L.lw2q||'What type of letter do you need?'}</div>
-            <div class="wiz-opts">
-              ${['hardship','settlement','stop','dispute','plan','holiday','negotiation'].map(t=>`<button class="wiz-opt" onclick="lwSelectType('${t}')" data-type="${t}">${L['ltype_'+t]||t}</button>`).join('')}
-            </div>
-            <div class="wiz-nav"><button class="wiz-back" onclick="lwBack(2)">${L.btnBack||'Back'}</button></div>
-          </div>
-          <div class="wiz-step" id="lw3">
-            <span class="wiz-eyebrow">Step 3 of 4</span>
-            <div class="wiz-q">${L.lw3q||'Tell us a little more.'}</div>
-            <div class="wiz-field">
-              <label class="wiz-label">${L.lw3debt||'Amount owed (optional)'}</label>
-              <div class="wiz-amount">
-                <input type="number" id="lw_amount" placeholder="0" value="${d.debts?.[0]?.amount||''}" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
-                <select id="lw_currency"><option value="${cur}">${cur}</option></select>
-              </div>
-            </div>
-            <div class="wiz-field">
-              <label class="wiz-label">${L.lw3sit||'Anything specific to include?'}</label>
-              <div class="wiz-hint">${L.lw3sith||'Optional — improves the letter significantly.'}</div>
-              <textarea id="lw_situation" rows="3" placeholder="e.g. I was made redundant 2 months ago. I have 2 children. I can pay 50 ${cur}/month.">${d.situation?'Context: '+d.situation:''}</textarea>
-            </div>
-            <div class="wiz-nav">
-              <button class="wiz-back" onclick="lwBack(3)">${L.btnBack||'Back'}</button>
-              <button class="wiz-next" onclick="lwNext(3)">${L.btnNext||'Continue'}</button>
-            </div>
-          </div>
-          <div class="wiz-step" id="lw4">
-            <span class="wiz-eyebrow">Step 4 of 4</span>
-            <div class="wiz-q">${L.lw4q||'One final detail.'}</div>
-            <div class="wiz-field">
-              <label class="wiz-label">${L.lw4hardship||'What is causing your hardship?'}</label>
-              <div class="wiz-opts grid2">
-                ${['Unemployment','Reduced income','Illness or disability','Divorce or separation','Business failure','Cost of living pressure','Unexpected expenses','Other'].map(h=>`<button class="wiz-opt" onclick="lwSelectHardship('${h}')">${h}</button>`).join('')}
-              </div>
-            </div>
-            <div class="wiz-nav">
-              <button class="wiz-back" onclick="lwBack(4)">${L.btnBack||'Back'}</button>
-              <button class="wiz-next" id="lwGenBtn" onclick="generateLetter()">${L.btnGenerate||'Generate'}</button>
-            </div>
-          </div>
-          <div class="wiz-step" id="lw_generating">
-            <div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text" id="lwGenText">${L.btnGenerating||'Generating…'}</div></div>
-          </div>
-        </div>
-        <div class="panel-output" id="letterOutput"></div>
-        <div class="output-actions" id="letterActions" style="display:none;">
-          <button class="btn-copy" onclick="copyOutput('letterOutput','letterCopyBtn')" id="letterCopyBtn">${L.btnCopy||'Copy'}</button>
-          <button class="btn-reset" onclick="openTool('letters')">${L.btnReset||'Start over'}</button>
-        </div>
-        <div class="panel-error" id="letterError"></div>
-      </div>`;
-
-    /* ── BUDGET TOOL ── */
-    case 'budget': return `
-      <div class="tool-panel active" id="panel_budget">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_budget||'Crisis Budget Tool'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div class="wiz-step active" id="bw1">
-          <span class="wiz-eyebrow">Step 1 of 2</span>
-          <div class="wiz-q">${L.bw1q||'Your current debt situation.'}</div>
-          <div class="wiz-two">
-            <div class="wiz-field"><label class="wiz-label">${L.bw1total||'Total debt'}</label><input type="number" id="b_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-            <div class="wiz-field"><label class="wiz-label">${L.bw1payment||'Monthly payment'}</label><input type="number" id="b_payment" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-          </div>
-          <div class="wiz-field"><label class="wiz-label">${L.bw1rate||'Interest rate (%)'}</label><div class="wiz-hint">${L.bw1rate_h||'Enter 0 if unknown.'}</div><input type="number" id="b_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div>
-          <div class="wiz-nav"><button class="wiz-next" onclick="bwNext(1)">${L.btnNext||'Continue'}</button></div>
-        </div>
-        <div class="wiz-step" id="bw2">
-          <span class="wiz-eyebrow">Step 2 of 2</span>
-          <div class="wiz-q">${L.bw2q||'Your monthly surplus.'}</div>
-          <div class="wiz-field"><label class="wiz-label">${L.bw2surplus||'Available for debt repayment'}</label><div class="wiz-hint">${L.bw2surplus_h||'Income minus all essential costs.'}</div><input type="number" id="b_surplus" value="${calcSurplus()}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-          <div class="wiz-field"><label class="wiz-label">${L.bw2extra||'Extra you could add per month'}</label><div class="wiz-hint">${L.bw2extra_h||'Even small amounts make a big difference.'}</div><input type="number" id="b_extra" value="0" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-          <div class="wiz-nav">
-            <button class="wiz-back" onclick="bwBack(2)">${L.btnBack||'Back'}</button>
-            <button class="wiz-next" onclick="runBudget()">${L.btnGenerate||'Calculate'}</button>
-          </div>
-        </div>
-        <div class="calc-result" id="budgetResult"></div>
-      </div>`;
-
-    /* ── DF DATE ── */
-    case 'dfdate': return `
-      <div class="tool-panel active" id="panel_dfdate">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_dfdate||'Debt-Free Date Calculator'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div class="wiz-q" style="margin-bottom:14px;">${L.dfw1q||'Enter your debt details.'}</div>
-        <div class="wiz-two">
-          <div class="wiz-field"><label class="wiz-label">${L.dfw1total||'Total debt'} (${cur})</label><input type="number" id="df_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-          <div class="wiz-field"><label class="wiz-label">${L.dfw1payment||'Monthly payment'} (${cur})</label><input type="number" id="df_payment" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-        </div>
-        <div class="wiz-field"><label class="wiz-label">${L.dfw1rate||'Interest rate (%)'}</label><input type="number" id="df_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div>
-        <div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runDFDate()">${L.btnGenerate||'Calculate'}</button></div>
-        <div class="calc-result" id="dfdateResult"></div>
-      </div>`;
-
-    /* ── SNOWBALL / AVALANCHE ── */
-    case 'snowball': return `
-      <div class="tool-panel active" id="panel_snowball">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_snowball||'Snowball vs Avalanche'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div class="wiz-q" style="margin-bottom:14px;">Enter your two largest debts to compare strategies.</div>
-        <div class="wiz-two">
-          <div class="wiz-field"><label class="wiz-label">Debt 1 — amount (${cur})</label><input type="number" id="s_d1" value="${d.debts?.[0]?.amount||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-          <div class="wiz-field"><label class="wiz-label">Debt 1 — interest (%)</label><input type="number" id="s_r1" value="${d.debts?.[0]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div>
-        </div>
-        <div class="wiz-two">
-          <div class="wiz-field"><label class="wiz-label">Debt 2 — amount (${cur})</label><input type="number" id="s_d2" value="${d.debts?.[1]?.amount||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-          <div class="wiz-field"><label class="wiz-label">Debt 2 — interest (%)</label><input type="number" id="s_r2" value="${d.debts?.[1]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div>
-        </div>
-        <div class="wiz-field"><label class="wiz-label">Total monthly payment (${cur})</label><input type="number" id="s_pmt" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-        <div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runSnowball()">Compare strategies</button></div>
-        <div class="calc-result" id="snowballResult"></div>
-      </div>`;
-
-    /* ── INCOME SIMULATOR ── */
-    case 'income': return `
-      <div class="tool-panel active" id="panel_income">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_income||'Extra Income Simulator'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div class="wiz-q" style="margin-bottom:14px;">${L.isw1q||'Your current timeline.'}</div>
-        <div class="wiz-two">
-          <div class="wiz-field"><label class="wiz-label">Total debt (${cur})</label><input type="number" id="inc_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-          <div class="wiz-field"><label class="wiz-label">Monthly payment (${cur})</label><input type="number" id="inc_payment" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-        </div>
-        <div class="wiz-field"><label class="wiz-label">Interest rate (%)</label><input type="number" id="inc_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" step="0.1" inputmode="decimal"/></div>
-        <div class="wiz-field" style="margin-top:4px;"><label class="wiz-label">${L.isw2extra||'Extra income per month'} (${cur})</label><div class="wiz-hint">${L.isw2extra_h||'Added directly to your debt payment.'}</div><input type="number" id="inc_extra" placeholder="e.g. 200" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-        <div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runIncomeSim()">Show impact</button></div>
-        <div class="calc-result" id="incomeResult"></div>
-      </div>`;
-
-    /* ── COLLECTION MAP ── */
-    case 'collection': return `
-      <div class="tool-panel active" id="panel_collection">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_collection||'Debt Collection Map'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px;">Understanding the process removes the fear. Know what comes next — and your rights at every stage.</p>
-        ${[
-          ['1','Missed payment notice','The creditor sends a reminder. At this stage: contact them immediately — most will pause collection if you communicate proactively. Right: you can request a payment plan.'],
-          ['2','Formal demand letter','A letter before action. Deadline is usually 14–30 days. Right: dispute the debt in writing if you believe it is incorrect or statute-barred.'],
-          ['3','Account sold to collections','Debt is passed or sold to a collections agency. The original creditor is no longer your contact. Right: request proof of the debt in writing before making any payment.'],
-          ['4','Collections contact','Phone calls, letters, home visits in some countries. Right: in most countries you can request all contact be in writing only.'],
-          ['5','Legal proceedings','Creditor files a claim with the court. You will receive court papers — respond within the deadline. Right: attend or respond — ignoring leads to default judgment.'],
-          ['6','County court judgment (CCJ) or equivalent','A court orders you to pay. Right: apply to vary the judgment if you cannot afford the amount ordered.'],
-          ['7','Enforcement','Bailiffs, wage garnishment, or bank account freezing. Right: certain income and essential household items are protected from seizure in most jurisdictions.'],
-        ].map(([n,title,text])=>`<div class="info-stage"><div class="info-stage-num">${n}</div><div class="info-stage-body"><strong>${title}</strong>${text}</div></div>`).join('')}
-      </div>`;
-
-    /* ── LEGAL GUIDE ── */
-    case 'legal': return `
-      <div class="tool-panel active" id="panel_legal">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_legal||'Legal Protection Guide'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px;">Based on your country: <strong>${d.country||'your country'}</strong>. Always verify with a local adviser for your specific situation.</p>
-        <div class="info-block"><h4>What collectors cannot do</h4><ul>
-          <li>Contact you at unreasonable hours (typically before 8 am or after 9 pm)</li>
-          <li>Use threatening, abusive or harassing language</li>
-          <li>Contact your employer without court order</li>
-          <li>Claim to have legal powers they do not have</li>
-          <li>Collect a debt that is statute-barred (time-limited)</li>
-        </ul></div>
-        <div class="info-block"><h4>Your key rights</h4><ul>
-          <li>Request all communication in writing — collectors must comply</li>
-          <li>Request proof of the debt (debt validation letter) before paying</li>
-          <li>Dispute incorrect debts in writing within the statutory period</li>
-          <li>Apply for a repayment plan through the courts if judgment is issued</li>
-          <li>Certain income is always protected from garnishment</li>
-        </ul></div>
-        <div class="info-block"><h4>Statute of limitations — ${d.country||'your country'}</h4><p>Most unsecured debts become unenforceable after 5–6 years in EU countries, 6 years in the UK, 3–6 years in US states, and 6 years in Australia. Use the AI letter tool to request debt validation if a collector contacts you about an old debt.</p></div>
-      </div>`;
-
-    /* ── CHALLENGE ── */
-    case 'challenge': return `
-      <div class="tool-panel active" id="panel_challenge">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_challenge||'90-Day Challenge'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        ${[
-          ['Days 1–7','Foundation week','List every debt. Calculate your real surplus. Contact one creditor. Set up a dedicated repayment account.'],
-          ['Days 8–14','Communication week','Write at least one letter. Request payment plans for any debts in arrears. Stop all non-essential direct debits.'],
-          ['Days 15–21','Budget week','Identify 3 spending categories to cut. Redirect the saving to debt. Review your snowball or avalanche order.'],
-          ['Days 22–30','Momentum week','Make your first extra payment. Check credit report. Set a monthly review date.'],
-          ['Days 31–60','Build momentum','Increase repayments by even 10–20%. Negotiate interest reductions. Track every payment made.'],
-          ['Days 61–90','Breakthrough phase','Identify your debt-free date. Build a small emergency buffer. Plan what you do with the freed-up money.'],
-        ].map(([range,title,text])=>`<div class="info-block"><h4>${range} — ${title}</h4><p>${text}</p></div>`).join('')}
-      </div>`;
-
-    /* ── PSYCHOLOGY ── */
-    case 'psychology': return `
-      <div class="tool-panel active" id="panel_psychology">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_psychology||'Behavioural Tools'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div class="info-block"><h4>The 48-hour rule for impulse spending</h4><p>Before any unplanned purchase over 30 ${d.currency||'EUR'}: wait 48 hours. Write it down. If you still want it after 48 hours and it fits the budget, it is a considered decision — not an impulse. Most impulse purchases disappear within 24 hours.</p></div>
-        <div class="info-block"><h4>The debt repayment habit loop</h4><p>Attach your debt payment to an existing habit. Example: every time you make your morning coffee, check your debt balance. The visual reminder activates the motivation. Small, consistent action outperforms large, infrequent action every time.</p></div>
-        <div class="info-block"><h4>Managing financial stress</h4><ul>
-          <li>Separate the financial problem from your identity — debt is a situation, not who you are</li>
-          <li>Set one specific financial task per day — not a list, one task</li>
-          <li>Acknowledge every payment made, no matter how small</li>
-          <li>Physical movement (even a 10-minute walk) reduces cortisol — the stress hormone that drives impulsive financial decisions</li>
-        </ul></div>
-        <div class="info-block"><h4>If you have missed a payment</h4><p>Missing a payment is not failure — it is information. It tells you the plan needs adjusting. Contact the creditor the same day. Creditors respond far better to proactive contact than silence.</p></div>
-      </div>`;
-
-    /* ── CRISIS PLANS ── */
-    case 'crisis': return `
-      <div class="tool-panel active" id="panel_crisis">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_crisis||'Crisis Action Plans'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div class="wiz-opts" style="margin-bottom:0;">
-          <button class="wiz-opt" onclick="showCrisisPlan('unemployed')">${L.cp_unemployed||'Unemployment'}</button>
-          <button class="wiz-opt" onclick="showCrisisPlan('divorce')">${L.cp_divorce||'Divorce / separation'}</button>
-          <button class="wiz-opt" onclick="showCrisisPlan('sick')">${L.cp_sick||'Sick leave'}</button>
-          <button class="wiz-opt" onclick="showCrisisPlan('emergency')">${L.cp_emergency||'Financial emergency'}</button>
-        </div>
-        <div id="crisisPlanContent" style="margin-top:14px;"></div>
-      </div>`;
-
-    /* ── EMERGENCY CARD ── */
-    case 'emergency': return `
-      <div class="tool-panel active" id="panel_emergency">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_emergency||'Emergency Action Card'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">If you are in a debt crisis right now — do these in order.</p>
-        ${[
-          'Housing first — pay rent or mortgage before anything else. It is the one bill that cannot be negotiated away.',
-          'Keep food and utilities running — call providers for emergency payment plans if needed.',
-          'Stop all non-essential direct debits today — list them and cancel one by one.',
-          'Do not ignore post or calls — open everything, date-stamp it, keep copies.',
-          'Contact a free debt adviser in your country before making any lump-sum payments to collectors.',
-          'Do not borrow more to pay off debt — this locks you into a cycle.',
-          'Use the AI letter tool to communicate with creditors in writing — this creates a paper trail and removes the fear of phone calls.',
-        ].map((s,i)=>`<div class="info-stage"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`).join('')}
-        <div style="margin-top:12px;display:flex;gap:8px;">
-          <button class="btn-copy" onclick="copyEmergencyCard()">Copy card</button>
-        </div>
-      </div>`;
-
-    /* ── NEGOTIATION PRACTICE ── */
-    case 'negotiation': return `
-      <div class="tool-panel active" id="panel_negotiation">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_negotiation||'Negotiation Practice'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div id="nw_steps">
-          <div class="wiz-step active" id="nw1">
-            <span class="wiz-eyebrow">Step 1 of 3</span>
-            <div class="wiz-q">${L.nw1q||'Who are you preparing to contact?'}</div>
-            <div class="wiz-opts">
-              ${['bank','card','collection','utility','tax','other'].map(t=>`<button class="wiz-opt" onclick="nwSelect('creditor_type','${t}',this)">${L['neg_type_'+t]||t}</button>`).join('')}
-            </div>
-            <div class="wiz-nav"><button class="wiz-next" id="nwBtn1" onclick="nwNext(1)">${L.btnNext||'Continue'}</button></div>
-          </div>
-          <div class="wiz-step" id="nw2">
-            <span class="wiz-eyebrow">Step 2 of 3</span>
-            <div class="wiz-q">${L.nw2q||'What do you want to achieve?'}</div>
-            <div class="wiz-opts">
-              ${['plan','reduce','holiday','freeze'].map(g=>`<button class="wiz-opt" onclick="nwSelect('goal','${g}',this)">${L['nw2_'+g]||g}</button>`).join('')}
-            </div>
-            <div class="wiz-nav">
-              <button class="wiz-back" onclick="nwBack(2)">${L.btnBack||'Back'}</button>
-              <button class="wiz-next" id="nwBtn2" onclick="nwNext(2)">${L.btnNext||'Continue'}</button>
-            </div>
-          </div>
-          <div class="wiz-step" id="nw3">
-            <span class="wiz-eyebrow">Step 3 of 3</span>
-            <div class="wiz-q">${L.nw3q||'Your situation in brief.'}</div>
-            <div class="wiz-field">
-              <textarea id="nw_situation" rows="3" placeholder="e.g. I was made redundant 3 months ago. I have 2 children. I can pay 80 ${cur}/month."></textarea>
-            </div>
-            <div class="wiz-nav">
-              <button class="wiz-back" onclick="nwBack(3)">${L.btnBack||'Back'}</button>
-              <button class="wiz-next" onclick="generateNegotiation()">${L.btnGenerate||'Start practice'}</button>
-            </div>
-          </div>
-          <div class="wiz-step" id="nw_generating">
-            <div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">${L.btnGenerating||'Generating…'}</div></div>
-          </div>
-        </div>
-        <div class="panel-output" id="negOutput"></div>
-        <div class="output-actions" id="negActions" style="display:none;">
-          <button class="btn-copy" onclick="copyOutput('negOutput','negCopyBtn')" id="negCopyBtn">${L.btnCopy||'Copy'}</button>
-          <button class="btn-reset" onclick="openTool('negotiation')">${L.btnReset||'Start over'}</button>
-        </div>
-        <div class="panel-error" id="negError"></div>
-      </div>`;
-
-    /* ── MONTHLY UPDATE ── */
-    case 'update': return `
-      <div class="tool-panel active" id="panel_update">
-        <div class="panel-header">
-          <div class="panel-title">${L.t_update||'Monthly Plan Update'}</div>
-          <button class="panel-close" onclick="closeTool()">&#x2715;</button>
-        </div>
-        <div id="uw_steps">
-          <div class="wiz-step active" id="uw1">
-            <span class="wiz-eyebrow">Step 1 of 3</span>
-            <div class="wiz-q">${L.uw1q||'How has the last 30 days gone?'}</div>
-            <div class="wiz-opts">
-              ${['good','ok','hard','crisis'].map(o=>`<button class="wiz-opt" onclick="uwSelect('progress','${o}',this)">${L['uw1_'+o]||o}</button>`).join('')}
-            </div>
-            <div class="wiz-nav"><button class="wiz-next" id="uwBtn1" onclick="uwNext(1)">${L.btnNext||'Continue'}</button></div>
-          </div>
-          <div class="wiz-step" id="uw2">
-            <span class="wiz-eyebrow">Step 2 of 3</span>
-            <div class="wiz-q">${L.uw2q||'Have your finances changed?'}</div>
-            <div class="wiz-two">
-              <div class="wiz-field"><label class="wiz-label">${L.uw2income||'Current monthly income'} (${cur})</label><input type="number" id="uw_income" value="${d.income||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-              <div class="wiz-field"><label class="wiz-label">${L.uw2payment||'Current monthly debt payment'} (${cur})</label><input type="number" id="uw_payment" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
-            </div>
-            <div class="wiz-nav">
-              <button class="wiz-back" onclick="uwBack(2)">${L.btnBack||'Back'}</button>
-              <button class="wiz-next" onclick="uwNext(2)">${L.btnNext||'Continue'}</button>
-            </div>
-          </div>
-          <div class="wiz-step" id="uw3">
-            <span class="wiz-eyebrow">Step 3 of 3</span>
-            <div class="wiz-q">${L.uw3q||'What do you want to focus on next?'}</div>
-            <div class="wiz-opts">
-              ${['Reducing total debt faster','Stopping collections / enforcement','Negotiating lower interest rates','Building a small emergency buffer','Getting back on track after a setback','Planning the next 30 days'].map(f=>`<button class="wiz-opt" onclick="uwSelect('focus','${f.replace(/'/g,'').replace(/\//g,'-')}',this)">${f}</button>`).join('')}
-            </div>
-            <div class="wiz-nav">
-              <button class="wiz-back" onclick="uwBack(3)">${L.btnBack||'Back'}</button>
-              <button class="wiz-next" onclick="generateUpdate()">${L.btnGenerate||'Generate updated plan'}</button>
-            </div>
-          </div>
-          <div class="wiz-step" id="uw_generating">
-            <div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">${L.btnGenerating||'Generating…'}</div></div>
-          </div>
-        </div>
-        <div class="panel-output" id="updateOutput"></div>
-        <div class="output-actions" id="updateActions" style="display:none;">
-          <button class="btn-copy" onclick="copyOutput('updateOutput','updateCopyBtn')" id="updateCopyBtn">${L.btnCopy||'Copy'}</button>
-          <button class="btn-reset" onclick="openTool('update')">${L.btnReset||'Start over'}</button>
-        </div>
-      </div>`;
-
-    default: return '';
-  }
-}
 
 /* ═══════════════════════════════════════════════
    AI CALL HELPER
