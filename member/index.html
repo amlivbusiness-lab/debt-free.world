@@ -213,6 +213,38 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 .dash-footer a{color:var(--green);font-size:12px;text-decoration:none;margin:0 8px;}
 .dash-footer p{font-size:11px;color:var(--muted);margin-top:6px;}
 
+/* ════ LANGUAGE SELECTOR ════ */
+.lang-selector-wrap{position:relative;}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--white);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.12);z-index:500;min-width:160px;overflow:hidden;}
+.lang-menu.open{display:block;animation:fadeUp 0.2s ease;}
+.lang-menu-inner{display:flex;flex-direction:column;max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.lang-menu-inner button{background:none;border:none;padding:11px 16px;text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--text);cursor:pointer;transition:background 0.1s;-webkit-tap-highlight-color:transparent;}
+.lang-menu-inner button:hover{background:var(--green-bg);}
+.lang-menu-inner button.active-lang{color:var(--green);font-weight:600;}
+
+/* ════ DRAWER SETTINGS ROWS ════ */
+.drawer-setting-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:12px;}
+.drawer-setting-row .drawer-tool-name{font-size:13.5px;font-weight:500;color:var(--text);}
+.drawer-setting-row .drawer-tool-desc{font-size:12px;color:var(--muted);margin-top:1px;}
+
+/* ════ LOGOUT BUTTON ════ */
+.drawer-logout-btn{width:calc(100% - 40px);margin:0 20px;background:none;border:1.5px solid var(--border);border-radius:30px;padding:11px 16px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;font-family:var(--sans);transition:all 0.15s;text-align:center;}
+.drawer-logout-btn:hover{border-color:var(--red);color:var(--red);}
+
+/* ════ DOCUMENT ARCHIVE ════ */
+.doc-list{display:flex;flex-direction:column;gap:8px;}
+.doc-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 15px;cursor:pointer;transition:border-color 0.15s,background 0.15s;-webkit-tap-highlight-color:transparent;}
+.doc-item:hover,.doc-item:active{border-color:var(--green-border);background:var(--green-bg);}
+.doc-item-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px;}
+.doc-item-title{font-size:13.5px;font-weight:600;color:#111;line-height:1.3;}
+.doc-item-meta{font-size:11.5px;color:var(--muted);flex-shrink:0;}
+.doc-item-type{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--green-light);color:var(--green-dark);border-radius:10px;padding:2px 8px;margin-top:3px;}
+.doc-viewer{background:var(--green-bg);border:1px solid var(--green-border);border-radius:10px;padding:16px;margin-top:12px;font-size:13.5px;line-height:1.8;color:#222;white-space:pre-wrap;font-weight:300;display:none;}
+.doc-viewer.active{display:block;animation:fadeUp 0.2s ease;}
+.doc-empty{font-size:13.5px;color:var(--muted);line-height:1.7;padding:8px 0;}
+.doc-saving{font-size:12px;color:var(--green);margin-top:6px;display:none;}
+.doc-saving.active{display:block;}
+
 /* toast */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
@@ -352,7 +384,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 ════════════════════════════════════════ -->
 <div id="gate">
   <div class="gate-card">
-    <span class="gate-logo">✦ Debt-Free.world</span>
+    <span class="gate-logo">🌍 Debt-Free.world</span>
     <div class="gate-spinner" id="gateSpinner"></div>
     <div class="gate-title" id="gateTitle">Verifying your access</div>
     <div class="gate-sub" id="gateSub">Checking your link. This takes only a moment.</div>
@@ -376,6 +408,32 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     <div class="topbar-right">
       <span class="topbar-days" id="topbarDays"></span>
       <span class="topbar-badge">Debt Recovery</span>
+      <div class="lang-selector-wrap">
+        <button class="topbar-tools-btn" onclick="toggleLangMenu()" id="langBtn" aria-label="Change language">🌍</button>
+        <div class="lang-menu" id="langMenu">
+          <div class="lang-menu-inner">
+            <button onclick="changeLang('EN')">English</button>
+            <button onclick="changeLang('FI')">Suomi</button>
+            <button onclick="changeLang('SV')">Svenska</button>
+            <button onclick="changeLang('DE')">Deutsch</button>
+            <button onclick="changeLang('FR')">Français</button>
+            <button onclick="changeLang('ES')">Español</button>
+            <button onclick="changeLang('PT')">Português</button>
+            <button onclick="changeLang('IT')">Italiano</button>
+            <button onclick="changeLang('NL')">Nederlands</button>
+            <button onclick="changeLang('PL')">Polski</button>
+            <button onclick="changeLang('TR')">Türkçe</button>
+            <button onclick="changeLang('RU')">Русский</button>
+            <button onclick="changeLang('AR')">العربية</button>
+            <button onclick="changeLang('HI')">हिन्दी</button>
+            <button onclick="changeLang('ZH')">中文</button>
+            <button onclick="changeLang('JA')">日本語</button>
+            <button onclick="changeLang('KO')">한국어</button>
+            <button onclick="changeLang('ID')">Indonesia</button>
+            <button onclick="changeLang('SW')">Kiswahili</button>
+          </div>
+        </div>
+      </div>
       <button class="topbar-tools-btn" onclick="openDrawer()" id="toolsBtn">All tools</button>
     </div>
   </div>
@@ -387,7 +445,29 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
       <span class="drawer-title" id="drawerTitle">All tools</span>
       <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
     </div>
+    <!-- Settings section — always first in drawer -->
+    <div class="drawer-section">
+      <span class="drawer-section-label" id="drawerSettLabel">Settings</span>
+      <div class="drawer-setting-row">
+        <div>
+          <div class="drawer-tool-name" id="drawerCompLabel">Companion mode</div>
+          <div class="drawer-tool-desc" id="drawerCompDesc">Step-by-step guidance and check-ins</div>
+        </div>
+        <button class="toggle" id="drawerCompanionToggle" onclick="toggleCompanion()"></button>
+      </div>
+      <div class="drawer-setting-row">
+        <div>
+          <div class="drawer-tool-name" id="drawerRemLabel">Monthly reminders</div>
+          <div class="drawer-tool-desc" id="drawerRemDesc">Progress emails every 30 days</div>
+        </div>
+        <button class="toggle" id="drawerRemindersToggle" onclick="toggleSetting('reminders')"></button>
+      </div>
+    </div>
     <div id="drawerContent"></div>
+    <!-- Logout — always last -->
+    <div class="drawer-section" style="padding-bottom:24px;">
+      <button class="drawer-logout-btn" id="drawerLogout" onclick="logout()">Sign out</button>
+    </div>
   </div>
 
   <div class="main-wrap">
@@ -455,9 +535,8 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     <!-- Active tool panel -->
     <div id="activePanelWrap"></div>
 
-    <!-- Settings -->
-    <span class="section-label" id="settingsLabel">Settings</span>
-    <div class="plan-card" id="settingsCard">
+    <!-- Settings — moved to drawer -->
+    <div class="plan-card" id="settingsCard" style="display:none;">
       <div class="settings-row">
         <div>
           <div class="settings-label" id="settCompanionLabel">Companion mode</div>
@@ -501,7 +580,7 @@ const MT = {
     gateSuccess:'Your link is on its way. Check your inbox — and your spam folder if it doesn\'t arrive within 2 minutes.',
     topbarDays:'Day {d} of 90',drawerTitle:'All tools',toolsBtn:'All tools',
     progressLabel:'Day {d} of 90',progressDate:'On track to be debt-free by {date}',
-    planEyebrow:'Your personalised 90-day plan',planTitle:'Your Debt Recovery Plan',
+    planEyebrow:'Your personalised 90-day plan',planTitle:'Your Debt-Free Plan',planTitleFI:'Veloista vapaa -suunnitelmasi',
     planExpand:'Read full plan',planCollapse:'Show less',
     noPlanText:'Your personalised plan is waiting. Complete the 2-minute setup and we\'ll build it instantly.',
     noPlanBtn:'Build my plan now',
@@ -527,8 +606,9 @@ const MT = {
     t_legal:'Legal Protection Guide',t_legal_d:'What collectors can and cannot do in your country',
     t_negotiation:'Negotiation Practice',t_negotiation_d:'Prepare for creditor calls with AI roleplay',
     t_update:'Monthly Plan Update',t_update_d:'Review and refresh your plan for the next 30 days',
+  t_archive:'My Documents',t_archive_d:'All letters and notes generated during your 90 days',
     // Drawer section labels
-    ds_plan:'Plan & Progress',ds_letters:'Letters & Negotiation',ds_calc:'Calculators',ds_psych:'Mindset & Psychology',ds_crisis:'Crisis Plans',ds_legal:'Legal & Guides',
+    ds_plan:'Plan & Progress',ds_archive_section:'My Documents',ds_letters:'Letters & Negotiation',ds_calc:'Calculators',ds_psych:'Mindset & Psychology',ds_crisis:'Crisis Plans',ds_legal:'Legal & Guides',
     // Letter wizard
     lw1q:'Who is the letter for?',lw1h:'This becomes the salutation in your letter.',
     lw2q:'What type of letter do you need?',
@@ -559,7 +639,7 @@ const MT = {
     gateSuccess:'Linkkisi on matkalla. Tarkista saapuneet — ja roskapostikansio jos se ei saavu 2 minuutin kuluessa.',
     topbarDays:'Päivä {d} / 90',drawerTitle:'Kaikki työkalut',toolsBtn:'Kaikki työkalut',
     progressLabel:'Päivä {d} / 90',progressDate:'Olet matkalla velattomaksi {date} mennessä',
-    planEyebrow:'Henkilökohtainen 90 päivän suunnitelmasi',planTitle:'Velkojen palautussuunnitelmasi',
+    planEyebrow:'Henkilökohtainen 90 päivän suunnitelmasi',planTitle:'Veloista vapaa -suunnitelmasi',
     planExpand:'Lue koko suunnitelma',planCollapse:'Näytä vähemmän',
     noPlanText:'Henkilökohtainen suunnitelmasi odottaa. Täytä 2 minuutin lomake ja rakennamme sen heti.',
     noPlanBtn:'Rakenna suunnitelmani nyt',
@@ -582,13 +662,116 @@ const MT = {
     t_legal:'Oikeudellinen suoja',t_legal_d:'Mitä perijät saavat ja eivät saa tehdä',
     t_negotiation:'Neuvotteluharjoittaja',t_negotiation_d:'Valmistaudu velkoja-puheluihin AI-roolipelillä',
     t_update:'Kuukausipäivitys',t_update_d:'Tarkista ja päivitä suunnitelmasi seuraavalle 30 päivälle',
+    t_archive:'Omat asiakirjani',t_archive_d:'Kaikki 90 päivän aikana luodut kirjeet ja muistiinpanot',
     ds_plan:'Suunnitelma ja edistyminen',ds_letters:'Kirjeet ja neuvottelu',ds_calc:'Laskurit',ds_psych:'Mielenlaatu ja psykologia',ds_crisis:'Kriisisuunnitelmat',ds_legal:'Oikeus ja oppaat',
     btnBack:'Takaisin',btnNext:'Jatka',btnGenerate:'Luo',btnGenerating:'Luodaan…',btnCopy:'Kopioi',btnCopied:'Kopioitu',btnReset:'Aloita alusta',
+    planTitle:'Veloista vapaa -suunnitelmasi',
+    planEyebrow:'Henkilökohtainen 90 päivän suunnitelmasi',
+    planExpand:'Lue koko suunnitelma',planCollapse:'Näytä vähemmän',
+    noPlanText:'Henkilökohtainen suunnitelmasi odottaa. Täytä 2 minuutin lomake.',
+    noPlanBtn:'Rakenna suunnitelmani nyt',
+    toolsSectionLabel:'Sinun työkalusi',
+    drawerSettLabel:'Asetukset',drawerCompLabel:'Companion-tila',drawerCompDesc:'Vaiheittainen ohjaus ja tarkistukset',
+    drawerRemLabel:'Kuukausittaiset muistutukset',drawerRemDesc:'Edistymissähköpostit 30 päivän välein',
+    drawerLogout:'Kirjaudu ulos',
+    // Tool names
+    t_letters:'AI-kirjeet velkojille',t_letters_d:'Valmiit kirjeet kaikkiin velkojakontaktitilanteisiin',
+    t_budget:'Kriisibudjettityökalu',t_budget_d:'Pienetkin muutokset nopeuttavat velattomaksi pääsyä',
+    t_snowball:'Lumipallo vs vyörytys',t_snowball_d:'Kumpi strategia säästää enemmän?',
+    t_dfdate:'Velattomaksi-päivälaskuri',t_dfdate_d:'Tarkka päivämäärä omilla luvuillasi',
+    t_income:'Lisätulosimulaattori',t_income_d:'Kuinka lisätulot nopeuttavat velattomaksi pääsyä',
+    t_collection:'Perintäprosessin kartta',t_collection_d:'Jokainen vaihe ja oikeutesi',
+    t_challenge:'90 päivän haaste',t_challenge_d:'Viikoittaiset toimet ja virstanpylväät',
+    t_psychology:'Käyttäytymistyökalut',t_psychology_d:'Impulssikontrolli, tavat ja stressinhallinta',
+    t_crisis:'Kriisisuunnitelmat',t_crisis_d:'Työtön, ero, sairasloma — vaihe vaiheelta',
+    t_emergency:'Hätätilanne-toimintakortti',t_emergency_d:'Henkilökohtainen kriisitarkistuslista',
+    t_legal:'Oikeudellinen suoja',t_legal_d:'Mitä perijät saavat ja eivät saa tehdä',
+    t_negotiation:'Neuvotteluharjoittaja',t_negotiation_d:'Valmistaudu velkoja-puheluihin AI:n avulla',
+    t_update:'Kuukausipäivitys',t_update_d:'Tarkista ja päivitä suunnitelmasi',
+    ds_plan:'Suunnitelma ja edistyminen',ds_letters:'Kirjeet ja neuvottelu',ds_calc:'Laskurit',
+    ds_psych:'Mielenlaatu ja psykologia',ds_crisis:'Kriisisuunnitelmat',ds_legal:'Oikeus ja oppaat',
+    // Letter wizard FI
+    ltype_hardship:'Maksuvaikeus / kohtuullistamispyyntö',ltype_settlement:'Velkasovintoesitys',
+    ltype_stop:'Yhteydenottokielto',ltype_dispute:'Velan riitauttaminen',
+    ltype_plan:'Maksusuunnitelmaehdotus',ltype_holiday:'Maksulykkäyspyyntö',ltype_negotiation:'Yleinen neuvottelu',
+    // Update wizard FI
+    uw1q:'Miten viimeiset 30 päivää ovat menneet?',
+    uw1_good:'Paremmin kuin odotin',uw1_ok:'Suunnitelman mukaan',
+    uw1_hard:'Vaikeammin kuin odotin',uw1_crisis:'Tilanne on muuttunut merkittävästi',
+    uw2q:'Ovatko taloutesi muuttuneet?',uw2income:'Nykyiset kuukausittaiset nettotulot',uw2payment:'Nykyinen kuukausittainen velanmaksu',
+    uw3q:'Mihin haluat keskittyä seuraavaksi?',
+    uw3_opts:['Vähennä kokonaisvelkaa nopeammin','Pysäytä perintä tai ulosotto','Neuvottele alhaisempia korkoja','Rakenna pieni hätäpuskuri','Palauta tilanne raiteilleen','Suunnittele seuraavat 30 päivää'],
+    // Crisis FI
+    cp_unemployed:'Työtön tai tulot menetettiin',cp_divorce:'Avioero tai ero',cp_sick:'Sairasloma tai vamma',cp_emergency:'Taloudellinen hätätilanne',
+    // Budget FI
+    bw1q:'Nykyinen velkatilanteesi.',bw1total:'Jäljellä oleva kokonaisvelka',bw1rate:'Korko (%)',bw1rate_h:'Syötä 0 jos et tiedä.',
+    bw2q:'Kuukausittaiset maksusi.',bw2surplus:'Nykyinen kuukausittainen velanmaksu',bw2extra:'Lisäsumma jonka voisit maksaa kuukaudessa',
+    // Negotiation FI
+    nw1q:'Keneen olet valmistautumassa ottamaan yhteyttä?',nw2q:'Mitä haluat saavuttaa?',
+    nw2_plan:'Sopia maksusuunnitelmasta',nw2_reduce:'Pienentää velkapääomaa',nw2_holiday:'Maksulykkäys',nw2_freeze:'Koronpysäytys',
+    neg_type_bank:'Pankki tai lainanantaja',neg_type_card:'Luottokorttiyhtiö',neg_type_collection:'Perintätoimisto',
+    neg_type_utility:'Energia- tai palveluntarjoaja',neg_type_tax:'Veroviranomainen',neg_type_other:'Muu velkoja',
+    // Fresh task FI
+    fresh_label:'Ensimmäinen askelesi',fresh_title_coll:'Kiireellisin toimenpide: ota yhteyttä perintätoimistoon.',
+    fresh_title_default:'Vaihe 1: vahvista numerosi.',
+    fresh_opt_budget:'Avaa kriisibudjettilaskuri',fresh_opt_plan:'Lue koko suunnitelmani ensin',fresh_opt_later:'Tutustun sivuihin ensin',
+    // Welcome card FI
+    welcome_title_name:'{name}, suunnitelmasi odottaa rakentamista.',welcome_title:'Henkilökohtainen suunnitelmasi odottaa rakentamista.',
+    welcome_sub:'Se kestää noin 2 minuuttia. Esitämme muutamia kysymyksiä tilanteestasi ja rakennamme täysin henkilökohtaisen 90 päivän suunnitelman.',
+    welcome_cta:'Rakenna henkilökohtainen suunnitelmani nyt',welcome_explore:'Tutustun ensin työkaluihin',
   }
 };
 // Fallback all other lang codes to EN
 ['SV','DE','NO','DA','NL','ES','FR','IT','PL','PT','CS','ET','LV','LT','HU','RO','HR'].forEach(c=>{MT[c]={...MT.EN};});
 Object.assign(MT['SV'],{gateTitle:'Verifierar din åtkomst',gateSendBtn:'Skicka mig en ny åtkomstlänk',toolsBtn:'Alla verktyg',btnBack:'Tillbaka',btnNext:'Fortsätt',btnGenerate:'Generera',btnCopy:'Kopiera',btnReset:'Börja om'});
+
+// Country data — verified official sources only, no unverified numbers
+// Each entry links directly to the official authority website
+const COUNTRY_DATA = {
+  'Finland':      { agencies: ['Takuusäätiö — takuusaatio.fi', 'Ulosottolaitos — ulosotto.fi', 'Kilpailu- ja kuluttajavirasto — kkv.fi'], sol_link: 'https://www.kkv.fi', protect_link: 'https://ulosotto.fi' },
+  'Sweden':       { agencies: ['Kronofogden — kronofogden.se', 'Konsumentverket — konsumentverket.se', 'Kommunal skuldrådgivning (via din kommun)'], sol_link: 'https://kronofogden.se', protect_link: 'https://kronofogden.se/skuldsanering' },
+  'Norway':       { agencies: ['NAV — nav.no', 'Gjeldsoffer-Alliansen — goa.no', 'Namsmannen (via Forliksrådet)'], sol_link: 'https://lovdata.no', protect_link: 'https://nav.no' },
+  'Denmark':      { agencies: ['Gældsrådgivning Danmark — gaeldsraadgivning.dk', 'Forbrugerrådet Tænk — taenk.dk', 'Fogedretten (statsforvaltningen)'], sol_link: 'https://domstol.dk', protect_link: 'https://gaeldsraadgivning.dk' },
+  'Germany':      { agencies: ['Schuldnerberatung — schuldnerberatung.de', 'Verbraucherzentrale — verbraucherzentrale.de', 'Bundesministerium der Justiz — bmj.de'], sol_link: 'https://bmj.de', protect_link: 'https://verbraucherzentrale.de' },
+  'Netherlands':  { agencies: ['Geldfit — geldfit.nl', 'Nibud — nibud.nl', 'Gemeentelijke schuldhulpverlening (via uw gemeente)'], sol_link: 'https://rijksoverheid.nl', protect_link: 'https://geldfit.nl' },
+  'France':       { agencies: ['Banque de France (surendettement) — banque-france.fr', 'Point Conseil Budget — mon-budget-service-public.fr', 'CCAS/CDAS (via votre mairie)'], sol_link: 'https://banque-france.fr/surendettement', protect_link: 'https://service-public.fr' },
+  'Spain':        { agencies: ['ADICAE — adicae.net', 'Servicio de Asesoramiento y Protección del Cliente Bancario — bde.es', 'Segunda Oportunidad — mjusticia.gob.es'], sol_link: 'https://mjusticia.gob.es', protect_link: 'https://bde.es' },
+  'Italy':        { agencies: ['Codacons — codacons.it', 'Adiconsum — adiconsum.it', 'OCC (Organismo di Composizione della Crisi) — giustizia.it'], sol_link: 'https://giustizia.it', protect_link: 'https://codacons.it' },
+  'Poland':       { agencies: ['UOKiK — uokik.gov.pl', 'Federacja Konsumentów — federacja-konsumentow.org.pl', 'Rzecznicy Konsumentów (via powiat)'], sol_link: 'https://uokik.gov.pl', protect_link: 'https://ms.gov.pl' },
+  'Portugal':     { agencies: ['DECO Proteste — deco.proteste.pt', 'Banco de Portugal (PERSI) — bportugal.pt', 'Santa Casa da Misericórdia — scml.pt'], sol_link: 'https://bportugal.pt', protect_link: 'https://deco.proteste.pt' },
+  'United Kingdom':{ agencies: ['StepChange — stepchange.org', 'National Debtline — nationaldebtline.org', 'MoneyHelper — moneyhelper.org.uk', 'Citizens Advice — citizensadvice.org.uk'], sol_link: 'https://legislation.gov.uk/ukpga/1980/58', protect_link: 'https://moneyhelper.org.uk' },
+  'Ireland':      { agencies: ['MABS — mabs.ie', 'Insolvency Service of Ireland — isi.gov.ie', 'Abhaile — abhaile.ie'], sol_link: 'https://isi.gov.ie', protect_link: 'https://mabs.ie' },
+  'United States':{ agencies: ['NFCC — nfcc.org', 'Consumer Financial Protection Bureau — consumerfinance.gov', 'USA.gov debt help — usa.gov/debt'], sol_link: 'https://consumerfinance.gov', protect_link: 'https://ftc.gov/debt' },
+  'Canada':       { agencies: ['Credit Counselling Canada — creditcounsellingcanada.ca', 'FCAC — canada.ca/fcac', 'OSB Insolvency — ised.canada.ca'], sol_link: 'https://canada.ca/fcac', protect_link: 'https://ic.gc.ca' },
+  'Australia':    { agencies: ['National Debt Helpline — ndh.org.au', 'Australian Financial Complaints Authority — afca.org.au', 'MoneySmart — moneysmart.gov.au'], sol_link: 'https://ndh.org.au', protect_link: 'https://moneysmart.gov.au' },
+  'Brazil':       { agencies: ['Serasa Consumidor — serasa.com.br', 'PROCON Nacional — portal.mj.gov.br/procon', 'Banco Central do Brasil — bcb.gov.br'], sol_link: 'https://bcb.gov.br', protect_link: 'https://consumidor.gov.br' },
+  'Indonesia':    { agencies: ['OJK (Otoritas Jasa Keuangan) — ojk.go.id', 'YLKI — ylki.or.id', 'BPKN — bpkn.go.id'], sol_link: 'https://ojk.go.id', protect_link: 'https://ojk.go.id/id/konsumen' },
+  'India':        { agencies: ['RBI Ombudsman — rbi.org.in/ombudsman', 'Consumer Helpline — consumerhelpline.gov.in', 'SEBI — sebi.gov.in'], sol_link: 'https://rbi.org.in', protect_link: 'https://consumerhelpline.gov.in' },
+  'South Africa': { agencies: ['National Credit Regulator — ncr.org.za', 'Credit Ombud — creditombud.org.za', 'NCRCP — ncrcp.org.za'], sol_link: 'https://ncr.org.za', protect_link: 'https://creditombud.org.za' },
+  'Philippines':  { agencies: ['BSP Financial Consumer Protection — bsp.gov.ph', 'DTI — dti.gov.ph', 'SEC — sec.gov.ph'], sol_link: 'https://bsp.gov.ph', protect_link: 'https://bsp.gov.ph/financial-consumer-protection' },
+  'Mexico':       { agencies: ['PROFECO — profeco.gob.mx', 'CONDUSEF — condusef.gob.mx', 'Banco de México — banxico.org.mx'], sol_link: 'https://condusef.gob.mx', protect_link: 'https://condusef.gob.mx' },
+  'Argentina':    { agencies: ['Defensa del Consumidor — consumidor.gob.ar', 'BCRA — bcra.gob.ar', 'UIF — uif.gob.ar'], sol_link: 'https://consumidor.gob.ar', protect_link: 'https://bcra.gob.ar' },
+  'New Zealand':  { agencies: ['MoneyTalks — moneytalks.co.nz', 'Commerce Commission — comcom.govt.nz', 'FSCL — fscl.org.nz'], sol_link: 'https://comcom.govt.nz', protect_link: 'https://moneytalks.co.nz' },
+  'Switzerland':  { agencies: ['Schuldenberatung Schweiz — schulden.ch', 'SECO — seco.admin.ch', 'Budget-Beratung — budgetberatung.ch'], sol_link: 'https://schulden.ch', protect_link: 'https://seco.admin.ch' },
+  'Austria':      { agencies: ['ASB Schuldnerberatungen — asb-gmbh.at', 'Verein für Konsumenteninformation — vki.at', 'Schuldnerhilfe OÖ — schuldnerhilfe.at'], sol_link: 'https://vki.at', protect_link: 'https://asb-gmbh.at' },
+  'Greece':       { agencies: ['Συνήγορος του Καταναλωτή — synigoroskatanaloti.gr', 'EFET — efet.gr', 'ΤτΕ — bankofgreece.gr'], sol_link: 'https://bankofgreece.gr', protect_link: 'https://synigoroskatanaloti.gr' },
+  'Belgium':      { agencies: ['Ombudsfin — ombudsfin.be', 'Test-Achats — test-achats.be', 'SPF Économie — economie.fgov.be'], sol_link: 'https://economie.fgov.be', protect_link: 'https://ombudsfin.be' },
+  'Czech Republic':{ agencies: ['dTest — dtest.cz', 'ČNB — cnb.cz', 'Asociace občanských poraden — obcanskeporadny.cz'], sol_link: 'https://cnb.cz', protect_link: 'https://dtest.cz' },
+  'Estonia':      { agencies: ['Tarbijakaitse ja Tehnilise Järelevalve Amet — ttja.ee', 'Finantsinspektsioon — fi.ee', 'Võlanõustamine — sotsiaalkindlustusamet.ee'], sol_link: 'https://ttja.ee', protect_link: 'https://fi.ee' },
+  'Latvia':       { agencies: ['Patērētāju tiesību aizsardzības centrs — ptac.gov.lv', 'Finanšu un kapitāla tirgus komisija — fktk.lv', 'Tieslietu ministrija — tm.gov.lv'], sol_link: 'https://tm.gov.lv', protect_link: 'https://ptac.gov.lv' },
+  'Lithuania':    { agencies: ['Valstybinė vartotojų teisių apsaugos tarnyba — vvtat.lt', 'Lietuvos bankas — lb.lt', 'Teisingumo ministerija — tm.lt'], sol_link: 'https://tm.lt', protect_link: 'https://vvtat.lt' },
+  'Hungary':      { agencies: ['Gazdasági Versenyhivatal — gvh.hu', 'Magyar Nemzeti Bank — mnb.hu', 'Pénzügyi Navigátor — penzugyi-navigator.hu'], sol_link: 'https://mnb.hu', protect_link: 'https://penzugyi-navigator.hu' },
+  'Romania':      { agencies: ['ANPC — anpc.gov.ro', 'ASF — asfromania.ro', 'BNR — bnr.ro'], sol_link: 'https://bnr.ro', protect_link: 'https://anpc.gov.ro' },
+  'Croatia':      { agencies: ['Hrvatska agencija za nadzor financijskih usluga — hanfa.hr', 'HNB — hnb.hr', 'Savez potrošača Hrvatske — potrosaci.hr'], sol_link: 'https://hnb.hr', protect_link: 'https://hanfa.hr' },
+};
+
+function getCountryData(country) {
+  return COUNTRY_DATA[country] || {
+    agencies: ['Your national consumer protection authority', 'Your country\'s free debt counselling service', 'Your local citizens advice equivalent'],
+    sol_link: null,
+    protect_link: null
+  };
+}
 
 /* ═══════════════════════════════════════════════
    STATE
@@ -783,39 +966,36 @@ function showFreshPlanView() {
   let taskOpts  = [];
 
   if (collections && collections.includes('Yes')) {
-    // Urgent — collections active
     taskTitle = 'Your most urgent action: contact the collections agency.';
-    taskDesc  = 'With a debt in collections or enforcement, the first 24–48 hours matter most. A letter stops the clock on most collection activity while a plan is being arranged.';
+    taskDesc  = 'With a debt in collections or enforcement, acting quickly matters. The first step is understanding your rights and what to do next — your plan has the details.';
     taskOpts  = [
-      { label: 'Write a letter to the collections agency now', action: () => openTool('letters') },
-      { label: 'I need to understand the process first', action: () => openTool('collection') },
-      { label: 'I\'ll come back to this shortly', action: () => hideFreshCard() },
+      { label: 'Read my full plan — it explains exactly what to do', action: () => { expandPlanAndScroll(); hideFreshCard(); } },
+      { label: 'See the debt collection process and your rights', action: () => openTool('collection') },
+      { label: 'I\'ll explore the tools first', action: () => hideFreshCard() },
     ];
   } else if (barrier && barrier.includes('afraid')) {
-    // Fear/avoidance profile — start tiny
     taskTitle = 'Start with the smallest possible step.';
-    taskDesc  = 'You don\'t have to contact anyone today. Begin by reading through your plan once and marking the one action that feels most manageable.';
+    taskDesc  = 'You don\'t have to contact anyone today. Begin by reading your plan — it shows exactly what to do and in what order.';
     taskOpts  = [
-      { label: 'Read my full plan', action: () => { togglePlan(); hideFreshCard(); } },
-      { label: 'Show me my debt collection rights', action: () => openTool('legal') },
-      { label: 'I\'ll take a look around first', action: () => hideFreshCard() },
+      { label: 'Read my plan — it starts with the easiest possible action', action: () => { expandPlanAndScroll(); hideFreshCard(); } },
+      { label: 'See my legal rights first', action: () => openTool('legal') },
+      { label: 'I\'ll explore the tools first', action: () => hideFreshCard() },
     ];
   } else if (barrier && (barrier.includes('exhausted') || barrier.includes('failed'))) {
     taskTitle = 'This time, one thing at a time.';
-    taskDesc  = 'Previous attempts failed because the system is hard — not because you are. Today\'s only task: read your plan and identify the one number that matters most to you.';
+    taskDesc  = 'Previous attempts failed because the system is hard — not because of you. Today\'s only task: read your plan and identify the one number that matters most.';
     taskOpts  = [
-      { label: 'Read my full plan', action: () => { togglePlan(); hideFreshCard(); } },
+      { label: 'Read my plan — it shows the one thing to do today', action: () => { expandPlanAndScroll(); hideFreshCard(); } },
       { label: 'Open the budget calculator', action: () => openTool('budget') },
-      { label: 'I\'ll explore on my own', action: () => hideFreshCard() },
+      { label: 'I\'ll explore the tools first', action: () => hideFreshCard() },
     ];
   } else {
-    // Default first task — calculate real numbers
-    taskTitle = 'Step 1: confirm your numbers.';
-    taskDesc  = 'Your plan is built on the figures you provided. The single most useful thing right now is running the budget calculator with your exact current numbers — it will show your real debt-free date.';
+    taskTitle = 'Step 1: read your plan.';
+    taskDesc  = 'Your personalised 90-day plan is ready. It shows your exact situation, priorities, and first actions. Start there — everything else follows from it.';
     taskOpts  = [
+      { label: 'Read my plan — it shows your first concrete action', action: () => { expandPlanAndScroll(); hideFreshCard(); } },
       { label: 'Open the budget calculator', action: () => openTool('budget') },
-      { label: 'Write my first creditor letter', action: () => openTool('letters') },
-      { label: 'Read my full plan first', action: () => { togglePlan(); hideFreshCard(); } },
+      { label: 'I\'ll explore the tools first', action: () => hideFreshCard() },
     ];
   }
 
@@ -852,6 +1032,17 @@ function handleFreshOpt(i) {
   const opt = window._freshOpts?.[i];
   if (opt?.action) opt.action();
   hideFreshCard();
+}
+
+function expandPlanAndScroll() {
+  const planBody = document.getElementById('planBody');
+  if (planBody) {
+    planBody.classList.add('expanded');
+    const btn = document.getElementById('planExpandBtn');
+    if (btn) btn.textContent = L.planCollapse || 'Show less';
+    planExpanded = true;
+  }
+  document.getElementById('planCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function hideFreshCard() {
@@ -985,14 +1176,21 @@ function renderCompanionCard() {
 function handleCompanionOpt(i, label, encoded) {
   const decoded = decodeURIComponent(encoded);
   const lower = decoded.toLowerCase();
-  if (lower.includes('letter') || lower.includes('kirje') || lower.includes('brev') || lower.includes('brief') || lower.includes('help') || lower.includes('contact') || lower.includes('yhteyttä') || lower.includes('kontakt')) {
-    openTool('letters');
-  } else if (lower.includes('number') || lower.includes('budget') || lower.includes('update') || lower.includes('luku') || lower.includes('siffr') || lower.includes('monat')) {
+  if (lower.includes('plan') || lower.includes('suunnitelm') || lower.includes('zeig') || lower.includes('show') || lower.includes('lue') || lower.includes('lesen') || lower.includes('visa')) {
+    expandPlanAndScroll();
+    const card = document.getElementById('companionCard');
+    if (card) card.style.display = 'none';
+  } else if (lower.includes('number') || lower.includes('update') || lower.includes('luku') || lower.includes('paivit') || lower.includes('siffr') || lower.includes('uppdatera') || lower.includes('zahl') || lower.includes('aktualis')) {
     openTool('update');
-  } else if (lower.includes('strategy') || lower.includes('plan') || lower.includes('suunnitelm') || lower.includes('strateg')) {
-    togglePlan();
-  } else if (lower.includes('setback') || lower.includes('struggling') || lower.includes('vastoink') || lower.includes('svårt') || lower.includes('changed') || lower.includes('muuttunut') || lower.includes('crisis')) {
+  } else if (lower.includes('process') || lower.includes('prosess') || lower.includes('collection') || lower.includes('perinta')) {
+    openTool('collection');
+  } else if (lower.includes('strategy') || lower.includes('strateg') || lower.includes('review') || lower.includes('tarkist')) {
+    openTool('dfdate');
+  } else if (lower.includes('crisis') || lower.includes('setback') || lower.includes('vastoink') || lower.includes('changed') || lower.includes('muuttunut')) {
     openTool('crisis');
+  } else if (lower.includes('tool') || lower.includes('explore') || lower.includes('tyokalu') || lower.includes('verktyg')) {
+    const card = document.getElementById('companionCard');
+    if (card) card.style.display = 'none';
   } else {
     const card = document.getElementById('companionCard');
     const CS = COMPANION_STRINGS[lang] || COMPANION_STRINGS.EN;
@@ -1002,6 +1200,7 @@ function handleCompanionOpt(i, label, encoded) {
     }
   }
 }
+
 
 /* ─── Tool grid ─── */
 const TOOLS = [
@@ -1018,6 +1217,7 @@ const TOOLS = [
   {id:'crisis',    key:'t_crisis',    badge:'',   section:'ds_crisis'},
   {id:'emergency', key:'t_emergency', badge:'',   section:'ds_crisis'},
   {id:'negotiation',key:'t_negotiation',badge:'AI',section:'ds_letters'},
+  {id:'archive',    key:'t_archive',    badge:'',   section:'ds_plan'},
 ];
 
 function renderToolGrid() {
@@ -1044,21 +1244,42 @@ function renderDrawer() {
   };
   let html = '';
   Object.entries(sections).forEach(([sKey, tools]) => {
-    html += `<div class="drawer-section"><span class="drawer-section-label">${L[sKey]||sKey}</span>`;
+    html += '<div class="drawer-section"><span class="drawer-section-label">' + (L[sKey]||sKey) + '</span>';
     tools.forEach(t => {
-      html += `<div class="drawer-tool" onclick="closeDrawer();openTool('${t.id}')">
-        <div style="flex:1;">
-          <div class="drawer-tool-name">${L[t.key]||t.id}</div>
-          <div class="drawer-tool-desc">${L[t.key+'_d']||''}</div>
-        </div>
-        ${t.badge?`<span class="drawer-tool-badge">${t.badge}</span>`:''}
-      </div>`;
+      const tKey = t.key.replace('t_','t_');
+      html += '<div class="drawer-tool" onclick="closeDrawer();openTool(\'' + t.id + '\')">'
+        + '<div style="flex:1;"><div class="drawer-tool-name">' + (L[t.key]||t.id) + '</div>'
+        + '<div class="drawer-tool-desc">' + (L[t.key+'_d']||'') + '</div></div>'
+        + (t.badge ? '<span class="drawer-tool-badge">' + t.badge + '</span>' : '')
+        + '</div>';
     });
     html += '</div>';
   });
   document.getElementById('drawerContent').innerHTML = html;
   document.getElementById('drawerTitle').textContent = L.drawerTitle || 'All tools';
   document.getElementById('toolsBtn').textContent = L.toolsBtn || 'All tools';
+
+  // Sync settings toggles in drawer
+  document.getElementById('drawerCompanionToggle')?.classList.toggle('on', companionOn);
+  document.getElementById('drawerRemindersToggle')?.classList.toggle('on', remindersOn);
+  // Translate settings labels
+  const sl = L.drawerSettLabel || L.settingsLabel || 'Settings';
+  const drawerSettEl = document.getElementById('drawerSettLabel');
+  if (drawerSettEl) drawerSettEl.textContent = sl;
+  const dcl = L.drawerCompLabel || L.settCompanionLabel || 'Companion mode';
+  const dclEl = document.getElementById('drawerCompLabel');
+  if (dclEl) dclEl.textContent = dcl;
+  const dcd = L.drawerCompDesc || L.settCompanionDesc || 'Step-by-step guidance and check-ins';
+  const dcdEl = document.getElementById('drawerCompDesc');
+  if (dcdEl) dcdEl.textContent = dcd;
+  const drl = L.drawerRemLabel || L.settRemindersLabel || 'Monthly reminders';
+  const drlEl = document.getElementById('drawerRemLabel');
+  if (drlEl) drlEl.textContent = drl;
+  const drd = L.drawerRemDesc || L.settRemindersDesc || 'Progress emails every 30 days';
+  const drdEl = document.getElementById('drawerRemDesc');
+  if (drdEl) drdEl.textContent = drd;
+  const logoutEl = document.getElementById('drawerLogout');
+  if (logoutEl) logoutEl.textContent = L.drawerLogout || 'Sign out';
 }
 
 function openDrawer() {
@@ -1085,10 +1306,11 @@ function renderSettings() {
 
 async function toggleCompanion() {
   companionOn = !companionOn;
-  document.getElementById('companionToggle').classList.toggle('on', companionOn);
+  document.getElementById('companionToggle')?.classList.toggle('on', companionOn);
+  document.getElementById('drawerCompanionToggle')?.classList.toggle('on', companionOn);
   const card = document.getElementById('companionCard');
   if (companionOn) { renderCompanionCard(); }
-  else { card.style.display = 'none'; }
+  else { if (card) card.style.display = 'none'; }
   await saveSetting('companion_mode', companionOn ? 'guided' : 'independent');
   showToast(L.toastSaved || 'Preference saved');
 }
@@ -1577,13 +1799,61 @@ function buildPanel(id) {
       </div>
     </div>`;
 
-  // Remaining tools unchanged in Batch 1 — carried forward
-  case 'collection': return buildCollectionPanel(d);
-  case 'legal':      return buildLegalPanel(d);
-  case 'challenge':  return buildChallengePanel(d);
-  case 'psychology': return buildPsychPanel(d, cur);
-  case 'crisis':     return buildCrisisPanel(d);
-  case 'emergency':  return buildEmergencyPanel(d);
+  // ═══════════════════════════════════════════
+  // DOCUMENT ARCHIVE
+  // ═══════════════════════════════════════════
+  case 'archive': {
+    const docs = memberData.documents || [];
+    const TYPE_LABELS = {
+      letter: L['t_letters'] || 'Letter',
+      negotiation: L['t_negotiation'] || 'Negotiation notes',
+      update: L['t_update'] || 'Plan update',
+    };
+    const emptyMsg = lang === 'FI'
+      ? 'Asiakirjasi ilmestyvät tänne kun luot ensimmäisen kirjeen tai neuvottelumuistiinpanon.'
+      : lang === 'SV'
+      ? 'Dina dokument visas här när du skapar ditt första brev eller förhandlingsanteckning.'
+      : 'Your documents will appear here when you generate your first letter or negotiation note.';
+
+    const docListHtml = docs.length === 0
+      ? `<p class="doc-empty">${emptyMsg}</p>`
+      : docs.slice().reverse().map((doc, i) => {
+          const idx = docs.length - 1 - i; // reverse index for click handler
+          const date = doc.created_at ? new Date(doc.created_at).toLocaleDateString(langToLocale(lang), {day:'numeric',month:'short'}) : '';
+          const title = doc.creditor ? `${doc.creditor}` : (doc.title || 'Document');
+          return `<div class="doc-item" onclick="toggleDocViewer(${idx})">
+            <div class="doc-item-header">
+              <div>
+                <div class="doc-item-title">${title}</div>
+                <span class="doc-item-type">${TYPE_LABELS[doc.type] || doc.type}</span>
+              </div>
+              <span class="doc-item-meta">${date}</span>
+            </div>
+            <div class="doc-viewer" id="docviewer_${idx}"></div>
+            <div class="output-actions" id="docactions_${idx}" style="display:none;margin-top:8px;">
+              <button class="btn-copy" onclick="event.stopPropagation();copyDocToClipboard(${idx})" id="doccopy_${idx}">${L.btnCopy||'Copy'}</button>
+            </div>
+          </div>`;
+        }).join('');
+
+    return `
+    <div class="tool-panel active" id="panel_archive">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_archive||'My Documents'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.6;">${docs.length} ${docs.length === 1 ? 'document' : 'documents'} · Stored for 90 days</p>
+      <div class="doc-list" id="docList">${docListHtml}</div>
+    </div>`;
+  }
+
+  // Static tools — multilingual wrapper
+  case 'collection': return buildStaticPanel('collection', d);
+  case 'legal':      return buildStaticPanel('legal', d);
+  case 'challenge':  return buildStaticPanel('challenge', d);
+  case 'psychology': return buildStaticPanel('psychology', d);
+  case 'crisis':     return buildStaticPanel('crisis', d);
+  case 'emergency':  return buildStaticPanel('emergency', d);
 
   default: return '';
   }
@@ -1593,41 +1863,149 @@ function buildPanel(id) {
 // STATIC PANEL BUILDERS (Batch 2 — upgraded)
 // ─────────────────────────────────────────────
 
-// Country data for maakohtainen content
-const COUNTRY_DATA = {
-  // EU
-  'Finland':      { sol: '5 years (yleinen vanhentumisaika)', agencies: ['Takuusäätiö (takuusaatio.fi)', 'Ulosottolaitos (ulosotto.fi)', 'Kilpailu- ja kuluttajavirasto (kkv.fi)'], hours: '7 am – 9 pm', wage_protect: 'Suojaosuus: ~900 €/kk, lapsikorotus ~150 €/lapsi' },
-  'Sweden':       { sol: '3–10 years (preskription)', agencies: ['Kronofogden (kronofogden.se)', 'Konsumentverket (konsumentverket.se)', 'Kommunal budget- och skuldrådgivning'], hours: '8 am – 9 pm', wage_protect: 'Utmätningsfri del: ~5 600 SEK/mån' },
-  'Norway':       { sol: '3 years (foreldelse)', agencies: ['NAV (nav.no)', 'Gjeldsoffer-Alliansen (goa.no)', 'Namsmannen (namsmann.no)'], hours: '9 am – 9 pm', wage_protect: 'Livsoppholdssats beskyttes (ca. 8 000–10 000 NOK/mnd)' },
-  'Denmark':      { sol: '3 years (forældelsesfrist)', agencies: ['Gældsrådgivning Danmark (gaeldsraadgivning.dk)', 'Forbrugerrådet Tænk (taenk.dk)', 'Fogedretten'], hours: '8 am – 9 pm', wage_protect: 'Rimelig løn til leveomkostninger beskyttes' },
-  'Germany':      { sol: '3 years (Verjährung)', agencies: ['Schuldnerberatung (schuldnerberatung.de)', 'Verbraucherzentrale (verbraucherzentrale.de)', 'Amtsgericht (Insolvenzverfahren)'], hours: '7 am – 9 pm', wage_protect: 'Pfändungsfreigrenze ca. 1 400 €/Monat (§ 850c ZPO)' },
-  'Netherlands':  { sol: '5 years (verjaring)', agencies: ['Geldfit (geldfit.nl)', 'Nibud (nibud.nl)', 'Schuldhulpverlening gemeente'], hours: '8 am – 9 pm', wage_protect: 'Beslagvrije voet: ~1 250 €/maand (netto)' },
-  'France':       { sol: '2–5 years (prescription)', agencies: ['Banque de France (banque-france.fr)', 'Point Conseil Budget (mon-budget-service-public.fr)', 'CCAS / CDAD'], hours: '8 am – 9 pm', wage_protect: 'Fraction saisissable: protège SMIC et allocations' },
-  'Spain':        { sol: '5 years (prescripción)', agencies: ['ADICAE (adicae.net)', 'Servicios sociales municipales', 'Juzgado de lo Mercantil (Segunda Oportunidad)'], hours: '9 am – 9 pm', wage_protect: 'Inembargable: SMI (1 134 €/mes en 2024)' },
-  'Italy':        { sol: '5–10 years (prescrizione)', agencies: ['Codacons (codacons.it)', 'OCC (Organismo di Composizione della Crisi)', 'Adiconsum (adiconsum.it)'], hours: '8 am – 9 pm', wage_protect: 'Pignorabile: max 1/5 dello stipendio netto' },
-  'Poland':       { sol: '3–6 years (przedawnienie)', agencies: ['UOKiK (uokik.gov.pl)', 'Federacja Konsumentów (federacja-konsumentow.org.pl)', 'Rzecznicy Konsumentów'], hours: '8 am – 9 pm', wage_protect: 'Minimalne wynagrodzenie netto chronione przed egzekucją' },
-  'Portugal':     { sol: '5 years (prescrição)', agencies: ['DECO (deco.proteste.pt)', 'Santa Casa da Misericórdia', 'Instituto de Apoio às Pequenas e Médias Empresas'], hours: '9 am – 9 pm', wage_protect: 'Impenhorável: salário mínimo (820 €/mês)' },
-  'United Kingdom':{ sol: '6 years (Limitation Act 1980)', agencies: ['StepChange (stepchange.org)', 'National Debtline (nationaldebtline.org)', 'MoneyHelper (moneyhelper.org.uk)', 'Citizens Advice (citizensadvice.org.uk)'], hours: '8 am – 9 pm', wage_protect: 'Breathing Space (60-day protection), protected earnings ca. £426/month' },
-  'Ireland':      { sol: '6 years', agencies: ['MABS (mabs.ie)', 'ISI (isi.gov.ie)', 'Abhaile (abhaile.ie)'], hours: '8 am – 9 pm', wage_protect: 'Protected earnings in attachment of earnings order' },
-  'United States':{ sol: '3–6 years (varies by state)', agencies: ['NFCC (nfcc.org)', 'CFPB (consumerfinance.gov)', 'CCCS (local)', '211.org (helpline)'], hours: 'FDCPA: 8 am – 9 pm (local time)', wage_protect: 'Federal: 75% of disposable earnings or 30× federal minimum wage (whichever is greater)' },
-  'Canada':       { sol: '2–6 years (varies by province)', agencies: ['Credit Counselling Canada (creditcounsellingcanada.ca)', 'FCAC (canada.ca/fcac)', 'OSB (ised.canada.ca)'], hours: '8 am – 9 pm', wage_protect: 'Varies by province — typically 70–80% of net wages' },
-  'Australia':    { sol: '6 years', agencies: ['National Debt Helpline (ndh.org.au)', 'AFCA (afca.org.au)', 'MoneySmart (moneysmart.gov.au)'], hours: 'ACCC guidelines: 7:30 am – 9 pm weekdays', wage_protect: 'Bankruptcy Act protects certain income and essential assets' },
-};
-
-function getCountryData(country) {
-  return COUNTRY_DATA[country] || {
-    sol: '3–6 years (check your country\'s specific rules)',
-    agencies: ['Your national consumer protection authority', 'Your local free debt counselling service', 'Citizens advice or equivalent in your country'],
-    hours: '8 am – 9 pm (local time)',
-    wage_protect: 'A minimum subsistence amount is protected from garnishment in most countries'
-  };
+/* ═══════════════════════════════════════════════
+   LANGUAGE SWITCHER
+═══════════════════════════════════════════════ */
+function toggleLangMenu() {
+  const menu = document.getElementById('langMenu');
+  if (menu) {
+    menu.classList.toggle('open');
+    // Mark active language
+    menu.querySelectorAll('button').forEach(b => {
+      b.classList.toggle('active-lang', b.textContent.trim() === langLabel(lang));
+    });
+  }
+  // Close on outside click
+  if (menu.classList.contains('open')) {
+    setTimeout(() => {
+      document.addEventListener('click', closeLangMenuOnOutside, { once: true });
+    }, 10);
+  }
+}
+function closeLangMenuOnOutside(e) {
+  const wrap = document.querySelector('.lang-selector-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('langMenu')?.classList.remove('open');
+  }
+}
+function langLabel(code) {
+  const labels = {EN:'English',FI:'Suomi',SV:'Svenska',DE:'Deutsch',FR:'Français',ES:'Español',PT:'Português',IT:'Italiano',NL:'Nederlands',PL:'Polski',TR:'Türkçe',RU:'Русский',AR:'العربية',HI:'हिन्दी',ZH:'中文',JA:'日本語',KO:'한국어',ID:'Indonesia',SW:'Kiswahili'};
+  return labels[code] || code;
+}
+async function changeLang(code) {
+  lang = code;
+  L = MT[code] || MT.EN;
+  document.getElementById('langMenu')?.classList.remove('open');
+  // Refresh all translatable UI
+  renderDrawer();
+  renderSettings();
+  renderCompanionCard();
+  renderToolGrid();
+  // Update plan title
+  const planTitleEl = document.getElementById('planTitle');
+  if (planTitleEl) planTitleEl.textContent = (code === 'FI' ? 'Veloista vapaa -suunnitelmasi' : L.planTitle || 'Your Debt-Free Plan');
+  // Save preference to KV
+  await saveSetting('language', code);
+  showToast(langLabel(code));
 }
 
+/* ═══════════════════════════════════════════════
+   LOGOUT
+═══════════════════════════════════════════════ */
+function logout() {
+  sessionStorage.removeItem('dfw_member_token');
+  memberToken = '';
+  memberData = {};
+  closeDrawer();
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('gate').style.display = 'flex';
+  document.getElementById('gateSpinner').style.display = 'none';
+  document.getElementById('gateTitle').textContent = 'You have been signed out.';
+  document.getElementById('gateSub').textContent = 'Use the link in your email to sign back in, or request a new one below.';
+  document.getElementById('gateForm').style.display = 'block';
+}
 function buildCollectionPanel(d) {
   const country = d.country || 'your country';
   const cd = getCountryData(d.country);
   const collections = d.collections || '';
   const isInCollections = collections.includes('Yes');
+
+  let currentStage = 0;
+  if (collections.includes('court') || collections.includes('enforcement')) currentStage = 6;
+  else if (collections.includes('agency')) currentStage = 3;
+
+  const stages = [
+    ['Missed payment notice', 'The creditor sends a reminder. Contact them immediately — most will pause collection if you reach out proactively before this escalates. Your right: request a payment plan in writing.'],
+    ['Formal demand letter', 'A written notice giving a deadline — usually 14–30 days. Your right: dispute the debt in writing if you believe it is incorrect, inflated, or time-limited. Keep a copy of everything.'],
+    ['Account passed to collections', 'The debt is sold or passed to a collections agency. The original creditor is no longer your contact. Your right: request written proof of the debt before making any payment.'],
+    ['Collections contact begins', 'Phone calls, letters, and in some countries home visits. In most countries you can demand that all contact be in writing only — send this request by letter and keep your copy.'],
+    ['Legal claim filed', 'The creditor files a claim with the court. You will receive court papers — respond within the stated deadline. Ignoring court papers leads to automatic default judgment.'],
+    ['Court judgment issued', 'A court has ordered you to pay. Your right: apply to vary the judgment amount or instalment if you cannot afford what was ordered — this is a standard court application.'],
+    ['Enforcement', 'Wage garnishment, bank account freezing, or bailiff visits. Most countries protect a minimum income from garnishment. Essential household items are also protected.'],
+  ];
+
+  let html = '<div class="tool-panel active" id="panel_collection">';
+  html += '<div class="panel-header"><div class="panel-title">Debt Collection Map</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>';
+
+  if (isInCollections) {
+    const sn = currentStage > 0 ? currentStage : 3;
+    html += '<div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-bottom:16px;font-size:13px;color:var(--green-dark);line-height:1.6;">Based on your profile, you appear to be at <strong>Stage ' + sn + '</strong>.</div>';
+  }
+
+  html += '<p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;">Every stage of the process — and your rights at each step.</p>';
+
+  stages.forEach((s, i) => {
+    const n = i + 1;
+    const isCurr = currentStage === n || (currentStage === 0 && n === 1);
+    const isPast = n < currentStage;
+    const border = isCurr ? 'border-left:3px solid var(--green);' : '';
+    const numBg = isPast ? 'background:var(--muted);' : (isCurr ? 'background:var(--green);' : 'background:#ddd;color:#666;');
+    html += '<div class="info-stage" style="' + border + 'margin-bottom:8px;"><div class="info-stage-num" style="' + numBg + '">' + n + '</div><div class="info-stage-body"><strong>' + s[0] + '</strong>' + s[1] + '</div></div>';
+  });
+
+  if (cd.protect_link) {
+    html += '<div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-top:12px;font-size:12.5px;color:var(--green-dark);">Verify the rules that apply in <strong>' + country + '</strong>: ' + cd.agencies.map(a => '<a href="#" style="color:var(--green);text-decoration:underline;" onclick="event.preventDefault();">' + a + '</a>').join(' · ') + '</div>';
+  }
+
+  html += '<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool(\'letters\')">Write a letter to your creditor</button>';
+  html += '</div>';
+  return html;
+}
+
+function buildLegalPanel(d) {
+  const country = d.country || 'your country';
+  const cd = getCountryData(d.country);
+
+  let agencyLinks = cd.agencies.map(a => {
+    const parts = a.split(' — ');
+    const name = parts[0];
+    const url = parts[1] ? 'https://' + parts[1].replace(/^https?:\/\//, '') : '#';
+    return '<li><a href="' + url + '" target="_blank" rel="noopener" style="color:var(--green);">' + name + '</a>' + (parts[1] ? ' — ' + parts[1] : '') + '</li>';
+  }).join('');
+
+  return '<div class="tool-panel active" id="panel_legal">'
+  + '<div class="panel-header"><div class="panel-title">Legal Protection Guide</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
+  + '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Based on your country: <strong>' + country + '</strong>. This is general guidance — always verify current rules with the official authorities linked below.</p>'
+  + '<div class="info-block"><h4>What collectors cannot do</h4><ul>'
+  + '<li>Use threatening, abusive or harassing language — illegal in virtually every jurisdiction</li>'
+  + '<li>Contact your employer, family or neighbours about your debt without a court order</li>'
+  + '<li>Misrepresent their legal powers or threaten consequences they cannot deliver</li>'
+  + '<li>Collect a debt that has exceeded the legal time limit (statute of limitations)</li>'
+  + '<li>Contact you at unreasonable hours — check the rules for ' + country + ' via the links below</li>'
+  + '</ul></div>'
+  + '<div class="info-block"><h4>Your key rights</h4><ul>'
+  + '<li>Request all contact in writing — collectors must comply</li>'
+  + '<li>Request written proof of the debt (debt validation) before making any payment</li>'
+  + '<li>Dispute incorrect or inflated debts in writing within the statutory period</li>'
+  + '<li>Apply to vary a court judgment if you cannot afford the ordered amount</li>'
+  + '<li>A minimum income is protected from wage garnishment — check the current threshold via the official authority below</li>'
+  + '</ul></div>'
+  + '<div class="info-block"><h4>Official sources for ' + country + '</h4>'
+  + '<p style="font-size:12.5px;color:var(--muted);margin-bottom:8px;">These are the verified official and non-profit organisations for ' + country + '. Figures for time limits and income thresholds change — always check the current rules directly on their websites.</p>'
+  + '<ul>' + agencyLinks + '</ul></div>'
+  + '<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool(\'letters\')">Write a stop contact letter</button>'
+  + '</div>';
+}
 
   // Determine which stage the client is likely at
   let currentStage = 0;
@@ -1671,34 +2049,6 @@ function buildCollectionPanel(d) {
   html += '<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool(\'letters\')">Write a letter to your creditor</button>';
   html += '</div>';
   return html;
-}
-
-function buildLegalPanel(d) {
-  const country = d.country || 'your country';
-  const cd = getCountryData(d.country);
-
-  return '<div class="tool-panel active" id="panel_legal">'
-  + '<div class="panel-header"><div class="panel-title">Legal Protection Guide</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
-  + '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Specific to <strong>' + country + '</strong>. This is general information — not legal advice. For complex situations, contact a qualified adviser.</p>'
-  + '<div class="info-block"><h4>What collectors cannot do in ' + country + '</h4><ul>'
-  + '<li>Contact you outside permitted hours: <strong>' + cd.hours + '</strong></li>'
-  + '<li>Use threatening, abusive or harassing language — this is illegal in virtually every jurisdiction</li>'
-  + '<li>Contact your employer, family or neighbours about your debt without a court order</li>'
-  + '<li>Misrepresent their legal powers or threaten consequences they cannot deliver</li>'
-  + '<li>Collect a statute-barred debt — in ' + country + ', most unsecured debts become unenforceable after <strong>' + cd.sol + '</strong></li>'
-  + '</ul></div>'
-  + '<div class="info-block"><h4>Your key rights</h4><ul>'
-  + '<li>Request all contact in writing — send a letter, keep the copy, and collectors must comply</li>'
-  + '<li>Request written proof of the debt (debt validation) before making any payment or acknowledging the debt</li>'
-  + '<li>Dispute incorrect or inflated debts in writing within the statutory period</li>'
-  + '<li>Apply to vary a court judgment if you cannot afford the ordered amount</li>'
-  + '<li>Income protection: <strong>' + cd.wage_protect + '</strong></li>'
-  + '</ul></div>'
-  + '<div class="info-block"><h4>Free help in ' + country + '</h4><ul>'
-  + cd.agencies.map(a => '<li>' + a + '</li>').join('')
-  + '</ul></div>'
-  + '<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool(\'letters\')">Write a stop contact letter</button>'
-  + '</div>';
 }
 
 function buildChallengePanel(d) {
@@ -1815,8 +2165,105 @@ function buildEmergencyPanel(d) {
 }
 
 /* ═══════════════════════════════════════════════
-   WIZARD NAVIGATION — fixed regex
+   MULTILINGUAL STATIC PANELS
+   For non-EN languages, static panels request an
+   AI translation on first open and cache it in
+   sessionStorage so subsequent opens are instant.
 ═══════════════════════════════════════════════ */
+const STATIC_TOOLS = ['collection','legal','challenge','psychology','crisis','emergency'];
+
+function buildStaticPanel(id, d) {
+  // Always build EN version first
+  let enHtml = '';
+  switch(id) {
+    case 'collection':  enHtml = buildCollectionPanel(d); break;
+    case 'legal':       enHtml = buildLegalPanel(d); break;
+    case 'challenge':   enHtml = buildChallengePanel(d); break;
+    case 'psychology':  enHtml = buildPsychPanel(d, d.currency||'EUR'); break;
+    case 'crisis':      enHtml = buildCrisisPanel(d); break;
+    case 'emergency':   enHtml = buildEmergencyPanel(d); break;
+    default:            return '';
+  }
+  // EN — return directly
+  if (lang === 'EN') return enHtml;
+
+  // Non-EN — check cache first
+  const cacheKey = 'dfw_panel_' + id + '_' + lang;
+  const cached = sessionStorage.getItem(cacheKey);
+  if (cached) {
+    // Return cached version with panel wrapper
+    return enHtml.replace(/(<div class="tool-panel active"[^>]*>)/, '$1' + cached);
+  }
+
+  // Return EN version with translation banner
+  const LANG_NAMES = {FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',PT:'Portuguese',IT:'Italian',NL:'Dutch',PL:'Polish',TR:'Turkish',RU:'Russian',AR:'Arabic',HI:'Hindi',ZH:'Chinese',JA:'Japanese',KO:'Korean',ID:'Indonesian',SW:'Swahili'};
+  const planLang = LANG_NAMES[lang] || lang;
+
+  // Trigger async translation after panel is in DOM
+  setTimeout(() => translateStaticPanel(id, d, planLang, cacheKey), 50);
+
+  // Return with translation loading banner
+  return enHtml.replace(
+    /(<div class="panel-header">)/,
+    '<div id="panel_translate_banner_' + id + '" style="background:var(--green-bg);border-bottom:1px solid var(--green-border);padding:10px 16px;font-size:12.5px;color:var(--green-dark);display:flex;align-items:center;gap:8px;">' +
+    '<div class="wiz-spinner" style="width:14px;height:14px;border-width:2px;margin:0;"></div>' +
+    'Translating to ' + planLang + '…' +
+    '</div>$1'
+  );
+}
+
+async function translateStaticPanel(id, d, planLang, cacheKey) {
+  const panelEl = document.getElementById('panel_' + id);
+  if (!panelEl) return;
+
+  // Extract text content to translate
+  const titles  = Array.from(panelEl.querySelectorAll('h4')).map(el => el.textContent);
+  const paras   = Array.from(panelEl.querySelectorAll('p:not([style*="font-size:12"]),.info-stage-body')).map(el => el.textContent);
+  const items   = Array.from(panelEl.querySelectorAll('li')).map(el => el.textContent);
+
+  const textToTranslate = [
+    ...titles.map((t,i) => 'H4_' + i + ': ' + t),
+    ...paras.map((p,i) => 'P_' + i + ': ' + p.substring(0,200)),
+    ...items.map((li,i) => 'LI_' + i + ': ' + li.substring(0,150)),
+  ].join('\n');
+
+  const prompt = 'Translate the following UI text to ' + planLang + '. Keep the prefix codes (H4_0:, P_0:, LI_0: etc) exactly as-is. Translate only the text after the colon. Return the same format. Do not add explanations.\n\n' + textToTranslate;
+
+  const result = await callAI(prompt);
+  if (!result.text) {
+    // Remove banner on failure
+    document.getElementById('panel_translate_banner_' + id)?.remove();
+    return;
+  }
+
+  // Apply translations back to DOM elements
+  const lines = result.text.split('\n');
+  const get = (prefix, i) => {
+    const line = lines.find(l => l.startsWith(prefix + i + ':'));
+    return line ? line.slice((prefix + i + ':').length).trim() : null;
+  };
+
+  panelEl.querySelectorAll('h4').forEach((el, i) => {
+    const t = get('H4_', i); if (t) el.textContent = t;
+  });
+  panelEl.querySelectorAll('p:not([style*="font-size:12"])').forEach((el, i) => {
+    const t = get('P_', i); if (t) el.textContent = t;
+  });
+  panelEl.querySelectorAll('.info-stage-body').forEach((el, i) => {
+    const t = get('P_', panelEl.querySelectorAll('p').length + i); if (t) el.textContent = t;
+  });
+  panelEl.querySelectorAll('li').forEach((el, i) => {
+    // Preserve links inside li
+    if (el.querySelector('a')) return;
+    const t = get('LI_', i); if (t) el.textContent = t;
+  });
+
+  // Cache in sessionStorage
+  try { sessionStorage.setItem(cacheKey, result.text.substring(0, 8000)); } catch {}
+
+  // Remove loading banner
+  document.getElementById('panel_translate_banner_' + id)?.remove();
+}
 function wizShowStep(prefix, n) {
   // Find all child steps of this wizard — match prefix + (digit OR underscore+word)
   const allSteps = document.querySelectorAll('[id^="' + prefix + '"]');
@@ -1834,56 +2281,56 @@ function wizShowStep(prefix, n) {
 ═══════════════════════════════════════════════ */
 const COMPANION_STRINGS = {
   EN: {
-    collections_q: 'The most urgent step is contacting the collections agency. Have you been able to do that yet?',
-    collections_opts: ['Yes — I made contact', 'Not yet — help me write the letter', 'Not ready yet'],
+    collections_q: 'The most urgent step is addressing the collections agency. Have you read through your plan yet?',
+    collections_opts: ['Yes — I\'ve read it, what\'s next?', 'Not yet — show me my plan', 'I need to understand the process first'],
     day7_q: 'Your plan is ready. What feels most manageable to start with today?',
-    day7_opts: ['Looking at my numbers', 'Writing a letter to a creditor', 'Reading through my plan first'],
+    day7_opts: ['Show me my plan', 'Update my monthly numbers', 'I\'ll explore the tools first'],
     day30_q: 'Day {d}. How are things going with your plan so far?',
-    day30_opts: ['Making progress', 'Struggling a little', 'Something has changed in my situation'],
+    day30_opts: ['Making progress', 'Struggling a little', 'Something has changed — I need to update'],
     day60_q: '{d} days in — that\'s real progress. What would help most right now?',
-    day60_opts: ['Update my monthly numbers', 'Write a letter to a creditor', 'Review my strategy'],
+    day60_opts: ['Update my monthly numbers', 'Review my strategy', 'I\'m back on track'],
     day90_q: 'Day {d} — you\'re in the final stretch. What are you focused on?',
     day90_opts: ['Staying on track', 'Dealing with a setback', 'Planning what comes after 90 days'],
     noted: 'Noted. Your tools are below whenever you need them.',
   },
   FI: {
-    collections_q: 'Kiireellisin askel on ottaa yhteyttä perintätoimistoon. Oletko pystynyt tekemään sen?',
-    collections_opts: ['Kyllä — otin yhteyttä', 'En vielä — auta kirjeen kanssa', 'En ole vielä valmis'],
+    collections_q: 'Kiireellisin askel on käsitellä perintätoimiston asia. Oletko lukenut suunnitelmasi?',
+    collections_opts: ['Kyllä — luin sen, mitä seuraavaksi?', 'En vielä — näytä suunnitelmani', 'Tarvitsen tietoa prosessista ensin'],
     day7_q: 'Suunnitelmasi on valmis. Mikä tuntuu helpoimmalta aloittaa tänään?',
-    day7_opts: ['Katson lukuni', 'Kirjoitan kirjeen velkojalle', 'Luen suunnitelmani ensin'],
-    day30_q: 'Päivä {d}. Kuinka suunnitelma on edennyt?',
-    day30_opts: ['Edistystä on tapahtunut', 'Hieman vaikeaa', 'Tilanteeni on muuttunut'],
+    day7_opts: ['Näytä suunnitelmani', 'Päivitä kuukausilukuni', 'Tutustun ensin työkaluihin'],
+    day30_q: 'Päivä {d}. Miten suunnitelma on edennyt?',
+    day30_opts: ['Edistystä on tapahtunut', 'Hieman vaikeaa', 'Tilanne on muuttunut — päivitän'],
     day60_q: '{d} päivää — se on aitoa edistystä. Mikä auttaisi nyt eniten?',
-    day60_opts: ['Päivitän kuukausilukuni', 'Kirjoitan kirjeen velkojalle', 'Tarkistan strategiani'],
+    day60_opts: ['Päivitän kuukausilukuni', 'Tarkistan strategiani', 'Olen takaisin raiteilla'],
     day90_q: 'Päivä {d} — olet loppusuoralla. Mihin keskityt?',
     day90_opts: ['Pysyn kurssilla', 'Käsittelen vastoinkäymistä', 'Suunnittelen mitä tulee 90 päivän jälkeen'],
     noted: 'Selvä. Työkalusi ovat alla aina tarvittaessa.',
   },
   SV: {
-    collections_q: 'Det mest brådskande steget är att kontakta inkassobolaget. Har du kunnat göra det?',
-    collections_opts: ['Ja — jag tog kontakt', 'Inte ännu — hjälp mig skriva brevet', 'Inte redo än'],
+    collections_q: 'Det mest brådskande steget är att hantera inkassoärendet. Har du läst din plan?',
+    collections_opts: ['Ja — vad är nästa steg?', 'Inte ännu — visa min plan', 'Jag behöver förstå processen'],
     day7_q: 'Din plan är klar. Vad känns mest hanterbart att börja med idag?',
-    day7_opts: ['Titta på mina siffror', 'Skriva ett brev till en borgenär', 'Läsa igenom min plan först'],
+    day7_opts: ['Visa min plan', 'Uppdatera mina månadssiffror', 'Jag utforskar verktygen'],
     day30_q: 'Dag {d}. Hur går det med din plan?',
-    day30_opts: ['Gör framsteg', 'Lite svårt', 'Något har förändrats i min situation'],
+    day30_opts: ['Gör framsteg', 'Lite svårt', 'Något har förändrats — behöver uppdatera'],
     day60_q: '{d} dagar — det är verkliga framsteg. Vad skulle hjälpa mest nu?',
-    day60_opts: ['Uppdatera mina månadssiffror', 'Skriva ett brev till en borgenär', 'Granska min strategi'],
-    day90_q: 'Dag {d} — du är på slutrakan. Vad fokuserar du på?',
-    day90_opts: ['Hålla kursen', 'Hantera ett bakslag', 'Planera vad som händer efter 90 dagar'],
-    noted: 'Noterat. Dina verktyg finns nedan när du behöver dem.',
+    day60_opts: ['Uppdatera mina siffror', 'Granska min strategi', 'Jag är tillbaka på rätt spår'],
+    day90_q: 'Dag {d} — du är på slutrakan.',
+    day90_opts: ['Hålla kursen', 'Hantera ett bakslag', 'Planera efter 90 dagar'],
+    noted: 'Noterat. Dina verktyg finns nedan.',
   },
   DE: {
-    collections_q: 'Der dringendste Schritt ist, das Inkassobüro zu kontaktieren. Haben Sie das schon geschafft?',
-    collections_opts: ['Ja — ich habe Kontakt aufgenommen', 'Noch nicht — hilf mir beim Brief', 'Noch nicht bereit'],
+    collections_q: 'Der dringendste Schritt ist die Inkasso-Angelegenheit. Haben Sie Ihren Plan gelesen?',
+    collections_opts: ['Ja — was ist der nächste Schritt?', 'Noch nicht — zeig mir meinen Plan', 'Ich brauche Infos zum Prozess'],
     day7_q: 'Ihr Plan ist fertig. Was fühlt sich heute am einfachsten an?',
-    day7_opts: ['Meine Zahlen ansehen', 'Einen Brief an einen Gläubiger schreiben', 'Zuerst den Plan lesen'],
+    day7_opts: ['Zeig mir meinen Plan', 'Zahlen aktualisieren', 'Ich erkunde die Tools'],
     day30_q: 'Tag {d}. Wie läuft es mit Ihrem Plan?',
-    day30_opts: ['Mache Fortschritte', 'Etwas schwierig', 'Meine Situation hat sich verändert'],
-    day60_q: '{d} Tage — das ist echter Fortschritt. Was würde jetzt am meisten helfen?',
-    day60_opts: ['Monatszahlen aktualisieren', 'Brief an Gläubiger schreiben', 'Strategie überprüfen'],
-    day90_q: 'Tag {d} — Sie sind auf der Zielgeraden. Worauf konzentrieren Sie sich?',
-    day90_opts: ['Auf Kurs bleiben', 'Mit einem Rückschlag umgehen', 'Nach 90 Tagen planen'],
-    noted: 'Verstanden. Ihre Werkzeuge sind unten verfügbar.',
+    day30_opts: ['Mache Fortschritte', 'Etwas schwierig', 'Situation hat sich geändert'],
+    day60_q: '{d} Tage — das ist echter Fortschritt.',
+    day60_opts: ['Zahlen aktualisieren', 'Strategie überprüfen', 'Bin wieder auf Kurs'],
+    day90_q: 'Tag {d} — Sie sind auf der Zielgeraden.',
+    day90_opts: ['Auf Kurs bleiben', 'Mit Rückschlag umgehen', 'Nach 90 Tagen planen'],
+    noted: 'Verstanden. Ihre Werkzeuge sind unten.',
   },
 };
 // Fallback all other languages to EN
@@ -2014,9 +2461,11 @@ FORMAT RULES (follow exactly):
     document.getElementById('letterError').style.display='block';
     return;
   }
-  // Save to session history
+  // Save to session history and KV document archive
   const now = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const docTitle = lwData.creditor + ' · ' + (typeLabels[lwData.type]||lwData.type);
   saveLWHistory({ creditor: lwData.creditor, type: typeLabels[lwData.type]||lwData.type, text: result.text, time: now });
+  saveDocument('letter', docTitle, result.text, { creditor: lwData.creditor, subtype: lwData.type });
 
   document.getElementById('letterOutput').textContent = result.text;
   document.getElementById('letterOutput').classList.add('active');
@@ -2467,7 +2916,11 @@ Plain text. Under 150 words. Write entirely in ${planLang}.`;
   document.getElementById('negFeedback').textContent = res.text || '';
   document.getElementById('negFeedback').classList.add('active');
   document.getElementById('negActions').style.display='flex';
-}
+
+  // Save negotiation notes + transcript to document archive
+  const negTitle = (nwData.creditor_type || 'Creditor') + ' · ' + (nwData.goal || 'Negotiation');
+  const negFullText = '=== PREPARATION NOTES ===\n\n' + negPrepText + '\n\n=== SESSION TRANSCRIPT ===\n\n' + negHistory.map(m=>'['+m.role.toUpperCase()+']: '+m.text).join('\n\n') + '\n\n=== COACH FEEDBACK ===\n\n' + (res.text||'');
+  saveDocument('negotiation', negTitle, negFullText, { creditor: nwData.creditor_type, subtype: nwData.goal });
 
 // ─── MONTHLY UPDATE WIZARD ───
 let uwData = {};
@@ -2524,9 +2977,74 @@ Write 4–5 concrete, numbered actions. If progress was 'crisis', stabilisation 
     memberData.debt_recovery_plan = result.text;
     memberData.member_plan = result.text;
     document.getElementById('planBody').textContent = result.text;
+    // Save to document archive
+    const updateTitle = 'Plan update · Day ' + (memberData._dayNum||'?') + '/90';
+    saveDocument('update', updateTitle, result.text, {});
   } catch(e) {}
 }
 
+
+/* ═══════════════════════════════════════════════
+   DOCUMENT ARCHIVE
+   Saves all AI-generated documents to KV via
+   /member/save-document. Stored in member record
+   documents[] array, max 50 entries, TTL = 90 days.
+═══════════════════════════════════════════════ */
+async function saveDocument(type, title, text, meta) {
+  if (!text || !memberToken) return;
+  const doc = {
+    type,          // 'letter' | 'negotiation' | 'update'
+    title,         // e.g. "Nordea · Hardship"
+    creditor: meta?.creditor || null,
+    subtype: meta?.subtype || null,
+    text,
+    created_at: new Date().toISOString(),
+  };
+
+  // Update local memberData immediately so archive panel reflects it
+  if (!memberData.documents) memberData.documents = [];
+  memberData.documents.push(doc);
+
+  // Persist to KV
+  try {
+    await fetch(`${WORKER_URL}/member/save-document`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-member-token': memberToken },
+      body: JSON.stringify({ document: doc })
+    });
+  } catch(e) { /* Non-critical — doc already in local memberData */ }
+}
+
+function toggleDocViewer(idx) {
+  const viewer = document.getElementById('docviewer_' + idx);
+  const actions = document.getElementById('docactions_' + idx);
+  if (!viewer) return;
+  const isOpen = viewer.classList.contains('active');
+  // Close all other viewers first
+  document.querySelectorAll('.doc-viewer.active').forEach(v => {
+    v.classList.remove('active');
+    const i = v.id.replace('docviewer_','');
+    document.getElementById('docactions_' + i)?.style && (document.getElementById('docactions_' + i).style.display = 'none');
+  });
+  if (!isOpen) {
+    const doc = memberData.documents?.[idx];
+    if (doc) {
+      viewer.textContent = doc.text;
+      viewer.classList.add('active');
+      if (actions) actions.style.display = 'flex';
+    }
+  }
+}
+
+function copyDocToClipboard(idx) {
+  const doc = memberData.documents?.[idx];
+  if (!doc?.text) return;
+  navigator.clipboard.writeText(doc.text).then(() => {
+    const btn = document.getElementById('doccopy_' + idx);
+    if (btn) { btn.textContent = L.btnCopied || 'Copied'; setTimeout(() => btn.textContent = L.btnCopy || 'Copy', 2000); }
+    showToast(L.toastCopied || 'Copied to clipboard');
+  });
+}
 
 /* ═══════════════════════════════════════════════
    AI CALL HELPER
