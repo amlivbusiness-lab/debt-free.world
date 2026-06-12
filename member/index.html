@@ -217,6 +217,69 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
+/* ════ BATCH 1 ADDITIONS ════ */
+
+/* Letter history */
+.letter-history{margin-top:16px;border-top:1px solid var(--border);padding-top:14px;}
+.letter-history-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;}
+.letter-history-item{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-bottom:7px;cursor:pointer;transition:background 0.12s;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.letter-history-item:hover{background:var(--green-light);}
+.letter-history-meta{font-size:12px;color:var(--green-dark);font-weight:500;}
+.letter-history-date{font-size:11px;color:var(--muted);flex-shrink:0;}
+.letter-history-empty{font-size:13px;color:var(--muted);font-style:italic;}
+
+/* Visual timeline bar */
+.timeline-wrap{margin-top:14px;}
+.timeline-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.timeline-bar-label{font-size:12px;color:var(--muted);width:56px;flex-shrink:0;text-align:right;}
+.timeline-bar-track{flex:1;background:#f0f0f0;border-radius:100px;height:10px;overflow:hidden;}
+.timeline-bar-fill{height:100%;border-radius:100px;transition:width 0.8s cubic-bezier(.4,0,.2,1);}
+.timeline-bar-fill.current{background:var(--muted);}
+.timeline-bar-fill.improved{background:var(--green);}
+.timeline-bar-months{font-size:12px;font-weight:600;color:var(--text);width:52px;flex-shrink:0;}
+.timeline-saving{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-top:10px;font-size:13px;color:var(--green-dark);line-height:1.6;}
+.timeline-saving strong{font-weight:700;}
+.timeline-interest-warn{font-size:12px;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 13px;margin-top:8px;line-height:1.55;}
+
+/* DF Date milestones */
+.milestone-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);}
+.milestone-row:last-child{border-bottom:none;}
+.milestone-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.milestone-dot.reached{background:var(--green);}
+.milestone-dot.upcoming{background:#ddd;}
+.milestone-text{font-size:13px;color:#333;line-height:1.4;}
+.milestone-date{font-size:12px;color:var(--muted);margin-top:1px;}
+
+/* Snowball full debt list */
+.debt-strategy-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;margin-bottom:6px;}
+.debt-strategy-name{font-size:13px;font-weight:500;color:#222;}
+.debt-strategy-order{font-size:11px;font-weight:700;color:var(--green);background:var(--green-light);border-radius:10px;padding:2px 8px;}
+.strategy-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.strategy-box{border-radius:10px;padding:13px 14px;border:1.5px solid var(--border);}
+.strategy-box.winner{border-color:var(--green);background:var(--green-bg);}
+.strategy-box-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:6px;display:block;}
+.strategy-box.winner .strategy-box-title{color:var(--green);}
+.strategy-box-months{font-family:var(--serif);font-size:20px;color:var(--text);}
+.strategy-box-detail{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5;}
+.strategy-verdict{font-size:13px;color:#333;line-height:1.65;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+
+/* Negotiation interactive mode */
+.neg-chat{display:flex;flex-direction:column;gap:8px;margin-top:4px;max-height:340px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.neg-bubble{padding:11px 14px;border-radius:12px;font-size:13.5px;line-height:1.65;max-width:88%;}
+.neg-bubble.creditor{background:#f3f4f6;color:#222;border-bottom-left-radius:4px;align-self:flex-start;}
+.neg-bubble.you{background:var(--green-bg);color:var(--green-dark);border-bottom-right-radius:4px;align-self:flex-end;border:1px solid var(--green-border);}
+.neg-bubble.system{background:#fffbeb;color:#92400e;border-radius:8px;align-self:stretch;font-size:12.5px;border:1px solid #fde68a;}
+.neg-input-row{display:flex;gap:8px;margin-top:10px;}
+.neg-input-row input{flex:1;font-family:var(--sans);font-size:14px;border:1.5px solid var(--border);border-radius:8px;padding:11px 13px;outline:none;transition:border-color 0.2s;}
+.neg-input-row input:focus{border-color:var(--green);}
+.neg-send-btn{background:var(--green);color:var(--white);border:none;border-radius:8px;padding:11px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);flex-shrink:0;}
+.neg-feedback{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:13px 14px;font-size:13px;color:var(--green-dark);line-height:1.65;margin-top:10px;display:none;}
+.neg-feedback.active{display:block;}
+
+/* Monthly update — save confirmation */
+.update-saved{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--green-dark);margin-top:10px;display:none;}
+.update-saved.active{display:block;}
+
 @media(max-width:480px){
   .main-wrap{padding:16px 12px 80px;}
   .wiz-two{grid-template-columns:1fr;}
@@ -989,14 +1052,12 @@ async function saveSetting(key, value) {
 }
 
 /* ═══════════════════════════════════════════════
-   TOOL PANELS — WIZARD ENGINE
+   TOOL PANELS — WIZARD ENGINE  (Batch 1)
 ═══════════════════════════════════════════════ */
 function openTool(toolId) {
   activeToolId = toolId;
-  // Highlight grid card
   document.querySelectorAll('.tool-card').forEach(c=>c.classList.remove('active'));
   document.getElementById('tc_'+toolId)?.classList.add('active');
-  // Render panel
   const wrap = document.getElementById('activePanelWrap');
   wrap.innerHTML = buildPanel(toolId);
   wrap.scrollIntoView({behavior:'smooth', block:'nearest'});
@@ -1006,6 +1067,1129 @@ function closeTool() {
   document.querySelectorAll('.tool-card').forEach(c=>c.classList.remove('active'));
   document.getElementById('activePanelWrap').innerHTML = '';
   activeToolId = null;
+}
+
+function buildPanel(id) {
+  const d = memberData;
+  const cur = d.currency || 'EUR';
+
+  // ─────────────────────────────────────────
+  // HELPER: language name for AI prompts
+  // ─────────────────────────────────────────
+  const LANG_NAMES = {FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
+  const planLang = LANG_NAMES[lang] || 'English';
+
+  switch(id) {
+
+  // ═══════════════════════════════════════════
+  // 1. AI CREDITOR LETTERS — full rebuild
+  //    - All debts selectable (not just first)
+  //    - Type selection requires explicit Continue (no auto-jump)
+  //    - Letter history stored in sessionStorage
+  //    - "Write another" CTA after output
+  // ═══════════════════════════════════════════
+  case 'letters': {
+    const debtOpts = d.debts && d.debts.length > 0
+      ? d.debts.map((dbt,i) =>
+          `<button class="wiz-opt" onclick="lwSelectDebt(${i},this)" data-idx="${i}">${dbt.creditor||dbt.type} — ${(dbt.amount||0).toLocaleString()} ${dbt.currency||cur}</button>`
+        ).join('') + `<button class="wiz-opt" onclick="lwSelectDebt(-1,this)" data-idx="-1">Other / not listed</button>`
+      : `<button class="wiz-opt selected" onclick="lwSelectDebt(-1,this)" data-idx="-1">Enter creditor name</button>`;
+
+    const history = getLWHistory();
+    const historyHtml = history.length === 0
+      ? `<span class="letter-history-empty">No letters generated yet this session.</span>`
+      : history.map((h,i)=>`<div class="letter-history-item" onclick="lwShowHistory(${i})"><span class="letter-history-meta">${h.creditor} · ${h.type}</span><span class="letter-history-date">${h.time}</span></div>`).join('');
+
+    return `
+    <div class="tool-panel active" id="panel_letters">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_letters||'AI Creditor Letters'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      <div id="lw_steps">
+        <div class="wiz-step active" id="lw1">
+          <span class="wiz-eyebrow">Step 1 of 4</span>
+          <div class="wiz-q">Who is this letter for?</div>
+          <div class="wiz-hint" style="margin-bottom:10px;">Select a debt from your profile, or enter a name below.</div>
+          <div class="wiz-opts" id="lw_debt_opts">${debtOpts}</div>
+          <div class="wiz-field" style="margin-top:10px;" id="lw_manual_wrap">
+            <label class="wiz-label" id="lw_manual_label">Creditor name</label>
+            <input type="text" id="lw_creditor" placeholder="e.g. Nordea, Klarna, HMRC, Intrum…" style="font-size:15px;padding:13px 14px;"/>
+          </div>
+          <div class="wiz-nav"><button class="wiz-next" onclick="lwNext(1)">Continue</button></div>
+        </div>
+
+        <div class="wiz-step" id="lw2">
+          <span class="wiz-eyebrow">Step 2 of 4</span>
+          <div class="wiz-q">What type of letter do you need?</div>
+          <div class="wiz-opts" id="lw_type_opts">
+            <button class="wiz-opt" onclick="lwSelectType('hardship',this)">Hardship / payment difficulty</button>
+            <button class="wiz-opt" onclick="lwSelectType('settlement',this)">Debt settlement offer</button>
+            <button class="wiz-opt" onclick="lwSelectType('stop',this)">Stop contact request</button>
+            <button class="wiz-opt" onclick="lwSelectType('dispute',this)">Debt dispute</button>
+            <button class="wiz-opt" onclick="lwSelectType('plan',this)">Propose a payment plan</button>
+            <button class="wiz-opt" onclick="lwSelectType('holiday',this)">Request a payment holiday</button>
+            <button class="wiz-opt" onclick="lwSelectType('negotiation',this)">General negotiation</button>
+          </div>
+          <div class="wiz-nav">
+            <button class="wiz-back" onclick="lwBack(2)">Back</button>
+            <button class="wiz-next" onclick="lwNext(2)">Continue</button>
+          </div>
+        </div>
+
+        <div class="wiz-step" id="lw3">
+          <span class="wiz-eyebrow">Step 3 of 4</span>
+          <div class="wiz-q">A few more details.</div>
+          <div class="wiz-field">
+            <label class="wiz-label">Amount owed <span style="font-weight:300;color:var(--muted)">(optional)</span></label>
+            <div class="wiz-amount">
+              <input type="number" id="lw_amount" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+              <select id="lw_currency">
+                ${['EUR','GBP','SEK','NOK','DKK','USD','CHF','PLN','CZK','HUF','RON','CAD','AUD','BRL','INR','IDR','PHP'].map(c=>`<option value="${c}"${c===cur?' selected':''}>${c}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+          <div class="wiz-field">
+            <label class="wiz-label">Anything specific to include? <span style="font-weight:300;color:var(--muted)">(optional)</span></label>
+            <div class="wiz-hint">Context makes the letter significantly more persuasive.</div>
+            <textarea id="lw_situation" rows="3" placeholder="e.g. I was made redundant 2 months ago. I have 2 children. I can pay 50 ${cur}/month.">${d.situation?d.situation:''}</textarea>
+          </div>
+          <div class="wiz-nav">
+            <button class="wiz-back" onclick="lwBack(3)">Back</button>
+            <button class="wiz-next" onclick="lwNext(3)">Continue</button>
+          </div>
+        </div>
+
+        <div class="wiz-step" id="lw4">
+          <span class="wiz-eyebrow">Step 4 of 4</span>
+          <div class="wiz-q">What is causing the hardship?</div>
+          <div class="wiz-opts grid2" id="lw_hardship_opts">
+            ${['Unemployment','Reduced income','Illness or disability','Divorce or separation','Business failure','Cost of living pressure','Unexpected expenses','Other'].map(h=>`<button class="wiz-opt" onclick="lwSelectHardship('${h}',this)">${h}</button>`).join('')}
+          </div>
+          <div class="wiz-nav">
+            <button class="wiz-back" onclick="lwBack(4)">Back</button>
+            <button class="wiz-next" id="lwGenBtn" onclick="generateLetter()">Generate letter</button>
+          </div>
+        </div>
+
+        <div class="wiz-step" id="lw_generating">
+          <div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">Writing your letter…</div></div>
+        </div>
+      </div>
+
+      <div class="panel-output" id="letterOutput"></div>
+      <div class="output-actions" id="letterActions" style="display:none;">
+        <button class="btn-copy" onclick="copyOutput('letterOutput','letterCopyBtn')" id="letterCopyBtn">Copy</button>
+        <button class="btn-reset" onclick="openTool('letters')">Write another letter</button>
+      </div>
+      <div class="panel-error" id="letterError"></div>
+
+      <div class="letter-history" id="lwHistory">
+        <span class="letter-history-label">Letters written this session</span>
+        <div id="lwHistoryList">${historyHtml}</div>
+      </div>
+    </div>`;
+  }
+
+  // ═══════════════════════════════════════════
+  // 2. CRISIS BUDGET TOOL
+  //    - Fixed field labelling (surplus vs payment)
+  //    - Visual timeline bar comparison
+  //    - Interest cost saved shown prominently
+  // ═══════════════════════════════════════════
+  case 'budget': {
+    const surplus = calcSurplus();
+    return `
+    <div class="tool-panel active" id="panel_budget">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_budget||'Crisis Budget Tool'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      <div class="wiz-step active" id="bw1">
+        <span class="wiz-eyebrow">Step 1 of 2 — Your debt</span>
+        <div class="wiz-q">What are you paying off?</div>
+        <div class="wiz-two">
+          <div class="wiz-field">
+            <label class="wiz-label">Total debt remaining (${cur})</label>
+            <input type="number" id="b_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+          </div>
+          <div class="wiz-field">
+            <label class="wiz-label">Interest rate (%)</label>
+            <div class="wiz-hint">Enter 0 if unknown — we'll calculate without interest.</div>
+            <input type="number" id="b_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/>
+          </div>
+        </div>
+        <div class="wiz-nav"><button class="wiz-next" onclick="bwNext(1)">Continue</button></div>
+      </div>
+
+      <div class="wiz-step" id="bw2">
+        <span class="wiz-eyebrow">Step 2 of 2 — Your payments</span>
+        <div class="wiz-q">How much can you put towards debt each month?</div>
+        <div class="wiz-field">
+          <label class="wiz-label">Current monthly debt payment (${cur})</label>
+          <div class="wiz-hint">What you are paying now — not what's required.</div>
+          <input type="number" id="b_payment" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+        </div>
+        <div class="wiz-field">
+          <label class="wiz-label">Extra you could add per month (${cur})</label>
+          <div class="wiz-hint">Even 30–50 ${cur} extra makes a meaningful difference. Try 0 first to see your baseline.</div>
+          <input type="number" id="b_extra" value="0" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+        </div>
+        <div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:10px 13px;font-size:12.5px;color:var(--green-dark);margin-bottom:14px;">
+          Available surplus from your profile: <strong>${surplus} ${cur}/month</strong>
+        </div>
+        <div class="wiz-nav">
+          <button class="wiz-back" onclick="bwBack(2)">Back</button>
+          <button class="wiz-next" onclick="runBudget()">Calculate</button>
+        </div>
+      </div>
+      <div class="calc-result" id="budgetResult"></div>
+    </div>`;
+  }
+
+  // ═══════════════════════════════════════════
+  // 3. DEBT-FREE DATE CALCULATOR
+  //    - Clearly distinct from Budget Tool
+  //    - Milestones: 25%, 50%, 75%, debt-free
+  //    - Total interest shown
+  // ═══════════════════════════════════════════
+  case 'dfdate': return `
+    <div class="tool-panel active" id="panel_dfdate">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_dfdate||'Debt-Free Date Calculator'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Enter your numbers below to see your exact debt-free date and key milestones along the way.</p>
+      <div class="wiz-two">
+        <div class="wiz-field">
+          <label class="wiz-label">Total debt (${cur})</label>
+          <input type="number" id="df_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+        </div>
+        <div class="wiz-field">
+          <label class="wiz-label">Monthly payment (${cur})</label>
+          <input type="number" id="df_payment" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+        </div>
+      </div>
+      <div class="wiz-field">
+        <label class="wiz-label">Interest rate (%)</label>
+        <div class="wiz-hint">Enter 0 if unknown — result will be a minimum estimate.</div>
+        <input type="number" id="df_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/>
+      </div>
+      <div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runDFDate()">Calculate my debt-free date</button></div>
+      <div class="calc-result" id="dfdateResult"></div>
+    </div>`;
+
+  // ═══════════════════════════════════════════
+  // 4. SNOWBALL VS AVALANCHE
+  //    - Uses all debts from onboarding, not just two
+  //    - Full comparison with total interest cost
+  //    - Payoff order shown visually
+  // ═══════════════════════════════════════════
+  case 'snowball': {
+    // Use onboarding debts if available, else manual entry
+    const hasDebts = d.debts && d.debts.length >= 2;
+    const debtRows = hasDebts
+      ? d.debts.map((dbt,i)=>`
+          <div class="wiz-two" style="margin-bottom:8px;">
+            <div class="wiz-field" style="margin-bottom:0;">
+              <label class="wiz-label" style="font-size:11px;">${dbt.creditor||dbt.type||'Debt '+(i+1)} — amount (${dbt.currency||cur})</label>
+              <input type="number" id="s_d${i}" value="${dbt.amount||''}" placeholder="0" inputmode="decimal" style="font-size:15px;padding:11px 12px;"/>
+            </div>
+            <div class="wiz-field" style="margin-bottom:0;">
+              <label class="wiz-label" style="font-size:11px;">Interest rate (%)</label>
+              <input type="number" id="s_r${i}" value="${dbt.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal" style="font-size:15px;padding:11px 12px;"/>
+            </div>
+          </div>`).join('')
+      : `<div class="wiz-two">
+          <div class="wiz-field"><label class="wiz-label">Debt 1 — amount (${cur})</label><input type="number" id="s_d0" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
+          <div class="wiz-field"><label class="wiz-label">Debt 1 — interest (%)</label><input type="number" id="s_r0" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div>
+        </div>
+        <div class="wiz-two">
+          <div class="wiz-field"><label class="wiz-label">Debt 2 — amount (${cur})</label><input type="number" id="s_d1" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
+          <div class="wiz-field"><label class="wiz-label">Debt 2 — interest (%)</label><input type="number" id="s_r1" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div>
+        </div>`;
+    const debtCount = hasDebts ? d.debts.length : 2;
+
+    return `
+    <div class="tool-panel active" id="panel_snowball">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_snowball||'Snowball vs Avalanche'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      ${hasDebts ? `<p style="font-size:12.5px;color:var(--green-dark);background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:9px 12px;margin-bottom:14px;">Your ${d.debts.length} debts from your profile are pre-filled. Adjust any figures if needed.</p>` : ''}
+      ${debtRows}
+      <div class="wiz-field" style="margin-top:4px;">
+        <label class="wiz-label">Total monthly payment available for all debts (${cur})</label>
+        <input type="number" id="s_pmt" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+      </div>
+      <div class="wiz-nav">
+        <button class="wiz-next" style="width:100%;" onclick="runSnowball(${debtCount})">Compare strategies</button>
+      </div>
+      <div class="calc-result" id="snowballResult"></div>
+    </div>`;
+  }
+
+  // ═══════════════════════════════════════════
+  // 5. EXTRA INCOME SIMULATOR
+  //    - Unchanged logic, improved output framing
+  //    - Subtle Income Builder bridge at bottom
+  // ═══════════════════════════════════════════
+  case 'income': return `
+    <div class="tool-panel active" id="panel_income">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_income||'Extra Income Simulator'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">See how a small amount of extra monthly income changes your debt-free date.</p>
+      <div class="wiz-two">
+        <div class="wiz-field"><label class="wiz-label">Total debt (${cur})</label><input type="number" id="inc_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
+        <div class="wiz-field"><label class="wiz-label">Current monthly payment (${cur})</label><input type="number" id="inc_payment" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/></div>
+      </div>
+      <div class="wiz-two">
+        <div class="wiz-field">
+          <label class="wiz-label">Interest rate (%)</label>
+          <input type="number" id="inc_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" step="0.1" inputmode="decimal"/>
+        </div>
+        <div class="wiz-field">
+          <label class="wiz-label">Extra income per month (${cur})</label>
+          <div class="wiz-hint">This goes directly to debt repayment.</div>
+          <input type="number" id="inc_extra" placeholder="e.g. 200" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+        </div>
+      </div>
+      <div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runIncomeSim()">Show impact</button></div>
+      <div class="calc-result" id="incomeResult"></div>
+    </div>`;
+
+  // ═══════════════════════════════════════════
+  // 6. NEGOTIATION PRACTICE — interactive mode
+  //    - 3-step wizard unchanged
+  //    - Output: preparation notes THEN live chat
+  //    - AI plays creditor, user responds
+  //    - Post-session feedback from AI coach
+  // ═══════════════════════════════════════════
+  case 'negotiation': return `
+    <div class="tool-panel active" id="panel_negotiation">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_negotiation||'Negotiation Practice'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      <div id="nw_steps">
+        <div class="wiz-step active" id="nw1">
+          <span class="wiz-eyebrow">Step 1 of 3</span>
+          <div class="wiz-q">Who are you preparing to contact?</div>
+          <div class="wiz-opts" id="nw1_opts">
+            ${[['bank','Bank or lender'],['card','Credit card provider'],['collection','Collections agency'],['utility','Utility or service provider'],['tax','Tax authority'],['other','Other creditor']].map(([v,l])=>`<button class="wiz-opt" onclick="nwSelect('creditor_type','${v}',this)">${l}</button>`).join('')}
+          </div>
+          <div class="wiz-nav"><button class="wiz-next" id="nwBtn1" onclick="nwNext(1)">Continue</button></div>
+        </div>
+        <div class="wiz-step" id="nw2">
+          <span class="wiz-eyebrow">Step 2 of 3</span>
+          <div class="wiz-q">What do you want to achieve from this call?</div>
+          <div class="wiz-opts" id="nw2_opts">
+            ${[['plan','Agree a payment plan'],['reduce','Reduce the balance owed'],['holiday','Payment holiday'],['freeze','Interest freeze'],['stop','Stop collection contact'],['dispute','Dispute the debt']].map(([v,l])=>`<button class="wiz-opt" onclick="nwSelect('goal','${v}',this)">${l}</button>`).join('')}
+          </div>
+          <div class="wiz-nav">
+            <button class="wiz-back" onclick="nwBack(2)">Back</button>
+            <button class="wiz-next" id="nwBtn2" onclick="nwNext(2)">Continue</button>
+          </div>
+        </div>
+        <div class="wiz-step" id="nw3">
+          <span class="wiz-eyebrow">Step 3 of 3</span>
+          <div class="wiz-q">Your situation in brief.</div>
+          <div class="wiz-hint" style="margin-bottom:8px;">This is pre-filled from your profile — adjust if needed.</div>
+          <div class="wiz-field">
+            <textarea id="nw_situation" rows="3" placeholder="e.g. Made redundant 3 months ago. 2 children. Can pay 80 ${cur}/month.">${d.situation||''}</textarea>
+          </div>
+          <div class="wiz-field">
+            <label class="wiz-label">Practice mode</label>
+            <div class="wiz-opts grid2" id="nw_mode_opts">
+              <button class="wiz-opt selected" onclick="nwSelect('mode','interactive',this)">
+                <span style="display:block;font-weight:600;">Interactive</span>
+                <span style="display:block;font-size:11.5px;color:var(--muted);margin-top:2px;">You reply, AI responds as creditor</span>
+              </button>
+              <button class="wiz-opt" onclick="nwSelect('mode','script',this)">
+                <span style="display:block;font-weight:600;">Script only</span>
+                <span style="display:block;font-size:11.5px;color:var(--muted);margin-top:2px;">Get a full example dialogue</span>
+              </button>
+            </div>
+          </div>
+          <div class="wiz-nav">
+            <button class="wiz-back" onclick="nwBack(3)">Back</button>
+            <button class="wiz-next" onclick="startNegotiation()">Start practice</button>
+          </div>
+        </div>
+        <div class="wiz-step" id="nw_generating">
+          <div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">Preparing your session…</div></div>
+        </div>
+      </div>
+
+      <!-- Preparation notes (shown before interactive starts) -->
+      <div id="negPrep" style="display:none;">
+        <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;display:block;margin-bottom:8px;">Before you start</span>
+        <div class="panel-output active" id="negPrepOutput"></div>
+        <button class="wiz-next" style="width:100%;margin-top:12px;" onclick="startInteractiveNeg()">Start the practice call</button>
+      </div>
+
+      <!-- Interactive chat -->
+      <div id="negChat" style="display:none;">
+        <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;display:block;margin-bottom:8px;">Practice call</span>
+        <div class="neg-chat" id="negChatMessages"></div>
+        <div class="neg-input-row" id="negInputRow">
+          <input type="text" id="negUserInput" placeholder="Type your response…" onkeydown="if(event.key==='Enter')sendNegReply()"/>
+          <button class="neg-send-btn" onclick="sendNegReply()">Send</button>
+        </div>
+        <button class="btn-reset" style="margin-top:10px;width:100%;" onclick="endNegSession()">End session — get feedback</button>
+      </div>
+
+      <!-- Feedback -->
+      <div class="neg-feedback" id="negFeedback"></div>
+      <div class="output-actions" id="negActions" style="display:none;">
+        <button class="btn-copy" onclick="copyOutput('negFeedback','negCopyBtn')" id="negCopyBtn">Copy notes</button>
+        <button class="btn-reset" onclick="openTool('negotiation')">Start over</button>
+      </div>
+      <div class="panel-error" id="negError"></div>
+    </div>`;
+
+  // ═══════════════════════════════════════════
+  // 7. MONTHLY PLAN UPDATE
+  //    - uw_payment pre-filled from onboarding
+  //    - Saves updated plan back to KV
+  //    - Confirmation shown after save
+  // ═══════════════════════════════════════════
+  case 'update': return `
+    <div class="tool-panel active" id="panel_update">
+      <div class="panel-header">
+        <div class="panel-title">${L.t_update||'Monthly Plan Update'}</div>
+        <button class="panel-close" onclick="closeTool()">&#x2715;</button>
+      </div>
+      <div id="uw_steps">
+        <div class="wiz-step active" id="uw1">
+          <span class="wiz-eyebrow">Step 1 of 3</span>
+          <div class="wiz-q">How has the last 30 days gone?</div>
+          <div class="wiz-opts" id="uw1_opts">
+            <button class="wiz-opt" onclick="uwSelect('progress','good',this)">Better than expected</button>
+            <button class="wiz-opt" onclick="uwSelect('progress','ok',this)">Roughly as planned</button>
+            <button class="wiz-opt" onclick="uwSelect('progress','hard',this)">Harder than expected</button>
+            <button class="wiz-opt" onclick="uwSelect('progress','crisis',this)">Things have changed significantly</button>
+          </div>
+          <div class="wiz-nav"><button class="wiz-next" id="uwBtn1" onclick="uwNext(1)">Continue</button></div>
+        </div>
+        <div class="wiz-step" id="uw2">
+          <span class="wiz-eyebrow">Step 2 of 3</span>
+          <div class="wiz-q">Have your finances changed?</div>
+          <div class="wiz-hint" style="margin-bottom:12px;">Pre-filled from your profile — update if anything has changed.</div>
+          <div class="wiz-two">
+            <div class="wiz-field">
+              <label class="wiz-label">Current monthly income (${cur})</label>
+              <input type="number" id="uw_income" value="${d.income||''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+            </div>
+            <div class="wiz-field">
+              <label class="wiz-label">Current monthly debt payment (${cur})</label>
+              <input type="number" id="uw_payment" value="${calcSurplus()>0?Math.max(0,calcSurplus()):''}" placeholder="0" inputmode="decimal" style="font-size:16px;padding:12px 13px;"/>
+            </div>
+          </div>
+          <div class="wiz-nav">
+            <button class="wiz-back" onclick="uwBack(2)">Back</button>
+            <button class="wiz-next" onclick="uwNext(2)">Continue</button>
+          </div>
+        </div>
+        <div class="wiz-step" id="uw3">
+          <span class="wiz-eyebrow">Step 3 of 3</span>
+          <div class="wiz-q">What do you want to focus on next?</div>
+          <div class="wiz-opts" id="uw3_opts">
+            ${['Reducing total debt faster','Stopping collections or enforcement','Negotiating lower interest rates','Building a small emergency buffer','Getting back on track after a setback','Planning the next 30 days'].map(f=>`<button class="wiz-opt" onclick="uwSelect('focus','${f.replace(/'/g,'').replace(/\//g,'-')}',this)">${f}</button>`).join('')}
+          </div>
+          <div class="wiz-nav">
+            <button class="wiz-back" onclick="uwBack(3)">Back</button>
+            <button class="wiz-next" onclick="generateUpdate()">Generate updated plan</button>
+          </div>
+        </div>
+        <div class="wiz-step" id="uw_generating">
+          <div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">Updating your plan…</div></div>
+        </div>
+      </div>
+      <div class="panel-output" id="updateOutput"></div>
+      <div class="update-saved" id="updateSaved">Your updated plan has been saved. It is now shown at the top of your dashboard.</div>
+      <div class="output-actions" id="updateActions" style="display:none;">
+        <button class="btn-copy" onclick="copyOutput('updateOutput','updateCopyBtn')" id="updateCopyBtn">Copy</button>
+        <button class="btn-reset" onclick="openTool('update')">Start over</button>
+      </div>
+    </div>`;
+
+  // Remaining tools unchanged in Batch 1 — carried forward
+  case 'collection': return buildCollectionPanel(d);
+  case 'legal':      return buildLegalPanel(d);
+  case 'challenge':  return buildChallengePanel(d);
+  case 'psychology': return buildPsychPanel(d, cur);
+  case 'crisis':     return buildCrisisPanel(d);
+  case 'emergency':  return buildEmergencyPanel(d);
+
+  default: return '';
+  }
+}
+
+// ─────────────────────────────────────────────
+// STATIC PANEL BUILDERS (Batch 1 — unchanged)
+// ─────────────────────────────────────────────
+function buildCollectionPanel(d) {
+  return `<div class="tool-panel active" id="panel_collection">
+    <div class="panel-header"><div class="panel-title">Debt Collection Map</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px;">Understanding the process removes the fear. Know what comes next — and your rights at every stage.</p>
+    ${[['1','Missed payment notice','The creditor sends a reminder. At this stage: contact them immediately — most will pause collection if you communicate proactively. Right: you can request a payment plan.'],['2','Formal demand letter','A letter before action. Deadline is usually 14–30 days. Right: dispute the debt in writing if you believe it is incorrect or statute-barred.'],['3','Account sold to collections','Debt is passed or sold to a collections agency. The original creditor is no longer your contact. Right: request proof of the debt in writing before making any payment.'],['4','Collections contact','Phone calls, letters, home visits in some countries. Right: in most countries you can request all contact be in writing only.'],['5','Legal proceedings','Creditor files a claim with the court. You will receive court papers — respond within the deadline. Right: attend or respond — ignoring leads to default judgment.'],['6','Court judgment','A court orders you to pay. Right: apply to vary the judgment if you cannot afford the amount ordered.'],['7','Enforcement','Bailiffs, wage garnishment, or bank account freezing. Right: certain income and essential household items are protected from seizure in most jurisdictions.']].map(([n,title,text])=>`<div class="info-stage"><div class="info-stage-num">${n}</div><div class="info-stage-body"><strong>${title}</strong>${text}</div></div>`).join('')}
+  </div>`;
+}
+
+function buildLegalPanel(d) {
+  return `<div class="tool-panel active" id="panel_legal">
+    <div class="panel-header"><div class="panel-title">Legal Protection Guide</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px;">Based on your country: <strong>${d.country||'your country'}</strong>. Always verify with a local adviser for your specific situation.</p>
+    <div class="info-block"><h4>What collectors cannot do</h4><ul><li>Contact you at unreasonable hours (typically before 8 am or after 9 pm)</li><li>Use threatening, abusive or harassing language</li><li>Contact your employer without a court order</li><li>Claim to have legal powers they do not have</li><li>Collect a debt that is statute-barred (time-limited)</li></ul></div>
+    <div class="info-block"><h4>Your key rights</h4><ul><li>Request all communication in writing — collectors must comply</li><li>Request proof of the debt (debt validation) before making any payment</li><li>Dispute incorrect debts in writing within the statutory period</li><li>Apply for a repayment plan through the courts if judgment is issued</li><li>Certain income is always protected from garnishment</li></ul></div>
+    <div class="info-block"><h4>Statute of limitations — ${d.country||'your country'}</h4><p>Most unsecured debts become unenforceable after 5–6 years in EU countries, 6 years in the UK, 3–6 years across US states, and 6 years in Australia. If a collector contacts you about an old debt, use the letter generator to request debt validation before making any payment or acknowledgement.</p></div>
+  </div>`;
+}
+
+function buildChallengePanel(d) {
+  const cCur = d.currency || 'EUR';
+  const weeks = [
+    ['Days 1–7',  'Foundation week',  'List every debt with the exact balance. Calculate your real monthly surplus. Contact one creditor. Set up a separate debt repayment account.'],
+    ['Days 8–14', 'Communication week','Write at least one creditor letter. Request payment plans for any debts in arrears. Review all direct debits — cancel anything non-essential.'],
+    ['Days 15–21','Budget week',       'Identify 3 spending categories to reduce. Redirect every euro saved to debt. Review your snowball or avalanche order.'],
+    ['Days 22–30','Momentum week',     'Make your first extra payment. Pull your credit report and check for errors. Set a recurring monthly review date.'],
+    ['Days 31–60','Build momentum',    'Increase repayments by 10–20% if possible. Negotiate interest reductions with at least one lender. Track every payment made.'],
+    ['Days 61–90','Breakthrough phase','Recalculate your debt-free date with your current numbers. Build a small emergency buffer (500 ' + cCur + ' minimum). Plan what you do with the freed-up money when this debt is gone.'],
+  ];
+  return '<div class="tool-panel active" id="panel_challenge">'
+    + '<div class="panel-header"><div class="panel-title">90-Day Challenge</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>'
+    + weeks.map(function(w){ return '<div class="info-block"><h4>'+w[0]+' \u2014 '+w[1]+'</h4><p>'+w[2]+'</p></div>'; }).join('')
+    + '</div>';
+}
+
+function buildPsychPanel(d, cur) {
+  const threshold = Math.round((parseFloat(d.income)||2000)*0.015);
+  return `<div class="tool-panel active" id="panel_psychology">
+    <div class="panel-header"><div class="panel-title">Behavioural Tools</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
+    <div class="info-block"><h4>The 48-hour rule for impulse spending</h4><p>Before any unplanned purchase over ${threshold} ${cur}: wait 48 hours. Write down what it is and why you want it. If you still want it after 48 hours and it fits your budget, it is a considered decision — not an impulse. Research shows that around 70% of impulse purchases are forgotten within 24 hours.</p></div>
+    <div class="info-block"><h4>The debt repayment habit loop</h4><p>Attach your debt payment to an existing daily habit — the same time, the same trigger. Every time you make your morning coffee, open your bank balance and check the number. The visual reminder activates motivation. Small, consistent action over 90 days outperforms large, infrequent effort every single time.</p></div>
+    <div class="info-block"><h4>Managing financial stress</h4><ul><li>Separate the financial problem from your identity — debt is a situation, not who you are</li><li>Set one specific financial task per day, not a list — one task only</li><li>Acknowledge every payment made, however small</li><li>Physical movement (even a 10-minute walk) measurably reduces cortisol, the stress hormone that drives impulsive decisions</li></ul></div>
+    <div class="info-block"><h4>If you have missed a payment</h4><p>Missing a payment is not failure — it is information. It tells you the plan needs adjusting. Contact the creditor the same day. Creditors consistently respond better to proactive contact than to silence — a brief, honest call or letter changes the dynamic entirely.</p></div>
+  </div>`;
+}
+
+function buildCrisisPanel(d) {
+  return `<div class="tool-panel active" id="panel_crisis">
+    <div class="panel-header"><div class="panel-title">Crisis Action Plans</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
+    <div class="wiz-opts" style="margin-bottom:0;">
+      <button class="wiz-opt" onclick="showCrisisPlan('unemployed')">Unemployment</button>
+      <button class="wiz-opt" onclick="showCrisisPlan('divorce')">Divorce / separation</button>
+      <button class="wiz-opt" onclick="showCrisisPlan('sick')">Sick leave</button>
+      <button class="wiz-opt" onclick="showCrisisPlan('emergency')">Financial emergency</button>
+    </div>
+    <div id="crisisPlanContent" style="margin-top:14px;"></div>
+  </div>`;
+}
+
+function buildEmergencyPanel(d) {
+  return `<div class="tool-panel active" id="panel_emergency">
+    <div class="panel-header"><div class="panel-title">Emergency Action Card</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">If you are in a debt crisis right now — do these in order.</p>
+    ${['Housing first — pay rent or mortgage before anything else. It cannot be negotiated away.','Keep food and utilities running — call providers immediately for emergency payment arrangements.','Stop all non-essential direct debits today — list every one and cancel them one by one.','Do not ignore post or calls — open everything, write the date on it, and keep copies.','Contact a free debt adviser in your country before making any lump-sum payment to a collector.','Do not borrow more to pay off existing debt — this locks you into a cycle that is very hard to break.','Use the letter generator to communicate with every creditor in writing — this creates a paper trail and removes the fear of phone calls.'].map((s,i)=>`<div class="info-stage"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`).join('')}
+    <div style="margin-top:12px;"><button class="btn-copy" onclick="copyEmergencyCard()">Copy card</button></div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   WIZARD NAVIGATION
+═══════════════════════════════════════════════ */
+function wizShowStep(prefix, n) {
+  document.querySelectorAll(`[id^="${prefix}"]`).forEach(el=>{
+    if(/^[\d_]/.test(el.id.replace(prefix,''))) el.classList.remove('active');
+  });
+  document.getElementById(prefix+n)?.classList.add('active');
+}
+
+// ─── LETTER WIZARD ───
+let lwData = {};
+
+function getLWHistory() {
+  try { return JSON.parse(sessionStorage.getItem('dfw_lw_history')||'[]'); } catch { return []; }
+}
+function saveLWHistory(entry) {
+  try {
+    const h = getLWHistory();
+    h.unshift(entry);
+    sessionStorage.setItem('dfw_lw_history', JSON.stringify(h.slice(0,10)));
+  } catch {}
+}
+
+function lwSelectDebt(idx, btn) {
+  document.querySelectorAll('#lw_debt_opts .wiz-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  lwData.debtIdx = idx;
+  if (idx >= 0 && memberData.debts?.[idx]) {
+    const dbt = memberData.debts[idx];
+    document.getElementById('lw_creditor').value = dbt.creditor || dbt.type || '';
+    const amtEl = document.getElementById('lw_amount');
+    if (amtEl) amtEl.value = dbt.amount || '';
+    lwData.prefilled = dbt;
+  } else {
+    document.getElementById('lw_creditor').value = '';
+  }
+}
+
+function lwNext(step) {
+  const t = T[lang]||T.EN||{};
+  if (step===1) {
+    lwData.creditor = document.getElementById('lw_creditor').value.trim();
+    if (!lwData.creditor) { showToast('Please enter the creditor name.'); return; }
+    wizShowStep('lw',2);
+  }
+  if (step===2) {
+    if (!lwData.type) { showToast('Please select a letter type.'); return; }
+    wizShowStep('lw',3);
+  }
+  if (step===3) {
+    lwData.amount   = document.getElementById('lw_amount')?.value;
+    lwData.currency = document.getElementById('lw_currency')?.value;
+    lwData.situation= document.getElementById('lw_situation')?.value.trim();
+    wizShowStep('lw',4);
+  }
+}
+function lwBack(step) { wizShowStep('lw', step-1); }
+
+function lwSelectType(t, btn) {
+  lwData.type = t;
+  document.querySelectorAll('#lw_type_opts .wiz-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function lwSelectHardship(h, btn) {
+  lwData.hardship = h;
+  document.querySelectorAll('#lw_hardship_opts .wiz-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function lwShowHistory(idx) {
+  const h = getLWHistory();
+  if (!h[idx]) return;
+  document.getElementById('letterOutput').textContent = h[idx].text;
+  document.getElementById('letterOutput').classList.add('active');
+  document.getElementById('letterActions').style.display='flex';
+  document.getElementById('lw_steps').style.display='none';
+}
+
+async function generateLetter() {
+  if (!lwData.hardship) { showToast('Please select the hardship reason.'); return; }
+  wizShowStep('lw','_generating');
+
+  const d = memberData;
+  const cur = lwData.currency || d.currency || 'EUR';
+  const planLang = {FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'}[lang]||'English';
+
+  const typeLabels = {hardship:'hardship and payment difficulty',settlement:'debt settlement offer',stop:'cease and desist / stop contact',dispute:'debt dispute',plan:'proposed payment plan',holiday:'payment holiday request',negotiation:'general negotiation'};
+
+  const prompt = `You are a professional debt letter writer at Debt-Free.world.
+Write a formal, professional letter of type: ${typeLabels[lwData.type]||lwData.type}
+Language: ${planLang}
+Recipient / creditor: ${lwData.creditor}
+${lwData.amount ? `Debt amount: ${lwData.amount} ${cur}` : ''}
+Hardship reason: ${lwData.hardship}
+${lwData.situation ? `Additional context: ${lwData.situation}` : ''}
+${d.country ? `Country (debtor is based in): ${d.country}` : ''}
+${d.employment ? `Employment status: ${d.employment}` : ''}
+${d.household ? `Household: ${d.household}` : ''}
+${d.children && d.children !== '0' ? `Children at home: ${d.children}` : ''}
+
+FORMAT RULES (follow exactly):
+- Start with today's date placeholder: [DATE]
+- Then debtor address placeholder: [YOUR ADDRESS]
+- Then recipient: ${lwData.creditor} / [THEIR ADDRESS]
+- Subject line on its own line: Re: [ACCOUNT REFERENCE]
+- Formal salutation: Dear Sir or Madam (or equivalent in ${planLang})
+- Body: 3 short paragraphs — (1) identify yourself and the account, (2) explain the situation clearly and factually, (3) make a specific concrete proposal
+- Close with: request for written confirmation of any agreement
+- Sign-off with: Yours faithfully, [YOUR NAME]
+- Do NOT use markdown
+- Do NOT exceed 320 words in the body
+- Write entirely in ${planLang}`;
+
+  const result = await callAI(prompt);
+  if (result.error) {
+    wizShowStep('lw',4);
+    document.getElementById('letterError').textContent = result.error;
+    document.getElementById('letterError').style.display='block';
+    return;
+  }
+  // Save to session history
+  const now = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  saveLWHistory({ creditor: lwData.creditor, type: typeLabels[lwData.type]||lwData.type, text: result.text, time: now });
+
+  document.getElementById('letterOutput').textContent = result.text;
+  document.getElementById('letterOutput').classList.add('active');
+  document.getElementById('letterActions').style.display='flex';
+  document.getElementById('lw_steps').style.display='none';
+
+  // Refresh history list
+  const h = getLWHistory();
+  document.getElementById('lwHistoryList').innerHTML = h.map((item,i)=>
+    `<div class="letter-history-item" onclick="lwShowHistory(${i})"><span class="letter-history-meta">${item.creditor} · ${item.type}</span><span class="letter-history-date">${item.time}</span></div>`
+  ).join('');
+}
+
+// ─── BUDGET WIZARD ───
+function bwNext(step) {
+  if (step===1) {
+    if (!document.getElementById('b_total').value) { showToast('Please enter your total debt.'); return; }
+    wizShowStep('bw',2);
+  }
+}
+function bwBack(step) { wizShowStep('bw', step-1); }
+function calcSurplus() {
+  const d = memberData;
+  return Math.max(0, Math.round((parseFloat(d.income)||0) - (parseFloat(d.housing_cost)||0) - (parseFloat(d.other_costs)||0)));
+}
+
+function runBudget() {
+  const P   = parseFloat(document.getElementById('b_total').value)||0;
+  const pmt = parseFloat(document.getElementById('b_payment').value)||0;
+  const r   = parseFloat(document.getElementById('b_rate').value)||0;
+  const ext = parseFloat(document.getElementById('b_extra').value)||0;
+  const cur = memberData.currency||'EUR';
+  if (!P || !pmt) { showToast('Please fill in all required fields.'); return; }
+
+  function calcMonths(principal, payment, rate) {
+    if (!payment || payment <= 0) return null;
+    const mr = rate/100/12;
+    if (mr === 0) return Math.ceil(principal/payment);
+    if (payment <= principal*mr) return null; // payment doesn't cover interest
+    return Math.ceil(-Math.log(1 - principal*mr/payment) / Math.log(1+mr));
+  }
+  function totalInterest(principal, payment, rate, m) {
+    return Math.max(0, payment*m - principal);
+  }
+
+  const m1 = calcMonths(P, pmt, r);
+  const m2 = ext > 0 ? calcMonths(P, pmt+ext, r) : null;
+
+  if (!m1) {
+    document.getElementById('budgetResult').innerHTML = `<p style="color:var(--red);font-size:13.5px;">At ${pmt} ${cur}/month your payment does not cover the interest at ${r}%. You need at least ${Math.ceil(P*r/100/12)+1} ${cur}/month to start reducing this debt.</p>`;
+    document.getElementById('budgetResult').classList.add('active');
+    return;
+  }
+
+  const df1 = new Date(); df1.setMonth(df1.getMonth()+m1);
+  const int1 = totalInterest(P, pmt, r, m1);
+  const maxM = Math.max(m1, m2||0);
+
+  let html = `<span class="calc-highlight">${df1.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</span>`;
+  html += `<p style="font-size:13.5px;color:#333;margin-bottom:14px;">At ${pmt} ${cur}/month — debt-free in <strong>${Math.floor(m1/12)}y ${m1%12}m</strong> (${m1} payments).</p>`;
+
+  // Visual timeline
+  html += `<div class="timeline-wrap">`;
+  html += `<div class="timeline-bar-row"><span class="timeline-bar-label">Current</span><div class="timeline-bar-track"><div class="timeline-bar-fill current" style="width:100%;"></div></div><span class="timeline-bar-months">${m1} months</span></div>`;
+
+  if (m2 !== null && ext > 0) {
+    const df2 = new Date(); df2.setMonth(df2.getMonth()+m2);
+    const int2 = totalInterest(P, pmt+ext, r, m2);
+    const savedM = m1-m2;
+    const savedInt = Math.round(int1-int2);
+    const pct = Math.round(m2/maxM*100);
+
+    html += `<div class="timeline-bar-row"><span class="timeline-bar-label">With +${ext}</span><div class="timeline-bar-track"><div class="timeline-bar-fill improved" style="width:${pct}%;"></div></div><span class="timeline-bar-months">${m2} months</span></div>`;
+    html += `</div>`;
+    html += `<div class="timeline-saving"><strong>${savedM} months sooner</strong> — debt-free by ${df2.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}.${savedInt > 50 ? ` You save approximately <strong>${savedInt.toLocaleString()} ${cur}</strong> in interest.` : ''}</div>`;
+  } else {
+    html += `</div>`;
+  }
+
+  if (int1 > 100) {
+    html += `<div class="timeline-interest-warn">At this rate you will pay approximately <strong>${Math.round(int1).toLocaleString()} ${cur}</strong> in interest over the repayment period. Even a small extra monthly payment significantly reduces this.</div>`;
+  }
+
+  const res = document.getElementById('budgetResult');
+  res.innerHTML = html;
+  res.classList.add('active');
+}
+
+// ─── DF DATE ───
+function runDFDate() {
+  const P   = parseFloat(document.getElementById('df_total').value)||0;
+  const pmt = parseFloat(document.getElementById('df_payment').value)||0;
+  const r   = parseFloat(document.getElementById('df_rate').value)||0;
+  const cur = memberData.currency||'EUR';
+  if (!P || !pmt) { showToast('Please enter total debt and monthly payment.'); return; }
+
+  function calcM(principal, payment, rate) {
+    const mr = rate/100/12;
+    if (mr === 0) return Math.ceil(principal/payment);
+    if (payment <= principal*mr) return null;
+    return Math.ceil(-Math.log(1-principal*mr/payment)/Math.log(1+mr));
+  }
+
+  const m = calcM(P, pmt, r);
+  const res = document.getElementById('dfdateResult');
+
+  if (!m) {
+    res.innerHTML = `<p style="color:var(--red);font-size:13.5px;">Your monthly payment doesn't cover the interest. You need at least ${Math.ceil(P*r/100/12)+1} ${cur}/month to start reducing this balance.</p>`;
+    res.classList.add('active'); return;
+  }
+
+  const df = new Date(); df.setMonth(df.getMonth()+m);
+  const totalPaid = pmt*m;
+  const totalInt  = Math.max(0, totalPaid-P);
+
+  // Milestones
+  const milestones = [
+    { label:'25% paid off',  months: calcM(P*0.75, pmt, r) },
+    { label:'Halfway there', months: calcM(P*0.50, pmt, r) },
+    { label:'75% paid off',  months: calcM(P*0.25, pmt, r) },
+    { label:'Debt-free',     months: m },
+  ];
+
+  let html = `<span class="calc-highlight">${df.toLocaleDateString(langToLocale(lang),{day:'numeric',month:'long',year:'numeric'})}</span>`;
+  html += `<p style="font-size:13px;color:var(--muted);margin-bottom:14px;">${Math.floor(m/12)}y ${m%12}m at ${pmt} ${cur}/month${totalInt>50?' · '+Math.round(totalInt).toLocaleString()+' '+cur+' interest':''}</p>`;
+  html += `<div style="margin-bottom:4px;">`;
+  milestones.forEach(ms => {
+    if (!ms.months) return;
+    const d = new Date(); d.setMonth(d.getMonth()+ms.months);
+    const reached = ms.months <= (memberData._dayNum/30||0);
+    html += `<div class="milestone-row">
+      <div class="milestone-dot ${reached?'reached':'upcoming'}"></div>
+      <div><div class="milestone-text">${ms.label}</div><div class="milestone-date">${d.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</div></div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  res.innerHTML = html;
+  res.classList.add('active');
+}
+
+// ─── SNOWBALL vs AVALANCHE ───
+function runSnowball(debtCount) {
+  const debts = [];
+  for (let i = 0; i < debtCount; i++) {
+    const amt = parseFloat(document.getElementById('s_d'+i)?.value)||0;
+    const rt  = parseFloat(document.getElementById('s_r'+i)?.value)||0;
+    const lbl = memberData.debts?.[i]?.creditor || memberData.debts?.[i]?.type || `Debt ${i+1}`;
+    if (amt > 0) debts.push({ label: lbl, amount: amt, rate: rt });
+  }
+  const totalPmt = parseFloat(document.getElementById('s_pmt').value)||0;
+  const cur = memberData.currency||'EUR';
+
+  if (debts.length < 2 || !totalPmt) { showToast('Please enter at least 2 debts and a monthly payment.'); return; }
+
+  function simulate(debtList, monthlyPmt) {
+    let remaining = debtList.map(d=>({...d, balance: d.amount}));
+    let months = 0;
+    let totalInt = 0;
+    const maxM = 600;
+    while (remaining.some(d=>d.balance > 0.01) && months < maxM) {
+      months++;
+      let avail = monthlyPmt;
+      // Apply interest
+      remaining.forEach(d => {
+        const interest = d.balance * d.rate/100/12;
+        totalInt += interest;
+        d.balance += interest;
+      });
+      // Pay minimums (1% of balance or 10 currency units, whichever is greater)
+      remaining.filter(d=>d.balance>0).forEach(d => {
+        const min = Math.min(d.balance, Math.max(d.balance*0.01, 10));
+        d.balance -= min;
+        avail -= min;
+      });
+      // Pay extra to target debt
+      const target = remaining.find(d=>d.balance>0.01);
+      if (target && avail > 0) {
+        const pay = Math.min(target.balance, avail);
+        target.balance -= pay;
+        avail -= pay;
+      }
+    }
+    return { months, totalInt: Math.round(totalInt), order: debtList.map(d=>d.label) };
+  }
+
+  const snowOrder = [...debts].sort((a,b)=>a.amount-b.amount);
+  const avalOrder = [...debts].sort((a,b)=>b.rate-a.rate);
+
+  const snow  = simulate(snowOrder, totalPmt);
+  const aval  = simulate(avalOrder, totalPmt);
+  const winner = aval.totalInt <= snow.totalInt ? 'avalanche' : 'snowball';
+
+  const res = document.getElementById('snowballResult');
+  let html = `<div class="strategy-compare">
+    <div class="strategy-box${winner==='snowball'?' winner':''}">
+      <span class="strategy-box-title">Snowball</span>
+      <div class="strategy-box-months">${snow.months} months</div>
+      <div class="strategy-box-detail">${Math.round(snow.totalInt).toLocaleString()} ${cur} interest${winner==='snowball'?'<br><strong>Best for motivation</strong>':''}</div>
+    </div>
+    <div class="strategy-box${winner==='avalanche'?' winner':''}">
+      <span class="strategy-box-title">Avalanche</span>
+      <div class="strategy-box-months">${aval.months} months</div>
+      <div class="strategy-box-detail">${Math.round(aval.totalInt).toLocaleString()} ${cur} interest${winner==='avalanche'?'<br><strong>Saves most money</strong>':''}</div>
+    </div>
+  </div>`;
+
+  html += `<p class="strategy-verdict">${winner==='avalanche' ? `Avalanche saves you <strong>${(snow.totalInt-aval.totalInt).toLocaleString()} ${cur}</strong> in interest — mathematically the better choice. Use Snowball only if you need fast early wins to stay motivated.` : `With these interest rates, both strategies cost roughly the same. Snowball clears a debt faster, which can be a strong motivational boost.`}</p>`;
+
+  html += `<div style="margin-top:14px;"><span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:8px;">Payoff order — ${winner==='avalanche'?'Avalanche':'Snowball'} (recommended)</span>`;
+  const rec = winner==='avalanche' ? avalOrder : snowOrder;
+  rec.forEach((dbt,i)=>{
+    html += `<div class="debt-strategy-row"><span class="debt-strategy-name">${dbt.label} — ${dbt.amount.toLocaleString()} ${cur}</span><span class="debt-strategy-order">#${i+1}</span></div>`;
+  });
+  html += `</div>`;
+
+  res.innerHTML = html;
+  res.classList.add('active');
+}
+
+// ─── INCOME SIMULATOR ───
+function runIncomeSim() {
+  const P   = parseFloat(document.getElementById('inc_total').value)||0;
+  const pmt = parseFloat(document.getElementById('inc_payment').value)||0;
+  const r   = parseFloat(document.getElementById('inc_rate').value)||0;
+  const ext = parseFloat(document.getElementById('inc_extra').value)||0;
+  const cur = memberData.currency||'EUR';
+  if (!P||!pmt||!ext) { showToast('Please fill in all fields.'); return; }
+
+  function calcM(principal, payment, rate) {
+    const mr = rate/100/12;
+    if (mr===0) return Math.ceil(principal/payment);
+    if (payment<=principal*mr) return null;
+    return Math.ceil(-Math.log(1-principal*mr/payment)/Math.log(1+mr));
+  }
+  const m1 = calcM(P, pmt, r);
+  const m2 = calcM(P, pmt+ext, r);
+  const res = document.getElementById('incomeResult');
+
+  if (!m1||!m2) { res.innerHTML='<p>Unable to calculate — check your numbers.</p>'; res.classList.add('active'); return; }
+  const saved = m1-m2;
+  const df2 = new Date(); df2.setMonth(df2.getMonth()+m2);
+  const totalSaved = Math.round(saved * ext);
+
+  res.innerHTML = `<span class="calc-highlight">${saved} months sooner</span>
+    <p style="font-size:13.5px;margin-bottom:10px;">With <strong>${ext} ${cur}</strong> extra per month, you reach debt-free by <strong>${df2.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</strong> — ${saved} months earlier than your current pace.</p>
+    <p style="font-size:12.5px;color:var(--muted);">That's approximately <strong>${totalSaved.toLocaleString()} ${cur}</strong> less paid in total over the repayment period.</p>`;
+  res.classList.add('active');
+}
+
+// ─── CRISIS PLANS ───
+function showCrisisPlan(type) {
+  const d = memberData;
+  const plans = {
+    unemployed: ['Contact every creditor before the first missed payment — most lenders have dedicated hardship teams and will freeze interest immediately if contacted proactively.', 'Apply for every state benefit you are entitled to on the same day you lose income. In most countries this means unemployment benefit, housing benefit and any child-related supplements.', 'Pause all non-essential direct debits immediately.', 'Prioritise in this order: housing, utilities, food, unsecured debt. Unsecured creditors have the least power in the short term.', 'Use the letter generator to send a formal hardship notification to each creditor — this creates a paper trail and starts the negotiation process.', 'Set a review date 30 days out, or sooner if your employment situation changes.'],
+    divorce: ['Separate all joint accounts and notify banks of the change in circumstances immediately — you can be held liable for a joint account even after separation.', 'Get legal advice on shared debt liability as early as possible. Oral agreements between partners have no legal standing.', 'Recalculate your full budget on a single income. Do not use combined pre-separation figures for anything.', 'If you have a joint mortgage or rental, take urgent legal advice on your options — this is time-sensitive.', 'Use the letter generator to formally notify creditors of the change in circumstances.', 'Your own housing security comes first — before negotiating anything else.'],
+    sick: ['Apply for sick pay, disability benefit, or income protection immediately — do not wait to "see how things go". Processing times can be weeks.', 'Notify every creditor in writing that you are on medical leave. Most lenders have a statutory or voluntary hardship process that includes interest freezes.', 'Request a payment holiday of 1–3 months from your main lenders — this is a standard product at most banks and does not require court involvement.', 'Do not cash in savings or pensions unless absolutely necessary — these assets are often protected from creditors in formal insolvency processes.', 'Contact a free debt adviser for a full review if your sick leave is likely to last more than 3 months.', 'Set a review date tied to your expected return-to-work date.'],
+    emergency: ['Stop. Do not make any irreversible financial decision in the first 48 hours — panic leads to mistakes that worsen the situation.', 'List every debt and every payment due in the next 30 days on a single page.', 'Housing security comes before everything else — rent, mortgage, and utility arrears carry eviction and disconnection risk. Unsecured debt does not.', 'Contact a free debt helpline in your country today. Free advice prevents expensive mistakes.', 'Do not borrow more money to cover existing debt — this almost always makes the situation worse.', 'Use the letter generator to request emergency payment deferrals from every creditor — this buys time and creates a record.'],
+  };
+  const steps = plans[type]||[];
+  document.getElementById('crisisPlanContent').innerHTML = steps.map((s,i)=>`<div class="info-stage" style="margin-top:${i===0?'14':'0'}px;"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`).join('');
+  // Add CTA to letters tool
+  document.getElementById('crisisPlanContent').innerHTML += `<button class="plan-cta" style="margin-top:12px;" onclick="openTool('letters')">Write a letter to your creditor</button>`;
+}
+
+// ─── NEGOTIATION WIZARD ───
+let nwData = { mode: 'interactive' };
+let negHistory = []; // chat history for interactive mode
+let negPrepText = '';
+
+function nwSelect(field, val, btn) {
+  nwData[field] = val;
+  btn.closest('.wiz-opts').querySelectorAll('.wiz-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function nwNext(step) {
+  if (step===1) { if (!nwData.creditor_type) { showToast('Please select who you are contacting.'); return; } wizShowStep('nw',2); }
+  if (step===2) { if (!nwData.goal)          { showToast('Please select your goal.'); return; }          wizShowStep('nw',3); }
+}
+function nwBack(step) { wizShowStep('nw', step-1); }
+
+async function startNegotiation() {
+  const sit = document.getElementById('nw_situation')?.value.trim() || memberData.situation || '';
+  nwData.situation = sit;
+  if (!nwData.mode) nwData.mode = 'interactive';
+  wizShowStep('nw','_generating');
+
+  const d = memberData;
+  const planLang = {FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'}[lang]||'English';
+
+  const prepPrompt = `You are a debt negotiation coach at Debt-Free.world. The client is about to call a ${nwData.creditor_type} to ${nwData.goal.replace(/_/g,' ')}.
+Client situation: ${sit}
+Country: ${d.country||'not specified'}
+
+Write PREPARATION NOTES in ${planLang} — plain text, no markdown symbols:
+1. What to say in the opening 30 seconds (exact wording suggestion)
+2. Three key phrases that work with this type of creditor
+3. Three things to avoid saying
+4. What to do if they refuse
+5. What a realistic outcome looks like
+
+Keep it under 250 words. Write entirely in ${planLang}.`;
+
+  const result = await callAI(prepPrompt);
+  if (result.error) {
+    wizShowStep('nw',3);
+    document.getElementById('negError').textContent = result.error;
+    document.getElementById('negError').style.display='block';
+    return;
+  }
+  negPrepText = result.text;
+
+  if (nwData.mode === 'script') {
+    // Script mode — generate full dialogue and show directly
+    const scriptPrompt = `You are a debt negotiation coach. Generate a realistic practice dialogue in ${planLang}.
+Creditor type: ${nwData.creditor_type}
+Goal: ${nwData.goal}
+Client situation: ${sit}
+Country: ${d.country||'not specified'}
+Write a realistic back-and-forth (8–10 exchanges). Mark [YOU] and [CREDITOR] clearly. Show a successful outcome. Plain text, no symbols. Write entirely in ${planLang}.`;
+
+    const scriptResult = await callAI(scriptPrompt);
+    document.getElementById('negFeedback').textContent = negPrepText + '\n\n---\n\n' + (scriptResult.text||'');
+    document.getElementById('negFeedback').classList.add('active');
+    document.getElementById('negActions').style.display='flex';
+    document.getElementById('nw_steps').style.display='none';
+    return;
+  }
+
+  // Interactive mode — show prep notes, then start chat
+  document.getElementById('nw_steps').style.display='none';
+  document.getElementById('negPrepOutput').textContent = result.text;
+  document.getElementById('negPrep').style.display='block';
+}
+
+async function startInteractiveNeg() {
+  document.getElementById('negPrep').style.display='none';
+  document.getElementById('negChat').style.display='block';
+  negHistory = [];
+
+  // AI opens as the creditor
+  const d = memberData;
+  const planLang = {FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'}[lang]||'English';
+
+  const openingPrompt = `You are playing the role of a ${nwData.creditor_type} representative in a debt negotiation practice session. The client wants to: ${nwData.goal}.
+Open the call realistically — be professional but slightly resistant (this is practice). One short sentence only. Language: ${planLang}.`;
+
+  const res = await callAI(openingPrompt);
+  const opening = res.text || 'Good morning. How can I help you today?';
+  negHistory.push({ role: 'creditor', text: opening });
+  renderNegChat();
+}
+
+async function sendNegReply() {
+  const input = document.getElementById('negUserInput');
+  const userText = input.value.trim();
+  if (!userText) return;
+  input.value = '';
+
+  negHistory.push({ role: 'you', text: userText });
+  renderNegChat();
+
+  if (negHistory.length >= 16) { endNegSession(); return; }
+
+  const d = memberData;
+  const planLang = {FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'}[lang]||'English';
+
+  const context = negHistory.map(m=>`[${m.role.toUpperCase()}]: ${m.text}`).join('\n');
+  const replyPrompt = `You are a ${nwData.creditor_type} representative in a practice call. Goal the client wants: ${nwData.goal}.
+Conversation so far:\n${context}\n
+Respond as the creditor — one or two sentences, realistic, slightly resistant but professional. Language: ${planLang}.`;
+
+  const res = await callAI(replyPrompt);
+  negHistory.push({ role: 'creditor', text: res.text || '…' });
+  renderNegChat();
+}
+
+function renderNegChat() {
+  const container = document.getElementById('negChatMessages');
+  container.innerHTML = negHistory.map(m=>
+    `<div class="neg-bubble ${m.role}">${m.text}</div>`
+  ).join('');
+  container.scrollTop = container.scrollHeight;
+}
+
+async function endNegSession() {
+  document.getElementById('negInputRow').style.display='none';
+  document.getElementById('negChat').querySelector('.btn-reset').style.display='none';
+
+  const d = memberData;
+  const planLang = {FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'}[lang]||'English';
+  const context = negHistory.map(m=>`[${m.role.toUpperCase()}]: ${m.text}`).join('\n');
+
+  const feedbackPrompt = `You are a debt negotiation coach. Review this practice conversation and give brief, honest feedback in ${planLang}.
+Conversation:\n${context}\n
+Give 3 things: (1) What went well, (2) What to improve, (3) One specific phrase to use next time.
+Plain text. Under 150 words. Write entirely in ${planLang}.`;
+
+  const feedbackBubble = document.createElement('div');
+  feedbackBubble.className = 'neg-bubble system';
+  feedbackBubble.textContent = 'Getting your feedback…';
+  document.getElementById('negChatMessages').appendChild(feedbackBubble);
+
+  const res = await callAI(feedbackPrompt);
+  feedbackBubble.textContent = res.text || 'Session complete.';
+
+  document.getElementById('negFeedback').textContent = res.text || '';
+  document.getElementById('negFeedback').classList.add('active');
+  document.getElementById('negActions').style.display='flex';
+}
+
+// ─── MONTHLY UPDATE WIZARD ───
+let uwData = {};
+function uwSelect(field, val, btn) {
+  uwData[field]=val;
+  btn.closest('.wiz-opts').querySelectorAll('.wiz-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function uwNext(step) {
+  if (step===1) { if (!uwData.progress) { showToast('Please select how the last 30 days went.'); return; } wizShowStep('uw',2); }
+  if (step===2) { wizShowStep('uw',3); }
+}
+function uwBack(step) { wizShowStep('uw', step-1); }
+
+async function generateUpdate() {
+  if (!uwData.focus) { showToast('Please select a focus area.'); return; }
+  wizShowStep('uw','_generating');
+
+  const d = memberData;
+  const income  = document.getElementById('uw_income')?.value  || d.income  || 'unchanged';
+  const payment = document.getElementById('uw_payment')?.value || 'unchanged';
+  const planLang = {FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'}[lang]||'English';
+
+  const prompt = `You are a debt recovery coach at Debt-Free.world. Write an updated 30-day action plan in ${planLang}.
+Member: ${d.firstname||'member'} · Country: ${d.country||'not specified'} · Day ${d._dayNum||30} of 90
+Last 30 days: ${uwData.progress}
+Current income: ${income} ${d.currency||'EUR'}/month · Debt payment: ${payment} ${d.currency||'EUR'}/month
+Focus for next 30 days: ${uwData.focus}
+Original situation: ${d.situation||'not specified'}
+Write 4–5 concrete, numbered actions. If progress was 'crisis', stabilisation comes before everything else. Close with one sentence of encouragement. Plain text only. Max 320 words. Write entirely in ${planLang}.`;
+
+  const result = await callAI(prompt);
+  if (result.error) { wizShowStep('uw',3); return; }
+
+  document.getElementById('updateOutput').textContent = result.text;
+  document.getElementById('updateOutput').classList.add('active');
+  document.getElementById('updateActions').style.display='flex';
+  document.getElementById('uw_steps').style.display='none';
+
+  // Save updated plan back to KV
+  try {
+    await fetch(`${WORKER_URL}/onboarding/save`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-member-token': memberToken },
+      body: JSON.stringify({
+        email: memberData.email,
+        plan: result.text,
+        send_plan_email: false,
+        onboarding: { firstname: memberData.firstname, language: memberData.language, country: memberData.country }
+      })
+    });
+    document.getElementById('updateSaved').classList.add('active');
+    // Refresh plan card
+    memberData.debt_recovery_plan = result.text;
+    memberData.member_plan = result.text;
+    document.getElementById('planBody').textContent = result.text;
+  } catch(e) {}
 }
 
 function buildPanel(id) {
@@ -1390,211 +2574,6 @@ function buildPanel(id) {
 
     default: return '';
   }
-}
-
-/* ═══════════════════════════════════════════════
-   WIZARD NAVIGATION HELPERS
-═══════════════════════════════════════════════ */
-function wizShowStep(prefix, n) {
-  document.querySelectorAll(`[id^="${prefix}"]`).forEach(el=>{
-    if(/^\d+$/.test(el.id.replace(prefix,''))) el.classList.remove('active');
-  });
-  document.getElementById(prefix+n)?.classList.add('active');
-}
-
-// Letter wizard
-let lwData = {};
-function lwNext(step) {
-  if (step===1) { lwData.creditor=document.getElementById('lw_creditor').value.trim(); if(!lwData.creditor){showToast(L.toastFillFields);return;} wizShowStep('lw',2); }
-  if (step===3) { lwData.amount=document.getElementById('lw_amount').value; lwData.currency=document.getElementById('lw_currency').value; lwData.situation=document.getElementById('lw_situation').value.trim(); wizShowStep('lw',4); }
-}
-function lwBack(step) { wizShowStep('lw', step-1); }
-function lwSelectType(t) { lwData.type=t; document.querySelectorAll('#lw2 .wiz-opt').forEach(b=>b.classList.toggle('selected',b.dataset.type===t)); setTimeout(()=>wizShowStep('lw',3),200); }
-function lwSelectHardship(h) { lwData.hardship=h; document.querySelectorAll('#lw4 .wiz-opt').forEach(b=>b.classList.toggle('selected',b.textContent===h)); }
-
-async function generateLetter() {
-  if (!lwData.hardship) { showToast(L.toastFillFields); return; }
-  wizShowStep('lw','_generating');
-  const d = memberData;
-  const prompt = `You are a professional debt letter writer at Debt-Free.world.
-Write a formal, professional ${lwData.type?.replace('_',' ')} letter in ${memberData.language&&['FI','SV','DE','FR','ES','IT','NL','PL','PT'].includes(memberData.language)?{FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',NL:'Dutch',PL:'Polish',PT:'Portuguese'}[memberData.language]:'English'} from a debtor to ${lwData.creditor}.
-Debt amount: ${lwData.amount||'not specified'} ${lwData.currency||d.currency||'EUR'}
-Hardship reason: ${lwData.hardship}
-Additional context: ${lwData.situation||d.situation||'Standard hardship situation'}
-Country: ${d.country||'not specified'}
-Letter type: ${lwData.type}
-Instructions:
-- Use formal letter format with date, address blocks (use [YOUR ADDRESS] and [DATE] as placeholders), and proper salutation
-- Address letter to: ${lwData.creditor}
-- Reference account/reference number as [ACCOUNT REFERENCE] 
-- Be factual, professional and firm but not aggressive
-- Include a specific, realistic proposal
-- Close with a request for written confirmation
-- Maximum 350 words
-- Write entirely in the requested language`;
-
-  const result = await callAI(prompt);
-  if (result.error) {
-    wizShowStep('lw',4);
-    document.getElementById('letterError').textContent = result.error;
-    document.getElementById('letterError').style.display='block';
-    return;
-  }
-  document.getElementById('letterOutput').textContent = result.text;
-  document.getElementById('letterOutput').classList.add('active');
-  document.getElementById('letterActions').style.display='flex';
-  document.getElementById('lw_steps').style.display='none';
-}
-
-// Budget wizard
-function bwNext(step){ if(step===1){ const t=document.getElementById('b_total').value; if(!t){showToast(L.toastFillFields);return;} wizShowStep('bw',2); } }
-function bwBack(step){ wizShowStep('bw',step-1); }
-function calcSurplus(){ const d=memberData; return Math.max(0,Math.round((parseFloat(d.income)||0)-(parseFloat(d.housing_cost)||0)-(parseFloat(d.other_costs)||0))); }
-
-function runBudget(){
-  const P=parseFloat(document.getElementById('b_total').value)||0;
-  const pmt=parseFloat(document.getElementById('b_surplus').value)||0;
-  const rate=parseFloat(document.getElementById('b_rate')?document.getElementById('b_rate').value:0)||0;
-  const extra=parseFloat(document.getElementById('b_extra').value)||0;
-  const cur=memberData.currency||'EUR';
-  if(!P||!pmt){showToast(L.toastFillFields);return;}
-  function months(principal,payment,r){if(!payment)return null;const mr=r/100/12;if(mr===0)return Math.ceil(principal/payment);if(payment<=principal*mr)return null;return Math.ceil(-Math.log(1-principal*mr/payment)/Math.log(1+mr));}
-  const m1=months(P,pmt,rate);
-  const m2=extra>0?months(P,pmt+extra,rate):null;
-  let html='';
-  if(!m1){html='<p>Your current payment does not cover the interest. Increase your monthly payment to start reducing the balance.</p>';}
-  else{
-    const df1=new Date();df1.setMonth(df1.getMonth()+m1);
-    html=`<span class="calc-highlight">${df1.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</span><p>At ${pmt} ${cur}/month, you will be debt-free in ${Math.floor(m1/12)} years and ${m1%12} months.</p>`;
-    if(m2!==null){
-      const df2=new Date();df2.setMonth(df2.getMonth()+m2);
-      const saved=m1-m2;
-      html+=`<p style="margin-top:10px;padding-top:10px;border-top:1px solid var(--green-border);"><strong>With ${extra} ${cur} extra/month:</strong> debt-free by ${df2.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})} — <strong>${saved} months sooner.</strong></p>`;
-    }
-  }
-  const res=document.getElementById('budgetResult');
-  res.innerHTML=html;res.classList.add('active');
-}
-
-function runDFDate(){
-  const P=parseFloat(document.getElementById('df_total').value)||0;
-  const pmt=parseFloat(document.getElementById('df_payment').value)||0;
-  const rate=parseFloat(document.getElementById('df_rate').value)||0;
-  const cur=memberData.currency||'EUR';
-  if(!P||!pmt){showToast(L.toastFillFields);return;}
-  function months(principal,payment,r){if(!payment)return null;const mr=r/100/12;if(mr===0)return Math.ceil(principal/payment);if(payment<=principal*mr)return null;return Math.ceil(-Math.log(1-principal*mr/payment)/Math.log(1+mr));}
-  const m=months(P,pmt,rate);
-  const res=document.getElementById('dfdateResult');
-  if(!m){res.innerHTML='<p>Your payment does not cover the interest. You need to increase your monthly payment to reduce this debt.</p>';res.classList.add('active');return;}
-  const df=new Date();df.setMonth(df.getMonth()+m);
-  const totalPaid=pmt*m;
-  const totalInterest=Math.max(0,totalPaid-P);
-  res.innerHTML=`<span class="calc-highlight">${df.toLocaleDateString(langToLocale(lang),{day:'numeric',month:'long',year:'numeric'})}</span><p>Debt-free in ${Math.floor(m/12)} years and ${m%12} months (${m} payments of ${pmt} ${cur}).</p>${totalInterest>50?`<p style="margin-top:8px;font-size:12.5px;color:var(--muted);">Total interest paid: approx. ${Math.round(totalInterest).toLocaleString()} ${cur}.</p>`:''}`;
-  res.classList.add('active');
-}
-
-function runSnowball(){
-  const d1=parseFloat(document.getElementById('s_d1').value)||0;
-  const r1=parseFloat(document.getElementById('s_r1').value)||0;
-  const d2=parseFloat(document.getElementById('s_d2').value)||0;
-  const r2=parseFloat(document.getElementById('s_r2').value)||0;
-  const pmt=parseFloat(document.getElementById('s_pmt').value)||0;
-  if(!d1||!d2||!pmt){showToast(L.toastFillFields);return;}
-  const snowFirst=d1<=d2?'Debt 1':'Debt 2';
-  const avalFirst=r1>=r2?`Debt 1 (${r1}%)`:`Debt 2 (${r2}%)`;
-  const highRate=Math.max(r1,r2);
-  const rec=highRate>8?`With interest rates above 8%, Avalanche saves you more money. Choose Snowball only if you need motivational quick wins.`:`With these interest rates, both methods cost roughly the same. Snowball gives you a faster first win — the financial difference is minimal.`;
-  const res=document.getElementById('snowballResult');
-  res.innerHTML=`<p><strong>Snowball:</strong> Pay ${snowFirst} first (smallest balance). Fast psychological win — clears a debt quickly and frees up that payment for the next one.</p><p style="margin-top:8px;"><strong>Avalanche:</strong> Pay ${avalFirst} first (highest interest). Mathematically optimal — saves the most money over time.</p><p style="margin-top:10px;padding-top:10px;border-top:1px solid var(--green-border);font-size:12.5px;">${rec}</p>`;
-  res.classList.add('active');
-}
-
-function runIncomeSim(){
-  const P=parseFloat(document.getElementById('inc_total').value)||0;
-  const pmt=parseFloat(document.getElementById('inc_payment').value)||0;
-  const rate=parseFloat(document.getElementById('inc_rate').value)||0;
-  const extra=parseFloat(document.getElementById('inc_extra').value)||0;
-  const cur=memberData.currency||'EUR';
-  if(!P||!pmt||!extra){showToast(L.toastFillFields);return;}
-  function months(principal,payment,r){if(!payment)return null;const mr=r/100/12;if(mr===0)return Math.ceil(principal/payment);if(payment<=principal*mr)return null;return Math.ceil(-Math.log(1-principal*mr/payment)/Math.log(1+mr));}
-  const m1=months(P,pmt,rate);
-  const m2=months(P,pmt+extra,rate);
-  const res=document.getElementById('incomeResult');
-  if(!m1||!m2){res.innerHTML='<p>Unable to calculate — check your numbers.</p>';res.classList.add('active');return;}
-  const saved=m1-m2;
-  const df2=new Date();df2.setMonth(df2.getMonth()+m2);
-  res.innerHTML=`<span class="calc-highlight">${saved} months sooner</span><p>With ${extra} ${cur} extra per month, you reach debt-free by <strong>${df2.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</strong> — ${saved} months earlier than your current pace.</p><p style="margin-top:8px;font-size:12.5px;color:var(--muted);">That is ${Math.round(saved*extra).toLocaleString()} ${cur} less paid in total.</p>`;
-  res.classList.add('active');
-}
-
-// Crisis plans
-function showCrisisPlan(type){
-  const plans={
-    unemployed:['Contact creditors immediately — before the first missed payment. Most lenders have hardship teams.','Apply for all state benefits you are entitled to — do this the same week.','Pause all non-essential direct debits.','Prioritise: housing, utilities, food — in that order. Unsecured debt comes after.','Use the AI letter tool to send a hardship notification to each creditor.','Set a calendar reminder to review in 30 days or when employment status changes.'],
-    divorce:['Separate joint accounts and joint debts as quickly as possible — get legal advice on shared liability.','Notify creditors of the change in circumstances in writing.','Recalculate your budget based on single income — do not use pre-separation numbers.','If you have joint mortgage or rental, take urgent legal advice on your options.','Use the AI letter tool for formal notifications to creditors.','Prioritise your own housing security first.'],
-    sick:['Apply for sick pay, disability benefit or income protection — do this immediately, not later.','Notify all creditors in writing that you are on sick leave. Most have hardship provisions.','Request a payment holiday of 1–3 months from your main lenders.','Do not cash in savings or pensions unless absolutely necessary — these are protected in most insolvency processes.','Contact a free debt adviser for a full review.','Set a review date when your health situation is expected to change.'],
-    emergency:['Stop. Do not make any irreversible financial decisions in the first 48 hours.','List every debt and every payment due in the next 30 days.','Housing first — everything else can wait or be negotiated.','Contact a free debt helpline in your country today.','Do not borrow more to pay off debt.','Use the AI letter tool to request emergency payment deferrals.'],
-  };
-  const steps=plans[type]||[];
-  document.getElementById('crisisPlanContent').innerHTML=steps.map((s,i)=>`<div class="info-stage"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`).join('');
-}
-
-// Negotiation wizard
-let nwData={};
-function nwSelect(field,val,btn){nwData[field]=val;btn.closest('.wiz-opts').querySelectorAll('.wiz-opt').forEach(b=>b.classList.toggle('selected',b===btn));}
-function nwNext(step){if(step===1){if(!nwData.creditor_type){showToast(L.toastFillFields);return;}wizShowStep('nw',2);}if(step===2){if(!nwData.goal){showToast(L.toastFillFields);return;}wizShowStep('nw',3);}}
-function nwBack(step){wizShowStep('nw',step-1);}
-
-async function generateNegotiation(){
-  wizShowStep('nw','_generating');
-  const d=memberData;
-  const sit=document.getElementById('nw_situation')?.value.trim()||d.situation||'';
-  const langName={FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',NL:'Dutch',PL:'Polish',PT:'Portuguese'}[lang]||'English';
-  const prompt=`You are a debt negotiation coach. Generate a realistic negotiation practice scenario in ${langName}.
-Creditor type: ${nwData.creditor_type}
-Goal: ${nwData.goal}
-Client situation: ${sit}
-Country: ${d.country||'not specified'}
-
-Write a 2-part response:
-PART 1 — PREPARATION (5–6 bullet points): What to say, what not to say, key phrases that work, what to expect.
-PART 2 — PRACTICE SCRIPT: A realistic back-and-forth dialogue (6–8 exchanges) showing how a successful negotiation sounds. Show both sides. Mark [YOU] and [CREDITOR] clearly.
-
-Write entirely in ${langName}. Plain text, no markdown symbols.`;
-  const result=await callAI(prompt);
-  if(result.error){wizShowStep('nw',3);document.getElementById('negError').textContent=result.error;document.getElementById('negError').style.display='block';return;}
-  document.getElementById('negOutput').textContent=result.text;document.getElementById('negOutput').classList.add('active');
-  document.getElementById('negActions').style.display='flex';document.getElementById('nw_steps').style.display='none';
-}
-
-// Monthly update wizard
-let uwData={};
-function uwSelect(field,val,btn){uwData[field]=val;btn.closest('.wiz-opts').querySelectorAll('.wiz-opt').forEach(b=>b.classList.toggle('selected',b===btn));}
-function uwNext(step){if(step===1){if(!uwData.progress){showToast(L.toastFillFields);return;}wizShowStep('uw',2);}if(step===2){wizShowStep('uw',3);}}
-function uwBack(step){wizShowStep('uw',step-1);}
-
-async function generateUpdate(){
-  wizShowStep('uw','_generating');
-  const d=memberData;
-  const income=document.getElementById('uw_income')?.value||d.income||'unchanged';
-  const payment=document.getElementById('uw_payment')?.value||'unchanged';
-  const langName={FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',NL:'Dutch',PL:'Polish',PT:'Portuguese'}[lang]||'English';
-  const prompt=`You are a debt recovery coach at Debt-Free.world. Write a 30-day updated action plan in ${langName}.
-Member: ${d.firstname||'member'}
-Country: ${d.country}
-Day of plan: ${d._dayNum||30}
-Last 30 days: ${uwData.progress}
-Income now: ${income} ${d.currency||'EUR'}/month
-Debt payment now: ${payment} ${d.currency||'EUR'}/month
-Focus for next 30 days: ${uwData.focus||'general progress'}
-Original situation: ${d.situation||'not specified'}
-Write 4–5 concrete actions for the next 30 days, personalised to their current state.
-If progress was 'crisis', prioritise stabilisation above everything else.
-Close with one sentence of encouragement in brand voice. Write entirely in ${langName}. Plain text only. Max 350 words.`;
-  const result=await callAI(prompt);
-  if(result.error){wizShowStep('uw',3);return;}
-  document.getElementById('updateOutput').textContent=result.text;document.getElementById('updateOutput').classList.add('active');
-  document.getElementById('updateActions').style.display='flex';document.getElementById('uw_steps').style.display='none';
 }
 
 /* ═══════════════════════════════════════════════
