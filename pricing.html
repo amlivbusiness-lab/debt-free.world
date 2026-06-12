@@ -15,7 +15,6 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
 .page{max-width:720px;margin:0 auto;padding:0 24px;}
-
 nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.25rem 0;}
 .nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;justify-self:start;}
 .nav-logo em{font-style:italic;color:var(--green);}
@@ -23,13 +22,11 @@ nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1
 .nav-link{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
 .nav-link:hover{background:var(--green-bg);}
 .nav-link.active{color:var(--green);font-weight:600;}
-
 .hero{padding:2.5rem 0 2rem;}
 .hero-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1rem;}
 .hero h1{font-family:var(--serif);font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-0.5px;margin-bottom:1rem;}
 .hero h1 em{font-style:italic;color:var(--green);}
 .hero-lead{font-size:16px;line-height:1.7;color:#555;font-weight:300;}
-
 .journey{display:flex;align-items:center;gap:0;padding:1.5rem 0 2rem;flex-wrap:wrap;}
 .journey-step{display:flex;flex-direction:column;align-items:center;gap:5px;}
 .journey-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff;}
@@ -47,7 +44,6 @@ nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1
 .journey-line.c2{background:var(--blue);}
 .journey-line.c3{background:var(--gold);}
 .journey-line.c4{background:var(--violet);}
-
 .phase{padding:2rem 0;border-top:none;}
 .phase-header{display:flex;align-items:baseline;gap:0.875rem;margin-bottom:1.5rem;}
 .phase-num{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:3px 10px;border-radius:20px;}
@@ -57,12 +53,10 @@ nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1
 .phase-num.s4{background:#f5f3ff;color:var(--violet);}
 .phase-title{font-family:var(--serif);font-size:22px;color:var(--text);}
 .phase-status{font-size:12px;color:#888;font-style:italic;}
-
 .card-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px;}
 @media(max-width:560px){.card-row{grid-template-columns:1fr;}}
 .card-row.three{grid-template-columns:1fr 1fr 1fr;}
 @media(max-width:680px){.card-row.three{grid-template-columns:1fr;}}
-
 .tmv{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-weight:500;margin-bottom:5px;}
 .card{border:0.5px solid var(--border);border-radius:10px;padding:1.25rem;}
 .card.live{border-color:var(--green-border);background:var(--green-bg);}
@@ -80,7 +74,8 @@ nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1
 .price-period{font-size:13px;color:#888;margin-bottom:3px;}
 .price-note{font-size:11px;color:#aaa;margin-bottom:1rem;font-style:italic;}
 .divider{height:0.5px;background:var(--border);margin:1rem 0;}
-.features{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+.feature-group-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-weight:600;margin:0.875rem 0 0.5rem;display:block;}
+.features{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:0.5rem;}
 .features li{font-size:13px;color:#333;display:flex;gap:7px;align-items:flex-start;line-height:1.45;}
 .features li svg{flex-shrink:0;margin-top:2px;}
 .check-s1{width:13px;height:13px;color:var(--green);}
@@ -89,24 +84,20 @@ nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1
 .check-s4{width:13px;height:13px;color:var(--violet);}
 .check-dim{width:13px;height:13px;color:#ccc;}
 .disclaimer{font-size:11px;color:#888;font-style:italic;margin-bottom:0.875rem;line-height:1.5;}
-
 .consent-block{background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:10px;}
 .consent-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:7px;cursor:pointer;}
 .consent-row:last-child{margin-bottom:0;}
 .consent-row input[type="checkbox"]{margin-top:2px;flex-shrink:0;accent-color:var(--green);width:15px;height:15px;cursor:pointer;}
 .consent-row span{font-size:12px;color:#444;line-height:1.5;}
 .consent-row a{color:var(--green);}
-
 .btn{background:var(--green);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);width:100%;text-align:center;display:block;text-decoration:none;transition:background 0.15s;}
 .btn:hover{background:var(--green-dark);}
 .btn-outline{background:transparent;color:var(--green);border:1.5px solid var(--green);border-radius:30px;padding:11px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);width:100%;text-align:center;display:block;text-decoration:none;}
 .btn-outline:hover{background:var(--green-bg);}
-
 .lock-block{border-radius:8px;padding:10px 14px;text-align:center;margin-bottom:10px;font-size:12px;font-weight:500;}
 .lock-block.s2{background:#eff6ff;color:var(--blue);}
 .lock-block.s3{background:#fffbeb;color:var(--gold);}
 .lock-block.s4{background:#f5f3ff;color:var(--violet);}
-
 .notify-form{display:flex;gap:7px;margin-top:8px;}
 .notify-input{flex:1;padding:9px 12px;border:0.5px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;}
 .notify-input:focus{border-color:var(--green);}
@@ -120,14 +111,12 @@ nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1
 .notify-success.s4{color:var(--violet);}
 .gatekeeper{font-size:11px;color:#bbb;text-align:center;margin-top:8px;font-style:italic;}
 .security-note{font-size:11px;color:#aaa;text-align:center;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:5px;}
-
 .popup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:10000;align-items:center;justify-content:center;padding:1.5rem;}
 .popup-overlay.show{display:flex;}
 .popup-box{background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 12px 48px rgba(0,0,0,0.18);}
 .popup-title{font-family:var(--serif);font-size:22px;color:var(--text);margin-bottom:0.75rem;}
 .popup-sub{font-size:14px;color:#555;line-height:1.65;margin-bottom:1.5rem;}
 .popup-btn{background:var(--green);color:#fff;border:none;border-radius:30px;padding:12px 28px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);}
-
 footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 .footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;}
 .footer-logo{font-family:var(--serif);font-size:17px;color:var(--text);}
@@ -136,7 +125,6 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 .footer-links{display:flex;gap:16px;flex-wrap:wrap;}
 .footer-links a{font-size:12px;color:#888;text-decoration:none;}
 .footer-vat{font-size:12px;color:#bbb;}
-
 @media(max-width:520px){
   nav{grid-template-columns:1fr 1fr;}
   .nav-links{display:none;}
@@ -183,6 +171,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
   </div>
   <div class="card-row">
 
+    <!-- DEBT FREE -->
     <div>
       <div class="tmv">Typical market value: 199 €</div>
       <div class="card live">
@@ -208,33 +197,62 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       </div>
     </div>
 
+    <!-- DEBT RECOVERY — updated feature list -->
     <div>
       <div class="tmv">Typical market value: 990 €</div>
       <div class="card live featured">
         <div class="card-accent s1"></div>
         <div class="card-name">Debt Recovery</div>
-        <div class="card-tag">Your complete 90-day system — personalised, actionable, immediate.</div>
+        <div class="card-tag">A complete 90-day programme — not a checklist.</div>
         <div class="price-main">19 €</div>
         <div class="price-period">/ 90 days</div>
         <div class="price-note">One-time. No subscription. Yours to keep.</div>
         <div class="divider"></div>
+
+        <span class="feature-group-label">Your personalised plan</span>
         <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Debt FREE</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Personalised 90-day Debt Recovery plan</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Creditor letter generator (7 types)</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Payment plan &amp; holiday letter generator</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt negotiation &amp; bank letter generator</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt collection response generator</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Snowball &amp; avalanche strategy tools</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Crisis budget tool</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly plan update &amp; progress tracker</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>90-day debt-free challenge</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Behavioural psychology exercises</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Financial habit &amp; impulse spending tools</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Financial stress management</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Unemployment, divorce &amp; sick leave plans</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Crisis action cards &amp; emergency kit</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>In-depth onboarding — built around your actual debts, income, mindset and goals</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Personalised 90-day Debt Recovery plan — three phases, country-specific resources</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly plan update — refresh your priorities every 30 days</li>
         </ul>
+
+        <span class="feature-group-label">AI letter generator</span>
+        <ul class="features">
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>7 letter types: hardship, settlement, stop contact, dispute, payment plan, payment holiday, negotiation</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Letters addressed to your specific creditor by name — ready to copy and send</li>
+        </ul>
+
+        <span class="feature-group-label">Calculators &amp; strategy tools</span>
+        <ul class="features">
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Crisis Budget Tool</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt-Free Date Calculator</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Snowball vs Avalanche Calculator</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Extra Income Simulator — see how additional income shortens your timeline</li>
+        </ul>
+
+        <span class="feature-group-label">Negotiation &amp; legal tools</span>
+        <ul class="features">
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Negotiation Practice — AI roleplay to prepare for creditor calls</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt Collection Map — every stage and your rights at each step</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Legal Protection Guide — what collectors can and cannot do in your country</li>
+        </ul>
+
+        <span class="feature-group-label">Mindset &amp; crisis support</span>
+        <ul class="features">
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Behavioural Tools — impulse control, habits, financial stress management</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Crisis Action Plans — unemployment, divorce, sick leave and emergencies</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Emergency Action Card — your personal debt crisis checklist</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>90-Day Challenge — weekly framework to stay on track</li>
+        </ul>
+
+        <span class="feature-group-label">Access &amp; guidance</span>
+        <ul class="features">
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Private Member Area — all tools in one place for 90 days</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Companion mode — guided check-ins and next-step suggestions (optional)</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly reminder emails — optional progress prompts</li>
+        </ul>
+
+        <div class="divider"></div>
         <div class="disclaimer">General guidance — not country-specific legal advice.</div>
         <div class="consent-block">
           <label class="consent-row">
@@ -243,7 +261,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           </label>
           <label class="consent-row">
             <input type="checkbox" id="consent-art16">
-            <span>I understand my personalised report is delivered immediately and I waive my right of withdrawal under EU Directive 2011/83/EU Art. 16(m).</span>
+            <span>I understand my personalised plan is delivered immediately and I waive my right of withdrawal under EU Directive 2011/83/EU Art. 16(m).</span>
           </label>
         </div>
         <button class="btn" id="btn-premium" onclick="startCheckout('premium')">Get Debt Recovery — 19 €</button>
@@ -265,7 +283,6 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
     <span class="phase-status">Coming Q4 2026</span>
   </div>
   <div class="card-row three">
-
     <div>
       <div class="tmv">Typical market value: 299 €</div>
       <div class="card dim">
@@ -284,15 +301,14 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Salary estimate by role &amp; country</li>
           <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Job search checklist</li>
         </ul>
-        <div class="lock-block s2">🔒 Available Q4 2026</div>
+        <div class="lock-block s2">Available Q4 2026</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-income-free" placeholder="your@email.com">
           <button class="notify-btn s2" onclick="notifyMe('income-free')">Notify me</button>
         </div>
-        <div class="notify-success s2" id="success-income-free">✦ You're on the list!</div>
+        <div class="notify-success s2" id="success-income-free">You're on the list.</div>
       </div>
     </div>
-
     <div>
       <div class="tmv">Typical market value: 1 990 €</div>
       <div class="card dim">
@@ -312,16 +328,15 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Salary benchmarks by country</li>
           <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Job application tracker &amp; document storage</li>
         </ul>
-        <div class="lock-block s2">🔒 Available Q4 2026</div>
+        <div class="lock-block s2">Available Q4 2026</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-starter" placeholder="your@email.com">
           <button class="notify-btn s2" onclick="notifyMe('starter')">Notify me</button>
         </div>
-        <div class="notify-success s2" id="success-starter">✦ You're on the list!</div>
+        <div class="notify-success s2" id="success-starter">You're on the list.</div>
         <div class="gatekeeper">Unlocks after 200 Debt Recovery members</div>
       </div>
     </div>
-
     <div>
       <div class="tmv">Typical market value: 1 990 €</div>
       <div class="card dim">
@@ -341,16 +356,15 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly progress reports</li>
           <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Discord community + live sessions with Vilma</li>
         </ul>
-        <div class="lock-block s2">🔒 Available Q4 2026</div>
+        <div class="lock-block s2">Available Q4 2026</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-pro" placeholder="your@email.com">
           <button class="notify-btn s2" onclick="notifyMe('pro')">Notify me</button>
         </div>
-        <div class="notify-success s2" id="success-pro">✦ You're on the list!</div>
+        <div class="notify-success s2" id="success-pro">You're on the list.</div>
         <div class="gatekeeper">Unlocks after 200 Debt Recovery members</div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -362,7 +376,6 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
     <span class="phase-status">Coming Q2–Q3 2027</span>
   </div>
   <div class="card-row">
-
     <div>
       <div class="tmv">Typical market value: 199 €</div>
       <div class="card dim">
@@ -378,15 +391,14 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>FIRE calculator</li>
           <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Investment readiness test</li>
         </ul>
-        <div class="lock-block s3">🔒 Available Q2–Q3 2027</div>
+        <div class="lock-block s3">Available Q2–Q3 2027</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-wealth-free" placeholder="your@email.com">
           <button class="notify-btn s3" onclick="notifyMe('wealth-free')">Notify me</button>
         </div>
-        <div class="notify-success s3" id="success-wealth-free">✦ You're on the list!</div>
+        <div class="notify-success s3" id="success-wealth-free">You're on the list.</div>
       </div>
     </div>
-
     <div>
       <div class="tmv">Typical market value: 1 990 €</div>
       <div class="card dim">
@@ -409,15 +421,14 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Retirement planning basics</li>
           <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Investing dictionary &amp; checklists</li>
         </ul>
-        <div class="lock-block s3">🔒 Available Q2–Q3 2027</div>
+        <div class="lock-block s3">Available Q2–Q3 2027</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-wealth" placeholder="your@email.com">
           <button class="notify-btn s3" onclick="notifyMe('wealth')">Notify me</button>
         </div>
-        <div class="notify-success s3" id="success-wealth">✦ You're on the list!</div>
+        <div class="notify-success s3" id="success-wealth">You're on the list.</div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -429,7 +440,6 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
     <span class="phase-status">Coming Q4 2027</span>
   </div>
   <div class="card-row">
-
     <div>
       <div class="tmv">Typical market value: 399 €</div>
       <div class="card dim">
@@ -445,15 +455,14 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Freelancer readiness test</li>
           <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Productisation readiness test</li>
         </ul>
-        <div class="lock-block s4">🔒 Available Q4 2027</div>
+        <div class="lock-block s4">Available Q4 2027</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-business-free" placeholder="your@email.com">
           <button class="notify-btn s4" onclick="notifyMe('business-free')">Notify me</button>
         </div>
-        <div class="notify-success s4" id="success-business-free">✦ You're on the list!</div>
+        <div class="notify-success s4" id="success-business-free">You're on the list.</div>
       </div>
     </div>
-
     <div>
       <div class="tmv">Typical market value: 4 990 €</div>
       <div class="card dim">
@@ -475,22 +484,21 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Client acquisition &amp; sales fundamentals</li>
           <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Startup &amp; side business paths</li>
         </ul>
-        <div class="lock-block s4">🔒 Available Q4 2027</div>
+        <div class="lock-block s4">Available Q4 2027</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-business" placeholder="your@email.com">
           <button class="notify-btn s4" onclick="notifyMe('business')">Notify me</button>
         </div>
-        <div class="notify-success s4" id="success-business">✦ You're on the list!</div>
+        <div class="notify-success s4" id="success-business">You're on the list.</div>
       </div>
     </div>
-
   </div>
 </div>
 
 <footer>
   <div class="footer-top">
     <span class="footer-logo">Debt-<em>Free</em>.world</span>
-    <span class="footer-note">Built with honesty. Free forever for those who need it most. 🌍</span>
+    <span class="footer-note">Built with honesty. Free forever for those who need it most.</span>
   </div>
   <div class="footer-links">
     <a href="/about.html">About</a>
@@ -548,9 +556,9 @@ async function notifyMe(product){
   if(!email||!email.includes('@')){input.style.borderColor='#dc2626';return;}
   input.style.borderColor='';
   try{
-    await fetch(WORKER_URL+'/api/email',{
+    await fetch(WORKER_URL+'/api/subscribe',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({sender:{name:'Debt-Free.world',email:'insights@debt-free.world'},to:[{email:'insights@debt-free.world'}],subject:'Waitlist: '+product+' — '+email,htmlContent:'<p>Waitlist: <strong>'+product+'</strong>: '+email+'</p>'})
+      body:JSON.stringify({email,country:'',language:'EN'})
     });
   }catch{}
   const wrap=input.parentElement;
