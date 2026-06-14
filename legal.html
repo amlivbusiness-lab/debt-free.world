@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Legal — Debt-Free.world</title>
+<meta name="description" content="Terms of Service, Privacy Policy and Refund Policy for Debt-Free.world, operated by Amliv Oy. VAT FI32503518."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
+.page{max-width:720px;margin:0 auto;padding:0 24px;}
+
+/* ── Minimal nav — logo only, no full site nav (legal pages open in new tab) ── */
+.legal-nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;border-bottom:0.5px solid #f0f0f0;}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;}
+.nav-logo em{font-style:italic;color:var(--green);}
+
+/* ── Sticky anchor tab bar ── */
+.legal-tabs{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--border);display:flex;gap:0;}
+.legal-tab{flex:1;text-align:center;padding:13px 8px;font-size:13px;font-weight:500;color:#777;text-decoration:none;border-bottom:2px solid transparent;transition:color 0.15s,border-color 0.15s;white-space:nowrap;}
+.legal-tab:hover{color:var(--green);}
+.legal-tab.active{color:var(--green);border-bottom-color:var(--green);font-weight:600;}
+@media(max-width:520px){.legal-tab{font-size:11px;padding:11px 4px;}}
+
+/* ── Section separators ── */
+.doc-section{padding-top:3rem;}
+.doc-section + .doc-section{margin-top:1rem;border-top:2px solid var(--border);}
+
+/* ── Shared content styles ── */
+.hero{padding:2.5rem 0 2rem;}
+.hero-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1rem;}
+.hero h1{font-family:var(--serif);font-size:clamp(28px,5vw,42px);line-height:1.1;letter-spacing:-0.5px;margin-bottom:0.75rem;}
+.hero-meta{font-size:13px;color:#888;}
+.section{padding:1.75rem 0;}
+.section-num{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#111;font-weight:500;margin-bottom:0.625rem;}
+.section h2{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:0.875rem;font-weight:400;}
+.prose{font-size:15px;line-height:1.85;color:#333;font-weight:300;}
+.prose p{margin-bottom:1rem;}
+.prose p:last-child{margin-bottom:0;}
+.prose ul,.prose ol{padding-left:1.25rem;margin-bottom:1rem;display:flex;flex-direction:column;gap:0.4rem;}
+.prose li{font-size:15px;color:#333;line-height:1.65;}
+.prose strong{font-weight:600;color:#111;}
+.prose a{color:var(--green);}
+.highlight-box{background:var(--green-bg);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:1.125rem 1.5rem;margin:1rem 0;}
+.highlight-box p{font-size:14px;line-height:1.7;color:#333;}
+.highlight-box strong{color:var(--green-dark);}
+.info-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;}
+.info-list li{font-size:14px;color:#333;padding:0.5rem 0.75rem;background:#f9f9f9;border-radius:6px;border-left:2px solid var(--green-border);}
+.price-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;margin-top:0.5rem;}
+.price-list li{font-size:14px;color:#333;padding:0.625rem 0.875rem;border:0.5px solid var(--border);border-radius:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;}
+.price-list .price{font-weight:600;color:var(--green);}
+.step-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:0.75rem;}
+.step-item{display:flex;gap:14px;align-items:flex-start;padding:1rem;border:0.5px solid var(--border);border-radius:10px;background:#fff;}
+.step-num{font-size:11px;font-weight:700;background:var(--green);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-body{font-size:14px;color:#333;line-height:1.6;}
+.step-body strong{display:block;font-weight:600;color:#111;margin-bottom:3px;}
+.check-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;margin-top:0.75rem;}
+.check-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#333;line-height:1.6;padding:0.625rem 0.875rem;background:#f9f9f9;border-radius:8px;}
+.check-list li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
+footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:0.5px solid #eee;margin-top:3rem;}
+.footer-logo{font-family:var(--serif);font-size:17px;color:#111;}
+.footer-logo em{font-style:italic;color:var(--green);}
+.footer-note{font-size:12px;color:#888;}
+@media(max-width:520px){.price-list li{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- Logo only — no site nav, this page opens in new tab -->
+<div class="legal-nav">
+  <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
+</div>
+
+</div><!-- close .page so tabs go full width -->
+
+<!-- Sticky tab bar — full viewport width -->
+<div class="legal-tabs" id="legalTabs">
+  <a href="#terms" class="legal-tab active" id="tab-terms">Terms of Service</a>
+  <a href="#privacy" class="legal-tab" id="tab-privacy">Privacy Policy</a>
+  <a href="#refund" class="legal-tab" id="tab-refund">Refund Policy</a>
+</div>
+
+<div class="page">
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 1: TERMS OF SERVICE
+════════════════════════════════════════════════ -->
+<div class="doc-section" id="terms">
+
+<div class="hero">
+  <div class="hero-label">Legal</div>
+  <h1>Terms of Service</h1>
+  <p class="hero-meta">Debt-Free.world &middot; Amliv Oy &middot; Last updated: 2 June 2026</p>
+</div>
+
+<div class="section">
+  <p class="prose">These Terms of Service govern your use of Debt-Free.world and all services provided by Amliv Oy. By accessing or using our platform, you agree to these Terms. If you do not agree, please do not use our services.</p>
+</div>
+
+<div class="section">
+  <div class="section-num">01</div>
+  <h2>Who we are</h2>
+  <ul class="info-list">
+    <li><strong>Business owner:</strong> Vilma Paasikivi, Founder, Debt-Free.world</li>
+    <li><strong>Company:</strong> Amliv Oy</li>
+    <li><strong>VAT number:</strong> FI32503518</li>
+    <li><strong>Location:</strong> Nokia, Finland</li>
+    <li><strong>Support:</strong> <a href="mailto:support@debt-free.world" style="color:var(--green);">support@debt-free.world</a></li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-num">02</div>
+  <h2>What we offer</h2>
+  <div class="prose">
+    <p>Debt-Free.world is a global AI-powered financial empowerment platform. We provide personalised financial analysis, debt recovery tools, income building resources, and wealth building guidance &mdash; organised into four product lines:</p>
+    <ul>
+      <li><strong>Debt Recovery</strong> &mdash; tools and plans to help you take control of your finances</li>
+      <li><strong>Income Builder</strong> &mdash; tools to grow your income (coming Q4 2026)</li>
+      <li><strong>Wealth Builder</strong> &mdash; tools to build lasting wealth (coming 2027)</li>
+      <li><strong>Business Builder</strong> &mdash; tools to build a business or side income (coming 2027)</li>
+    </ul>
+    <p>Free tools are available without registration. Paid services require payment and are subject to the additional terms below.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">03</div>
+  <h2>Free services</h2>
+  <div class="prose">
+    <p>Free tools on Debt-Free.world are provided as-is, at no cost, and available to anyone. We reserve the right to modify, limit, or discontinue free services at any time without notice. Free services do not include any guarantee of accuracy, completeness, or fitness for a particular purpose.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">04</div>
+  <h2>Paid services and pricing</h2>
+  <div class="prose">
+    <p>All prices are in euros (EUR) and include applicable VAT. Payments are processed securely by Stripe. We do not store your payment card details.</p>
+  </div>
+  <ul class="price-list" style="margin-top:1rem;">
+    <li><span>Debt Recovery</span><span class="price">19 &euro; &middot; one-time &middot; 90 days access</span></li>
+    <li><span>Income Builder Starter</span><span class="price">39 &euro; &middot; one-time &middot; 90 days <em style="font-weight:300;color:#888;">(coming Q4 2026)</em></span></li>
+    <li><span>Income Builder Pro</span><span class="price">89 &euro; &middot; one-time &middot; 180 days <em style="font-weight:300;color:#888;">(coming Q4 2026)</em></span></li>
+    <li><span>Wealth Builder</span><span class="price">199 &euro; &middot; per year <em style="font-weight:300;color:#888;">(coming 2027)</em></span></li>
+    <li><span>Business Builder</span><span class="price">199&ndash;299 &euro; &middot; per year <em style="font-weight:300;color:#888;">(coming 2027)</em></span></li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-num">05</div>
+  <h2>Digital content and right of withdrawal</h2>
+  <div class="highlight-box">
+    <p><strong>Important:</strong> Our paid services involve the immediate delivery of personalised digital content. Under EU Directive 2011/83/EU Article 16(m), the right of withdrawal does not apply to digital content that is not supplied on a tangible medium, where performance has begun with the consumer&rsquo;s prior express consent and their acknowledgement that they thereby lose their right of withdrawal.</p>
+    <p style="margin-top:0.75rem;">You provide this consent explicitly at checkout, before payment is taken.</p>
+  </div>
+  <div class="prose" style="margin-top:1rem;">
+    <p>While we are not legally required to issue refunds, we are committed to treating every customer fairly. See our <a href="#refund">Refund Policy</a> below for full details of our goodwill commitment.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">06</div>
+  <h2>AI-generated content</h2>
+  <div class="prose">
+    <p>Our plans, letters, and analysis are generated by artificial intelligence (Anthropic Claude). They are provided for informational and guidance purposes only. They do not constitute legal, financial, or professional advice. You should consult a qualified professional before making significant financial decisions.</p>
+    <p>AI outputs may occasionally contain inaccuracies. We are not liable for decisions made based solely on AI-generated content.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">07</div>
+  <h2>Acceptable use</h2>
+  <div class="prose">
+    <ul>
+      <li>You must be 18 years of age or older to purchase paid services</li>
+      <li>You may not resell, redistribute, or reproduce our content without written permission</li>
+      <li>You may not use our platform for any unlawful purpose</li>
+      <li>You may not attempt to reverse-engineer, scrape, or disrupt our services</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">08</div>
+  <h2>Limitation of liability</h2>
+  <div class="prose">
+    <p>To the fullest extent permitted by law, Amliv Oy shall not be liable for any indirect, incidental, or consequential damages arising from your use of our services. Our total liability in any matter shall not exceed the amount you paid for the service in question.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">09</div>
+  <h2>Governing law</h2>
+  <div class="prose">
+    <p>These Terms are governed by Finnish law. Any disputes shall be subject to the jurisdiction of Finnish courts. EU consumers also retain rights under applicable EU consumer protection law and may use the <a href="https://ec.europa.eu/consumers/odr" target="_blank">EU Online Dispute Resolution platform</a>.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">10</div>
+  <h2>Changes to these terms</h2>
+  <div class="prose">
+    <p>We may update these Terms from time to time. Material changes will be announced via email to registered users. Continued use of our services after changes constitutes acceptance of the updated Terms.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">11</div>
+  <h2>Contact</h2>
+  <div class="prose">
+    <p>Questions about these Terms: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p>
+    <p>Amliv Oy &middot; Lauttakorventie 7 E 36, 37130 Nokia, Finland</p>
+  </div>
+</div>
+
+</div><!-- /terms -->
+
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 2: PRIVACY POLICY
+════════════════════════════════════════════════ -->
+<div class="doc-section" id="privacy">
+
+<div class="hero">
+  <div class="hero-label">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p class="hero-meta">Last updated: 14 June 2026 &mdash; Version 3.1</p>
+</div>
+
+<div class="section">
+  <h2>Who we are</h2>
+  <div class="prose">
+    <p><strong>Amliv Oy</strong><br>
+    Lauttakorventie 7 E 36, 37130 Nokia, Finland<br>
+    VAT: FI32503518<br>
+    Contact: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p>
+    <p>Amliv Oy operates Debt-Free.world. We are the data controller for all personal data processed in connection with this service.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>What data we collect and why</h2>
+  <div class="prose">
+    <p>We collect only what is necessary to provide the service you have requested.</p>
+    <p><strong>Free plan users</strong></p>
+    <p>When you submit the free debt recovery form, we collect:</p>
+    <ul>
+      <li>Email address &mdash; to deliver your 90-day plan</li>
+      <li>Financial information you enter (income, debt amounts, household type, country, employment situation, housing costs) &mdash; to generate your personalised plan</li>
+      <li>Your selected language and country &mdash; to localise your plan</li>
+    </ul>
+    <div class="highlight-box">
+      <p><strong>Free plan data storage:</strong> Financial data entered in the free plan form is used solely to generate your report. It is transmitted to our AI provider (Anthropic) for processing and is not intentionally retained by Amliv Oy after the report generation process has been completed. Your email address is stored in our email system (Brevo) to deliver your plan and send relevant updates.</p>
+    </div>
+    <p>Note: like all internet services, our infrastructure providers (Cloudflare) may retain technical request logs for short periods for security and operational purposes. These logs do not contain your financial form data.</p>
+    <p><strong>Premium Member Area users</strong></p>
+    <p>When you purchase a Premium membership and complete the onboarding form, we collect and store:</p>
+    <ul>
+      <li>Email address</li>
+      <li>First name</li>
+      <li>Country and language</li>
+      <li>Financial information you provide: debt total range, employment situation, household type, housing situation, income range, savings buffer, collections or enforcement status, primary barrier to debt repayment</li>
+      <li>Your AI-generated personalised plan</li>
+      <li>Stripe payment metadata (transaction ID, payment date &mdash; we do not store card details)</li>
+    </ul>
+    <div class="highlight-box">
+      <p><strong>How and why Premium data is stored:</strong> This data is stored in Cloudflare Workers KV (a key-value database) associated with your secure access token. The primary purpose is to power your personalised Premium Member Area and display your plan on subsequent visits during your membership period. Data is retained for the duration of your purchased membership tier and then automatically deleted.</p>
+    </div>
+    <p>Providing this financial information is voluntary. You may access your Member Area without completing the onboarding form, but your personalised plan will not be generated.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Membership periods and data retention</h2>
+  <div class="prose">
+    <p>Premium membership access and associated data retention periods vary by purchased plan:</p>
+    <ul>
+      <li><strong>Debt Recovery (90 days)</strong> &mdash; member data retained for 90 days from date of purchase</li>
+      <li><strong>Income Builder Starter (90 days)</strong> &mdash; member data retained for 90 days from date of purchase</li>
+      <li><strong>Income Builder Pro (180 days)</strong> &mdash; member data retained for 180 days from date of purchase</li>
+      <li><strong>Wealth Builder / Business Builder (365 days)</strong> &mdash; member data retained for 365 days from date of purchase</li>
+    </ul>
+    <p>After the applicable retention period, personal identifiers are deleted from our systems. We may retain fully anonymised statistical data derived from your submission indefinitely for research, reporting, impact measurement and service improvement purposes.</p>
+    <p>Other data retention periods:</p>
+    <ul>
+      <li><strong>Free plan email address</strong> &mdash; retained in Brevo until you unsubscribe or request deletion</li>
+      <li><strong>Payment records</strong> &mdash; retained as required by Finnish accounting law (7 years)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Research and impact measurement</h2>
+  <div class="prose">
+    <p>Part of the mission of Debt-Free.world is to demonstrate that accessible financial guidance creates measurable, real-world change. To support this mission, we may use data derived from user submissions for:</p>
+    <ul>
+      <li>Statistical research and analysis of debt patterns, recovery trajectories, and outcomes</li>
+      <li>Impact measurement and reporting</li>
+      <li>Service improvement and product development</li>
+      <li>Grant applications, funding proposals, and social impact reporting</li>
+      <li>Academic or non-profit collaboration on financial wellbeing research</li>
+    </ul>
+    <div class="highlight-box">
+      <p><strong>How we protect you in research use:</strong> Any data used for the purposes above will be aggregated, anonymised or pseudonymised before use &mdash; meaning it cannot reasonably be used to identify you as an individual. We will not share identifiable personal data with researchers or funders.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>AI processing and Anthropic</h2>
+  <div class="prose">
+    <p>Your personalised plan is generated by Claude, an AI model developed by Anthropic. When you submit financial information, it is sent to Anthropic&rsquo;s API to generate your plan.</p>
+    <p>Anthropic processes this data as a data processor acting on our behalf. <strong>Anthropic&rsquo;s standard API does not use submitted data to train AI models.</strong> We recommend reviewing <a href="https://www.anthropic.com/privacy" target="_blank">Anthropic&rsquo;s Privacy Policy</a> for their current data handling practices.</p>
+    <p>Your financial data is transmitted to Anthropic only for the purpose of generating your plan. It is not shared with Anthropic for any other purpose.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Legal basis for processing</h2>
+  <div class="prose">
+    <p>We process your personal data on the following legal bases under GDPR:</p>
+    <ul>
+      <li><strong>Contract performance</strong> (Art. 6(1)(b)) &mdash; processing necessary to deliver the service you have purchased or requested</li>
+      <li><strong>Legitimate interests</strong> (Art. 6(1)(f)) &mdash; sending relevant updates, measuring service impact, and improving the service, where these interests are not overridden by your rights</li>
+      <li><strong>Legal obligation</strong> (Art. 6(1)(c)) &mdash; retaining payment records as required by Finnish accounting law</li>
+      <li><strong>Consent</strong> (Art. 6(1)(a)) &mdash; where you have explicitly agreed, including for analytics cookies (GA4 and Microsoft Clarity) and marketing communications; you may withdraw consent at any time</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Who we share your data with</h2>
+  <div class="prose">
+    <p>We use the following service providers to operate Debt-Free.world. Each processes data only as necessary to provide their service:</p>
+    <ul>
+      <li><strong>Anthropic (Claude API)</strong> &mdash; AI processing to generate your personalised plan.</li>
+      <li><strong>Brevo (Sendinblue)</strong> &mdash; email delivery and contact list management.</li>
+      <li><strong>Cloudflare</strong> &mdash; infrastructure, DNS, security and Workers KV storage for Premium member data.</li>
+      <li><strong>Google (Analytics)</strong> &mdash; site analytics via Google Analytics 4, loaded only with your consent. IP addresses are anonymised. See <a href="https://policies.google.com/privacy" target="_blank">Google&rsquo;s Privacy Policy</a>.</li>
+      <li><strong>Microsoft (Clarity)</strong> &mdash; anonymised session recordings and heatmaps, loaded only with your consent. No financial data from forms is collected. See <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank">Microsoft&rsquo;s Privacy Statement</a>.</li>
+      <li><strong>Stripe</strong> &mdash; payment processing. Stripe is an independent data controller for payment data. See <a href="https://stripe.com/privacy" target="_blank">Stripe&rsquo;s Privacy Policy</a>.</li>
+    </ul>
+    <p>We do not sell your personal data. We do not share identifiable personal data with advertisers or any third party not listed above.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Your rights</h2>
+  <div class="prose">
+    <p>Under GDPR, you have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong>Access</strong> &mdash; request a copy of the personal data we hold about you</li>
+      <li><strong>Rectification</strong> &mdash; request correction of inaccurate data</li>
+      <li><strong>Erasure</strong> &mdash; request deletion of your personal data (&ldquo;right to be forgotten&rdquo;)</li>
+      <li><strong>Restriction</strong> &mdash; request that we limit processing of your data in certain circumstances</li>
+      <li><strong>Objection</strong> &mdash; object to processing based on legitimate interests</li>
+      <li><strong>Portability</strong> &mdash; receive a copy of your data in a structured, machine-readable format</li>
+      <li><strong>Withdraw consent</strong> &mdash; where processing is based on consent, withdraw it at any time without affecting the lawfulness of prior processing</li>
+    </ul>
+    <p>To exercise any of these rights, email <a href="mailto:support@debt-free.world">support@debt-free.world</a> with subject line <strong>&ldquo;Data request&rdquo;</strong> and the email address associated with your account. We will respond within 30 days.</p>
+    <p>If you believe we have not handled your data correctly, you have the right to lodge a complaint with the Finnish Data Protection Ombudsman (<a href="https://tietosuoja.fi" target="_blank">tietosuoja.fi</a>) or the supervisory authority in your country of residence.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Cookies and analytics</h2>
+  <div class="prose">
+    <p>We use two analytics tools to understand how visitors use our site:</p>
+    <ul>
+      <li><strong>Google Analytics 4 (GA4)</strong> &mdash; measures page views, session duration, traffic sources and general site usage. We enable IP anonymisation and do not use GA4 for advertising or remarketing.</li>
+      <li><strong>Microsoft Clarity</strong> &mdash; records anonymised session replays and heatmaps to help us understand how visitors navigate and interact with our pages. Clarity does not collect financial data entered in our forms. See <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank">Microsoft&rsquo;s Privacy Statement</a>.</li>
+    </ul>
+    <p>Both tools are loaded <strong>only after you consent</strong> via the cookie banner displayed on your first visit. Your consent choice is stored in your browser. We do not use cross-site tracking, advertising cookies, or remarketing pixels of any kind.</p>
+    <p>If you decline analytics, no tracking scripts are loaded. You may withdraw consent at any time by clearing your browser storage and declining again on your next visit.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Data security</h2>
+  <div class="prose">
+    <p>We take the following technical and organisational measures to protect your data:</p>
+    <ul>
+      <li>All data in transit is encrypted via HTTPS/TLS</li>
+      <li>Premium member tokens are cryptographically generated with 256-bit entropy and validated server-side on every request</li>
+      <li>Member tokens are stored in sessionStorage (not cookies or localStorage) and cleared from URLs immediately after validation</li>
+      <li>Financial data is not stored in browser storage or transmitted in page URLs</li>
+      <li>Access to production infrastructure is restricted</li>
+      <li>Premium member data is automatically deleted after the applicable membership period</li>
+      <li>All API endpoints are rate-limited and restricted to authorised origins</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>International data transfers</h2>
+  <div class="prose">
+    <p>Some of our service providers (Anthropic, Cloudflare, Stripe) operate infrastructure outside the European Economic Area. Where personal data is transferred outside the EEA, we rely on Standard Contractual Clauses or the provider&rsquo;s adequacy mechanisms as required by GDPR Chapter V.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Children</h2>
+  <div class="prose">
+    <p>Debt-Free.world is not directed at persons under 18 years of age. We do not knowingly collect personal data from minors. If you believe a minor has submitted personal data through our service, please contact us at <a href="mailto:support@debt-free.world">support@debt-free.world</a> and we will delete it promptly.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Changes to this policy</h2>
+  <div class="prose">
+    <p>We may update this Privacy Policy when our data practices change. Material changes will be noted at the top of this page with an updated date. For existing users, material changes will be communicated by email where we hold your email address.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Contact</h2>
+  <div class="prose">
+    <p>Questions about this Privacy Policy or your data:<br>
+    <a href="mailto:support@debt-free.world">support@debt-free.world</a><br>
+    Amliv Oy &middot; Lauttakorventie 7 E 36, 37130 Nokia, Finland</p>
+  </div>
+</div>
+
+</div><!-- /privacy -->
+
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 3: REFUND POLICY
+════════════════════════════════════════════════ -->
+<div class="doc-section" id="refund">
+
+<div class="hero">
+  <div class="hero-label">Legal</div>
+  <h1>Refund Policy</h1>
+  <p class="hero-meta">Debt-Free.world &middot; Amliv Oy &middot; Last updated: 2 June 2026</p>
+</div>
+
+<div class="section">
+  <p class="prose">We want every customer to feel confident purchasing from Debt-Free.world. This policy explains your rights and how we handle refund requests.</p>
+</div>
+
+<div class="section">
+  <div class="section-num">01</div>
+  <h2>Legal position &mdash; EU Art. 16(m)</h2>
+  <div class="highlight-box">
+    <p>Under EU Directive 2011/83/EU Article 16(m), consumers do not have a right of withdrawal for digital content that is not supplied on a tangible medium, where performance has begun with the consumer&rsquo;s prior express consent and acknowledgement that they thereby lose their right of withdrawal.</p>
+    <p style="margin-top:0.75rem;">At the point of purchase, you expressly consented to the immediate delivery of your personalised digital content and acknowledged the loss of your right of withdrawal. This consent was recorded at checkout.</p>
+    <p style="margin-top:0.75rem;"><strong>Therefore, Debt-Free.world is not legally obligated to provide refunds for completed purchases.</strong></p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">02</div>
+  <h2>Our goodwill commitment</h2>
+  <div class="prose">
+    <p>Despite the legal position above, we are committed to treating every customer fairly. We understand that financial stress is real, and we believe in the value of what we deliver. If you are genuinely unsatisfied, we will always listen and find a fair solution &mdash; because your trust matters more than any single transaction.</p>
+    <p style="font-style:italic;color:var(--green);font-weight:400;">We do this together ✦</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">03</div>
+  <h2>When we will issue a refund</h2>
+  <p class="prose" style="margin-bottom:0.75rem;">We will issue a full refund without question in any of the following situations:</p>
+  <ul class="check-list">
+    <li>You were charged but did not receive your access link or report within 24 hours</li>
+    <li>You were charged twice for the same purchase</li>
+    <li>A technical error prevented you from accessing your Premium Member Area</li>
+    <li>The content delivered was materially different from what was described</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-num">04</div>
+  <h2>Case-by-case review</h2>
+  <div class="prose">
+    <p>We review all other refund requests individually and with genuine care. While we cannot guarantee refunds outside the situations above, we commit to:</p>
+    <ul>
+      <li>Responding to every refund request within 3 business days</li>
+      <li>Treating every case with fairness and human judgment</li>
+      <li>Offering alternative solutions where a full refund is not appropriate &mdash; for example, extended access or personalised support</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">05</div>
+  <h2>How to request a refund</h2>
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-num">1</span>
+      <div class="step-body"><strong>Email us at support@debt-free.world</strong>Include your email address used at purchase and a brief description of the issue. Subject line: &ldquo;Refund request&rdquo;</div>
+    </li>
+    <li class="step-item">
+      <span class="step-num">2</span>
+      <div class="step-body"><strong>We respond within 3 business days</strong>We will review your case and respond with our decision or a request for more information.</div>
+    </li>
+    <li class="step-item">
+      <span class="step-num">3</span>
+      <div class="step-body"><strong>Refund processed within 5&ndash;10 business days</strong>Approved refunds are returned to your original payment method via Stripe. Timing depends on your bank.</div>
+    </li>
+  </ol>
+</div>
+
+<div class="section">
+  <div class="section-num">06</div>
+  <h2>Community Access Program</h2>
+  <div class="prose">
+    <p>If you genuinely cannot afford Debt Recovery but need help, you may apply to our Community Access Program &mdash; which provides free Premium access in exchange for feedback and participation in our development process.</p>
+    <p>Contact us at <a href="mailto:support@debt-free.world">support@debt-free.world</a> with the subject line &ldquo;Community Access&rdquo;.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">07</div>
+  <h2>Dispute resolution</h2>
+  <div class="prose">
+    <p>If you are not satisfied with our response, you have the right to escalate to:</p>
+    <ul>
+      <li><strong>Finnish Consumer Disputes Board:</strong> <a href="https://www.kuluttajariitalautakunta.fi" target="_blank">kuluttajariitalautakunta.fi</a></li>
+      <li><strong>EU Online Dispute Resolution:</strong> <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a></li>
+    </ul>
+    <p>These services are free of charge for consumers and available to all EU residents.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">08</div>
+  <h2>Contact</h2>
+  <div class="prose">
+    <p>For any refund or billing question: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p>
+    <p>Amliv Oy &middot; Lauttakorventie 7 E 36, 37130 Nokia, Finland</p>
+  </div>
+</div>
+
+</div><!-- /refund -->
+
+<footer>
+  <div class="footer-logo">Debt-<em>Free</em>.world</div>
+  <div class="footer-note">Amliv Oy &middot; VAT FI32503518 &middot; Nokia, Finland</div>
+</footer>
+
+</div><!-- /page -->
+
+<script>
+// Highlight active tab based on scroll position
+(function(){
+  var sections=['terms','privacy','refund'];
+  var tabs={terms:'tab-terms',privacy:'tab-privacy',refund:'tab-refund'};
+
+  function setActive(id){
+    sections.forEach(function(s){
+      var t=document.getElementById(tabs[s]);
+      if(t)t.classList.toggle('active',s===id);
+    });
+  }
+
+  // On scroll: find which section is most visible
+  window.addEventListener('scroll',function(){
+    var tabH=document.getElementById('legalTabs').offsetHeight+60;
+    var best=sections[0];
+    var bestTop=Infinity;
+    sections.forEach(function(s){
+      var el=document.getElementById(s);
+      if(!el)return;
+      var top=el.getBoundingClientRect().top - tabH;
+      if(top<=0 && Math.abs(top)<bestTop){
+        bestTop=Math.abs(top);
+        best=s;
+      } else if(top>0 && top<bestTop && bestTop===Infinity){
+        bestTop=top;
+        best=s;
+      }
+    });
+    setActive(best);
+  },{passive:true});
+
+  // On hash load
+  var hash=(location.hash||'#terms').replace('#','');
+  if(sections.indexOf(hash)>-1){setActive(hash);}
+
+  // Smooth scroll tabs accounting for sticky offset
+  document.querySelectorAll('.legal-tab').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var id=this.getAttribute('href').replace('#','');
+      var el=document.getElementById(id);
+      if(!el)return;
+      var tabH=document.getElementById('legalTabs').offsetHeight;
+      var top=el.getBoundingClientRect().top+window.scrollY - tabH - 16;
+      window.scrollTo({top:top,behavior:'smooth'});
+      history.replaceState(null,'','#'+id);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
