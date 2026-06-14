@@ -60,8 +60,6 @@
   ]
 }
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P67WN08EMJ');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -83,13 +81,20 @@
 html{font-size:17px;scroll-behavior:smooth;}
 body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;-webkit-font-smoothing:antialiased;}
 
-/* ── SITE-WIDE NAV ── */
+/* ── NAV ── */
 .site-nav-wrap{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:100;}
-.site-nav{max-width:720px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-top:1.25rem;padding-bottom:1.25rem;}
+.site-nav{max-width:720px;margin:0 auto;padding:1.25rem 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:22px;color:#111;text-decoration:none;}
-.nav-links{display:flex;gap:4px;align-items:center;}
-.nav-link{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
-.nav-link:hover{background:var(--green-bg);}
+.nav-logo em{font-style:italic;color:var(--green);}
+.nav-center{display:flex;gap:4px;align-items:center;justify-content:center;}
+.nav-link-plain{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
+.nav-link-plain:hover{background:var(--green-bg);}
+.nav-pricing-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;transition:background 0.15s;}
+.nav-pricing-link:hover{background:var(--green-bg);}
+.nav-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.nav-cta{font-size:13px;font-weight:600;background:var(--green);color:#fff;text-decoration:none;padding:7px 16px;border-radius:20px;white-space:nowrap;transition:background 0.15s;}
+.nav-cta:hover{background:var(--green-dark);}
+.lang-sel{font-size:13px;padding:6px 10px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
 
 /* ── LAYOUT ── */
 .article-outer{max-width:720px;margin:0 auto;padding:0 24px 80px;}
@@ -154,6 +159,19 @@ thead th{background:var(--green);color:#fff;text-align:left;padding:11px 14px;fo
 tbody tr:nth-child(even){background:var(--green-bg);}
 tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vertical-align:top;font-weight:300;}
 
+/* ── UPSELL BLOCK ── */
+.upsell-block{border:1.5px solid var(--green-border);border-radius:14px;background:var(--green-bg);padding:32px 28px;margin:52px 0 40px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;}
+.upsell-left{}
+.upsell-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--green);margin-bottom:8px;}
+.upsell-headline{font-family:var(--serif);font-size:1.4rem;color:#111;margin-bottom:10px;line-height:1.25;}
+.upsell-sub{font-size:14px;color:#444;line-height:1.65;font-weight:300;}
+.upsell-actions{display:flex;flex-direction:column;gap:10px;align-items:stretch;min-width:180px;}
+.upsell-btn-primary{display:block;background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:12px 20px;border-radius:30px;text-decoration:none;text-align:center;white-space:nowrap;}
+.upsell-btn-primary:hover{background:var(--green-dark);}
+.upsell-btn-secondary{display:block;background:#fff;color:var(--green);font-weight:600;font-size:14px;padding:11px 20px;border-radius:30px;text-decoration:none;text-align:center;border:1.5px solid var(--green);white-space:nowrap;}
+.upsell-btn-secondary:hover{background:var(--green-light);}
+.upsell-note{font-size:11px;color:#888;text-align:center;margin-top:2px;}
+
 /* ── CTA ── */
 .cta-block{background:var(--green);color:#fff;border-radius:12px;padding:36px 32px;text-align:center;margin:52px 0 40px;}
 .cta-block p{font-size:15px;line-height:1.85;font-weight:300;opacity:0.9;margin-bottom:20px;color:#fff;}
@@ -181,13 +199,22 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 /* ── FOOTER ── */
 .site-footer{max-width:720px;margin:0 auto;padding:0 24px;}
 
-@media(max-width:520px){
+/* ── COOKIE BANNER ── */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;display:none;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:var(--sans);}
+.cookie-banner a{color:#86c9a0;}
+.cookie-btn{padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:500;border:none;}
+.cookie-btn.accept{background:#166534;color:#fff;}
+.cookie-btn.decline{background:transparent;color:#ccc;border:1px solid #444;}
+
+@media(max-width:600px){
   h1.article-title{font-size:28px;}
   .cta-block{padding:28px 20px;}
   .cta-headline{font-size:1.4rem!important;}
   .phase-body{padding:18px 16px;}
   .site-nav{grid-template-columns:1fr auto;gap:8px;}
-  .site-nav > div:last-child{display:none;}
+  .nav-center{display:none;}
+  .upsell-block{grid-template-columns:1fr;gap:16px;}
+  .upsell-actions{flex-direction:row;}
 }
 </style>
 </head>
@@ -196,14 +223,14 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 <!-- NAV -->
 <div class="site-nav-wrap">
   <nav class="site-nav" aria-label="Site navigation">
-    <a href="/" class="nav-logo">Debt-<em style="font-style:italic;color:#166534;">Free</em>.world</a>
-    <div class="nav-links">
-      <a href="/blog/" class="nav-link">Blog</a>
-      <a href="/pricing.html" class="nav-link">Pricing</a>
-      <a href="/about.html" class="nav-link">About</a>
-      <a href="/faq.html" class="nav-link">FAQ</a>
+    <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
+    <div class="nav-center">
+      <a href="/pricing.html" class="nav-pricing-link">Pricing</a>
     </div>
-    <div></div>
+    <div class="nav-right">
+      <a href="/#get-started" class="nav-cta">Get free plan →</a>
+      <select class="lang-sel" id="langSel" aria-label="Language"></select>
+    </div>
   </nav>
 </div>
 
@@ -239,7 +266,6 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
   <article class="article-body">
 
     <h2 id="why-90">Why 90 days works</h2>
-
     <p>Most debt plans fail not because the math is wrong, but because they ask you to change too much at once or stay motivated for years. Ninety days solves both problems.</p>
     <p>In 90 days, you build the system — the automated payments, the negotiated rates, the single target debt, the monthly tracking habit. The system then runs your payoff for the next 2–4 years without requiring constant willpower.</p>
     <p>The goal of 90 days is not to be debt-free. It is to be <em>on track to be debt-free</em> — with a specific date, a proven method, and a structure that survives real life.</p>
@@ -260,7 +286,6 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       </table>
     </div>
 
-    <!-- PHASE 1 -->
     <h2 id="phase1">Phase 1 — Days 1–30: Foundation</h2>
     <p>The only goal of Phase 1 is to replace confusion with clarity and guesswork with a system. Nothing in this phase requires willpower — it requires one focused evening of work and then automation.</p>
 
@@ -326,7 +351,6 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       </div>
     </div>
 
-    <!-- PHASE 2 -->
     <h2 id="phase2">Phase 2 — Days 31–60: Acceleration</h2>
     <p>Phase 1 built the system. Phase 2 makes it faster — by reducing interest costs and finding additional cash flow. Two weeks of active action, then back to autopilot.</p>
 
@@ -361,7 +385,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">Audit</div>
               <div class="task-title">Cancel two recurring expenses you don't actively use</div>
-              <div class="task-desc">Go through your bank statement. Find subscriptions, memberships, or recurring charges you don't use weekly. Cancel two of them today. Redirect the savings to your target debt payment. Common finds: streaming services, gym memberships, app subscriptions, automatic renewals.</div>
+              <div class="task-desc">Go through your bank statement. Find subscriptions, memberships, or recurring charges you don't use weekly. Cancel two of them today. Redirect the savings to your target debt payment.</div>
             </div>
           </div>
           <div class="task">
@@ -377,14 +401,13 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-weekly">Weekly</div>
               <div class="task-title">Record your target debt balance every week</div>
-              <div class="task-desc">Same day, same time. The number goes down. Watching it drop weekly is the single most effective behavioral reinforcement for continuing. Takes 2 minutes. Use a note, a spreadsheet, a piece of paper — medium doesn't matter.</div>
+              <div class="task-desc">Same day, same time. The number goes down. Watching it drop weekly is the single most effective behavioral reinforcement for continuing. Takes 2 minutes.</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- PHASE 3 -->
     <h2 id="phase3">Phase 3 — Days 61–90: Momentum</h2>
     <p>By day 60, your system is running and your interest costs may be lower. Phase 3 capitalizes on momentum — you'll likely see your first major milestone and set up the next target.</p>
 
@@ -411,7 +434,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">Planning</div>
               <div class="task-title">Identify next target debt — prepare the rollover</div>
-              <div class="task-desc">When your current target debt is paid off, the payment you were making doesn't disappear — it rolls entirely to the next target. Write down: next target debt, its current balance, your projected rollover payment amount. The acceleration compounds each time.</div>
+              <div class="task-desc">When your current target debt is paid off, the payment you were making doesn't disappear — it rolls entirely to the next target. Write down: next target debt, its current balance, your projected rollover payment amount.</div>
             </div>
           </div>
           <div class="task">
@@ -419,7 +442,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">Milestone</div>
               <div class="task-title">Set your 12-month concrete target with exact number</div>
-              <div class="task-desc">Write this down: "By [month, year], my total debt will be €[specific number]." Not "less debt" — a specific euro amount. Example: "By May 2027, I will have reduced my total debt from €14,200 to €9,800." The specificity is what makes it actionable.</div>
+              <div class="task-desc">Write this down: "By [month, year], my total debt will be €[specific number]." Not "less debt" — a specific euro amount. The specificity is what makes it actionable.</div>
             </div>
           </div>
           <div class="task">
@@ -427,14 +450,13 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">Check-in</div>
               <div class="task-title">Review what worked and what didn't — adjust one thing</div>
-              <div class="task-desc">Was your extra payment automating correctly? Did you find the lump sum money? Did the rate negotiation work? Identify the single biggest friction point from the last 90 days and fix it. Small friction compounds over years.</div>
+              <div class="task-desc">Was your extra payment automating correctly? Did the rate negotiation work? Identify the single biggest friction point from the last 90 days and fix it. Small friction compounds over years.</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- AFTER 90 -->
     <h2 id="after-90">After day 90: what comes next</h2>
     <p>At the end of 90 days, the active work is largely done. Your system runs automatically. Your only recurring tasks are:</p>
     <ul>
@@ -442,18 +464,24 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       <li><strong>Monthly (10 min):</strong> Confirm all payments processed. Note any windfalls for lump-sum application.</li>
       <li><strong>At each debt payoff:</strong> Immediately redirect full payment to next target. Don't let the freed money diffuse into spending.</li>
     </ul>
-    <p>The system you built in 90 days will run this process for the next 2–4 years. The compound effect of rolled payments means each debt pays off faster than the last.</p>
 
     <div class="callout callout-gray">
       <div class="callout-title">The math of payment rollover</div>
-      Start with €200 extra/month on target debt 1. When paid off, roll €200 + the freed minimum (say €80) = €280 to target debt 2. When paid off, roll €280 + that freed minimum (say €120) = €400 to target debt 3. The final debt gets attacked with the full accumulated payment. This is why the snowball and avalanche both work dramatically better than paying equal extra on all debts.
+      Start with €200 extra/month on target debt 1. When paid off, roll €200 + the freed minimum (say €80) = €280 to target debt 2. When paid off, roll €280 + that freed minimum (say €120) = €400 to target debt 3. This is why both snowball and avalanche work dramatically better than paying equal extra on all debts.
     </div>
 
-    <div class="cta-block">
-      <p class="cta-headline">Get your personalized 90-day plan</p>
-      <p>AI-generated for your exact debts, income, and country. Sent to your email in minutes. Free — forever.</p>
-      <a href="https://www.debt-free.world/#get-started" class="cta-btn">Start free — 3 minutes →</a>
-      <p class="cta-sub">No account. No credit card. 19 languages. 40+ countries.</p>
+    <!-- UPSELL BLOCK -->
+    <div class="upsell-block">
+      <div class="upsell-left">
+        <div class="upsell-eyebrow">Ready to go further?</div>
+        <div class="upsell-headline">Your personalised 90-day plan — free in 3 minutes</div>
+        <div class="upsell-sub">AI-generated for your exact debts, income, and country. Or upgrade to Debt Recovery (19 €) for AI creditor letters, negotiation practice, legal protection guides, and 13 more tools.</div>
+      </div>
+      <div class="upsell-actions">
+        <a href="https://www.debt-free.world/#get-started" class="upsell-btn-primary">Get free plan →</a>
+        <a href="https://www.debt-free.world/pricing.html" class="upsell-btn-secondary">See Debt Recovery</a>
+        <div class="upsell-note">No card needed for free plan</div>
+      </div>
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
@@ -468,7 +496,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq3">What if I miss a week or fall behind?<span class="icon" aria-hidden="true">+</span></button>
-        <div class="faq-a" id="faq3">Because the plan is automated, missing a week of tracking doesn't derail the payments. The system continues. The only action needed is to catch up on tracking and continue. The biggest mistake is treating a missed week as a failure that requires starting over — it doesn't.</div>
+        <div class="faq-a" id="faq3">Because the plan is automated, missing a week of tracking doesn't derail the payments. The system continues. The biggest mistake is treating a missed week as a failure that requires starting over — it doesn't.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq4">Should I save money at the same time as paying off debt?<span class="icon" aria-hidden="true">+</span></button>
@@ -488,7 +516,6 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 </div>
 </main>
 
-<!-- FOOTER -->
 <div class="site-footer">
   <footer style="padding:2rem 0;display:flex;flex-direction:column;gap:0.75rem;border-top:0.5px solid #eee;margin-top:2rem;">
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center;">
@@ -499,21 +526,79 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       <a href="/about.html" style="font-size:12px;color:#888;text-decoration:none;">About</a>
       <a href="/faq.html" style="font-size:12px;color:#888;text-decoration:none;">FAQ</a>
       <a href="/pricing.html" style="font-size:12px;color:#888;text-decoration:none;">Pricing</a>
-      <a href="/terms-of-service.html" style="font-size:12px;color:#888;text-decoration:none;">Terms</a>
-      <a href="/privacy-policy.html" style="font-size:12px;color:#888;text-decoration:none;">Privacy</a>
-      <a href="/refund-policy.html" style="font-size:12px;color:#888;text-decoration:none;">Refund Policy</a>
+      <a href="/legal.html#terms" style="font-size:12px;color:#888;text-decoration:none;">Terms</a>
+      <a href="/legal.html#privacy" style="font-size:12px;color:#888;text-decoration:none;">Privacy</a>
+      <a href="/legal.html#refund" style="font-size:12px;color:#888;text-decoration:none;">Refund Policy</a>
       <span style="font-size:12px;color:#bbb;">Amliv Oy · VAT FI32503518</span>
     </div>
   </footer>
 </div>
 
+<!-- Cookie banner -->
+<div class="cookie-banner" id="dfwCookieBanner">
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal.html#privacy">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button class="cookie-btn decline" onclick="setCookieConsent('declined')">Decline</button>
+    <button class="cookie-btn accept" onclick="setCookieConsent('accepted')">Accept analytics</button>
+  </div>
+</div>
+
 <script>
+// FAQ
 document.querySelectorAll('.faq-q').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const exp=btn.getAttribute('aria-expanded')==='true';
     document.querySelectorAll('.faq-q').forEach(b=>{b.setAttribute('aria-expanded','false');document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');});
     if(!exp){btn.setAttribute('aria-expanded','true');document.getElementById(btn.getAttribute('aria-controls')).classList.add('open');}
   });
+});
+
+// Tracking
+function loadTracking(){
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','x6r2dfxj3l');
+  }
+}
+function setCookieConsent(choice){
+  localStorage.setItem('cookie-consent',choice);
+  document.getElementById('dfwCookieBanner').style.display='none';
+  if(choice==='accepted')loadTracking();
+}
+window.addEventListener('DOMContentLoaded',function(){
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('dfwCookieBanner').style.display='flex';
+  }
+  loadTracking();
+
+  // Lang selector
+  var langs=[
+    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+    ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
+    ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
+    ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
+    ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']
+  ];
+  var stored=localStorage.getItem('dfw_lang')||'EN';
+  var sel=document.getElementById('langSel');
+  if(sel){
+    langs.forEach(function(l){
+      var o=document.createElement('option');
+      o.value=l[0];o.textContent=l[1];
+      if(l[0]===stored)o.selected=true;
+      sel.appendChild(o);
+    });
+    sel.onchange=function(){localStorage.setItem('dfw_lang',this.value);};
+  }
 });
 </script>
 </body>
