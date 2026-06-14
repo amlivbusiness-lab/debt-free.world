@@ -131,6 +131,9 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
   .journey{gap:2px;}
   .journey-line{width:20px;}
 }
+.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
+.nav-blog:hover{background:var(--green-bg);}
+.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;justify-self:end;}
 </style>
 </head>
 <body>
@@ -138,12 +141,13 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 
 <nav>
   <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <div class="nav-links">
-    <a href="/blog/" class="nav-link">Blog</a>
-    <a href="/pricing.html" class="nav-link active">Pricing</a>
-    <a href="/about.html" class="nav-link">About</a>
-    <a href="/faq.html" class="nav-link">FAQ</a>
+  <div style="display:flex;gap:4px;align-items:center;justify-content:center;">
+    <a href="/blog/" class="nav-blog" id="nav-blog">Blog</a>
+    <a href="/pricing.html" id="nav-pricing" class="nav-link">Pricing</a>
+    <a href="/about.html" id="nav-about" class="nav-link">About</a>
+    <a href="/faq.html" id="nav-faq" class="nav-link">FAQ</a>
   </div>
+  <select class="lang-sel" id="langSel"></select>
 </nav>
 
 <section class="hero">
@@ -257,7 +261,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
         <div class="consent-block">
           <label class="consent-row">
             <input type="checkbox" id="consent-tos">
-            <span>I agree to the <a href="/terms-of-service.html" target="_blank">Terms of Service</a>, <a href="/privacy-policy.html" target="_blank">Privacy Policy</a> and <a href="/refund-policy.html" target="_blank">Refund Policy</a>.</span>
+            <span>I agree to the <a href="/legal.html#terms" target="_blank">Terms of Service</a>, <a href="/legal.html#privacy" target="_blank">Privacy Policy</a> and <a href="/legal.html#refund" target="_blank">Refund Policy</a>.</span>
           </label>
           <label class="consent-row">
             <input type="checkbox" id="consent-art16">
@@ -503,9 +507,9 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
   <div class="footer-links">
     <a href="/about.html">About</a>
     <a href="/faq.html">FAQ</a>
-    <a href="/terms-of-service.html">Terms</a>
-    <a href="/privacy-policy.html">Privacy</a>
-    <a href="/refund-policy.html">Refund Policy</a>
+    <a href="/legal.html#terms">Terms</a>
+    <a href="/legal.html#privacy">Privacy</a>
+    <a href="/legal.html#refund">Refund Policy</a>
     <a href="mailto:support@debt-free.world">support@debt-free.world</a>
     <span class="footer-vat">Amliv Oy · VAT FI32503518</span>
   </div>
@@ -566,6 +570,65 @@ async function notifyMe(product){
   const s=document.getElementById('success-'+product);
   if(s)s.style.display='block';
 }
+</script>
+<!-- Analytics — loads only after cookie consent -->
+<script>
+function loadTracking(){
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','x6r2dfxj3l');
+  }
+}
+function setCookieConsent(choice){
+  localStorage.setItem('cookie-consent',choice);
+  document.getElementById('dfwCookieBanner').style.display='none';
+  if(choice==='accepted')loadTracking();
+}
+window.addEventListener('DOMContentLoaded',function(){
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('dfwCookieBanner').style.display='flex';
+  }
+  loadTracking();
+});
+</script>
+<div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:sans-serif;">Accept analytics</button>
+  </div>
+</div>
+<script>
+(function(){
+  var langs=[
+    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+    ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
+    ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
+    ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
+    ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']
+  ];
+  var stored=localStorage.getItem('dfw_lang')||'EN';
+  window.addEventListener('DOMContentLoaded',function(){
+    var sel=document.getElementById('langSel');
+    if(!sel)return;
+    langs.forEach(function(l){
+      var o=document.createElement('option');
+      o.value=l[0];o.textContent=l[1];
+      if(l[0]===stored)o.selected=true;
+      sel.appendChild(o);
+    });
+    sel.onchange=function(){localStorage.setItem('dfw_lang',this.value);};
+  });
+})();
 </script>
 </body>
 </html>
