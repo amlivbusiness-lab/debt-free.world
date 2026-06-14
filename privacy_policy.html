@@ -49,20 +49,21 @@ footer{padding:2rem 0;display:flex;flex-direction:column;gap:0.75rem;border-top:
 <body>
 <div class="page">
 
-<nav>
-  <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <div class="nav-links">
-    <a href="/blog/" class="nav-link">Blog</a>
-    <a href="/pricing.html" class="nav-link">Pricing</a>
-    <a href="/about.html" class="nav-link">About</a>
-    <a href="/faq.html" class="nav-link">FAQ</a>
+<nav style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.25rem 0;position:sticky;top:0;background:var(--white);z-index:100;border-bottom:0.5px solid #f0f0f0;">
+  <a href="/" style="font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;justify-self:start;">Debt-<em style="font-style:italic;color:var(--green);">Free</em>.world</a>
+  <div style="display:flex;align-items:center;gap:4px;justify-self:center;">
+    <a href="/blog/" style="font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 10px;border-radius:20px;">Blog</a>
+    <a href="/pricing.html" style="font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 10px;border-radius:20px;">Pricing</a>
+    <a href="/about.html" style="font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 10px;border-radius:20px;">About</a>
+    <a href="/faq.html" style="font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 10px;border-radius:20px;">FAQ</a>
   </div>
+  <a href="/" style="font-size:13px;font-weight:500;color:var(--green);text-decoration:none;justify-self:end;">← Home</a>
 </nav>
 
 <div class="hero">
   <div class="hero-label">Legal</div>
   <h1>Privacy Policy</h1>
-  <p class="hero-date">Last updated: 5 June 2026 &mdash; Version 3.0</p>
+  <p class="hero-date">Last updated: 14 June 2026 &mdash; Version 3.1</p>
 </div>
 
 <div class="section">
@@ -164,7 +165,7 @@ footer{padding:2rem 0;display:flex;flex-direction:column;gap:0.75rem;border-top:
       <li><strong>Contract performance</strong> (Art. 6(1)(b)) &mdash; processing necessary to deliver the service you have purchased or requested</li>
       <li><strong>Legitimate interests</strong> (Art. 6(1)(f)) &mdash; sending relevant updates, measuring service impact, and improving the service, where these interests are not overridden by your rights</li>
       <li><strong>Legal obligation</strong> (Art. 6(1)(c)) &mdash; retaining payment records as required by Finnish accounting law</li>
-      <li><strong>Consent</strong> (Art. 6(1)(a)) &mdash; where you have explicitly agreed, such as for marketing communications; you may withdraw consent at any time</li>
+      <li><strong>Consent</strong> (Art. 6(1)(a)) &mdash; where you have explicitly agreed, including for analytics cookies (GA4 and Microsoft Clarity) and marketing communications; you may withdraw consent at any time</li>
     </ul>
   </div>
 </div>
@@ -177,6 +178,8 @@ footer{padding:2rem 0;display:flex;flex-direction:column;gap:0.75rem;border-top:
       <li><strong>Anthropic (Claude API)</strong> &mdash; AI processing to generate your personalised plan. See the AI processing section above.</li>
       <li><strong>Brevo (Sendinblue)</strong> &mdash; email delivery and contact list management. Your email address is stored in Brevo to send your plan and relevant updates.</li>
       <li><strong>Cloudflare</strong> &mdash; infrastructure, DNS, security and Workers KV storage for Premium member data. Cloudflare may process request metadata in the normal course of providing network and security services.</li>
+      <li><strong>Google (Analytics)</strong> &mdash; site analytics via Google Analytics 4, loaded only with your consent. IP addresses are anonymised. See <a href="https://policies.google.com/privacy" target="_blank">Google&rsquo;s Privacy Policy</a>.</li>
+      <li><strong>Microsoft (Clarity)</strong> &mdash; anonymised session recordings and heatmaps, loaded only with your consent. No financial data from forms is collected. See <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank">Microsoft&rsquo;s Privacy Statement</a>.</li>
       <li><strong>Stripe</strong> &mdash; payment processing. We share only what Stripe requires to process your payment. Stripe is an independent data controller for payment data. See <a href="https://stripe.com/privacy" target="_blank">Stripe&rsquo;s Privacy Policy</a>.</li>
     </ul>
     <p>We do not sell your personal data. We do not share identifiable personal data with advertisers or any third party not listed above.</p>
@@ -204,8 +207,14 @@ footer{padding:2rem 0;display:flex;flex-direction:column;gap:0.75rem;border-top:
 <div class="section">
   <h2>Cookies and analytics</h2>
   <div class="prose">
-    <p>We use Google Analytics 4 to understand how visitors use our site. GA4 is loaded only after you consent via the cookie banner displayed on your first visit. We use anonymised IP addresses and do not use cross-site tracking or advertising cookies.</p>
-    <p>If you decline analytics, no tracking scripts are loaded. You may withdraw consent at any time by clearing your browser cookies and declining again on your next visit.</p>
+    <p>We use two analytics tools to understand how visitors use our site:</p>
+    <ul>
+      <li><strong>Google Analytics 4 (GA4)</strong> &mdash; measures page views, session duration, traffic sources and general site usage. We enable IP anonymisation and do not use GA4 for advertising or remarketing.</li>
+      <li><strong>Microsoft Clarity</strong> &mdash; records anonymised session replays and heatmaps to help us understand how visitors navigate and interact with our pages. Clarity does not collect financial data entered in our forms. See <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank">Microsoft&rsquo;s Privacy Statement</a>.</li>
+    </ul>
+    <p>Both tools are loaded <strong>only after you consent</strong> via the cookie banner displayed on your first visit. Your consent choice is stored in your browser. We do not use cross-site tracking, advertising cookies, or remarketing pixels of any kind.</p>
+    <p>If you decline analytics, no tracking scripts are loaded. You may withdraw consent at any time by clearing your browser storage and declining again on your next visit.</p>
+    <p>Analytics data is processed in accordance with each provider&rsquo;s standard contractual clauses for EU data transfers.</p>
   </div>
 </div>
 
@@ -272,6 +281,42 @@ footer{padding:2rem 0;display:flex;flex-direction:column;gap:0.75rem;border-top:
   </div>
 </footer>
 
+</div>
+<!-- Analytics — loads only after cookie consent -->
+<script>
+function loadTracking(){
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','x6r2dfxj3l');
+  }
+}
+function setCookieConsent(choice){
+  localStorage.setItem('cookie-consent',choice);
+  document.getElementById('dfwCookieBanner').style.display='none';
+  if(choice==='accepted')loadTracking();
+}
+window.addEventListener('DOMContentLoaded',function(){
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('dfwCookieBanner').style.display='flex';
+  }
+  loadTracking();
+});
+</script>
+<div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/privacy_policy.html" style="color:#86c9a0;">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:sans-serif;">Accept analytics</button>
+  </div>
 </div>
 </body>
 </html>
