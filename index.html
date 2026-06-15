@@ -969,14 +969,10 @@ async function handleSubmit(){
     return;
   }
 
-  // Hae Turnstile-token ENNEN modaalin avaamista
+  // Hae Turnstile-token jos saatavilla — ei blokkaava
   let tsToken='';
   if(window.turnstile){
     try{ tsToken=window.turnstile.getResponse()||''; }catch(e){}
-  }
-  if(!tsToken){
-    alert(lang==='FI'?'Odota hetki ja yritä uudelleen — suojatarkistus ei ole vielä valmis.':'Please wait a moment and try again — security check not ready yet.');
-    return;
   }
 
   // Show thank-you modal IMMEDIATELY
