@@ -126,10 +126,12 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 .footer-links a{font-size:12px;color:#888;text-decoration:none;}
 .footer-vat{font-size:12px;color:#bbb;}
 @media(max-width:520px){
-  nav{grid-template-columns:1fr 1fr;}
-  .nav-links{display:none;}
-  .journey{gap:2px;}
-  .journey-line{width:20px;}
+  nav{grid-template-columns:auto auto;justify-content:space-between;}
+  .nav-links{gap:2px;}
+  .nav-hide-mobile{display:none;}
+  .journey{gap:2px;flex-wrap:nowrap;}
+  .journey-line{width:12px;}
+  .journey-label{font-size:8px;letter-spacing:0;text-align:center;}
 }
 .nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
 .nav-blog:hover{background:var(--green-bg);}
@@ -141,10 +143,10 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 
 <nav>
   <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <div style="display:flex;gap:4px;align-items:center;justify-content:center;">
-    <a href="/blog/" class="nav-blog" id="nav-blog">Blog</a>
-    <a href="/pricing.html" id="nav-pricing" class="nav-link">Pricing</a>
-    <a href="/about.html" id="nav-about" class="nav-link">About</a>
+  <div class="nav-links">
+    <a href="/blog/" id="nav-blog" class="nav-link nav-hide-mobile">Blog</a>
+    <a href="/pricing.html" id="nav-pricing" class="nav-blog">Pricing</a>
+    <a href="/about.html" id="nav-about" class="nav-link nav-hide-mobile">About</a>
     <a href="/faq.html" id="nav-faq" class="nav-link">FAQ</a>
   </div>
   <select class="lang-sel" id="langSel"></select>
@@ -161,16 +163,16 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
   <div class="journey-line c1"></div>
   <div class="journey-step"><div class="journey-num c2">2</div><div class="journey-label c2">Income Builder</div></div>
   <div class="journey-line c2"></div>
-  <div class="journey-step"><div class="journey-num c3">3</div><div class="journey-label c3">Wealth Builder</div></div>
+  <div class="journey-step"><div class="journey-num c3">3</div><div class="journey-label c3">Wealth Architect</div></div>
   <div class="journey-line c3"></div>
-  <div class="journey-step"><div class="journey-num c4">4</div><div class="journey-label c4">Business Builder</div></div>
+  <div class="journey-step"><div class="journey-num c4">4</div><div class="journey-label c4">Business Engine</div></div>
 </div>
 
 <!-- ── PHASE 1: DEBT RECOVERY ── -->
 <div class="phase">
   <div class="phase-header">
     <span class="phase-num s1">Phase 1</span>
-    <span class="phase-title">Debt Recovery</span>
+    <span class="phase-title">Debt</span>
     <span class="phase-status">Live now</span>
   </div>
   <div class="card-row">
@@ -181,7 +183,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="card live">
         <div class="card-accent s1"></div>
         <div class="card-name">Debt FREE</div>
-        <div class="card-tag">Personal financial snapshot — delivered immediately, forever free.</div>
+        <div class="card-tag">Your personal debt recovery journey starts here — free, always.</div>
         <div class="price-main">0 €</div>
         <div class="price-period">forever</div>
         <div class="price-note">No card. No registration.</div>
@@ -196,6 +198,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt counselling services by country</li>
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Risk alerts &amp; financial snapshot</li>
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Next recommended steps</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Emergency Action Card — immediate steps for debt crisis</li>
         </ul>
         <a href="https://www.debt-free.world" class="btn-outline">Get Debt FREE →</a>
       </div>
@@ -207,7 +210,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="card live featured">
         <div class="card-accent s1"></div>
         <div class="card-name">Debt Recovery</div>
-        <div class="card-tag">A complete 90-day programme — not a checklist.</div>
+        <div class="card-tag">Your Debt Recovery Companion for 90 days.</div>
         <div class="price-main">19 €</div>
         <div class="price-period">/ 90 days</div>
         <div class="price-note">One-time. No subscription. Yours to keep.</div>
@@ -220,7 +223,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly plan update — refresh your priorities every 30 days</li>
         </ul>
 
-        <span class="feature-group-label">AI letter generator</span>
+        <span class="feature-group-label">Letter generator</span>
         <ul class="features">
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>7 letter types: hardship, settlement, stop contact, dispute, payment plan, payment holiday, negotiation</li>
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Letters addressed to your specific creditor by name — ready to copy and send</li>
@@ -236,7 +239,7 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 
         <span class="feature-group-label">Negotiation &amp; legal tools</span>
         <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Negotiation Practice — AI roleplay to prepare for creditor calls</li>
+          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Creditor call practice — prepare before you pick up the phone</li>
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt Collection Map — every stage and your rights at each step</li>
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Legal Protection Guide — what collectors can and cannot do in your country</li>
         </ul>
@@ -251,13 +254,12 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 
         <span class="feature-group-label">Access &amp; guidance</span>
         <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Private Member Area — all tools in one place for 90 days</li>
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Companion mode — guided check-ins and next-step suggestions (optional)</li>
           <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly reminder emails — optional progress prompts</li>
         </ul>
 
         <div class="divider"></div>
-        <div class="disclaimer">General guidance — not country-specific legal advice.</div>
+        <div class="disclaimer">Not legal or financial advice.</div>
 
         <!-- ✅ KORJATTU: linkit osoittavat nyt /legal.html#... eikä erillisiin tiedostoihin -->
         <div class="consent-block">
@@ -271,6 +273,9 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
           </label>
         </div>
         <button class="btn" id="btn-premium" onclick="startCheckout('premium')">Get Debt Recovery — 19 €</button>
+        <div style="text-align:center;margin-top:10px;">
+          <a href="mailto:support@debt-free.world?subject=Community Access" style="font-size:12px;color:#888;text-decoration:underline;cursor:pointer;">Can't afford this right now? Apply for free access. No explanation needed.</a>
+        </div>
         <div class="security-note">
           <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Secured by Stripe · Amliv Oy · VAT FI32503518
@@ -279,13 +284,14 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
     </div>
 
   </div>
+  <p style="font-size:12px;color:#888;text-align:center;margin-top:10px;font-style:italic;">Both plans include access to your personal member area — sign in with your email, no password needed.</p>
 </div>
 
 <!-- ── PHASE 2: INCOME BUILDER ── -->
 <div class="phase">
   <div class="phase-header">
     <span class="phase-num s2">Phase 2</span>
-    <span class="phase-title">Income Builder</span>
+    <span class="phase-title">Income</span>
     <span class="phase-status">Coming Q4 2026</span>
   </div>
   <div class="card-row three">
@@ -294,19 +300,10 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="card dim">
         <div class="card-accent s2"></div>
         <div class="card-name">Income FREE</div>
-        <div class="card-tag">Start building your income — no cost, no registration.</div>
+        <div class="card-tag"></div>
         <div class="price-main dim">0 €</div>
         <div class="price-period">forever</div>
         <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>CV generator</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Cover letter template</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Skills mapping &amp; assessment</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Career direction analysis</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Income potential test</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Salary estimate by role &amp; country</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Job search checklist</li>
-        </ul>
         <div class="lock-block s2">Available Q4 2026</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-income-free" placeholder="your@email.com">
@@ -320,27 +317,17 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="card dim">
         <div class="card-accent s2"></div>
         <div class="card-name">Income Builder Starter</div>
-        <div class="card-tag">Your 90-day income growth system.</div>
+        <div class="card-tag"></div>
         <div class="price-main dim">39 €</div>
         <div class="price-period">/ 90 days</div>
         <div class="price-note">One-time. No subscription.</div>
         <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Income FREE</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Personalised 90-day income growth plan</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>AI CV &amp; cover letter generator</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Career change &amp; path analysis</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Remote &amp; freelance job listings</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Salary benchmarks by country</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Job application tracker &amp; document storage</li>
-        </ul>
         <div class="lock-block s2">Available Q4 2026</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-starter" placeholder="your@email.com">
           <button class="notify-btn s2" onclick="notifyMe('starter')">Notify me</button>
         </div>
         <div class="notify-success s2" id="success-starter">You're on the list.</div>
-        <div class="gatekeeper">Unlocks after 200 Debt Recovery members</div>
       </div>
     </div>
     <div>
@@ -348,27 +335,17 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="card dim">
         <div class="card-accent s2"></div>
         <div class="card-name">Income Builder Pro</div>
-        <div class="card-tag">The complete career &amp; income transformation system.</div>
+        <div class="card-tag"></div>
         <div class="price-main dim">89 €</div>
         <div class="price-period">/ 180 days</div>
         <div class="price-note">One-time. No subscription.</div>
         <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Starter</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>LinkedIn &amp; freelancer profile generator</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Interview &amp; salary negotiation simulator</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Remote &amp; freelance fundamentals</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Side income building basics</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly progress reports</li>
-          <li><svg class="check-s2" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Discord community + live sessions with Vilma</li>
-        </ul>
         <div class="lock-block s2">Available Q4 2026</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-pro" placeholder="your@email.com">
           <button class="notify-btn s2" onclick="notifyMe('pro')">Notify me</button>
         </div>
         <div class="notify-success s2" id="success-pro">You're on the list.</div>
-        <div class="gatekeeper">Unlocks after 200 Debt Recovery members</div>
       </div>
     </div>
   </div>
@@ -378,8 +355,8 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 <div class="phase">
   <div class="phase-header">
     <span class="phase-num s3">Phase 3</span>
-    <span class="phase-title">Wealth Builder</span>
-    <span class="phase-status">Coming Q2–Q3 2027</span>
+    <span class="phase-title">Wealth</span>
+    <span class="phase-status">Coming Q3 2028</span>
   </div>
   <div class="card-row">
     <div>
@@ -387,17 +364,11 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="card dim">
         <div class="card-accent s3"></div>
         <div class="card-name">Wealth FREE</div>
-        <div class="card-tag">Start your wealth journey — free calculators and guides.</div>
+        <div class="card-tag"></div>
         <div class="price-main dim">0 €</div>
         <div class="price-period">forever</div>
         <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Savings goal calculator</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Compound interest calculator</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>FIRE calculator</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Investment readiness test</li>
-        </ul>
-        <div class="lock-block s3">Available Q2–Q3 2027</div>
+        <div class="lock-block s3">Available Q3 2028</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-wealth-free" placeholder="your@email.com">
           <button class="notify-btn s3" onclick="notifyMe('wealth-free')">Notify me</button>
@@ -409,25 +380,13 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="tmv">Typical market value: 1 990 €</div>
       <div class="card dim">
         <div class="card-accent s3"></div>
-        <div class="card-name">Wealth Builder</div>
-        <div class="card-tag">Your complete wealth-building system — savings, investing, financial independence.</div>
+        <div class="card-name">Wealth Architect</div>
+        <div class="card-tag"></div>
         <div class="price-main dim">199 €</div>
         <div class="price-period">/ year</div>
         <div class="price-note">Annual. Cancel anytime.</div>
         <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Wealth FREE</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Personalised Wealth Builder plan</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Savings plans &amp; goal tracking</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Net worth tracker &amp; budgeting tools</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Investing fundamentals, ETFs &amp; index funds</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Country-specific broker comparisons</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Tax planning fundamentals</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Financial independence roadmap</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Retirement planning basics</li>
-          <li><svg class="check-s3" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Investing dictionary &amp; checklists</li>
-        </ul>
-        <div class="lock-block s3">Available Q2–Q3 2027</div>
+        <div class="lock-block s3">Available Q4 2028</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-wealth" placeholder="your@email.com">
           <button class="notify-btn s3" onclick="notifyMe('wealth')">Notify me</button>
@@ -442,8 +401,8 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 <div class="phase">
   <div class="phase-header">
     <span class="phase-num s4">Phase 4</span>
-    <span class="phase-title">Business Builder</span>
-    <span class="phase-status">Coming Q4 2027</span>
+    <span class="phase-title">Business</span>
+    <span class="phase-status">Coming Q3 2029</span>
   </div>
   <div class="card-row">
     <div>
@@ -451,17 +410,11 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="card dim">
         <div class="card-accent s4"></div>
         <div class="card-name">Business FREE</div>
-        <div class="card-tag">Validate your idea before you invest anything.</div>
+        <div class="card-tag"></div>
         <div class="price-main dim">0 €</div>
         <div class="price-period">forever</div>
         <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Business idea analyser</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Side business readiness test</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Freelancer readiness test</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Productisation readiness test</li>
-        </ul>
-        <div class="lock-block s4">Available Q4 2027</div>
+        <div class="lock-block s4">Available Q3 2029</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-business-free" placeholder="your@email.com">
           <button class="notify-btn s4" onclick="notifyMe('business-free')">Notify me</button>
@@ -473,24 +426,13 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
       <div class="tmv">Typical market value: 4 990 €</div>
       <div class="card dim">
         <div class="card-accent s4"></div>
-        <div class="card-name">Business Builder</div>
-        <div class="card-tag">Build your business or side income — from idea to first paying customer.</div>
-        <div class="price-main dim">199–299 €</div>
+        <div class="card-name">Business Engine</div>
+        <div class="card-tag"></div>
+        <div class="price-main dim">299 €</div>
         <div class="price-period">/ year</div>
         <div class="price-note">Annual. Cancel anytime.</div>
         <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Business FREE</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Personalised Business Builder plan</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Business idea validation &amp; customer profile tools</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Proposal &amp; business plan generator</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Cash flow calculators &amp; pricing tools</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Marketing, SEO &amp; automation fundamentals</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Freelance &amp; service business building guide</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Client acquisition &amp; sales fundamentals</li>
-          <li><svg class="check-s4" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Startup &amp; side business paths</li>
-        </ul>
-        <div class="lock-block s4">Available Q4 2027</div>
+        <div class="lock-block s4">Available Q4 2029</div>
         <div class="notify-form">
           <input type="email" class="notify-input" id="email-business" placeholder="your@email.com">
           <button class="notify-btn s4" onclick="notifyMe('business')">Notify me</button>
