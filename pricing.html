@@ -126,9 +126,12 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 .footer-links a{font-size:12px;color:#888;text-decoration:none;}
 .footer-vat{font-size:12px;color:#bbb;}
 @media(max-width:520px){
-  nav{grid-template-columns:auto auto;justify-content:space-between;}
-  .nav-links{gap:2px;}
-  .nav-hide-mobile{display:none;}
+  nav{grid-template-columns:1fr;gap:6px;}
+  .nav-logo{justify-self:center;}
+  .nav-links{justify-self:center;flex-wrap:wrap;justify-content:center;gap:2px;}
+  .nav-link{font-size:11px;padding:4px 8px;}
+  .nav-blog{font-size:11px;padding:4px 10px;}
+  .lang-sel{justify-self:center;font-size:11px;padding:4px 10px;}
   .journey{gap:2px;flex-wrap:nowrap;}
   .journey-line{width:12px;}
   .journey-label{font-size:8px;letter-spacing:0;text-align:center;}
@@ -144,9 +147,9 @@ footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
 <nav>
   <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
   <div class="nav-links">
-    <a href="/blog/" id="nav-blog" class="nav-link nav-hide-mobile">Blog</a>
+    <a href="/blog/" id="nav-blog" class="nav-link">Blog</a>
     <a href="/pricing.html" id="nav-pricing" class="nav-blog">Pricing</a>
-    <a href="/about.html" id="nav-about" class="nav-link nav-hide-mobile">About</a>
+    <a href="/about.html" id="nav-about" class="nav-link">About</a>
     <a href="/faq.html" id="nav-faq" class="nav-link">FAQ</a>
   </div>
   <select class="lang-sel" id="langSel"></select>
