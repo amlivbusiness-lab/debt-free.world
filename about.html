@@ -15,13 +15,30 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
 .page{max-width:720px;margin:0 auto;padding:0 24px;}
-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.25rem 0;}
-.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;justify-self:start;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;}
 .nav-logo em{font-style:italic;color:var(--green);}
-.nav-links{display:flex;gap:4px;align-items:center;justify-content:center;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
 .nav-link{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
 .nav-link:hover{background:var(--green-bg);}
 .nav-link.active{color:var(--green);font-weight:600;}
+.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
+.nav-blog:hover{background:var(--green-bg);}
+.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.2s;}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:1.25rem 24px 1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+.mobile-menu.open{display:block;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:#aaa;line-height:1;}
+.mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a.active{color:var(--green);font-weight:600;}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+}
 
 .hero{padding:2.5rem 0 2rem;}
 .hero-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1rem;}
@@ -85,26 +102,38 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   .eco-cell:nth-child(2){border-right:none;}
   .eco-cell:nth-child(3){border-top:1px solid var(--border);}
   .eco-cell:nth-child(4){border-top:1px solid var(--border);border-right:none;}
-  nav{grid-template-columns:1fr 1fr;}
-  .nav-links{display:none;}
 }
-.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;justify-self:center;}
-.nav-blog:hover{background:var(--green-bg);}
-.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;justify-self:end;}
 </style>
 </head>
 <body>
 <div class="page">
 <nav>
   <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <div style="display:flex;gap:4px;align-items:center;justify-content:center;">
-    <a href="/blog/" class="nav-blog" id="nav-blog">Blog</a>
+  <div class="nav-links">
+    <a href="/blog/" id="nav-blog" class="nav-link">Blog</a>
     <a href="/pricing.html" id="nav-pricing" class="nav-link">Pricing</a>
-    <a href="/about.html" id="nav-about" class="nav-link">About</a>
+    <a href="/about.html" id="nav-about" class="nav-blog">About</a>
     <a href="/faq.html" id="nav-faq" class="nav-link">FAQ</a>
   </div>
-  <select class="lang-sel" id="langSel" ></select>
+  <div class="nav-right">
+    <select class="lang-sel" id="langSel"></select>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="nav-logo">Debt-<em>Free</em>.world</span>
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <a href="/">Home</a>
+  <a href="/blog/">Blog</a>
+  <a href="/pricing.html">Pricing</a>
+  <a href="/about.html" class="active">About</a>
+  <a href="/faq.html">FAQ</a>
+</div>
 
 
 
@@ -112,7 +141,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 <section class="hero">
   <div class="hero-label">Our story</div>
   <h1>Built from<br>the inside of a<br><em>financial crisis.</em></h1>
-  <p class="hero-lead">Debt-Free.world was not built by a bank, a consulting firm, or a financial expert. It was built by someone who lost everything — and couldn't find the help she needed.</p>
+  <p class="hero-lead">Debt-Free.world was not built by a bank, a consulting firm, or a financial expert. It was built by a woman who lost nearly everything — and couldn't find the help, guidance, or companion she needed when she was drowning in debt.</p>
 </section>
 
 <!-- FOUNDER -->
@@ -120,7 +149,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="photo-inner">
     <div class="photo-img"><img src="https://raw.githubusercontent.com/amlivbusiness-lab/debt-free.world/main/vilma.png" alt="Vilma Paasikivi, Founder"/></div>
     <div>
-      <p class="prose" style="margin-bottom:0.75rem;">"I didn't create Debt-Free.world as a financial expert. I created it because I lived through financial collapse myself."</p>
+      <p class="prose" style="margin-bottom:0.75rem;">"I didn't create Debt-Free.world as a financial expert. I created it because I lived through financial collapse myself — and came out the other side knowing exactly what was missing."</p>
       <div class="photo-credit"><strong>Vilma Paasikivi</strong>Founder, Debt-Free.world<br>Nokia, Finland · Mother of three</div>
     </div>
   </div>
@@ -130,20 +159,26 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 <div class="section">
   <div class="section-label">The full story</div>
   <div class="prose">
-    <p>I am not a financial expert. I didn't study economics or work in banking. I built Debt-Free.world because I lived through the kind of financial collapse that changes you — and I came out the other side without a single tool that actually helped.</p>
-    <p>Over several years I lost around 45 000 € through failed business contracts, a construction scam, and a chain of setbacks I didn't see coming. Three children. No income. More debt than assets.</p>
-    <p>What broke me wasn't the money. It was the silence. Every service I found was either unaffordable, hopelessly generic, or built for people who already had their finances under control. Nobody talked to me like a real person. Nobody said: here is your exact situation, here are your actual options, and here is what you do today.</p>
-    <p>I spent months figuring it out on my own — reading, calling, waiting, filling in forms that led nowhere. I got through it. But I shouldn't have had to do it alone, and neither should you.</p>
+    <p>I am not a financial expert. I didn't study economics. I didn't work in banking. What I am is someone who built a life for herself and her three young children through her own work — and then watched nearly 45 000 € disappear through a business partner's betrayal, a construction scam, and a chain of consequences I didn't see coming.</p>
+    <p>The largest single blow wasn't a bad decision I made. It was trust that was abused. A partner I had worked with for about a year took what wasn't theirs to take. That changed everything overnight.</p>
+    <p>What followed was the kind of period that quietly breaks people. More debt than assets. That amount of shame. And a level of exhaustion — mental, financial, emotional — that I hadn't let myself acknowledge until I was already running on empty.</p>
+    <p>I want to be honest about that. I got tired. Not defeated — but genuinely, deeply tired.</p>
+    <p>Every service I found was either unaffordable, hopelessly generic, or built for people who already had their finances under control. Nobody spoke to me like a real person. Nobody asked what I was actually working toward. Nobody said: here is your exact situation, here are your real options, here is what you do today.</p>
+    <p>I spent months doing it myself — reading, calling, waiting, filling in forms that led nowhere. I got through it. But it took far longer than it should have.</p>
   </div>
 
-  <div class="pull-quote">"I spent years helping thousands of other people through hard times. I never protected myself. When I finally needed help — I couldn't find it."</div>
+  <div class="pull-quote">"I spent years helping others navigate hard times. I never built a safety net for myself. When I finally needed help — I couldn't find it."</div>
 
   <div class="prose">
-    <p>In 2025 I started building the thing I wish had existed. Not another article. Not a calculator with a phone number at the bottom. A real tool — one that takes your actual numbers, understands your actual situation, and gives you a real plan in your own language.</p>
-    <p>I wanted it to feel like talking to someone who has been there. Someone who doesn't judge the numbers you type in. Someone who says: okay, this is where you are — and here is how we move forward.</p>
-    <p>Debt-Free.world launched in 2026. It's free because that was never up for discussion. <strong>The people who need this most are the ones who can least afford to pay for it first.</strong></p>
+    <p>I need to tell you something about who I am — because I think it explains why I built what I built. For years, alongside raising my children and running my own work, I've organized community charity events — not because I had excess to spare, but because looking after the people around you has always felt like the only natural way to live. Do unto others. No conditions attached.</p>
+    <p>When my own financial world collapsed, I realized something uncomfortable: I had spent years helping others navigate hard times, and I had never once built a safety net for myself. I knew how to give — I hadn't learned how to ask.</p>
+    <p>That's the gap Debt-Free.world is built to close.</p>
+    <p>But here's what I learned that I didn't expect: the problem isn't just debt. The problem is that nobody asks the right question first. Not how much do you owe — but why do you want to get out. Because the answer to that question changes everything. It changes the plan. It changes the timeline. It changes what's actually worth doing tomorrow morning.</p>
+    <p>I don't bring you credentials. I bring you the lived experience of someone who went through the system that's supposed to help people in financial distress — and found it inadequate at every turn. Someone who understands that the path out of debt doesn't end at zero. It ends where you actually wanted to be when you started.</p>
+    <p>In 2025 I started building the tool I wish had existed. Not another article. Not a calculator with a phone number at the bottom. A real companion — one that takes your actual numbers, understands your actual situation, listens to what you're working toward, and gives you a real plan in your own language, without judgment. Something that feels like talking to someone who has actually been there.</p>
+    <p>Debt-Free.world launched in 2026. It's free. That was never up for discussion. <strong>Debt freedom should never depend on your ability to pay for help first.</strong> The people who need this most are the ones who can least afford to wait — and I built this for them, for us.</p>
   </div>
-  <p style="font-size:15px;color:var(--green);font-family:var(--serif);font-style:italic;margin-top:1.5rem;">— Vilma P</p>
+  <p style="font-size:15px;color:var(--green);font-family:var(--serif);font-style:italic;margin-top:1.5rem;">— Vilma P.</p>
 </div>
 
 <!-- VALUES -->
@@ -178,8 +213,8 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   </div>
 
   <div class="community-block">
-    <strong>Community Access Program</strong>
-    <p>If you are in genuine financial crisis and cannot afford the 19 € Debt Recovery access, you can apply for complimentary access. In return, we ask for honest feedback, participation in improving the service, and — if you are willing — sharing your story. Write to <a href="mailto:support@debt-free.world">support@debt-free.world</a> with the subject "Access Application".</p>
+    <strong>Community Access</strong>
+    <p>Can't afford the 19 € Debt Recovery right now? Apply for free access. No explanation needed. Write to <a href="mailto:support@debt-free.world">support@debt-free.world</a> — or use the link on the <a href="/pricing.html">pricing page</a>. Financial freedom should never depend on your ability to pay for help first.</p>
   </div>
 </div>
 
@@ -188,10 +223,10 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="section-label">How we got here</div>
   <div class="timeline">
     <div class="tl-item"><div class="tl-year">2020–24</div><div class="tl-text">Vilma experiences financial collapse through failed contracts, fraud, and business loss. The gap becomes clear: there is no accessible, honest, personalised financial guidance for people in crisis.</div></div>
-    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-text">Development begins. Amliv Oy incorporated in Nokia, Finland. The system is built around AI-generated plans personalised to income, household, debt type, and country.</div></div>
-    <div class="tl-item"><div class="tl-year">Q2 2026</div><div class="tl-text">Debt-Free.world launches. 19 languages. 40+ countries. Debt Recovery plan — free, forever.</div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-text">Development begins. Amliv Oy incorporated in Nokia, Finland. The platform is built around personalised plans tailored to income, household, debt type, and country.</div></div>
+    <div class="tl-item"><div class="tl-year">Q2 2026</div><div class="tl-text">Debt-Free.world launches. 19 languages. 40+ countries. Free, forever.</div></div>
     <div class="tl-item"><div class="tl-year">Q4 2026</div><div class="tl-text">Income Builder launches — for users who have stabilised their debt and are ready to grow their income.</div></div>
-    <div class="tl-item"><div class="tl-year">2027+</div><div class="tl-text">Wealth Builder and Business Builder. One platform. The full journey from financial crisis to financial independence.</div></div>
+    <div class="tl-item"><div class="tl-year">2027+</div><div class="tl-text">Wealth Architect and Business Engine. One platform. The full journey from financial crisis to financial independence.</div></div>
   </div>
 </div>
 
@@ -205,8 +240,8 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="ecosystem-row">
     <div class="eco-cell"><div class="eco-num" style="color:#166534;">01</div><div class="eco-label">Debt Recovery</div></div>
     <div class="eco-cell"><div class="eco-num" style="color:#1d4ed8;">02</div><div class="eco-label">Income Builder</div></div>
-    <div class="eco-cell"><div class="eco-num" style="color:#d97706;">03</div><div class="eco-label">Wealth Builder</div></div>
-    <div class="eco-cell"><div class="eco-num" style="color:#7c3aed;">04</div><div class="eco-label">Business Builder</div></div>
+    <div class="eco-cell"><div class="eco-num" style="color:#d97706;">03</div><div class="eco-label">Wealth Architect</div></div>
+    <div class="eco-cell"><div class="eco-num" style="color:#7c3aed;">04</div><div class="eco-label">Business Engine</div></div>
   </div>
   <p style="font-size:12px;color:#111;text-align:center;margin-top:0.75rem;">Most services help with one step. Debt-Free.world helps with the entire journey.</p>
 </div>
@@ -217,7 +252,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="prose">
     <p>Debt-Free.world is operated by <strong>Amliv Oy</strong>, a Finnish limited company registered in Nokia, Finland.</p>
     <p>VAT number: FI32503518<br>Contact: <a href="mailto:support@debt-free.world" style="color:var(--green);">support@debt-free.world</a></p>
-    <p>Vilma Paasikivi is the founder, product lead, and the person who reads every message you send. She runs monthly live Q&amp;A sessions for Premium members. Everything else runs automatically — by design, so we can keep this free without compromise.</p>
+    <p>Vilma Paasikivi is the founder, product lead, and the person who reads every message you send. Everything else runs automatically — by design, so we can keep this free without compromise.</p>
   </div>
 </div>
 
@@ -236,6 +271,10 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 </div>
 <!-- Analytics — loads only after cookie consent -->
 <script>
+function toggleMenu(){
+  const menu=document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
 function loadTracking(){
   if(localStorage.getItem('cookie-consent')==='accepted'){
     var s=document.createElement('script');s.async=true;
@@ -264,7 +303,7 @@ window.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 <div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
-  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/privacy_policy.html" style="color:#86c9a0;">Privacy Policy</a></span>
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
   <div style="display:flex;gap:8px;flex-shrink:0;">
     <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
     <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:sans-serif;">Accept analytics</button>
