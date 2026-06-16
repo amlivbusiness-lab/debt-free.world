@@ -125,20 +125,13 @@
   <!-- ═══════════════════════════════════════════════════
        GOOGLE ANALYTICS 4
   ═══════════════════════════════════════════════════ -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-P67WN08EMJ');
-  </script>
 
   <!-- ═══════════════════════════════════════════════════
        FONTS & STYLES
   ═══════════════════════════════════════════════════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
   <style>
@@ -146,16 +139,15 @@
 
     :root {
       --green:        #166534;
-      --green-light:  #dcfce7;
-      --green-mid:    #16a34a;
-      --text:         #1a1a1a;
-      --muted:        #6b7280;
-      --border:       #e5e7eb;
-      --bg:           #ffffff;
-      --bg-soft:      #f9fafb;
+      --green-dark:   #0f4d26;
+      --green-bg:     #f0f8f3;
+      --green-border: #86c9a0;
+      --green-light:  #dcf0e4;
+      --text:         #111;
+      --border:       #ddd;
+      --white:        #fff;
       --serif:        'DM Serif Display', Georgia, serif;
       --sans:         'DM Sans', system-ui, sans-serif;
-      --max:          740px;
     }
 
     html { font-size: 17px; scroll-behavior: smooth; }
@@ -163,46 +155,28 @@
     body {
       font-family: var(--sans);
       color: var(--text);
-      background: var(--bg);
+      background: #fff;
       line-height: 1.75;
       -webkit-font-smoothing: antialiased;
     }
 
     /* ── NAV ── */
-    .site-nav {
-      border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-    }
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      color: var(--green);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-    .nav-cta {
-      background: var(--green);
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: #14532d; }
+    .site-nav-wrap { border-bottom: 1px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 100; }
+    .site-nav { max-width: 720px; margin: 0 auto; padding: 1.25rem 24px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .nav-logo { font-family: var(--serif); font-size: 22px; color: #111; text-decoration: none; }
+    .nav-logo em { font-style: italic; color: var(--green); }
+    .nav-center { display: flex; gap: 4px; align-items: center; justify-content: center; }
+    .nav-pricing-link { font-size: 13px; font-weight: 600; color: var(--green); text-decoration: none; padding: 6px 14px; border: 1.5px solid var(--green); border-radius: 20px; }
+    .nav-pricing-link:hover { background: var(--green-bg); }
+    .nav-right { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+    .nav-cta { font-size: 13px; font-weight: 600; background: var(--green); color: #fff; text-decoration: none; padding: 7px 16px; border-radius: 20px; white-space: nowrap; }
+    .nav-cta:hover { background: var(--green-dark); }
+    .lang-sel { font-size: 13px; padding: 6px 10px; border: 1.5px solid var(--green); border-radius: 20px; background: var(--green-bg); color: var(--green); font-family: var(--sans); cursor: pointer; outline: none; }
+    @media(max-width:600px){ .site-nav { grid-template-columns: 1fr auto; } .nav-center { display: none; } }
 
     /* ── ARTICLE WRAPPER ── */
     .article-outer {
-      max-width: var(--max);
+      max-width: 720px;
       margin: 0 auto;
       padding: 0 20px 80px;
     }
@@ -210,10 +184,10 @@
     /* ── BREADCRUMB ── */
     .breadcrumb {
       font-size: 0.8rem;
-      color: var(--muted);
+      color: #888;
       padding: 20px 0 0;
     }
-    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a { color: #888; text-decoration: none; }
     .breadcrumb a:hover { color: var(--green); }
     .breadcrumb span { margin: 0 6px; }
 
@@ -252,7 +226,7 @@
     }
     .article-meta {
       font-size: 0.8rem;
-      color: var(--muted);
+      color: #888;
       display: flex;
       align-items: center;
       gap: 16px;
@@ -262,7 +236,7 @@
 
     /* ── TOC ── */
     .toc {
-      background: var(--bg-soft);
+      background: var(--green-bg);
       border: 1px solid var(--border);
       border-left: 3px solid var(--green);
       border-radius: 8px;
@@ -274,7 +248,7 @@
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--muted);
+      color: #888;
       margin-bottom: 12px;
     }
     .toc ol {
@@ -321,7 +295,7 @@
     .article-body li { color: #1f2937; }
     .article-body strong { color: var(--text); }
     .article-body a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
-    .article-body a:hover { color: var(--green-mid); }
+    .article-body a:hover { color: var(--green); }
 
     /* ── CALLOUT BOXES ── */
     .callout {
@@ -335,7 +309,7 @@
       border-left: 4px solid var(--green);
     }
     .callout-gray {
-      background: var(--bg-soft);
+      background: var(--green-bg);
       border: 1px solid var(--border);
     }
     .callout-title {
@@ -346,7 +320,7 @@
       margin-bottom: 6px;
       color: var(--green);
     }
-    .callout-gray .callout-title { color: var(--muted); }
+    .callout-gray .callout-title { color: #888; }
 
     /* ── COMPARISON TABLE ── */
     .table-wrap { overflow-x: auto; margin: 28px 0; }
@@ -362,7 +336,7 @@
       padding: 11px 14px;
       font-weight: 600;
     }
-    tbody tr:nth-child(even) { background: var(--bg-soft); }
+    tbody tr:nth-child(even) { background: var(--green-bg); }
     tbody td {
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
@@ -477,7 +451,7 @@
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--muted);
+      color: #888;
       margin-bottom: 16px;
     }
     .related-links { display: flex; flex-direction: column; gap: 10px; }
@@ -495,9 +469,9 @@
       text-align: center;
       padding: 28px 20px;
       font-size: 0.8rem;
-      color: var(--muted);
+      color: #888;
     }
-    .site-footer a { color: var(--muted); text-decoration: none; }
+    .site-footer a { color: #888; text-decoration: none; }
     .site-footer a:hover { color: var(--green); }
 
     @media (max-width: 480px) {
@@ -514,10 +488,18 @@
   <!-- ═══════════════════════════════════════════════════
        NAV
   ═══════════════════════════════════════════════════ -->
-  <nav class="site-nav" aria-label="Site navigation">
-    <a href="https://www.debt-free.world" class="nav-logo">Debt-Free ✦ World</a>
-    <a href="https://www.debt-free.world/#get-started" class="nav-cta">Get Free Plan →</a>
-  </nav>
+  <div class="site-nav-wrap">
+    <nav class="site-nav" aria-label="Site navigation">
+      <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
+      <div class="nav-center">
+        <a href="/pricing.html" class="nav-pricing-link">Pricing</a>
+      </div>
+      <div class="nav-right">
+        <a href="/#intake" class="nav-cta">Get free plan →</a>
+        <select class="lang-sel" id="langSel" aria-label="Language"></select>
+      </div>
+    </nav>
+  </div>
 
   <!-- ═══════════════════════════════════════════════════
        ARTICLE
@@ -529,7 +511,7 @@
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="https://www.debt-free.world">Home</a>
         <span>›</span>
-        <a href="https://www.debt-free.world/blog">Blog</a>
+        <a href="https://www.debt-free.world/blog/">Blog</a>
         <span>›</span>
         How to Get Out of Debt Fast
       </nav>
@@ -620,7 +602,7 @@
 
         <div class="callout callout-gray">
           <div class="callout-title">Free shortcut</div>
-          <a href="https://www.debt-free.world/#get-started">Debt-Free.world</a> builds this list and calculates your debt-free date automatically. Enter your debts once and get a full AI-powered plan — free, no account required.
+          <a href="https://www.debt-free.world/#intake">Debt-Free.world</a> builds this list and calculates your debt-free date automatically. Enter your debts once and get a full AI-powered plan — free, no account required.
         </div>
 
         <!-- ─── SECTION 3 ─── -->
@@ -746,7 +728,7 @@
         <h3>Debt-Free.world (AI-powered, free)</h3>
         <p>
           Enter your debts, income, and situation. Get an AI-generated 90-day action plan sent to your email — personalized to your country, your creditors, and your specific balances. No account. No credit card. Free permanently.
-          <a href="https://www.debt-free.world/#get-started">Get your free plan →</a>
+          <a href="https://www.debt-free.world/#intake">Get your free plan →</a>
         </p>
 
         <h3>Your country's debt help resources</h3>
@@ -774,11 +756,20 @@
           <li><strong>Ignoring the emotional side.</strong> Debt creates shame, which creates avoidance, which creates more debt. The fastest thing you can do for your debt is look at the full picture — once, clearly — and make one decision about what to do next.</li>
         </ul>
 
+        <!-- Upsell block -->
+        <div style="border:1.5px solid var(--green);border-radius:12px;background:var(--green-bg);padding:1.5rem 1.75rem;margin:2rem 0;">
+          <p style="font-family:var(--serif);font-size:18px;color:#111;margin-bottom:1rem;">Ready to build your real plan?</p>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;">
+            <a href="/#intake" style="display:block;background:var(--green);color:#fff;text-align:center;padding:12px 20px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;">Get free plan →</a>
+            <a href="/pricing.html" style="display:block;border:1.5px solid var(--green);color:var(--green);text-align:center;padding:12px 20px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;">Debt Recovery — 19 €</a>
+          </div>
+        </div>
+
         <!-- CTA block -->
         <div class="cta-block">
           <p class="cta-headline">Get your free 90-day debt plan</p>
           <p>AI-generated, personalized to your situation. Sent to your email in minutes. Free — forever.</p>
-          <a href="https://www.debt-free.world/#get-started" class="cta-btn">Start free — it takes 3 minutes →</a>
+          <a href="https://www.debt-free.world/#intake" class="cta-btn">Start free — it takes 3 minutes →</a>
           <p class="cta-sub">No account. No credit card. 19 languages. 40+ countries.</p>
         </div>
 
@@ -850,38 +841,106 @@
   <!-- ═══════════════════════════════════════════════════
        FOOTER
   ═══════════════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <p>
-      © 2026 Debt-Free.world — Amliv Oy, Nokia, Finland · VAT FI32503518
-      &nbsp;|&nbsp;
-      <a href="https://www.debt-free.world/privacy">Privacy</a>
-      &nbsp;|&nbsp;
-      <a href="https://www.debt-free.world/terms">Terms</a>
-      &nbsp;|&nbsp;
-      <a href="mailto:support@debt-free.world">support@debt-free.world</a>
-    </p>
-    <p style="margin-top:6px;">We do this together ✦</p>
-  </footer>
+  <div style="max-width:720px;margin:0 auto;padding:0 24px;">
+    <footer style="padding:2rem 0;border-top:0.5px solid #eee;margin-top:2rem;">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:0.75rem;">
+        <span style="font-family:'DM Serif Display',serif;font-size:17px;">Debt-<em style="font-style:italic;color:#166534;">Free</em>.world</span>
+        <span style="font-size:12px;color:#888;">Built with honesty. Free forever. 🌍</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;border-top:0.5px solid #eee;padding-top:0.75rem;">
+        <a href="/about.html" style="font-size:12px;color:#888;text-decoration:none;">About</a>
+        <a href="/faq.html" style="font-size:12px;color:#888;text-decoration:none;">FAQ</a>
+        <a href="/pricing.html" style="font-size:12px;color:#888;text-decoration:none;">Pricing</a>
+        <a href="/legal.html#terms" style="font-size:12px;color:#888;text-decoration:none;">Terms</a>
+        <a href="/legal.html#privacy" style="font-size:12px;color:#888;text-decoration:none;">Privacy</a>
+        <a href="/legal.html#refund" style="font-size:12px;color:#888;text-decoration:none;">Refund Policy</a>
+        <span style="font-size:12px;color:#bbb;">Amliv Oy · VAT FI32503518</span>
+      </div>
+    </footer>
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       FAQ ACCORDION JS
-  ═══════════════════════════════════════════════════ -->
+  <!-- Cookie banner + consent-first tracking -->
+  <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;">
+    <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:inherit;">Decline</button>
+      <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:inherit;">Accept analytics</button>
+    </div>
+  </div>
+
+  <!-- FAQ ACCORDION JS -->
   <script>
     document.querySelectorAll('.faq-q').forEach(btn => {
       btn.addEventListener('click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
-        // Close all
         document.querySelectorAll('.faq-q').forEach(b => {
           b.setAttribute('aria-expanded', 'false');
           document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');
         });
-        // Open clicked (if it was closed)
         if (!expanded) {
           btn.setAttribute('aria-expanded', 'true');
           document.getElementById(btn.getAttribute('aria-controls')).classList.add('open');
         }
       });
     });
+    function loadTracking(){
+      var s=document.createElement('script');s.async=true;
+      s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+      document.head.appendChild(s);
+      window.dataLayer=window.dataLayer||[];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window,document,'clarity','script','x6r2dfxj3l');
+    }
+    function setCookieConsent(choice){
+      localStorage.setItem('cookie-consent',choice);
+      document.getElementById('cookie-banner').style.display='none';
+      if(choice==='accepted')loadTracking();
+    }
+    (function(){
+      var consent=localStorage.getItem('cookie-consent');
+      if(!consent){
+        document.getElementById('cookie-banner').style.display='flex';
+      } else if(consent==='accepted'){
+        loadTracking();
+      }
+    })();
+    (function(){
+      var langs=[['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+        ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
+        ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
+        ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
+        ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']];
+      var URLS={
+        EN:'/blog/how-to-get-out-of-debt-fast',
+        FI:'/',DE:'/blog/schulden-loswerden-kostenlos',
+        FR:'/blog/aide-pour-dettes-gratuite',
+        SV:'/blog/skuldfri-gratis-hjalp',
+        NL:'/blog/schuldhulp-gratis-nederland',
+        PL:'/blog/pomoc-w-dlugach-za-darmo',
+        ES:'/blog/ayuda-deudas-gratis',
+        IT:'/blog/aiuto-debiti-gratis-italia',
+        PT:'/blog/ajuda-dividas-gratis-portugal',
+        ID:'/blog/bantuan-hutang-gratis-indonesia'
+      };
+      var DEFAULT_LANG='EN';
+      var sel=document.getElementById('langSel');
+      if(!sel)return;
+      langs.forEach(function(l){
+        var o=document.createElement('option');
+        o.value=l[0];o.textContent=l[1];
+        if(l[0]===DEFAULT_LANG)o.selected=true;
+        sel.appendChild(o);
+      });
+      sel.addEventListener('change',function(){
+        var url=URLS[this.value]||'/';
+        window.location.href=url;
+      });
+    })();
   </script>
 
 </body>
