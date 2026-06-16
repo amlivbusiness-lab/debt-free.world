@@ -68,36 +68,43 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P67WN08EMJ');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --green:#166534;--green-light:#dcfce7;--green-mid:#16a34a;
-  --text:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;
-  --bg:#ffffff;--bg-soft:#f9fafb;
+  --green:#166534;--green-dark:#0f4d26;--green-bg:#f0f8f3;--green-border:#86c9a0;--green-light:#dcf0e4;
+  --text:#111;--border:#ddd;--white:#fff;
   --serif:'DM Serif Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
-  --max:740px;
 }
 html{font-size:17px;scroll-behavior:smooth;}
-body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased;}
-.site-nav{border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);z-index:100;}
-.nav-logo{font-family:var(--serif);font-size:1.15rem;color:var(--green);text-decoration:none;}
-.nav-cta{background:var(--green);color:#fff;padding:8px 18px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;transition:background 0.2s;}
-.nav-cta:hover{background:#14532d;}
-.article-outer{max-width:var(--max);margin:0 auto;padding:0 20px 80px;}
-.breadcrumb{font-size:0.8rem;color:var(--muted);padding:20px 0 0;}
-.breadcrumb a{color:var(--muted);text-decoration:none;}
+body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;-webkit-font-smoothing:antialiased;}
+.site-nav-wrap{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:100;}
+.site-nav{max-width:720px;margin:0 auto;padding:1.25rem 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;}
+.nav-logo{font-family:var(--serif);font-size:22px;color:#111;text-decoration:none;}
+.nav-logo em{font-style:italic;color:var(--green);}
+.nav-center{display:flex;gap:4px;align-items:center;justify-content:center;}
+.nav-pricing-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
+.nav-pricing-link:hover{background:var(--green-bg);}
+.nav-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.nav-cta{font-size:13px;font-weight:600;background:var(--green);color:#fff;text-decoration:none;padding:7px 16px;border-radius:20px;white-space:nowrap;}
+.nav-cta:hover{background:var(--green-dark);}
+.lang-sel{font-size:13px;padding:6px 10px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
+@media(max-width:600px){.site-nav{grid-template-columns:1fr auto;}.nav-center{display:none;}}
+.article-outer{max-width:720px;margin:0 auto;padding:0 20px 80px;}
+.breadcrumb{font-size:0.8rem;color:#888;padding:20px 0 0;}
+.breadcrumb a{color:#888;text-decoration:none;}
 .breadcrumb a:hover{color:var(--green);}
 .breadcrumb span{margin:0 6px;}
 .article-hero{padding:32px 0 28px;border-bottom:1px solid var(--border);margin-bottom:40px;}
 .article-tag{display:inline-block;background:var(--green-light);color:var(--green);font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:14px;}
 h1.article-title{font-family:var(--serif);font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.2;color:var(--text);margin-bottom:16px;letter-spacing:-0.02em;}
 .article-intro{font-size:1.1rem;color:#374151;max-width:640px;margin-bottom:20px;line-height:1.7;}
-.article-meta{font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.article-meta{font-size:0.8rem;color:#888;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .article-meta strong{color:var(--text);}
-.toc{background:var(--bg-soft);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:8px;padding:20px 24px;margin-bottom:48px;}
-.toc-title{font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px;}
+.toc{background:var(--green-bg);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:8px;padding:20px 24px;margin-bottom:48px;}
+.toc-title{font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:12px;}
 .toc ol{padding-left:20px;display:flex;flex-direction:column;gap:6px;}
 .toc li{font-size:0.95rem;}
 .toc a{color:var(--green);text-decoration:none;font-weight:500;}
@@ -109,23 +116,23 @@ h1.article-title{font-family:var(--serif);font-size:clamp(1.9rem,5vw,2.6rem);lin
 .article-body li{color:#1f2937;}
 .article-body strong{color:var(--text);}
 .article-body a{color:var(--green);text-decoration:underline;text-underline-offset:3px;}
-.article-body a:hover{color:var(--green-mid);}
+.article-body a:hover{color:var(--green);}
 .callout{border-radius:8px;padding:18px 22px;margin:28px 0;font-size:0.97rem;}
 .callout-green{background:var(--green-light);border-left:4px solid var(--green);}
-.callout-gray{background:var(--bg-soft);border:1px solid var(--border);}
+.callout-gray{background:var(--green-bg);border:1px solid var(--border);}
 .callout-title{font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;color:var(--green);}
-.callout-gray .callout-title{color:var(--muted);}
+.callout-gray .callout-title{color:#888;}
 
 /* ── CALCULATOR ── */
-.calc-card{background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:28px 28px 24px;margin:32px 0;}
+.calc-card{background:var(--green-bg);border:1px solid var(--border);border-radius:12px;padding:28px 28px 24px;margin:32px 0;}
 .calc-title{font-family:var(--serif);font-size:1.3rem;margin-bottom:20px;color:var(--text);}
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(max-width:520px){.calc-grid{grid-template-columns:1fr;}}
 .calc-field{display:flex;flex-direction:column;gap:5px;}
-.calc-field label{font-size:0.82rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
+.calc-field label{font-size:0.82rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.05em;}
 .calc-field input{border:1.5px solid var(--border);border-radius:7px;padding:10px 12px;font-family:var(--sans);font-size:1rem;color:var(--text);outline:none;transition:border-color 0.2s;}
 .calc-field input:focus{border-color:var(--green);}
-.calc-hint{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.calc-hint{font-size:0.78rem;color:#888;margin-top:2px;}
 .calc-btn{margin-top:18px;background:var(--green);color:#fff;border:none;border-radius:8px;padding:13px 28px;font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer;width:100%;transition:background 0.2s;}
 .calc-btn:hover{background:#14532d;}
 .calc-result{display:none;margin-top:22px;background:#fff;border:2px solid var(--green);border-radius:10px;padding:22px 24px;}
@@ -133,15 +140,15 @@ h1.article-title{font-family:var(--serif);font-size:clamp(1.9rem,5vw,2.6rem);lin
 .result-date{font-family:var(--serif);font-size:1.8rem;color:var(--green);margin-bottom:6px;}
 .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
 @media(max-width:480px){.result-grid{grid-template-columns:1fr 1fr;}}
-.result-item{text-align:center;padding:12px 8px;background:var(--bg-soft);border-radius:8px;}
+.result-item{text-align:center;padding:12px 8px;background:var(--green-bg);border-radius:8px;}
 .result-num{font-family:var(--serif);font-size:1.3rem;color:var(--text);}
-.result-label{font-size:0.75rem;color:var(--muted);margin-top:2px;}
+.result-label{font-size:0.75rem;color:#888;margin-top:2px;}
 .result-faster{margin-top:16px;padding:12px 16px;background:var(--green-light);border-radius:8px;font-size:0.9rem;color:var(--green);font-weight:600;text-align:center;}
 .calc-cta-link{display:block;text-align:center;margin-top:14px;font-size:0.9rem;}
 .table-wrap{overflow-x:auto;margin:28px 0;}
 table{width:100%;border-collapse:collapse;font-size:0.9rem;}
 thead th{background:var(--green);color:#fff;text-align:left;padding:11px 14px;font-weight:600;}
-tbody tr:nth-child(even){background:var(--bg-soft);}
+tbody tr:nth-child(even){background:var(--green-bg);}
 tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;vertical-align:top;}
 .tag-good{color:#15803d;font-weight:600;}
 .cta-block{background:var(--green);color:#fff;border-radius:12px;padding:36px 32px;text-align:center;margin:52px 0 40px;}
@@ -158,26 +165,34 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;v
 .faq-a{display:none;padding-bottom:16px;color:#374151;font-size:0.97rem;line-height:1.7;}
 .faq-a.open{display:block;}
 .related{border-top:1px solid var(--border);padding-top:32px;margin-top:52px;}
-.related-title{font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:16px;}
+.related-title{font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:16px;}
 .related-links{display:flex;flex-direction:column;gap:10px;}
 .related-links a{color:var(--green);text-decoration:none;font-weight:500;font-size:0.97rem;}
 .related-links a:hover{text-decoration:underline;}
-.site-footer{border-top:1px solid var(--border);text-align:center;padding:28px 20px;font-size:0.8rem;color:var(--muted);}
-.site-footer a{color:var(--muted);text-decoration:none;}
+.site-footer{border-top:1px solid var(--border);text-align:center;padding:28px 20px;font-size:0.8rem;color:#888;}
+.site-footer a{color:#888;text-decoration:none;}
 .site-footer a:hover{color:var(--green);}
 @media(max-width:480px){h1.article-title{font-size:1.75rem;}.cta-block{padding:28px 20px;}.cta-block .cta-headline{font-size:1.4rem;}}
 </style>
 </head>
 <body>
-<nav class="site-nav" aria-label="Site navigation">
-  <a href="https://www.debt-free.world" class="nav-logo">Debt-Free ✦ World</a>
-  <a href="https://www.debt-free.world/#get-started" class="nav-cta">Get Free Plan →</a>
-</nav>
+<div class="site-nav-wrap">
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
+    <div class="nav-center">
+      <a href="/pricing.html" class="nav-pricing-link">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="/#intake" class="nav-cta">Get free plan →</a>
+      <select class="lang-sel" id="langSel" aria-label="Language"></select>
+    </div>
+  </nav>
+</div>
 <main>
 <div class="article-outer">
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <a href="https://www.debt-free.world">Home</a><span>›</span>
-    <a href="https://www.debt-free.world/blog">Blog</a><span>›</span>
+    <a href="https://www.debt-free.world/blog/">Blog</a><span>›</span>
     Debt-Free Date Calculator
   </nav>
   <header class="article-hero">
@@ -231,7 +246,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;v
       </div>
       <button class="calc-btn" onclick="calculateDebtFree()">Calculate my debt-free date →</button>
       <div class="calc-result" id="calc-result">
-        <div id="result-headline" style="font-size:0.9rem;color:var(--muted);margin-bottom:6px;">At your current payment, you'll be debt-free on:</div>
+        <div id="result-headline" style="font-size:0.9rem;color:#888;margin-bottom:6px;">At your current payment, you'll be debt-free on:</div>
         <div class="result-date" id="result-date">—</div>
         <div class="result-grid">
           <div class="result-item"><div class="result-num" id="result-months">—</div><div class="result-label">Months to payoff</div></div>
@@ -239,7 +254,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;v
           <div class="result-item"><div class="result-num" id="result-total">—</div><div class="result-label">Total amount paid</div></div>
         </div>
         <div class="result-faster" id="result-faster" style="display:none;"></div>
-        <a class="calc-cta-link" href="https://www.debt-free.world/#get-started">
+        <a class="calc-cta-link" href="https://www.debt-free.world/#intake">
           Want a full AI-powered plan for all your debts? <strong>Get it free →</strong>
         </a>
       </div>
@@ -278,15 +293,24 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;v
     <p>The calculator above handles one debt at a time. For multiple debts — the realistic situation for most people — there are two approaches:</p>
     <ol>
       <li><strong>Calculate each debt separately</strong> and track the total. Works, but misses the compound effect of rolling freed payments to the next debt (the avalanche/snowball strategy).</li>
-      <li><strong>Use an AI-powered full plan</strong> that calculates across all debts simultaneously, optimizes the payment order, and gives you a single debt-free date for everything. That's what <a href="https://www.debt-free.world/#get-started">Debt-Free.world's free plan</a> does.</li>
+      <li><strong>Use an AI-powered full plan</strong> that calculates across all debts simultaneously, optimizes the payment order, and gives you a single debt-free date for everything. That's what <a href="https://www.debt-free.world/#intake">Debt-Free.world's free plan</a> does.</li>
     </ol>
     <p>The difference matters. Someone with three debts totaling €15,000 might see a "last debt paid off" date of 2029 using method 1, but 2028 using method 2 — because rolling freed payments accelerates the final debts significantly.</p>
     <p>See also: <a href="https://www.debt-free.world/blog/how-to-get-out-of-debt-fast">How to get out of debt fast — snowball vs. avalanche compared</a></p>
 
+    <!-- Upsell block -->
+    <div style="border:1.5px solid var(--green);border-radius:12px;background:var(--green-bg);padding:1.5rem 1.75rem;margin:2rem 0;">
+      <p style="font-family:var(--serif);font-size:18px;color:#111;margin-bottom:1rem;">Ready to build your real plan?</p>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;">
+        <a href="/#intake" style="display:block;background:var(--green);color:#fff;text-align:center;padding:12px 20px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;">Get free plan →</a>
+        <a href="/pricing.html" style="display:block;border:1.5px solid var(--green);color:var(--green);text-align:center;padding:12px 20px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;">Debt Recovery — 19 €</a>
+      </div>
+    </div>
+
     <div class="cta-block">
       <p class="cta-headline">Get your full debt-free plan — all debts, one date</p>
       <p>AI calculates across all your debts and tells you the fastest route to zero. Free, takes 3 minutes.</p>
-      <a href="https://www.debt-free.world/#get-started" class="cta-btn">Get my free plan →</a>
+      <a href="https://www.debt-free.world/#intake" class="cta-btn">Get my free plan →</a>
       <p class="cta-sub">No account. No credit card. 19 languages.</p>
     </div>
 
@@ -335,7 +359,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;v
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq4">What is the difference between debt snowball calculator and debt avalanche calculator?<span class="icon" aria-hidden="true">+</span></button>
-        <div class="faq-a" id="faq4">A <strong>debt snowball calculator</strong> shows your payoff timeline when you target the <em>smallest balance first</em> — fast early wins, high motivation. A <strong>debt avalanche calculator</strong> shows your timeline when you target the <em>highest interest rate first</em> — saves the most money overall. The avalanche is mathematically superior; the snowball is psychologically superior for many people. For a personalized comparison of both methods applied to your exact debts, use the <a href="https://www.debt-free.world/#get-started">free Debt-Free.world plan</a>.</div>
+        <div class="faq-a" id="faq4">A <strong>debt snowball calculator</strong> shows your payoff timeline when you target the <em>smallest balance first</em> — fast early wins, high motivation. A <strong>debt avalanche calculator</strong> shows your timeline when you target the <em>highest interest rate first</em> — saves the most money overall. The avalanche is mathematically superior; the snowball is psychologically superior for many people. For a personalized comparison of both methods applied to your exact debts, use the <a href="https://www.debt-free.world/#intake">free Debt-Free.world plan</a>.</div>
       </div>
     </div>
     <div class="related">
@@ -349,10 +373,32 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#1f2937;v
   </article>
 </div>
 </main>
-<footer class="site-footer">
-  <p>© 2026 Debt-Free.world — Amliv Oy, Nokia, Finland · VAT FI32503518 &nbsp;|&nbsp; <a href="https://www.debt-free.world/privacy">Privacy</a> &nbsp;|&nbsp; <a href="https://www.debt-free.world/terms">Terms</a> &nbsp;|&nbsp; <a href="mailto:support@debt-free.world">support@debt-free.world</a></p>
-  <p style="margin-top:6px;">We do this together ✦</p>
-</footer>
+<div style="max-width:720px;margin:0 auto;padding:0 24px;">
+  <footer style="padding:2rem 0;border-top:0.5px solid #eee;margin-top:2rem;">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:0.75rem;">
+      <span style="font-family:'DM Serif Display',serif;font-size:17px;">Debt-<em style="font-style:italic;color:#166534;">Free</em>.world</span>
+      <span style="font-size:12px;color:#888;">Built with honesty. Free forever. 🌍</span>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;border-top:0.5px solid #eee;padding-top:0.75rem;">
+      <a href="/about.html" style="font-size:12px;color:#888;text-decoration:none;">About</a>
+      <a href="/faq.html" style="font-size:12px;color:#888;text-decoration:none;">FAQ</a>
+      <a href="/pricing.html" style="font-size:12px;color:#888;text-decoration:none;">Pricing</a>
+      <a href="/legal.html#terms" style="font-size:12px;color:#888;text-decoration:none;">Terms</a>
+      <a href="/legal.html#privacy" style="font-size:12px;color:#888;text-decoration:none;">Privacy</a>
+      <a href="/legal.html#refund" style="font-size:12px;color:#888;text-decoration:none;">Refund Policy</a>
+      <span style="font-size:12px;color:#bbb;">Amliv Oy · VAT FI32503518</span>
+    </div>
+  </footer>
+</div>
+
+<!-- Cookie banner + consent-first tracking -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;">
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:inherit;">Decline</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:inherit;">Accept analytics</button>
+  </div>
+</div>
 <script>
 function calculateDebtFree(){
   const B=parseFloat(document.getElementById('c-balance').value)||0;
@@ -399,6 +445,64 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     if(!exp){btn.setAttribute('aria-expanded','true');document.getElementById(btn.getAttribute('aria-controls')).classList.add('open');}
   });
 });
+function loadTracking(){
+  var s=document.createElement('script');s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,'clarity','script','x6r2dfxj3l');
+}
+function setCookieConsent(choice){
+  localStorage.setItem('cookie-consent',choice);
+  document.getElementById('cookie-banner').style.display='none';
+  if(choice==='accepted')loadTracking();
+}
+(function(){
+  var consent=localStorage.getItem('cookie-consent');
+  if(!consent){
+    document.getElementById('cookie-banner').style.display='flex';
+  } else if(consent==='accepted'){
+    loadTracking();
+  }
+})();
+(function(){
+  var langs=[['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+    ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
+    ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
+    ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
+    ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']];
+  var URLS={
+    EN:'/blog/how-to-get-out-of-debt-fast',
+    FI:'/',DE:'/blog/schulden-loswerden-kostenlos',
+    FR:'/blog/aide-pour-dettes-gratuite',
+    SV:'/blog/skuldfri-gratis-hjalp',
+    NL:'/blog/schuldhulp-gratis-nederland',
+    PL:'/blog/pomoc-w-dlugach-za-darmo',
+    ES:'/blog/ayuda-deudas-gratis',
+    IT:'/blog/aiuto-debiti-gratis-italia',
+    PT:'/blog/ajuda-dividas-gratis-portugal',
+    ID:'/blog/bantuan-hutang-gratis-indonesia'
+  };
+  var DEFAULT_LANG='EN';
+  var sel=document.getElementById('langSel');
+  if(!sel)return;
+  langs.forEach(function(l){
+    var o=document.createElement('option');
+    o.value=l[0];o.textContent=l[1];
+    if(l[0]===DEFAULT_LANG)o.selected=true;
+    sel.appendChild(o);
+  });
+  sel.addEventListener('change',function(){
+    var url=URLS[this.value]||'/';
+    window.location.href=url;
+  });
+})();
 </script>
 </body>
 </html>
