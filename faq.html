@@ -15,13 +15,30 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
 .page{max-width:720px;margin:0 auto;padding:0 24px;}
-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:1.25rem 0;}
-.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;justify-self:start;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;}
 .nav-logo em{font-style:italic;color:var(--green);}
-.nav-links{display:flex;gap:4px;align-items:center;justify-content:center;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
 .nav-link{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
 .nav-link:hover{background:var(--green-bg);}
 .nav-link.active{color:var(--green);font-weight:600;}
+.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
+.nav-blog:hover{background:var(--green-bg);}
+.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.2s;}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:1.25rem 24px 1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+.mobile-menu.open{display:block;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:#aaa;line-height:1;}
+.mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a.active{color:var(--green);font-weight:600;}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+}
 
 .hero{padding:2.5rem 0 2rem;}
 .hero-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1rem;}
@@ -58,27 +75,39 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 .footer-logo em{font-style:italic;color:var(--green);}
 .footer-note{font-size:12px;color:#888;}
 
-@media(max-width:520px){
-  nav{grid-template-columns:1fr 1fr;}
-  .nav-links{display:none;}
-}
-.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;justify-self:center;}
-.nav-blog:hover{background:var(--green-bg);}
-.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;justify-self:end;}
+
+
 </style>
 </head>
 <body>
 <div class="page">
 <nav>
   <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <div style="display:flex;gap:4px;align-items:center;justify-content:center;">
-    <a href="/blog/" class="nav-blog" id="nav-blog">Blog</a>
+  <div class="nav-links">
+    <a href="/blog/" id="nav-blog" class="nav-link">Blog</a>
     <a href="/pricing.html" id="nav-pricing" class="nav-link">Pricing</a>
     <a href="/about.html" id="nav-about" class="nav-link">About</a>
-    <a href="/faq.html" id="nav-faq" class="nav-link">FAQ</a>
+    <a href="/faq.html" id="nav-faq" class="nav-blog">FAQ</a>
   </div>
-  <select class="lang-sel" id="langSel" ></select>
+  <div class="nav-right">
+    <select class="lang-sel" id="langSel"></select>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="nav-logo">Debt-<em>Free</em>.world</span>
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <a href="/">Home</a>
+  <a href="/blog/">Blog</a>
+  <a href="/pricing.html">Pricing</a>
+  <a href="/about.html">About</a>
+  <a href="/faq.html" class="active">FAQ</a>
+</div>
 
 
 
@@ -104,20 +133,23 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 
   <details open>
     <summary>Is it really free? No catch?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Yes. The 90-day Debt Recovery plan, all analysis, and all Debt FREE tools are free — permanently. No credit card required. No trial period. No hidden costs. Free means free.</p><p>Debt Recovery (19 €, one-time) is an optional upgrade with a deeper toolset. It is not required to use the service.</p></div>
+    <div class="ans"><p>Yes. The free plan, all analysis, and your personal member area are free — permanently. No credit card required. No trial period. No hidden costs. Free means free.</p><p>Debt Recovery (19 €, one-time) is an optional upgrade that gives you a companion programme for 90 days. It is not required to use the service.</p></div>
   </details>
 
   <details>
     <summary>What exactly do I get for free?<span class="q-icon">+</span></summary>
     <div class="ans"><p>Your free plan includes:</p>
     <ul>
-      <li>A personalised 90-day Debt Recovery plan based on your exact numbers</li>
+      <li>A personalised 90-day debt recovery plan based on your exact numbers</li>
       <li>Debt analysis and prioritisation</li>
       <li>Budget and cash flow analysis</li>
       <li>A realistic repayment schedule with a debt-free date estimate</li>
+      <li>Risk alerts — what happens if you do nothing</li>
       <li>Your legal rights with creditors in your country</li>
       <li>Local debt counselling services and government support programmes</li>
+      <li>Emergency Action Card — immediate steps if you are in crisis right now</li>
       <li>One concrete action you can take today</li>
+      <li>Access to your personal member area</li>
       <li>The full plan delivered to your email — yours to keep</li>
     </ul></div>
   </details>
@@ -129,26 +161,35 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 
   <details>
     <summary>Do I need to create an account?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>No. The free plan requires only your email address — to deliver your plan. No account creation, no password, no profile.</p></div>
+    <div class="ans"><p>No account or password needed. Enter your email address to receive your plan and access your personal member area. That's it.</p></div>
+  </details>
+
+  <details>
+    <summary>What is the member area?<span class="q-icon">+</span></summary>
+    <div class="ans"><p>Both free and paid users get access to a personal member area — sign in with your email, no password needed. The member area is where your plan lives and where you access the tools included in your plan.</p></div>
   </details>
 </div>
 
-<!-- PREMIUM -->
 <div class="section" id="premium">
-  <div class="section-label">Debt Recovery — Premium (19 €)</div>
+  <div class="section-label">Debt Recovery — 19 €</div>
 
   <details>
-    <summary>What does Premium add?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Debt Recovery (19 €, one-time) gives you the full toolset inside your Premium Member Area for 90 days:</p>
+    <summary>What does Debt Recovery add?<span class="q-icon">+</span></summary>
+    <div class="ans"><p>Debt Recovery (19 €, one-time) is your companion programme for 90 days. You get everything in the free plan, plus:</p>
     <ul>
-      <li>Personalised 90-day Debt Recovery plan (AI-generated from your data)</li>
-      <li>Creditor letter generator — 7 letter types including hardship, settlement, stop-contact, and payment plan requests</li>
-      <li>Expense simulator — see exactly how cutting one cost accelerates your debt-free date</li>
-      <li>Snowball vs avalanche calculator — which strategy saves you more</li>
-      <li>Debt collection process map — your rights at every stage</li>
-      <li>Crisis budget tool</li>
-      <li>Monthly plan updates</li>
-      <li>Bank and creditor guides by country</li>
+      <li>In-depth onboarding built around your exact debts, income, mindset and goals</li>
+      <li>Personalised 90-day programme — three phases, country-specific resources</li>
+      <li>Monthly plan update — refresh your priorities every 30 days</li>
+      <li>Letter generator — 7 letter types addressed to your creditor by name, ready to send</li>
+      <li>Creditor call practice — prepare before you pick up the phone</li>
+      <li>Crisis Budget Tool, Snowball vs Avalanche Calculator, Extra Income Simulator</li>
+      <li>Debt Collection Map — your rights at every stage</li>
+      <li>Legal Protection Guide — what collectors can and cannot do in your country</li>
+      <li>Crisis Action Plans — unemployment, divorce, sick leave, emergencies</li>
+      <li>Behavioural tools — impulse control, habits, financial stress management</li>
+      <li>90-Day Challenge — weekly framework to stay on track</li>
+      <li>Companion Mode — guided check-ins and next-step suggestions</li>
+      <li>Monthly reminder emails</li>
     </ul></div>
   </details>
 
@@ -159,7 +200,12 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 
   <details>
     <summary>What happens after 90 days?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your Premium Member Area access expires after 90 days. The plan we sent to your email is yours to keep permanently. The free service remains available to you at any time.</p></div>
+    <div class="ans"><p>Your Debt Recovery programme access expires after 90 days. Your plan and any letters you generated are yours to keep permanently. The free service and your member area remain available to you at any time.</p></div>
+  </details>
+
+  <details>
+    <summary>Can't afford 19 €?<span class="q-icon">+</span></summary>
+    <div class="ans"><p>Write to <a href="mailto:support@debt-free.world">support@debt-free.world</a> or use the link on the pricing page: "Can't afford this right now? Apply for free access. No explanation needed." We will not ask why. Financial freedom should never depend on your ability to pay.</p></div>
   </details>
 
   <details>
@@ -179,7 +225,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 
   <details>
     <summary>How is my plan generated?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your plan is generated by AI (Claude by Anthropic) using the specific data you provide — your income, household type, debt amounts, interest rates, housing costs, employment situation, country, and language. The AI does not produce generic templates. It calculates your actual monthly gap, projects a realistic debt-free date, and gives you country-specific resources and next steps.</p></div>
+    <div class="ans"><p>Your plan is built from the specific data you provide — your income, household type, debt amounts, interest rates, housing costs, employment situation, country, and language. It does not produce generic templates. It calculates your actual monthly gap, projects a realistic debt-free date, and gives you country-specific resources and next steps.</p></div>
   </details>
 
   <details>
@@ -219,7 +265,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 
   <details>
     <summary>Who can see my financial information?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your data is processed by our AI provider (Anthropic) and email provider (Brevo) for the purpose of generating and delivering your plan. It is not shared with any other third party, not sold, and not used for advertising.</p></div>
+    <div class="ans"><p>Your data is processed by our technology and email provider (Brevo) for the purpose of generating and delivering your plan. It is not shared with any other third party, not sold, and not used for advertising.</p></div>
   </details>
 
   <details>
@@ -238,8 +284,8 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="section-label">Technical</div>
 
   <details>
-    <summary>How does my Premium Member Area work?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>After purchasing Debt Recovery, you receive a personal access link by email. Clicking it opens your Premium Member Area directly — no password required. The link is valid for 90 days and is personal to you. On first visit, you complete a short onboarding form that generates your personalised plan.</p></div>
+    <summary>How does my member area work?<span class="q-icon">+</span></summary>
+    <div class="ans"><p>Both free and paid users get a personal member area. After submitting the form, you receive an access link by email. Clicking it opens your member area directly — no password required. If you purchased Debt Recovery, your 90-day programme tools are available immediately after a short onboarding.</p></div>
   </details>
 
   <details>
@@ -298,6 +344,10 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 </div>
 <!-- Analytics — loads only after cookie consent -->
 <script>
+function toggleMenu(){
+  const menu=document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
 function loadTracking(){
   if(localStorage.getItem('cookie-consent')==='accepted'){
     var s=document.createElement('script');s.async=true;
