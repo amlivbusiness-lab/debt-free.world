@@ -23,7 +23,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -136,7 +136,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       <a href="/pricing.html" class="nav-pricing-link">Pricing</a>
     </div>
     <div class="nav-right">
-      <a href="/#get-started" class="nav-cta">Plan gratuit →</a>
+      <a href="/#intake" class="nav-cta">Plan gratuit →</a>
       <select class="lang-sel" id="langSel" aria-label="Language"></select>
     </div>
   </nav>
@@ -146,7 +146,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 <div class="article-outer">
   <nav class="breadcrumb">
     <a href="https://www.debt-free.world">Accueil</a><span>›</span>
-    <a href="https://www.debt-free.world/blog">Blog</a><span>›</span>
+    <a href="https://www.debt-free.world/blog/">Blog</a><span>›</span>
     Aide pour dettes gratuite
   </nav>
   <header class="article-hero">
@@ -303,7 +303,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
         <div class="step-num">4</div>
         <div class="step-body">
           <strong>Obtenir votre plan personnalisé gratuit</strong>
-          <p><a href="https://www.debt-free.world/#get-started">Debt-Free.world</a> génère en 3 minutes un plan d'action sur 90 jours personnalisé pour votre situation, vos dettes et la France — avec les organismes locaux adaptés à votre cas. Gratuit, en français, sans inscription.</p>
+          <p><a href="https://www.debt-free.world/#intake">Debt-Free.world</a> génère en 3 minutes un plan d'action sur 90 jours personnalisé pour votre situation, vos dettes et la France — avec les organismes locaux adaptés à votre cas. Gratuit, en français, sans inscription.</p>
         </div>
       </div>
     </div>
@@ -316,7 +316,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
         <div style="font-size:14px;color:#444;line-height:1.65;font-weight:300;">Généré par IA pour vos dettes, vos revenus et la France. Ou passez à Debt Recovery (19 €) pour des lettres IA aux créanciers, la pratique de négociation et 13 outils supplémentaires.</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;min-width:170px;">
-        <a href="https://www.debt-free.world/#get-started" style="display:block;background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:12px 18px;border-radius:30px;text-decoration:none;text-align:center;">Plan gratuit →</a>
+        <a href="https://www.debt-free.world/#intake" style="display:block;background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:12px 18px;border-radius:30px;text-decoration:none;text-align:center;">Plan gratuit →</a>
         <a href="https://www.debt-free.world/pricing.html" style="display:block;background:#fff;color:var(--green);font-weight:600;font-size:14px;padding:11px 18px;border-radius:30px;text-decoration:none;text-align:center;border:1.5px solid var(--green);">Voir Debt Recovery</a>
         <div style="font-size:11px;color:#888;text-align:center;">Sans carte pour le plan gratuit</div>
       </div>
@@ -325,7 +325,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
     <div class="cta-block">
       <p class="cta-headline">Votre plan gratuit pour sortir des dettes</p>
       <p>Personnalisé pour vos dettes, vos revenus et la France. Avec votre date de libération financière. Gratuit — toujours.</p>
-      <a href="https://www.debt-free.world/#get-started" class="cta-btn">Commencer gratuitement →</a>
+      <a href="https://www.debt-free.world/#intake" class="cta-btn">Commencer gratuitement →</a>
       <p class="cta-sub">Sans inscription. Sans carte bancaire. 3 minutes.</p>
     </div>
 
@@ -426,16 +426,31 @@ window.addEventListener('DOMContentLoaded',function(){
     ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
     ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
     ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']];
-  var stored=localStorage.getItem('dfw_lang')||'FR';
+  var URLS={
+    EN:'/blog/how-to-get-out-of-debt-fast',
+    FI:'/',DE:'/blog/schulden-loswerden-kostenlos',
+    FR:'/blog/aide-pour-dettes-gratuite',
+    SV:'/blog/skuldfri-gratis-hjalp',
+    NL:'/blog/schuldhulp-gratis-nederland',
+    PL:'/blog/pomoc-w-dlugach-za-darmo',
+    ES:'/blog/ayuda-deudas-gratis',
+    IT:'/blog/aiuto-debiti-gratis-italia',
+    PT:'/blog/ajuda-dividas-gratis-portugal',
+    ID:'/blog/bantuan-hutang-gratis-indonesia'
+  };
+  var DEFAULT_LANG='FR';
   var sel=document.getElementById('langSel');
   if(sel){
     langs.forEach(function(l){
       var o=document.createElement('option');
       o.value=l[0];o.textContent=l[1];
-      if(l[0]===stored)o.selected=true;
+      if(l[0]===DEFAULT_LANG)o.selected=true;
       sel.appendChild(o);
     });
-    sel.onchange=function(){localStorage.setItem('dfw_lang',this.value);};
+    sel.addEventListener('change',function(){
+      var url=URLS[this.value]||'/';
+      window.location.href=url;
+    });
   }
 });
 </script>
