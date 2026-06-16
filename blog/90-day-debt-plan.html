@@ -62,7 +62,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -228,7 +228,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       <a href="/pricing.html" class="nav-pricing-link">Pricing</a>
     </div>
     <div class="nav-right">
-      <a href="/#get-started" class="nav-cta">Get free plan →</a>
+      <a href="/#intake" class="nav-cta">Get free plan →</a>
       <select class="lang-sel" id="langSel" aria-label="Language"></select>
     </div>
   </nav>
@@ -238,7 +238,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 <div class="article-outer">
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <a href="https://www.debt-free.world">Home</a><span>›</span>
-    <a href="https://www.debt-free.world/blog">Blog</a><span>›</span>
+    <a href="https://www.debt-free.world/blog/">Blog</a><span>›</span>
     The 90-Day Debt Plan
   </nav>
   <header class="article-hero">
@@ -272,7 +272,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 
     <div class="callout callout-green">
       <div class="callout-title">Personalized version available free</div>
-      <a href="https://www.debt-free.world/#get-started">Debt-Free.world</a> generates this exact 90-day plan personalized to your income, debts, country, and situation. Takes 3 minutes. Delivered to your email. Free permanently.
+      <a href="https://www.debt-free.world/#intake">Debt-Free.world</a> generates this exact 90-day plan personalized to your income, debts, country, and situation. Takes 3 minutes. Delivered to your email. Free permanently.
     </div>
 
     <div class="table-wrap">
@@ -478,7 +478,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
         <div class="upsell-sub">AI-generated for your exact debts, income, and country. Or upgrade to Debt Recovery (19 €) for AI creditor letters, negotiation practice, legal protection guides, and 13 more tools.</div>
       </div>
       <div class="upsell-actions">
-        <a href="https://www.debt-free.world/#get-started" class="upsell-btn-primary">Get free plan →</a>
+        <a href="https://www.debt-free.world/#intake" class="upsell-btn-primary">Get free plan →</a>
         <a href="https://www.debt-free.world/pricing.html" class="upsell-btn-secondary">See Debt Recovery</a>
         <div class="upsell-note">No card needed for free plan</div>
       </div>
@@ -588,17 +588,31 @@ window.addEventListener('DOMContentLoaded',function(){
     ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
     ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']
   ];
-  var stored=localStorage.getItem('dfw_lang')||'EN';
+  var URLS={
+    EN:'/blog/how-to-get-out-of-debt-fast',
+    FI:'/',DE:'/blog/schulden-loswerden-kostenlos',
+    FR:'/blog/aide-pour-dettes-gratuite',
+    SV:'/blog/skuldfri-gratis-hjalp',
+    NL:'/blog/schuldhulp-gratis-nederland',
+    PL:'/blog/pomoc-w-dlugach-za-darmo',
+    ES:'/blog/ayuda-deudas-gratis',
+    IT:'/blog/aiuto-debiti-gratis-italia',
+    PT:'/blog/ajuda-dividas-gratis-portugal',
+    ID:'/blog/bantuan-hutang-gratis-indonesia'
+  };
+  var DEFAULT_LANG='EN';
   var sel=document.getElementById('langSel');
-  if(sel){
-    langs.forEach(function(l){
-      var o=document.createElement('option');
-      o.value=l[0];o.textContent=l[1];
-      if(l[0]===stored)o.selected=true;
-      sel.appendChild(o);
-    });
-    sel.onchange=function(){localStorage.setItem('dfw_lang',this.value);};
-  }
+  if(!sel)return;
+  langs.forEach(function(l){
+    var o=document.createElement('option');
+    o.value=l[0];o.textContent=l[1];
+    if(l[0]===DEFAULT_LANG)o.selected=true;
+    sel.appendChild(o);
+  });
+  sel.addEventListener('change',function(){
+    var url=URLS[this.value]||'/';
+    window.location.href=url;
+  });
 });
 </script>
 </body>
