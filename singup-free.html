@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="robots" content="index,follow"/>
+<title>Get My Free Plan — Debt-Free.world</title>
+<meta name="description" content="Create your DEBT FREE account. No payment card. No subscription. Your personalised debt clarity plan, free forever."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;
+  --green-border:#86c9a0;--green-bg:#f0f8f3;--green-pale:#f7fcf9;
+  --text:#111;--muted:#6b7280;--border:#e5e7eb;--white:#fff;
+  --red:#dc2626;--red-bg:#fef2f2;--red-border:#fca5a5;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+  --radius:14px;--shadow:0 2px 20px rgba(22,101,52,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:var(--sans);color:var(--text);background:var(--green-bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;-webkit-font-smoothing:antialiased;}
+
+.card{background:var(--white);border-radius:20px;padding:2.5rem 2rem;max-width:460px;width:100%;box-shadow:0 4px 32px rgba(22,101,52,0.08);animation:fadeUp 0.28s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.logo{font-family:var(--serif);font-size:1.05rem;color:var(--green);display:block;margin-bottom:1.75rem;text-decoration:none;}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-light);color:var(--green);border-radius:20px;font-size:11.5px;font-weight:600;padding:5px 13px;margin-bottom:1rem;letter-spacing:.4px;}
+
+h1{font-family:var(--serif);font-size:26px;line-height:1.18;color:var(--text);margin-bottom:8px;}
+.sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1.5rem;font-weight:300;}
+
+/* PROMISES */
+.promises{background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:14px 16px;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:7px;}
+.pr{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text);line-height:1.4;}
+.pr-tick{color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;font-size:13px;}
+
+/* FIELDS */
+.field{margin-bottom:14px;}
+.field-label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:6px;}
+.field input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;color:var(--text);background:var(--white);outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.field input:focus{border-color:var(--green);}
+.field.has-error input{border-color:var(--red);}
+.err-msg{font-size:12px;color:var(--red);margin-top:5px;display:none;}
+.field.has-error .err-msg{display:block;}
+
+/* CHECKBOX */
+.check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.check-row input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--green);cursor:pointer;}
+.check-row .check-lbl{font-size:13px;color:var(--muted);line-height:1.55;}
+.check-row a{color:var(--green);}
+.check-err{font-size:12px;color:var(--red);display:none;margin-top:-10px;margin-bottom:10px;}
+.check-err.show{display:block;}
+
+/* BUTTONS */
+.btn-full{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:15px 20px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background .2s;letter-spacing:.01em;}
+.btn-full:hover{background:var(--green-dark);}
+.btn-full:disabled{background:#ccc;cursor:not-allowed;}
+.no-card{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;}
+
+/* CONFIRMATION */
+#view-confirm{display:none;text-align:center;}
+.icon{font-size:48px;margin-bottom:1rem;line-height:1;}
+.confirm-title{font-family:var(--serif);font-size:22px;margin-bottom:8px;}
+.confirm-sub{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;}
+.confirm-email{font-weight:600;color:var(--green);}
+.resend-row{margin-top:1.25rem;font-size:13px;color:var(--muted);}
+.resend-btn{background:none;border:none;color:var(--green);font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;padding:0;}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:400;z-index:9999;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+footer{margin-top:1.5rem;font-size:12px;color:#aaa;text-align:center;}
+footer a{color:#aaa;}
+
+@media(max-width:480px){
+  .card{padding:2rem 1.25rem;}
+  h1{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+
+  <!-- VIEW: SIGNUP -->
+  <div id="view-signup">
+    <a class="logo" href="/">✦ Debt-Free.world</a>
+    <div class="badge">✦ DEBT FREE — 0 €</div>
+    <h1>Your clarity starts here.</h1>
+    <p class="sub">Enter your email. We'll send you a private link — your personalised plan will be ready inside in about 30 seconds.</p>
+
+    <div class="promises">
+      <div class="pr"><span class="pr-tick">✓</span>Complete financial overview &amp; debt prioritisation</div>
+      <div class="pr"><span class="pr-tick">✓</span>Your personal debt-free date estimate</div>
+      <div class="pr"><span class="pr-tick">✓</span>Emergency Action Card — what to do today</div>
+      <div class="pr"><span class="pr-tick">✓</span>90-day action plan with immediate next steps</div>
+      <div class="pr"><span class="pr-tick">✓</span>Verified local support services for your country</div>
+      <div class="pr"><span class="pr-tick">✓</span>Your member area — return anytime, always free</div>
+    </div>
+
+    <div class="field" id="wrap_email">
+      <label class="field-label" for="f_email">Your email address</label>
+      <input type="email" id="f_email" placeholder="you@example.com" autocomplete="email" inputmode="email"/>
+      <div class="err-msg" id="err_email">Please enter a valid email address.</div>
+    </div>
+
+    <label class="check-row" id="privacy-row">
+      <input type="checkbox" id="f_privacy"/>
+      <span class="check-lbl">I have read and accept the <a href="/legal.html#privacy" target="_blank">Privacy Policy</a>. I understand my data is used only to create my personalised plan.</span>
+    </label>
+    <div class="check-err" id="err_privacy">Please accept the Privacy Policy to continue.</div>
+
+    <button class="btn-full" id="btn-signup" onclick="handleSignup()">Get my DEBT FREE plan →</button>
+    <p class="no-card">No payment card. No subscription. No trial. Free forever.</p>
+  </div>
+
+  <!-- VIEW: CONFIRMATION -->
+  <div id="view-confirm">
+    <a class="logo" href="/">✦ Debt-Free.world</a>
+    <div class="icon">✉️</div>
+    <div class="confirm-title">Check your inbox.</div>
+    <p class="confirm-sub">We sent your access link to<br/><span class="confirm-email" id="confirm-email"></span>.<br/><br/>Click the link in that email — your plan will be ready in about 30 seconds.</p>
+    <div class="resend-row">No email? Check your spam, or <button class="resend-btn" onclick="resend()">send it again</button>.</div>
+  </div>
+
+</div>
+
+<footer>Amliv Oy · VAT FI32503518 · <a href="mailto:support@debt-free.world">support@debt-free.world</a> · <a href="/legal.html">Privacy &amp; Terms</a></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
+let signupEmail = '';
+
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2800);
+}
+function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim()); }
+function setFieldErr(wrapId,errId){ document.getElementById(wrapId)?.classList.add('has-error'); const e=document.getElementById(errId); if(e) e.style.display='block'; }
+function clearFieldErr(wrapId){ document.getElementById(wrapId)?.classList.remove('has-error'); }
+
+async function handleSignup(){
+  const email = document.getElementById('f_email').value.trim();
+  const privacy = document.getElementById('f_privacy').checked;
+  const btn = document.getElementById('btn-signup');
+  let ok = true;
+
+  if(!isValidEmail(email)){ setFieldErr('wrap_email','err_email'); ok=false; } else { clearFieldErr('wrap_email'); }
+  if(!privacy){ document.getElementById('err_privacy').classList.add('show'); ok=false; } else { document.getElementById('err_privacy').classList.remove('show'); }
+  if(!ok) return;
+
+  btn.disabled=true;
+  btn.textContent='Sending your link…';
+  signupEmail=email;
+
+  try{
+    const res=await fetch(`${WORKER_URL}/member/create-free`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
+    });
+    const data=await res.json().catch(()=>({}));
+
+    if(res.ok||data.success){
+      showConfirm();
+    } else if(res.status===409||data.exists){
+      // Account exists — send new magic link silently, show confirm anyway
+      await sendMagicLink(email);
+      showConfirm();
+    } else {
+      toast(data.message||'Something went wrong. Please try again.');
+      btn.disabled=false;
+      btn.textContent='Get my DEBT FREE plan →';
+    }
+  } catch(e){
+    toast('Connection error. Please check your internet and try again.');
+    btn.disabled=false;
+    btn.textContent='Get my DEBT FREE plan →';
+  }
+}
+
+function showConfirm(){
+  document.getElementById('view-signup').style.display='none';
+  document.getElementById('view-confirm').style.display='block';
+  document.getElementById('confirm-email').textContent=signupEmail;
+}
+
+async function sendMagicLink(email){
+  try{
+    await fetch(`${WORKER_URL}/member/request-magic-link`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
+    });
+  }catch(_){}
+}
+
+async function resend(){
+  if(!signupEmail) return;
+  await sendMagicLink(signupEmail);
+  document.querySelector('.resend-row').textContent='Link sent again. Check your inbox and spam folder.';
+}
+
+// Enter key support
+document.getElementById('f_email').addEventListener('keydown',e=>{ if(e.key==='Enter') handleSignup(); });
+</script>
+
+<!-- Analytics (cookie-gated, same pattern as existing pages) -->
+<script>
+function loadTracking(){
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script','x6r2dfxj3l');
+  }
+}
+function setCookieConsent(choice){localStorage.setItem('cookie-consent',choice);document.getElementById('dfwCookieBanner').style.display='none';if(choice==='accepted')loadTracking();}
+window.addEventListener('DOMContentLoaded',function(){if(!localStorage.getItem('cookie-consent')){document.getElementById('dfwCookieBanner').style.display='flex';}loadTracking();});
+</script>
+<div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:sans-serif;">Accept analytics</button>
+  </div>
+</div>
+</body>
+</html>
