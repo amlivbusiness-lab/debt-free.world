@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
-<title>Member Area — Debt-Free.world</title>
 <meta name="robots" content="noindex,nofollow"/>
+<title>My Debt FREE Plan — Debt-Free.world</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -14,1328 +14,614 @@
   --green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;
   --green-border:#86c9a0;--green-bg:#f0f8f3;--green-pale:#f7fcf9;
   --text:#111;--muted:#6b7280;--border:#e5e7eb;--white:#fff;
-  --red:#dc2626;--red-bg:#fef2f2;
+  --red:#dc2626;--amber:#d97706;
   --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
-  --radius:12px;
+  --radius:14px;--shadow:0 2px 20px rgba(22,101,52,0.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{font-family:var(--sans);color:var(--text);background:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:var(--sans);color:var(--text);background:var(--green-bg);min-height:100vh;-webkit-font-smoothing:antialiased;}
 
-/* ════ GATE ════ */
-#gate{display:flex;min-height:100vh;align-items:center;justify-content:center;background:var(--green-bg);padding:24px;}
-.gate-card{background:var(--white);border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center;box-shadow:0 4px 40px rgba(22,101,52,0.1);}
-.gate-logo{font-family:var(--serif);font-size:1.1rem;color:var(--green);display:block;margin-bottom:28px;}
-.gate-spinner{width:36px;height:36px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px;}
-.gate-title{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:8px;}
-.gate-sub{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:4px;}
-.gate-error{background:var(--red-bg);border:1px solid #fca5a5;border-radius:8px;padding:14px 16px;font-size:13px;color:var(--red);line-height:1.6;margin-top:16px;display:none;text-align:left;}
-.gate-form{margin-top:20px;display:none;}
-.gate-form input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;outline:none;-webkit-appearance:none;}
-.gate-form input:focus{border-color:var(--green);}
-.gate-btn{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);margin-top:10px;min-height:44px;}
-.gate-btn:disabled{background:#ccc;cursor:not-allowed;}
-.gate-success{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:14px 16px;font-size:13px;color:var(--green-dark);line-height:1.6;margin-top:16px;display:none;}
-@keyframes spin{to{transform:rotate(360deg);}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+/* ── TOPBAR ── */
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-logo{font-family:var(--serif);font-size:1.05rem;color:var(--green);text-decoration:none;letter-spacing:-0.01em;}
+.topbar-right{display:flex;align-items:center;gap:14px;}
+.topbar-name{font-size:12.5px;color:var(--muted);font-weight:400;}
 
-/* ════ TOPBAR ════ */
-#dashboard{display:none;}
-.topbar{background:var(--white);border-bottom:0.5px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:200;}
-.topbar-logo{font-family:var(--serif);font-size:15px;color:var(--green);letter-spacing:-0.01em;}
-.topbar-right{display:flex;align-items:center;gap:8px;}
-.lang-selector-wrap{position:relative;}
-.lang-pill{font-size:12px;color:var(--green);border:1.5px solid var(--green);border-radius:20px;padding:5px 12px;background:var(--green-bg);cursor:pointer;font-family:var(--sans);font-weight:500;min-height:34px;}
-.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--white);border:0.5px solid var(--border);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.12);z-index:500;min-width:160px;overflow:hidden;}
-.lang-menu.open{display:block;animation:fadeUp 0.2s ease;}
-.lang-menu-inner{display:flex;flex-direction:column;max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.lang-menu-inner button{background:none;border:none;padding:11px 16px;text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--text);cursor:pointer;-webkit-tap-highlight-color:transparent;}
-.lang-menu-inner button.active-lang{color:var(--green);font-weight:600;}
-.menu-pill{border:0.5px solid var(--border);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--white);-webkit-tap-highlight-color:transparent;}
+/* ── WRAP ── */
+.wrap{max-width:620px;margin:0 auto;padding:20px 16px 60px;}
 
-/* ════ DRAWER ════ */
-.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:300;display:none;opacity:0;transition:opacity 0.25s;}
-.drawer-overlay.open{display:block;opacity:1;}
-.tools-drawer{position:fixed;top:0;right:0;bottom:0;width:min(320px,92vw);background:var(--white);z-index:400;transform:translateX(100%);transition:transform 0.3s cubic-bezier(.4,0,.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.tools-drawer.open{transform:translateX(0);}
-.drawer-header{padding:18px 20px 14px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1;}
-.drawer-title{font-family:var(--serif);font-size:16px;color:var(--text);}
-.drawer-close{background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;padding:4px 8px;line-height:1;}
-.drawer-section{padding:14px 20px 4px;}
-.drawer-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;}
-.drawer-tool{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:44px;}
-.drawer-tool:active{background:var(--green-bg);}
-.drawer-tool-name{font-size:13.5px;font-weight:500;color:var(--text);}
-.drawer-tool-desc{font-size:11.5px;color:var(--muted);margin-top:1px;}
-.drawer-tool-badge{font-size:10px;font-weight:600;background:var(--green-light);color:var(--green-dark);padding:2px 7px;border-radius:10px;flex-shrink:0;}
-.drawer-setting-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:12px;}
-.toggle{width:44px;height:24px;background:var(--border);border-radius:100px;position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;border:none;}
-.toggle.on{background:var(--green);}
-.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--white);border-radius:50%;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.15);}
-.toggle.on::after{left:23px;}
-.drawer-logout-btn{width:calc(100% - 40px);margin:0 20px;background:var(--white);border:1.5px solid var(--border);border-radius:30px;padding:11px 16px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;font-family:var(--sans);text-align:center;min-height:44px;}
+/* ── WELCOME BANNER ── */
+.welcome-banner{background:var(--green);color:var(--white);border-radius:var(--radius);padding:22px 22px 20px;margin-bottom:16px;animation:fadeUp 0.3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.welcome-banner-title{font-family:var(--serif);font-size:20px;margin-bottom:5px;}
+.welcome-banner-sub{font-size:13px;opacity:.85;line-height:1.6;}
 
-/* ════ MAIN ════ */
-.main-wrap{max-width:640px;margin:0 auto;padding:0 0 80px;}
+/* ── REVIEW PROMPT ── */
+.review-prompt{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:13px 15px;margin-bottom:14px;font-size:13px;color:#92400e;line-height:1.5;display:none;}
+.review-prompt.show{display:block;}
+.review-prompt strong{display:block;font-weight:600;margin-bottom:2px;}
 
-/* ════ MENTOR CARD ════ */
-.mentor-card{border-left:3px solid var(--green);padding:20px 20px 0 18px;margin:20px 20px 0;}
-.mentor-day-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.mentor-day-tag{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:5px;}
-.mentor-day-dot{width:5px;height:5px;background:var(--green);border-radius:50%;display:inline-block;flex-shrink:0;}
-.mentor-day-badge{font-size:10px;font-weight:500;background:var(--green-bg);color:var(--green-dark);border:0.5px solid var(--green-border);border-radius:20px;padding:3px 10px;}
-.mentor-quote{font-family:var(--serif);font-size:18px;color:var(--text);line-height:1.35;font-style:italic;margin-bottom:10px;}
-.mentor-task-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:500;margin-bottom:5px;display:block;}
-.mentor-task-txt{font-size:13px;color:#444;line-height:1.7;margin-bottom:14px;}
-.mentor-btns{display:flex;gap:8px;padding-bottom:20px;}
+/* ── SECTION CARDS ── */
+.section{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;animation:fadeUp 0.3s ease;}
+.section-header{padding:16px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.section-title{font-family:var(--serif);font-size:18px;color:var(--text);}
+.section-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:.3px;}
+.badge-urgent{background:#fee2e2;color:var(--red);}
+.badge-ok{background:var(--green-light);color:var(--green);}
+.badge-info{background:#e0f2fe;color:#0369a1;}
+.section-body{padding:18px 20px;}
 
-/* ════ BUTTONS — primary = green fill, secondary = green outline ════ */
-.btn-primary{flex:1;background-color:#166534;color:#ffffff;border:none;border-radius:30px;padding:12px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);text-align:center;min-height:44px;-webkit-appearance:none;appearance:none;}
-.btn-secondary{background-color:#ffffff;color:#166534;border:1.5px solid #166534;border-radius:30px;padding:12px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);white-space:nowrap;min-height:44px;-webkit-appearance:none;appearance:none;}
-.btn-primary-full{width:100%;background-color:#166534;color:#ffffff;border:none;border-radius:30px;padding:13px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);text-align:center;display:block;min-height:44px;-webkit-appearance:none;appearance:none;}
-.btn-secondary-full{width:100%;background-color:#ffffff;color:#166534;border:1.5px solid #166534;border-radius:30px;padding:12px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);text-align:center;display:block;margin-top:8px;min-height:44px;-webkit-appearance:none;appearance:none;}
+/* ── CARD 1: Emergency Action ── */
+.emergency-section{border:2px solid var(--green);}
+.emergency-action-box{background:var(--green-light);border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:15px;font-weight:600;color:var(--green-dark);line-height:1.45;}
+.critical-debt-box{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:12px 14px;margin-bottom:14px;}
+.critical-lbl{font-size:10px;font-weight:600;color:var(--amber);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;}
+.critical-name{font-size:15px;font-weight:600;color:var(--text);}
+.critical-detail{font-size:12.5px;color:var(--muted);margin-top:3px;}
 
-/* ════ DIVIDER ════ */
-.df-divider{height:0.5px;background:var(--border);margin:20px 0 0;}
+/* Checklist */
+.checklist{display:flex;flex-direction:column;gap:9px;}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent;user-select:none;}
+.check-item.done{background:var(--green-pale);border-color:var(--green-border);}
+.check-item.done .check-label-text{color:var(--muted);text-decoration:line-through;}
+.check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
+.check-item.done .check-box{background:var(--green);border-color:var(--green);}
+.check-tick{color:var(--white);font-size:12px;display:none;}
+.check-item.done .check-tick{display:block;}
+.check-label-text{font-size:14px;line-height:1.4;font-weight:500;}
 
-/* ════ SECTION ════ */
-.df-section{padding:20px 20px 0;}
-.df-section-lbl{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text);font-weight:500;margin-bottom:14px;display:block;}
+/* ── CARD 2: Numbers ── */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.stat-box{background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:14px;}
+.stat-lbl{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
+.stat-val{font-family:var(--serif);font-size:22px;color:var(--text);line-height:1.1;}
+.stat-val.positive{color:var(--green);}
+.stat-val.negative{color:var(--red);}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
+.dfd-progress{margin-top:12px;}
+.dfd-lbl{font-size:12px;color:var(--muted);margin-bottom:6px;}
+.dfd-track{height:5px;background:var(--border);border-radius:100px;overflow:hidden;}
+.dfd-fill{height:100%;background:var(--green);border-radius:100px;transition:width .5s;}
 
-/* ════ TRACKER ════ */
-.tracker-dates{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.dbox{background:var(--white);border:0.5px solid var(--border);border-radius:8px;padding:11px 13px;}
-.dbox.hi{background:var(--green-bg);border-color:var(--green-border);}
-.dbox-lbl{font-size:10px;color:var(--muted);font-weight:500;margin-bottom:4px;display:block;}
-.dbox-lbl.g{color:var(--green);}
-.dbox-val{font-family:var(--serif);font-size:16px;color:var(--text);display:block;line-height:1.2;}
-.dbox-val.g{color:var(--green);}
-.dbox-sub{font-size:10.5px;color:var(--muted);margin-top:3px;display:block;}
-.dbox-sub.g{color:var(--green);font-weight:500;}
-.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.bar-lbl{font-size:11px;color:var(--muted);width:44px;flex-shrink:0;text-align:right;}
-.bar-track{flex:1;height:3px;background:var(--border);border-radius:100px;overflow:hidden;}
-.bar-fill-base{height:100%;border-radius:100px;background:#d1d5db;width:100%;}
-.bar-fill-now{height:100%;border-radius:100px;background:var(--green);}
-.met-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0 14px;}
-.mbox{background:var(--green-bg);border-radius:6px;padding:9px 11px;}
-.mbox-lbl{font-size:10px;color:var(--muted);margin-bottom:3px;display:block;}
-.mbox-val{font-size:15px;font-weight:500;color:var(--text);}
-.mbox-val.g{color:var(--green);}
-.tracker-locked{opacity:0.3;pointer-events:none;}
-.lock-note{font-size:12px;color:var(--muted);text-align:center;padding:10px 0 6px;font-style:italic;display:block;}
-.extra-row{display:flex;gap:8px;align-items:center;margin-top:2px;}
-.extra-in{flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);background:var(--white);min-height:44px;}
-.extra-in:focus{border-color:var(--green);}
-.extra-calc{background-color:#166534;color:#ffffff;border:none;border-radius:8px;padding:10px 14px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;white-space:nowrap;-webkit-appearance:none;appearance:none;}
-.extra-res{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;}
-.extra-res.ok{color:var(--green);font-weight:500;}
+/* ── CARD 3: Debt Map ── */
+.debt-map-item{padding:13px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.debt-map-item:last-child{border-bottom:none;}
+.debt-map-name{font-size:14px;font-weight:600;color:var(--text);}
+.debt-map-type{font-size:12px;color:var(--muted);margin-top:2px;}
+.debt-tags{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;}
+.debt-tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:10px;}
+.tag-urgent{background:#fee2e2;color:var(--red);}
+.tag-high{background:#fffbeb;color:#92400e;}
+.tag-med{background:#e0f2fe;color:#0369a1;}
+.tag-low{background:var(--green-light);color:var(--green);}
+.debt-map-right{text-align:right;flex-shrink:0;}
+.debt-map-amount{font-size:16px;font-weight:700;color:var(--text);}
+.debt-map-rate{font-size:12px;color:var(--muted);}
+.debt-map-interest{font-size:11px;color:var(--amber);margin-top:2px;}
 
-/* ════ PLAN CARD ════ */
-.plan-card-wrap{border-left:3px solid var(--green);padding:14px 16px;margin-bottom:10px;}
-.plan-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:500;margin-bottom:5px;display:block;}
-.plan-title-el{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:7px;}
-.profile-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px;}
-.profile-chip{font-size:11px;color:var(--green-dark);background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:20px;padding:2px 8px;}
-.plan-body-el{font-size:12.5px;line-height:1.75;color:#444;font-weight:300;max-height:120px;overflow:hidden;position:relative;}
-.plan-body-el.expanded{max-height:none;}
-.plan-body-el:not(.expanded)::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,var(--white));pointer-events:none;}
-.plan-expand-btn{background:none;border:none;font-size:12px;color:var(--green);font-weight:500;cursor:pointer;font-family:var(--sans);padding:7px 0 0;display:block;}
+/* ── CARD 4: 90-Day Overview ── */
+.phase-row{padding:13px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:flex-start;}
+.phase-row:last-child{border-bottom:none;}
+.phase-lbl{font-size:10px;font-weight:600;color:var(--green);letter-spacing:.4px;text-transform:uppercase;background:var(--green-light);border-radius:6px;padding:4px 10px;flex-shrink:0;margin-top:1px;white-space:nowrap;}
+.phase-text{font-size:13.5px;line-height:1.6;color:var(--text);}
 
-/* ════ ANON NOTICE ════ */
-.anon-card{border-left:3px solid var(--green-border);padding:14px 16px;margin-bottom:0;}
-.anon-title{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:5px;}
-.anon-txt{font-size:13px;color:#444;line-height:1.7;margin-bottom:14px;}
+/* ── CARD 5: Local Support ── */
+.support-item{background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:14px;margin-bottom:10px;}
+.support-item:last-child{margin-bottom:0;}
+.support-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.support-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+.support-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;}
+.support-link:hover{text-decoration:underline;}
+.support-free{font-size:11px;font-weight:600;color:var(--green);background:var(--green-light);padding:2px 8px;border-radius:10px;margin-left:8px;}
 
-/* ════ 3 QUESTIONS (anon flow) ════ */
-.q-sel{width:100%;font-family:var(--sans);font-size:13.5px;border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);background:var(--white);outline:none;min-height:44px;-webkit-appearance:none;appearance:none;}
-.q-sel:focus{border-color:var(--green);}
-.gen-card{border-left:3px solid var(--green-border);padding:13px 15px;margin-bottom:12px;}
-.gen-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:5px;display:block;}
-.gen-txt{font-size:12.5px;color:#444;line-height:1.7;}
+/* ── CARD 6: Full Plan ── */
+.plan-text{font-size:13.5px;line-height:1.85;color:var(--text);white-space:pre-wrap;word-wrap:break-word;}
+.plan-collapsed{max-height:160px;overflow:hidden;position:relative;}
+.plan-collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--white));}
+.plan-actions{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;}
+.btn-read-more{background:none;border:1.5px solid var(--green-border);border-radius:30px;padding:9px 18px;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--green);transition:background .15s;}
+.btn-read-more:hover{background:var(--green-pale);}
+.btn-print{background:none;border:1.5px solid var(--border);border-radius:30px;padding:9px 18px;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:400;color:var(--muted);transition:all .15s;}
+.btn-print:hover{border-color:var(--green-border);color:var(--green);}
+.disclaimer{background:#f9fafb;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:12px;color:var(--muted);line-height:1.6;}
 
-/* ════ TOOL PANELS (unchanged from original) ════ */
-.tool-panel{display:none;background:var(--white);border:0.5px solid var(--border);border-radius:var(--radius);padding:22px 20px;margin:16px 20px 0;animation:fadeUp 0.25s ease;}
-.tool-panel.active{display:block;}
-.panel-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px;}
-.panel-title{font-family:var(--serif);font-size:18px;color:var(--text);line-height:1.2;}
-.panel-close{background:none;border:none;font-size:18px;color:var(--muted);cursor:pointer;padding:2px 4px;line-height:1;flex-shrink:0;}
-.wiz-step{display:none;}
-.wiz-step.active{display:block;animation:fadeUp 0.22s ease;}
-.wiz-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:8px;display:block;}
-.wiz-q{font-size:14px;font-weight:500;color:#222;margin-bottom:12px;line-height:1.45;}
-.wiz-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
-.wiz-opts.grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.wiz-opt{border:1.5px solid var(--border);border-radius:8px;padding:11px 13px;background:var(--white);cursor:pointer;text-align:left;font-family:var(--sans);font-size:13.5px;font-weight:500;color:#333;-webkit-tap-highlight-color:transparent;line-height:1.3;min-height:44px;}
-.wiz-opt.selected{border-color:var(--green);background:var(--green-bg);color:var(--green-dark);}
-.wiz-field{margin-bottom:12px;}
-.wiz-label{display:block;font-size:12.5px;font-weight:500;color:#444;margin-bottom:5px;}
-.wiz-hint{font-size:12px;color:var(--muted);margin-bottom:5px;font-style:italic;}
-.wiz-field input,.wiz-field select,.wiz-field textarea{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:8px;padding:12px 13px;outline:none;color:var(--text);-webkit-appearance:none;background:var(--white);}
-.wiz-field input:focus,.wiz-field select:focus,.wiz-field textarea:focus{border-color:var(--green);}
-.wiz-field textarea{resize:none;line-height:1.6;}
-.wiz-two{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.wiz-amount{display:flex;gap:8px;}
-.wiz-amount input{flex:1;min-width:0;font-size:16px;padding:12px 13px;}
-.wiz-amount select{width:110px;flex-shrink:0;}
-.wiz-nav{display:flex;gap:8px;margin-top:16px;}
-.wiz-back{background:var(--white);border:1.5px solid var(--border);border-radius:30px;padding:11px 18px;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--sans);flex-shrink:0;min-height:44px;}
-.wiz-next{flex:1;background-color:#166534;color:#ffffff;border:none;border-radius:30px;padding:12px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;-webkit-appearance:none;appearance:none;}
-.wiz-next:disabled{background:#ccc;cursor:not-allowed;}
-.wiz-generating{text-align:center;padding:28px 0;}
-.wiz-spinner{width:32px;height:32px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.85s linear infinite;margin:0 auto 12px;}
-.wiz-gen-text{font-size:13px;color:var(--muted);}
-.panel-output{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:16px;font-size:13.5px;line-height:1.8;color:#222;white-space:pre-wrap;margin-top:14px;display:none;font-weight:300;}
-.panel-output.active{display:block;animation:fadeUp 0.2s ease;}
-.output-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
-.btn-copy{background:var(--white);border:1.5px solid var(--green);color:var(--green);border-radius:30px;padding:8px 18px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;}
-.btn-reset{background:var(--white);border:1.5px solid var(--border);color:var(--muted);border-radius:30px;padding:8px 18px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;}
-.panel-error{background:var(--red-bg);border:1px solid #fca5a5;border-radius:8px;padding:12px 14px;font-size:13px;color:var(--red);line-height:1.5;margin-top:12px;display:none;}
-.info-block{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:16px;margin-bottom:10px;}
-.info-block h4{font-size:13px;font-weight:600;color:#111;margin-bottom:8px;}
-.info-block p,.info-block li{font-size:13px;color:#333;line-height:1.75;font-weight:300;}
-.info-block ul{padding-left:16px;}
-.info-block li{margin-bottom:3px;}
-.info-stage{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;background:var(--white);border:0.5px solid var(--border);border-radius:8px;margin-bottom:8px;}
-.info-stage-num{width:22px;height:22px;background:var(--green);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
-.info-stage-body{font-size:13px;color:#333;line-height:1.6;font-weight:300;}
-.info-stage-body strong{font-weight:600;color:#111;display:block;margin-bottom:2px;}
-.calc-result{background:var(--white);border:0.5px solid var(--green-border);border-radius:8px;padding:14px 16px;margin-top:12px;font-size:13.5px;line-height:1.8;color:#222;display:none;}
-.calc-result.active{display:block;}
-.calc-highlight{font-family:var(--serif);font-size:22px;color:var(--green);display:block;margin-bottom:4px;}
-.timeline-wrap{margin-top:14px;}
-.timeline-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-.timeline-bar-label{font-size:12px;color:var(--muted);width:56px;flex-shrink:0;text-align:right;}
-.timeline-bar-track{flex:1;background:#f0f0f0;border-radius:100px;height:10px;overflow:hidden;}
-.timeline-bar-fill{height:100%;border-radius:100px;transition:width 0.8s cubic-bezier(.4,0,.2,1);}
-.timeline-bar-fill.current{background:var(--muted);}
-.timeline-bar-fill.improved{background:var(--green);}
-.timeline-bar-months{font-size:12px;font-weight:600;color:var(--text);width:52px;flex-shrink:0;}
-.timeline-saving{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-top:10px;font-size:13px;color:var(--green-dark);line-height:1.6;}
-.timeline-saving strong{font-weight:700;}
-.timeline-interest-warn{font-size:12px;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 13px;margin-top:8px;line-height:1.55;}
-.milestone-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--border);}
-.milestone-row:last-child{border-bottom:none;}
-.milestone-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
-.milestone-dot.reached{background:var(--green);}
-.milestone-dot.upcoming{background:#ddd;}
-.milestone-text{font-size:13px;color:#333;line-height:1.4;}
-.milestone-date{font-size:12px;color:var(--muted);margin-top:1px;}
-.debt-strategy-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;margin-bottom:6px;}
-.debt-strategy-name{font-size:13px;font-weight:500;color:#222;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60vw;}
-.debt-strategy-order{font-size:11px;font-weight:700;color:var(--green);background:var(--green-light);border-radius:10px;padding:2px 8px;}
-.strategy-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
-.strategy-box{border-radius:10px;padding:13px 14px;border:1.5px solid var(--border);}
-.strategy-box.winner{border-color:var(--green);background:var(--green-bg);}
-.strategy-box-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:6px;display:block;}
-.strategy-box.winner .strategy-box-title{color:var(--green);}
-.strategy-box-months{font-family:var(--serif);font-size:20px;color:var(--text);}
-.strategy-box-detail{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5;}
-.strategy-verdict{font-size:13px;color:#333;line-height:1.65;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--border);}
-.neg-chat{display:flex;flex-direction:column;gap:8px;margin-top:4px;max-height:340px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.neg-bubble{padding:11px 14px;border-radius:12px;font-size:13.5px;line-height:1.65;max-width:88%;}
-.neg-bubble.creditor{background:#f3f4f6;color:#222;border-bottom-left-radius:4px;align-self:flex-start;}
-.neg-bubble.you{background:var(--green-bg);color:var(--green-dark);border-bottom-right-radius:4px;align-self:flex-end;border:0.5px solid var(--green-border);}
-.neg-bubble.system{background:#fffbeb;color:#92400e;border-radius:8px;align-self:stretch;font-size:12.5px;border:1px solid #fde68a;}
-.neg-input-row{display:flex;gap:8px;margin-top:10px;}
-.neg-input-row input{flex:1;font-family:var(--sans);font-size:16px;border:1.5px solid var(--border);border-radius:8px;padding:11px 13px;outline:none;-webkit-appearance:none;}
-.neg-input-row input:focus{border-color:var(--green);}
-.neg-send-btn{background-color:#166534;color:#ffffff;border:none;border-radius:8px;padding:11px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);flex-shrink:0;min-height:44px;-webkit-appearance:none;appearance:none;}
-.neg-feedback{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:13px 14px;font-size:13px;color:var(--green-dark);line-height:1.65;margin-top:10px;display:none;}
-.neg-feedback.active{display:block;}
-.update-saved{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--green-dark);margin-top:10px;display:none;}
-.update-saved.active{display:block;}
-.letter-history{margin-top:16px;border-top:0.5px solid var(--border);padding-top:14px;}
-.letter-history-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;}
-.letter-history-item{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-bottom:7px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;}
-.letter-history-meta{font-size:12px;color:var(--green-dark);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;}
-.letter-history-date{font-size:11px;color:var(--muted);flex-shrink:0;}
-.letter-history-empty{font-size:13px;color:var(--muted);font-style:italic;}
-.plan-cta{display:inline-block;background-color:#166534;color:#ffffff;border:none;border-radius:30px;padding:11px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;min-height:44px;-webkit-appearance:none;appearance:none;}
-.doc-list{display:flex;flex-direction:column;gap:8px;}
-.doc-item{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:14px 15px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-.doc-item:active{border-color:var(--green-border);background:var(--green-bg);}
-.doc-item-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px;}
-.doc-item-title{font-size:13.5px;font-weight:600;color:#111;line-height:1.3;}
-.doc-item-meta{font-size:11.5px;color:var(--muted);flex-shrink:0;}
-.doc-item-type{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--green-light);color:var(--green-dark);border-radius:10px;padding:2px 8px;margin-top:3px;}
-.doc-viewer{background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:10px;padding:16px;margin-top:12px;font-size:13.5px;line-height:1.8;color:#222;white-space:pre-wrap;font-weight:300;display:none;}
-.doc-viewer.active{display:block;animation:fadeUp 0.2s ease;}
-.doc-empty{font-size:13.5px;color:var(--muted);line-height:1.7;padding:8px 0;}
+/* ── UPGRADE CARD (from muistio strategy) ── */
+.upgrade-card{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);border-radius:var(--radius);padding:24px 22px;margin-bottom:14px;color:var(--white);}
+.upgrade-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;opacity:.7;margin-bottom:10px;}
+.upgrade-title{font-family:var(--serif);font-size:22px;line-height:1.2;margin-bottom:8px;}
+.upgrade-sub{font-size:13.5px;opacity:.85;line-height:1.65;margin-bottom:18px;font-weight:300;}
+.upgrade-price{font-size:13px;opacity:.7;margin-bottom:16px;}
+.upgrade-price strong{font-size:20px;font-weight:700;opacity:1;}
+.btn-upgrade{display:inline-block;background:var(--white);color:var(--green);border:none;border-radius:30px;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:opacity .15s;}
+.btn-upgrade:hover{opacity:.92;}
 
-/* ════ FOOTER ════ */
-.dash-footer{text-align:center;padding:24px 20px 12px;border-top:0.5px solid var(--border);margin-top:24px;}
-.dash-footer a{color:var(--green);font-size:12px;text-decoration:none;margin:0 8px;}
-.dash-footer p{font-size:11px;color:var(--muted);margin-top:6px;}
+/* ── RE-AUTH ── */
+.reauth-wrap{max-width:400px;margin:60px auto;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 24px;text-align:center;display:none;}
+.reauth-wrap.show{display:block;}
+.reauth-icon{font-size:44px;margin-bottom:1rem;}
+.reauth-title{font-family:var(--serif);font-size:22px;margin-bottom:8px;}
+.reauth-sub{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;font-weight:300;}
+.field input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;color:var(--text);outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:12px;}
+.field input:focus{border-color:var(--green);}
+.btn-full{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background .2s;}
+.btn-full:hover{background:var(--green-dark);}
 
-/* ════ TOAST ════ */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
+/* Skeleton */
+.skel{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px;height:14px;margin:8px 0;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:400;z-index:9999;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
-/* ════ MOBILE ════ */
+/* Footer */
+.footer{text-align:center;padding:16px;font-size:12px;color:#aaa;}
+.footer a{color:#aaa;}
+
 @media(max-width:480px){
-  .main-wrap{padding:0 0 80px;}
-  .mentor-card{margin:16px 16px 0;padding:16px 16px 0 14px;}
-  .df-section{padding:16px 16px 0;}
-  .tool-panel{margin:12px 16px 0;padding:16px 14px;}
-  .wiz-two{grid-template-columns:1fr;}
-  .wiz-opts.grid2{grid-template-columns:1fr;}
-  .wiz-amount{flex-direction:column;}
-  .wiz-amount select{width:100%;}
-  .strategy-compare{grid-template-columns:1fr;}
-  .neg-chat{max-height:260px;}
-  .tracker-dates{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:1fr;}
+  .debt-map-item{flex-direction:column;gap:4px;}
+  .debt-map-right{text-align:left;}
+  .phase-row{flex-direction:column;gap:6px;}
+}
+@media print{
+  .topbar,.upgrade-card,.review-prompt,.welcome-banner{display:none!important;}
+  .section{box-shadow:none;}
 }
 </style>
 </head>
 <body>
 
-<div id="gate">
-  <div class="gate-card">
-    <span class="gate-logo">🌍 Debt-Free.world</span>
-    <div class="gate-spinner" id="gateSpinner"></div>
-    <div class="gate-title" id="gateTitle">Verifying your access</div>
-    <div class="gate-sub" id="gateSub">Checking your link. This takes only a moment.</div>
-    <div class="gate-error" id="gateError"></div>
-    <div class="gate-form" id="gateForm">
-      <input type="email" id="gateEmail" placeholder="Your email address" inputmode="email" autocomplete="email"/>
-      <button class="gate-btn" id="gateSendBtn" onclick="requestNewLink()">Send me a new access link</button>
-    </div>
-    <div class="gate-success" id="gateSuccess">Your link is on its way. Check your inbox — and your spam folder if it doesn't arrive within 2 minutes.</div>
+<nav class="topbar">
+  <span class="topbar-logo">✦ Debt-Free.world</span>
+  <div class="topbar-right">
+    <span class="topbar-name" id="topbar-name"></span>
   </div>
+</nav>
+
+<!-- Re-auth -->
+<div class="reauth-wrap" id="reauthWrap">
+  <div class="reauth-icon">🔑</div>
+  <div class="reauth-title">Welcome back.</div>
+  <p class="reauth-sub">Your session has expired. Enter your email — we'll send you a fresh access link. Your plan is safe.</p>
+  <div class="field"><input type="email" id="f_reauth" placeholder="your@email.com" autocomplete="email"/></div>
+  <button class="btn-full" onclick="sendNewLink()">Send my access link →</button>
 </div>
 
-<div id="dashboard">
+<!-- Dashboard -->
+<div class="wrap" id="dashboard" style="display:none;">
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <span class="topbar-logo">✦ Debt-Free.world</span>
-    <div class="topbar-right">
-      <div class="lang-selector-wrap">
-        <button class="lang-pill" onclick="toggleLangMenu()" id="langBtn" aria-label="Change language">🌍 <span id="langCode">EN</span></button>
-        <div class="lang-menu" id="langMenu">
-          <div class="lang-menu-inner">
-            <button onclick="changeLang('EN')">English</button>
-            <button onclick="changeLang('FI')">Suomi</button>
-            <button onclick="changeLang('SV')">Svenska</button>
-            <button onclick="changeLang('DE')">Deutsch</button>
-            <button onclick="changeLang('FR')">Français</button>
-            <button onclick="changeLang('ES')">Español</button>
-            <button onclick="changeLang('PT')">Português</button>
-            <button onclick="changeLang('IT')">Italiano</button>
-            <button onclick="changeLang('NL')">Nederlands</button>
-            <button onclick="changeLang('PL')">Polski</button>
-            <button onclick="changeLang('TR')">Türkçe</button>
-            <button onclick="changeLang('RU')">Русский</button>
-            <button onclick="changeLang('AR')">العربية</button>
-            <button onclick="changeLang('HI')">हिन्दी</button>
-            <button onclick="changeLang('ZH')">中文</button>
-            <button onclick="changeLang('JA')">日本語</button>
-            <button onclick="changeLang('KO')">한국어</button>
-            <button onclick="changeLang('ID')">Indonesia</button>
-            <button onclick="changeLang('SW')">Kiswahili</button>
-          </div>
+  <!-- Welcome banner (fresh load) -->
+  <div class="welcome-banner" id="welcomeBanner" style="display:none;">
+    <div class="welcome-banner-title">Your plan is ready, <span id="wbName"></span>. ✦</div>
+    <div class="welcome-banner-sub">Everything you told us is in here — your numbers, your situation, your next steps. This is yours, always.</div>
+  </div>
+
+  <!-- Stale data prompt -->
+  <div class="review-prompt" id="reviewPrompt">
+    <strong>It's been a while.</strong>
+    More than 30 days have passed since you set up your plan. Your numbers may have changed — consider updating them for a more accurate debt-free date.
+  </div>
+
+  <!-- CARD 1: Emergency Action (always first) -->
+  <div class="section emergency-section">
+    <div class="section-header">
+      <div class="section-title">Emergency Action Card</div>
+      <span class="section-badge badge-urgent" id="ec-badge">Today</span>
+    </div>
+    <div class="section-body">
+      <div class="emergency-action-box" id="ec-action"><div class="skel"></div><div class="skel" style="width:60%;"></div></div>
+      <div class="critical-debt-box" id="ec-critical-box">
+        <div class="critical-lbl">Most critical debt</div>
+        <div class="critical-name" id="ec-debt-name"><div class="skel" style="width:50%;"></div></div>
+        <div class="critical-detail" id="ec-debt-detail"></div>
+      </div>
+      <div class="checklist" id="checklist"></div>
+    </div>
+  </div>
+
+  <!-- CARD 2: Complete Picture -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Your Complete Picture</div>
+      <span class="section-badge badge-info">Live calculation</span>
+    </div>
+    <div class="section-body">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-lbl">Monthly surplus</div>
+          <div class="stat-val" id="stat-surplus">—</div>
+          <div class="stat-sub" id="stat-surplus-sub"></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Total debt</div>
+          <div class="stat-val" id="stat-debt">—</div>
+          <div class="stat-sub" id="stat-debt-sub"></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Debt-free date</div>
+          <div class="stat-val" id="stat-dfd">—</div>
+          <div class="stat-sub" id="stat-dfd-sub"></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Days with Debt-Free.world</div>
+          <div class="stat-val" id="stat-days">—</div>
+          <div class="stat-sub">days of progress</div>
         </div>
       </div>
-      <div class="menu-pill" role="button" aria-label="All tools" onclick="openDrawer()">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="dfd-progress" id="dfd-progress" style="display:none;">
+        <div class="dfd-lbl" id="dfd-pct-lbl"></div>
+        <div class="dfd-track"><div class="dfd-fill" id="dfd-fill" style="width:0%"></div></div>
       </div>
     </div>
   </div>
 
-  <!-- DRAWER -->
-  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-  <div class="tools-drawer" id="toolsDrawer">
-    <div class="drawer-header">
-      <span class="drawer-title" id="drawerTitle">All tools</span>
-      <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  <!-- CARD 3: Debt Map -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Your Debt Map</div>
+      <span class="section-badge badge-info" id="debt-count-badge"></span>
     </div>
-    <div class="drawer-section">
-      <span class="drawer-section-label" id="drawerSettLabel">Settings</span>
-      <div class="drawer-setting-row">
-        <div>
-          <div class="drawer-tool-name" id="drawerCompLabel">Companion mode</div>
-          <div class="drawer-tool-desc" id="drawerCompDesc">Daily guidance and check-ins</div>
-        </div>
-        <button class="toggle" id="drawerCompanionToggle" onclick="toggleCompanion()"></button>
-      </div>
-      <div class="drawer-setting-row">
-        <div>
-          <div class="drawer-tool-name" id="drawerRemLabel">Monthly reminders</div>
-          <div class="drawer-tool-desc" id="drawerRemDesc">Progress emails every 30 days</div>
-        </div>
-        <button class="toggle" id="drawerRemindersToggle" onclick="toggleSetting('reminders')"></button>
-      </div>
+    <div class="section-body" id="debt-map-body"><div class="skel"></div><div class="skel" style="width:70%;"></div></div>
+  </div>
+
+  <!-- CARD 4: 90-Day Overview -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">90-Day Overview</div>
     </div>
-    <div id="drawerContent"></div>
-    <div class="drawer-section" style="padding-bottom:24px;">
-      <button class="drawer-logout-btn" id="drawerLogout" onclick="logout()">Sign out</button>
+    <div class="section-body" id="phases-body"><div class="skel"></div><div class="skel" style="width:80%;"></div><div class="skel" style="width:55%;"></div></div>
+  </div>
+
+  <!-- CARD 5: Local Support -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Local Support</div>
+      <span class="section-badge badge-ok">Verified</span>
+    </div>
+    <div class="section-body" id="support-body"><div class="skel"></div><div class="skel" style="width:65%;"></div></div>
+  </div>
+
+  <!-- UPGRADE CARD (muistio: "myy hetkeä, ei tuotetta") -->
+  <div class="upgrade-card" id="upgrade-card">
+    <div class="upgrade-eyebrow">Debt Recovery</div>
+    <div class="upgrade-title">You already know your way out.</div>
+    <div class="upgrade-sub">Now let's make sure you actually get there. Your Debt Recovery Companion guides you through the next 90 days with personalised check-ins, creditor letter tools, and practical support.</div>
+    <div class="upgrade-price">One time. <strong>19 €</strong> &nbsp;·&nbsp; Less than 0,25 € per day for 90 days.</div>
+    <a href="/#pricing" class="btn-upgrade">Continue your journey →</a>
+  </div>
+
+  <!-- CARD 6: Full Plan -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Your Clarity Report</div>
+    </div>
+    <div class="section-body">
+      <div id="plan-wrapper" class="plan-collapsed">
+        <div class="plan-text" id="plan-text"><div class="skel"></div><div class="skel" style="width:90%;"></div><div class="skel" style="width:70%;"></div></div>
+      </div>
+      <div class="plan-actions">
+        <button class="btn-read-more" id="plan-toggle-btn" onclick="togglePlan()">Read full report ↓</button>
+        <button class="btn-print" onclick="window.print()">⎙ Save / Print</button>
+      </div>
+      <div class="disclaimer">Your plan is created based on the information you provide. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.</div>
     </div>
   </div>
 
-  <div class="main-wrap">
+</div><!-- /wrap -->
 
-    <!-- MENTOR CARD — shown on every visit -->
-    <div id="mentorCard">
-      <div class="mentor-card" id="mentorCardInner">
-        <div class="mentor-day-row">
-          <div class="mentor-day-tag"><span class="mentor-day-dot"></span><span id="mentorDayLabel">Day 1</span></div>
-          <span class="mentor-day-badge">90-day programme</span>
-        </div>
-        <div class="mentor-quote" id="mentorQuote">Loading your check-in…</div>
-        <span class="mentor-task-lbl" id="mentorTaskLbl">Today's task</span>
-        <div class="mentor-task-txt" id="mentorTaskTxt"></div>
-        <div class="mentor-btns" id="mentorBtns"></div>
-      </div>
-    </div>
-
-    <!-- ANON: 3 questions block -->
-    <div id="anonQBlock" style="display:none;padding:16px 20px 0;">
-      <span class="df-section-lbl">Three questions</span>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
-        <select class="q-sel" id="aq1">
-          <option value="">What best describes your situation?</option>
-          <option>Struggling with payments, not yet in collections</option>
-          <option>Collections agency has contacted me</option>
-          <option>Enforcement or court proceedings underway</option>
-          <option>I'm not sure where I stand</option>
-        </select>
-        <select class="q-sel" id="aq2">
-          <option value="">What is your main type of debt?</option>
-          <option>Credit card or consumer loan</option>
-          <option>Mortgage or housing loan</option>
-          <option>Student loan</option>
-          <option>Multiple types</option>
-        </select>
-        <select class="q-sel" id="aq3">
-          <option value="">What matters most to you right now?</option>
-          <option>Stop collections or enforcement</option>
-          <option>Reduce monthly payments</option>
-          <option>Pay everything off as fast as possible</option>
-          <option>Understand where I stand</option>
-        </select>
-      </div>
-      <button class="btn-primary-full" onclick="showAnonResult()">Show my starting point</button>
-    </div>
-
-    <!-- ANON: generic result -->
-    <div id="anonResultBlock" style="display:none;">
-      <div class="df-divider"></div>
-      <div class="df-section">
-        <span class="df-section-lbl">Generic starting point</span>
-        <div class="gen-card">
-          <span class="gen-lbl">Note</span>
-          <div class="gen-txt">This is a general starting point — not your personal plan. A personalised plan uses your income, debts, country and goals.</div>
-        </div>
-        <div id="anonGenPlan" style="font-size:13px;color:#444;line-height:1.75;padding:0 0 16px;white-space:pre-line;"></div>
-      </div>
-      <div class="df-divider"></div>
-      <div class="df-section" style="padding-bottom:4px;">
-        <div class="anon-card">
-          <div class="anon-title">You deserve more than this.</div>
-          <div class="anon-txt">A personalised plan takes your exact numbers — income, debts, country, household. It gives you your real debt-free date and your first concrete action. Takes 3 minutes.</div>
-          <button class="btn-primary-full" id="anonBuildBtn">Build my personalised plan now</button>
-          <button class="btn-secondary-full" onclick="document.getElementById('anonResultBlock').style.display='none'">I'll continue with the general version</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- DIVIDER -->
-    <div class="df-divider"></div>
-
-    <!-- TRACKER -->
-    <div class="df-section">
-      <span class="df-section-lbl" id="trackerLabel">Debt-free date tracker</span>
-
-      <!-- Locked state (anon) -->
-      <div id="trackerLocked" style="display:none;">
-        <span class="lock-note" id="lockNote">Tracker activates when your details are saved</span>
-        <div class="tracker-locked">
-          <div class="tracker-dates">
-            <div class="dbox"><span class="dbox-lbl">Without action</span><span class="dbox-val" style="color:#9ca3af;">— —</span><span class="dbox-sub">Waiting for your details</span></div>
-            <div class="dbox hi"><span class="dbox-lbl g">Your pace</span><span class="dbox-val" style="color:#9ca3af;">— —</span><span class="dbox-sub">Waiting for your details</span></div>
-          </div>
-          <div class="met-grid">
-            <div class="mbox"><span class="mbox-lbl">Debt remaining</span><span class="mbox-val" style="color:#9ca3af;">—</span></div>
-            <div class="mbox"><span class="mbox-lbl">Paid so far</span><span class="mbox-val" style="color:#9ca3af;">—</span></div>
-            <div class="mbox"><span class="mbox-lbl">90-day progress</span><span class="mbox-val" style="color:#9ca3af;">—</span></div>
-            <div class="mbox"><span class="mbox-lbl">Interest saved</span><span class="mbox-val" style="color:#9ca3af;">—</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Active tracker (plan exists) -->
-      <div id="trackerActive" style="display:none;">
-        <div class="tracker-dates">
-          <div class="dbox">
-            <span class="dbox-lbl" id="trackerLbl1">Without action</span>
-            <span class="dbox-val" id="trackerDate1">—</span>
-            <span class="dbox-sub" id="trackerSub1">Starting point</span>
-          </div>
-          <div class="dbox hi">
-            <span class="dbox-lbl g" id="trackerLbl2">At your pace</span>
-            <span class="dbox-val g" id="trackerDate2">—</span>
-            <span class="dbox-sub g" id="trackerSub2">—</span>
-          </div>
-        </div>
-        <div style="margin-bottom:10px;">
-          <div class="bar-row">
-            <span class="bar-lbl" id="barLbl1">Start</span>
-            <div class="bar-track"><div class="bar-fill-base"></div></div>
-          </div>
-          <div class="bar-row">
-            <span class="bar-lbl" id="barLbl2">Now</span>
-            <div class="bar-track"><div class="bar-fill-now" id="trackerBarNow" style="width:8%"></div></div>
-          </div>
-        </div>
-        <div class="met-grid">
-          <div class="mbox"><span class="mbox-lbl" id="metLbl1">Debt remaining</span><span class="mbox-val" id="metVal1">—</span></div>
-          <div class="mbox"><span class="mbox-lbl" id="metLbl2">Paid so far</span><span class="mbox-val g" id="metVal2">—</span></div>
-          <div class="mbox"><span class="mbox-lbl" id="metLbl3">90-day progress</span><span class="mbox-val g" id="metVal3">—</span></div>
-          <div class="mbox"><span class="mbox-lbl" id="metLbl4">Interest saved</span><span class="mbox-val g" id="metVal4">—</span></div>
-        </div>
-        <div style="border-top:0.5px solid var(--border);padding-top:12px;">
-          <span class="df-section-lbl" style="margin-bottom:8px;" id="extraIncomeLabel">Extra income or payment</span>
-          <div class="extra-row">
-            <input class="extra-in" type="number" placeholder="Amount in your currency" id="xamt" inputmode="decimal"/>
-            <button class="extra-calc" onclick="calcExtraImpact()">Calculate impact</button>
-          </div>
-          <div class="extra-res" id="xres">Extra income goes directly to your debts — see the effect on your debt-free date.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="df-divider"></div>
-
-    <!-- YOUR PLAN -->
-    <div class="df-section">
-      <span class="df-section-lbl" id="planSectionLabel">Your plan</span>
-
-      <!-- Anon: plan notice (always visible when no plan) -->
-      <div id="planAnonNotice" style="display:none;">
-        <div class="anon-card">
-          <div class="anon-title" id="planAnonTitle">Your plan is waiting for your details.</div>
-          <div class="anon-txt" id="planAnonTxt">You paid for personalised guidance — that requires your information. Without it you get only a general route, not yours. The tracker, your debt-free date and daily task all activate when you complete the form.</div>
-          <button class="btn-primary-full" id="planBuildBtn">Complete the 3-minute form</button>
-          <button class="btn-secondary-full" onclick="document.getElementById('planAnonNotice').style.display='none'">I'll explore the general content first</button>
-        </div>
-      </div>
-
-      <!-- Plan with content -->
-      <div id="planCardWrap" style="display:none;">
-        <div class="plan-card-wrap">
-          <span class="plan-eyebrow" id="planEyebrow">Personalised 90-day plan</span>
-          <div class="plan-title-el" id="planTitleEl">Your Debt Recovery Plan</div>
-          <div class="profile-chips" id="profileChips"></div>
-          <div class="plan-body-el" id="planBodyEl"></div>
-          <button class="plan-expand-btn" id="planExpandBtn" onclick="togglePlan()">Read full plan →</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TOOL PANELS -->
-    <div id="activePanelWrap"></div>
-
-    <div class="dash-footer">
-      <div><a href="https://www.debt-free.world">debt-free.world</a><a href="mailto:support@debt-free.world">support@debt-free.world</a></div>
-      <p>Debt-Free.world &middot; Amliv Oy &middot; VAT FI32503518</p>
-    </div>
-
-  </div>
-</div>
-
+<div class="footer">Amliv Oy · VAT FI32503518 · <a href="mailto:support@debt-free.world">support@debt-free.world</a> · <a href="/legal.html">Privacy &amp; Terms</a></div>
 <div class="toast" id="toast"></div>
 
 <script>
-const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
+const WORKER_URL='https://debt-free-proxy.amlivbusiness.workers.dev';
+const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
 
-/* ─── TRANSLATIONS (core strings) ─── */
-const MT = {
-  EN:{
-    gateTitle:'Verifying your access',gateSub:'Checking your link. This takes only a moment.',
-    gateError:'This link has expired or is invalid.',gateNoToken:'No access link found. Please use the link from your email.',
-    gateConnError:'Connection error — please refresh.',gateSendBtn:'Send me a new access link',
-    gateSuccess:"Your link is on its way. Check your inbox — and your spam folder if it doesn't arrive within 2 minutes.",
-    drawerTitle:'All tools',drawerSettLabel:'Settings',drawerCompLabel:'Companion mode',
-    drawerCompDesc:'Daily guidance and check-ins',drawerRemLabel:'Monthly reminders',
-    drawerRemDesc:'Progress emails every 30 days',drawerLogout:'Sign out',
-    planEyebrow:'Personalised 90-day plan',planExpand:'Read full plan →',planCollapse:'Show less',
-    toastCopied:'Copied to clipboard',toastSaved:'Preference saved',toastError:'Something went wrong — please try again.',
-    toastFillFields:'Please fill in all required fields.',
-    btnBack:'Back',btnNext:'Continue',btnGenerate:'Generate',btnGenerating:'Generating…',
-    btnCopy:'Copy',btnCopied:'Copied',btnReset:'Start over',
-    t_letters:'AI Creditor Letters',t_letters_d:'Ready-to-send letters for any creditor situation',
-    t_budget:'Crisis Budget Tool',t_budget_d:'See how small changes accelerate your debt-free date',
-    t_snowball:'Snowball vs Avalanche',t_snowball_d:'Which repayment strategy saves you more?',
-    t_dfdate:'Debt-Free Date Calculator',t_dfdate_d:'Your exact debt-free date — updated with your real numbers',
-    t_income:'Extra Income Simulator',t_income_d:'See how additional income shortens your timeline',
-    t_collection:'Debt Collection Map',t_collection_d:'Every stage of the process and your rights',
-    t_challenge:'90-Day Challenge',t_challenge_d:'Weekly actions and milestones to stay on track',
-    t_psychology:'Behavioural Tools',t_psychology_d:'Impulse control, habits and stress management',
-    t_crisis:'Crisis Action Plans',t_crisis_d:'Unemployment, divorce, sick leave — step-by-step',
-    t_emergency:'Emergency Action Card',t_emergency_d:'Your personal debt crisis checklist',
-    t_legal:'Legal Protection Guide',t_legal_d:'What collectors can and cannot do in your country',
-    t_negotiation:'Negotiation Practice',t_negotiation_d:'Prepare for creditor calls with AI roleplay',
-    t_update:'Monthly Plan Update',t_update_d:'Review and refresh your plan for the next 30 days',
-    t_archive:'My Documents',t_archive_d:'All letters and notes generated during your 90 days',
-    ds_plan:'Plan & Progress',ds_letters:'Letters & Negotiation',ds_calc:'Calculators',
-    ds_psych:'Mindset & Psychology',ds_crisis:'Crisis Plans',ds_legal:'Legal & Guides',
-  },
-  FI:{
-    gateTitle:'Tarkistetaan pääsyäsi',gateSub:'Tarkistetaan linkkisi. Tämä kestää vain hetken.',
-    gateError:'Tämä linkki on vanhentunut tai virheellinen.',gateNoToken:'Pääsylinkkiä ei löydy. Käytä sähköpostissasi olevaa linkkiä.',
-    gateConnError:'Yhteysvirhe — päivitä sivu.',gateSendBtn:'Lähetä minulle uusi pääsylinkki',
-    gateSuccess:'Linkkisi on matkalla. Tarkista saapuneet — ja roskapostikansio jos se ei saavu 2 minuutin kuluessa.',
-    drawerTitle:'Kaikki työkalut',drawerSettLabel:'Asetukset',drawerCompLabel:'Companion-tila',
-    drawerCompDesc:'Päivittäinen ohjaus ja tarkistukset',drawerRemLabel:'Kuukausittaiset muistutukset',
-    drawerRemDesc:'Edistymissähköpostit 30 päivän välein',drawerLogout:'Kirjaudu ulos',
-    planEyebrow:'Henkilökohtainen 90 päivän suunnitelma',planExpand:'Lue koko suunnitelma →',planCollapse:'Näytä vähemmän',
-    toastCopied:'Kopioitu leikepöydälle',toastSaved:'Asetus tallennettu',toastError:'Jokin meni pieleen — yritä uudelleen.',
-    toastFillFields:'Täytä kaikki vaaditut kentät.',
-    btnBack:'Takaisin',btnNext:'Jatka',btnGenerate:'Luo',btnGenerating:'Luodaan…',
-    btnCopy:'Kopioi',btnCopied:'Kopioitu',btnReset:'Aloita alusta',
-    t_letters:'AI-kirjeet velkojille',t_letters_d:'Valmiit kirjeet kaikkiin velkojakontaktitilanteisiin',
-    t_budget:'Kriisibudjettityökalu',t_budget_d:'Pienetkin muutokset nopeuttavat velattomaksi pääsyä',
-    t_snowball:'Lumipallo vs vyörytys',t_snowball_d:'Kumpi strategia säästää enemmän?',
-    t_dfdate:'Velattomaksi-päivälaskuri',t_dfdate_d:'Tarkka velattomaksi-päivä omilla luvuillasi',
-    t_income:'Lisätulosimulaattori',t_income_d:'Kuinka paljon nopeammin lisätulot vievät velattomaksi?',
-    t_collection:'Perintäprosessin kartta',t_collection_d:'Jokainen vaihe ja oikeutesi',
-    t_challenge:'90 päivän haaste',t_challenge_d:'Viikoittaiset toimet ja virstanpylväät',
-    t_psychology:'Käyttäytymistyökalut',t_psychology_d:'Impulssikontrolli, tavat ja stressinhallinta',
-    t_crisis:'Kriisisuunnitelmat',t_crisis_d:'Työtön, ero, sairasloma — vaihe vaiheelta',
-    t_emergency:'Hätätilanne-toimintakortti',t_emergency_d:'Henkilökohtainen velkakriisin tarkistuslista',
-    t_legal:'Oikeudellinen suoja',t_legal_d:'Mitä perijät saavat ja eivät saa tehdä',
-    t_negotiation:'Neuvotteluharjoittaja',t_negotiation_d:'Valmistaudu velkoja-puheluihin AI-roolipelillä',
-    t_update:'Kuukausipäivitys',t_update_d:'Tarkista ja päivitä suunnitelmasi seuraavalle 30 päivälle',
-    t_archive:'Omat asiakirjani',t_archive_d:'Kaikki 90 päivän aikana luodut kirjeet ja muistiinpanot',
-    ds_plan:'Suunnitelma ja edistyminen',ds_letters:'Kirjeet ja neuvottelu',ds_calc:'Laskurit',
-    ds_psych:'Mielenlaatu ja psykologia',ds_crisis:'Kriisisuunnitelmat',ds_legal:'Oikeus ja oppaat',
-  }
-};
-// Fallback all other languages to EN
-['SV','DE','NO','DA','NL','ES','FR','IT','PL','PT','CS','ET','LV','LT','HU','RO','HR',
- 'TR','RU','AR','HI','ZH','JA','KO','ID','SW'].forEach(c=>{MT[c]={...MT.EN};});
+let memberToken=null;
+let planExpanded=false;
 
-/* ─── STATE ─── */
-let memberData={},memberToken='',lang='EN',L=MT.EN;
-let planExpanded=false,activeToolId=null,companionOn=true,remindersOn=true;
-let lwData={},nwData={mode:'interactive'},negHistory=[],negPrepText='',uwData={};
+/* ── INIT ── */
+window.addEventListener('DOMContentLoaded',async()=>{
+  const p=new URLSearchParams(window.location.search);
+  memberToken=p.get('token')||sessionStorage.getItem('dfw_member_token');
+  const fresh=p.get('fresh')==='1';
 
-/* ─── INIT ─── */
-(async function init(){
-  const urlParams=new URLSearchParams(window.location.search);
-  const rawToken=urlParams.get('token')||sessionStorage.getItem('dfw_member_token');
-  if(!rawToken){showGateError('noToken');return;}
-  memberToken=rawToken;
-  sessionStorage.setItem('dfw_member_token',rawToken);
-  history.replaceState(null,'',window.location.pathname);
+  if(!memberToken){ showReauth(); return; }
+  sessionStorage.setItem('dfw_member_token',memberToken);
+
   try{
-    const res=await fetch(`${WORKER_URL}/member/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:rawToken})});
-    if(res.status===401||res.status===403){showGateError('expired');return;}
-    if(!res.ok){showGateError('connection');return;}
+    const res=await fetch(`${WORKER_URL}/member/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:memberToken})});
+    if(!res.ok){ showReauth(); return; }
     const data=await res.json();
-    memberData=data;
-    if(data.language&&MT[data.language])lang=data.language;
-    L=MT[lang]||MT.EN;
-    companionOn=data.settings?.companion_mode!=='independent';
-    remindersOn=data.settings?.reminders!=='No';
-    launchDashboard();
-  }catch(e){showGateError('connection');}
-})();
 
-/* ─── GATE ─── */
-function showGateError(type){
-  document.getElementById('gateSpinner').style.display='none';
-  const msgs={expired:L.gateError,noToken:L.gateNoToken,connection:L.gateConnError};
-  const errEl=document.getElementById('gateError');
-  errEl.textContent=msgs[type]||L.gateError;
-  errEl.style.display='block';
-  document.getElementById('gateTitle').textContent='';
-  document.getElementById('gateSub').textContent='';
-  if(type!=='connection')document.getElementById('gateForm').style.display='block';
-}
-async function requestNewLink(){
-  const email=document.getElementById('gateEmail').value.trim();
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast(L.toastFillFields||'Please enter a valid email.');return;}
-  const btn=document.getElementById('gateSendBtn');btn.disabled=true;btn.textContent='…';
-  try{await fetch(`${WORKER_URL}/member/request-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});}catch(e){}
-  document.getElementById('gateForm').style.display='none';
-  document.getElementById('gateSuccess').style.display='block';
-  document.getElementById('gateError').style.display='none';
-}
+    // Tier guard — paid members go to /member/
+    if(data.tier&&data.tier!=='free'){
+      window.location.replace(`/member/?token=${encodeURIComponent(memberToken)}`);
+      return;
+    }
 
-/* ─── LAUNCH ─── */
-function launchDashboard(){
-  document.getElementById('gate').style.display='none';
-  document.getElementById('dashboard').style.display='block';
-  document.getElementById('langCode').textContent=lang;
-  const hasPlan=!!(memberData.debt_recovery_plan||memberData.member_plan);
-  renderDrawer();
-  renderMentorCard(hasPlan);
-  renderTracker(hasPlan);
-  renderPlanSection(hasPlan);
-  if(!hasPlan){
-    document.getElementById('planAnonNotice').style.display='block';
-    const onbUrl=`/onboarding-debt-recovery.html?token=${memberToken}`;
-    document.getElementById('planBuildBtn').onclick=()=>{window.location.href=onbUrl;};
-    document.getElementById('anonBuildBtn').onclick=()=>{window.location.href=onbUrl;};
+    document.getElementById('dashboard').style.display='block';
+    renderDashboard(data,fresh);
+  }catch(e){ showReauth(); }
+});
+
+/* ── RENDER ── */
+function renderDashboard(data,fresh){
+  const od=data.onboarding||{};
+  const firstname=od.firstname||'there';
+  const cur=CC[od.country]||od.currency||'EUR';
+  const debts=od.debts||[];
+  const plan=data.plan||'';
+
+  // Topbar
+  document.getElementById('topbar-name').textContent='Hi, '+firstname;
+
+  // Welcome banner
+  if(fresh){
+    const wb=document.getElementById('welcomeBanner');
+    document.getElementById('wbName').textContent=firstname;
+    wb.style.display='block';
+    setTimeout(()=>{ wb.style.opacity='0'; wb.style.transition='opacity 1s'; setTimeout(()=>wb.style.display='none',1000); },8000);
   }
-}
 
-/* ─── MENTOR CARD ─── */
-function renderMentorCard(hasPlan){
-  const d=memberData;
-  const created=d.created_at?new Date(d.created_at):new Date();
-  const dayNum=Math.max(1,Math.min(90,Math.floor((new Date()-created)/86400000)+1));
-  memberData._dayNum=dayNum;
-  document.getElementById('mentorDayLabel').textContent=(lang==='FI'?'Päivä ':'Day ')+dayNum;
+  // Stale check
+  if(data.created_at){
+    const days=Math.floor((Date.now()-new Date(data.created_at).getTime())/86400000);
+    if(days>30) document.getElementById('reviewPrompt').classList.add('show');
+    document.getElementById('stat-days').textContent=days;
+  }
 
-  const name=d.firstname||'';
-  const collections=d.collections||'';
+  // ── Numbers
+  const income=(parseFloat(od.income)||0)+(parseFloat(od.extra_amount)||0);
+  const expenses=(parseFloat(od.housing_cost)||0)+(parseFloat(od.other_costs)||0);
+  const surplus=income-expenses;
+  const totalDebt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
 
-  let quote='',taskLbl='',taskTxt='',btns=[];
+  const surplusEl=document.getElementById('stat-surplus');
+  surplusEl.textContent=fmtCur(cur,surplus);
+  surplusEl.classList.add(surplus>=0?'positive':'negative');
+  document.getElementById('stat-surplus-sub').textContent=surplus>=0
+    ?`${fmtCur(cur,income)} in — ${fmtCur(cur,expenses)} out`
+    :'Expenses exceed income';
 
-  if(!hasPlan){
-    quote=name?`"${name}, olet täällä. Se tarkoittaa jo jotain."`:`"You are here. That already means something."`;
-    taskLbl=lang==='FI'?'Ensimmäinen askelesi':'Your first step';
-    taskTxt=lang==='FI'
-      ?'Vastaa kolmeen lyhyeen kysymykseen — saat heti yleisen lähtöpisteen tilanteellesi. Sen jälkeen kerromme mitä henkilökohtainen suunnitelma tarkoittaisi sinulle.'
-      :'Answer three short questions — you\'ll get a general starting point immediately. Then we\'ll show you what a personalised plan would mean for you.';
-    btns=[
-      {label:lang==='FI'?'Aloita — vie 2 minuuttia':'Start — takes 2 minutes',cls:'btn-primary',action:'showAnonQuestions()'},
-    ];
-  } else if(collections.includes('Yes')){
-    quote=name
-      ?(lang==='FI'?`"${name}, kiireellisin askel on perintätoimiston asia."`:  `"${name}, the most urgent step is addressing the collections agency."`)
-      :(lang==='FI'?'"Kiireellisin askel: perintätoimiston asia."':'"The most urgent step: address the collections agency."');
-    taskLbl=lang==='FI'?'Tämän päivän tehtävä':'Today\'s task';
-    taskTxt=lang==='FI'
-      ?'Kirjoita kirje perintätoimistolle tänään. Et tarvitse täydellisiä sanoja — autamme sinua. Yksi kirje muuttaa prosessin suunnan.'
-      :'Write a letter to the collections agency today. You don\'t need perfect words — we help you write it. One letter changes the direction of the process.';
-    btns=[
-      {label:lang==='FI'?'Kirjoita kirje nyt':'Write the letter now',cls:'btn-primary',action:"openTool('letters')"},
-      {label:lang==='FI'?'Myöhemmin':'Later',cls:'btn-secondary',action:''},
-    ];
-  } else if(dayNum<=7){
-    quote=name
-      ?(lang==='FI'?`"${name}, suunnitelmasi on valmis. Aloitetaan ensimmäisestä askeleesta."`:  `"${name}, your plan is ready. Let\'s begin with the first step."`)
-      :(lang==='FI'?'"Suunnitelmasi on valmis. Aloitetaan ensimmäisestä askeleesta."':'"Your plan is ready. Let\'s begin with the first step."');
-    taskLbl=lang==='FI'?'Tämän päivän tehtävä':'Today\'s task';
-    taskTxt=lang==='FI'
-      ?'Lue koko suunnitelmasi — se kertoo tarkan tilanteesi, prioriteetit ja ensimmäiset toimenpiteet. Kaikki muu seuraa siitä.'
-      :'Read your full plan — it shows your exact situation, priorities and first actions. Everything else follows from it.';
-    btns=[
-      {label:lang==='FI'?'Lue suunnitelmani':'Read my plan',cls:'btn-primary',action:'expandPlanAndScroll()'},
-      {label:lang==='FI'?'Avaa budjettilaskuri':'Open budget calculator',cls:'btn-secondary',action:"openTool('budget')"},
-    ];
-  } else if(dayNum<=30){
-    quote=lang==='FI'
-      ?`"Päivä ${dayNum}. Jokainen tehty askel on tärkeä — myös ne pienet."`
-      :`"Day ${dayNum}. Every step taken matters — including the small ones."`;
-    taskLbl=lang==='FI'?'Tämän päivän tehtävä':'Today\'s task';
-    taskTxt=lang==='FI'
-      ?'Päivitä numerosi — tulo, velka, maksu. Päivitetyt luvut pitävät suunnitelmasi ajantasaisena ja motivoivana.'
-      :'Update your numbers — income, debt, payment. Updated numbers keep your plan accurate and motivating.';
-    btns=[
-      {label:lang==='FI'?'Päivitä suunnitelmani':'Update my plan',cls:'btn-primary',action:"openTool('update')"},
-      {label:lang==='FI'?'Lue suunnitelmani':'Read my plan',cls:'btn-secondary',action:'expandPlanAndScroll()'},
-    ];
-  } else if(dayNum<=60){
-    quote=lang==='FI'
-      ?`"${dayNum} päivää — se on aitoa edistystä. Et ole enää samassa paikassa kuin alussa."`
-      :`"${dayNum} days — that\'s real progress. You are not in the same place you started."`;
-    taskLbl=lang==='FI'?'Tämän päivän tehtävä':'Today\'s task';
-    taskTxt=lang==='FI'
-      ?'Vertaa strategioitasi — lumipallo vai vyörytys. Oikea strategia voi säästää satoja euroja korkokuluissa.'
-      :'Compare your strategies — snowball vs avalanche. The right strategy can save hundreds in interest costs.';
-    btns=[
-      {label:lang==='FI'?'Vertaa strategioita':'Compare strategies',cls:'btn-primary',action:"openTool('snowball')"},
-      {label:lang==='FI'?'Päivitä suunnitelmani':'Update my plan',cls:'btn-secondary',action:"openTool('update')"},
-    ];
+  document.getElementById('stat-debt').textContent=fmtCur(cur,totalDebt);
+  const monthlyCost=debts.reduce((s,d)=>s+(parseFloat(d.amount)*(parseFloat(d.interest)||0)/100/12),0);
+  document.getElementById('stat-debt-sub').textContent=monthlyCost>0?`≈ ${fmtCur(cur,monthlyCost)}/mo in interest`:'';
+
+  // Debt-free date
+  const dfdEl=document.getElementById('stat-dfd');
+  if(surplus>0&&totalDebt>0){
+    const months=Math.ceil(totalDebt/surplus);
+    const dfd=new Date(); dfd.setMonth(dfd.getMonth()+months);
+    dfdEl.textContent=dfd.toLocaleDateString('en',{month:'short',year:'numeric'});
+    document.getElementById('stat-dfd-sub').textContent=`≈ ${months} months at current pace`;
+    if(data.created_at){
+      const elapsed=Math.floor((Date.now()-new Date(data.created_at).getTime())/86400000/30.4);
+      const pct=Math.min(98,Math.round(elapsed/months*100));
+      document.getElementById('dfd-progress').style.display='block';
+      document.getElementById('dfd-pct-lbl').textContent=pct+'% of the way there';
+      document.getElementById('dfd-fill').style.width=pct+'%';
+    }
+  } else if(surplus<=0){
+    dfdEl.textContent='Address deficit first'; dfdEl.classList.add('negative');
+    document.getElementById('stat-dfd-sub').textContent='Surplus needed to calculate';
   } else {
-    quote=lang==='FI'
-      ?`"Päivä ${dayNum} — olet loppusuoralla. Se matka jonka olet kulkenut on jo merkittävä."`
-      :`"Day ${dayNum} — you\'re in the final stretch. The journey you\'ve made is already significant."`;
-    taskLbl=lang==='FI'?'Tämän päivän tehtävä':'Today\'s task';
-    taskTxt=lang==='FI'
-      ?'Laske uusi velaton-päiväsi nykyisillä luvuillasi. Katso kuinka pitkälle olet tullut lähtötilanteesta.'
-      :'Calculate your updated debt-free date with your current numbers. See how far you\'ve come from the starting point.';
-    btns=[
-      {label:lang==='FI'?'Laske velaton-päiväni':'Calculate my debt-free date',cls:'btn-primary',action:"openTool('dfdate')"},
-      {label:lang==='FI'?'Päivitä suunnitelmani':'Update my plan',cls:'btn-secondary',action:"openTool('update')"},
-    ];
+    dfdEl.textContent='Enter debts to calculate';
   }
 
-  document.getElementById('mentorQuote').textContent=quote;
-  document.getElementById('mentorTaskLbl').textContent=taskLbl;
-  document.getElementById('mentorTaskTxt').textContent=taskTxt;
-  document.getElementById('mentorBtns').innerHTML=btns.map(b=>
-    `<button class="${b.cls}"${b.action?' onclick="'+b.action+'"':''}>${b.label}</button>`
-  ).join('');
+  // ── Card 1: Emergency
+  renderEmergencyCard(plan,debts,cur,data.emergency_card_checked||[false,false,false]);
+
+  // ── Card 3: Debt Map
+  document.getElementById('debt-count-badge').textContent=debts.length+' debt'+(debts.length!==1?'s':'');
+  renderDebtMap(debts,cur);
+
+  // ── Card 4: Phases
+  renderPhases(plan);
+
+  // ── Card 5: Support
+  renderSupport(plan,od.country);
+
+  // ── Card 6: Plan
+  document.getElementById('plan-text').textContent=plan||'Your plan will appear here.';
 }
 
-/* ─── ANON 3 QUESTIONS ─── */
-function showAnonQuestions(){
-  document.getElementById('anonQBlock').style.display='block';
-  document.getElementById('anonQBlock').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function showAnonResult(){
-  const q1=document.getElementById('aq1').value;
-  if(!q1)return;
-  const plans={
-    'Struggling with payments, not yet in collections':'1. List every debt with its exact balance today.\n2. Calculate your real monthly surplus after all essential costs.\n3. Contact each creditor in writing before any first missed payment — most will pause collection if you reach out proactively.',
-    'Collections agency has contacted me':'1. Respond to the agency in writing — not by phone.\n2. Request written proof of the debt before making any payment.\n3. Know your rights — collectors cannot threaten actions they are not authorised to take.',
-    'Enforcement or court proceedings underway':'1. Check the protected income threshold at the enforcement office — it cannot be seized.\n2. Apply to vary the payment order if the amount is unaffordable.\n3. Contact free debt counselling immediately.',
-    "I'm not sure where I stand":'1. Open all unopened letters — write today\'s date on each one.\n2. List every debt and the last contact date.\n3. From this you will know exactly where you stand.',
-  };
-  document.getElementById('anonGenPlan').style.whiteSpace='pre-line';
-  document.getElementById('anonGenPlan').textContent=plans[q1]||'Map your debts, prioritise housing, contact creditors in writing.';
-  document.getElementById('anonResultBlock').style.display='block';
-  document.getElementById('anonResultBlock').scrollIntoView({behavior:'smooth',block:'start'});
+/* ── EMERGENCY CARD ── */
+function renderEmergencyCard(plan,debts,cur,checkState){
+  // Extract from plan text
+  let action='Review your most urgent debt and take the first small step today.';
+  let checks=['List all your debts and their minimum payments','Contact your most urgent creditor to understand your options','Check if you qualify for any government support in your country'];
+
+  if(plan){
+    const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
+    let inSection=false; let foundAction=false; const foundChecks=[];
+    for(const line of lines){
+      if(/emergency action/i.test(line)){inSection=true;continue;}
+      if(inSection&&/local support|closing|we do this/i.test(line)){inSection=false;break;}
+      if(inSection){
+        if(!foundAction&&line.length>20&&!/^[\d\-•·\*]/.test(line)){action=line;foundAction=true;}
+        else if(/^[\d\-•·\*]/.test(line)){const c=line.replace(/^[\d\.\-•·\*]+\s*/,'').trim();if(c.length>10)foundChecks.push(c);}
+      }
+    }
+    if(foundChecks.length>=2)checks=foundChecks.slice(0,3);
+  }
+
+  document.getElementById('ec-action').textContent=action;
+
+  // Most critical debt
+  if(debts.length>0){
+    const sorted=[...debts].sort((a,b)=>{
+      if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
+      if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
+      return ((parseFloat(b.interest)||0)*parseFloat(b.amount))-((parseFloat(a.interest)||0)*parseFloat(a.amount));
+    });
+    const crit=sorted[0];
+    const monthInt=parseFloat(crit.amount)*(parseFloat(crit.interest)||0)/100/12;
+    document.getElementById('ec-debt-name').textContent=(crit.creditor?crit.creditor+' — ':'')+fmtCur(crit.currency||cur,crit.amount);
+    document.getElementById('ec-debt-detail').textContent=`${crit.type}${crit.interest>0?' · '+crit.interest+'% p.a.':''}${monthInt>0?' · '+fmtCur(crit.currency||cur,monthInt)+'/mo interest':''}${crit.type==='Debt in collections'?' · ⚠️ Urgent':''}`;
+    if(crit.type==='Debt in collections') document.getElementById('ec-badge').textContent='⚠️ Urgent';
+  }
+
+  // Checklist
+  const cl=document.getElementById('checklist');
+  cl.innerHTML=checks.map((item,i)=>`
+    <div class="check-item ${checkState[i]?'done':''}" id="ci-${i}" onclick="toggleCheck(${i})">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-label-text">${esc(item)}</div>
+    </div>`).join('');
 }
 
-/* ─── TRACKER ─── */
-function renderTracker(hasPlan){
-  if(!hasPlan){
-    document.getElementById('trackerLocked').style.display='block';
-    document.getElementById('trackerActive').style.display='none';
+function toggleCheck(i){
+  document.getElementById('ci-'+i).classList.toggle('done');
+  saveChecks();
+}
+async function saveChecks(){
+  const states=[0,1,2].map(i=>{ const el=document.getElementById('ci-'+i); return el?el.classList.contains('done'):false; });
+  try{
+    await fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:states})});
+  }catch(_){}
+}
+
+/* ── DEBT MAP ── */
+function renderDebtMap(debts,cur){
+  const body=document.getElementById('debt-map-body');
+  if(!debts.length){body.innerHTML='<p style="color:var(--muted);font-size:13.5px;">No debts recorded. Complete your onboarding to see your debt map.</p>';return;}
+  const sorted=[...debts].sort((a,b)=>{
+    if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
+    if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
+    return ((parseFloat(b.interest)||0)*parseFloat(b.amount))-((parseFloat(a.interest)||0)*parseFloat(a.amount));
+  });
+  body.innerHTML=sorted.map(d=>{
+    const rate=parseFloat(d.interest)||0;
+    let tag='';
+    if(d.type==='Debt in collections')tag='<span class="debt-tag tag-urgent">⚠️ Collections</span>';
+    else if(rate>=20)tag='<span class="debt-tag tag-high">High rate</span>';
+    else if(rate>=10)tag='<span class="debt-tag tag-med">Medium</span>';
+    else tag='<span class="debt-tag tag-low">Lower risk</span>';
+    const monthInt=parseFloat(d.amount)*rate/100/12;
+    return `<div class="debt-map-item">
+      <div><div class="debt-map-name">${esc(d.creditor||d.type)}</div><div class="debt-map-type">${esc(d.type)}</div><div class="debt-tags">${tag}</div></div>
+      <div class="debt-map-right">
+        <div class="debt-map-amount">${fmtCur(d.currency||cur,d.amount)}</div>
+        <div class="debt-map-rate">${rate}% p.a.</div>
+        ${monthInt>0?`<div class="debt-map-interest">+${fmtCur(d.currency||cur,monthInt)}/mo</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── 90-DAY PHASES ── */
+function renderPhases(plan){
+  const body=document.getElementById('phases-body');
+  // Extract actionable content from plan for 3 phases
+  let p1='Address your most urgent debt first. Contact your highest-priority creditor and understand exactly what they need from you.';
+  let p2='Build a consistent repayment habit. Allocate your monthly surplus to the highest-cost debt while maintaining minimum payments across all others.';
+  let p3='Review your progress and accelerate. Look for additional income or expense reductions. Every debt you clear removes weight — and compounds momentum.';
+
+  if(plan){
+    const lines=plan.split('\n').map(l=>l.trim()).filter(l=>l.length>20);
+    // Try to find Days 1-30 content
+    let inSection=false;
+    for(let i=0;i<lines.length;i++){
+      if(/days 1.30|foundation|first week|this week/i.test(lines[i])&&!inSection){
+        const content=lines.slice(i+1,i+4).filter(l=>!/^[\d\.\-•·]/.test(l)&&l.length>20);
+        if(content.length)p1=content[0];
+        inSection=true;
+      }
+    }
+  }
+
+  body.innerHTML=[{lbl:'Days 1–30',text:p1},{lbl:'Days 31–60',text:p2},{lbl:'Days 61–90',text:p3}].map(ph=>`
+    <div class="phase-row">
+      <div class="phase-lbl">${ph.lbl}</div>
+      <div class="phase-text">${esc(ph.text)}</div>
+    </div>`).join('');
+}
+
+/* ── LOCAL SUPPORT ── */
+function renderSupport(plan,country){
+  const body=document.getElementById('support-body');
+  if(!plan){ body.innerHTML=supportFallback(country); return; }
+
+  const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
+  let inSection=false; const supportLines=[];
+  for(const line of lines){
+    if(/local support/i.test(line)){inSection=true;continue;}
+    if(inSection&&/closing|we do this together|✦/i.test(line))break;
+    if(inSection&&line.length>8)supportLines.push(line);
+  }
+
+  if(!supportLines.length){ body.innerHTML=supportFallback(country); return; }
+
+  // Check for the fallback phrase
+  const combined=supportLines.join(' ');
+  if(/support@debt-free\.world/i.test(combined)){
+    body.innerHTML=`<p style="font-size:13.5px;color:var(--muted);line-height:1.6;">For verified local support resources, contact us at <a href="mailto:support@debt-free.world" style="color:var(--green);font-weight:600;">support@debt-free.world</a> — we'll send you a verified list for ${esc(country||'your country')}.</p>`;
     return;
   }
-  document.getElementById('trackerLocked').style.display='none';
-  document.getElementById('trackerActive').style.display='block';
 
-  const d=memberData;
-  const cur=d.currency||'EUR';
-  const dayNum=d._dayNum||1;
-  const debt=parseFloat(d.total_debt)||0;
-  const rate=(d.debts&&d.debts[0]&&d.debts[0].interest)?parseFloat(d.debts[0].interest):0;
-  const pmt=parseFloat(d.payment)||parseFloat(d.monthly_payment)||260;
-
-  if(!debt||!pmt)return;
-
-  function calcM(P,pmt,r){
-    const mr=r/100/12;
-    if(mr===0)return Math.ceil(P/pmt);
-    if(pmt<=P*mr)return null;
-    return Math.ceil(-Math.log(1-P*mr/pmt)/Math.log(1+mr));
+  // Parse orgs
+  const orgs=parseOrgs(supportLines);
+  if(!orgs.length){
+    body.innerHTML=`<div style="font-size:13.5px;color:var(--muted);line-height:1.75;">${supportLines.map(l=>esc(l)).join('<br/>')}</div>`;
+    return;
   }
-
-  const mBase=calcM(debt,pmt,rate);
-  if(!mBase)return;
-
-  const paid=Math.round(pmt*(dayNum/30));
-  const remaining=Math.max(0,debt-paid);
-  const intSaved=Math.round(paid*(rate/100/12)*dayNum);
-  const pct=Math.min(100,Math.round(dayNum/90*100));
-
-  const dfBase=new Date();dfBase.setMonth(dfBase.getMonth()+mBase);
-  const dfNow=new Date();dfNow.setMonth(dfNow.getMonth()+Math.max(1,mBase-Math.floor(dayNum/30)));
-
-  const locale=langToLocale(lang);
-  document.getElementById('trackerDate1').textContent=dfBase.toLocaleDateString(locale,{month:'long',year:'numeric'});
-  document.getElementById('trackerSub1').textContent=(lang==='FI'?'Lähtöpiste · ':'Starting point · ')+mBase+(lang==='FI'?' kk':' months');
-  document.getElementById('trackerDate2').textContent=dfNow.toLocaleDateString(locale,{month:'long',year:'numeric'});
-  const savedM=Math.max(0,mBase-Math.max(1,mBase-Math.floor(dayNum/30)));
-  document.getElementById('trackerSub2').textContent=savedM>0?(savedM+(lang==='FI'?' kk nopeammin':' months sooner')):lang==='FI'?'Hyvä alku':'Good start';
-  document.getElementById('trackerBarNow').style.width=pct+'%';
-  document.getElementById('metVal1').textContent=remaining.toLocaleString()+' '+cur;
-  document.getElementById('metVal2').textContent=paid.toLocaleString()+' '+cur;
-  document.getElementById('metVal2').className='mbox-val g';
-  document.getElementById('metVal3').textContent=pct+' %';
-  document.getElementById('metVal3').className='mbox-val g';
-  document.getElementById('metVal4').textContent=intSaved>0?intSaved.toLocaleString()+' '+cur:'—';
-  document.getElementById('metVal4').className='mbox-val g';
+  body.innerHTML=orgs.map(o=>`
+    <div class="support-item">
+      <div class="support-name">${esc(o.name)}</div>
+      ${o.desc?`<div class="support-desc">${esc(o.desc)}</div>`:''}
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        ${o.url?`<a href="${esc(o.url)}" class="support-link" target="_blank" rel="noopener">Visit website →</a>`:''}
+        ${o.free?'<span class="support-free">Free</span>':''}
+      </div>
+    </div>`).join('');
 }
-
-function calcExtraImpact(){
-  const amt=parseFloat(document.getElementById('xamt').value)||0;
-  if(!amt)return;
-  const d=memberData;
-  const debt=parseFloat(d.total_debt)||0;
-  const rate=(d.debts&&d.debts[0]&&d.debts[0].interest)?parseFloat(d.debts[0].interest):0;
-  const pmt=parseFloat(d.payment)||260;
-  const cur=d.currency||'EUR';
-  function calcM(P,p,r){const mr=r/100/12;if(mr===0)return Math.ceil(P/p);if(p<=P*mr)return null;return Math.ceil(-Math.log(1-P*mr/p)/Math.log(1+mr));}
-  const base=calcM(debt,pmt,rate);
-  const improved=calcM(debt,pmt+amt,rate);
-  const res=document.getElementById('xres');
-  if(base&&improved&&base>improved){
-    const saved=Math.round(base-improved);
-    res.className='extra-res ok';
-    res.textContent=Math.round(amt)+' '+cur+(lang==='FI'?' lisää kuukaudessa → velaton ':' extra per month → debt-free ')+saved+(lang==='FI'?' kuukautta aiemmin.':' months sooner.');
-  } else {
-    res.className='extra-res';
-    res.textContent=lang==='FI'?'Syötä suurempi summa nähdäksesi vaikutuksen.':'Enter a larger amount to see the impact.';
+function supportFallback(country){
+  return `<p style="font-size:13.5px;color:var(--muted);line-height:1.6;">For verified local support resources tailored to your profile, contact us at <a href="mailto:support@debt-free.world" style="color:var(--green);font-weight:600;">support@debt-free.world</a>.</p>`;
+}
+function parseOrgs(lines){
+  const orgs=[]; let cur=null;
+  for(const line of lines){
+    const urlM=line.match(/https?:\/\/[\w\.\-\/]+/);
+    if(urlM&&cur){cur.url=urlM[0];continue;}
+    if(/\bfree\b/i.test(line)&&cur){cur.free=true;}
+    if(line.length<90&&!line.startsWith('-')&&!urlM){
+      if(cur&&cur.name)orgs.push(cur);
+      cur={name:line,desc:'',url:'',free:false};
+    } else if(cur&&!cur.desc&&line.length>20){cur.desc=line;}
   }
+  if(cur&&cur.name)orgs.push(cur);
+  return orgs;
 }
 
-/* ─── PLAN SECTION ─── */
-function renderPlanSection(hasPlan){
-  if(!hasPlan)return;
-  const plan=memberData.debt_recovery_plan||memberData.member_plan||'';
-  const d=memberData;
-  document.getElementById('planAnonNotice').style.display='none';
-  document.getElementById('planCardWrap').style.display='block';
-  document.getElementById('planEyebrow').textContent=L.planEyebrow||'Personalised 90-day plan';
-  document.getElementById('planTitleEl').textContent=d.firstname?(lang==='FI'?d.firstname+'n velanhallintasuunnitelma':d.firstname+"'s Debt Recovery Plan"):'Your Debt Recovery Plan';
-  const chips=[];
-  if(d.country)chips.push(d.country);
-  if(d.employment)chips.push(d.employment);
-  if(d.total_debt&&d.currency)chips.push(d.total_debt+' '+d.currency);
-  document.getElementById('profileChips').innerHTML=chips.map(c=>`<span class="profile-chip">${c}</span>`).join('');
-  document.getElementById('planBodyEl').textContent=plan;
-  document.getElementById('planExpandBtn').textContent=L.planExpand||'Read full plan →';
-}
-
+/* ── PLAN TOGGLE ── */
 function togglePlan(){
+  const w=document.getElementById('plan-wrapper'); const btn=document.getElementById('plan-toggle-btn');
   planExpanded=!planExpanded;
-  document.getElementById('planBodyEl').classList.toggle('expanded',planExpanded);
-  document.getElementById('planExpandBtn').textContent=planExpanded?(L.planCollapse||'Show less'):(L.planExpand||'Read full plan →');
+  if(planExpanded){w.classList.remove('plan-collapsed');btn.textContent='Show less ↑';}
+  else{w.classList.add('plan-collapsed');btn.textContent='Read full report ↓';}
 }
 
-function expandPlanAndScroll(){
-  planExpanded=true;
-  document.getElementById('planBodyEl').classList.add('expanded');
-  document.getElementById('planExpandBtn').textContent=L.planCollapse||'Show less';
-  document.getElementById('planCardWrap')?.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-/* ─── DRAWER ─── */
-const TOOLS=[
-  {id:'letters',key:'t_letters',badge:'AI',section:'ds_letters'},
-  {id:'update',key:'t_update',badge:'',section:'ds_plan'},
-  {id:'budget',key:'t_budget',badge:'',section:'ds_calc'},
-  {id:'dfdate',key:'t_dfdate',badge:'',section:'ds_calc'},
-  {id:'snowball',key:'t_snowball',badge:'',section:'ds_calc'},
-  {id:'income',key:'t_income',badge:'',section:'ds_calc'},
-  {id:'collection',key:'t_collection',badge:'',section:'ds_legal'},
-  {id:'legal',key:'t_legal',badge:'',section:'ds_legal'},
-  {id:'challenge',key:'t_challenge',badge:'',section:'ds_plan'},
-  {id:'psychology',key:'t_psychology',badge:'',section:'ds_psych'},
-  {id:'crisis',key:'t_crisis',badge:'',section:'ds_crisis'},
-  {id:'emergency',key:'t_emergency',badge:'',section:'ds_crisis'},
-  {id:'negotiation',key:'t_negotiation',badge:'AI',section:'ds_letters'},
-  {id:'archive',key:'t_archive',badge:'',section:'ds_plan'},
-];
-
-function renderDrawer(){
-  const sections={ds_plan:TOOLS.filter(t=>t.section==='ds_plan'),ds_letters:TOOLS.filter(t=>t.section==='ds_letters'),ds_calc:TOOLS.filter(t=>t.section==='ds_calc'),ds_psych:TOOLS.filter(t=>t.section==='ds_psych'),ds_crisis:TOOLS.filter(t=>t.section==='ds_crisis'),ds_legal:TOOLS.filter(t=>t.section==='ds_legal')};
-  let html='';
-  Object.entries(sections).forEach(([sKey,tools])=>{
-    html+='<div class="drawer-section"><span class="drawer-section-label">'+(L[sKey]||sKey)+'</span>';
-    tools.forEach(t=>{
-      html+='<div class="drawer-tool" onclick="closeDrawer();openTool(\''+t.id+'\')">'
-        +'<div style="flex:1;"><div class="drawer-tool-name">'+(L[t.key]||t.id)+'</div>'
-        +'<div class="drawer-tool-desc">'+(L[t.key+'_d']||'')+'</div></div>'
-        +(t.badge?'<span class="drawer-tool-badge">'+t.badge+'</span>':'')
-        +'</div>';
-    });
-    html+='</div>';
-  });
-  document.getElementById('drawerContent').innerHTML=html;
-  document.getElementById('drawerTitle').textContent=L.drawerTitle||'All tools';
-  document.getElementById('drawerSettLabel').textContent=L.drawerSettLabel||'Settings';
-  document.getElementById('drawerCompLabel').textContent=L.drawerCompLabel||'Companion mode';
-  document.getElementById('drawerCompDesc').textContent=L.drawerCompDesc||'Daily guidance and check-ins';
-  document.getElementById('drawerRemLabel').textContent=L.drawerRemLabel||'Monthly reminders';
-  document.getElementById('drawerRemDesc').textContent=L.drawerRemDesc||'Progress emails every 30 days';
-  document.getElementById('drawerLogout').textContent=L.drawerLogout||'Sign out';
-  document.getElementById('drawerCompanionToggle').classList.toggle('on',companionOn);
-  document.getElementById('drawerRemindersToggle').classList.toggle('on',remindersOn);
-}
-
-function openDrawer(){document.getElementById('toolsDrawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');document.body.style.overflow='hidden';}
-function closeDrawer(){document.getElementById('toolsDrawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');document.body.style.overflow='';}
-
-async function toggleCompanion(){
-  companionOn=!companionOn;
-  document.getElementById('drawerCompanionToggle').classList.toggle('on',companionOn);
-  await saveSetting('companion_mode',companionOn?'guided':'independent');
-  showToast(L.toastSaved||'Preference saved');
-}
-async function toggleSetting(key){
-  if(key==='reminders'){remindersOn=!remindersOn;document.getElementById('drawerRemindersToggle').classList.toggle('on',remindersOn);await saveSetting('reminders',remindersOn?'Yes':'No');showToast(L.toastSaved||'Preference saved');}
-}
-async function saveSetting(key,value){
-  try{await fetch(`${WORKER_URL}/member/settings`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({[key]:value})});}catch(e){}
-}
-
-/* ─── LANGUAGE ─── */
-function toggleLangMenu(){
-  const menu=document.getElementById('langMenu');
-  menu.classList.toggle('open');
-  if(menu.classList.contains('open')){
-    setTimeout(()=>{document.addEventListener('click',closeLangOutside,{once:true});},10);
-  }
-}
-function closeLangOutside(e){
-  const wrap=document.querySelector('.lang-selector-wrap');
-  if(wrap&&!wrap.contains(e.target))document.getElementById('langMenu')?.classList.remove('open');
-}
-function langLabel(code){const m={EN:'English',FI:'Suomi',SV:'Svenska',DE:'Deutsch',FR:'Français',ES:'Español',PT:'Português',IT:'Italiano',NL:'Nederlands',PL:'Polski',TR:'Türkçe',RU:'Русский',AR:'العربية',HI:'हिन्दी',ZH:'中文',JA:'日本語',KO:'한국어',ID:'Indonesia',SW:'Kiswahili'};return m[code]||code;}
-async function changeLang(code){
-  lang=code;L=MT[code]||MT.EN;
-  document.getElementById('langMenu')?.classList.remove('open');
-  document.getElementById('langCode').textContent=code;
-  renderDrawer();
-  await saveSetting('language',code);
-  showToast(langLabel(code));
-}
-function langToLocale(l){const m={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',NO:'nb-NO',DA:'da-DK',NL:'nl-NL',ES:'es-ES',FR:'fr-FR',IT:'it-IT',PL:'pl-PL',PT:'pt-PT'};return m[l]||'en-GB';}
-
-/* ─── LOGOUT ─── */
-function logout(){
-  sessionStorage.removeItem('dfw_member_token');memberToken='';memberData={};closeDrawer();
-  document.getElementById('dashboard').style.display='none';document.getElementById('gate').style.display='flex';
-  document.getElementById('gateSpinner').style.display='none';
-  document.getElementById('gateTitle').textContent='You have been signed out.';
-  document.getElementById('gateSub').textContent='Use the link in your email to sign back in, or request a new one below.';
-  document.getElementById('gateForm').style.display='block';
-}
-
-/* ─── TOOL PANELS ─── */
-function openTool(toolId){
-  activeToolId=toolId;
-  const wrap=document.getElementById('activePanelWrap');
-  wrap.innerHTML=buildPanel(toolId);
-  wrap.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function closeTool(){document.getElementById('activePanelWrap').innerHTML='';activeToolId=null;}
-
-/* ─── AI HELPER ─── */
-async function callAI(prompt){
+/* ── RE-AUTH ── */
+function showReauth(){ document.getElementById('reauthWrap').classList.add('show'); }
+async function sendNewLink(){
+  const email=document.getElementById('f_reauth').value.trim();
+  if(!email){toast('Please enter your email address.');return;}
   try{
-    const res=await fetch(`${WORKER_URL}/api/chat`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1500,messages:[{role:'user',content:prompt}]})});
-    if(res.status===401)return{error:'Session expired. Please re-open your access link.'};
-    if(res.status===429){const d=await res.json();return{error:d.error||'Daily AI limit reached. Resets at midnight UTC.'};}
-    if(!res.ok)return{error:L.toastError||'Generation failed. Please try again.'};
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'';
-    if(!text)return{error:L.toastError||'Generation failed. Please try again.'};
-    return{text};
-  }catch(e){return{error:L.toastError||'Connection error. Please try again.'};}
+    await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    document.getElementById('reauthWrap').innerHTML='<div class="reauth-icon">✉️</div><div class="reauth-title">Check your inbox.</div><p class="reauth-sub">Your access link is on its way. Click it to return to your plan.</p>';
+  }catch(e){toast('Could not send link. Please email support@debt-free.world');}
 }
 
-/* ─── COPY / TOAST ─── */
-function copyOutput(outputId,btnId){
-  const text=document.getElementById(outputId)?.textContent||'';
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn=document.getElementById(btnId);
-    if(btn){btn.textContent=L.btnCopied||'Copied';setTimeout(()=>btn.textContent=L.btnCopy||'Copy',2000);}
-    showToast(L.toastCopied||'Copied to clipboard');
-  }).catch(()=>showToast(L.toastError));
+/* ── HELPERS ── */
+function fmtCur(cur,val){
+  const n=Math.round(val||0);
+  try{return new Intl.NumberFormat('en',{style:'currency',currency:cur,maximumFractionDigits:0}).format(n);}
+  catch(_){return cur+' '+n.toLocaleString();}
 }
-function showToast(msg){if(!msg)return;const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
-
-/* ─── WIZ HELPER ─── */
-function wizShowStep(prefix,n){
-  document.querySelectorAll('[id^="'+prefix+'"]').forEach(el=>{
-    const suf=el.id.slice(prefix.length);
-    if(/^(\d+|_\w+)$/.test(suf))el.classList.remove('active');
-  });
-  const target=document.getElementById(prefix+n);
-  if(target)target.classList.add('active');
-}
-
-/* ─── SURPLUS ─── */
-function calcSurplus(){const d=memberData;return Math.max(0,Math.round((parseFloat(d.income)||0)-(parseFloat(d.housing_cost)||0)-(parseFloat(d.other_costs)||0)));}
-
-/* ─── DOCUMENT ARCHIVE ─── */
-async function saveDocument(type,title,text,meta){
-  if(!text||!memberToken)return;
-  const doc={type,title,creditor:meta?.creditor||null,subtype:meta?.subtype||null,text,created_at:new Date().toISOString()};
-  if(!memberData.documents)memberData.documents=[];
-  memberData.documents.push(doc);
-  try{await fetch(`${WORKER_URL}/member/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({document:doc})});}catch(e){}
-}
-function toggleDocViewer(idx){
-  const viewer=document.getElementById('docviewer_'+idx);
-  const actions=document.getElementById('docactions_'+idx);
-  if(!viewer)return;
-  const isOpen=viewer.classList.contains('active');
-  document.querySelectorAll('.doc-viewer.active').forEach(v=>{v.classList.remove('active');const i=v.id.replace('docviewer_','');if(document.getElementById('docactions_'+i))document.getElementById('docactions_'+i).style.display='none';});
-  if(!isOpen){const doc=memberData.documents?.[idx];if(doc){viewer.textContent=doc.text;viewer.classList.add('active');if(actions)actions.style.display='flex';}}
-}
-function copyDocToClipboard(idx){
-  const doc=memberData.documents?.[idx];if(!doc?.text)return;
-  navigator.clipboard.writeText(doc.text).then(()=>{const btn=document.getElementById('doccopy_'+idx);if(btn){btn.textContent=L.btnCopied||'Copied';setTimeout(()=>btn.textContent=L.btnCopy||'Copy',2000);}showToast(L.toastCopied||'Copied to clipboard');});
-}
-
-/* ─── COUNTRY DATA ─── */
-const COUNTRY_DATA={'Finland':{agencies:['Takuusäätiö — takuusaatio.fi','Ulosottolaitos — ulosotto.fi','Kilpailu- ja kuluttajavirasto — kkv.fi']},'Sweden':{agencies:['Kronofogden — kronofogden.se','Konsumentverket — konsumentverket.se']},'Germany':{agencies:['Schuldnerberatung — schuldnerberatung.de','Verbraucherzentrale — verbraucherzentrale.de']},'United Kingdom':{agencies:['StepChange — stepchange.org','National Debtline — nationaldebtline.org','MoneyHelper — moneyhelper.org.uk']},'Ireland':{agencies:['MABS — mabs.ie','Insolvency Service of Ireland — isi.gov.ie']},'United States':{agencies:['NFCC — nfcc.org','Consumer Financial Protection Bureau — consumerfinance.gov']},'Australia':{agencies:['National Debt Helpline — ndh.org.au','MoneySmart — moneysmart.gov.au']},'Netherlands':{agencies:['Geldfit — geldfit.nl','Nibud — nibud.nl']},'France':{agencies:['Banque de France — banque-france.fr','Point Conseil Budget — mon-budget-service-public.fr']},'Spain':{agencies:['ADICAE — adicae.net','Segunda Oportunidad — mjusticia.gob.es']},'Poland':{agencies:['UOKiK — uokik.gov.pl','Federacja Konsumentów — federacja-konsumentow.org.pl']}};
-function getCountryData(c){return COUNTRY_DATA[c]||{agencies:['Your national consumer protection authority','Your country\'s free debt counselling service','Your local citizens advice equivalent']};}
-
-
-/* ─── BUILD PANEL — all tool panels ─── */
-function buildPanel(id){
-  const d=memberData,cur=d.currency||'EUR';
-  const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
-  const planLang=LANG_NAMES[lang]||'English';
-
-  switch(id){
-  case 'letters':{
-    const debtOpts=d.debts&&d.debts.length>0
-      ?d.debts.map((dbt,i)=>`<button class="wiz-opt" onclick="lwSelectDebt(${i},this)">${dbt.creditor||dbt.type} — ${(dbt.amount||0).toLocaleString()} ${dbt.currency||cur}</button>`).join('')+`<button class="wiz-opt" onclick="lwSelectDebt(-1,this)">Other / not listed</button>`
-      :`<button class="wiz-opt selected" onclick="lwSelectDebt(-1,this)">Enter creditor name</button>`;
-    const hist=getLWHistory();
-    const histHtml=hist.length===0?'<span class="letter-history-empty">No letters generated yet this session.</span>':hist.map((h,i)=>`<div class="letter-history-item" onclick="lwShowHistory(${i})"><span class="letter-history-meta">${h.creditor} · ${h.type}</span><span class="letter-history-date">${h.time}</span></div>`).join('');
-    return`<div class="tool-panel active" id="panel_letters"><div class="panel-header"><div class="panel-title">${L.t_letters||'AI Creditor Letters'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
-    <div id="lw_steps">
-      <div class="wiz-step active" id="lw1"><span class="wiz-eyebrow">Step 1 of 4</span><div class="wiz-q">Who is this letter for?</div><div class="wiz-hint" style="margin-bottom:10px;">Select a debt from your profile, or enter a name below.</div><div class="wiz-opts" id="lw_debt_opts">${debtOpts}</div><div class="wiz-field" style="margin-top:10px;"><label class="wiz-label">Creditor name</label><input type="text" id="lw_creditor" placeholder="e.g. Nordea, Klarna, HMRC, Intrum…"/></div><div class="wiz-nav"><button class="wiz-next" onclick="lwNext(1)">Continue</button></div></div>
-      <div class="wiz-step" id="lw2"><span class="wiz-eyebrow">Step 2 of 4</span><div class="wiz-q">What type of letter do you need?</div><div class="wiz-opts" id="lw_type_opts"><button class="wiz-opt" onclick="lwSelectType('hardship',this)">Hardship / payment difficulty</button><button class="wiz-opt" onclick="lwSelectType('settlement',this)">Debt settlement offer</button><button class="wiz-opt" onclick="lwSelectType('stop',this)">Stop contact request</button><button class="wiz-opt" onclick="lwSelectType('dispute',this)">Debt dispute</button><button class="wiz-opt" onclick="lwSelectType('plan',this)">Propose a payment plan</button><button class="wiz-opt" onclick="lwSelectType('holiday',this)">Request a payment holiday</button><button class="wiz-opt" onclick="lwSelectType('negotiation',this)">General negotiation</button></div><div class="wiz-nav"><button class="wiz-back" onclick="lwBack(2)">Back</button><button class="wiz-next" onclick="lwNext(2)">Continue</button></div></div>
-      <div class="wiz-step" id="lw3"><span class="wiz-eyebrow">Step 3 of 4</span><div class="wiz-q">A few more details.</div><div class="wiz-field"><label class="wiz-label">Amount owed <span style="font-weight:300;color:var(--muted)">(optional)</span></label><div class="wiz-amount"><input type="number" id="lw_amount" placeholder="0" inputmode="decimal"/><select id="lw_currency">${['EUR','GBP','SEK','NOK','DKK','USD','CHF','PLN','CZK','HUF','RON','CAD','AUD','BRL','INR','IDR','PHP'].map(c=>`<option value="${c}"${c===cur?' selected':''}>${c}</option>`).join('')}</select></div></div><div class="wiz-field"><label class="wiz-label">Anything specific to include? <span style="font-weight:300;color:var(--muted)">(optional)</span></label><div class="wiz-hint">Context makes the letter significantly more persuasive.</div><textarea id="lw_situation" rows="3" placeholder="e.g. Made redundant 2 months ago. 2 children. Can pay 50 ${cur}/month.">${d.situation||''}</textarea></div><div class="wiz-nav"><button class="wiz-back" onclick="lwBack(3)">Back</button><button class="wiz-next" onclick="lwNext(3)">Continue</button></div></div>
-      <div class="wiz-step" id="lw4"><span class="wiz-eyebrow">Step 4 of 4</span><div class="wiz-q">What is causing the hardship?</div><div class="wiz-opts grid2" id="lw_hardship_opts">${['Unemployment','Reduced income','Illness or disability','Divorce or separation','Business failure','Cost of living pressure','Unexpected expenses','Other'].map(h=>`<button class="wiz-opt" onclick="lwSelectHardship('${h}',this)">${h}</button>`).join('')}</div><div class="wiz-nav"><button class="wiz-back" onclick="lwBack(4)">Back</button><button class="wiz-next" onclick="generateLetter()">Generate letter</button></div></div>
-      <div class="wiz-step" id="lw_generating"><div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">Writing your letter…</div></div></div>
-    </div>
-    <div class="panel-output" id="letterOutput"></div>
-    <div class="output-actions" id="letterActions" style="display:none;"><button class="btn-copy" onclick="copyOutput('letterOutput','letterCopyBtn')" id="letterCopyBtn">Copy</button><button class="btn-reset" onclick="openTool('letters')">Write another letter</button></div>
-    <div class="panel-error" id="letterError"></div>
-    <div class="letter-history"><span class="letter-history-label">Letters written this session</span><div id="lwHistoryList">${histHtml}</div></div></div>`;}
-
-  case 'budget':{const surplus=calcSurplus();
-    return`<div class="tool-panel active" id="panel_budget"><div class="panel-header"><div class="panel-title">${L.t_budget||'Crisis Budget Tool'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>
-    <div class="wiz-step active" id="bw1"><span class="wiz-eyebrow">Step 1 of 2 — Your debt</span><div class="wiz-q">What are you paying off?</div><div class="wiz-two"><div class="wiz-field"><label class="wiz-label">Total debt remaining (${cur})</label><input type="number" id="b_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Interest rate (%)</label><div class="wiz-hint">Enter 0 if unknown.</div><input type="number" id="b_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div></div><div class="wiz-nav"><button class="wiz-next" onclick="bwNext(1)">Continue</button></div></div>
-    <div class="wiz-step" id="bw2"><span class="wiz-eyebrow">Step 2 of 2 — Your payments</span><div class="wiz-q">How much can you put towards debt each month?</div><div class="wiz-field"><label class="wiz-label">Current monthly debt payment (${cur})</label><div class="wiz-hint">What you are paying now.</div><input type="number" id="b_payment" placeholder="0" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Extra you could add per month (${cur})</label><div class="wiz-hint">Even 30–50 ${cur} extra makes a meaningful difference.</div><input type="number" id="b_extra" value="0" placeholder="0" inputmode="decimal"/></div><div style="background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:10px 13px;font-size:12.5px;color:var(--green-dark);margin-bottom:14px;">Available surplus from your profile: <strong>${surplus} ${cur}/month</strong></div><div class="wiz-nav"><button class="wiz-back" onclick="bwBack(2)">Back</button><button class="wiz-next" onclick="runBudget()">Calculate</button></div></div>
-    <div class="calc-result" id="budgetResult"></div></div>`;}
-
-  case 'dfdate':return`<div class="tool-panel active" id="panel_dfdate"><div class="panel-header"><div class="panel-title">${L.t_dfdate||'Debt-Free Date Calculator'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Enter your numbers to see your exact debt-free date and key milestones.</p><div class="wiz-two"><div class="wiz-field"><label class="wiz-label">Total debt (${cur})</label><input type="number" id="df_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Monthly payment (${cur})</label><input type="number" id="df_payment" placeholder="0" inputmode="decimal"/></div></div><div class="wiz-field"><label class="wiz-label">Interest rate (%)</label><div class="wiz-hint">Enter 0 if unknown.</div><input type="number" id="df_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div><div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runDFDate()">Calculate my debt-free date</button></div><div class="calc-result" id="dfdateResult"></div></div>`;
-
-  case 'snowball':{
-    const hasDebts=d.debts&&d.debts.length>=2;
-    const debtRows=hasDebts?d.debts.map((dbt,i)=>`<div class="wiz-two" style="margin-bottom:8px;"><div class="wiz-field" style="margin-bottom:0;"><label class="wiz-label" style="font-size:11px;">${dbt.creditor||dbt.type||'Debt '+(i+1)} (${dbt.currency||cur})</label><input type="number" id="s_d${i}" value="${dbt.amount||''}" placeholder="0" inputmode="decimal"/></div><div class="wiz-field" style="margin-bottom:0;"><label class="wiz-label" style="font-size:11px;">Interest rate (%)</label><input type="number" id="s_r${i}" value="${dbt.interest||''}" placeholder="0" min="0" max="100" step="0.1" inputmode="decimal"/></div></div>`).join('')
-      :`<div class="wiz-two"><div class="wiz-field"><label class="wiz-label">Debt 1 — amount (${cur})</label><input type="number" id="s_d0" placeholder="0" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Debt 1 — interest (%)</label><input type="number" id="s_r0" placeholder="0" step="0.1" inputmode="decimal"/></div></div><div class="wiz-two"><div class="wiz-field"><label class="wiz-label">Debt 2 — amount (${cur})</label><input type="number" id="s_d1" placeholder="0" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Debt 2 — interest (%)</label><input type="number" id="s_r1" placeholder="0" step="0.1" inputmode="decimal"/></div></div>`;
-    const cnt=hasDebts?d.debts.length:2;
-    return`<div class="tool-panel active" id="panel_snowball"><div class="panel-header"><div class="panel-title">${L.t_snowball||'Snowball vs Avalanche'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>${hasDebts?`<p style="font-size:12.5px;color:var(--green-dark);background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:9px 12px;margin-bottom:14px;">Your ${d.debts.length} debts are pre-filled. Adjust if needed.</p>`:''} ${debtRows}<div class="wiz-field" style="margin-top:4px;"><label class="wiz-label">Total monthly payment for all debts (${cur})</label><input type="number" id="s_pmt" placeholder="0" inputmode="decimal"/></div><div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runSnowball(${cnt})">Compare strategies</button></div><div class="calc-result" id="snowballResult"></div></div>`;}
-
-  case 'income':return`<div class="tool-panel active" id="panel_income"><div class="panel-header"><div class="panel-title">${L.t_income||'Extra Income Simulator'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">See how a small amount of extra monthly income changes your debt-free date.</p><div class="wiz-two"><div class="wiz-field"><label class="wiz-label">Total debt (${cur})</label><input type="number" id="inc_total" value="${d.total_debt||''}" placeholder="0" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Current monthly payment (${cur})</label><input type="number" id="inc_payment" placeholder="0" inputmode="decimal"/></div></div><div class="wiz-two"><div class="wiz-field"><label class="wiz-label">Interest rate (%)</label><input type="number" id="inc_rate" value="${d.debts?.[0]?.interest||''}" placeholder="0" step="0.1" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Extra income per month (${cur})</label><div class="wiz-hint">Goes directly to debt repayment.</div><input type="number" id="inc_extra" placeholder="e.g. 200" inputmode="decimal"/></div></div><div class="wiz-nav"><button class="wiz-next" style="width:100%;" onclick="runIncomeSim()">Show impact</button></div><div class="calc-result" id="incomeResult"></div></div>`;
-
-  case 'negotiation':return`<div class="tool-panel active" id="panel_negotiation"><div class="panel-header"><div class="panel-title">${L.t_negotiation||'Negotiation Practice'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><div id="nw_steps"><div class="wiz-step active" id="nw1"><span class="wiz-eyebrow">Step 1 of 3</span><div class="wiz-q">Who are you preparing to contact?</div><div class="wiz-opts" id="nw1_opts">${[['bank','Bank or lender'],['card','Credit card provider'],['collection','Collections agency'],['utility','Utility or service provider'],['tax','Tax authority'],['other','Other creditor']].map(([v,l])=>`<button class="wiz-opt" onclick="nwSelect('creditor_type','${v}',this)">${l}</button>`).join('')}</div><div class="wiz-nav"><button class="wiz-next" onclick="nwNext(1)">Continue</button></div></div><div class="wiz-step" id="nw2"><span class="wiz-eyebrow">Step 2 of 3</span><div class="wiz-q">What do you want to achieve?</div><div class="wiz-opts">${[['plan','Agree a payment plan'],['reduce','Reduce the balance owed'],['holiday','Payment holiday'],['freeze','Interest freeze'],['stop','Stop collection contact'],['dispute','Dispute the debt']].map(([v,l])=>`<button class="wiz-opt" onclick="nwSelect('goal','${v}',this)">${l}</button>`).join('')}</div><div class="wiz-nav"><button class="wiz-back" onclick="nwBack(2)">Back</button><button class="wiz-next" onclick="nwNext(2)">Continue</button></div></div><div class="wiz-step" id="nw3"><span class="wiz-eyebrow">Step 3 of 3</span><div class="wiz-q">Your situation in brief.</div><div class="wiz-field"><textarea id="nw_situation" rows="3" placeholder="e.g. Made redundant 3 months ago. 2 children. Can pay 80 ${cur}/month.">${d.situation||''}</textarea></div><div class="wiz-field"><label class="wiz-label">Practice mode</label><div class="wiz-opts grid2" id="nw_mode_opts"><button class="wiz-opt selected" onclick="nwSelect('mode','interactive',this)"><span style="display:block;font-weight:600;">Interactive</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:2px;">You reply, AI responds as creditor</span></button><button class="wiz-opt" onclick="nwSelect('mode','script',this)"><span style="display:block;font-weight:600;">Script only</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:2px;">Get a full example dialogue</span></button></div></div><div class="wiz-nav"><button class="wiz-back" onclick="nwBack(3)">Back</button><button class="wiz-next" onclick="startNegotiation()">Start practice</button></div></div><div class="wiz-step" id="nw_generating"><div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">Preparing your session…</div></div></div></div><div id="negPrep" style="display:none;"><span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;display:block;margin-bottom:8px;">Before you start</span><div class="panel-output active" id="negPrepOutput"></div><button class="wiz-next" style="width:100%;margin-top:12px;" onclick="startInteractiveNeg()">Start the practice call</button></div><div id="negChat" style="display:none;"><span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;display:block;margin-bottom:8px;">Practice call</span><div class="neg-chat" id="negChatMessages"></div><div class="neg-input-row" id="negInputRow"><input type="text" id="negUserInput" placeholder="Type your response…" onkeydown="if(event.key==='Enter')sendNegReply()"/><button class="neg-send-btn" onclick="sendNegReply()">Send</button></div><button class="btn-reset" style="margin-top:10px;width:100%;" onclick="endNegSession()">End session — get feedback</button></div><div class="neg-feedback" id="negFeedback"></div><div class="output-actions" id="negActions" style="display:none;"><button class="btn-copy" onclick="copyOutput('negFeedback','negCopyBtn')" id="negCopyBtn">Copy notes</button><button class="btn-reset" onclick="openTool('negotiation')">Start over</button></div><div class="panel-error" id="negError"></div></div>`;
-
-  case 'update':return`<div class="tool-panel active" id="panel_update"><div class="panel-header"><div class="panel-title">${L.t_update||'Monthly Plan Update'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><div id="uw_steps"><div class="wiz-step active" id="uw1"><span class="wiz-eyebrow">Step 1 of 3</span><div class="wiz-q">How has the last 30 days gone?</div><div class="wiz-opts"><button class="wiz-opt" onclick="uwSelect('progress','good',this)">Better than expected</button><button class="wiz-opt" onclick="uwSelect('progress','ok',this)">Roughly as planned</button><button class="wiz-opt" onclick="uwSelect('progress','hard',this)">Harder than expected</button><button class="wiz-opt" onclick="uwSelect('progress','crisis',this)">Things have changed significantly</button></div><div class="wiz-nav"><button class="wiz-next" onclick="uwNext(1)">Continue</button></div></div><div class="wiz-step" id="uw2"><span class="wiz-eyebrow">Step 2 of 3</span><div class="wiz-q">Have your finances changed?</div><div class="wiz-hint" style="margin-bottom:12px;">Pre-filled from your profile — update if needed.</div><div class="wiz-two"><div class="wiz-field"><label class="wiz-label">Current monthly income (${cur})</label><input type="number" id="uw_income" value="${d.income||''}" placeholder="0" inputmode="decimal"/></div><div class="wiz-field"><label class="wiz-label">Current monthly debt payment (${cur})</label><input type="number" id="uw_payment" value="${calcSurplus()>0?Math.max(0,calcSurplus()):''}" placeholder="0" inputmode="decimal"/></div></div><div class="wiz-nav"><button class="wiz-back" onclick="uwBack(2)">Back</button><button class="wiz-next" onclick="uwNext(2)">Continue</button></div></div><div class="wiz-step" id="uw3"><span class="wiz-eyebrow">Step 3 of 3</span><div class="wiz-q">What do you want to focus on next?</div><div class="wiz-opts">${['Reducing total debt faster','Stopping collections or enforcement','Negotiating lower interest rates','Building a small emergency buffer','Getting back on track after a setback','Planning the next 30 days'].map(f=>`<button class="wiz-opt" onclick="uwSelect('focus','${f.replace(/'/g,'').replace(/\//g,'-')}',this)">${f}</button>`).join('')}</div><div class="wiz-nav"><button class="wiz-back" onclick="uwBack(3)">Back</button><button class="wiz-next" onclick="generateUpdate()">Generate updated plan</button></div></div><div class="wiz-step" id="uw_generating"><div class="wiz-generating"><div class="wiz-spinner"></div><div class="wiz-gen-text">Updating your plan…</div></div></div></div><div class="panel-output" id="updateOutput"></div><div class="update-saved" id="updateSaved">Your updated plan has been saved. It is now shown at the top of your dashboard.</div><div class="output-actions" id="updateActions" style="display:none;"><button class="btn-copy" onclick="copyOutput('updateOutput','updateCopyBtn')" id="updateCopyBtn">Copy</button><button class="btn-reset" onclick="openTool('update')">Start over</button></div></div>`;
-
-  case 'archive':{
-    const docs=memberData.documents||[];
-    const TYPE_LABELS={letter:'Letter',negotiation:'Negotiation notes',update:'Plan update'};
-    const docHtml=docs.length===0?'<p class="doc-empty">Your documents will appear here when you generate your first letter or negotiation note.</p>':docs.slice().reverse().map((doc,i)=>{const idx=docs.length-1-i;const date=doc.created_at?new Date(doc.created_at).toLocaleDateString(langToLocale(lang),{day:'numeric',month:'short'}):'';const title=doc.creditor||doc.title||'Document';return`<div class="doc-item" onclick="toggleDocViewer(${idx})"><div class="doc-item-header"><div><div class="doc-item-title">${title}</div><span class="doc-item-type">${TYPE_LABELS[doc.type]||doc.type}</span></div><span class="doc-item-meta">${date}</span></div><div class="doc-viewer" id="docviewer_${idx}"></div><div class="output-actions" id="docactions_${idx}" style="display:none;margin-top:8px;"><button class="btn-copy" onclick="event.stopPropagation();copyDocToClipboard(${idx})" id="doccopy_${idx}">Copy</button></div></div>`;}).join('');
-    return`<div class="tool-panel active" id="panel_archive"><div class="panel-header"><div class="panel-title">${L.t_archive||'My Documents'}</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.6;">${docs.length} ${docs.length===1?'document':'documents'} · Stored for 90 days</p><div class="doc-list">${docHtml}</div></div>`;}
-
-  case 'collection': return buildCollectionPanel(d);
-  case 'legal': return buildLegalPanel(d);
-  case 'challenge': return buildChallengePanel(d);
-  case 'psychology': return buildPsychPanel(d,cur);
-  case 'crisis': return buildCrisisPanel(d);
-  case 'emergency': return buildEmergencyPanel(d);
-  default: return '';
-  }
-}
-
-/* ─── STATIC PANELS ─── */
-function buildCollectionPanel(d){
-  const country=d.country||'your country',cd=getCountryData(d.country),collections=d.collections||'';
-  const isIn=collections.includes('Yes');let cur2=0;
-  if(collections.includes('court')||collections.includes('enforcement'))cur2=6;
-  else if(collections.includes('agency'))cur2=3;
-  const stages=[['Missed payment notice','Contact them immediately — most will pause collection if you reach out proactively. Request a payment plan in writing.'],['Formal demand letter','14–30 day deadline. Dispute in writing if the debt is incorrect or time-barred. Keep copies.'],['Account passed to collections','Request written proof of the debt before any payment. Do not acknowledge verbally.'],['Collections contact begins','You can demand all contact be in writing — send this by letter and keep your copy.'],['Legal claim filed','Respond within the deadline. Ignoring court papers leads to automatic default judgment.'],['Court judgment issued','Apply to vary the judgment amount if you cannot afford the order — courts routinely grant this.'],['Enforcement','Most countries protect a minimum income. Essential household items are also protected.']];
-  let html=`<div class="tool-panel active" id="panel_collection"><div class="panel-header"><div class="panel-title">Debt Collection Map</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>`;
-  if(isIn)html+=`<div style="background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-bottom:16px;font-size:13px;color:var(--green-dark);line-height:1.6;">Based on your profile, you appear to be at <strong>Stage ${cur2>0?cur2:3}</strong>.</div>`;
-  html+=`<p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;">Every stage of the process — and your rights at each step.</p>`;
-  stages.forEach((s,i)=>{const n=i+1,isCurr=cur2===n||(cur2===0&&n===1),isPast=n<cur2;const bdr=isCurr?'border-left:3px solid var(--green);':'';const bg=isPast?'background:var(--muted);':(isCurr?'background:var(--green);':'background:#ddd;color:#666;');html+=`<div class="info-stage" style="${bdr}margin-bottom:8px;"><div class="info-stage-num" style="${bg}">${n}</div><div class="info-stage-body"><strong>${s[0]}</strong>${s[1]}</div></div>`;});
-  if(cd.agencies)html+=`<div style="background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:8px;padding:11px 13px;margin-top:12px;font-size:12.5px;color:var(--green-dark);">Official help in ${country}: ${cd.agencies.slice(0,2).join(' · ')}</div>`;
-  html+=`<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool('letters')">Write a letter to your creditor</button></div>`;
-  return html;
-}
-function buildLegalPanel(d){
-  const country=d.country||'your country',cd=getCountryData(d.country);
-  const links=cd.agencies.map(a=>{const p=a.split(' — ');return`<li><a href="${p[1]?'https://'+p[1].replace(/^https?:\/\//,''):'#'}" target="_blank" rel="noopener" style="color:var(--green);">${p[0]}</a>${p[1]?' — '+p[1]:''}</li>`;}).join('');
-  return`<div class="tool-panel active" id="panel_legal"><div class="panel-header"><div class="panel-title">Legal Protection Guide</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Based on your country: <strong>${country}</strong>. General guidance — verify current rules via the official authorities below.</p><div class="info-block"><h4>What collectors cannot do</h4><ul><li>Use threatening, abusive or harassing language</li><li>Contact your employer, family or neighbours without a court order</li><li>Misrepresent their legal powers or threaten actions they cannot take</li><li>Collect a debt past the legal time limit</li></ul></div><div class="info-block"><h4>Your key rights</h4><ul><li>Request all contact in writing — collectors must comply</li><li>Request written proof of the debt before any payment</li><li>Dispute incorrect or inflated debts in writing</li><li>Apply to vary a court judgment if the amount is unaffordable</li><li>A minimum income is protected from wage garnishment</li></ul></div><div class="info-block"><h4>Official sources for ${country}</h4><ul>${links}</ul></div><button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool('letters')">Write a stop contact letter</button></div>`;
-}
-function buildChallengePanel(d){
-  const cCur=d.currency||'EUR',collections=d.collections||'',employed=d.employment||'';
-  const hasC=collections.includes('Yes'),isUnemp=employed.includes('Unemployed')||employed.includes('sick');
-  const w1=hasC?'Write a formal letter to the collections agency today — use the letter generator. Keep a copy.':isUnemp?'Contact every creditor and request a hardship deferral before anything else. Then list every debt with its exact balance.':'List every debt with its exact balance and interest rate. Calculate your real monthly surplus. Open one letter you have been avoiding.';
-  const weeks=[['Days 1–7','Foundation week',w1],['Days 8–14','Communication week','Write at least one formal creditor letter. Request payment plans for any debts in arrears. Cancel every non-essential direct debit.'],['Days 15–21','Budget week','Identify 3 spending categories to cut. Redirect every '+cCur+' saved directly to debt. Run the Snowball vs Avalanche calculator.'],['Days 22–30','Momentum week','Make your first extra debt payment. Check your credit report for errors. Set a monthly review date.'],['Days 31–60','Build momentum','Increase repayments by 10–20% if your budget allows. Contact at least one more lender about interest reduction.'],['Days 61–90','Breakthrough phase','Recalculate your debt-free date. Build a 500 '+cCur+' emergency buffer so one unexpected cost does not undo your progress.']];
-  return`<div class="tool-panel active" id="panel_challenge"><div class="panel-header"><div class="panel-title">90-Day Challenge</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>${hasC?'<div style="background:var(--red-bg);border:1px solid #fca5a5;border-radius:8px;padding:10px 13px;font-size:12.5px;color:var(--red);margin-bottom:14px;">Active collections detected — Week 1 adjusted to prioritise this.</div>':''} ${weeks.map(w=>`<div class="info-block"><h4>${w[0]} — ${w[1]}</h4><p>${w[2]}</p></div>`).join('')}<button class="plan-cta" style="margin-top:14px;width:100%;" onclick="openTool('letters')">Write my first creditor letter</button></div>`;
-}
-function buildPsychPanel(d,cur){
-  const thr=Math.max(20,Math.round((parseFloat(d.income)||2000)*0.015)),barrier=d.barrier||'';
-  const open=barrier.includes('ashamed')?'<div class="info-block" style="border-left:3px solid var(--green);"><h4>You reached out — that matters more than you know</h4><p>Financial shame is one of the most isolating experiences there is — and it is entirely undeserved. Debt is a situation. It is not who you are.</p></div>':barrier.includes('exhausted')||barrier.includes('failed')?'<div class="info-block" style="border-left:3px solid var(--green);"><h4>Previous attempts failed for structural reasons — not personal ones</h4><p>When previous attempts did not work, it was almost never a failure of willpower. This time you have the right tools.</p></div>':'';
-  return`<div class="tool-panel active" id="panel_psychology"><div class="panel-header"><div class="panel-title">Behavioural Tools</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div>${open}<div class="info-block"><h4>The ${thr} ${cur} pause rule</h4><p>Before any unplanned purchase over ${thr} ${cur}: wait 48 hours. Around 70% of impulse purchases are forgotten within 24 hours. This rule alone saves most people 50–150 ${cur} per month within the first 30 days.</p></div><div class="info-block"><h4>The debt repayment habit loop</h4><p>Attach your debt payment to an existing daily habit — same trigger, same time, every day. Small consistent action over 90 days outperforms large infrequent effort every time.</p></div><div class="info-block"><h4>Managing financial stress</h4><ul><li>Debt is a situation — it is not a character verdict.</li><li>Set exactly one financial task per day.</li><li>Acknowledge every payment made, however small.</li><li>10 minutes of physical movement measurably reduces cortisol.</li></ul></div></div>`;
-}
-function buildCrisisPanel(d){
-  return`<div class="tool-panel active" id="panel_crisis"><div class="panel-header"><div class="panel-title">Crisis Action Plans</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Select the situation closest to yours.</p><div class="wiz-opts" style="margin-bottom:0;"><button class="wiz-opt" onclick="showCrisisPlan('unemployed',this)">Unemployment or income loss</button><button class="wiz-opt" onclick="showCrisisPlan('divorce',this)">Divorce or separation</button><button class="wiz-opt" onclick="showCrisisPlan('sick',this)">Sick leave or disability</button><button class="wiz-opt" onclick="showCrisisPlan('emergency',this)">Financial emergency</button></div><div id="crisisPlanContent" style="margin-top:14px;"></div></div>`;
-}
-function buildEmergencyPanel(d){
-  const country=d.country||'your country',cd=getCountryData(d.country),agency=cd.agencies[0]||'your national free debt counselling service';
-  const steps=['Housing first — pay rent or mortgage before anything else.','Food and utilities second — call providers if you cannot pay.','Stop all non-essential direct debits today.','Open every unopened letter — write today\'s date on each one.','Contact free debt advice in '+country+' before any lump-sum payment: '+agency+'.','Do not borrow more money to cover existing debt.','Write to every creditor using the letter generator.'];
-  let html=`<div class="tool-panel active" id="panel_emergency"><div class="panel-header"><div class="panel-title">Emergency Action Card</div><button class="panel-close" onclick="closeTool()">&#x2715;</button></div><p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Do these in order — right now if you are in crisis.</p>`;
-  steps.forEach((s,i)=>{html+=`<div class="info-stage"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`;});
-  html+=`<div style="margin-top:12px;display:flex;gap:8px;"><button class="btn-copy" onclick="copyEmergencyCard()">Copy card</button><button class="plan-cta" style="padding:8px 18px;font-size:13px;" onclick="openTool('letters')">Write a deferral letter</button></div></div>`;
-  return html;
-}
-function copyEmergencyCard(){const items=['Emergency Action Card — Debt-Free.world','','1. Pay rent or mortgage first.','2. Keep food and utilities running.','3. Stop all non-essential direct debits today.','4. Open all unopened letters.','5. Contact free debt advice before paying collectors.','6. Do not borrow more to pay off debt.','7. Write to all creditors.'];navigator.clipboard.writeText(items.join('\n')).then(()=>showToast(L.toastCopied||'Copied'));}
-
-function showCrisisPlan(type,btn){
-  const d=memberData,cd=getCountryData(d.country),country=d.country||'your country',agency=cd.agencies[0]||'your national free debt counselling service';
-  if(btn){document.querySelectorAll('#panel_crisis .wiz-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
-  const plans={unemployed:['Contact every creditor before the first missed payment — hardship teams will freeze interest immediately.','Apply for every benefit you are entitled to on the same day income stops: '+agency+'.','Pause every non-essential direct debit today.','Prioritise: housing → utilities → food → unsecured debt.','Use the letter generator to send formal hardship notifications.','Set a review date 30 days out.'],divorce:['Separate all joint accounts and notify banks immediately.','Get legal advice on shared debt liability as early as possible.','Recalculate your complete budget on your individual income alone.','Take urgent legal advice on any joint mortgage or rental agreement.','Formally notify every creditor of the change in circumstances.','Your housing security is the absolute priority.'],sick:['Apply for sick pay or disability benefit on day one.','Write to every creditor immediately to notify them of your medical leave.','Request a payment holiday of 1–3 months from your main lenders.','Do not cash in savings or pension unless absolutely necessary.','If leave exceeds 3 months, contact '+agency+' for a full review.','Set a review date tied to your expected return-to-work date.'],emergency:['Stop. Do not make any irreversible financial decision in the first 48 hours.','List every debt and payment due in the next 30 days on a single page.','Housing first, always.','Contact '+agency+' today.','Do not borrow new money to cover existing debt.','Use the letter generator to request emergency payment deferrals.']};
-  const steps=plans[type]||[];
-  let html=steps.map((s,i)=>`<div class="info-stage"><div class="info-stage-num">${i+1}</div><div class="info-stage-body">${s}</div></div>`).join('');
-  html+=`<button class="plan-cta" style="margin-top:12px;width:100%;" onclick="openTool('letters')">Write a letter to your creditor</button>`;
-  document.getElementById('crisisPlanContent').innerHTML=html;
-}
-
-/* ─── LETTER WIZARD ─── */
-function getLWHistory(){try{return JSON.parse(sessionStorage.getItem('dfw_lw_history')||'[]');}catch{return[];}}
-function saveLWHistory(entry){try{const h=getLWHistory();h.unshift(entry);sessionStorage.setItem('dfw_lw_history',JSON.stringify(h.slice(0,10)));}catch{}}
-function lwSelectDebt(idx,btn){document.querySelectorAll('#lw_debt_opts .wiz-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');lwData.debtIdx=idx;const cur=memberData.currency||'EUR';if(idx>=0&&memberData.debts?.[idx]){const dbt=memberData.debts[idx];document.getElementById('lw_creditor').value=dbt.creditor||dbt.type||'';lwData.prefilled=dbt;lwData.prefilledCurrency=dbt.currency||cur;lwData.prefilledAmount=dbt.amount||'';}else{document.getElementById('lw_creditor').value='';lwData.prefilled=null;lwData.prefilledCurrency=cur;lwData.prefilledAmount='';}}
-function lwNext(step){if(step===1){lwData.creditor=document.getElementById('lw_creditor').value.trim();if(!lwData.creditor){showToast('Please enter the creditor name.');return;}wizShowStep('lw',2);}if(step===2){if(!lwData.type){showToast('Please select a letter type.');return;}wizShowStep('lw',3);const amtEl=document.getElementById('lw_amount');if(amtEl&&lwData.prefilledAmount)amtEl.value=lwData.prefilledAmount;const curEl=document.getElementById('lw_currency');if(curEl&&lwData.prefilledCurrency){for(let o of curEl.options){if(o.value===lwData.prefilledCurrency){o.selected=true;break;}}}}if(step===3){lwData.amount=document.getElementById('lw_amount')?.value;lwData.currency=document.getElementById('lw_currency')?.value||memberData.currency||'EUR';lwData.situation=document.getElementById('lw_situation')?.value.trim();wizShowStep('lw',4);}}
-function lwBack(step){wizShowStep('lw',step-1);}
-function lwSelectType(t,btn){lwData.type=t;document.querySelectorAll('#lw_type_opts .wiz-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
-function lwSelectHardship(h,btn){lwData.hardship=h;document.querySelectorAll('#lw_hardship_opts .wiz-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
-function lwShowHistory(idx){const h=getLWHistory();if(!h[idx])return;document.getElementById('letterOutput').textContent=h[idx].text;document.getElementById('letterOutput').classList.add('active');document.getElementById('letterActions').style.display='flex';document.getElementById('lw_steps').style.display='none';}
-async function generateLetter(){
-  if(!lwData.hardship){showToast('Please select the hardship reason.');return;}
-  wizShowStep('lw','_generating');
-  const d=memberData,cur=lwData.currency||d.currency||'EUR';
-  const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'};
-  const planLang=LANG_NAMES[lang]||'English';
-  const typeLabels={hardship:'hardship and payment difficulty',settlement:'debt settlement offer',stop:'cease and desist / stop contact',dispute:'debt dispute',plan:'proposed payment plan',holiday:'payment holiday request',negotiation:'general negotiation'};
-  const prompt=`You are a professional debt letter writer at Debt-Free.world.\nWrite a formal, professional letter of type: ${typeLabels[lwData.type]||lwData.type}\nLanguage: ${planLang}\nRecipient: ${lwData.creditor}\n${lwData.amount?`Debt amount: ${lwData.amount} ${cur}`:''}\nHardship reason: ${lwData.hardship}\n${lwData.situation?`Additional context: ${lwData.situation}`:''}\n${d.country?`Country: ${d.country}`:''}\n${d.employment?`Employment: ${d.employment}`:''}\nFORMAT: Start with [DATE], [YOUR ADDRESS], recipient address, subject line Re: [ACCOUNT REFERENCE], formal salutation, 3 paragraphs (identify, explain, propose), request written confirmation, sign Yours faithfully [YOUR NAME]. No markdown. Max 320 words. Write entirely in ${planLang}.`;
-  const result=await callAI(prompt);
-  if(result.error){wizShowStep('lw',4);document.getElementById('letterError').textContent=result.error;document.getElementById('letterError').style.display='block';return;}
-  const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  const docTitle=lwData.creditor+' · '+(typeLabels[lwData.type]||lwData.type);
-  saveLWHistory({creditor:lwData.creditor,type:typeLabels[lwData.type]||lwData.type,text:result.text,time:now});
-  saveDocument('letter',docTitle,result.text,{creditor:lwData.creditor,subtype:lwData.type});
-  document.getElementById('letterOutput').textContent=result.text;
-  document.getElementById('letterOutput').classList.add('active');
-  document.getElementById('letterActions').style.display='flex';
-  document.getElementById('lw_steps').style.display='none';
-  const h=getLWHistory();
-  document.getElementById('lwHistoryList').innerHTML=h.map((item,i)=>`<div class="letter-history-item" onclick="lwShowHistory(${i})"><span class="letter-history-meta">${item.creditor} · ${item.type}</span><span class="letter-history-date">${item.time}</span></div>`).join('');
-}
-
-/* ─── BUDGET WIZARD ─── */
-function bwNext(step){if(step===1){if(!document.getElementById('b_total').value){showToast('Please enter your total debt.');return;}wizShowStep('bw',2);}}
-function bwBack(step){wizShowStep('bw',step-1);}
-function runBudget(){
-  const P=parseFloat(document.getElementById('b_total').value)||0,pmt=parseFloat(document.getElementById('b_payment').value)||0,r=parseFloat(document.getElementById('b_rate').value)||0,ext=parseFloat(document.getElementById('b_extra').value)||0,cur=memberData.currency||'EUR';
-  if(!P||!pmt){showToast('Please fill in all required fields.');return;}
-  function calcM(p,pm,rt){if(!pm||pm<=0)return null;const mr=rt/100/12;if(mr===0)return Math.ceil(p/pm);if(pm<=p*mr)return null;return Math.ceil(-Math.log(1-p*mr/pm)/Math.log(1+mr));}
-  function totInt(p,pm,rt,m){return Math.max(0,pm*m-p);}
-  const m1=calcM(P,pmt,r),m2=ext>0?calcM(P,pmt+ext,r):null;
-  if(!m1){document.getElementById('budgetResult').innerHTML=`<p style="color:var(--red);font-size:13.5px;">At ${pmt} ${cur}/month your payment does not cover the interest at ${r}%.</p>`;document.getElementById('budgetResult').classList.add('active');return;}
-  const df1=new Date();df1.setMonth(df1.getMonth()+m1);const int1=totInt(P,pmt,r,m1);const maxM=Math.max(m1,m2||0);
-  let html=`<span class="calc-highlight">${df1.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</span><p style="font-size:13.5px;color:#333;margin-bottom:14px;">At ${pmt} ${cur}/month — debt-free in <strong>${Math.floor(m1/12)}y ${m1%12}m</strong> (${m1} payments).</p>`;
-  html+=`<div class="timeline-wrap"><div class="timeline-bar-row"><span class="timeline-bar-label">Current</span><div class="timeline-bar-track"><div class="timeline-bar-fill current" style="width:100%;"></div></div><span class="timeline-bar-months">${m1} mo</span></div>`;
-  if(m2!==null&&ext>0){const df2=new Date();df2.setMonth(df2.getMonth()+m2);const int2=totInt(P,pmt+ext,r,m2);const savedM=m1-m2,savedInt=Math.round(int1-int2),pct=Math.round(m2/maxM*100);html+=`<div class="timeline-bar-row"><span class="timeline-bar-label">+${ext}</span><div class="timeline-bar-track"><div class="timeline-bar-fill improved" style="width:${pct}%;"></div></div><span class="timeline-bar-months">${m2} mo</span></div></div><div class="timeline-saving"><strong>${savedM} months sooner</strong> — debt-free by ${df2.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}.${savedInt>50?` Save approx. <strong>${savedInt.toLocaleString()} ${cur}</strong> in interest.`:''}</div>`;}else{html+=`</div>`;}
-  if(int1>100)html+=`<div class="timeline-interest-warn">At this rate you will pay approx. <strong>${Math.round(int1).toLocaleString()} ${cur}</strong> in interest. Even a small extra monthly payment significantly reduces this.</div>`;
-  const res=document.getElementById('budgetResult');res.innerHTML=html;res.classList.add('active');
-}
-
-/* ─── DF DATE ─── */
-function runDFDate(){
-  const P=parseFloat(document.getElementById('df_total').value)||0,pmt=parseFloat(document.getElementById('df_payment').value)||0,r=parseFloat(document.getElementById('df_rate').value)||0,cur=memberData.currency||'EUR';
-  if(!P||!pmt){showToast('Please enter total debt and monthly payment.');return;}
-  function calcM(p,pm,rt){const mr=rt/100/12;if(mr===0)return Math.ceil(p/pm);if(pm<=p*mr)return null;return Math.ceil(-Math.log(1-p*mr/pm)/Math.log(1+mr));}
-  const m=calcM(P,pmt,r);const res=document.getElementById('dfdateResult');
-  if(!m){res.innerHTML=`<p style="color:var(--red);font-size:13.5px;">Your payment doesn't cover the interest. Increase your monthly payment.</p>`;res.classList.add('active');return;}
-  const df=new Date();df.setMonth(df.getMonth()+m);const totInt=Math.max(0,pmt*m-P);
-  const milestones=[{label:'25% paid off',months:calcM(P*0.75,pmt,r)},{label:'Halfway there',months:calcM(P*0.5,pmt,r)},{label:'75% paid off',months:calcM(P*0.25,pmt,r)},{label:'Debt-free',months:m}];
-  let html=`<span class="calc-highlight">${df.toLocaleDateString(langToLocale(lang),{day:'numeric',month:'long',year:'numeric'})}</span><p style="font-size:13px;color:var(--muted);margin-bottom:14px;">${Math.floor(m/12)}y ${m%12}m at ${pmt} ${cur}/month${totInt>50?' · '+Math.round(totInt).toLocaleString()+' '+cur+' interest':''}</p><div style="margin-bottom:4px;">`;
-  milestones.forEach(ms=>{if(!ms.months)return;const dd=new Date();dd.setMonth(dd.getMonth()+ms.months);html+=`<div class="milestone-row"><div class="milestone-dot upcoming"></div><div><div class="milestone-text">${ms.label}</div><div class="milestone-date">${dd.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</div></div></div>`;});
-  html+=`</div>`;res.innerHTML=html;res.classList.add('active');
-}
-
-/* ─── SNOWBALL ─── */
-function runSnowball(debtCount){
-  const debts=[];for(let i=0;i<debtCount;i++){const amt=parseFloat(document.getElementById('s_d'+i)?.value)||0,rt=parseFloat(document.getElementById('s_r'+i)?.value)||0,lbl=memberData.debts?.[i]?.creditor||memberData.debts?.[i]?.type||`Debt ${i+1}`;if(amt>0)debts.push({label:lbl,amount:amt,rate:rt});}
-  const totalPmt=parseFloat(document.getElementById('s_pmt').value)||0,cur=memberData.currency||'EUR';
-  if(debts.length<2||!totalPmt){showToast('Please enter at least 2 debts and a monthly payment.');return;}
-  function simulate(list,mp){let rem=list.map(x=>({...x,balance:x.amount}));let months=0,totInt=0;const maxM=600;while(rem.some(x=>x.balance>0.01)&&months<maxM){months++;let av=mp;rem.forEach(x=>{const int=x.balance*x.rate/100/12;totInt+=int;x.balance+=int;});rem.filter(x=>x.balance>0).forEach(x=>{const mn=Math.min(x.balance,Math.max(x.balance*0.01,10));x.balance-=mn;av-=mn;});const tgt=rem.find(x=>x.balance>0.01);if(tgt&&av>0){const pay=Math.min(tgt.balance,av);tgt.balance-=pay;av-=pay;}}return{months,totalInt:Math.round(totInt)};}
-  const snowOrder=[...debts].sort((a,b)=>a.amount-b.amount),avalOrder=[...debts].sort((a,b)=>b.rate-a.rate);
-  const snow=simulate(snowOrder,totalPmt),aval=simulate(avalOrder,totalPmt),winner=aval.totalInt<=snow.totalInt?'avalanche':'snowball';
-  let html=`<div class="strategy-compare"><div class="strategy-box${winner==='snowball'?' winner':''}"><span class="strategy-box-title">Snowball</span><div class="strategy-box-months">${snow.months} months</div><div class="strategy-box-detail">${Math.round(snow.totalInt).toLocaleString()} ${cur} interest${winner==='snowball'?'<br><strong>Best for motivation</strong>':''}</div></div><div class="strategy-box${winner==='avalanche'?' winner':''}"><span class="strategy-box-title">Avalanche</span><div class="strategy-box-months">${aval.months} months</div><div class="strategy-box-detail">${Math.round(aval.totalInt).toLocaleString()} ${cur} interest${winner==='avalanche'?'<br><strong>Saves most money</strong>':''}</div></div></div>`;
-  html+=`<p class="strategy-verdict">${winner==='avalanche'?`Avalanche saves you <strong>${(snow.totalInt-aval.totalInt).toLocaleString()} ${cur}</strong> in interest.`:'With these rates, both strategies cost roughly the same. Snowball gives faster early wins.'}</p>`;
-  html+=`<div style="margin-top:14px;"><span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:8px;">Payoff order — recommended</span>`;
-  const rec=winner==='avalanche'?avalOrder:snowOrder;
-  rec.forEach((dbt,i)=>{html+=`<div class="debt-strategy-row"><span class="debt-strategy-name">${dbt.label} — ${dbt.amount.toLocaleString()} ${cur}</span><span class="debt-strategy-order">#${i+1}</span></div>`;});
-  html+=`</div>`;document.getElementById('snowballResult').innerHTML=html;document.getElementById('snowballResult').classList.add('active');
-}
-
-/* ─── INCOME SIM ─── */
-function runIncomeSim(){
-  const P=parseFloat(document.getElementById('inc_total').value)||0,pmt=parseFloat(document.getElementById('inc_payment').value)||0,r=parseFloat(document.getElementById('inc_rate').value)||0,ext=parseFloat(document.getElementById('inc_extra').value)||0,cur=memberData.currency||'EUR';
-  if(!P||!pmt||!ext){showToast('Please fill in all fields.');return;}
-  function calcM(p,pm,rt){const mr=rt/100/12;if(mr===0)return Math.ceil(p/pm);if(pm<=p*mr)return null;return Math.ceil(-Math.log(1-p*mr/pm)/Math.log(1+mr));}
-  const m1=calcM(P,pmt,r),m2=calcM(P,pmt+ext,r);const res=document.getElementById('incomeResult');
-  if(!m1||!m2){res.innerHTML='<p>Unable to calculate — check your numbers.</p>';res.classList.add('active');return;}
-  const saved=m1-m2,df2=new Date();df2.setMonth(df2.getMonth()+m2);const totSaved=Math.round(saved*ext);
-  res.innerHTML=`<span class="calc-highlight">${Math.round(saved)} months sooner</span><p style="font-size:13.5px;margin-bottom:10px;">With <strong>${ext} ${cur}</strong> extra per month, debt-free by <strong>${df2.toLocaleDateString(langToLocale(lang),{month:'long',year:'numeric'})}</strong> — ${Math.round(saved)} months earlier.</p><p style="font-size:12.5px;color:var(--muted);">That's approximately <strong>${totSaved.toLocaleString()} ${cur}</strong> less paid in total.</p>`;
-  res.classList.add('active');
-}
-
-/* ─── NEGOTIATION ─── */
-function nwSelect(field,val,btn){nwData[field]=val;btn.closest('.wiz-opts').querySelectorAll('.wiz-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
-function nwNext(step){if(step===1){if(!nwData.creditor_type){showToast('Please select who you are contacting.');return;}wizShowStep('nw',2);}if(step===2){if(!nwData.goal){showToast('Please select your goal.');return;}wizShowStep('nw',3);}}
-function nwBack(step){wizShowStep('nw',step-1);}
-async function startNegotiation(){
-  const sit=document.getElementById('nw_situation')?.value.trim()||memberData.situation||'';nwData.situation=sit;if(!nwData.mode)nwData.mode='interactive';wizShowStep('nw','_generating');
-  const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'};const planLang=LANG_NAMES[lang]||'English';
-  const prompt=`You are a debt negotiation coach at Debt-Free.world. The client is about to call a ${nwData.creditor_type} to ${nwData.goal.replace(/_/g,' ')}.\nClient situation: ${sit}\nCountry: ${memberData.country||'not specified'}\nWrite PREPARATION NOTES in ${planLang} — plain text, no symbols:\n1. Opening 30 seconds (exact wording)\n2. Three key phrases\n3. Three things to avoid\n4. What to do if they refuse\n5. Realistic outcome\nUnder 250 words. Write entirely in ${planLang}.`;
-  const result=await callAI(prompt);
-  if(result.error){wizShowStep('nw',3);document.getElementById('negError').textContent=result.error;document.getElementById('negError').style.display='block';return;}
-  negPrepText=result.text;
-  if(nwData.mode==='script'){const scriptPrompt=`You are a debt negotiation coach. Generate a realistic dialogue in ${planLang}.\nCreditor: ${nwData.creditor_type}, Goal: ${nwData.goal}, Situation: ${sit}\nMark [YOU] and [CREDITOR]. 8–10 exchanges. Successful outcome. No symbols. Write entirely in ${planLang}.`;const sr=await callAI(scriptPrompt);document.getElementById('negFeedback').textContent=negPrepText+'\n\n---\n\n'+(sr.text||'');document.getElementById('negFeedback').classList.add('active');document.getElementById('negActions').style.display='flex';document.getElementById('nw_steps').style.display='none';return;}
-  document.getElementById('nw_steps').style.display='none';document.getElementById('negPrepOutput').textContent=result.text;document.getElementById('negPrep').style.display='block';
-}
-async function startInteractiveNeg(){
-  document.getElementById('negPrep').style.display='none';document.getElementById('negChat').style.display='block';negHistory=[];
-  const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'};const planLang=LANG_NAMES[lang]||'English';
-  const res=await callAI(`You are playing a ${nwData.creditor_type} representative. The client wants to: ${nwData.goal}. Open realistically — professional but slightly resistant. One short sentence. Language: ${planLang}.`);
-  const opening=res.text||'Good morning. How can I help you today?';negHistory.push({role:'creditor',text:opening});renderNegChat();
-}
-async function sendNegReply(){
-  const input=document.getElementById('negUserInput');const userText=input.value.trim();if(!userText)return;input.value='';negHistory.push({role:'you',text:userText});renderNegChat();
-  if(negHistory.length>=16){endNegSession();return;}
-  const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'};const planLang=LANG_NAMES[lang]||'English';
-  const context=negHistory.map(m=>`[${m.role.toUpperCase()}]: ${m.text}`).join('\n');
-  const res=await callAI(`You are a ${nwData.creditor_type} representative. Goal: ${nwData.goal}.\nConversation:\n${context}\nRespond as creditor — 1-2 sentences, realistic, slightly resistant. Language: ${planLang}.`);
-  negHistory.push({role:'creditor',text:res.text||'…'});renderNegChat();
-}
-function renderNegChat(){const c=document.getElementById('negChatMessages');c.innerHTML=negHistory.map(m=>`<div class="neg-bubble ${m.role}">${m.text}</div>`).join('');c.scrollTop=c.scrollHeight;}
-async function endNegSession(){
-  document.getElementById('negInputRow').style.display='none';document.getElementById('negChat').querySelector('.btn-reset').style.display='none';
-  const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'};const planLang=LANG_NAMES[lang]||'English';
-  const context=negHistory.map(m=>`[${m.role.toUpperCase()}]: ${m.text}`).join('\n');
-  const feedbackBubble=document.createElement('div');feedbackBubble.className='neg-bubble system';feedbackBubble.textContent='Getting your feedback…';document.getElementById('negChatMessages').appendChild(feedbackBubble);
-  const res=await callAI(`You are a debt negotiation coach. Review this practice conversation. Give brief honest feedback in ${planLang}:\n${context}\nGive: (1) What went well, (2) What to improve, (3) One phrase to use next time. Under 150 words. Write entirely in ${planLang}.`);
-  feedbackBubble.textContent=res.text||'Session complete.';document.getElementById('negFeedback').textContent=res.text||'';document.getElementById('negFeedback').classList.add('active');document.getElementById('negActions').style.display='flex';
-  const negTitle=(nwData.creditor_type||'Creditor')+' · '+(nwData.goal||'Negotiation');
-  const negText='=== PREPARATION NOTES ===\n\n'+negPrepText+'\n\n=== TRANSCRIPT ===\n\n'+negHistory.map(m=>'['+m.role.toUpperCase()+']: '+m.text).join('\n\n')+'\n\n=== FEEDBACK ===\n\n'+(res.text||'');
-  saveDocument('negotiation',negTitle,negText,{creditor:nwData.creditor_type,subtype:nwData.goal});
-}
-
-/* ─── UPDATE WIZARD ─── */
-function uwSelect(field,val,btn){uwData[field]=val;btn.closest('.wiz-opts').querySelectorAll('.wiz-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
-function uwNext(step){if(step===1){if(!uwData.progress){showToast('Please select how the last 30 days went.');return;}wizShowStep('uw',2);}if(step===2){wizShowStep('uw',3);}}
-function uwBack(step){wizShowStep('uw',step-1);}
-async function generateUpdate(){
-  if(!uwData.focus){showToast('Please select a focus area.');return;}
-  wizShowStep('uw','_generating');
-  const d=memberData,income=document.getElementById('uw_income')?.value||d.income||'unchanged',payment=document.getElementById('uw_payment')?.value||'unchanged';
-  const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese'};const planLang=LANG_NAMES[lang]||'English';
-  const prompt=`You are a debt recovery coach at Debt-Free.world. Write an updated 30-day action plan in ${planLang}.\nMember: ${d.firstname||'member'} · Country: ${d.country||'not specified'} · Day ${d._dayNum||30} of 90\nLast 30 days: ${uwData.progress}\nIncome: ${income} ${d.currency||'EUR'}/month · Payment: ${payment} ${d.currency||'EUR'}/month\nFocus: ${uwData.focus}\n4–5 concrete numbered actions. If crisis, stabilisation first. Close with encouragement. Plain text. Max 320 words. Write entirely in ${planLang}.`;
-  const result=await callAI(prompt);if(result.error){wizShowStep('uw',3);return;}
-  document.getElementById('updateOutput').textContent=result.text;document.getElementById('updateOutput').classList.add('active');document.getElementById('updateActions').style.display='flex';document.getElementById('uw_steps').style.display='none';
-  try{
-    await fetch(`${WORKER_URL}/onboarding/save`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({email:memberData.email,plan:result.text,send_plan_email:false,onboarding:{firstname:memberData.firstname,language:memberData.language,country:memberData.country}})});
-    document.getElementById('updateSaved').classList.add('active');
-    memberData.debt_recovery_plan=result.text;memberData.member_plan=result.text;
-    document.getElementById('planBodyEl').textContent=result.text;
-    saveDocument('update','Plan update · Day '+(memberData._dayNum||'?')+'/90',result.text,{});
-  }catch(e){}
-}
+function esc(s){ if(!s)return ''; return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function toast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2800); }
 </script>
 </body>
 </html>
