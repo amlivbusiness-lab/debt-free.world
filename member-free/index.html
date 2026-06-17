@@ -20,26 +20,54 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{font-family:var(--sans);color:var(--text);background:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;}
+/* Body starts hidden — no flash of dashboard before plan modal */
+body{font-family:var(--sans);color:var(--text);background:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;visibility:hidden;}
+body.ready{visibility:visible;}
 
-/* GATE */
-#gate{display:flex;min-height:100vh;align-items:center;justify-content:center;background:var(--green-bg);padding:24px;}
+/* ════ GATE ════ */
+#gate{display:none;min-height:100vh;align-items:center;justify-content:center;background:var(--green-bg);padding:24px;}
+#gate.show{display:flex;}
 .gate-card{background:var(--white);border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center;box-shadow:0 4px 40px rgba(22,101,52,0.1);}
 .gate-logo{font-family:var(--serif);font-size:1.1rem;color:var(--green);display:block;margin-bottom:28px;}
 .gate-spinner{width:36px;height:36px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px;}
 .gate-title{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:8px;}
-.gate-sub{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:4px;}
-.gate-form{margin-top:20px;display:none;}
-.gate-form input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;outline:none;-webkit-appearance:none;margin-bottom:10px;}
+.gate-sub{font-size:13px;color:var(--muted);line-height:1.65;}
+.gate-form{margin-top:20px;display:none;flex-direction:column;gap:10px;}
+.gate-form.show{display:flex;}
+.gate-form input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;outline:none;-webkit-appearance:none;}
 .gate-form input:focus{border-color:var(--green);}
 .gate-btn{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;}
 .gate-btn:disabled{background:#ccc;cursor:not-allowed;}
 .gate-success{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:14px 16px;font-size:13px;color:var(--green-dark);line-height:1.6;margin-top:16px;display:none;}
+.gate-success.show{display:block;}
 @keyframes spin{to{transform:rotate(360deg);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
-/* TOPBAR */
+/* ════ PLAN-FIRST OVERLAY (shows before dashboard) ════ */
+/* Covers everything — only the plan, nothing else visible beneath */
+#planFirst{
+  position:fixed;inset:0;background:var(--white);z-index:1000;
+  display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;
+}
+#planFirst.show{display:flex;}
+.pf-topbar{background:var(--white);border-bottom:0.5px solid var(--border);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-shrink:0;}
+.pf-logo{font-family:var(--serif);font-size:15px;color:var(--green);}
+.pf-body{flex:1;max-width:640px;width:100%;margin:0 auto;padding:24px 20px 32px;}
+.pf-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:8px;display:block;}
+.pf-title{font-family:var(--serif);font-size:24px;color:var(--text);margin-bottom:4px;line-height:1.2;}
+.pf-meta{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5;}
+.pf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.pf-chip{font-size:11px;color:var(--green-dark);background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:20px;padding:3px 10px;}
+.pf-plan{font-size:13.5px;line-height:1.85;color:#333;white-space:pre-wrap;font-weight:300;padding:20px;background:var(--white);border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:20px;}
+.pf-actions{display:flex;flex-direction:column;gap:10px;}
+.btn-pf-primary{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;-webkit-appearance:none;}
+.btn-pf-primary:hover{background:var(--green-dark);}
+.btn-pf-secondary{width:100%;background:var(--white);color:var(--green);border:1.5px solid var(--green);border-radius:30px;padding:13px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;-webkit-appearance:none;}
+.btn-pf-print{width:100%;background:var(--white);color:var(--muted);border:1.5px solid var(--border);border-radius:30px;padding:12px;font-size:13px;font-weight:400;cursor:pointer;font-family:var(--sans);min-height:44px;-webkit-appearance:none;}
+
+/* ════ TOPBAR ════ */
 #dashboard{display:none;}
+#dashboard.show{display:block;}
 .topbar{background:var(--white);border-bottom:0.5px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:200;}
 .topbar-logo{font-family:var(--serif);font-size:15px;color:var(--green);letter-spacing:-0.01em;}
 .topbar-right{display:flex;align-items:center;gap:8px;}
@@ -48,11 +76,11 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 .lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--white);border:0.5px solid var(--border);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.12);z-index:500;min-width:160px;overflow:hidden;}
 .lang-menu.open{display:block;animation:fadeUp 0.2s ease;}
 .lang-menu-inner{display:flex;flex-direction:column;max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.lang-menu-inner button{background:none;border:none;padding:11px 16px;text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--text);cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.lang-menu-inner button{background:none;border:none;padding:10px 16px;text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--text);cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:40px;}
 .lang-menu-inner button:hover{background:var(--green-pale);}
 .menu-pill{border:0.5px solid var(--border);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--white);-webkit-tap-highlight-color:transparent;}
 
-/* DRAWER */
+/* ════ DRAWER ════ */
 .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:300;display:none;opacity:0;transition:opacity 0.25s;}
 .drawer-overlay.open{display:block;opacity:1;}
 .tools-drawer{position:fixed;top:0;right:0;bottom:0;width:min(320px,92vw);background:var(--white);z-index:400;transform:translateX(100%);transition:transform 0.3s cubic-bezier(.4,0,.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch;}
@@ -60,51 +88,32 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 .drawer-header{padding:18px 20px 14px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1;}
 .drawer-title{font-family:var(--serif);font-size:16px;color:var(--text);}
 .drawer-close{background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;padding:4px 8px;line-height:1;}
-.drawer-section{padding:14px 20px 4px;}
-.drawer-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;}
-.drawer-item{display:flex;align-items:flex-start;gap:12px;padding:11px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:44px;border-left:3px solid transparent;transition:border-color .15s,background .15s;}
-.drawer-item:hover{background:var(--green-pale);border-left-color:var(--green-border);}
-.drawer-item-icon{font-size:17px;flex-shrink:0;margin-top:1px;}
-.drawer-item-name{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.3;}
-.drawer-item-desc{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4;}
-.drawer-item-badge{display:inline-block;font-size:10px;font-weight:600;background:var(--green-light);color:var(--green-dark);padding:2px 7px;border-radius:10px;margin-top:4px;}
-.drawer-item-badge.coming{background:#f3f4f6;color:var(--muted);}
+.drawer-section{padding:14px 20px 6px;}
+.drawer-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px;display:block;}
+.drawer-tool{display:flex;align-items:flex-start;gap:12px;padding:10px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:44px;border-left:3px solid transparent;margin:0 -20px;transition:border-color .15s,background .15s;}
+.drawer-tool:hover{background:var(--green-pale);border-left-color:var(--green-border);}
+.drawer-tool-name{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.3;}
+.drawer-tool-desc{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4;}
+.drawer-tool-badge{font-size:10px;font-weight:600;background:var(--green-light);color:var(--green-dark);padding:2px 7px;border-radius:10px;flex-shrink:0;margin-top:3px;}
+.drawer-tool-badge.coming{background:#f3f4f6;color:var(--muted);}
+.drawer-tool-badge.unlock{background:#fef3c7;color:#92400e;}
 .drawer-divider{height:0.5px;background:var(--border);margin:8px 0;}
+.drawer-plan-link{display:flex;align-items:center;gap:10px;padding:11px 20px;cursor:pointer;min-height:44px;margin:0 -20px;-webkit-tap-highlight-color:transparent;border-left:3px solid var(--green);background:var(--green-pale);}
+.drawer-plan-link-name{font-size:13.5px;font-weight:600;color:var(--green-dark);}
+.drawer-plan-link-desc{font-size:11.5px;color:var(--green);margin-top:1px;}
 .drawer-logout-btn{width:calc(100% - 40px);margin:12px 20px 24px;background:var(--white);border:1.5px solid var(--border);border-radius:30px;padding:11px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;font-family:var(--sans);text-align:center;min-height:44px;display:block;}
 
-/* MAIN */
+/* ════ MAIN ════ */
 .main-wrap{max-width:640px;margin:0 auto;padding:0 0 80px;}
 
-/* PLAN MODAL */
-.plan-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;display:none;align-items:flex-end;justify-content:center;}
-.plan-modal-overlay.open{display:flex;animation:fadeUp 0.25s ease;}
-.plan-modal{background:var(--white);border-radius:20px 20px 0 0;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.plan-modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:14px auto 20px;}
-.plan-modal-header{padding:0 20px 16px;border-bottom:0.5px solid var(--border);}
-.plan-modal-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:6px;display:block;}
-.plan-modal-title{font-family:var(--serif);font-size:22px;color:var(--text);margin-bottom:4px;}
-.plan-modal-sub{font-size:13px;color:var(--muted);line-height:1.5;}
-.plan-modal-body{padding:20px;font-size:13.5px;line-height:1.85;color:#333;white-space:pre-wrap;font-weight:300;}
-.plan-modal-actions{padding:0 20px 32px;display:flex;flex-direction:column;gap:10px;}
-.btn-modal-close{width:100%;background:var(--white);border:1.5px solid var(--border);border-radius:30px;padding:13px;font-size:13.5px;font-weight:500;color:var(--muted);cursor:pointer;font-family:var(--sans);min-height:44px;}
-.btn-modal-print{width:100%;background:var(--green-pale);border:1px solid var(--green-border);border-radius:30px;padding:12px;font-size:13px;font-weight:500;color:var(--green);cursor:pointer;font-family:var(--sans);min-height:44px;}
-
-/* WELCOME CARD */
-.welcome-card{margin:20px 20px 0;background:var(--green);border-radius:var(--radius);padding:22px 20px;color:var(--white);animation:fadeUp 0.3s ease;}
-.welcome-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;opacity:0.7;margin-bottom:8px;display:block;}
-.welcome-title{font-family:var(--serif);font-size:22px;line-height:1.2;margin-bottom:8px;}
-.welcome-sub{font-size:13px;opacity:0.85;line-height:1.65;margin-bottom:18px;font-weight:300;}
-.welcome-btns{display:flex;flex-direction:column;gap:8px;}
-.btn-white{background:var(--white);color:var(--green);border:none;border-radius:30px;padding:13px 20px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;text-align:center;-webkit-appearance:none;}
-.btn-white-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.45);border-radius:30px;padding:12px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;text-align:center;-webkit-appearance:none;}
-
-/* SECTION */
+/* ════ SECTION ════ */
 .df-divider{height:0.5px;background:var(--border);margin:20px 0 0;}
 .df-section{padding:20px 20px 0;}
 .df-section-lbl{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text);font-weight:500;margin-bottom:14px;display:block;}
 
-/* EMERGENCY CARD */
-.emergency-card{border-left:3px solid var(--green);padding:16px 16px 16px 14px;margin:20px 20px 0;background:var(--green-pale);border-radius:0 var(--radius) var(--radius) 0;}
+/* ════ EMERGENCY CARD ════ */
+/* White background, green left border — no green fill on cards */
+.emergency-card{border-left:3px solid var(--green);padding:16px 16px 16px 14px;margin:20px 20px 0;background:var(--white);border-radius:0 var(--radius) var(--radius) 0;border:0.5px solid var(--border);border-left:3px solid var(--green);}
 .ec-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:8px;display:block;}
 .ec-action{font-family:var(--serif);font-size:17px;color:var(--text);line-height:1.3;margin-bottom:14px;}
 .ec-critical{background:var(--white);border:1px solid #fde68a;border-radius:8px;padding:11px 13px;margin-bottom:12px;}
@@ -113,18 +122,19 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 .ec-critical-detail{font-size:12px;color:var(--muted);margin-top:2px;}
 .checklist{display:flex;flex-direction:column;gap:8px;}
 .check-item{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;background:var(--white);transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent;user-select:none;min-height:44px;}
-.check-item.done{background:var(--green-pale);border-color:var(--green-border);}
+.check-item.done{border-color:var(--green-border);}
 .check-item.done .check-label-text{color:var(--muted);text-decoration:line-through;}
 .check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
 .check-item.done .check-box{background:var(--green);border-color:var(--green);}
 .check-tick{color:var(--white);font-size:12px;display:none;}
 .check-item.done .check-tick{display:block;}
 .check-label-text{font-size:13.5px;line-height:1.45;}
+.ec-readplan-btn{margin-top:14px;background:none;border:1.5px solid var(--green);border-radius:30px;padding:10px 20px;font-size:13px;font-weight:600;color:var(--green);cursor:pointer;font-family:var(--sans);min-height:44px;}
 
-/* TRACKER */
+/* ════ TRACKER — white boxes, green border on highlight ════ */
 .tracker-dates{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
 .dbox{background:var(--white);border:0.5px solid var(--border);border-radius:8px;padding:11px 13px;}
-.dbox.hi{background:var(--green-bg);border-color:var(--green-border);}
+.dbox.hi{background:var(--white);border:1.5px solid var(--green-border);}
 .dbox-lbl{font-size:10px;color:var(--muted);font-weight:500;margin-bottom:4px;display:block;}
 .dbox-lbl.g{color:var(--green);}
 .dbox-val{font-family:var(--serif);font-size:16px;color:var(--text);display:block;line-height:1.2;}
@@ -132,12 +142,13 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 .dbox-sub{font-size:10.5px;color:var(--muted);margin-top:3px;display:block;}
 .dbox-sub.g{color:var(--green);font-weight:500;}
 .met-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.mbox{background:var(--green-bg);border-radius:6px;padding:9px 11px;}
+/* Met boxes: white + border, NOT green fill */
+.mbox{background:var(--white);border:0.5px solid var(--border);border-radius:6px;padding:9px 11px;}
 .mbox-lbl{font-size:10px;color:var(--muted);margin-bottom:3px;display:block;}
 .mbox-val{font-size:15px;font-weight:500;color:var(--text);}
 .mbox-val.g{color:var(--green);}
 
-/* DEBT MAP */
+/* ════ DEBT MAP — white cards, green border ════ */
 .debt-map-item{padding:12px 0;border-bottom:0.5px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 .debt-map-item:last-child{border-bottom:none;}
 .debt-map-name{font-size:14px;font-weight:600;color:var(--text);}
@@ -153,8 +164,8 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 .debt-map-rate{font-size:12px;color:var(--muted);}
 .debt-map-interest{font-size:11px;color:var(--amber);margin-top:1px;}
 
-/* SUPPORT */
-.support-item{background:var(--green-pale);border:0.5px solid var(--green-border);border-radius:8px;padding:13px;margin-bottom:8px;}
+/* ════ SUPPORT — white + green border ════ */
+.support-item{background:var(--white);border:1px solid var(--green-border);border-radius:8px;padding:13px;margin-bottom:8px;}
 .support-item:last-child{margin-bottom:0;}
 .support-name{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px;}
 .support-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:7px;}
@@ -162,16 +173,22 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 .support-link:hover{text-decoration:underline;}
 .support-free{font-size:10px;font-weight:600;color:var(--green);background:var(--green-light);padding:2px 7px;border-radius:10px;margin-left:6px;}
 
-/* UPGRADE */
-.upgrade-card{margin:20px 20px 0;background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);border-radius:var(--radius);padding:22px 20px;color:var(--white);}
-.upgrade-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;opacity:0.7;margin-bottom:8px;display:block;}
-.upgrade-title{font-family:var(--serif);font-size:20px;line-height:1.2;margin-bottom:8px;}
-.upgrade-sub{font-size:13px;opacity:0.85;line-height:1.65;margin-bottom:14px;font-weight:300;}
-.upgrade-price{font-size:12px;opacity:0.7;margin-bottom:14px;}
-.upgrade-price strong{font-size:18px;font-weight:700;opacity:1;}
-.btn-upgrade{display:block;text-align:center;background:var(--white);color:var(--green);border:none;border-radius:30px;padding:13px 20px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;min-height:44px;-webkit-appearance:none;}
+/* ════ UPGRADE — CTA only with green fill ════ */
+.upgrade-card{margin:20px 20px 0;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px 20px;}
+.upgrade-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:8px;display:block;}
+.upgrade-title{font-family:var(--serif);font-size:20px;line-height:1.2;margin-bottom:8px;color:var(--text);}
+.upgrade-sub{font-size:13px;color:#444;line-height:1.65;margin-bottom:6px;font-weight:300;}
+.upgrade-tagline{font-size:12px;color:var(--green);font-weight:500;margin-bottom:14px;font-style:italic;}
+.upgrade-price{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.upgrade-price strong{font-size:18px;font-weight:700;color:var(--text);}
+/* Green fill only on CTA button */
+.btn-upgrade{display:block;text-align:center;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:13px 20px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;min-height:44px;-webkit-appearance:none;}
+.btn-upgrade:hover{background:var(--green-dark);}
+.upgrade-features{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.upgrade-features li{font-size:13px;color:#444;display:flex;gap:8px;align-items:flex-start;line-height:1.4;}
+.upgrade-features .uf-check{color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
 
-.disclaimer{margin:16px 20px 0;background:#f9fafb;border:0.5px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.6;}
+.disclaimer{margin:16px 20px 0;border:0.5px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.6;background:var(--white);}
 .dash-footer{text-align:center;padding:24px 20px 12px;border-top:0.5px solid var(--border);margin-top:24px;}
 .dash-footer a{color:var(--green);font-size:12px;text-decoration:none;margin:0 8px;}
 .dash-footer p{font-size:11px;color:var(--muted);margin-top:6px;}
@@ -183,13 +200,14 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
   .met-grid{grid-template-columns:1fr;}
   .debt-map-item{flex-direction:column;gap:4px;}
   .debt-map-right{text-align:left;}
+  .pf-title{font-size:20px;}
 }
-@media print{.topbar,.upgrade-card,.welcome-card,.plan-modal-overlay{display:none!important;}}
+@media print{.topbar,.upgrade-card,.dash-footer{display:none!important;}}
 </style>
 </head>
 <body>
 
-<!-- GATE -->
+<!-- GATE (loading + re-auth) -->
 <div id="gate">
   <div class="gate-card">
     <span class="gate-logo">✦ Debt-Free.world</span>
@@ -204,10 +222,29 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
   </div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- PLAN-FIRST OVERLAY — shown before dashboard on fresh visit -->
+<!-- Dashboard is invisible behind this. User only sees the plan. -->
+<div id="planFirst">
+  <div class="pf-topbar">
+    <span class="pf-logo">✦ Debt-Free.world</span>
+    <button class="btn-pf-print" onclick="window.print()" style="width:auto;padding:8px 16px;font-size:12px;">⎙ Save</button>
+  </div>
+  <div class="pf-body">
+    <span class="pf-eyebrow">Your Clarity Report</span>
+    <div class="pf-title" id="pfTitle">Your personalised plan</div>
+    <div class="pf-meta" id="pfMeta"></div>
+    <div class="pf-chips" id="pfChips"></div>
+    <div class="pf-plan" id="pfPlan">Loading your plan…</div>
+    <div class="pf-actions">
+      <button class="btn-pf-primary" onclick="enterDashboard()">Go to my member area →</button>
+      <button class="btn-pf-secondary" onclick="window.print()">⎙ Save or print my plan</button>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD — only shown after user dismisses plan -->
 <div id="dashboard">
 
-  <!-- TOPBAR -->
   <div class="topbar">
     <span class="topbar-logo">✦ Debt-Free.world</span>
     <div class="topbar-right">
@@ -219,18 +256,25 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
             <button onclick="changeLang('FI')">Suomi</button>
             <button onclick="changeLang('SV')">Svenska</button>
             <button onclick="changeLang('DE')">Deutsch</button>
-            <button onclick="changeLang('FR')">Français</button>
-            <button onclick="changeLang('ES')">Español</button>
-            <button onclick="changeLang('PT')">Português</button>
-            <button onclick="changeLang('IT')">Italiano</button>
-            <button onclick="changeLang('NL')">Nederlands</button>
-            <button onclick="changeLang('PL')">Polski</button>
             <button onclick="changeLang('NO')">Norsk</button>
             <button onclick="changeLang('DA')">Dansk</button>
+            <button onclick="changeLang('NL')">Nederlands</button>
+            <button onclick="changeLang('ES')">Español</button>
+            <button onclick="changeLang('FR')">Français</button>
+            <button onclick="changeLang('IT')">Italiano</button>
+            <button onclick="changeLang('PL')">Polski</button>
+            <button onclick="changeLang('PT')">Português</button>
+            <button onclick="changeLang('CS')">Čeština</button>
+            <button onclick="changeLang('ET')">Eesti</button>
+            <button onclick="changeLang('LV')">Latviešu</button>
+            <button onclick="changeLang('LT')">Lietuvių</button>
+            <button onclick="changeLang('HU')">Magyar</button>
+            <button onclick="changeLang('RO')">Română</button>
+            <button onclick="changeLang('HR')">Hrvatski</button>
           </div>
         </div>
       </div>
-      <div class="menu-pill" role="button" aria-label="Menu" onclick="openDrawer()">
+      <div class="menu-pill" role="button" aria-label="All tools" onclick="openDrawer()">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
       </div>
     </div>
@@ -244,88 +288,91 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
       <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
     </div>
 
+    <!-- Read plan shortcut — always at top -->
     <div class="drawer-section">
-      <span class="drawer-section-label">DEBT FREE — Your plan</span>
-      <div class="drawer-item" onclick="openPlanModal();closeDrawer();">
-        <div class="drawer-item-icon">📋</div>
+      <div class="drawer-plan-link" onclick="showPlanFirst();closeDrawer();">
         <div>
-          <div class="drawer-item-name">My Clarity Report</div>
-          <div class="drawer-item-desc">Your full personalised analysis — debts, roadmap, emergency steps</div>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="scrollTo('emergency');closeDrawer();">
-        <div class="drawer-item-icon">⚡</div>
-        <div>
-          <div class="drawer-item-name">Emergency Action Card</div>
-          <div class="drawer-item-desc">Your single most important step — right now</div>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="scrollTo('tracker');closeDrawer();">
-        <div class="drawer-item-icon">📅</div>
-        <div>
-          <div class="drawer-item-name">Debt-Free Date</div>
-          <div class="drawer-item-desc">Your realistic timeline, calculated from your numbers</div>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="scrollTo('debtmap');closeDrawer();">
-        <div class="drawer-item-icon">🗺️</div>
-        <div>
-          <div class="drawer-item-name">Debt Map</div>
-          <div class="drawer-item-desc">Every debt prioritised by urgency and interest cost</div>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="scrollTo('support');closeDrawer();">
-        <div class="drawer-item-icon">🏛️</div>
-        <div>
-          <div class="drawer-item-name">Local Support</div>
-          <div class="drawer-item-desc">Verified free services in your country</div>
+          <div class="drawer-plan-link-name">📋 Read my Clarity Report</div>
+          <div class="drawer-plan-link-desc">Open your full personalised plan</div>
         </div>
       </div>
     </div>
 
     <div class="drawer-divider"></div>
 
+    <!-- DEBT FREE tools -->
+    <div class="drawer-section">
+      <span class="drawer-section-label">DEBT FREE — Your plan</span>
+      <div class="drawer-tool" onclick="scrollTo('emergency');closeDrawer();">
+        <div><div class="drawer-tool-name">⚡ Emergency Action Card</div><div class="drawer-tool-desc">Your single most urgent step — what to do today</div></div>
+      </div>
+      <div class="drawer-tool" onclick="scrollTo('tracker');closeDrawer();">
+        <div><div class="drawer-tool-name">📅 Debt-Free Date</div><div class="drawer-tool-desc">Your realistic timeline based on your numbers</div></div>
+      </div>
+      <div class="drawer-tool" onclick="scrollTo('debtmap');closeDrawer();">
+        <div><div class="drawer-tool-name">🗺️ Debt Map</div><div class="drawer-tool-desc">Every debt prioritised by urgency and interest cost</div></div>
+      </div>
+      <div class="drawer-tool" onclick="scrollTo('support');closeDrawer();">
+        <div><div class="drawer-tool-name">🏛️ Local Support</div><div class="drawer-tool-desc">Verified free services in your country</div></div>
+      </div>
+    </div>
+
+    <div class="drawer-divider"></div>
+
+    <!-- DEBT RECOVERY tools -->
     <div class="drawer-section">
       <span class="drawer-section-label">Debt Recovery — 19 €</span>
-      <div class="drawer-item" onclick="window.location.href='/#pricing';">
-        <div class="drawer-item-icon">✉️</div>
-        <div>
-          <div class="drawer-item-name">Creditor Letter Generator</div>
-          <div class="drawer-item-desc">Hardship letters, payment plans, settlement proposals — addressed to your creditor by name</div>
-          <span class="drawer-item-badge">Unlock</span>
-        </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">✉️ AI Creditor Letters</div><div class="drawer-tool-desc">Hardship letters, payment plans, settlement proposals — addressed to your creditor by name</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
       </div>
-      <div class="drawer-item" onclick="window.location.href='/#pricing';">
-        <div class="drawer-item-icon">📞</div>
-        <div>
-          <div class="drawer-item-name">Creditor Call Practice</div>
-          <div class="drawer-item-desc">Prepare for the difficult conversations before you pick up the phone</div>
-          <span class="drawer-item-badge">Unlock</span>
-        </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">📞 Creditor Call Practice</div><div class="drawer-tool-desc">AI roleplay — prepare for the difficult conversation before you pick up the phone</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
       </div>
-      <div class="drawer-item" onclick="window.location.href='/#pricing';">
-        <div class="drawer-item-icon">🛟</div>
-        <div>
-          <div class="drawer-item-name">Crisis Action Plans</div>
-          <div class="drawer-item-desc">Job loss, divorce, illness, unexpected emergencies</div>
-          <span class="drawer-item-badge">Unlock</span>
-        </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">📈 90-Day Guided Journey</div><div class="drawer-tool-desc">Weekly check-ins, next-step recommendations, progress tracking</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
       </div>
-      <div class="drawer-item" onclick="window.location.href='/#pricing';">
-        <div class="drawer-item-icon">🧠</div>
-        <div>
-          <div class="drawer-item-name">Behaviour &amp; Mindset Tools</div>
-          <div class="drawer-item-desc">Habits, stress management, spending awareness, impulse control</div>
-          <span class="drawer-item-badge">Unlock</span>
-        </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">📊 Monthly Plan Update</div><div class="drawer-tool-desc">Review and refresh your plan for the next 30 days</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
       </div>
-      <div class="drawer-item" onclick="window.location.href='/#pricing';">
-        <div class="drawer-item-icon">📈</div>
-        <div>
-          <div class="drawer-item-name">90-Day Guided Journey</div>
-          <div class="drawer-item-desc">Weekly check-ins, progress tracking, monthly plan updates</div>
-          <span class="drawer-item-badge">Unlock</span>
-        </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">💰 Crisis Budget Planner</div><div class="drawer-tool-desc">See how small changes accelerate your debt-free date</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">⚖️ Snowball vs Avalanche</div><div class="drawer-tool-desc">Which repayment strategy saves you the most?</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">➕ Extra Income Simulator</div><div class="drawer-tool-desc">How much sooner would additional income get you debt-free?</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">🗂️ Debt Collection Map</div><div class="drawer-tool-desc">Every stage of the process and your legal rights</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">⚖️ Legal Protection Guide</div><div class="drawer-tool-desc">What collectors can and cannot do in your country</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">🏆 90-Day Challenge</div><div class="drawer-tool-desc">Weekly actions and milestones to keep you on track</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">🧠 Behaviour &amp; Mindset Tools</div><div class="drawer-tool-desc">Impulse control, financial habits, stress management</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">🛟 Crisis Action Plans</div><div class="drawer-tool-desc">Job loss, divorce, illness, emergencies — step by step</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
+      </div>
+      <div class="drawer-tool" onclick="goUpgrade();">
+        <div><div class="drawer-tool-name">📁 My Documents</div><div class="drawer-tool-desc">All letters and notes saved during your 90 days</div></div>
+        <span class="drawer-tool-badge unlock">Unlock</span>
       </div>
     </div>
 
@@ -333,21 +380,17 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 
     <div class="drawer-section">
       <span class="drawer-section-label">Coming soon</span>
-      <div class="drawer-item">
-        <div class="drawer-item-icon">💼</div>
-        <div>
-          <div class="drawer-item-name">Income Builder</div>
-          <div class="drawer-item-desc">Discover realistic ways to increase your income</div>
-          <span class="drawer-item-badge coming">Q4 2026</span>
-        </div>
+      <div class="drawer-tool">
+        <div><div class="drawer-tool-name">💼 Income Builder</div><div class="drawer-tool-desc">Discover realistic ways to increase your income</div></div>
+        <span class="drawer-tool-badge coming">Q4 2026</span>
       </div>
-      <div class="drawer-item">
-        <div class="drawer-item-icon">🏦</div>
-        <div>
-          <div class="drawer-item-name">Wealth Architect</div>
-          <div class="drawer-item-desc">Build and protect what you earn</div>
-          <span class="drawer-item-badge coming">Q2–Q3 2027</span>
-        </div>
+      <div class="drawer-tool">
+        <div><div class="drawer-tool-name">🏦 Wealth Architect</div><div class="drawer-tool-desc">Build and protect what you earn</div></div>
+        <span class="drawer-tool-badge coming">Q2–Q3 2027</span>
+      </div>
+      <div class="drawer-tool">
+        <div><div class="drawer-tool-name">🏗️ Business Engine</div><div class="drawer-tool-desc">For entrepreneurs and business owners</div></div>
+        <span class="drawer-tool-badge coming">Q4 2029</span>
       </div>
     </div>
 
@@ -355,39 +398,11 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
     <button class="drawer-logout-btn" onclick="logout()">Sign out</button>
   </div>
 
-  <!-- PLAN MODAL -->
-  <div class="plan-modal-overlay" id="planModalOverlay">
-    <div class="plan-modal" id="planModal">
-      <div class="plan-modal-handle"></div>
-      <div class="plan-modal-header">
-        <span class="plan-modal-eyebrow">Your Clarity Report</span>
-        <div class="plan-modal-title" id="planModalTitle">Your personalised plan</div>
-        <div class="plan-modal-sub" id="planModalSub"></div>
-      </div>
-      <div class="plan-modal-body" id="planModalBody">Loading your plan…</div>
-      <div class="plan-modal-actions">
-        <button class="btn-modal-print" onclick="window.print()">⎙ Save / Print</button>
-        <button class="btn-modal-close" onclick="closePlanModal()">Explore my member area →</button>
-      </div>
-    </div>
-  </div>
-
   <div class="main-wrap">
-
-    <!-- WELCOME CARD -->
-    <div class="welcome-card" id="welcomeCard" style="display:none;">
-      <span class="welcome-eyebrow">✦ Your plan is ready</span>
-      <div class="welcome-title">Welcome, <span id="welcomeName"></span>.</div>
-      <div class="welcome-sub" id="welcomeSub">Your personalised Debt FREE Clarity Report is ready. This is the kind of clarity people pay hundreds for. Yours — free, forever.</div>
-      <div class="welcome-btns">
-        <button class="btn-white" onclick="openPlanModal()">Read my Clarity Report →</button>
-        <button class="btn-white-outline" onclick="dismissWelcome()">Explore my member area first</button>
-      </div>
-    </div>
 
     <!-- EMERGENCY ACTION CARD -->
     <div id="emergency">
-      <div class="emergency-card">
+      <div class="emergency-card" style="margin:20px 20px 0;">
         <span class="ec-eyebrow">⚡ Emergency Action Card</span>
         <div class="ec-action" id="ecAction">Loading your most urgent action…</div>
         <div class="ec-critical" id="ecCritical">
@@ -396,6 +411,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
           <div class="ec-critical-detail" id="ecDebtDetail"></div>
         </div>
         <div class="checklist" id="checklist"></div>
+        <button class="ec-readplan-btn" onclick="showPlanFirst()">Read my full Clarity Report →</button>
       </div>
     </div>
 
@@ -418,7 +434,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
       </div>
       <div class="met-grid">
         <div class="mbox"><span class="mbox-lbl">Total debt</span><span class="mbox-val" id="statDebt">—</span></div>
-        <div class="mbox"><span class="mbox-lbl">Monthly interest</span><span class="mbox-val" id="statInterest">—</span></div>
+        <div class="mbox"><span class="mbox-lbl">Monthly interest cost</span><span class="mbox-val" id="statInterest">—</span></div>
         <div class="mbox"><span class="mbox-lbl">Days with us</span><span class="mbox-val g" id="statDays">—</span></div>
         <div class="mbox"><span class="mbox-lbl">Savings buffer</span><span class="mbox-val" id="statSavings">—</span></div>
       </div>
@@ -442,20 +458,26 @@ body{font-family:var(--sans);color:var(--text);background:var(--white);min-heigh
 
     <!-- UPGRADE -->
     <div class="upgrade-card">
-      <span class="upgrade-eyebrow">Debt Recovery</span>
+      <span class="upgrade-eyebrow">Debt Recovery — 19 €</span>
       <div class="upgrade-title">You already know your way out.</div>
-      <div class="upgrade-sub">Now let's make sure you actually get there. Your Debt Recovery Companion guides you through the next 90 days with personalised check-ins, creditor letters written to your creditor by name, and tools that do the hard work with you.</div>
-      <div class="upgrade-price">One time. <strong>19 €</strong> &nbsp;·&nbsp; Less than 0,25 € per day.</div>
+      <div class="upgrade-sub">Now let's make sure you actually get there. Your Debt Recovery Companion guides you through the next 90 days with personalised tools, check-ins and practical support.</div>
+      <div class="upgrade-tagline">"I know what to do" → "I am doing it and succeeding."</div>
+      <ul class="upgrade-features">
+        <li><span class="uf-check">✓</span>Creditor letters written to your creditor by name — 7 types</li>
+        <li><span class="uf-check">✓</span>Creditor call practice — AI roleplay before you pick up the phone</li>
+        <li><span class="uf-check">✓</span>90-day guided journey with weekly check-ins and next-step recommendations</li>
+        <li><span class="uf-check">✓</span>Crisis action plans — job loss, divorce, illness, emergencies</li>
+        <li><span class="uf-check">✓</span>Behaviour and mindset tools — habits, stress, impulse control</li>
+        <li><span class="uf-check">✓</span>Monthly plan updates, snowball vs avalanche, extra income simulator</li>
+      </ul>
+      <div class="upgrade-price">One time. <strong>19 €</strong> &nbsp;·&nbsp; Less than 0,25 € per day for 90 days.</div>
       <a href="/#pricing" class="btn-upgrade">Continue your journey →</a>
     </div>
 
     <div class="disclaimer">Your plan is created based on the information you provided. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.</div>
 
     <div class="dash-footer">
-      <a href="/">Home</a>
-      <a href="/pricing.html">Pricing</a>
-      <a href="/legal.html">Privacy &amp; Terms</a>
-      <a href="mailto:support@debt-free.world">Support</a>
+      <a href="/">Home</a><a href="/pricing.html">Pricing</a><a href="/legal.html">Privacy &amp; Terms</a><a href="mailto:support@debt-free.world">Support</a>
       <p>Amliv Oy · VAT FI32503518 · Nokia, Finland</p>
     </div>
 
@@ -469,11 +491,16 @@ const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 const CC = {'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
 
 let memberToken = null;
+let memberData  = null;
 
+/* ── INIT ── */
 window.addEventListener('DOMContentLoaded', async () => {
   const p = new URLSearchParams(window.location.search);
   memberToken = p.get('token') || sessionStorage.getItem('dfw_member_token');
   const isFresh = p.get('fresh') === '1';
+
+  // Show gate while loading (body still hidden)
+  document.getElementById('gate').classList.add('show');
 
   if (!memberToken) { showGateError(); return; }
   sessionStorage.setItem('dfw_member_token', memberToken);
@@ -495,21 +522,66 @@ window.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    showDashboard(data, isFresh);
+    memberData = data;
+
+    // All data loaded — now reveal body
+    document.body.classList.add('ready');
+
+    if (isFresh) {
+      // First visit: hide gate, show plan-only overlay, dashboard stays hidden
+      document.getElementById('gate').classList.remove('show');
+      showPlanFirst(data);
+    } else {
+      // Return visit: go straight to dashboard
+      document.getElementById('gate').classList.remove('show');
+      document.getElementById('dashboard').classList.add('show');
+      renderDashboard(data);
+    }
+
   } catch(e) { showGateError(); }
 });
 
+/* ── GATE ERROR ── */
 function showGateError() {
-  document.getElementById('gateSpinner').style.display='none';
-  document.getElementById('gateTitle').textContent='Your link has expired.';
-  document.getElementById('gateSub').textContent='Enter your email — we\'ll send a fresh link right away.';
-  document.getElementById('gateForm').style.display='block';
+  document.body.classList.add('ready');
+  document.getElementById('gateSpinner').style.display = 'none';
+  document.getElementById('gateTitle').textContent = 'Your link has expired.';
+  document.getElementById('gateSub').textContent = 'Enter your email — we\'ll send a fresh access link right away.';
+  document.getElementById('gateForm').classList.add('show');
 }
 
-function showDashboard(data, fresh) {
-  document.getElementById('gate').style.display='none';
-  document.getElementById('dashboard').style.display='block';
+/* ── PLAN-FIRST SCREEN ── */
+function showPlanFirst(data) {
+  const d = data || memberData;
+  if (!d) return;
+  const od = d.onboarding || {};
+  const plan = d.member_plan || '';
 
+  document.getElementById('pfTitle').textContent = (od.firstname ? od.firstname + '\u2019s' : 'Your') + ' Clarity Report';
+  document.getElementById('pfMeta').textContent = od.country
+    ? 'Personalised for ' + od.country + ' \u00b7 ' + new Date().toLocaleDateString('en',{month:'long',year:'numeric'})
+    : '';
+
+  // Profile chips
+  const chips = [];
+  if (od.country) chips.push(od.country);
+  if (od.employment) chips.push(od.employment);
+  if (od.debts && od.debts.length) chips.push(od.debts.length + (od.debts.length===1?' debt':' debts'));
+  document.getElementById('pfChips').innerHTML = chips.map(c=>`<span class="pf-chip">${esc(c)}</span>`).join('');
+
+  document.getElementById('pfPlan').textContent = plan || 'Your plan will appear here.';
+  document.getElementById('planFirst').classList.add('show');
+}
+
+/* ── ENTER DASHBOARD FROM PLAN ── */
+function enterDashboard() {
+  document.getElementById('planFirst').classList.remove('show');
+  document.getElementById('dashboard').classList.add('show');
+  if (memberData) renderDashboard(memberData);
+}
+
+/* ── RENDER DASHBOARD ── */
+function renderDashboard(data) {
   const od = data.onboarding || {};
   const cur = CC[od.country] || od.currency || 'EUR';
   const debts = od.debts || [];
@@ -517,39 +589,30 @@ function showDashboard(data, fresh) {
 
   if (od.language) document.getElementById('langCode').textContent = od.language;
 
-  // Plan modal
-  document.getElementById('planModalTitle').textContent = (od.firstname ? od.firstname + '\u2019s' : 'Your') + ' Clarity Report';
-  document.getElementById('planModalSub').textContent = od.country ? 'Personalised for ' + od.country + ' \u00b7 ' + new Date().toLocaleDateString('en',{month:'long',year:'numeric'}) : '';
-  document.getElementById('planModalBody').textContent = plan || 'Your plan will appear here.';
-
-  // Welcome card + auto-open plan on first visit
-  if (fresh) {
-    const wc = document.getElementById('welcomeCard');
-    document.getElementById('welcomeName').textContent = od.firstname || '';
-    wc.style.display = 'block';
-    setTimeout(() => openPlanModal(), 1000);
-  }
-
   renderNumbers(od, cur, data.created_at);
   renderEmergencyCard(plan, debts, cur, data.emergency_card_checked || [false,false,false]);
   renderDebtMap(debts, cur);
   renderSupport(plan, od.country);
 }
 
+/* ── NUMBERS ── */
 function renderNumbers(od, cur, created_at) {
   const income = (parseFloat(od.income)||0) + (parseFloat(od.extra_amount)||0);
-  const exp = (parseFloat(od.housing_cost)||0) + (parseFloat(od.other_costs)||0);
+  const exp    = (parseFloat(od.housing_cost)||0) + (parseFloat(od.other_costs)||0);
   const surplus = income - exp;
-  const debts = od.debts || [];
-  const totalDebt = debts.reduce((s,d)=>s+(parseFloat(d.amount)||0), 0);
-  const monthlyInt = debts.reduce((s,d)=>s+(parseFloat(d.amount)*(parseFloat(d.interest)||0)/100/12), 0);
+  const debts   = od.debts || [];
+  const totalDebt  = debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
+  const monthlyInt = debts.reduce((s,d)=>s+(parseFloat(d.amount)*(parseFloat(d.interest)||0)/100/12),0);
 
   const surplusEl = document.getElementById('statSurplus');
-  surplusEl.textContent = fmtCur(cur, surplus);
+  surplusEl.textContent = fmtCur(cur,surplus);
   surplusEl.style.color = surplus >= 0 ? 'var(--green)' : 'var(--red)';
-  document.getElementById('statSurplusSub').textContent = surplus >= 0 ? fmtCur(cur,income)+' in \u2014 '+fmtCur(cur,exp)+' out' : 'Expenses exceed income';
-  document.getElementById('statDebt').textContent = fmtCur(cur, totalDebt);
-  document.getElementById('statInterest').textContent = monthlyInt > 0 ? fmtCur(cur,monthlyInt)+'/mo' : '\u2014';
+  document.getElementById('statSurplusSub').textContent = surplus >= 0
+    ? fmtCur(cur,income)+' in \u2014 '+fmtCur(cur,exp)+' out'
+    : 'Expenses exceed income';
+
+  document.getElementById('statDebt').textContent = fmtCur(cur,totalDebt);
+  document.getElementById('statInterest').textContent = monthlyInt>0 ? fmtCur(cur,monthlyInt)+'/mo' : '\u2014';
   document.getElementById('statSavings').textContent = od.savings || '\u2014';
 
   const dfdEl = document.getElementById('statDfd');
@@ -561,17 +624,21 @@ function renderNumbers(od, cur, created_at) {
   } else if (surplus <= 0) {
     dfdEl.textContent = 'Address deficit first';
     dfdEl.style.color = 'var(--red)';
+    document.getElementById('statDfdSub').textContent = 'Surplus needed to calculate';
+  } else {
+    dfdEl.textContent = '\u2014';
   }
 
   if (created_at) {
     const days = Math.floor((Date.now()-new Date(created_at).getTime())/86400000);
-    document.getElementById('statDays').textContent = days === 0 ? 'Today' : days+' days';
+    document.getElementById('statDays').textContent = days===0 ? 'Today' : days+' days';
   }
 }
 
+/* ── EMERGENCY CARD ── */
 function renderEmergencyCard(plan, debts, cur, checkState) {
   let action = 'Review your most urgent debt and take the first concrete step today.';
-  let checks = [
+  let checks  = [
     'List all your debts and their minimum monthly payments',
     'Contact your most urgent creditor to understand your options',
     'Check if you qualify for any government support in your country'
@@ -580,30 +647,30 @@ function renderEmergencyCard(plan, debts, cur, checkState) {
   if (plan) {
     const lines = plan.split('\n').map(l=>l.trim()).filter(Boolean);
     let inSection=false, foundAction=false;
-    const foundChecks=[];
+    const fc=[];
     for (const line of lines) {
       if (/emergency action/i.test(line)){inSection=true;continue;}
       if (inSection && /local support|closing|we do this/i.test(line)) break;
       if (inSection) {
         if (!foundAction && line.length>20 && !/^[\d\-\u2022\u00b7\*]/.test(line)){action=line;foundAction=true;}
-        else if (/^[\d\-\u2022\u00b7\*]/.test(line)){const c=line.replace(/^[\d\.\-\u2022\u00b7\*]+\s*/,'').trim();if(c.length>10)foundChecks.push(c);}
+        else if (/^[\d\-\u2022\u00b7\*]/.test(line)){const c=line.replace(/^[\d\.\-\u2022\u00b7\*]+\s*/,'').trim();if(c.length>10)fc.push(c);}
       }
     }
-    if (foundChecks.length>=2) checks=foundChecks.slice(0,3);
+    if (fc.length>=2) checks=fc.slice(0,3);
   }
 
   document.getElementById('ecAction').textContent = action;
 
   if (debts.length > 0) {
-    const sorted = [...debts].sort((a,b)=>{
+    const sorted=[...debts].sort((a,b)=>{
       if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
       if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
       return((parseFloat(b.interest)||0)*parseFloat(b.amount))-((parseFloat(a.interest)||0)*parseFloat(a.amount));
     });
     const crit=sorted[0];
-    const monthInt=parseFloat(crit.amount)*(parseFloat(crit.interest)||0)/100/12;
+    const mi=parseFloat(crit.amount)*(parseFloat(crit.interest)||0)/100/12;
     document.getElementById('ecDebtName').textContent=(crit.creditor||crit.type)+' \u2014 '+fmtCur(crit.currency||cur,crit.amount);
-    document.getElementById('ecDebtDetail').textContent=crit.type+(crit.interest>0?' \u00b7 '+crit.interest+'% p.a.':'')+(monthInt>0?' \u00b7 '+fmtCur(crit.currency||cur,monthInt)+'/mo interest':'')+(crit.type==='Debt in collections'?' \u00b7 \u26a0\ufe0f Urgent':'');
+    document.getElementById('ecDebtDetail').textContent=crit.type+(crit.interest>0?' \u00b7 '+crit.interest+'% p.a.':'')+(mi>0?' \u00b7 '+fmtCur(crit.currency||cur,mi)+'/mo interest':'')+(crit.type==='Debt in collections'?' \u00b7 \u26a0\ufe0f Urgent':'');
   } else {
     document.getElementById('ecCritical').style.display='none';
   }
@@ -617,13 +684,11 @@ function renderEmergencyCard(plan, debts, cur, checkState) {
 
 function toggleCheck(i){
   document.getElementById('ci-'+i).classList.toggle('done');
-  saveChecks();
-}
-async function saveChecks(){
   const states=[0,1,2].map(i=>{const el=document.getElementById('ci-'+i);return el?el.classList.contains('done'):false;});
-  try{await fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:states})});}catch(_){}
+  fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:states})}).catch(_=>{});
 }
 
+/* ── DEBT MAP ── */
 function renderDebtMap(debts, cur){
   const body=document.getElementById('debtMapBody');
   if(!debts.length){body.innerHTML='<p style="font-size:13px;color:var(--muted);">No debts recorded.</p>';return;}
@@ -644,63 +709,101 @@ function renderDebtMap(debts, cur){
   }).join('');
 }
 
+/* ── LOCAL SUPPORT ──
+   The AI prompt already handles verified local orgs — we display what it returns.
+   If the AI wrote the fallback phrase, we show a clean contact prompt instead of
+   the raw "contact us at support@..." text from the plan.
+   We do NOT add any unverified orgs ourselves.
+*/
 function renderSupport(plan, country){
   const body=document.getElementById('supportBody');
-  if(!plan){body.innerHTML=supportFallback();return;}
+  if(!plan){body.innerHTML=supportFallback(country);return;}
+
   const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
   let inSection=false;const sl=[];
   for(const line of lines){
     if(/local support/i.test(line)){inSection=true;continue;}
-    if(inSection&&/closing|we do this together|\u2726/i.test(line))break;
+    if(inSection&&/closing|we do this together|\u2726|✦/i.test(line))break;
     if(inSection&&line.length>8)sl.push(line);
   }
-  if(!sl.length||/support@debt-free\.world/i.test(sl.join(' '))){body.innerHTML=supportFallback();return;}
+
+  if(!sl.length){body.innerHTML=supportFallback(country);return;}
+
+  // If the AI wrote its own fallback (no verified orgs found for this country)
+  // we present it as a proper contact card — not raw text
+  if(/support@debt-free\.world/i.test(sl.join(' '))&&sl.length<=3){
+    body.innerHTML=supportFallback(country);
+    return;
+  }
+
+  // Parse and render verified orgs from plan
   const orgs=parseOrgs(sl);
-  if(!orgs.length){body.innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.75;">${sl.map(l=>esc(l)).join('<br/>')}</div>`;return;}
-  body.innerHTML=orgs.map(o=>`<div class="support-item"><div class="support-name">${esc(o.name)}</div>${o.desc?`<div class="support-desc">${esc(o.desc)}</div>`:''}<div>${o.url?`<a href="${esc(o.url)}" class="support-link" target="_blank" rel="noopener">Visit website \u2192</a>`:''} ${o.free?'<span class="support-free">Free</span>':''}</div></div>`).join('');
+  if(!orgs.length){
+    // Plan has support content but couldn't parse into org cards — render as plain text
+    body.innerHTML=`<div style="font-size:13px;color:#444;line-height:1.75;">${sl.map(l=>esc(l)).join('<br/>')}</div>`;
+    return;
+  }
+
+  body.innerHTML=orgs.map(o=>`
+    <div class="support-item">
+      <div class="support-name">${esc(o.name)}</div>
+      ${o.desc?`<div class="support-desc">${esc(o.desc)}</div>`:''}
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        ${o.url?`<a href="${esc(o.url)}" class="support-link" target="_blank" rel="noopener">Visit website \u2192</a>`:''}
+        ${o.free?'<span class="support-free">Free</span>':''}
+      </div>
+    </div>`).join('');
 }
-function supportFallback(){return`<p style="font-size:13px;color:var(--muted);line-height:1.65;">For verified local resources tailored to your profile, contact us at <a href="mailto:support@debt-free.world" style="color:var(--green);font-weight:600;">support@debt-free.world</a></p>`;}
+
+function supportFallback(country){
+  return`<div class="support-item">
+    <div class="support-name">Free debt counselling in ${esc(country||'your country')}</div>
+    <div class="support-desc">We maintain a verified list of free debt counselling services, government support programmes and non-profit organisations for every country we serve. Contact us for your personalised list.</div>
+    <a href="mailto:support@debt-free.world?subject=Local support list — ${encodeURIComponent(country||'')}" class="support-link">Request my country resource list \u2192</a>
+  </div>`;
+}
+
 function parseOrgs(lines){
   const orgs=[];let cur=null;
   for(const line of lines){
-    const urlM=line.match(/https?:\/\/[\w\.\-\/]+/);
+    const urlM=line.match(/https?:\/\/[\w\.\-\/\?\=\&\%]+/);
     if(urlM&&cur){cur.url=urlM[0];continue;}
     if(/\bfree\b/i.test(line)&&cur)cur.free=true;
-    if(line.length<90&&!line.startsWith('-')&&!urlM){if(cur&&cur.name)orgs.push(cur);cur={name:line,desc:'',url:'',free:false};}
-    else if(cur&&!cur.desc&&line.length>20)cur.desc=line;
+    if(line.length<100&&!line.startsWith('-')&&!urlM&&!/^\d+\./.test(line)){
+      if(cur&&cur.name)orgs.push(cur);
+      cur={name:line,desc:'',url:'',free:false};
+    } else if(cur&&!cur.desc&&line.length>20&&!urlM){cur.desc=line;}
   }
   if(cur&&cur.name)orgs.push(cur);
   return orgs;
 }
 
-function openPlanModal(){document.getElementById('planModalOverlay').style.display='flex';document.body.style.overflow='hidden';}
-function closePlanModal(){document.getElementById('planModalOverlay').style.display='none';document.body.style.overflow='';}
-document.getElementById('planModalOverlay').addEventListener('click',function(e){if(e.target===this)closePlanModal();});
-
-function dismissWelcome(){document.getElementById('welcomeCard').style.display='none';closePlanModal();}
-
+/* ── NAV ── */
 function openDrawer(){document.getElementById('toolsDrawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeDrawer(){document.getElementById('toolsDrawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');document.body.style.overflow='';}
-
 function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
 function changeLang(code){document.getElementById('langCode').textContent=code;document.getElementById('langMenu').classList.remove('open');}
 document.addEventListener('click',e=>{const m=document.getElementById('langMenu');const b=document.getElementById('langBtn');if(m&&!m.contains(e.target)&&e.target!==b)m.classList.remove('open');});
-
 function scrollTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+function goUpgrade(){window.location.href='/#pricing';}
+function logout(){sessionStorage.removeItem('dfw_member_token');window.location.replace('/');}
 
+/* ── RE-AUTH ── */
 async function requestNewLink(){
   const email=document.getElementById('gateEmail').value.trim();
   if(!email){toast('Please enter your email address.');return;}
   const btn=document.getElementById('gateSendBtn');btn.disabled=true;btn.textContent='Sending\u2026';
   try{
     await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-    document.getElementById('gateForm').style.display='none';
-    document.getElementById('gateSuccess').style.display='block';
-  }catch(e){toast('Could not send link. Please email support@debt-free.world');btn.disabled=false;btn.textContent='Send me a new access link';}
+    document.getElementById('gateForm').classList.remove('show');
+    document.getElementById('gateSuccess').classList.add('show');
+  }catch(e){
+    toast('Could not send link. Please email support@debt-free.world');
+    btn.disabled=false;btn.textContent='Send me a new access link';
+  }
 }
 
-function logout(){sessionStorage.removeItem('dfw_member_token');window.location.replace('/');}
-
+/* ── HELPERS ── */
 function fmtCur(cur,val){const n=Math.round(val||0);try{return new Intl.NumberFormat('en',{style:'currency',currency:cur,maximumFractionDigits:0}).format(n);}catch(_){return cur+' '+n.toLocaleString();}}
 function esc(s){if(!s)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
