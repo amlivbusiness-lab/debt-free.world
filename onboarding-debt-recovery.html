@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
-<title>Build Your Recovery Plan — Debt-Free.world</title>
 <meta name="robots" content="noindex,nofollow"/>
+<title>Build My Plan — Debt-Free.world</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -46,7 +46,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 .q-title{font-family:var(--serif);font-size:24px;line-height:1.18;color:var(--text);margin-bottom:8px;}
 .q-sub{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:26px;font-weight:300;}
 
-/* ── SECTION DIVIDER within card ── */
+/* ── SECTION DIVIDER ── */
 .q-section{margin-top:26px;padding-top:22px;border-top:1px solid var(--border);}
 .q-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:14px;display:block;}
 
@@ -58,8 +58,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   width:100%;font-family:var(--sans);font-size:15px;
   border:1.5px solid var(--border);border-radius:10px;
   padding:13px 15px;color:var(--text);background:var(--white);
-  outline:none;transition:border-color 0.2s;-webkit-appearance:none;
-  -webkit-appearance:none;appearance:none;
+  outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;
 }
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green);}
 .field.has-error input,.field.has-error select{border-color:var(--red);}
@@ -79,8 +78,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   padding:13px 16px;background:var(--white);cursor:pointer;
   text-align:left;font-family:var(--sans);
   color:#333;transition:border-color 0.15s,background 0.15s;
-  line-height:1.3;-webkit-tap-highlight-color:transparent;
-  user-select:none;
+  line-height:1.3;-webkit-tap-highlight-color:transparent;user-select:none;
 }
 .opt:active{transform:scale(0.985);}
 .opt.selected{border-color:var(--green);background:var(--green-bg);}
@@ -144,6 +142,13 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 .loader-steps li.ls-active{color:var(--text);}
 .loader-steps li.ls-active::before{content:"·";color:var(--green);font-size:20px;top:-1px;}
 
+/* ── INVALID TOKEN ── */
+.invalid-wrap{max-width:400px;margin:60px auto;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 24px;text-align:center;display:none;}
+.invalid-wrap.show{display:block;}
+.invalid-icon{font-size:44px;margin-bottom:1rem;}
+.invalid-title{font-family:var(--serif);font-size:22px;margin-bottom:8px;}
+.invalid-sub{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;font-weight:300;}
+
 /* ── TOAST ── */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:400;z-index:9999;transition:transform 0.3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
@@ -183,9 +188,16 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
 <div class="wrap">
 
-<!-- ══════════════════════════════════
-  STEP 1 — WHO YOU ARE
-══════════════════════════════════ -->
+<!-- INVALID TOKEN -->
+<div class="invalid-wrap" id="invalidWrap">
+  <div class="invalid-icon">🔑</div>
+  <div class="invalid-title">This link has expired.</div>
+  <p class="invalid-sub">Magic links are valid for 48 hours. Enter your email and we'll send a fresh one right away.</p>
+  <div class="field"><input type="email" id="f_relink" placeholder="your@email.com" autocomplete="email"/></div>
+  <button class="btn-full" onclick="requestNewLink()">Send new link →</button>
+</div>
+
+<!-- ══ STEP 1 — WHO YOU ARE ══ -->
 <div class="q-card active" id="step1">
   <span class="q-eyebrow" id="s1ey">Step 1 of 7</span>
   <h1 class="q-title" id="s1title">Let's start with you.</h1>
@@ -278,9 +290,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   <div class="cta-row"><button class="btn-next" onclick="goNext(1)" id="btn1">Continue</button></div>
 </div>
 
-<!-- ══════════════════════════════════
-  STEP 2 — YOUR SITUATION
-══════════════════════════════════ -->
+<!-- ══ STEP 2 — SITUATION ══ -->
 <div class="q-card" id="step2">
   <span class="q-eyebrow" id="s2ey">Step 2 of 7</span>
   <h1 class="q-title" id="s2title">What's going on right now?</h1>
@@ -304,9 +314,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  STEP 3 — DEBT MAP
-══════════════════════════════════ -->
+<!-- ══ STEP 3 — DEBT MAP ══ -->
 <div class="q-card" id="step3">
   <span class="q-eyebrow" id="s3ey">Step 3 of 7</span>
   <h1 class="q-title" id="s3title">Tell me about your debts.</h1>
@@ -335,7 +343,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     </div>
     <div class="field">
       <label class="field-label" id="lbl_mini_creditor">Who is this owed to?</label>
-      <div class="field-hint" id="hint_mini_creditor">Company or person name — e.g. Nordea, Klarna, HMRC. Helps generate ready-to-send letters.</div>
+      <div class="field-hint" id="hint_mini_creditor">Company or person name — e.g. Nordea, Klarna, HMRC. Used to personalise your plan.</div>
       <input type="text" id="mini_creditor" placeholder="e.g. Nordea, Klarna, HMRC…"/>
     </div>
     <div class="field">
@@ -388,9 +396,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  STEP 4 — FINANCES
-══════════════════════════════════ -->
+<!-- ══ STEP 4 — FINANCES ══ -->
 <div class="q-card" id="step4">
   <span class="q-eyebrow" id="s4ey">Step 4 of 7</span>
   <h1 class="q-title" id="s4title">Your monthly finances.</h1>
@@ -478,7 +484,6 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
           <option value="Retired" id="emp7">Retired</option>
           <option value="Student" id="emp8">Student</option>
         </select>
-        <div class="err-msg" id="err_emp">Required.</div>
       </div>
       <div class="field">
         <label class="field-label" id="lbl_household">Household type</label>
@@ -509,9 +514,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  STEP 5 — MINDSET
-══════════════════════════════════ -->
+<!-- ══ STEP 5 — MINDSET ══ -->
 <div class="q-card" id="step5">
   <span class="q-eyebrow" id="s5ey">Step 5 of 7</span>
   <h1 class="q-title" id="s5title">How does this feel right now?</h1>
@@ -564,9 +567,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  STEP 6 — GOALS
-══════════════════════════════════ -->
+<!-- ══ STEP 6 — GOALS ══ -->
 <div class="q-card" id="step6">
   <span class="q-eyebrow" id="s6ey">Step 6 of 7</span>
   <h1 class="q-title" id="s6title">What does debt-free mean to you?</h1>
@@ -604,7 +605,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     <div class="field">
       <label class="field-label" id="lbl_own_words">What does success look like one year from now?</label>
       <div class="field-hint" id="hint_own_words">Optional — but powerful. Your exact words will appear in your plan.</div>
-      <textarea id="f_own_words" rows="6" maxlength="600" id_placeholder="s6_placeholder"></textarea>
+      <textarea id="f_own_words" rows="6" maxlength="600"></textarea>
     </div>
   </div>
 
@@ -614,27 +615,32 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  STEP 7 — READY
-══════════════════════════════════ -->
+<!-- ══ STEP 7 — READY (DEBT FREE — modified) ══ -->
 <div class="q-card" id="step7">
   <span class="q-eyebrow" id="s7ey">Step 7 of 7</span>
-  <h1 class="q-title" id="s7title">Almost there.</h1>
-  <p class="q-sub" id="s7sub">One preference, and we build your plan.</p>
+  <h1 class="q-title" id="s7title">One last thing.</h1>
+  <p class="q-sub" id="s7sub">What would feel most important to understand today? This shapes the focus of your Clarity Report.</p>
 
   <div class="field">
-    <label class="field-label" id="lbl_companion">How do you want to be guided through your 90 days?</label>
-    <div class="opts" id="opts_companion" style="margin-top:10px;">
-      <button class="opt" onclick="selectOpt(this,'companion_mode')" data-val="guided">
-        <span class="opt-label" id="comp1">Guide me — step by step</span>
-        <span class="opt-desc" id="comp1d">Debt-Free.world checks in with you, suggests your next action, and keeps you on track. You can turn this off at any time.</span>
+    <label class="field-label" id="lbl_focus">What would feel like the most important thing to understand today?</label>
+    <div class="opts" id="opts_focus" style="margin-top:10px;">
+      <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="What my debts actually cost me — in real numbers">
+        <span class="opt-label" id="foc1">What my debts actually cost me — in real numbers</span>
       </button>
-      <button class="opt" onclick="selectOpt(this,'companion_mode')" data-val="independent">
-        <span class="opt-label" id="comp2">I'll navigate independently</span>
-        <span class="opt-desc" id="comp2d">Your full plan and all tools are available whenever you need them. You decide what to use and when.</span>
+      <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="Whether my situation is legally serious or manageable">
+        <span class="opt-label" id="foc2">Whether my situation is legally serious or manageable</span>
+      </button>
+      <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="What I can realistically do this week">
+        <span class="opt-label" id="foc3">What I can realistically do this week</span>
+      </button>
+      <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="Whether there is government help I am not using">
+        <span class="opt-label" id="foc4">Whether there is government help I am not using</span>
+      </button>
+      <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="How long this will realistically take">
+        <span class="opt-label" id="foc5">How long this will realistically take</span>
       </button>
     </div>
-    <div class="err-msg" id="err_companion" style="display:none;">Please choose how you'd like to proceed.</div>
+    <div class="err-msg" id="err_focus" style="display:none;">Please select what feels most important.</div>
   </div>
 
   <div class="q-section">
@@ -646,8 +652,8 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     </div>
   </div>
 
-  <button class="btn-full" onclick="submitForm()" id="btnSubmit"><span id="submitText">Build my 90-day plan</span></button>
-  <p class="submit-note" id="submitNote">This takes 20–30 seconds. We'll also send a copy to your email.</p>
+  <button class="btn-full" onclick="submitForm()" id="btnSubmit"><span id="submitText">Build my Debt FREE plan</span></button>
+  <p class="submit-note" id="submitNote">This takes 20–30 seconds. Your plan will be waiting in your member area.</p>
 </div>
 
 <!-- LOADING -->
@@ -659,8 +665,8 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     <li id="ls1">Reading your debt situation</li>
     <li id="ls2">Calculating your repayment path</li>
     <li id="ls3">Finding local support for your country</li>
-    <li id="ls4">Personalising the tone and strategy</li>
-    <li id="ls5">Writing your 90-day plan</li>
+    <li id="ls4">Personalising the tone and focus</li>
+    <li id="ls5">Writing your Clarity Report</li>
   </ul>
 </div>
 
@@ -668,18 +674,15 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <div class="toast" id="toast"></div>
 
 <script>
-/* ─────────────────────────────────────────────
-   CONFIG
-───────────────────────────────────────────── */
+/* ── CONFIG ── */
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 const STEP_PCT = [0,14,28,42,57,71,86,100];
 
-/* ─────────────────────────────────────────────
-   TRANSLATIONS
-   Keys map to element IDs in the DOM.
-   Only the UI strings change — option values
-   (data-val) are always sent to the API in EN.
-───────────────────────────────────────────── */
+/* ── TRANSLATIONS ──
+   Identical architecture to onboarding-debt-recovery.
+   Keys map to element IDs. data-val attributes always sent in EN.
+   Step 7 keys differ (focus instead of companion_mode).
+*/
 const T = {
 EN:{
   topStep:"Step {n} of 7",
@@ -688,15 +691,15 @@ EN:{
   s2ey:"Step 2 of 7",s2title:"What's going on right now?",s2sub:"This helps us understand the full picture — not just the numbers. Select everything that applies.",s2multi:"Select all that apply",
   sit1:"Debts have grown beyond what I can manage",sit2:"Lost my job or income recently",sit3:"Going through divorce or separation",sit4:"Dealing with illness or sick leave",sit5:"Business closed or self-employment difficulties",sit6:"Victim of fraud, scam or broken contract",sit7:"Debt accumulated gradually — it just kept growing",sit8:"Tried to help someone financially and it went wrong",
   s3ey:"Step 3 of 7",s3title:"Tell me about your debts.",s3sub:"Add each debt separately. This is how we build the right priority order — not a guess. Rough estimates are fine.",
-  lbl_mini_type:"Type of debt",mini_type_ph:"— Select type —",lbl_mini_creditor:"Who is this owed to?",hint_mini_creditor:"Company or person name — e.g. Nordea, Klarna, HMRC. Helps generate ready-to-send letters.",lbl_mini_amount:"Amount owed",lbl_mini_interest:"Approximate interest rate (%)",hint_mini_interest:"Enter 0 if you don't know — we'll treat it as unknown, not as zero-interest.",
+  lbl_mini_type:"Type of debt",mini_type_ph:"— Select type —",lbl_mini_creditor:"Who is this owed to?",hint_mini_creditor:"Company or person name — e.g. Nordea, Klarna, HMRC. Used to personalise your plan.",lbl_mini_amount:"Amount owed",lbl_mini_interest:"Approximate interest rate (%)",hint_mini_interest:"Enter 0 if you don't know — we'll note it as unknown, not as zero-interest.",
   addDebtLabel:"Add a debt",addDebtConfirm:"Add debt",cancelDebtBtn:"Cancel",
   lbl_collections_section:"Collections & enforcement",hint_collections:"Is any debt already being handled by a collections agency or court enforcement?",col_no:"No",col_agency:"Collections agency",col_court:"Court / enforcement",col_unknown:"Not sure",
   s4ey:"Step 4 of 7",s4title:"Your monthly finances.",s4sub:"Real numbers only — we build a realistic plan, not an optimistic one. Rough estimates are fine.",
   lbl_income_section:"Income",lbl_income:"Monthly take-home income",hint_income:"After tax. If income varies, use your lowest typical month.",lbl_extra_income:"Any additional income not in your main salary?",extra_no:"No, that's it",extra_gig:"Side work / gig",extra_rent:"Rental income",extra_ben:"Benefits / support",lbl_extra_amount:"Approximately how much extra per month?",
-  lbl_expenses_section:"Monthly expenses",lbl_housing_cost:"Housing cost",hint_housing:"Rent, mortgage or maintenance charge",lbl_other_costs:"Other fixed costs",hint_other:"Food, transport, utilities, phone",
+  lbl_expenses_section:"Monthly expenses",lbl_housing_cost:"Housing cost",hint_housing:"Rent, mortgage or maintenance",lbl_other_costs:"Other fixed costs",hint_other:"Food, transport, utilities, phone",
   lbl_buffer_section:"Financial buffer",lbl_savings:"Current savings or emergency buffer",sav1:"None at all",sav2:"Under 500",sav3:"500 – 2 000",sav4:"Over 2 000",
   lbl_household_section:"Household",lbl_employment:"Employment status",emp_ph:"— Select —",emp1:"Employed full-time",emp2:"Employed part-time",emp3:"Self-employed / business owner",emp4:"Unemployed",emp5:"On sick leave",emp6:"On parental leave",emp7:"Retired",emp8:"Student",
-  lbl_household:"Household type",hh_ph:"— Select —",hh1:"Single, no children",hh2:"Single parent",hh3:"Couple, no children",hh4:"Couple with children",hh5:"Other",lbl_children:"Minor children (under 18) at same address",ch0:"0 — none at home",
+  lbl_household:"Household type",hh_ph:"— Select —",hh1:"Single, no children",hh2:"Single parent",hh3:"Couple, no children",hh4:"Couple with children",hh5:"Other",lbl_children:"Minor children (under 18) living at the same address",ch0:"0 — no minor children at home",
   s5ey:"Step 5 of 7",s5title:"How does this feel right now?",s5sub:"No judgement here. This shapes how your plan is written — not whether we help you.",
   lbl_barrier:"What has felt hardest so far?",bar1:"I don't know where to start — it's overwhelming",bar2:"I'm afraid to open letters or answer creditor calls",bar3:"I feel ashamed — nobody in my life knows about this",bar4:"I've tried before and failed — I'm exhausted",bar5:"It feels hopeless — the numbers don't add up",bar6:"I know what to do — I just can't make myself start",
   lbl_support_section:"Support",lbl_support:"Does anyone in your life know about your situation?",sup1:"Yes, I have support",sup2:"Some people know",sup3:"I'm handling this alone",sup4:"Prefer not to say",
@@ -705,13 +708,14 @@ EN:{
   lbl_primary_goal:"What is your deepest reason for wanting this?",
   goal1:"Peace of mind",goal1d:"Stop feeling anxious about money every single day",goal2:"My family",goal2d:"Provide real security for the people I love",goal3:"Freedom",goal3d:"Make real choices again — not just survive",goal4:"A normal life",goal4d:"Feel like myself again — without the weight of shame",goal5:"A specific goal",goal5d:"Save for something meaningful once this is behind me",
   lbl_ownwords_section:"In your own words",lbl_own_words:"What does success look like one year from now?",hint_own_words:"Optional — but powerful. Your exact words will appear in your plan.",s6_placeholder:"e.g. I open my bank account without dread. My children don't notice the stress anymore.",
-  s7ey:"Step 7 of 7",s7title:"Almost there.",s7sub:"One preference, and we build your plan.",lbl_companion:"How do you want to be guided through your 90 days?",
-  comp1:"Guide me — step by step",comp1d:"Debt-Free.world checks in with you, suggests your next action, and keeps you on track. You can turn this off at any time.",comp2:"I'll navigate independently",comp2d:"Your full plan and all tools are available whenever you need them. You decide what to use and when.",
+  s7ey:"Step 7 of 7",s7title:"One last thing.",s7sub:"What would feel most important to understand today? This shapes the focus of your Clarity Report.",
+  lbl_focus:"What would feel like the most important thing to understand today?",
+  foc1:"What my debts actually cost me — in real numbers",foc2:"Whether my situation is legally serious or manageable",foc3:"What I can realistically do this week",foc4:"Whether there is government help I am not using",foc5:"How long this will realistically take",
   lbl_extra_section:"Optional",lbl_anything_else:"Anything else you want us to know?",hint_anything:"Anything that didn't fit the questions above. Completely optional.",
-  submitText:"Build my 90-day plan",submitNote:"This takes 20–30 seconds. We'll also send a copy to your email.",
-  load_title:"Building your plan…",load_sub:"This takes about 30 seconds.",ls1:"Reading your debt situation",ls2:"Calculating your repayment path",ls3:"Finding local support for your country",ls4:"Personalising the tone and strategy",ls5:"Writing your 90-day plan",
+  submitText:"Build my Debt FREE plan",submitNote:"This takes 20–30 seconds. Your plan will be waiting in your member area.",
+  load_title:"Building your plan…",load_sub:"This takes about 30 seconds.",ls1:"Reading your debt situation",ls2:"Calculating your repayment path",ls3:"Finding local support for your country",ls4:"Personalising the tone and focus",ls5:"Writing your Clarity Report",
   btn_back:"Back",btn_next:"Continue",
-  err_firstname:"Please enter your first name.",err_country:"Please select your country.",err_income:"Please enter your monthly income.",err_companion:"Please choose how you'd like to proceed.",err_barrier:"Please select the option that fits best.",err_goal:"Please select what matters most to you.",
+  err_firstname:"Please enter your first name.",err_country:"Please select your country.",err_income:"Please enter your monthly income.",err_focus:"Please select what feels most important.",err_barrier:"Please select the option that fits best.",err_goal:"Please select what matters most to you.",
   toast_situation:"Please select at least one option.",toast_collections:"Please indicate whether any debt is in collections.",toast_savings:"Please select your savings level.",toast_employment:"Please select your employment status.",toast_support:"Please answer the support question.",toast_debt_type:"Please select a debt type and enter an amount.",
   debtLabel_unknown_rate:"unknown rate"
 },
@@ -722,7 +726,7 @@ FI:{
   s2ey:"Vaihe 2 / 7",s2title:"Mitä juuri nyt tapahtuu?",s2sub:"Tämä auttaa meitä ymmärtämään koko tilanteen — ei pelkästään numeroita. Valitse kaikki sopivat.",s2multi:"Valitse kaikki sopivat",
   sit1:"Velat ovat kasvaneet yli hallintakyvyn",sit2:"Menetin työni tai tuloni äskettäin",sit3:"Olen erotilantessa tai eron jälkeen",sit4:"Sairaus tai sairausloma",sit5:"Yritys sulkeutui tai yrittäjyys ei toimi",sit6:"Petoksen, huijauksen tai rikotun sopimuksen uhri",sit7:"Velka on kasautunut vähitellen ajan myötä",sit8:"Yritin auttaa toista taloudellisesti ja se meni pieleen",
   s3ey:"Vaihe 3 / 7",s3title:"Kerro veloistasi.",s3sub:"Lisää jokainen velka erikseen. Näin rakennamme oikean prioriteettijärjestyksen — ei arvauksia. Arviot riittävät.",
-  lbl_mini_type:"Velkatyyppi",mini_type_ph:"— Valitse tyyppi —",lbl_mini_creditor:"Kenelle tämä on velkaa?",hint_mini_creditor:"Yrityksen tai henkilön nimi — esim. Nordea, Ferratum, Vero. Auttaa luomaan valmiita kirjeitä.",lbl_mini_amount:"Velan määrä",lbl_mini_interest:"Arvioitu korko (%)",hint_mini_interest:"Laita 0 jos et tiedä — merkitsemme sen tuntemattomaksi, ei nollakorkoiseksi.",
+  lbl_mini_type:"Velkatyyppi",mini_type_ph:"— Valitse tyyppi —",lbl_mini_creditor:"Kenelle tämä on velkaa?",hint_mini_creditor:"Yrityksen tai henkilön nimi — esim. Nordea, Ferratum, Vero. Käytetään suunnitelmasi personointiin.",lbl_mini_amount:"Velan määrä",lbl_mini_interest:"Arvioitu korko (%)",hint_mini_interest:"Laita 0 jos et tiedä — merkitsemme sen tuntemattomaksi, ei nollakorkoiseksi.",
   addDebtLabel:"Lisää velka",addDebtConfirm:"Lisää",cancelDebtBtn:"Peruuta",
   lbl_collections_section:"Perintä ja ulosotto",hint_collections:"Onko jokin velka jo perinnässä tai ulosotossa?",col_no:"Ei",col_agency:"Perintätoimistossa",col_court:"Oikeudessa / ulosotossa",col_unknown:"En tiedä",
   s4ey:"Vaihe 4 / 7",s4title:"Kuukausitaloutesi.",s4sub:"Vain todelliset luvut — rakennamme realistisen suunnitelman, emme optimistisen. Arviot riittävät.",
@@ -739,305 +743,180 @@ FI:{
   lbl_primary_goal:"Mikä on syvin syysi tähän?",
   goal1:"Mielenrauha",goal1d:"Lopeta rahasta aiheutuva ahdistus joka ikinen päivä",goal2:"Perheeni",goal2d:"Anna rakkaimmilleni todellinen turvallisuus",goal3:"Vapaus",goal3d:"Tee taas oikeita valintoja — älä vain selviä",goal4:"Normaali elämä",goal4d:"Tunne itsesi jälleen — ilman häpeän taakkaa",goal5:"Konkreettinen tavoite",goal5d:"Säästä johonkin merkitykselliseen kun tämä on takana",
   lbl_ownwords_section:"Omin sanoin",lbl_own_words:"Miltä menestys näyttää vuoden päästä?",hint_own_words:"Valinnainen — mutta voimakas. Omat sanasi ilmestyvät suunnitelmassasi.",s6_placeholder:"esim. Avaan pankkitilini ilman pelkoa. Lapseni eivät enää huomaa stressiäni.",
-  s7ey:"Vaihe 7 / 7",s7title:"Melkein valmista.",s7sub:"Yksi asetus, ja rakennamme suunnitelmasi.",lbl_companion:"Miten haluat edetä 90 päivän aikana?",
-  comp1:"Ohjaa minua — askel kerrallaan",comp1d:"Debt-Free.world tarkistaa edistymisesi, ehdottaa seuraavaa toimenpidettä ja pitää sinut kurssilla. Voit poistaa tämän käytöstä milloin tahansa.",comp2:"Etenen itsenäisesti",comp2d:"Koko suunnitelmasi ja kaikki työkalut ovat saatavilla aina kun tarvitset. Sinä päätät mitä käytät ja milloin.",
+  s7ey:"Vaihe 7 / 7",s7title:"Yksi asia vielä.",s7sub:"Mikä tuntuisi tärkeimmältä asialta ymmärtää tänään? Tämä muokkaa raporttisi painopistettä.",
+  lbl_focus:"Mikä tuntuisi tärkeimmältä asialta ymmärtää tänään?",
+  foc1:"Mitä velkani todella maksavat — todellisissa luvuissa",foc2:"Onko tilanteeni juridisesti vakava vai hallittavissa",foc3:"Mitä voin realistisesti tehdä tällä viikolla",foc4:"Onko olemassa valtion tukea jota en käytä",foc5:"Kuinka kauan tämä realistisesti kestää",
   lbl_extra_section:"Valinnainen",lbl_anything_else:"Haluatko kertoa meille jotain muuta?",hint_anything:"Mitä tahansa mitä ei mahtunut kysymyksiin. Täysin valinnainen.",
-  submitText:"Rakenna 90 päivän suunnitelmani",submitNote:"Tämä kestää 20–30 sekuntia. Lähetämme kopion myös sähköpostiisi.",
-  load_title:"Rakennetaan suunnitelmaasi…",load_sub:"Tämä kestää noin 30 sekuntia.",ls1:"Luetaan velkatilannettasi",ls2:"Lasketaan maksupolku",ls3:"Etsitään paikallinen tuki maallesi",ls4:"Personoidaan sävy ja strategia",ls5:"Kirjoitetaan 90 päivän suunnitelmasi",
+  submitText:"Rakenna DEBT FREE -suunnitelmani",submitNote:"Tämä kestää 20–30 sekuntia. Suunnitelmasi odottaa sinua jäsenalueellasi.",
+  load_title:"Rakennetaan suunnitelmaasi…",load_sub:"Tämä kestää noin 30 sekuntia.",ls1:"Luetaan velkatilannettasi",ls2:"Lasketaan maksupolku",ls3:"Etsitään paikallinen tuki maallesi",ls4:"Personoidaan sävy ja painopiste",ls5:"Kirjoitetaan selkeysraporttisi",
   btn_back:"Takaisin",btn_next:"Jatka",
-  err_firstname:"Anna etunimesi.",err_country:"Valitse maa.",err_income:"Anna kuukausitulosi.",err_companion:"Valitse miten haluat edetä.",err_barrier:"Valitse sopivin vaihtoehto.",err_goal:"Valitse sinulle tärkein.",
+  err_firstname:"Anna etunimesi.",err_country:"Valitse maa.",err_income:"Anna kuukausitulosi.",err_focus:"Valitse sinulle tärkein.",err_barrier:"Valitse sopivin vaihtoehto.",err_goal:"Valitse sinulle tärkein.",
   toast_situation:"Valitse vähintään yksi vaihtoehto.",toast_collections:"Kerro onko jokin velka perinnässä.",toast_savings:"Valitse säästötasosi.",toast_employment:"Valitse työtilanne.",toast_support:"Vastaa tukikysymykseen.",toast_debt_type:"Valitse velkatyyppi ja syötä summa.",
   debtLabel_unknown_rate:"korko tuntematon"
 }
 };
+['SV','DE','NO','DA','NL','ES','FR','IT','PL','PT','CS','ET','LV','LT','HU','RO','HR'].forEach(code=>{ T[code]=Object.assign({},T.EN); });
+Object.assign(T['SV'],{ps:["Du","Situation","Skulder","Ekonomi","Känsla","Mål","Klar"],s1title:"Låt oss börja med dig.",s1sub:"Din plan byggs kring din verkliga situation — inte en mall.",submitText:"Bygg min DEBT FREE-plan",submitNote:"Det tar 20–30 sekunder. Din plan väntar i ditt medlemsområde.",btn_back:"Tillbaka",btn_next:"Fortsätt"});
 
-// Minimal fallbacks for other languages (extend as needed)
-['SV','DE','NO','DA','NL','ES','FR','IT','PL','PT','CS','ET','LV','LT','HU','RO','HR'].forEach(code => {
-  T[code] = Object.assign({}, T.EN);
-});
-// Swedish overrides (sample — extend all as needed)
-Object.assign(T['SV'], {
-  ps:["Du","Situation","Skulder","Ekonomi","Känsla","Mål","Klar"],
-  s1title:"Låt oss börja med dig.",s1sub:"Din plan byggs kring din verkliga situation — inte en mall.",
-  submitText:"Bygg min 90-dagarsplan",submitNote:"Det tar 20–30 sekunder. Vi skickar också en kopia till din e-post.",
-  btn_back:"Tillbaka",btn_next:"Fortsätt"
-});
-
-/* ─────────────────────────────────────────────
-   STATE
-───────────────────────────────────────────── */
+/* ── STATE ── */
 let lang = 'EN';
 let currentStep = 1;
-let formData = { extra_income:'No additional income', reminders:'Yes', confidence:4 };
+let formData = { extra_income:'No additional income', confidence:4 };
 let multiSelects = { situation:[] };
 let debts = [];
 let confidenceVal = 4;
 
 const params = new URLSearchParams(window.location.search);
 const memberToken = params.get('token') || null;
-const sessionId   = params.get('session_id') || null;
 
-/* ─────────────────────────────────────────────
-   LANGUAGE
-───────────────────────────────────────────── */
-function setLang(code) {
-  lang = code;
-  formData.language = code;
-  const t = T[code] || T.EN;
-
-  // Update all elements with matching IDs
-  Object.keys(t).forEach(k => {
-    if (k === 'ps' || typeof t[k] !== 'string') return;
-    const el = document.getElementById(k);
-    if (!el) return;
-    if (el.tagName === 'OPTION') el.textContent = t[k];
-    else if (el.tagName === 'INPUT' && el.type === 'text') { /* don't overwrite input values */ }
-    else if (el.tagName === 'TEXTAREA') el.placeholder = t[k] || '';
-    else el.textContent = t[k];
-  });
-
-  // Progress step labels
-  if (t.ps) {
-    t.ps.forEach((label, i) => {
-      const el = document.getElementById('ps'+(i+1));
-      if (el) el.textContent = label;
-    });
+/* ── TOKEN VALIDATION ON LOAD ── */
+window.addEventListener('DOMContentLoaded', async ()=>{
+  if(!memberToken){
+    showInvalidScreen();
+    return;
   }
+  try{
+    const res=await fetch(`${WORKER_URL}/member/validate`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({token:memberToken})
+    });
+    if(!res.ok){ showInvalidScreen(); return; }
+    // Valid — stay on step 1
+  }catch(e){ showInvalidScreen(); }
+});
 
-  // topbar step
-  const tbs = document.getElementById('topbarStep');
-  if (tbs && t.topStep) tbs.textContent = t.topStep.replace('{n}', currentStep);
-
-  // Textarea placeholder for step 6
-  const ta = document.getElementById('f_own_words');
-  if (ta && t.s6_placeholder) ta.placeholder = t.s6_placeholder;
-
-  // Back/next buttons
-  document.querySelectorAll('.btn-back').forEach(b => {
-    if (!b.id && t.btn_back) b.textContent = t.btn_back;
-  });
-  ['back2','back3','back4','back5','back6'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && t.btn_back) el.textContent = t.btn_back;
-  });
-  ['btn1','btn2','btn3','btn4','btn5','btn6'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && t.btn_next) el.textContent = t.btn_next;
-  });
+function showInvalidScreen(){
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('invalidWrap').classList.add('show');
 }
 
-/* ─────────────────────────────────────────────
-   NAVIGATION
-───────────────────────────────────────────── */
-function goNext(step) {
-  if (!validateStep(step)) return;
-  collectStep(step);
-  showStep(step + 1);
+async function requestNewLink(){
+  const email=document.getElementById('f_relink').value.trim();
+  if(!email){ toast('Please enter your email address.'); return; }
+  try{
+    await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    document.getElementById('invalidWrap').innerHTML='<div class="invalid-icon">✉️</div><div class="invalid-title">Link sent.</div><p class="invalid-sub">Check your inbox — your new access link is on its way.</p>';
+  }catch(e){ toast('Could not send link. Please email support@debt-free.world'); }
 }
-function goBack(step) { showStep(step - 1); }
 
-function showStep(n) {
-  document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+/* ── LANGUAGE ── */
+function setLang(code){
+  lang=code; formData.language=code;
+  const t=T[code]||T.EN;
+  Object.keys(t).forEach(k=>{
+    if(k==='ps'||typeof t[k]!=='string')return;
+    const el=document.getElementById(k); if(!el)return;
+    if(el.tagName==='OPTION')el.textContent=t[k];
+    else if(el.tagName==='INPUT'&&el.type==='text'){}
+    else if(el.tagName==='TEXTAREA')el.placeholder=t[k]||'';
+    else el.textContent=t[k];
+  });
+  if(t.ps){ t.ps.forEach((label,i)=>{ const el=document.getElementById('ps'+(i+1)); if(el)el.textContent=label; }); }
+  const tbs=document.getElementById('topbarStep'); if(tbs&&t.topStep)tbs.textContent=t.topStep.replace('{n}',currentStep);
+  const ta=document.getElementById('f_own_words'); if(ta&&t.s6_placeholder)ta.placeholder=t.s6_placeholder;
+  ['back2','back3','back4','back5','back6'].forEach(id=>{ const el=document.getElementById(id); if(el&&t.btn_back)el.textContent=t.btn_back; });
+  ['btn1','btn2','btn3','btn4','btn5','btn6'].forEach(id=>{ const el=document.getElementById(id); if(el&&t.btn_next)el.textContent=t.btn_next; });
+}
+
+/* ── NAVIGATION ── */
+function goNext(step){ if(!validateStep(step))return; collectStep(step); showStep(step+1); }
+function goBack(step){ showStep(step-1); }
+function showStep(n){
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
   document.getElementById('step'+n)?.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
-  currentStep = n;
-  document.getElementById('progressFill').style.width = STEP_PCT[n]+'%';
-  const t = T[lang]||T.EN;
-  const tbs = document.getElementById('topbarStep');
-  if (tbs) tbs.textContent = (t.topStep||'Step {n} of 7').replace('{n}', n);
-  for(let i=1;i<=7;i++) {
-    document.getElementById('ps'+i)?.classList.toggle('active', i <= n);
-  }
+  currentStep=n;
+  document.getElementById('progressFill').style.width=STEP_PCT[n]+'%';
+  const t=T[lang]||T.EN;
+  const tbs=document.getElementById('topbarStep'); if(tbs)tbs.textContent=(t.topStep||'Step {n} of 7').replace('{n}',n);
+  for(let i=1;i<=7;i++){ document.getElementById('ps'+i)?.classList.toggle('active',i<=n); }
 }
 
-/* ─────────────────────────────────────────────
-   VALIDATION
-───────────────────────────────────────────── */
-function validateStep(step) {
-  const t = T[lang]||T.EN;
-  let ok = true;
-
-  if (step===1) {
-    const fn = document.getElementById('f_firstname');
-    const co = document.getElementById('f_country');
-    if (!fn.value.trim()) { setFieldErr('wrap_firstname','err_firstname'); ok=false; } else clearFieldErr('wrap_firstname');
-    if (!co.value) { setFieldErr('wrap_country','err_country'); ok=false; } else clearFieldErr('wrap_country');
+/* ── VALIDATION ── */
+function validateStep(step){
+  const t=T[lang]||T.EN; let ok=true;
+  if(step===1){
+    const fn=document.getElementById('f_firstname'); const co=document.getElementById('f_country');
+    if(!fn.value.trim()){ setFieldErr('wrap_firstname','err_firstname'); ok=false; }else clearFieldErr('wrap_firstname');
+    if(!co.value){ setFieldErr('wrap_country','err_country'); ok=false; }else clearFieldErr('wrap_country');
   }
-  if (step===2) {
-    if (multiSelects.situation.length===0) { toast(t.toast_situation); ok=false; }
+  if(step===2){ if(multiSelects.situation.length===0){ toast(t.toast_situation); ok=false; } }
+  if(step===3){ if(!formData.collections){ toast(t.toast_collections); ok=false; } }
+  if(step===4){
+    if(!document.getElementById('f_income').value){ setFieldErr('wrap_income','err_income'); ok=false; }else clearFieldErr('wrap_income');
+    if(!document.getElementById('f_housing_cost').value){ setFieldErr('wrap_housing','err_housing'); ok=false; }else clearFieldErr('wrap_housing');
+    if(!document.getElementById('f_other_costs').value){ setFieldErr('wrap_other','err_other'); ok=false; }else clearFieldErr('wrap_other');
+    if(!document.getElementById('f_employment').value){ toast(t.toast_employment); ok=false; }
+    if(!formData.savings){ toast(t.toast_savings); ok=false; }
   }
-  if (step===3) {
-    if (!formData.collections) { toast(t.toast_collections); ok=false; }
+  if(step===5){
+    if(!formData.barrier){ showInlineErr('err_barrier'); ok=false; }
+    if(!formData.support_network){ toast(t.toast_support||'Please answer the support question.'); ok=false; }
   }
-  if (step===4) {
-    if (!document.getElementById('f_income').value) { setFieldErr('wrap_income','err_income'); ok=false; } else clearFieldErr('wrap_income');
-    if (!document.getElementById('f_housing_cost').value) { setFieldErr('wrap_housing','err_housing'); ok=false; } else clearFieldErr('wrap_housing');
-    if (!document.getElementById('f_other_costs').value) { setFieldErr('wrap_other','err_other'); ok=false; } else clearFieldErr('wrap_other');
-    if (!document.getElementById('f_employment').value) { toast(t.toast_employment); ok=false; }
-    if (!formData.savings) { toast(t.toast_savings); ok=false; }
-  }
-  if (step===5) {
-    if (!formData.barrier) { showInlineErr('err_barrier'); ok=false; }
-    if (!formData.support_network) { toast(t.toast_support||'Please answer the support question.'); ok=false; }
-  }
-  if (step===6) {
-    if (!formData.primary_goal) { showInlineErr('err_goal'); ok=false; }
-  }
-  if (step===7) {
-    if (!formData.companion_mode) { showInlineErr('err_companion'); ok=false; }
-  }
+  if(step===6){ if(!formData.primary_goal){ showInlineErr('err_goal'); ok=false; } }
+  if(step===7){ if(!formData.immediate_focus){ showInlineErr('err_focus'); ok=false; } }
   return ok;
 }
+function setFieldErr(wrapId,errId){ document.getElementById(wrapId)?.classList.add('has-error'); const e=document.getElementById(errId); if(e)e.style.display='block'; }
+function clearFieldErr(wrapId){ document.getElementById(wrapId)?.classList.remove('has-error'); }
+function showInlineErr(errId){ const e=document.getElementById(errId); if(e){ e.style.display='block'; setTimeout(()=>e.style.display='none',3000); } }
+function toast(msg){ if(!msg)return; const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2800); }
 
-function setFieldErr(wrapId, errId) {
-  document.getElementById(wrapId)?.classList.add('has-error');
-  const e = document.getElementById(errId);
-  if (e) e.style.display='block';
-}
-function clearFieldErr(wrapId) {
-  document.getElementById(wrapId)?.classList.remove('has-error');
-}
-function showInlineErr(errId) {
-  const e = document.getElementById(errId);
-  if (e) { e.style.display='block'; setTimeout(()=>e.style.display='none',3000); }
-}
-function toast(msg) {
-  if (!msg) return;
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'), 2800);
+/* ── COLLECT DATA ── */
+function collectStep(step){
+  if(step===1){ formData.firstname=document.getElementById('f_firstname').value.trim(); formData.language=document.getElementById('f_language').value; formData.country=document.getElementById('f_country').value; }
+  if(step===2){ formData.situation=multiSelects.situation.join(' | '); }
+  if(step===3){ formData.debts=debts; formData.total_debt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0); formData.debt_count=debts.length; formData.debt_types=[...new Set(debts.map(d=>d.type))].join(', '); }
+  if(step===4){ formData.income=document.getElementById('f_income').value; formData.currency=document.getElementById('f_currency').value; formData.extra_amount=document.getElementById('f_extra_amount').value||'0'; formData.housing_cost=document.getElementById('f_housing_cost').value; formData.other_costs=document.getElementById('f_other_costs').value; formData.employment=document.getElementById('f_employment').value; formData.household=document.getElementById('f_household').value; formData.children=document.getElementById('f_children').value; }
+  if(step===5){ formData.confidence=confidenceVal; }
+  if(step===6){ formData.own_words=document.getElementById('f_own_words').value.trim(); }
+  if(step===7){ formData.anything_else=document.getElementById('f_anything_else').value.trim(); }
 }
 
-/* ─────────────────────────────────────────────
-   COLLECT DATA
-───────────────────────────────────────────── */
-function collectStep(step) {
-  if (step===1) {
-    formData.firstname = document.getElementById('f_firstname').value.trim();
-    formData.language  = document.getElementById('f_language').value;
-    formData.country   = document.getElementById('f_country').value;
-  }
-  if (step===2) { formData.situation = multiSelects.situation.join(' | '); }
-  if (step===3) {
-    formData.debts      = debts;
-    formData.total_debt = debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
-    formData.debt_count = debts.length;
-    formData.debt_types = [...new Set(debts.map(d=>d.type))].join(', ');
-  }
-  if (step===4) {
-    formData.income       = document.getElementById('f_income').value;
-    formData.currency     = document.getElementById('f_currency').value;
-    formData.extra_amount = document.getElementById('f_extra_amount').value||'0';
-    formData.housing_cost = document.getElementById('f_housing_cost').value;
-    formData.other_costs  = document.getElementById('f_other_costs').value;
-    formData.employment   = document.getElementById('f_employment').value;
-    formData.household    = document.getElementById('f_household').value;
-    formData.children     = document.getElementById('f_children').value;
-  }
-  if (step===5) { formData.confidence = confidenceVal; }
-  if (step===6) { formData.own_words = document.getElementById('f_own_words').value.trim(); }
-  if (step===7) { formData.anything_else = document.getElementById('f_anything_else').value.trim(); }
-}
-
-/* ─────────────────────────────────────────────
-   OPTION BUTTONS
-───────────────────────────────────────────── */
-function selectOpt(btn, field) {
+/* ── OPTION BUTTONS ── */
+function selectOpt(btn,field){
   btn.closest('.opts').querySelectorAll('.opt').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  formData[field] = btn.getAttribute('data-val');
-  if (field==='extra_income') {
-    document.getElementById('wrap_extra_amount').style.display =
-      (formData.extra_income==='No additional income') ? 'none' : 'block';
-  }
+  btn.classList.add('selected'); formData[field]=btn.getAttribute('data-val');
+  if(field==='extra_income'){ document.getElementById('wrap_extra_amount').style.display=(formData.extra_income==='No additional income')?'none':'block'; }
 }
-function toggleOpt(btn, field) {
-  btn.classList.toggle('selected');
-  const val = btn.getAttribute('data-val');
-  if (!multiSelects[field]) multiSelects[field]=[];
-  if (btn.classList.contains('selected')) { if(!multiSelects[field].includes(val)) multiSelects[field].push(val); }
-  else { multiSelects[field]=multiSelects[field].filter(v=>v!==val); }
+function toggleOpt(btn,field){
+  btn.classList.toggle('selected'); const val=btn.getAttribute('data-val');
+  if(!multiSelects[field])multiSelects[field]=[];
+  if(btn.classList.contains('selected')){ if(!multiSelects[field].includes(val))multiSelects[field].push(val); }
+  else{ multiSelects[field]=multiSelects[field].filter(v=>v!==val); }
 }
 
-/* ─────────────────────────────────────────────
-   DEBT MANAGEMENT
-───────────────────────────────────────────── */
-function openMiniForm() {
-  document.getElementById('debtMiniForm').classList.add('open');
-  document.getElementById('addDebtBtn').style.display='none';
-  setTimeout(()=>document.getElementById('mini_amount').focus(),100);
+/* ── DEBT MANAGEMENT ── */
+function openMiniForm(){ document.getElementById('debtMiniForm').classList.add('open'); document.getElementById('addDebtBtn').style.display='none'; setTimeout(()=>document.getElementById('mini_amount').focus(),100); }
+function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.getElementById('addDebtBtn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; }); }
+function addDebt(){
+  const t=T[lang]||T.EN;
+  const type=document.getElementById('mini_type').value; const amt=document.getElementById('mini_amount').value;
+  if(!type||!amt){ toast(t.toast_debt_type); return; }
+  debts.push({type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0});
+  renderDebts(); closeMiniForm();
 }
-function closeMiniForm() {
-  document.getElementById('debtMiniForm').classList.remove('open');
-  document.getElementById('addDebtBtn').style.display='flex';
-  ['mini_type','mini_creditor','mini_amount','mini_interest'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.value='';
-  });
-}
-function addDebt() {
-  const t   = T[lang]||T.EN;
-  const type = document.getElementById('mini_type').value;
-  const amt  = document.getElementById('mini_amount').value;
-  if (!type||!amt) { toast(t.toast_debt_type); return; }
-  debts.push({
-    type,
-    creditor: document.getElementById('mini_creditor').value.trim(),
-    amount:   parseFloat(amt),
-    currency: document.getElementById('mini_currency').value,
-    interest: parseFloat(document.getElementById('mini_interest').value)||0
-  });
-  renderDebts();
-  closeMiniForm();
-}
-function removeDebt(i) { debts.splice(i,1); renderDebts(); }
-function renderDebts() {
-  const t    = T[lang]||T.EN;
-  const list = document.getElementById('debtList');
-  const cur  = formData.currency||'EUR';
+function removeDebt(i){ debts.splice(i,1); renderDebts(); }
+function renderDebts(){
+  const t=T[lang]||T.EN; const list=document.getElementById('debtList'); const cur=formData.currency||'EUR';
   list.innerHTML='';
   debts.forEach((d,i)=>{
-    const el = document.createElement('div');
-    el.className='debt-row';
-    const creditorStr = d.creditor ? ` — ${d.creditor}` : '';
-    const rateStr = d.interest>0 ? `${d.interest}%` : (t.debtLabel_unknown_rate||'unknown rate');
-    el.innerHTML=`
-      <div class="debt-row-info">
-        <span class="debt-row-type">${d.type}${creditorStr}</span>
-        <span class="debt-row-creditor">${rateStr}</span>
-      </div>
-      <div class="debt-row-right">
-        <span class="debt-row-amount">${d.amount.toLocaleString('en')} ${d.currency||cur}</span>
-      </div>
-      <button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
+    const el=document.createElement('div'); el.className='debt-row';
+    const creditorStr=d.creditor?` — ${d.creditor}`:'';
+    const rateStr=d.interest>0?`${d.interest}%`:(t.debtLabel_unknown_rate||'unknown rate');
+    el.innerHTML=`<div class="debt-row-info"><span class="debt-row-type">${d.type}${creditorStr}</span><span class="debt-row-creditor">${rateStr}</span></div><div class="debt-row-right"><span class="debt-row-amount">${d.amount.toLocaleString('en')} ${d.currency||cur}</span></div><button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
     list.appendChild(el);
   });
-  const addBtn = document.getElementById('addDebtLabel');
-  if (addBtn) addBtn.textContent = debts.length===0
-    ? (t.addDebtLabel||'Add a debt')
-    : ((t.addDebtLabel||'Add a debt').replace('Add a','Add another').replace('Lisää velka','Lisää toinen velka'));
+  const addBtn=document.getElementById('addDebtLabel');
+  if(addBtn)addBtn.textContent=debts.length===0?(t.addDebtLabel||'Add a debt'):((t.addDebtLabel||'Add a debt').replace('Add a','Add another').replace('Lisää velka','Lisää toinen velka'));
 }
 
-/* ─────────────────────────────────────────────
-   CONFIDENCE SLIDER
-───────────────────────────────────────────── */
+/* ── CONFIDENCE SLIDER ── */
 (function initSlider(){
-  const track=document.getElementById('confTrack');
-  const fill=document.getElementById('confFill');
-  const thumb=document.getElementById('confThumb');
+  const track=document.getElementById('confTrack'); const fill=document.getElementById('confFill'); const thumb=document.getElementById('confThumb');
   if(!track)return;
-  function setVal(pct){
-    pct=Math.max(0,Math.min(100,pct));
-    confidenceVal=Math.round(pct/10);
-    formData.confidence=confidenceVal;
-    fill.style.width=pct+'%';
-    thumb.style.left=pct+'%';
-  }
-  function relX(e,el){
-    const r=el.getBoundingClientRect();
-    const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
-    return Math.max(0,Math.min(x/r.width*100,100));
-  }
+  function setVal(pct){ pct=Math.max(0,Math.min(100,pct)); confidenceVal=Math.round(pct/10); formData.confidence=confidenceVal; fill.style.width=pct+'%'; thumb.style.left=pct+'%'; }
+  function relX(e,el){ const r=el.getBoundingClientRect(); const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left; return Math.max(0,Math.min(x/r.width*100,100)); }
   let drag=false;
   track.addEventListener('mousedown',e=>{drag=true;setVal(relX(e,track));});
   track.addEventListener('touchstart',e=>{drag=true;setVal(relX(e,track));e.preventDefault();},{passive:false});
@@ -1048,37 +927,24 @@ function renderDebts() {
   setVal(40);
 })();
 
-/* ─────────────────────────────────────────────
-   COUNTRY → CURRENCY
-───────────────────────────────────────────── */
+/* ── COUNTRY → CURRENCY ── */
 const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
 function onCountryChange(country){
-  const cur=CC[country];
-  if(!cur)return;
-  ['f_currency','mini_currency'].forEach(id=>{
-    const s=document.getElementById(id);
-    if(s){for(let o of s.options){if(o.value===cur){o.selected=true;break;}}}
-  });
+  const cur=CC[country]; if(!cur)return;
+  ['f_currency','mini_currency'].forEach(id=>{ const s=document.getElementById(id); if(s){for(let o of s.options){if(o.value===cur){o.selected=true;break;}}} });
   formData.currency=cur;
 }
 
-/* ─────────────────────────────────────────────
-   LOADER ANIMATION
-───────────────────────────────────────────── */
+/* ── LOADER ANIMATION ── */
 function animateLoader(){
   const ids=['ls1','ls2','ls3','ls4','ls5'];
-  ids.forEach(id=>{ const el=document.getElementById(id); if(el){el.className='';} });
+  ids.forEach(id=>{ const el=document.getElementById(id); if(el)el.className=''; });
   let i=0;
-  function next(){
-    if(i>0){ const prev=document.getElementById(ids[i-1]); if(prev)prev.classList.add('ls-done'); }
-    if(i<ids.length){ const cur=document.getElementById(ids[i]); if(cur)cur.classList.add('ls-active'); i++; setTimeout(next,i===ids.length?99999:4500); }
-  }
+  function next(){ if(i>0){const prev=document.getElementById(ids[i-1]);if(prev)prev.classList.add('ls-done');} if(i<ids.length){const cur=document.getElementById(ids[i]);if(cur)cur.classList.add('ls-active');i++;setTimeout(next,i===ids.length?99999:4500);} }
   next();
 }
 
-/* ─────────────────────────────────────────────
-   BUILD AI PROMPT
-───────────────────────────────────────────── */
+/* ── BUILD AI PROMPT (Clarity Report — not 90-day action plan) ── */
 function buildPrompt(d){
   const langNames={EN:'English',FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',ES:'Spanish',FR:'French',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
   const planLang=langNames[d.language]||'English';
@@ -1093,20 +959,21 @@ function buildPrompt(d){
   Support network: ${d.support_network||'not specified'}
   Confidence level: ${d.confidence||4}/10
   Primary motivation: ${d.primary_goal||'not specified'}
+  Most important thing to understand today: ${d.immediate_focus||'not specified'}
   ${d.own_words?`Their exact words about success: "${d.own_words}"`:''}
   ${d.anything_else?`Additional context they shared: "${d.anything_else}"`:''}`;
 
   const toneRules=[];
   if(d.barrier&&d.barrier.includes('ashamed'))toneRules.push('SHAME: Open with deep validation. Name the courage it took to be here. Use "we" throughout.');
   if(d.barrier&&d.barrier.includes('afraid'))toneRules.push('FEAR/AVOIDANCE: First action must be tiny and non-threatening. Build trust before asking them to contact anyone.');
-  if(d.barrier&&d.barrier.includes('exhausted')||d.barrier&&d.barrier.includes('failed'))toneRules.push('PAST FAILURE: Explicitly acknowledge previous attempts failed for structural reasons, not personal weakness.');
+  if(d.barrier&&(d.barrier.includes('exhausted')||d.barrier.includes('failed')))toneRules.push('PAST FAILURE: Explicitly acknowledge previous attempts failed for structural reasons, not personal weakness.');
   if(d.barrier&&d.barrier.includes('hopeless'))toneRules.push('HOPELESSNESS: Start with what IS within their control. No big promises — only small, concrete wins.');
-  if(d.barrier&&d.barrier.includes('overwhelming'))toneRules.push('OVERWHELM: Use extremely short numbered steps. Maximum 3 actions per phase. Simplicity is kindness.');
+  if(d.barrier&&d.barrier.includes('overwhelming'))toneRules.push('OVERWHELM: Use extremely short numbered steps. Maximum 3 actions per section. Simplicity is kindness.');
   if(d.support_network&&d.support_network.includes('alone'))toneRules.push('ISOLATION: They are doing this alone. Extra warmth. Do not suggest "talk to someone" — they are not ready.');
-  if((d.confidence||4)<=3)toneRules.push('LOW CONFIDENCE: Avoid ambitious targets. First 30 days = stability only.');
-  if(d.collections&&d.collections.includes('Yes'))toneRules.push('ACTIVE COLLECTIONS: Make addressing collections THE FIRST ACTION in Days 1–30. Treat as urgent.');
+  if((d.confidence||4)<=3)toneRules.push('LOW CONFIDENCE: Avoid ambitious targets. Focus on stability and understanding first.');
+  if(d.collections&&d.collections.includes('Yes'))toneRules.push('ACTIVE COLLECTIONS: Make addressing collections THE FIRST PRIORITY. Treat as urgent.');
 
-  return `You are a senior financial recovery coach at Debt-Free.world. Write a fully personalised 90-day Debt Recovery plan for ${d.firstname||'this person'} — entirely in ${planLang}.
+  return `You are a senior financial clarity coach at Debt-Free.world. Write a fully personalised DEBT FREE Clarity Report for ${d.firstname||'this person'} — entirely in ${planLang}.
 
 ${psych}
 
@@ -1128,68 +995,63 @@ ${debtDetail}
 TONE RULES — apply precisely:
 ${toneRules.length>0?toneRules.map(r=>'→ '+r).join('\n'):'→ Warm, direct, honest. Use "we" occasionally.'}
 
-PLAN STRUCTURE (write entirely in ${planLang}):
-1. OPENING (2–3 sentences): Address ${d.firstname||'them'} by name. Reference their specific situation. Acknowledge the hardest thing they named.
-2. YOUR NUMBERS: Show the surplus calculation explicitly. Be honest if it is tight.
-3. DAYS 1–30 — Foundation: 4–5 concrete actions, prioritised by urgency. Collections first if applicable.
-4. DAYS 31–60 — Momentum: 3–4 actions building on phase 1. Include country-specific resources for ${d.country}.
-5. DAYS 61–90 — Breakthrough: 3 actions. Include a realistic milestone with actual numbers from their situation.
-6. LOCAL RESOURCES: 3 specific organisations for ${d.country} with contact details. Country-relevant only.
-7. CLOSING: 2 sentences. Reference their goal directly.${d.own_words?' End with their exact words: "'+d.own_words+'"':' End with brand voice: "We do this together. ✦"'}
+REPORT STRUCTURE — write entirely in ${planLang}:
+1. OPENING (2 sentences): Address ${d.firstname||'them'} by name. Acknowledge the specific situation they named and the courage it took to be here.
+2. YOUR COMPLETE PICTURE: Show the surplus calculation explicitly with their numbers. Total debt, estimated time at current pace, monthly cost of interest on their most expensive debt. Which debt is most urgent and why. One sentence on what is within their control starting today.
+3. YOUR DEBT-FREE DATE: Realistic estimate based on surplus and total debt. Show the calculation. What happens if they find 50 ${cur} more per month — one comparison only.
+4. WHAT THIS MEANS LEGALLY: Based on country (${d.country}) and collections status only. If no collections: brief reassurance in one sentence. If collections active: name it urgent, state the specific type of action needed. NEVER speculate. State only verified general facts for ${d.country}.
+5. YOUR EMERGENCY ACTION CARD: The single most important financial action for THIS WEEK. Their most critical debt named explicitly. Exactly 3 concrete steps for this week — numbered, specific, not general.
+6. LOCAL SUPPORT — VERIFIED ONLY: List organisations for ${d.country} matching their profile (${d.employment}, ${d.household}, debts: ${d.debt_types||'various'}). Include full name, website URL, what they help with, free or paid. If you cannot verify an organisation is real and currently active: do not list it. Write instead: "Contact us at support@debt-free.world for verified local resources for ${d.country}."
+7. CLOSING (2 sentences): Reference their deepest goal directly.${d.own_words?' Close with their exact words: "'+d.own_words+'"':' End with: "We do this together. ✦"'}
 
-FORMAT: No markdown symbols. Plain text. Clear section headings on their own line. Maximum 700 words. Write entirely in ${planLang}.`;
+FORMAT: No markdown. Plain text. Clear section headings on their own line. Maximum 800 words. Write entirely in ${planLang}.`;
 }
 
-/* ─────────────────────────────────────────────
-   SUBMIT
-───────────────────────────────────────────── */
+/* ── SUBMIT ── */
 async function submitForm(){
   collectStep(7);
   const t=T[lang]||T.EN;
-  if(!formData.companion_mode){ showInlineErr('err_companion'); return; }
+  if(!formData.immediate_focus){ showInlineErr('err_focus'); return; }
 
   document.getElementById('step7').classList.remove('active');
   const loader=document.getElementById('loadingScreen');
   loader.classList.add('active');
   animateLoader();
 
-  // Fetch member email from KV via token (C option)
+  // Fetch member email
   let memberEmail='';
   if(memberToken){
     try{
-      const vRes=await fetch(`${WORKER_URL}/member/validate`,{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({token:memberToken})
-      });
+      const vRes=await fetch(`${WORKER_URL}/member/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:memberToken})});
       if(vRes.ok){const vData=await vRes.json();memberEmail=vData.email||'';}
     }catch(e){}
   }
   formData.email=memberEmail;
 
-  // Generate plan
+  // Generate Clarity Report
   let plan='';
   try{
     const headers={'Content-Type':'application/json'};
     if(memberToken)headers['x-member-token']=memberToken;
     const aiRes=await fetch(`${WORKER_URL}/api/chat`,{
       method:'POST',headers,
-      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2500,
-        messages:[{role:'user',content:buildPrompt(formData)}]})
+      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2000,messages:[{role:'user',content:buildPrompt(formData)}]})
     });
     if(aiRes.ok){const aiData=await aiRes.json();plan=aiData.content?.[0]?.text||'';}
   }catch(e){}
 
-  // Save to KV + trigger plan email
+  // Save to KV — no email delivery for free tier (plan lives in member area)
   try{
     const headers={'Content-Type':'application/json'};
     if(memberToken)headers['x-member-token']=memberToken;
     await fetch(`${WORKER_URL}/onboarding/save`,{
       method:'POST',headers,
       body:JSON.stringify({
-        session_id:sessionId,
+        token:memberToken,
         email:memberEmail,
         plan,
-        send_plan_email:true,
+        send_plan_email:false,
+        tier:'free',
         onboarding:{
           firstname:formData.firstname,language:formData.language,country:formData.country,
           situation:formData.situation,debts:formData.debts,total_debt:formData.total_debt,
@@ -1199,19 +1061,17 @@ async function submitForm(){
           employment:formData.employment,household:formData.household,children:formData.children,
           savings:formData.savings,barrier:formData.barrier,support_network:formData.support_network,
           confidence:formData.confidence,primary_goal:formData.primary_goal,own_words:formData.own_words,
-          companion_mode:formData.companion_mode,anything_else:formData.anything_else
+          immediate_focus:formData.immediate_focus,anything_else:formData.anything_else
         }
       })
     });
   }catch(e){}
 
-  // Redirect
-  if(memberToken){window.location.replace(`https://www.debt-free.world/member/?token=${memberToken}&fresh=1`);}
-  else{window.location.replace(`https://www.debt-free.world/member/`);}
+  // Redirect to free member area
+  window.location.replace(`https://www.debt-free.world/member-free/?token=${memberToken}&fresh=1`);
 }
 
-// Init defaults
-formData.language = 'EN';
+formData.language='EN';
 </script>
 </body>
 </html>
