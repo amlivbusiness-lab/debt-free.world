@@ -188,6 +188,12 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
 <div class="wrap">
 
+<!-- TOKEN LOADING STATE -->
+<div id="tokenLoading" style="display:none;text-align:center;padding:60px 20px;">
+  <div style="width:36px;height:36px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
+  <p style="font-size:13px;color:var(--muted);">Verifying your access…</p>
+</div>
+
 <!-- INVALID TOKEN -->
 <div class="invalid-wrap" id="invalidWrap">
   <div class="invalid-icon">🔑</div>
@@ -198,7 +204,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 </div>
 
 <!-- ══ STEP 1 — WHO YOU ARE ══ -->
-<div class="q-card active" id="step1">
+<div class="q-card" id="step1">
   <span class="q-eyebrow" id="s1ey">Step 1 of 7</span>
   <h1 class="q-title" id="s1title">Let's start with you.</h1>
   <p class="q-sub" id="s1sub">Your plan will be built around your real situation — not a template. Everything you share stays private.</p>
@@ -770,19 +776,52 @@ const params = new URLSearchParams(window.location.search);
 const memberToken = params.get('token') || null;
 
 /* ── TOKEN VALIDATION ON LOAD ── */
+// Steps are hidden via CSS until token is confirmed valid.
+// This prevents the ghost-step bug where step1 shows but Continue does nothing.
 window.addEventListener('DOMContentLoaded', async ()=>{
+  // Show loading state — hide all steps until validated
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('invalidWrap').style.display='none';
+
+  const loadEl=document.getElementById('tokenLoading');
+  if(loadEl)loadEl.style.display='block';
+
   if(!memberToken){
+    if(loadEl)loadEl.style.display='none';
     showInvalidScreen();
     return;
   }
-  try{
-    const res=await fetch(`${WORKER_URL}/member/validate`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({token:memberToken})
-    });
-    if(!res.ok){ showInvalidScreen(); return; }
-    // Valid — stay on step 1
-  }catch(e){ showInvalidScreen(); }
+
+  // Try up to 2 times — handles transient network errors
+  let validated=false;
+  for(let attempt=0;attempt<2;attempt++){
+    try{
+      const res=await fetch(`${WORKER_URL}/member/validate`,{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({token:memberToken})
+      });
+      if(res.ok){
+        validated=true;
+        break;
+      }
+      if(res.status===401||res.status===403){
+        // Definitively invalid — don't retry
+        break;
+      }
+    }catch(e){
+      // Network error — retry
+      if(attempt===0) await new Promise(r=>setTimeout(r,1200));
+    }
+  }
+
+  if(loadEl)loadEl.style.display='none';
+
+  if(validated){
+    // Show step 1 only after successful validation
+    document.getElementById('step1').classList.add('active');
+  } else {
+    showInvalidScreen();
+  }
 });
 
 function showInvalidScreen(){
