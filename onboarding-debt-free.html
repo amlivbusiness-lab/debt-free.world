@@ -1001,7 +1001,18 @@ REPORT STRUCTURE — write entirely in ${planLang}:
 3. YOUR DEBT-FREE DATE: Realistic estimate based on surplus and total debt. Show the calculation. What happens if they find 50 ${cur} more per month — one comparison only.
 4. WHAT THIS MEANS LEGALLY: Based on country (${d.country}) and collections status only. If no collections: brief reassurance in one sentence. If collections active: name it urgent, state the specific type of action needed. NEVER speculate. State only verified general facts for ${d.country}.
 5. YOUR EMERGENCY ACTION CARD: The single most important financial action for THIS WEEK. Their most critical debt named explicitly. Exactly 3 concrete steps for this week — numbered, specific, not general.
-6. LOCAL SUPPORT — VERIFIED ONLY: List organisations for ${d.country} matching their profile (${d.employment}, ${d.household}, debts: ${d.debt_types||'various'}). Include full name, website URL, what they help with, free or paid. If you cannot verify an organisation is real and currently active: do not list it. Write instead: "Contact us at support@debt-free.world for verified local resources for ${d.country}."
+6. LOCAL SUPPORT — COUNTRY-SPECIFIC ORGANISATIONS:
+List 3 to 5 real, currently active organisations in \${d.country} that match this person's profile.
+Profile filter: employment = \${d.employment}, household = \${d.household}, debt types = \${d.debt_types||'various'}, collections = \${d.collections||'unknown'}.
+For each organisation write: full official name on its own line, then website URL on the next line, then one sentence on what they help with and whether it is free.
+Do not list unemployment services if person is employed. Do not list organisations from other countries.
+Country reference — use these where verified and relevant:
+Finland: Takuusäätiö (takuusaatio.fi), Talous- ja velkaneuvonta via oikeusapu.fi, Kela (kela.fi), Marttaliitto (martat.fi), Suomen Kuluttajaliitto (kuluttajaliitto.fi).
+Sweden: Kronofogden (kronofogden.se), budget- och skuldrådgivning via kommunen, Konsumentverket (konsumentverket.se).
+United Kingdom: StepChange (stepchange.org), National Debtline (nationaldebtline.org), Citizens Advice (citizensadvice.org.uk), MoneyHelper (moneyhelper.org.uk).
+Germany: Caritas Schuldnerberatung (caritas.de), Verbraucherzentrale (verbraucherzentrale.de), Diakonie (diakonie.de).
+If you can verify similar organisations for other countries — list them with the same format.
+If you cannot verify at least 2 organisations for this country and profile: list what you can confirm, then write on a new line: Unverified: additional verified resources for \${d.country} available on request.
 7. CLOSING (2 sentences): Reference their deepest goal directly.${d.own_words?' Close with their exact words: "'+d.own_words+'"':' End with: "We do this together. ✦"'}
 
 FORMAT: No markdown. Plain text. Clear section headings on their own line. Maximum 800 words. Write entirely in ${planLang}.`;
