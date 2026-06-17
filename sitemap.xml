@@ -157,4 +157,14 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- DEBT FREE signup — indexed, public entry point -->
+  <url>
+    <loc>https://www.debt-free.world/signup-free.html</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- onboarding-debt-free.html and member-free/ are noindex — not listed here -->
+
 </urlset>
