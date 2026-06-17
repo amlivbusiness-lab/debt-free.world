@@ -944,36 +944,120 @@ function animateLoader(){
   next();
 }
 
-/* ── BUILD AI PROMPT (Clarity Report — not 90-day action plan) ── */
+/* ── BUILD AI PROMPT — My DEBT FREE Plan ── */
 function buildPrompt(d){
-  const langNames={EN:'English',FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',ES:'Spanish',FR:'French',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
+  const langNames={EN:'English',FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',
+    NL:'Dutch',ES:'Spanish',FR:'French',IT:'Italian',PL:'Polish',PT:'Portuguese',
+    CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
   const planLang=langNames[d.language]||'English';
   const cur=d.currency||'EUR';
-  const surplus=(parseFloat(d.income)||0)+(parseFloat(d.extra_amount)||0)-(parseFloat(d.housing_cost)||0)-(parseFloat(d.other_costs)||0);
+  const surplus=(parseFloat(d.income)||0)+(parseFloat(d.extra_amount)||0)
+    -(parseFloat(d.housing_cost)||0)-(parseFloat(d.other_costs)||0);
   const debtDetail=d.debts&&d.debts.length>0
     ? d.debts.map(x=>`  • ${x.type}${x.creditor?' ('+x.creditor+')':''}: ${x.amount} ${x.currency||cur}${x.interest>0?' at '+x.interest+'% interest':' — interest rate unknown'}`).join('\n')
     : `  • Total debt: ${d.total_debt||'unknown'} ${cur} (${d.debt_types||'unspecified types'})`;
+  const totalDebt=d.debts&&d.debts.length>0?d.debts.reduce((s,x)=>s+(parseFloat(x.amount)||0),0):parseFloat(d.total_debt)||0;
+  const highestRate=d.debts&&d.debts.length>0?Math.max(...d.debts.map(x=>parseFloat(x.interest)||0)):0;
 
+  // Psychological profile block
   const psych=`PSYCHOLOGICAL PROFILE:
   Biggest barrier: "${d.barrier||'not specified'}"
   Support network: ${d.support_network||'not specified'}
   Confidence level: ${d.confidence||4}/10
   Primary motivation: ${d.primary_goal||'not specified'}
-  Most important thing to understand today: ${d.immediate_focus||'not specified'}
-  ${d.own_words?`Their exact words about success: "${d.own_words}"`:''}
-  ${d.anything_else?`Additional context they shared: "${d.anything_else}"`:''}`;
+  What they most want to understand today: ${d.immediate_focus||'not specified'}
+  ${d.own_words?'Their exact words about success in 1 year: "'+d.own_words+'"':''}
+  ${d.anything_else?'Additional context: "'+d.anything_else+'"':''}`;
 
+  // Tone rules — adaptive based on psychological profile
   const toneRules=[];
-  if(d.barrier&&d.barrier.includes('ashamed'))toneRules.push('SHAME: Open with deep validation. Name the courage it took to be here. Use "we" throughout.');
+  if(d.barrier&&d.barrier.includes('ashamed'))toneRules.push('SHAME: Open with deep validation. Name the courage it took to be here. Use "we" throughout. Never use the word "problem".');
   if(d.barrier&&d.barrier.includes('afraid'))toneRules.push('FEAR/AVOIDANCE: First action must be tiny and non-threatening. Build trust before asking them to contact anyone.');
   if(d.barrier&&(d.barrier.includes('exhausted')||d.barrier.includes('failed')))toneRules.push('PAST FAILURE: Explicitly acknowledge previous attempts failed for structural reasons, not personal weakness.');
-  if(d.barrier&&d.barrier.includes('hopeless'))toneRules.push('HOPELESSNESS: Start with what IS within their control. No big promises — only small, concrete wins.');
-  if(d.barrier&&d.barrier.includes('overwhelming'))toneRules.push('OVERWHELM: Use extremely short numbered steps. Maximum 3 actions per section. Simplicity is kindness.');
-  if(d.support_network&&d.support_network.includes('alone'))toneRules.push('ISOLATION: They are doing this alone. Extra warmth. Do not suggest "talk to someone" — they are not ready.');
-  if((d.confidence||4)<=3)toneRules.push('LOW CONFIDENCE: Avoid ambitious targets. Focus on stability and understanding first.');
-  if(d.collections&&d.collections.includes('Yes'))toneRules.push('ACTIVE COLLECTIONS: Make addressing collections THE FIRST PRIORITY. Treat as urgent.');
+  if(d.barrier&&d.barrier.includes('hopeless'))toneRules.push('HOPELESSNESS: Start with what IS within their control right now. No big promises — only small, concrete wins first.');
+  if(d.barrier&&d.barrier.includes('overwhelming'))toneRules.push('OVERWHELM: Use extremely short numbered steps. Maximum 3 actions per phase. Simplicity is kindness here.');
+  if(d.support_network&&d.support_network.includes('alone'))toneRules.push('ISOLATION: They are doing this alone. Extra warmth throughout. Do not suggest "talk to someone" — they are not ready for that.');
+  if((d.confidence||4)<=3)toneRules.push('LOW CONFIDENCE: Days 1-30 = stability only, no ambitious targets. One small win at a time.');
+  if(d.collections&&d.collections.includes('Yes'))toneRules.push('ACTIVE COLLECTIONS: Make addressing collections THE FIRST ACTION in Days 1-30. Name the urgency directly but calmly.');
+  if(d.employment&&d.employment.includes('Unemployed'))toneRules.push('UNEMPLOYED: Do NOT push aggressive repayment. Stabilise first. Focus: essential costs, payment deferrals, free counselling.');
+  if(d.employment&&d.employment.includes('illness'))toneRules.push('ILLNESS/DISABILITY: Very empathetic tone. No pressure on timelines. Disability-specific services first.');
+  if(d.employment&&(d.employment.includes('Part-time')||d.employment.includes('gig')))toneRules.push('IRREGULAR INCOME: Buffer fund before any extra debt repayment. Budget on minimum expected income, not average.');
+  if(d.employment&&d.employment.includes('Self-employed'))toneRules.push('SELF-EMPLOYED: Separate personal and business debts clearly. Include tax liabilities in the debt picture.');
 
-  return `You are a senior financial clarity coach at Debt-Free.world. Write a fully personalised DEBT FREE Clarity Report for ${d.firstname||'this person'} — entirely in ${planLang}.
+  // Repayment strategy
+  let strategy='';
+  if(highestRate>25)strategy='REPAYMENT STRATEGY: Avalanche method — highest interest rate first. The interest cost on the highest-rate debt is destroying progress. Name this explicitly.';
+  else if(totalDebt>0&&d.debts&&d.debts.length>1)strategy='REPAYMENT STRATEGY: Snowball method — smallest balance first. Quick wins build momentum. Name the first debt to eliminate.';
+
+  // Country-specific legal context
+  const countryLegal={
+    'United Kingdom':'If total debt is unmanageable, mention Individual Voluntary Arrangement (IVA) as a formal option — always with a referral to a licensed insolvency practitioner, never as a recommendation.',
+    'United States':'If total debt is very high, mention Chapter 13 bankruptcy as a last resort — always with a clear disclaimer to consult a qualified attorney. Never recommend it directly.',
+    'Ireland':'Always mention MABS (mabs.ie) as the primary free resource. Mention ISI (isi.gov.ie) for formal debt resolution options.',
+    'Finland':'Mention Takuusäätiö for guarantees and Talous- ja velkaneuvonta (oikeusapu.fi) for free statutory debt counselling.',
+    'Australia':'Mention National Debt Helpline (ndh.org.au) as the primary free resource and MoneySmart (moneysmart.gov.au).',
+    'Canada':'Mention Credit Counselling Canada and FCAC (canada.ca/fcac) for federally regulated guidance.',
+    'Germany':'Mention Caritas Schuldnerberatung and Verbraucherzentrale for free counselling.',
+    'Sweden':'Mention budget- och skuldrådgivning via the municipality (free by law) and Kronofogden for formal options.',
+    'Netherlands':'Mention Nibud (nibud.nl) and schuldhulpverlening via gemeente.',
+    'Belgium':'Mention OCMW/CPAS for social support and CAW for debt counselling.',
+    'France':'Mention CDAD (legal advice) and CRESUS (cresus.fr) for debt mediation.',
+    'Spain':'Mention ADICAE (adicae.net) and Caritas for debt counselling.',
+    'Portugal':'Mention DECO (deco.proteste.pt) for consumer and debt advice.',
+    'Italy':'Mention Caritas and Adiconsum for debt support.',
+    'Poland':'Mention Federacja Konsumentów (federacja-konsumentow.org.pl).',
+    'Czech Republic':'Mention Poradna při finanční tísni (financnitisen.cz).',
+    'Denmark':'Mention Gældsrådgivning Danmark and kommunal gældsrådgivning.',
+    'Norway':'Mention NAV for benefits and kommunal gjeldsrådgivning (free by law).',
+    'South Africa':'Mention National Debt Counsellors Association and DebtBusters.',
+    'New Zealand':'Mention MoneyTalks (moneytalks.co.nz) and sorted.org.nz.',
+    'Other':'Mention that free or low-cost debt counselling is available in most countries through government-funded or non-profit services — search "[country] free debt counselling" to find local services.',
+  };
+  const legalNote=countryLegal[d.country]||countryLegal['Other'];
+
+  // Support org reference list — comprehensive
+  const supportOrgs={
+    'Finland':'Takuusäätiö (takuusaatio.fi) — guarantees and debt counselling, free | Talous- ja velkaneuvonta via oikeusapu.fi — statutory free debt counselling | Kela (kela.fi) — benefits and financial support | Marttaliitto (martat.fi) — household budgeting support | Suomen Kuluttajaliitto (kuluttajaliitto.fi) — consumer rights',
+    'Sweden':'Budget- och skuldrådgivning via kommunen — free by law, contact your local municipality | Kronofogden (kronofogden.se) — debt enforcement and voluntary payment plans | Konsumentverket (konsumentverket.se) — consumer guidance | Skuldsanering via Kronofogden — formal debt relief for insolvent individuals',
+    'United Kingdom':'StepChange (stepchange.org) — free debt charity, full debt management | National Debtline (nationaldebtline.org) — free phone and online advice | Citizens Advice (citizensadvice.org.uk) — free legal and financial guidance | MoneyHelper (moneyhelper.org.uk) — government-backed financial guidance',
+    'Ireland':'MABS (mabs.ie) — Money Advice and Budgeting Service, free | ISI (isi.gov.ie) — Insolvency Service of Ireland for formal options | Citizens Information (citizensinformation.ie) — benefits and rights | Clann Housing Association for housing debt',
+    'United States':'NFCC (nfcc.org) — National Foundation for Credit Counseling, find local nonprofit agencies | CFPB (consumerfinance.gov) — Consumer Financial Protection Bureau | 211.org — local social services including financial help | HUD-approved housing counsellors for mortgage issues',
+    'Canada':'Credit Counselling Canada (creditcounsellingcanada.ca) — find accredited nonprofit agencies | FCAC (canada.ca/fcac) — Financial Consumer Agency of Canada | Provincial consumer protection offices',
+    'Australia':'National Debt Helpline (ndh.org.au) — free phone advice from professional financial counsellors | MoneySmart (moneysmart.gov.au) — government financial guidance | Financial counsellors via fcaweb.org.au',
+    'New Zealand':'MoneyTalks (moneytalks.co.nz) — free financial helpline | Sorted (sorted.org.nz) — free budgeting tools and guides | Community law centres for legal debt questions',
+    'Germany':'Caritas Schuldnerberatung (caritas.de) — free debt counselling | Verbraucherzentrale (verbraucherzentrale.de) — consumer advice centres | Diakonie (diakonie.de) — social support including debt help',
+    'Austria':'AK Konsumentenschutz (arbeiterkammer.at) — free consumer and debt advice | Schuldnerberatung (schuldenberatung.at) — free public debt counselling',
+    'Switzerland':'Schuldenberatung Schweiz (schulden.ch) — free debt counselling | SKOS (skos.ch) — social support guidelines',
+    'Netherlands':'Nibud (nibud.nl) — budget and debt guidance | Schuldhulpverlening via gemeente — contact your local municipality for free debt help | NVVK (nvvk.eu) — debt restructuring',
+    'Belgium':'OCMW/CPAS — public social welfare centre, contact locally | CAW (caw.be) — free social and financial support | Ombudsfin (ombudsfin.be) — financial disputes',
+    'France':'CRESUS (cresus.fr) — debt mediation and prevention | CDAD — local legal and financial advice | CCAS — municipal social support centres',
+    'Spain':'ADICAE (adicae.net) — consumer and debt advocacy | Caritas (caritas.es) — social and financial support | OCU (ocu.org) — consumer rights',
+    'Portugal':'DECO (deco.proteste.pt) — consumer and debt advice | Santa Casa da Misericórdia for social support | CPCJ for family financial difficulties',
+    'Italy':'Adiconsum (adiconsum.it) — consumer and debt support | Caritas (caritas.it) — social support | Banca d'Italia (bancaditalia.it) — financial dispute resolution',
+    'Poland':'Federacja Konsumentów (federacja-konsumentow.org.pl) — consumer rights and debt advice | UOKiK (uokik.gov.pl) — consumer protection office',
+    'Czech Republic':'Poradna při finanční tísni (financnitisen.cz) — free debt counselling | dTest (dtest.cz) — consumer advice | Czech Bar Association for legal debt questions',
+    'Hungary':'Magyar Bankszövetség — contact for banking disputes | Fogyasztóvédelem (fogyasztovédelem.hu) — consumer protection',
+    'Romania':'ANPC (anpc.ro) — National Consumer Protection Authority | Caritas Romania (caritas.ro) for social support',
+    'Denmark':'Gældsrådgivning Danmark (gaeldsraadgivning.dk) — free debt counselling | Forbrugerrådet Tænk (taenk.dk) — consumer advice | Kommunal gældsrådgivning — contact your local municipality',
+    'Norway':'NAV (nav.no) — benefits, unemployment and social support | Kommunal gjeldsrådgivning — free by law, contact your local municipality | Forbrukerrådet (forbrukerradet.no) — consumer rights',
+    'Estonia':'Tarbijakaitse (tarbijakaitse.ee) — consumer and financial protection | Kohalik omavalitsus — local municipality for debt support',
+    'Latvia':'PTAC (ptac.gov.lv) — consumer rights and financial guidance | Sociālais dienests — municipal social support',
+    'Lithuania':'VVTAT (vvtat.lt) — state consumer rights protection | Savivaldybės socialinė tarnyba — municipal social support',
+    'Croatia':'HANFA (hanfa.hr) — financial regulation authority | Potrošač.hr — consumer rights',
+    'Slovakia':'SOS (sos-financne.sk) — financial counselling | Spotrebiteľ.sk — consumer protection',
+    'Bulgaria':'КЗП (kzp.bg) — consumer protection commission | Caritas Bulgaria for social support',
+    'Greece':'ΕΛΚΕΠΑ (elkepaa.gr) — consumer protection | Κέντρα Κοινότητας — community centres for social support',
+    'South Africa':'National Debt Counsellors Association (ndca.org.za) | DebtBusters (debtbusters.co.za) | National Credit Regulator (ncr.org.za)',
+    'India':'RBI Ombudsman (cms.rbi.org.in) for banking disputes | NITI Aayog financial literacy resources',
+    'Indonesia':'OJK (ojk.go.id) — Financial Services Authority | YLKI (ylki.or.id) — consumer protection',
+    'Philippines':'SEC (sec.gov.ph) — lending regulation | BSP (bsp.gov.ph) — central bank consumer assistance',
+    'Brazil':'PROCON (procon.sp.gov.br) — consumer protection | SERASA (serasa.com.br) — credit negotiation portal',
+    'Mexico':'PROFECO (profeco.gob.mx) — consumer protection | CONDUSEF (condusef.gob.mx) — financial services protection',
+    'Argentina':'Defensa del Consumidor — municipal consumer protection offices',
+  };
+  const supportRef=supportOrgs[d.country]||'Search "[country] free debt counselling" to find local non-profit or government-funded services. Most countries offer free debt counselling through municipalities, charities or government agencies.';
+
+  return `You are a senior financial coach at Debt-Free.world. Write a fully personalised My DEBT FREE Plan for ${d.firstname||'this person'} — entirely in ${planLang}.
 
 ${psych}
 
@@ -981,43 +1065,76 @@ FINANCIAL PROFILE:
   Country: ${d.country}
   Employment: ${d.employment}
   Household: ${d.household}${d.children&&d.children!=='0'?', '+d.children+' minor child(ren) at home':''}
-  Monthly income: ${d.income} ${cur}${parseFloat(d.extra_amount)>0?' + '+d.extra_amount+' '+cur+' additional':''}
+  Monthly income (take-home): ${d.income} ${cur}${parseFloat(d.extra_amount)>0?' + '+d.extra_amount+' '+cur+' additional':''}
   Housing cost: ${d.housing_cost} ${cur}/month
   Other fixed costs: ${d.other_costs} ${cur}/month
   Calculated monthly surplus: ${Math.round(surplus)} ${cur}
-  Savings / buffer: ${d.savings||'unknown'}
+  Savings / emergency buffer: ${d.savings||'unknown'}
   Collections status: ${d.collections||'unknown'}
   What brought them here: ${d.situation}
 
-DEBT MAP:
+DEBT MAP — use these exact figures throughout the plan:
 ${debtDetail}
+Total debt: ${totalDebt} ${cur}
+Highest interest rate in portfolio: ${highestRate}%
 
-TONE RULES — apply precisely:
-${toneRules.length>0?toneRules.map(r=>'→ '+r).join('\n'):'→ Warm, direct, honest. Use "we" occasionally.'}
+TONE RULES — apply all that match:
+${toneRules.length>0?toneRules.map(r=>'→ '+r).join('\n'):'→ Warm, direct, honest. Use "we" occasionally. Never clinical or generic.'}
 
-REPORT STRUCTURE — write entirely in ${planLang}:
-1. OPENING (2 sentences): Address ${d.firstname||'them'} by name. Acknowledge the specific situation they named and the courage it took to be here.
-2. YOUR COMPLETE PICTURE: Show the surplus calculation explicitly with their numbers. Total debt, estimated time at current pace, monthly cost of interest on their most expensive debt. Which debt is most urgent and why. One sentence on what is within their control starting today.
-3. YOUR DEBT-FREE DATE: Realistic estimate based on surplus and total debt. Show the calculation. What happens if they find 50 ${cur} more per month — one comparison only.
-4. WHAT THIS MEANS LEGALLY: Based on country (${d.country}) and collections status only. If no collections: brief reassurance in one sentence. If collections active: name it urgent, state the specific type of action needed. NEVER speculate. State only verified general facts for ${d.country}.
-5. YOUR EMERGENCY ACTION CARD: The single most important financial action for THIS WEEK. Their most critical debt named explicitly. Exactly 3 concrete steps for this week — numbered, specific, not general.
-6. LOCAL SUPPORT — COUNTRY-SPECIFIC ORGANISATIONS:
-List 3 to 5 real, currently active organisations in \${d.country} that match this person's profile.
-Profile filter: employment = \${d.employment}, household = \${d.household}, debt types = \${d.debt_types||'various'}, collections = \${d.collections||'unknown'}.
-For each organisation write: full official name on its own line, then website URL on the next line, then one sentence on what they help with and whether it is free.
-Do not list unemployment services if person is employed. Do not list organisations from other countries.
-Country reference — use these where verified and relevant:
-Finland: Takuusäätiö (takuusaatio.fi), Talous- ja velkaneuvonta via oikeusapu.fi, Kela (kela.fi), Marttaliitto (martat.fi), Suomen Kuluttajaliitto (kuluttajaliitto.fi).
-Sweden: Kronofogden (kronofogden.se), budget- och skuldrådgivning via kommunen, Konsumentverket (konsumentverket.se).
-United Kingdom: StepChange (stepchange.org), National Debtline (nationaldebtline.org), Citizens Advice (citizensadvice.org.uk), MoneyHelper (moneyhelper.org.uk).
-Germany: Caritas Schuldnerberatung (caritas.de), Verbraucherzentrale (verbraucherzentrale.de), Diakonie (diakonie.de).
-If you can verify similar organisations for other countries — list them with the same format.
-If you cannot verify at least 2 organisations for this country and profile: list what you can confirm, then write on a new line: Unverified: additional verified resources for \${d.country} available on request.
-7. CLOSING (2 sentences): Reference their deepest goal directly.${d.own_words?' Close with their exact words: "'+d.own_words+'"':' End with: "We do this together. ✦"'}
+${strategy?'STRATEGY NOTE:\n→ '+strategy+'\n':''}
+COUNTRY LEGAL CONTEXT FOR ${d.country}:
+→ ${legalNote}
+→ NEVER give legal advice. Always refer to a qualified professional for legal questions.
 
-FORMAT: No markdown. Plain text. Clear section headings on their own line. Maximum 800 words. Write entirely in ${planLang}.`;
+LOCAL SUPPORT ORGANISATIONS FOR ${d.country}:
+${supportRef}
+Use the above as your source. List 3 to 5 that match this person's profile (${d.employment}, ${d.household}).
+Do not list unemployment services if employed. Do not list organisations from other countries.
+Format each as: Organisation name on its own line, then URL, then one sentence on what they offer and whether it is free.
+
+PLAN STRUCTURE — write entirely in ${planLang}:
+
+1. OPENING (2–3 sentences):
+Address ${d.firstname||'them'} by name. Reference their specific situation. Acknowledge the hardest thing they named.
+
+2. YOUR NUMBERS:
+Show the surplus calculation explicitly with their actual figures.
+Total debt, estimated time to debt-free at current surplus.
+Monthly interest cost on their most expensive debt — exact number.
+Be honest if the surplus is tight. One sentence on what is within their control starting today.
+
+3. DAYS 1–30 — Build the Foundation:
+4 to 5 concrete actions, prioritised by urgency.
+If collections active: addressing collections is action 1.
+If unemployed: stabilise essential costs first, no aggressive repayment.
+Include the single most important creditor to contact and why.
+
+4. DAYS 31–60 — Build Momentum:
+3 to 4 actions that build directly on phase 1 results.
+Include the repayment strategy (${strategy?'apply the strategy noted above':'snowball if multiple debts, single focus if one debt'}).
+Name a specific milestone they can measure — use their actual numbers.
+
+5. DAYS 61–90 — Breakthrough:
+3 actions. One must include a realistic financial milestone with actual numbers from their situation.
+If surplus exists: name exactly how much debt they will have eliminated by day 90.
+One forward-looking sentence: what becomes possible once the first debt is cleared.
+
+6. LOCAL SUPPORT:
+List the organisations from the reference above that match this person's profile.
+Format: Name, URL, one sentence description, free or paid.
+
+7. CLOSING (2 sentences):
+Reference their deepest goal (${d.primary_goal||'not specified'}) directly.
+${d.own_words?'Close with their exact words: "'+d.own_words+'"':'End with: "We do this together. ✦"'}
+
+FORMAT RULES:
+No markdown symbols. No bullet points with symbols.
+Plain text. Clear section headings on their own line in capitals.
+Use numbered lists for actions.
+Maximum 900 words.
+Write entirely in ${planLang}.
+Never mention competitors. Never give legal advice — always refer to a professional.`;
 }
-
 /* ── SUBMIT ── */
 async function submitForm(){
   collectStep(7);
@@ -1046,7 +1163,7 @@ async function submitForm(){
     if(memberToken)headers['x-member-token']=memberToken;
     const aiRes=await fetch(`${WORKER_URL}/api/chat`,{
       method:'POST',headers,
-      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2000,messages:[{role:'user',content:buildPrompt(formData)}]})
+      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2500,messages:[{role:'user',content:buildPrompt(formData)}]})
     });
     if(aiRes.ok){const aiData=await aiRes.json();plan=aiData.content?.[0]?.text||'';}
   }catch(e){}
