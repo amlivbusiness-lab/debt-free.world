@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>My Debt FREE Plan — Debt-Free.world</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;
+  --green-border:#86c9a0;--green-bg:#f0f8f3;--green-pale:#f7fcf9;
+  --text:#111;--muted:#6b7280;--border:#e5e7eb;--white:#fff;
+  --red:#dc2626;--amber:#d97706;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+  --radius:14px;--shadow:0 2px 20px rgba(22,101,52,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:var(--sans);color:var(--text);background:var(--green-bg);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-logo{font-family:var(--serif);font-size:1.05rem;color:var(--green);text-decoration:none;letter-spacing:-0.01em;}
+.topbar-right{display:flex;align-items:center;gap:14px;}
+.topbar-name{font-size:12.5px;color:var(--muted);font-weight:400;}
+
+/* ── WRAP ── */
+.wrap{max-width:620px;margin:0 auto;padding:20px 16px 60px;}
+
+/* ── WELCOME BANNER ── */
+.welcome-banner{background:var(--green);color:var(--white);border-radius:var(--radius);padding:22px 22px 20px;margin-bottom:16px;animation:fadeUp 0.3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.welcome-banner-title{font-family:var(--serif);font-size:20px;margin-bottom:5px;}
+.welcome-banner-sub{font-size:13px;opacity:.85;line-height:1.6;}
+
+/* ── REVIEW PROMPT ── */
+.review-prompt{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:13px 15px;margin-bottom:14px;font-size:13px;color:#92400e;line-height:1.5;display:none;}
+.review-prompt.show{display:block;}
+.review-prompt strong{display:block;font-weight:600;margin-bottom:2px;}
+
+/* ── SECTION CARDS ── */
+.section{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;animation:fadeUp 0.3s ease;}
+.section-header{padding:16px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.section-title{font-family:var(--serif);font-size:18px;color:var(--text);}
+.section-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:.3px;}
+.badge-urgent{background:#fee2e2;color:var(--red);}
+.badge-ok{background:var(--green-light);color:var(--green);}
+.badge-info{background:#e0f2fe;color:#0369a1;}
+.section-body{padding:18px 20px;}
+
+/* ── CARD 1: Emergency Action ── */
+.emergency-section{border:2px solid var(--green);}
+.emergency-action-box{background:var(--green-light);border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:15px;font-weight:600;color:var(--green-dark);line-height:1.45;}
+.critical-debt-box{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:12px 14px;margin-bottom:14px;}
+.critical-lbl{font-size:10px;font-weight:600;color:var(--amber);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;}
+.critical-name{font-size:15px;font-weight:600;color:var(--text);}
+.critical-detail{font-size:12.5px;color:var(--muted);margin-top:3px;}
+
+/* Checklist */
+.checklist{display:flex;flex-direction:column;gap:9px;}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent;user-select:none;}
+.check-item.done{background:var(--green-pale);border-color:var(--green-border);}
+.check-item.done .check-label-text{color:var(--muted);text-decoration:line-through;}
+.check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
+.check-item.done .check-box{background:var(--green);border-color:var(--green);}
+.check-tick{color:var(--white);font-size:12px;display:none;}
+.check-item.done .check-tick{display:block;}
+.check-label-text{font-size:14px;line-height:1.4;font-weight:500;}
+
+/* ── CARD 2: Numbers ── */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.stat-box{background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:14px;}
+.stat-lbl{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
+.stat-val{font-family:var(--serif);font-size:22px;color:var(--text);line-height:1.1;}
+.stat-val.positive{color:var(--green);}
+.stat-val.negative{color:var(--red);}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
+.dfd-progress{margin-top:12px;}
+.dfd-lbl{font-size:12px;color:var(--muted);margin-bottom:6px;}
+.dfd-track{height:5px;background:var(--border);border-radius:100px;overflow:hidden;}
+.dfd-fill{height:100%;background:var(--green);border-radius:100px;transition:width .5s;}
+
+/* ── CARD 3: Debt Map ── */
+.debt-map-item{padding:13px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.debt-map-item:last-child{border-bottom:none;}
+.debt-map-name{font-size:14px;font-weight:600;color:var(--text);}
+.debt-map-type{font-size:12px;color:var(--muted);margin-top:2px;}
+.debt-tags{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;}
+.debt-tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:10px;}
+.tag-urgent{background:#fee2e2;color:var(--red);}
+.tag-high{background:#fffbeb;color:#92400e;}
+.tag-med{background:#e0f2fe;color:#0369a1;}
+.tag-low{background:var(--green-light);color:var(--green);}
+.debt-map-right{text-align:right;flex-shrink:0;}
+.debt-map-amount{font-size:16px;font-weight:700;color:var(--text);}
+.debt-map-rate{font-size:12px;color:var(--muted);}
+.debt-map-interest{font-size:11px;color:var(--amber);margin-top:2px;}
+
+/* ── CARD 4: 90-Day Overview ── */
+.phase-row{padding:13px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:flex-start;}
+.phase-row:last-child{border-bottom:none;}
+.phase-lbl{font-size:10px;font-weight:600;color:var(--green);letter-spacing:.4px;text-transform:uppercase;background:var(--green-light);border-radius:6px;padding:4px 10px;flex-shrink:0;margin-top:1px;white-space:nowrap;}
+.phase-text{font-size:13.5px;line-height:1.6;color:var(--text);}
+
+/* ── CARD 5: Local Support ── */
+.support-item{background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:14px;margin-bottom:10px;}
+.support-item:last-child{margin-bottom:0;}
+.support-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.support-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+.support-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;}
+.support-link:hover{text-decoration:underline;}
+.support-free{font-size:11px;font-weight:600;color:var(--green);background:var(--green-light);padding:2px 8px;border-radius:10px;margin-left:8px;}
+
+/* ── CARD 6: Full Plan ── */
+.plan-text{font-size:13.5px;line-height:1.85;color:var(--text);white-space:pre-wrap;word-wrap:break-word;}
+.plan-collapsed{max-height:160px;overflow:hidden;position:relative;}
+.plan-collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--white));}
+.plan-actions{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;}
+.btn-read-more{background:none;border:1.5px solid var(--green-border);border-radius:30px;padding:9px 18px;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--green);transition:background .15s;}
+.btn-read-more:hover{background:var(--green-pale);}
+.btn-print{background:none;border:1.5px solid var(--border);border-radius:30px;padding:9px 18px;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:400;color:var(--muted);transition:all .15s;}
+.btn-print:hover{border-color:var(--green-border);color:var(--green);}
+.disclaimer{background:#f9fafb;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ── UPGRADE CARD (from muistio strategy) ── */
+.upgrade-card{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);border-radius:var(--radius);padding:24px 22px;margin-bottom:14px;color:var(--white);}
+.upgrade-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;opacity:.7;margin-bottom:10px;}
+.upgrade-title{font-family:var(--serif);font-size:22px;line-height:1.2;margin-bottom:8px;}
+.upgrade-sub{font-size:13.5px;opacity:.85;line-height:1.65;margin-bottom:18px;font-weight:300;}
+.upgrade-price{font-size:13px;opacity:.7;margin-bottom:16px;}
+.upgrade-price strong{font-size:20px;font-weight:700;opacity:1;}
+.btn-upgrade{display:inline-block;background:var(--white);color:var(--green);border:none;border-radius:30px;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:opacity .15s;}
+.btn-upgrade:hover{opacity:.92;}
+
+/* ── RE-AUTH ── */
+.reauth-wrap{max-width:400px;margin:60px auto;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 24px;text-align:center;display:none;}
+.reauth-wrap.show{display:block;}
+.reauth-icon{font-size:44px;margin-bottom:1rem;}
+.reauth-title{font-family:var(--serif);font-size:22px;margin-bottom:8px;}
+.reauth-sub{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;font-weight:300;}
+.field input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;color:var(--text);outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:12px;}
+.field input:focus{border-color:var(--green);}
+.btn-full{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background .2s;}
+.btn-full:hover{background:var(--green-dark);}
+
+/* Skeleton */
+.skel{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px;height:14px;margin:8px 0;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:400;z-index:9999;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* Footer */
+.footer{text-align:center;padding:16px;font-size:12px;color:#aaa;}
+.footer a{color:#aaa;}
+
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr;}
+  .debt-map-item{flex-direction:column;gap:4px;}
+  .debt-map-right{text-align:left;}
+  .phase-row{flex-direction:column;gap:6px;}
+}
+@media print{
+  .topbar,.upgrade-card,.review-prompt,.welcome-banner{display:none!important;}
+  .section{box-shadow:none;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <span class="topbar-logo">✦ Debt-Free.world</span>
+  <div class="topbar-right">
+    <span class="topbar-name" id="topbar-name"></span>
+  </div>
+</nav>
+
+<!-- Re-auth -->
+<div class="reauth-wrap" id="reauthWrap">
+  <div class="reauth-icon">🔑</div>
+  <div class="reauth-title">Welcome back.</div>
+  <p class="reauth-sub">Your session has expired. Enter your email — we'll send you a fresh access link. Your plan is safe.</p>
+  <div class="field"><input type="email" id="f_reauth" placeholder="your@email.com" autocomplete="email"/></div>
+  <button class="btn-full" onclick="sendNewLink()">Send my access link →</button>
+</div>
+
+<!-- Dashboard -->
+<div class="wrap" id="dashboard" style="display:none;">
+
+  <!-- Welcome banner (fresh load) -->
+  <div class="welcome-banner" id="welcomeBanner" style="display:none;">
+    <div class="welcome-banner-title">Your plan is ready, <span id="wbName"></span>. ✦</div>
+    <div class="welcome-banner-sub">Everything you told us is in here — your numbers, your situation, your next steps. This is yours, always.</div>
+  </div>
+
+  <!-- Stale data prompt -->
+  <div class="review-prompt" id="reviewPrompt">
+    <strong>It's been a while.</strong>
+    More than 30 days have passed since you set up your plan. Your numbers may have changed — consider updating them for a more accurate debt-free date.
+  </div>
+
+  <!-- CARD 1: Emergency Action (always first) -->
+  <div class="section emergency-section">
+    <div class="section-header">
+      <div class="section-title">Emergency Action Card</div>
+      <span class="section-badge badge-urgent" id="ec-badge">Today</span>
+    </div>
+    <div class="section-body">
+      <div class="emergency-action-box" id="ec-action"><div class="skel"></div><div class="skel" style="width:60%;"></div></div>
+      <div class="critical-debt-box" id="ec-critical-box">
+        <div class="critical-lbl">Most critical debt</div>
+        <div class="critical-name" id="ec-debt-name"><div class="skel" style="width:50%;"></div></div>
+        <div class="critical-detail" id="ec-debt-detail"></div>
+      </div>
+      <div class="checklist" id="checklist"></div>
+    </div>
+  </div>
+
+  <!-- CARD 2: Complete Picture -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Your Complete Picture</div>
+      <span class="section-badge badge-info">Live calculation</span>
+    </div>
+    <div class="section-body">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-lbl">Monthly surplus</div>
+          <div class="stat-val" id="stat-surplus">—</div>
+          <div class="stat-sub" id="stat-surplus-sub"></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Total debt</div>
+          <div class="stat-val" id="stat-debt">—</div>
+          <div class="stat-sub" id="stat-debt-sub"></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Debt-free date</div>
+          <div class="stat-val" id="stat-dfd">—</div>
+          <div class="stat-sub" id="stat-dfd-sub"></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Days with Debt-Free.world</div>
+          <div class="stat-val" id="stat-days">—</div>
+          <div class="stat-sub">days of progress</div>
+        </div>
+      </div>
+      <div class="dfd-progress" id="dfd-progress" style="display:none;">
+        <div class="dfd-lbl" id="dfd-pct-lbl"></div>
+        <div class="dfd-track"><div class="dfd-fill" id="dfd-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3: Debt Map -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Your Debt Map</div>
+      <span class="section-badge badge-info" id="debt-count-badge"></span>
+    </div>
+    <div class="section-body" id="debt-map-body"><div class="skel"></div><div class="skel" style="width:70%;"></div></div>
+  </div>
+
+  <!-- CARD 4: 90-Day Overview -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">90-Day Overview</div>
+    </div>
+    <div class="section-body" id="phases-body"><div class="skel"></div><div class="skel" style="width:80%;"></div><div class="skel" style="width:55%;"></div></div>
+  </div>
+
+  <!-- CARD 5: Local Support -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Local Support</div>
+      <span class="section-badge badge-ok">Verified</span>
+    </div>
+    <div class="section-body" id="support-body"><div class="skel"></div><div class="skel" style="width:65%;"></div></div>
+  </div>
+
+  <!-- UPGRADE CARD (muistio: "myy hetkeä, ei tuotetta") -->
+  <div class="upgrade-card" id="upgrade-card">
+    <div class="upgrade-eyebrow">Debt Recovery</div>
+    <div class="upgrade-title">You already know your way out.</div>
+    <div class="upgrade-sub">Now let's make sure you actually get there. Your Debt Recovery Companion guides you through the next 90 days with personalised check-ins, creditor letter tools, and practical support.</div>
+    <div class="upgrade-price">One time. <strong>19 €</strong> &nbsp;·&nbsp; Less than 0,25 € per day for 90 days.</div>
+    <a href="/#pricing" class="btn-upgrade">Continue your journey →</a>
+  </div>
+
+  <!-- CARD 6: Full Plan -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Your Clarity Report</div>
+    </div>
+    <div class="section-body">
+      <div id="plan-wrapper" class="plan-collapsed">
+        <div class="plan-text" id="plan-text"><div class="skel"></div><div class="skel" style="width:90%;"></div><div class="skel" style="width:70%;"></div></div>
+      </div>
+      <div class="plan-actions">
+        <button class="btn-read-more" id="plan-toggle-btn" onclick="togglePlan()">Read full report ↓</button>
+        <button class="btn-print" onclick="window.print()">⎙ Save / Print</button>
+      </div>
+      <div class="disclaimer">Your plan is created based on the information you provide. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.</div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<div class="footer">Amliv Oy · VAT FI32503518 · <a href="mailto:support@debt-free.world">support@debt-free.world</a> · <a href="/legal.html">Privacy &amp; Terms</a></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WORKER_URL='https://debt-free-proxy.amlivbusiness.workers.dev';
+const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
+
+let memberToken=null;
+let planExpanded=false;
+
+/* ── INIT ── */
+window.addEventListener('DOMContentLoaded',async()=>{
+  const p=new URLSearchParams(window.location.search);
+  memberToken=p.get('token')||sessionStorage.getItem('dfw_member_token');
+  const fresh=p.get('fresh')==='1';
+
+  if(!memberToken){ showReauth(); return; }
+  sessionStorage.setItem('dfw_member_token',memberToken);
+
+  try{
+    const res=await fetch(`${WORKER_URL}/member/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:memberToken})});
+    if(!res.ok){ showReauth(); return; }
+    const data=await res.json();
+
+    // Tier guard — paid members go to /member/
+    if(data.tier&&data.tier!=='free'){
+      window.location.replace(`/member/?token=${encodeURIComponent(memberToken)}`);
+      return;
+    }
+
+    document.getElementById('dashboard').style.display='block';
+    renderDashboard(data,fresh);
+  }catch(e){ showReauth(); }
+});
+
+/* ── RENDER ── */
+function renderDashboard(data,fresh){
+  const od=data.onboarding||{};
+  const firstname=od.firstname||'there';
+  const cur=CC[od.country]||od.currency||'EUR';
+  const debts=od.debts||[];
+  const plan=data.plan||'';
+
+  // Topbar
+  document.getElementById('topbar-name').textContent='Hi, '+firstname;
+
+  // Welcome banner
+  if(fresh){
+    const wb=document.getElementById('welcomeBanner');
+    document.getElementById('wbName').textContent=firstname;
+    wb.style.display='block';
+    setTimeout(()=>{ wb.style.opacity='0'; wb.style.transition='opacity 1s'; setTimeout(()=>wb.style.display='none',1000); },8000);
+  }
+
+  // Stale check
+  if(data.created_at){
+    const days=Math.floor((Date.now()-new Date(data.created_at).getTime())/86400000);
+    if(days>30) document.getElementById('reviewPrompt').classList.add('show');
+    document.getElementById('stat-days').textContent=days;
+  }
+
+  // ── Numbers
+  const income=(parseFloat(od.income)||0)+(parseFloat(od.extra_amount)||0);
+  const expenses=(parseFloat(od.housing_cost)||0)+(parseFloat(od.other_costs)||0);
+  const surplus=income-expenses;
+  const totalDebt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
+
+  const surplusEl=document.getElementById('stat-surplus');
+  surplusEl.textContent=fmtCur(cur,surplus);
+  surplusEl.classList.add(surplus>=0?'positive':'negative');
+  document.getElementById('stat-surplus-sub').textContent=surplus>=0
+    ?`${fmtCur(cur,income)} in — ${fmtCur(cur,expenses)} out`
+    :'Expenses exceed income';
+
+  document.getElementById('stat-debt').textContent=fmtCur(cur,totalDebt);
+  const monthlyCost=debts.reduce((s,d)=>s+(parseFloat(d.amount)*(parseFloat(d.interest)||0)/100/12),0);
+  document.getElementById('stat-debt-sub').textContent=monthlyCost>0?`≈ ${fmtCur(cur,monthlyCost)}/mo in interest`:'';
+
+  // Debt-free date
+  const dfdEl=document.getElementById('stat-dfd');
+  if(surplus>0&&totalDebt>0){
+    const months=Math.ceil(totalDebt/surplus);
+    const dfd=new Date(); dfd.setMonth(dfd.getMonth()+months);
+    dfdEl.textContent=dfd.toLocaleDateString('en',{month:'short',year:'numeric'});
+    document.getElementById('stat-dfd-sub').textContent=`≈ ${months} months at current pace`;
+    if(data.created_at){
+      const elapsed=Math.floor((Date.now()-new Date(data.created_at).getTime())/86400000/30.4);
+      const pct=Math.min(98,Math.round(elapsed/months*100));
+      document.getElementById('dfd-progress').style.display='block';
+      document.getElementById('dfd-pct-lbl').textContent=pct+'% of the way there';
+      document.getElementById('dfd-fill').style.width=pct+'%';
+    }
+  } else if(surplus<=0){
+    dfdEl.textContent='Address deficit first'; dfdEl.classList.add('negative');
+    document.getElementById('stat-dfd-sub').textContent='Surplus needed to calculate';
+  } else {
+    dfdEl.textContent='Enter debts to calculate';
+  }
+
+  // ── Card 1: Emergency
+  renderEmergencyCard(plan,debts,cur,data.emergency_card_checked||[false,false,false]);
+
+  // ── Card 3: Debt Map
+  document.getElementById('debt-count-badge').textContent=debts.length+' debt'+(debts.length!==1?'s':'');
+  renderDebtMap(debts,cur);
+
+  // ── Card 4: Phases
+  renderPhases(plan);
+
+  // ── Card 5: Support
+  renderSupport(plan,od.country);
+
+  // ── Card 6: Plan
+  document.getElementById('plan-text').textContent=plan||'Your plan will appear here.';
+}
+
+/* ── EMERGENCY CARD ── */
+function renderEmergencyCard(plan,debts,cur,checkState){
+  // Extract from plan text
+  let action='Review your most urgent debt and take the first small step today.';
+  let checks=['List all your debts and their minimum payments','Contact your most urgent creditor to understand your options','Check if you qualify for any government support in your country'];
+
+  if(plan){
+    const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
+    let inSection=false; let foundAction=false; const foundChecks=[];
+    for(const line of lines){
+      if(/emergency action/i.test(line)){inSection=true;continue;}
+      if(inSection&&/local support|closing|we do this/i.test(line)){inSection=false;break;}
+      if(inSection){
+        if(!foundAction&&line.length>20&&!/^[\d\-•·\*]/.test(line)){action=line;foundAction=true;}
+        else if(/^[\d\-•·\*]/.test(line)){const c=line.replace(/^[\d\.\-•·\*]+\s*/,'').trim();if(c.length>10)foundChecks.push(c);}
+      }
+    }
+    if(foundChecks.length>=2)checks=foundChecks.slice(0,3);
+  }
+
+  document.getElementById('ec-action').textContent=action;
+
+  // Most critical debt
+  if(debts.length>0){
+    const sorted=[...debts].sort((a,b)=>{
+      if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
+      if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
+      return ((parseFloat(b.interest)||0)*parseFloat(b.amount))-((parseFloat(a.interest)||0)*parseFloat(a.amount));
+    });
+    const crit=sorted[0];
+    const monthInt=parseFloat(crit.amount)*(parseFloat(crit.interest)||0)/100/12;
+    document.getElementById('ec-debt-name').textContent=(crit.creditor?crit.creditor+' — ':'')+fmtCur(crit.currency||cur,crit.amount);
+    document.getElementById('ec-debt-detail').textContent=`${crit.type}${crit.interest>0?' · '+crit.interest+'% p.a.':''}${monthInt>0?' · '+fmtCur(crit.currency||cur,monthInt)+'/mo interest':''}${crit.type==='Debt in collections'?' · ⚠️ Urgent':''}`;
+    if(crit.type==='Debt in collections') document.getElementById('ec-badge').textContent='⚠️ Urgent';
+  }
+
+  // Checklist
+  const cl=document.getElementById('checklist');
+  cl.innerHTML=checks.map((item,i)=>`
+    <div class="check-item ${checkState[i]?'done':''}" id="ci-${i}" onclick="toggleCheck(${i})">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-label-text">${esc(item)}</div>
+    </div>`).join('');
+}
+
+function toggleCheck(i){
+  document.getElementById('ci-'+i).classList.toggle('done');
+  saveChecks();
+}
+async function saveChecks(){
+  const states=[0,1,2].map(i=>{ const el=document.getElementById('ci-'+i); return el?el.classList.contains('done'):false; });
+  try{
+    await fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:states})});
+  }catch(_){}
+}
+
+/* ── DEBT MAP ── */
+function renderDebtMap(debts,cur){
+  const body=document.getElementById('debt-map-body');
+  if(!debts.length){body.innerHTML='<p style="color:var(--muted);font-size:13.5px;">No debts recorded. Complete your onboarding to see your debt map.</p>';return;}
+  const sorted=[...debts].sort((a,b)=>{
+    if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
+    if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
+    return ((parseFloat(b.interest)||0)*parseFloat(b.amount))-((parseFloat(a.interest)||0)*parseFloat(a.amount));
+  });
+  body.innerHTML=sorted.map(d=>{
+    const rate=parseFloat(d.interest)||0;
+    let tag='';
+    if(d.type==='Debt in collections')tag='<span class="debt-tag tag-urgent">⚠️ Collections</span>';
+    else if(rate>=20)tag='<span class="debt-tag tag-high">High rate</span>';
+    else if(rate>=10)tag='<span class="debt-tag tag-med">Medium</span>';
+    else tag='<span class="debt-tag tag-low">Lower risk</span>';
+    const monthInt=parseFloat(d.amount)*rate/100/12;
+    return `<div class="debt-map-item">
+      <div><div class="debt-map-name">${esc(d.creditor||d.type)}</div><div class="debt-map-type">${esc(d.type)}</div><div class="debt-tags">${tag}</div></div>
+      <div class="debt-map-right">
+        <div class="debt-map-amount">${fmtCur(d.currency||cur,d.amount)}</div>
+        <div class="debt-map-rate">${rate}% p.a.</div>
+        ${monthInt>0?`<div class="debt-map-interest">+${fmtCur(d.currency||cur,monthInt)}/mo</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── 90-DAY PHASES ── */
+function renderPhases(plan){
+  const body=document.getElementById('phases-body');
+  // Extract actionable content from plan for 3 phases
+  let p1='Address your most urgent debt first. Contact your highest-priority creditor and understand exactly what they need from you.';
+  let p2='Build a consistent repayment habit. Allocate your monthly surplus to the highest-cost debt while maintaining minimum payments across all others.';
+  let p3='Review your progress and accelerate. Look for additional income or expense reductions. Every debt you clear removes weight — and compounds momentum.';
+
+  if(plan){
+    const lines=plan.split('\n').map(l=>l.trim()).filter(l=>l.length>20);
+    // Try to find Days 1-30 content
+    let inSection=false;
+    for(let i=0;i<lines.length;i++){
+      if(/days 1.30|foundation|first week|this week/i.test(lines[i])&&!inSection){
+        const content=lines.slice(i+1,i+4).filter(l=>!/^[\d\.\-•·]/.test(l)&&l.length>20);
+        if(content.length)p1=content[0];
+        inSection=true;
+      }
+    }
+  }
+
+  body.innerHTML=[{lbl:'Days 1–30',text:p1},{lbl:'Days 31–60',text:p2},{lbl:'Days 61–90',text:p3}].map(ph=>`
+    <div class="phase-row">
+      <div class="phase-lbl">${ph.lbl}</div>
+      <div class="phase-text">${esc(ph.text)}</div>
+    </div>`).join('');
+}
+
+/* ── LOCAL SUPPORT ── */
+function renderSupport(plan,country){
+  const body=document.getElementById('support-body');
+  if(!plan){ body.innerHTML=supportFallback(country); return; }
+
+  const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
+  let inSection=false; const supportLines=[];
+  for(const line of lines){
+    if(/local support/i.test(line)){inSection=true;continue;}
+    if(inSection&&/closing|we do this together|✦/i.test(line))break;
+    if(inSection&&line.length>8)supportLines.push(line);
+  }
+
+  if(!supportLines.length){ body.innerHTML=supportFallback(country); return; }
+
+  // Check for the fallback phrase
+  const combined=supportLines.join(' ');
+  if(/support@debt-free\.world/i.test(combined)){
+    body.innerHTML=`<p style="font-size:13.5px;color:var(--muted);line-height:1.6;">For verified local support resources, contact us at <a href="mailto:support@debt-free.world" style="color:var(--green);font-weight:600;">support@debt-free.world</a> — we'll send you a verified list for ${esc(country||'your country')}.</p>`;
+    return;
+  }
+
+  // Parse orgs
+  const orgs=parseOrgs(supportLines);
+  if(!orgs.length){
+    body.innerHTML=`<div style="font-size:13.5px;color:var(--muted);line-height:1.75;">${supportLines.map(l=>esc(l)).join('<br/>')}</div>`;
+    return;
+  }
+  body.innerHTML=orgs.map(o=>`
+    <div class="support-item">
+      <div class="support-name">${esc(o.name)}</div>
+      ${o.desc?`<div class="support-desc">${esc(o.desc)}</div>`:''}
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        ${o.url?`<a href="${esc(o.url)}" class="support-link" target="_blank" rel="noopener">Visit website →</a>`:''}
+        ${o.free?'<span class="support-free">Free</span>':''}
+      </div>
+    </div>`).join('');
+}
+function supportFallback(country){
+  return `<p style="font-size:13.5px;color:var(--muted);line-height:1.6;">For verified local support resources tailored to your profile, contact us at <a href="mailto:support@debt-free.world" style="color:var(--green);font-weight:600;">support@debt-free.world</a>.</p>`;
+}
+function parseOrgs(lines){
+  const orgs=[]; let cur=null;
+  for(const line of lines){
+    const urlM=line.match(/https?:\/\/[\w\.\-\/]+/);
+    if(urlM&&cur){cur.url=urlM[0];continue;}
+    if(/\bfree\b/i.test(line)&&cur){cur.free=true;}
+    if(line.length<90&&!line.startsWith('-')&&!urlM){
+      if(cur&&cur.name)orgs.push(cur);
+      cur={name:line,desc:'',url:'',free:false};
+    } else if(cur&&!cur.desc&&line.length>20){cur.desc=line;}
+  }
+  if(cur&&cur.name)orgs.push(cur);
+  return orgs;
+}
+
+/* ── PLAN TOGGLE ── */
+function togglePlan(){
+  const w=document.getElementById('plan-wrapper'); const btn=document.getElementById('plan-toggle-btn');
+  planExpanded=!planExpanded;
+  if(planExpanded){w.classList.remove('plan-collapsed');btn.textContent='Show less ↑';}
+  else{w.classList.add('plan-collapsed');btn.textContent='Read full report ↓';}
+}
+
+/* ── RE-AUTH ── */
+function showReauth(){ document.getElementById('reauthWrap').classList.add('show'); }
+async function sendNewLink(){
+  const email=document.getElementById('f_reauth').value.trim();
+  if(!email){toast('Please enter your email address.');return;}
+  try{
+    await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    document.getElementById('reauthWrap').innerHTML='<div class="reauth-icon">✉️</div><div class="reauth-title">Check your inbox.</div><p class="reauth-sub">Your access link is on its way. Click it to return to your plan.</p>';
+  }catch(e){toast('Could not send link. Please email support@debt-free.world');}
+}
+
+/* ── HELPERS ── */
+function fmtCur(cur,val){
+  const n=Math.round(val||0);
+  try{return new Intl.NumberFormat('en',{style:'currency',currency:cur,maximumFractionDigits:0}).format(n);}
+  catch(_){return cur+' '+n.toLocaleString();}
+}
+function esc(s){ if(!s)return ''; return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function toast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2800); }
+</script>
+</body>
+</html>
