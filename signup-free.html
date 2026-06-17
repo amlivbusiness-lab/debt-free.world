@@ -15,7 +15,7 @@
   --green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;
   --green-border:#86c9a0;--green-bg:#f0f8f3;--green-pale:#f7fcf9;
   --text:#111;--muted:#6b7280;--border:#e5e7eb;--white:#fff;
-  --red:#dc2626;--red-bg:#fef2f2;--red-border:#fca5a5;
+  --red:#dc2626;
   --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
   --radius:14px;--shadow:0 2px 20px rgba(22,101,52,0.08);
 }
@@ -27,19 +27,14 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-bg);min-he
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
 .logo{font-family:var(--serif);font-size:1.05rem;color:var(--green);display:block;margin-bottom:1.75rem;text-decoration:none;}
-
-/* BADGE */
 .badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-light);color:var(--green);border-radius:20px;font-size:11.5px;font-weight:600;padding:5px 13px;margin-bottom:1rem;letter-spacing:.4px;}
-
 h1{font-family:var(--serif);font-size:26px;line-height:1.18;color:var(--text);margin-bottom:8px;}
 .sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1.5rem;font-weight:300;}
 
-/* PROMISES */
 .promises{background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:14px 16px;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:7px;}
 .pr{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text);line-height:1.4;}
-.pr-tick{color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;font-size:13px;}
+.pr-tick{color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
 
-/* FIELDS */
 .field{margin-bottom:14px;}
 .field-label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:6px;}
 .field input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;color:var(--text);background:var(--white);outline:none;transition:border-color .2s;-webkit-appearance:none;}
@@ -48,7 +43,6 @@ h1{font-family:var(--serif);font-size:26px;line-height:1.18;color:var(--text);ma
 .err-msg{font-size:12px;color:var(--red);margin-top:5px;display:none;}
 .field.has-error .err-msg{display:block;}
 
-/* CHECKBOX */
 .check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .check-row input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--green);cursor:pointer;}
 .check-row .check-lbl{font-size:13px;color:var(--muted);line-height:1.55;}
@@ -56,32 +50,24 @@ h1{font-family:var(--serif);font-size:26px;line-height:1.18;color:var(--text);ma
 .check-err{font-size:12px;color:var(--red);display:none;margin-top:-10px;margin-bottom:10px;}
 .check-err.show{display:block;}
 
-/* BUTTONS */
 .btn-full{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:15px 20px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background .2s;letter-spacing:.01em;}
 .btn-full:hover{background:var(--green-dark);}
 .btn-full:disabled{background:#ccc;cursor:not-allowed;}
 .no-card{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;}
 
-/* CONFIRMATION */
-#view-confirm{display:none;text-align:center;}
-.icon{font-size:48px;margin-bottom:1rem;line-height:1;}
-.confirm-title{font-family:var(--serif);font-size:22px;margin-bottom:8px;}
-.confirm-sub{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;}
-.confirm-email{font-weight:600;color:var(--green);}
-.resend-row{margin-top:1.25rem;font-size:13px;color:var(--muted);}
-.resend-btn{background:none;border:none;color:var(--green);font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;padding:0;}
+/* LOADING STATE */
+#view-loading{display:none;text-align:center;padding:1rem 0;}
+.spinner{width:40px;height:40px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1.25rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-title{font-family:var(--serif);font-size:20px;margin-bottom:8px;}
+.loading-sub{font-size:14px;color:var(--muted);line-height:1.6;}
 
-/* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:400;z-index:9999;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
 footer{margin-top:1.5rem;font-size:12px;color:#aaa;text-align:center;}
 footer a{color:#aaa;}
-
-@media(max-width:480px){
-  .card{padding:2rem 1.25rem;}
-  h1{font-size:22px;}
-}
+@media(max-width:480px){.card{padding:2rem 1.25rem;}h1{font-size:22px;}}
 </style>
 </head>
 <body>
@@ -93,7 +79,7 @@ footer a{color:#aaa;}
     <a class="logo" href="/">✦ Debt-Free.world</a>
     <div class="badge">✦ DEBT FREE — 0 €</div>
     <h1>Your clarity starts here.</h1>
-    <p class="sub">Enter your email. We'll send you a private link — your personalised plan will be ready inside in about 30 seconds.</p>
+    <p class="sub">Enter your email and you'll go straight to building your plan. No card. No subscription. Takes about 2 minutes.</p>
 
     <div class="promises">
       <div class="pr"><span class="pr-tick">✓</span>Complete financial overview &amp; debt prioritisation</div>
@@ -110,23 +96,22 @@ footer a{color:#aaa;}
       <div class="err-msg" id="err_email">Please enter a valid email address.</div>
     </div>
 
-    <label class="check-row" id="privacy-row">
+    <label class="check-row">
       <input type="checkbox" id="f_privacy"/>
       <span class="check-lbl">I have read and accept the <a href="/legal.html#privacy" target="_blank">Privacy Policy</a>. I understand my data is used only to create my personalised plan.</span>
     </label>
     <div class="check-err" id="err_privacy">Please accept the Privacy Policy to continue.</div>
 
-    <button class="btn-full" id="btn-signup" onclick="handleSignup()">Get my DEBT FREE plan →</button>
+    <button class="btn-full" id="btn-signup" onclick="handleSignup()">Build my Debt FREE plan →</button>
     <p class="no-card">No payment card. No subscription. No trial. Free forever.</p>
   </div>
 
-  <!-- VIEW: CONFIRMATION -->
-  <div id="view-confirm">
+  <!-- VIEW: LOADING — shown while account is created -->
+  <div id="view-loading">
     <a class="logo" href="/">✦ Debt-Free.world</a>
-    <div class="icon">✉️</div>
-    <div class="confirm-title">Check your inbox.</div>
-    <p class="confirm-sub">We sent your access link to<br/><span class="confirm-email" id="confirm-email"></span>.<br/><br/>Click the link in that email — your plan will be ready in about 30 seconds.</p>
-    <div class="resend-row">No email? Check your spam, or <button class="resend-btn" onclick="resend()">send it again</button>.</div>
+    <div class="spinner"></div>
+    <div class="loading-title">Setting up your account…</div>
+    <p class="loading-sub">This takes just a second. You'll go straight to your plan.</p>
   </div>
 
 </div>
@@ -136,7 +121,6 @@ footer a{color:#aaa;}
 
 <script>
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
-let signupEmail = '';
 
 function toast(msg){
   const el=document.getElementById('toast');
@@ -144,8 +128,6 @@ function toast(msg){
   setTimeout(()=>el.classList.remove('show'),2800);
 }
 function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim()); }
-function setFieldErr(wrapId,errId){ document.getElementById(wrapId)?.classList.add('has-error'); const e=document.getElementById(errId); if(e) e.style.display='block'; }
-function clearFieldErr(wrapId){ document.getElementById(wrapId)?.classList.remove('has-error'); }
 
 async function handleSignup(){
   const email = document.getElementById('f_email').value.trim();
@@ -153,66 +135,69 @@ async function handleSignup(){
   const btn = document.getElementById('btn-signup');
   let ok = true;
 
-  if(!isValidEmail(email)){ setFieldErr('wrap_email','err_email'); ok=false; } else { clearFieldErr('wrap_email'); }
-  if(!privacy){ document.getElementById('err_privacy').classList.add('show'); ok=false; } else { document.getElementById('err_privacy').classList.remove('show'); }
+  // Validate
+  if(!isValidEmail(email)){
+    document.getElementById('wrap_email').classList.add('has-error');
+    ok=false;
+  } else {
+    document.getElementById('wrap_email').classList.remove('has-error');
+  }
+  if(!privacy){
+    document.getElementById('err_privacy').classList.add('show');
+    ok=false;
+  } else {
+    document.getElementById('err_privacy').classList.remove('show');
+  }
   if(!ok) return;
 
-  btn.disabled=true;
-  btn.textContent='Sending your link…';
-  signupEmail=email;
+  // Show loading immediately
+  document.getElementById('view-signup').style.display='none';
+  document.getElementById('view-loading').style.display='block';
 
   try{
-    const res=await fetch(`${WORKER_URL}/member/create-free`,{
+    const res = await fetch(`${WORKER_URL}/member/create-free`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email})
+      body: JSON.stringify({email, return_token: true})
     });
-    const data=await res.json().catch(()=>({}));
 
-    if(res.ok||data.success){
-      showConfirm();
-    } else if(res.status===409||data.exists){
-      // Account exists — send new magic link silently, show confirm anyway
-      await sendMagicLink(email);
-      showConfirm();
+    const data = await res.json().catch(()=>({}));
+
+    if(res.ok && data.token){
+      // Redirect straight to onboarding with token in URL
+      window.location.replace(`/onboarding-debt-free.html?token=${encodeURIComponent(data.token)}`);
+
+    } else if(res.status === 409 && data.paid){
+      // Existing paid member — send to member area
+      window.location.replace('/member/');
+
+    } else if(data.token){
+      // Account existed, new token issued — go straight to onboarding
+      window.location.replace(`/onboarding-debt-free.html?token=${encodeURIComponent(data.token)}`);
+
     } else {
-      toast(data.message||'Something went wrong. Please try again.');
-      btn.disabled=false;
-      btn.textContent='Get my DEBT FREE plan →';
+      // Fallback — token not returned, send magic link email and show message
+      document.getElementById('view-loading').innerHTML = `
+        <a class="logo" href="/">✦ Debt-Free.world</a>
+        <div style="font-size:44px;margin-bottom:1rem;">✉️</div>
+        <div class="loading-title">Check your inbox.</div>
+        <p class="loading-sub">We sent your access link to <strong>${email}</strong>.<br><br>Click the link to build your plan.</p>`;
     }
+
   } catch(e){
-    toast('Connection error. Please check your internet and try again.');
-    btn.disabled=false;
-    btn.textContent='Get my DEBT FREE plan →';
+    // Network error fallback
+    document.getElementById('view-loading').innerHTML = `
+      <a class="logo" href="/">✦ Debt-Free.world</a>
+      <div style="font-size:44px;margin-bottom:1rem;">✉️</div>
+      <div class="loading-title">Check your inbox.</div>
+      <p class="loading-sub">We sent your access link to <strong>${email}</strong>.<br><br>Click the link to build your plan.</p>`;
   }
 }
 
-function showConfirm(){
-  document.getElementById('view-signup').style.display='none';
-  document.getElementById('view-confirm').style.display='block';
-  document.getElementById('confirm-email').textContent=signupEmail;
-}
-
-async function sendMagicLink(email){
-  try{
-    await fetch(`${WORKER_URL}/member/request-magic-link`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email})
-    });
-  }catch(_){}
-}
-
-async function resend(){
-  if(!signupEmail) return;
-  await sendMagicLink(signupEmail);
-  document.querySelector('.resend-row').textContent='Link sent again. Check your inbox and spam folder.';
-}
-
-// Enter key support
+// Enter key
 document.getElementById('f_email').addEventListener('keydown',e=>{ if(e.key==='Enter') handleSignup(); });
 </script>
 
-<!-- Analytics (cookie-gated, same pattern as existing pages) -->
 <script>
 function loadTracking(){
   if(localStorage.getItem('cookie-consent')==='accepted'){
