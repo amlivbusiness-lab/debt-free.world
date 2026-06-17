@@ -817,8 +817,19 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   if(loadEl)loadEl.style.display='none';
 
   if(validated){
-    // Show step 1 only after successful validation
-    document.getElementById('step1').classList.add('active');
+    // Show step 1 — explicit multi-method activation for mobile reliability
+    const step1 = document.getElementById('step1');
+    if(step1){
+      // Remove active from all cards first (belt and suspenders)
+      document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+      // Force display before adding class — fixes Android WebView timing bug
+      step1.style.display = 'block';
+      step1.classList.add('active');
+      // Scroll to top — important on mobile where page may have scrolled
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   } else {
     showInvalidScreen();
   }
@@ -861,9 +872,19 @@ function setLang(code){
 function goNext(step){ if(!validateStep(step))return; collectStep(step); showStep(step+1); }
 function goBack(step){ showStep(step-1); }
 function showStep(n){
-  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
-  document.getElementById('step'+n)?.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('.q-card').forEach(c=>{
+    c.classList.remove('active');
+    c.style.display='';
+  });
+  const target=document.getElementById('step'+n);
+  if(target){
+    target.style.display='block';
+    target.classList.add('active');
+  }
+  // Scroll to top — multi-method for Android compatibility
+  try{window.scrollTo({top:0,behavior:'smooth'});}catch(_){}
+  document.body.scrollTop=0;
+  document.documentElement.scrollTop=0;
   currentStep=n;
   document.getElementById('progressFill').style.width=STEP_PCT[n]+'%';
   const t=T[lang]||T.EN;
@@ -1072,7 +1093,7 @@ function buildPrompt(d){
     'France':'CRESUS (cresus.fr) — debt mediation and prevention | CDAD — local legal and financial advice | CCAS — municipal social support centres',
     'Spain':'ADICAE (adicae.net) — consumer and debt advocacy | Caritas (caritas.es) — social and financial support | OCU (ocu.org) — consumer rights',
     'Portugal':'DECO (deco.proteste.pt) — consumer and debt advice | Santa Casa da Misericórdia for social support | CPCJ for family financial difficulties',
-    'Italy':'Adiconsum (adiconsum.it) — consumer and debt support | Caritas (caritas.it) — social support | Banca d'Italia (bancaditalia.it) — financial dispute resolution',
+    'Italy':'Adiconsum (adiconsum.it) — consumer and debt support | Caritas (caritas.it) — social support | Banca d\'Italia (bancaditalia.it) — financial dispute resolution',
     'Poland':'Federacja Konsumentów (federacja-konsumentow.org.pl) — consumer rights and debt advice | UOKiK (uokik.gov.pl) — consumer protection office',
     'Czech Republic':'Poradna při finanční tísni (financnitisen.cz) — free debt counselling | dTest (dtest.cz) — consumer advice | Czech Bar Association for legal debt questions',
     'Hungary':'Magyar Bankszövetség — contact for banking disputes | Fogyasztóvédelem (fogyasztovédelem.hu) — consumer protection',
