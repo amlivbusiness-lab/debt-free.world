@@ -336,10 +336,10 @@ window.addEventListener('DOMContentLoaded',async()=>{
     const data=await res.json();
 
     // Tier guard — paid members go to /member/
-    if(data.tier&&data.tier!=='free'){
-      window.location.replace(`/member/?token=${encodeURIComponent(memberToken)}`);
-      return;
-    }
+ if(data.tier && data.tier === 'free'){
+  window.location.replace(`/member-free/?token=${encodeURIComponent(memberToken)}`);
+  return;
+}
 
     document.getElementById('dashboard').style.display='block';
     renderDashboard(data,fresh);
