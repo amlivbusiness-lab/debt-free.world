@@ -180,6 +180,7 @@ async function handleSignup(){
   showView('view-loading');
 
   let token = null;
+  let onboardingComplete = false;
 
   try {
     const res = await fetch(`${WORKER_URL}/member/create-free`, {
@@ -194,6 +195,7 @@ async function handleSignup(){
 
     if(data.token) {
       token = data.token;
+      onboardingComplete = data.onboarding_complete === true;
     } else if(res.status === 409 && data.paid) {
       // Existing paid member — go to member area
       window.location.replace('/member/');
@@ -207,8 +209,13 @@ async function handleSignup(){
   }
 
   if(token) {
-    // Best path: go straight to onboarding
-    window.location.replace('/onboarding-debt-free.html?token=' + encodeURIComponent(token));
+    // Returning member who already has a plan — go straight to it.
+    // Never send someone with a completed plan back to a blank form.
+    if(onboardingComplete) {
+      window.location.replace('/member-free/?token=' + encodeURIComponent(token));
+    } else {
+      window.location.replace('/onboarding-debt-free.html?token=' + encodeURIComponent(token));
+    }
   } else {
     // Fallback: Worker is running older version without return_token support
     // Magic link was sent by Worker — show inbox message
