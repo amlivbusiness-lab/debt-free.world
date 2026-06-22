@@ -9,209 +9,202 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
-<!-- Lucide icons via CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.383.0/umd/lucide.min.js"></script>
 <style>
 :root{
-  --green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;
-  --green-border:#86c9a0;--green-bg:#f0f8f3;--green-pale:#f7fcf9;
-  --text:#111;--muted:#6b7280;--border:#e5e7eb;--white:#fff;
-  --red:#dc2626;--amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fde68a;
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --green-pale:#fafaf8;--green-border:#bcd9c5;
+  --text:#111;--text-soft:#2b2b2b;--border:#e8e8e3;--white:#fff;
+  --red:#b3261e;--red-bg:#fdf0ef;--amber:#92611c;--amber-bg:#fbf3e6;--amber-border:#e9d3a4;
   --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
-  --radius:12px;--icon-size:18px;--icon-stroke:1.5;
+  --icon-size:18px;--icon-stroke:1.5;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 body{font-family:var(--sans);color:var(--text);background:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;visibility:hidden;}
 body.ready{visibility:visible;}
 
-/* ── LUCIDE ICON HELPER ── */
 .icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .icon svg{width:var(--icon-size);height:var(--icon-size);stroke-width:var(--icon-stroke);stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 
-/* ── GATE ── */
-#gate{display:none;min-height:100vh;align-items:center;justify-content:center;background:var(--green-bg);padding:24px;}
-#gate.show{display:flex;}
-.gate-card{background:var(--white);border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center;box-shadow:0 4px 40px rgba(22,101,52,0.1);}
-.gate-logo{font-family:var(--serif);font-size:1.1rem;color:var(--green);display:block;margin-bottom:28px;}
-.gate-spinner{width:36px;height:36px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px;}
-.gate-title{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:8px;}
-.gate-sub{font-size:13px;color:var(--muted);line-height:1.65;}
-.gate-form{margin-top:20px;display:none;flex-direction:column;gap:10px;}
-.gate-form.show{display:flex;}
-.gate-form input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;outline:none;-webkit-appearance:none;}
-.gate-form input:focus{border-color:var(--green);}
-.gate-btn{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;}
-.gate-success{background:var(--green-bg);border:1px solid var(--green-border);border-radius:8px;padding:14px 16px;font-size:13px;color:var(--green-dark);line-height:1.6;margin-top:16px;display:none;}
-.gate-success.show{display:block;}
 @keyframes spin{to{transform:rotate(360deg);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
-/* ── PLAN-FIRST OVERLAY ── */
+#gate{display:none;min-height:100vh;align-items:center;justify-content:center;background:var(--green-pale);padding:24px;}
+#gate.show{display:flex;}
+.gate-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:40px 32px;max-width:420px;width:100%;text-align:center;}
+.gate-logo{font-family:var(--serif);font-size:1.1rem;color:var(--text);display:block;margin-bottom:28px;}
+.gate-spinner{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px;}
+.gate-title{font-family:var(--serif);font-size:20px;color:var(--text);font-weight:400;margin-bottom:8px;}
+.gate-sub{font-size:13.5px;color:var(--text-soft);line-height:1.65;font-weight:300;}
+.gate-form{margin-top:20px;display:none;flex-direction:column;gap:10px;}
+.gate-form.show{display:flex;}
+.gate-form input{width:100%;font-family:var(--sans);font-size:15px;border:1px solid var(--border);border-radius:4px;padding:13px 15px;outline:none;-webkit-appearance:none;color:var(--text);}
+.gate-form input:focus{border-color:var(--green);}
+.gate-btn{width:100%;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;}
+.gate-btn:hover{background:var(--green-dark);}
+.gate-success{background:var(--green-pale);border:1px solid var(--green-border);border-radius:4px;padding:14px 16px;font-size:13px;color:var(--text);line-height:1.6;margin-top:16px;display:none;font-weight:300;}
+.gate-success.show{display:block;}
+
 #planFirst{position:fixed;inset:0;background:var(--white);z-index:1000;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 #planFirst.show{display:flex;}
-.pf-topbar{background:var(--white);border-bottom:0.5px solid var(--border);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-shrink:0;}
-.pf-logo{font-family:var(--serif);font-size:15px;color:var(--green);}
-.pf-save{background:none;border:1.5px solid var(--border);border-radius:30px;padding:7px 16px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;font-family:var(--sans);min-height:36px;display:flex;align-items:center;gap:6px;}
-.pf-body{flex:1;max-width:640px;width:100%;margin:0 auto;padding:24px 20px 40px;}
-.pf-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:8px;display:block;}
-.pf-title{font-family:var(--serif);font-size:26px;color:var(--text);margin-bottom:6px;line-height:1.2;}
-.pf-meta{font-size:13px;color:var(--muted);margin-bottom:16px;}
-.pf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
-.pf-chip{font-size:11px;color:var(--green-dark);background:var(--green-bg);border:0.5px solid var(--green-border);border-radius:20px;padding:3px 10px;}
-.pf-plan{font-size:13.5px;line-height:1.85;color:#333;white-space:pre-wrap;font-weight:300;padding:20px;border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:24px;}
+.pf-topbar{background:var(--white);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-shrink:0;border-bottom:1px solid var(--border);}
+.pf-logo{font-family:var(--serif);font-size:15px;color:var(--text);}
+.pf-save{background:none;border:1px solid var(--border);border-radius:4px;padding:7px 16px;font-size:12px;font-weight:500;color:var(--text-soft);cursor:pointer;font-family:var(--sans);min-height:36px;display:flex;align-items:center;gap:6px;}
+.pf-save:hover{border-color:var(--green);color:var(--green);}
+.pf-body{flex:1;max-width:700px;width:100%;margin:0 auto;padding:32px 20px 48px;}
+.pf-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
+.pf-title{font-family:var(--serif);font-size:28px;color:var(--text);font-weight:400;margin-bottom:8px;line-height:1.25;}
+.pf-meta{font-size:13px;color:var(--text-soft);margin-bottom:18px;font-weight:300;}
+.pf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;}
+.pf-chip{font-size:11px;color:var(--text);background:var(--green-pale);border:1px solid var(--border);border-radius:14px;padding:4px 12px;}
+.pf-plan{font-size:14.5px;line-height:1.9;color:var(--text-soft);white-space:pre-wrap;font-weight:300;padding:0;margin-bottom:32px;}
 .pf-actions{display:flex;flex-direction:column;gap:10px;}
-.btn-pf-cta{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-pf-cta{width:100%;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:15px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-pf-cta:hover{background:var(--green-dark);}
-.btn-pf-secondary{width:100%;background:var(--white);color:var(--green);border:1.5px solid var(--green);border-radius:30px;padding:13px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-pf-secondary{width:100%;background:var(--white);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:13px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:46px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-pf-secondary:hover{border-color:var(--green);color:var(--green);}
 
-/* ── TOPBAR ── */
 #dashboard{display:none;}
 #dashboard.show{display:block;}
-.topbar{background:var(--white);border-bottom:0.5px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:200;}
-.topbar-logo{font-family:var(--serif);font-size:15px;color:var(--green);}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:200;}
+.topbar-logo{font-family:var(--serif);font-size:15px;color:var(--text);}
 .topbar-right{display:flex;align-items:center;gap:8px;}
 .lang-selector-wrap{position:relative;}
-.lang-pill{font-size:12px;color:var(--green);border:1.5px solid var(--green);border-radius:20px;padding:5px 12px;background:var(--green-bg);cursor:pointer;font-family:var(--sans);font-weight:500;min-height:34px;}
-.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--white);border:0.5px solid var(--border);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.12);z-index:500;min-width:170px;overflow:hidden;}
+.lang-pill{font-size:12px;color:var(--text);border:1px solid var(--border);border-radius:14px;padding:5px 12px;background:none;cursor:pointer;font-family:var(--sans);font-weight:500;min-height:34px;}
+.lang-pill:hover{border-color:var(--green);color:var(--green);}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--white);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.08);z-index:500;min-width:170px;overflow:hidden;}
 .lang-menu.open{display:block;animation:fadeUp 0.2s ease;}
 .lang-menu-inner{display:flex;flex-direction:column;max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .lang-menu-inner button{background:none;border:none;padding:10px 16px;text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--text);cursor:pointer;min-height:40px;}
 .lang-menu-inner button:hover{background:var(--green-pale);}
-.menu-pill{border:0.5px solid var(--border);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--white);color:var(--muted);}
-.menu-pill:hover{border-color:var(--green-border);color:var(--green);}
+.menu-pill{border:1px solid var(--border);border-radius:6px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:none;color:var(--text-soft);}
+.menu-pill:hover{border-color:var(--green);color:var(--green);}
 
-/* ── DRAWER ── */
 .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:300;display:none;opacity:0;transition:opacity 0.25s;}
 .drawer-overlay.open{display:block;opacity:1;}
-.tools-drawer{position:fixed;top:0;right:0;bottom:0;width:min(340px,92vw);background:var(--white);z-index:400;transform:translateX(100%);transition:transform 0.3s cubic-bezier(.4,0,.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.tools-drawer{position:fixed;top:0;right:0;bottom:0;width:min(360px,92vw);background:var(--white);z-index:400;transform:translateX(100%);transition:transform 0.3s cubic-bezier(.4,0,.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .tools-drawer.open{transform:translateX(0);}
-.drawer-header{padding:18px 20px 14px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1;}
-.drawer-title{font-family:var(--serif);font-size:16px;color:var(--text);}
-.drawer-close{background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;padding:4px 8px;line-height:1;}
-.drawer-section{padding:14px 20px 6px;}
-.drawer-section-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;}
-.drawer-item{display:flex;align-items:flex-start;gap:12px;padding:10px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:44px;margin:0 -20px;transition:background .15s;}
+.drawer-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1;}
+.drawer-title{font-family:var(--serif);font-size:16px;color:var(--text);font-weight:400;}
+.drawer-close{background:none;border:none;font-size:20px;color:var(--text-soft);cursor:pointer;padding:4px 8px;line-height:1;}
+.drawer-section{padding:16px 20px 6px;}
+.drawer-section-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
+.drawer-item{display:flex;align-items:flex-start;gap:12px;padding:11px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:44px;margin:0 -20px;transition:background .15s;}
 .drawer-item:hover{background:var(--green-pale);}
-.drawer-item .icon{color:var(--muted);margin-top:2px;flex-shrink:0;}
+.drawer-item .icon{color:var(--text-soft);margin-top:2px;flex-shrink:0;}
 .drawer-item-name{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.3;}
-.drawer-item-desc{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4;}
-.drawer-item-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:4px;}
-.badge-unlock{background:#fef3c7;color:#92400e;}
-.badge-coming{background:#f3f4f6;color:var(--muted);}
-.drawer-plan-item{display:flex;align-items:flex-start;gap:12px;padding:12px 20px;cursor:pointer;min-height:44px;margin:0 -20px;background:var(--green-pale);border-left:3px solid var(--green);}
+.drawer-item-desc{font-size:11.5px;color:var(--text-soft);margin-top:2px;line-height:1.4;font-weight:300;}
+.drawer-item-badge{display:inline-flex;align-items:center;font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:5px;letter-spacing:0.3px;}
+.badge-unlock{background:var(--amber-bg);color:var(--amber);}
+.badge-coming{background:#f1f1ed;color:var(--text-soft);}
+.drawer-plan-item{display:flex;align-items:flex-start;gap:12px;padding:13px 20px;cursor:pointer;min-height:44px;margin:0 -20px;background:var(--green-pale);border-left:3px solid var(--green);}
 .drawer-plan-item .icon{color:var(--green);margin-top:2px;}
-.drawer-plan-item-name{font-size:13.5px;font-weight:600;color:var(--green-dark);}
-.drawer-plan-item-desc{font-size:11.5px;color:var(--green);margin-top:1px;}
-.drawer-divider{height:0.5px;background:var(--border);margin:6px 0;}
-.drawer-logout{width:calc(100% - 40px);margin:12px 20px 24px;background:var(--white);border:1.5px solid var(--border);border-radius:30px;padding:11px;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--sans);text-align:center;min-height:44px;display:block;}
+.drawer-plan-item-name{font-size:13.5px;font-weight:600;color:var(--text);}
+.drawer-plan-item-desc{font-size:11.5px;color:var(--text-soft);margin-top:1px;font-weight:300;}
+.drawer-divider{height:1px;background:var(--border);margin:8px 0;}
+.drawer-logout{width:calc(100% - 40px);margin:14px 20px 24px;background:none;border:1px solid var(--border);border-radius:4px;padding:11px;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);text-align:center;min-height:44px;display:block;}
+.drawer-logout:hover{border-color:var(--text-soft);color:var(--text);}
 
-/* ── MAIN ── */
-.main-wrap{max-width:640px;margin:0 auto;padding:0 0 80px;}
+.main-wrap{max-width:700px;margin:0 auto;padding:0 0 80px;}
 
-/* ── JOURNEY SECTIONS ── */
-/* TODAY */
-.today-section{padding:20px 20px 0;}
-.journey-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
-.journey-label .icon{--icon-size:13px;}
+.today-section{padding:24px 20px 0;}
+.greeting{padding:4px 0 0;}
+.greeting-name{font-family:var(--serif);font-size:24px;color:var(--text);font-weight:400;margin-bottom:5px;}
+.greeting-sub{font-size:13.5px;color:var(--text-soft);line-height:1.55;font-weight:300;}
 
-/* Greeting card */
-.greeting{padding:16px 0 0;}
-.greeting-name{font-family:var(--serif);font-size:22px;color:var(--text);margin-bottom:4px;}
-.greeting-sub{font-size:13px;color:var(--muted);line-height:1.55;}
+.action-card{margin-top:18px;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 6px 6px 0;overflow:hidden;}
+.action-card-top{display:flex;align-items:center;gap:9px;padding:13px 16px;background:var(--green-pale);}
+.action-card-top .icon{color:var(--green);}
+.action-card-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--green);}
+.action-card-body{padding:18px 16px;}
+.action-text{font-family:var(--serif);font-size:18px;color:var(--text);font-weight:400;line-height:1.4;margin-bottom:16px;}
+.ec-critical{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:6px;padding:11px 14px;margin-bottom:14px;}
+.ec-critical-lbl{font-size:10px;font-weight:600;color:var(--amber);letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;}
+.ec-critical-name{font-size:14px;font-weight:600;color:var(--text);}
+.ec-critical-detail{font-size:12.5px;color:var(--text-soft);margin-top:2px;font-weight:300;}
 
-/* Action card — TODAY priority */
-.action-card{margin-top:16px;background:var(--white);border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.action-card-top{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:0.5px solid var(--border);}
-.action-card-top .icon{color:var(--amber);}
-.action-card-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--amber);}
-.action-card-body{padding:14px;}
-.action-text{font-family:var(--serif);font-size:16px;color:var(--text);line-height:1.35;margin-bottom:14px;}
 .checklist{display:flex;flex-direction:column;gap:8px;}
-.check-item{display:flex;align-items:flex-start;gap:11px;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;background:var(--white);transition:border-color .15s;-webkit-tap-highlight-color:transparent;user-select:none;min-height:44px;}
-.check-item.done{border-color:var(--green-border);}
-.check-item.done .check-label{color:var(--muted);text-decoration:line-through;}
-.check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
+.check-item{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border:1px solid var(--border);border-radius:6px;cursor:pointer;background:var(--white);transition:border-color .15s;-webkit-tap-highlight-color:transparent;user-select:none;min-height:44px;}
+.check-item.done{border-color:var(--green-border);background:var(--green-pale);}
+.check-item.done .check-label{color:var(--text-soft);text-decoration:line-through;}
+.check-box{width:19px;height:19px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
 .check-item.done .check-box{background:var(--green);border-color:var(--green);}
 .check-icon{display:none;}
 .check-item.done .check-icon{display:block;color:var(--white);}
-.check-icon svg{width:12px;height:12px;stroke-width:2.5;}
-.check-label{font-size:13.5px;line-height:1.45;}
-.action-card-footer{padding:12px 14px;border-top:0.5px solid var(--border);display:flex;gap:10px;}
+.check-icon svg{width:11px;height:11px;stroke-width:3;}
+.check-label{font-size:14px;line-height:1.45;font-weight:400;}
 
-/* ── SECTION DIVIDER ── */
-.df-divider{height:0.5px;background:var(--border);margin:20px 0 0;}
-.df-section{padding:20px 20px 0;}
-.df-section-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text);font-weight:500;margin-bottom:14px;display:block;}
+.action-card-footer{padding:13px 16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;}
 
-/* ── UNDERSTAND — snapshot ── */
-/* White cards with borders only — no green fills */
-.snapshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.snap-box{background:var(--white);border:0.5px solid var(--border);border-radius:8px;padding:12px 13px;}
-.snap-box.highlight{border:1.5px solid var(--green-border);}
-.snap-label{font-size:10px;color:var(--muted);font-weight:500;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
-.snap-label .icon{--icon-size:12px;color:var(--muted);}
-.snap-label.g .icon{color:var(--green);}
+.df-divider{height:1px;background:var(--border);margin:28px 20px 0;}
+.df-section{padding:28px 20px 0;}
+.df-section-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:16px;display:block;}
+
+.snapshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.snap-box{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 15px;}
+.snap-box.highlight{border:1.5px solid var(--green-border);background:var(--green-pale);}
+.snap-label{font-size:10.5px;color:var(--text-soft);font-weight:500;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.snap-label .icon{--icon-size:13px;color:var(--text-soft);}
 .snap-label.g{color:var(--green);}
-.snap-val{font-family:var(--serif);font-size:17px;color:var(--text);display:block;line-height:1.2;}
+.snap-label.g .icon{color:var(--green);}
+.snap-val{font-family:var(--serif);font-size:19px;color:var(--text);display:block;line-height:1.2;font-weight:400;}
 .snap-val.g{color:var(--green);}
 .snap-val.r{color:var(--red);}
-.snap-sub{font-size:10.5px;color:var(--muted);margin-top:3px;display:block;line-height:1.4;}
+.snap-sub{font-size:11px;color:var(--text-soft);margin-top:4px;display:block;line-height:1.4;font-weight:300;}
 
-/* ── PLAN SECTION ── */
-.plan-card{border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.plan-card-header{padding:14px 16px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.plan-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.plan-card-header{padding:15px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .plan-card-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;}
-.plan-card-body{padding:16px;font-size:13.5px;line-height:1.85;color:#333;white-space:pre-wrap;font-weight:300;max-height:200px;overflow:hidden;position:relative;}
+.plan-card-body{padding:18px;font-size:14.5px;line-height:1.9;color:var(--text-soft);white-space:pre-wrap;font-weight:300;max-height:220px;overflow:hidden;position:relative;}
 .plan-card-body.expanded{max-height:none;}
 .plan-card-body:not(.expanded)::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--white));pointer-events:none;}
-.plan-card-footer{padding:12px 16px;border-top:0.5px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;}
-.btn-expand{background:none;border:none;font-size:13px;color:var(--green);font-weight:500;cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
-.btn-print{background:none;border:none;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
+.plan-card-footer{padding:13px 18px;border-top:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;}
+.plan-card-footer-left{display:flex;gap:16px;}
+.btn-expand{background:none;border:none;font-size:13px;color:var(--green);font-weight:600;cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
+.btn-print{background:none;border:none;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
+.btn-print:hover{color:var(--text);}
+.btn-update-plan{background:none;border:none;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
+.btn-update-plan:hover{color:var(--green);}
 
-/* ── DEBT MAP ── */
-.debt-item{padding:12px 0;border-bottom:0.5px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.debt-item{padding:13px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 .debt-item:last-child{border-bottom:none;}
-.debt-name{font-size:14px;font-weight:600;color:var(--text);}
-.debt-type{font-size:12px;color:var(--muted);margin-top:2px;}
-.debt-tags{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;}
-.debt-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;}
-.tag-urgent{background:#fee2e2;color:var(--red);}
-.tag-high{background:var(--amber-bg);color:#92400e;}
-.tag-med{background:#e0f2fe;color:#0369a1;}
-.tag-low{background:var(--green-light);color:var(--green);}
+.debt-name{font-size:14.5px;font-weight:600;color:var(--text);}
+.debt-type{font-size:12px;color:var(--text-soft);margin-top:2px;font-weight:300;}
+.debt-tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;}
+.debt-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;}
+.tag-urgent{background:var(--red-bg);color:var(--red);}
+.tag-high{background:var(--amber-bg);color:var(--amber);}
+.tag-med{background:#eaf1f8;color:#2c5a82;}
+.tag-low{background:var(--green-pale);color:var(--green);}
 .debt-right{text-align:right;flex-shrink:0;}
 .debt-amount{font-size:16px;font-weight:700;color:var(--text);}
-.debt-rate{font-size:12px;color:var(--muted);}
+.debt-rate{font-size:12px;color:var(--text-soft);font-weight:300;}
 .debt-interest{font-size:11px;color:var(--amber);margin-top:1px;}
 
-/* ── TOOLS SECTION ── */
-.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.tool-card{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:14px 13px;cursor:pointer;transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent;min-height:80px;display:flex;flex-direction:column;justify-content:space-between;}
-.tool-card:hover{border-color:var(--green-border);background:var(--green-pale);}
-.tool-card-icon{color:var(--muted);margin-bottom:8px;}
-.tool-card-icon svg{width:20px;height:20px;stroke-width:1.5;}
-.tool-card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;}
-.tool-card-desc{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
-/* Tool panel placeholders — these open inline panels in v2 */
-.tool-panel-wrap{display:none;margin-top:12px;border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;animation:fadeUp 0.2s ease;}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.tool-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:15px 14px;cursor:pointer;transition:border-color .15s;-webkit-tap-highlight-color:transparent;min-height:84px;display:flex;flex-direction:column;justify-content:space-between;}
+.tool-card:hover{border-color:var(--green);}
+.tool-card-icon{color:var(--text-soft);margin-bottom:9px;}
+.tool-card-icon svg{width:19px;height:19px;stroke-width:1.5;}
+.tool-card-name{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.3;}
+.tool-card-desc{font-size:11.5px;color:var(--text-soft);margin-top:3px;line-height:1.4;font-weight:300;}
+.tool-panel-wrap{display:none;margin-top:12px;border:1px solid var(--border);border-radius:6px;padding:22px;animation:fadeUp 0.2s ease;}
 .tool-panel-wrap.open{display:block;}
-.tool-panel-title{font-family:var(--serif);font-size:17px;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
-.btn-close-panel{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;}
+.tool-panel-title{font-family:var(--serif);font-size:17px;color:var(--text);font-weight:400;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.btn-close-panel{background:none;border:none;color:var(--text-soft);cursor:pointer;font-size:18px;line-height:1;}
 
-/* ── SUPPORT ── */
-.support-item{background:var(--white);border:0.5px solid var(--green-border);border-radius:8px;padding:14px;margin-bottom:8px;}
+.support-item{background:var(--white);border:1px solid var(--green-border);border-radius:6px;padding:15px;margin-bottom:9px;}
 .support-item:last-child{margin-bottom:0;}
-.support-name{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px;}
-.support-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+.support-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.support-desc{font-size:13px;color:var(--text-soft);line-height:1.6;margin-bottom:9px;font-weight:300;}
 .support-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .support-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:4px;}
 .support-link:hover{text-decoration:underline;}
-.support-free{font-size:10px;font-weight:600;color:var(--green);background:var(--green-light);padding:2px 7px;border-radius:10px;}
+.support-free{font-size:10px;font-weight:600;color:var(--green);background:var(--green-pale);padding:2px 8px;border-radius:10px;}
 
-/* ── JOURNEY TIMELINE ── */
 .journey-timeline{display:flex;flex-direction:column;gap:0;}
-.journey-step{display:flex;gap:14px;padding:14px 0;border-bottom:0.5px solid var(--border);}
+.journey-step{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);}
 .journey-step:last-child{border-bottom:none;}
 .journey-step-left{display:flex;flex-direction:column;align-items:center;gap:0;width:28px;flex-shrink:0;}
 .journey-step-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -224,49 +217,62 @@ body.ready{visibility:visible;}
 .journey-step-dot.locked .icon{color:#ccc;}
 .journey-step-line{width:1px;flex:1;min-height:20px;background:var(--border);margin:4px 0;}
 .journey-step-body{flex:1;padding-top:4px;}
-.journey-step-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:4px;display:block;}
+.journey-step-tag{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:5px;display:block;}
 .journey-step-tag.complete{color:var(--green);}
 .journey-step-tag.active{color:var(--green);}
-.journey-step-tag.locked{color:var(--muted);}
-.journey-step-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.3;}
-.journey-step-desc{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5;}
+.journey-step-tag.locked{color:var(--text-soft);}
+.journey-step-title{font-size:15px;font-weight:600;color:var(--text);line-height:1.3;}
+.journey-step-desc{font-size:13px;color:var(--text-soft);margin-top:4px;line-height:1.55;font-weight:300;}
 
-/* ── UPGRADE CARD ── */
-/* Single premium card — not a list of locks */
-.upgrade-card{margin:20px 20px 0;border:1px solid var(--border);border-radius:var(--radius);padding:22px 20px;background:var(--white);}
-.upgrade-tag{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:var(--green);margin-bottom:10px;display:block;}
-.upgrade-title{font-family:var(--serif);font-size:21px;color:var(--text);margin-bottom:8px;line-height:1.2;}
-.upgrade-body{font-size:13px;color:#444;line-height:1.65;font-weight:300;margin-bottom:14px;}
-.upgrade-includes{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
-.upgrade-includes li{font-size:13px;color:#333;display:flex;align-items:flex-start;gap:8px;line-height:1.4;}
+.upgrade-card{margin:20px 20px 0;border:1px solid var(--border);border-radius:6px;padding:26px 22px;background:var(--white);}
+.upgrade-tag{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:var(--green);margin-bottom:12px;display:block;}
+.upgrade-title{font-family:var(--serif);font-size:22px;color:var(--text);font-weight:400;margin-bottom:10px;line-height:1.3;}
+.upgrade-body{font-size:13.5px;color:var(--text-soft);line-height:1.7;font-weight:300;margin-bottom:16px;}
+.upgrade-includes{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.upgrade-includes li{font-size:13.5px;color:var(--text);display:flex;align-items:flex-start;gap:9px;line-height:1.45;}
 .upgrade-includes .icon{color:var(--green);margin-top:2px;--icon-size:14px;}
-.upgrade-price{font-size:12px;color:var(--muted);margin-bottom:16px;}
-.upgrade-price strong{font-size:17px;font-weight:700;color:var(--text);}
-/* Green fill only on CTA */
-.btn-upgrade{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;min-height:44px;}
+.upgrade-price{font-size:12.5px;color:var(--text-soft);margin-bottom:18px;font-weight:300;}
+.upgrade-price strong{color:var(--text);font-weight:600;}
+.btn-upgrade{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:15px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;min-height:48px;}
 .btn-upgrade:hover{background:var(--green-dark);}
+.upgrade-community{display:block;text-align:center;margin-top:12px;font-size:12.5px;color:var(--green);font-weight:500;text-decoration:underline;text-decoration-color:var(--green-border);text-underline-offset:3px;}
+.upgrade-community:hover{text-decoration-color:var(--green);}
 
-.disclaimer{margin:16px 20px 0;border:0.5px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.6;}
-.dash-footer{text-align:center;padding:24px 20px 12px;border-top:0.5px solid var(--border);margin-top:24px;}
-.dash-footer a{color:var(--green);font-size:12px;text-decoration:none;margin:0 8px;}
-.dash-footer p{font-size:11px;color:var(--muted);margin-top:6px;}
+.disclaimer{margin:20px 20px 0;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-size:12px;color:var(--text-soft);line-height:1.65;font-weight:300;}
+
+.dash-footer{text-align:center;padding:28px 20px 14px;border-top:1px solid var(--border);margin-top:28px;}
+.dash-footer a{color:var(--green);font-size:12.5px;text-decoration:none;margin:0 10px;}
+.dash-footer p{font-size:11.5px;color:var(--text-soft);margin-top:8px;font-weight:300;}
+
+.btn-green{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:12px 18px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;}
+.btn-green:hover{background:var(--green-dark);}
+.btn-ghost{display:flex;align-items:center;justify-content:center;gap:8px;background:none;color:var(--text-soft);border:1px solid var(--border);border-radius:4px;padding:12px 18px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;}
+.btn-ghost:hover{border-color:var(--text-soft);color:var(--text);}
+
+.update-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:600;display:none;align-items:center;justify-content:center;padding:20px;}
+.update-modal-overlay.show{display:flex;animation:fadeUp 0.2s ease;}
+.update-modal{background:var(--white);border-radius:8px;max-width:460px;width:100%;padding:32px 28px;}
+.update-modal h3{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--text);margin-bottom:10px;}
+.update-modal p{font-size:14px;color:var(--text-soft);line-height:1.65;font-weight:300;margin-bottom:24px;}
+.update-modal-actions{display:flex;flex-direction:column;gap:10px;}
+.update-opt{display:flex;align-items:flex-start;gap:13px;border:1px solid var(--border);border-radius:6px;padding:16px;cursor:pointer;transition:border-color .15s;text-align:left;background:none;width:100%;font-family:var(--sans);}
+.update-opt:hover{border-color:var(--green);}
+.update-opt .icon{color:var(--green);margin-top:1px;flex-shrink:0;}
+.update-opt-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.update-opt-desc{font-size:12.5px;color:var(--text-soft);line-height:1.5;font-weight:300;}
+.update-modal-close{display:block;width:100%;background:none;border:none;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);padding:14px 0 0;text-align:center;}
+.update-modal-close:hover{color:var(--text);}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-
-/* ── BUTTONS ── */
-.btn-ghost{background:none;border:1.5px solid var(--border);border-radius:30px;padding:9px 18px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;font-family:var(--sans);min-height:40px;display:inline-flex;align-items:center;gap:6px;}
-.btn-ghost:hover{border-color:var(--green-border);color:var(--green);}
-.btn-green{background:var(--green);color:var(--white);border:none;border-radius:30px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:40px;display:inline-flex;align-items:center;gap:6px;}
-.btn-green:hover{background:var(--green-dark);}
 
 @media(max-width:480px){
   .snapshot-grid{grid-template-columns:1fr;}
   .tools-grid{grid-template-columns:1fr;}
   .debt-item{flex-direction:column;gap:4px;}
   .debt-right{text-align:left;}
-  .pf-title{font-size:21px;}
 }
-@media print{.topbar,.upgrade-card,.dash-footer,.action-card-footer,.pf-topbar{display:none!important;}}
+@media print{.topbar,.upgrade-card,.dash-footer,.action-card-footer,.pf-topbar,.disclaimer{display:none!important;}}
 </style>
 </head>
 <body>
@@ -274,7 +280,7 @@ body.ready{visibility:visible;}
 <!-- GATE -->
 <div id="gate">
   <div class="gate-card">
-    <span class="gate-logo">✦ Debt-Free.world</span>
+    <span class="gate-logo">Debt-Free.world</span>
     <div class="gate-spinner" id="gateSpinner"></div>
     <div class="gate-title" id="gateTitle">Verifying your access</div>
     <div class="gate-sub" id="gateSub">This takes only a moment.</div>
@@ -289,7 +295,7 @@ body.ready{visibility:visible;}
 <!-- PLAN-FIRST OVERLAY -->
 <div id="planFirst">
   <div class="pf-topbar">
-    <span class="pf-logo">✦ Debt-Free.world</span>
+    <span class="pf-logo">Debt-Free.world</span>
     <button class="pf-save" onclick="window.print()">
       <span data-lucide="printer"></span> Save / Print
     </button>
@@ -316,41 +322,18 @@ body.ready{visibility:visible;}
 <!-- DASHBOARD -->
 <div id="dashboard">
 
-  <!-- TOPBAR -->
   <div class="topbar">
-    <span class="topbar-logo">✦ Debt-Free.world</span>
+    <span class="topbar-logo">Debt-Free.world</span>
     <div class="topbar-right">
       <div class="lang-selector-wrap">
-        <button class="lang-pill" onclick="toggleLangMenu()" id="langBtn">
-          <span id="langCode">EN</span> ▾
-        </button>
+        <button class="lang-pill" id="langBtn" onclick="toggleLangMenu()"><span id="langCode">EN</span> ▾</button>
         <div class="lang-menu" id="langMenu">
-          <div class="lang-menu-inner">
-            <button onclick="changeLang('EN')">English</button>
-            <button onclick="changeLang('FI')">Suomi</button>
-            <button onclick="changeLang('SV')">Svenska</button>
-            <button onclick="changeLang('DE')">Deutsch</button>
-            <button onclick="changeLang('NO')">Norsk</button>
-            <button onclick="changeLang('DA')">Dansk</button>
-            <button onclick="changeLang('NL')">Nederlands</button>
-            <button onclick="changeLang('ES')">Español</button>
-            <button onclick="changeLang('FR')">Français</button>
-            <button onclick="changeLang('IT')">Italiano</button>
-            <button onclick="changeLang('PL')">Polski</button>
-            <button onclick="changeLang('PT')">Português</button>
-            <button onclick="changeLang('CS')">Čeština</button>
-            <button onclick="changeLang('ET')">Eesti</button>
-            <button onclick="changeLang('LV')">Latviešu</button>
-            <button onclick="changeLang('LT')">Lietuvių</button>
-            <button onclick="changeLang('HU')">Magyar</button>
-            <button onclick="changeLang('RO')">Română</button>
-            <button onclick="changeLang('HR')">Hrvatski</button>
-          </div>
+          <div class="lang-menu-inner" id="langMenuInner"></div>
         </div>
       </div>
-      <div class="menu-pill" onclick="openDrawer()" aria-label="All tools">
+      <button class="menu-pill" onclick="openDrawer()" aria-label="All tools">
         <span data-lucide="menu"></span>
-      </div>
+      </button>
     </div>
   </div>
 
@@ -362,8 +345,7 @@ body.ready{visibility:visible;}
       <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
     </div>
 
-    <!-- Read plan -->
-    <div style="padding:8px 20px 4px;">
+    <div style="padding:10px 20px 4px;">
       <div class="drawer-plan-item" onclick="showPlanFirst();closeDrawer();">
         <div class="icon"><span data-lucide="file-text"></span></div>
         <div>
@@ -375,7 +357,6 @@ body.ready{visibility:visible;}
 
     <div class="drawer-divider"></div>
 
-    <!-- YOUR PLAN section -->
     <div class="drawer-section">
       <span class="drawer-section-label">Your Plan</span>
       <div class="drawer-item" onclick="scrollTo('today');closeDrawer();">
@@ -394,11 +375,14 @@ body.ready{visibility:visible;}
         <div class="icon"><span data-lucide="landmark"></span></div>
         <div><div class="drawer-item-name">Local Support</div><div class="drawer-item-desc">Verified free services in your country</div></div>
       </div>
+      <div class="drawer-item" onclick="openUpdateModal();closeDrawer();">
+        <div class="icon"><span data-lucide="refresh-cw"></span></div>
+        <div><div class="drawer-item-name">Update my information</div><div class="drawer-item-desc">Numbers changed? Refresh your plan</div></div>
+      </div>
     </div>
 
     <div class="drawer-divider"></div>
 
-    <!-- TOOLS section -->
     <div class="drawer-section">
       <span class="drawer-section-label">Tools</span>
       <div class="drawer-item" onclick="scrollTo('tools');closeDrawer();">
@@ -429,22 +413,20 @@ body.ready{visibility:visible;}
 
     <div class="drawer-divider"></div>
 
-    <!-- LEARN section -->
     <div class="drawer-section">
       <span class="drawer-section-label">Learn</span>
       <div class="drawer-item" onclick="window.location.href='/blog/';">
         <div class="icon"><span data-lucide="book-open"></span></div>
         <div><div class="drawer-item-name">Articles</div><div class="drawer-item-desc">Debt education and financial guides</div></div>
       </div>
-      <div class="drawer-item" onclick="window.location.href='/blog/';">
-        <div class="icon"><span data-lucide="help-circle"></span></div>
-        <div><div class="drawer-item-name">Financial Glossary</div><div class="drawer-item-desc">Plain-language definitions</div></div>
+      <div class="drawer-item" onclick="window.location.href='/ecosystem.html';">
+        <div class="icon"><span data-lucide="map-pin"></span></div>
+        <div><div class="drawer-item-name">The Ecosystem</div><div class="drawer-item-desc">See the full journey, all five stages</div></div>
       </div>
     </div>
 
     <div class="drawer-divider"></div>
 
-    <!-- DEBT RECOVERY section -->
     <div class="drawer-section">
       <span class="drawer-section-label">Debt Recovery — 19 €</span>
       <div class="drawer-item" onclick="goUpgrade();">
@@ -511,11 +493,13 @@ body.ready{visibility:visible;}
           <span class="drawer-item-badge badge-unlock">Unlock</span>
         </div>
       </div>
+      <div style="padding:6px 0 2px;">
+        <a href="#" class="upgrade-community" onclick="goUpgradeCommunity(event)" style="text-align:left;display:block;">Can't afford 19 €? Get Community Access — free</a>
+      </div>
     </div>
 
     <div class="drawer-divider"></div>
 
-    <!-- COMING SOON -->
     <div class="drawer-section">
       <span class="drawer-section-label">Coming soon</span>
       <div class="drawer-item">
@@ -531,7 +515,7 @@ body.ready{visibility:visible;}
         <div>
           <div class="drawer-item-name">Wealth Architect</div>
           <div class="drawer-item-desc">Build and protect what you earn</div>
-          <span class="drawer-item-badge badge-coming">Q2–Q3 2027</span>
+          <span class="drawer-item-badge badge-coming">2028</span>
         </div>
       </div>
       <div class="drawer-item">
@@ -539,7 +523,7 @@ body.ready{visibility:visible;}
         <div>
           <div class="drawer-item-name">Business Engine</div>
           <div class="drawer-item-desc">For entrepreneurs and business owners</div>
-          <span class="drawer-item-badge badge-coming">Q4 2029</span>
+          <span class="drawer-item-badge badge-coming">2029</span>
         </div>
       </div>
     </div>
@@ -551,25 +535,24 @@ body.ready{visibility:visible;}
   <!-- MAIN CONTENT -->
   <div class="main-wrap">
 
-    <!-- TODAY — greeting + action card -->
+    <!-- TODAY -->
     <div class="today-section" id="today">
       <div class="greeting">
         <div class="greeting-name" id="greetingName">Good to see you.</div>
         <div class="greeting-sub" id="greetingSub">Your journey to financial freedom has already started.</div>
       </div>
 
-      <!-- TODAY action card -->
-      <div class="action-card" style="margin-top:16px;">
+      <div class="action-card">
         <div class="action-card-top">
           <div class="icon"><span data-lucide="zap"></span></div>
           <div class="action-card-label">Today's priority</div>
         </div>
         <div class="action-card-body">
           <div class="action-text" id="ecAction">Loading your priority action…</div>
-          <div id="ecCritical" style="background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:8px;padding:10px 13px;margin-bottom:12px;">
-            <div style="font-size:10px;font-weight:600;color:var(--amber);letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;">Most critical debt</div>
-            <div style="font-size:13.5px;font-weight:600;color:var(--text);" id="ecDebtName">—</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:2px;" id="ecDebtDetail"></div>
+          <div class="ec-critical" id="ecCritical">
+            <div class="ec-critical-lbl">Most critical debt</div>
+            <div class="ec-critical-name" id="ecDebtName">—</div>
+            <div class="ec-critical-detail" id="ecDebtDetail"></div>
           </div>
           <div class="checklist" id="checklist"></div>
         </div>
@@ -588,7 +571,7 @@ body.ready{visibility:visible;}
 
     <div class="df-divider"></div>
 
-    <!-- UNDERSTAND — financial snapshot + debt-free date -->
+    <!-- UNDERSTAND -->
     <div class="df-section" id="understand">
       <span class="df-section-label">Understand — Your Financial Reality</span>
       <div class="snapshot-grid">
@@ -629,23 +612,29 @@ body.ready{visibility:visible;}
 
     <div class="df-divider"></div>
 
-    <!-- PLAN — your roadmap -->
+    <!-- PLAN -->
     <div class="df-section" id="plan">
       <span class="df-section-label">Plan — My DEBT FREE Plan</span>
       <div class="plan-card">
         <div class="plan-card-header">
           <span class="plan-card-eyebrow">My DEBT FREE Plan</span>
-          <span style="font-size:11px;color:var(--muted);" id="planMeta"></span>
+          <span style="font-size:11px;color:var(--text-soft);font-weight:300;" id="planMeta"></span>
         </div>
         <div class="plan-card-body" id="planBody">Loading your plan…</div>
         <div class="plan-card-footer">
-          <button class="btn-expand" id="planExpandBtn" onclick="togglePlan()">
-            <span data-lucide="chevron-down"></span>
-            Read full plan
-          </button>
-          <button class="btn-print" onclick="window.print()">
-            <span data-lucide="printer"></span>
-            Save / Print
+          <div class="plan-card-footer-left">
+            <button class="btn-expand" id="planExpandBtn" onclick="togglePlan()">
+              <span data-lucide="chevron-down"></span>
+              Read full plan
+            </button>
+            <button class="btn-print" onclick="window.print()">
+              <span data-lucide="printer"></span>
+              Save / Print
+            </button>
+          </div>
+          <button class="btn-update-plan" onclick="openUpdateModal()">
+            <span data-lucide="refresh-cw"></span>
+            Update my plan
           </button>
         </div>
       </div>
@@ -669,7 +658,7 @@ body.ready{visibility:visible;}
 
     <div class="df-divider"></div>
 
-    <!-- LOCAL SUPPORT -->
+    <!-- SUPPORT -->
     <div class="df-section" id="support">
       <span class="df-section-label">Support — You Are Not Alone</span>
       <div id="supportBody"></div>
@@ -677,7 +666,7 @@ body.ready{visibility:visible;}
 
     <div class="df-divider"></div>
 
-    <!-- JOURNEY TIMELINE -->
+    <!-- JOURNEY -->
     <div class="df-section" id="journey">
       <span class="df-section-label">Your Journey</span>
       <div class="journey-timeline">
@@ -701,8 +690,8 @@ body.ready{visibility:visible;}
             <span class="journey-step-tag active">DEBT RECOVERY — 19 €</span>
             <div class="journey-step-title">My Recovery Journey</div>
             <div class="journey-step-desc">90-day guided companion. Creditor letters. Weekly check-ins. The difference between knowing and doing.</div>
-            <button class="btn-green" style="margin-top:10px;font-size:12.5px;padding:9px 18px;" onclick="goUpgrade()">
-              <span data-lucide="unlock"></span>
+            <button class="btn-green" style="margin-top:12px;font-size:13px;padding:10px 18px;" onclick="goUpgrade()">
+              <span data-lucide="arrow-right"></span>
               Continue my journey
             </button>
           </div>
@@ -724,7 +713,7 @@ body.ready{visibility:visible;}
             <div class="journey-step-line"></div>
           </div>
           <div class="journey-step-body">
-            <span class="journey-step-tag locked">WEALTH ARCHITECT — Q2–Q3 2027</span>
+            <span class="journey-step-tag locked">WEALTH ARCHITECT — 2028</span>
             <div class="journey-step-title">Build and Protect Wealth</div>
             <div class="journey-step-desc">Once debt is gone, build what lasts.</div>
           </div>
@@ -734,7 +723,7 @@ body.ready{visibility:visible;}
             <div class="journey-step-dot locked"><div class="icon"><span data-lucide="lock"></span></div></div>
           </div>
           <div class="journey-step-body">
-            <span class="journey-step-tag locked">BUSINESS ENGINE — Q4 2029</span>
+            <span class="journey-step-tag locked">BUSINESS ENGINE — 2029</span>
             <div class="journey-step-title">Build Something Bigger</div>
             <div class="journey-step-desc">For entrepreneurs ready to build their next chapter.</div>
           </div>
@@ -756,34 +745,69 @@ body.ready{visibility:visible;}
         <li><div class="icon"><span data-lucide="check"></span></div>Behaviour and mindset tools — habits, stress, impulse control</li>
       </ul>
       <div class="upgrade-price">19 € once. <strong>Less than 0,25 €</strong> per day for 90 days. No subscription.</div>
-      <a href="/#pricing" class="btn-upgrade">
-        <span data-lucide="unlock"></span>
+      <a href="#" class="btn-upgrade" onclick="goUpgradeStripe(event)">
+        <span data-lucide="arrow-right"></span>
         Continue my recovery
       </a>
+      <a href="#" class="upgrade-community" onclick="goUpgradeCommunity(event)">Can't afford 19 € right now? Get Community Access — free, no explanation needed.</a>
     </div>
 
     <div class="disclaimer">Your plan is created based on the information you provided. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.</div>
 
     <div class="dash-footer">
-      <a href="/">Home</a><a href="/pricing.html">Pricing</a><a href="/legal.html">Privacy &amp; Terms</a><a href="mailto:support@debt-free.world">Support</a>
+      <a href="/">Home</a><a href="/ecosystem.html">Ecosystem</a><a href="/legal.html#privacy">Privacy</a><a href="mailto:support@debt-free.world">Support</a>
       <p>Amliv Oy · VAT FI32503518 · Nokia, Finland</p>
     </div>
 
-  </div><!-- /main-wrap -->
-</div><!-- /dashboard -->
+  </div>
+</div>
+
+<!-- UPDATE PLAN MODAL -->
+<div class="update-modal-overlay" id="updateModalOverlay" onclick="closeUpdateModalBg(event)">
+  <div class="update-modal">
+    <h3>Update your plan</h3>
+    <p>Your situation may have changed since you built your plan. Choose how you'd like to update it — both options take a few minutes.</p>
+    <div class="update-modal-actions">
+      <button class="update-opt" onclick="goUpdateExisting()">
+        <div class="icon"><span data-lucide="edit-3"></span></div>
+        <div>
+          <div class="update-opt-title">Update my information</div>
+          <div class="update-opt-desc">Go through the form again with your current numbers pre-filled. A new plan replaces your old one.</div>
+        </div>
+      </button>
+      <button class="update-opt" onclick="goStartOver()">
+        <div class="icon"><span data-lucide="rotate-ccw"></span></div>
+        <div>
+          <div class="update-opt-title">Start completely over</div>
+          <div class="update-opt-desc">Begin the form from scratch with nothing pre-filled. Useful if your situation has changed a lot.</div>
+        </div>
+      </button>
+    </div>
+    <button class="update-modal-close" onclick="closeUpdateModal()">Cancel</button>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 const WORKER_URL='https://debt-free-proxy.amlivbusiness.workers.dev';
 const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
+const LANGS=[['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],['HU','Magyar'],['RO','Română'],['HR','Hrvatski']];
 
 let memberToken=null,memberData=null,planExpanded=false;
 
-/* ── INIT ── */
 window.addEventListener('DOMContentLoaded',async()=>{
-  // Init Lucide icons
   if(window.lucide)lucide.createIcons();
+
+  const menuInner=document.getElementById('langMenuInner');
+  if(menuInner){
+    LANGS.forEach(l=>{
+      const b=document.createElement('button');
+      b.textContent=l[1];
+      b.onclick=()=>{document.getElementById('langCode').textContent=l[0];document.getElementById('langMenu').classList.remove('open');};
+      menuInner.appendChild(b);
+    });
+  }
 
   const p=new URLSearchParams(window.location.search);
   memberToken=p.get('token')||sessionStorage.getItem('dfw_member_token');
@@ -791,7 +815,11 @@ window.addEventListener('DOMContentLoaded',async()=>{
 
   document.getElementById('gate').classList.add('show');
 
-  if(!memberToken){showGateError();return;}
+  if(!memberToken){
+    document.body.classList.add('ready');
+    window.location.replace('/signup-free.html');
+    return;
+  }
   sessionStorage.setItem('dfw_member_token',memberToken);
 
   try{
@@ -799,17 +827,23 @@ window.addEventListener('DOMContentLoaded',async()=>{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({token:memberToken})
     });
-    if(!res.ok){showGateError();return;}
+
+    if(!res.ok){
+      showGateError();
+      return;
+    }
     const data=await res.json();
 
     if(data.tier&&data.tier!=='free'){
       window.location.replace(`/member/?token=${encodeURIComponent(memberToken)}`);
       return;
     }
+
     if(!data.onboarding_complete){
       window.location.replace(`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}`);
       return;
     }
+
     memberData=data;
     document.body.classList.add('ready');
 
@@ -821,18 +855,19 @@ window.addEventListener('DOMContentLoaded',async()=>{
       document.getElementById('dashboard').classList.add('show');
       renderDashboard(data);
     }
-  }catch(e){showGateError();}
+  }catch(e){
+    showGateError();
+  }
 });
 
 function showGateError(){
   document.body.classList.add('ready');
   document.getElementById('gateSpinner').style.display='none';
-  document.getElementById('gateTitle').textContent='Your link has expired.';
-  document.getElementById('gateSub').textContent='Enter your email and we\'ll send a fresh access link right away.';
+  document.getElementById('gateTitle').textContent='We could not verify your access.';
+  document.getElementById('gateSub').textContent='Enter your email and we\'ll send a fresh link to continue your plan.';
   document.getElementById('gateForm').classList.add('show');
 }
 
-/* ── PLAN-FIRST ── */
 function showPlanFirst(data){
   const d=data||memberData;
   if(!d)return;
@@ -851,7 +886,6 @@ function showPlanFirst(data){
   document.getElementById('pfPlan').textContent=plan||'Your plan will appear here once onboarding is complete.';
   document.getElementById('planFirst').classList.add('show');
 
-  // Re-init icons in overlay
   if(window.lucide)lucide.createIcons();
 }
 
@@ -862,7 +896,6 @@ function enterDashboard(){
   if(window.lucide)lucide.createIcons();
 }
 
-/* ── RENDER ── */
 function renderDashboard(data){
   const od=data.onboarding||{};
   const cur=CC[od.country]||od.currency||'EUR';
@@ -871,13 +904,11 @@ function renderDashboard(data){
 
   if(od.language)document.getElementById('langCode').textContent=od.language;
 
-  // Greeting
   const hour=new Date().getHours();
   const greet=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening';
   document.getElementById('greetingName').textContent=greet+(od.firstname?', '+od.firstname:'')+'.';
   document.getElementById('greetingSub').textContent='Your next priority is waiting below. Your plan has everything you need.';
 
-  // Plan section
   document.getElementById('planBody').textContent=plan||'Your plan will appear here.';
   document.getElementById('planMeta').textContent=od.country?od.country+' \u00b7 '+new Date().toLocaleDateString('en',{month:'short',year:'numeric'}):'';
 
@@ -888,7 +919,6 @@ function renderDashboard(data){
   renderSupport(plan,od.country);
 }
 
-/* ── NUMBERS ── */
 function renderNumbers(od,cur,created_at){
   const income=(parseFloat(od.income)||0)+(parseFloat(od.extra_amount)||0);
   const exp=(parseFloat(od.housing_cost)||0)+(parseFloat(od.other_costs)||0);
@@ -899,13 +929,12 @@ function renderNumbers(od,cur,created_at){
 
   const surplusEl=document.getElementById('statSurplus');
   surplusEl.textContent=fmtCur(cur,surplus);
-  if(surplus>=0){surplusEl.classList.add('g');}else{surplusEl.classList.add('r');}
+  surplusEl.classList.add(surplus>=0?'g':'r');
   document.getElementById('statSurplusSub').textContent=surplus>=0
     ?fmtCur(cur,income)+' in \u2014 '+fmtCur(cur,exp)+' out':'Expenses exceed income';
 
   document.getElementById('statDebt').textContent=fmtCur(cur,totalDebt);
-  document.getElementById('statDebtSub').textContent=monthlyInt>0
-    ?'\u2248 '+fmtCur(cur,monthlyInt)+'/mo in interest':'';
+  document.getElementById('statDebtSub').textContent=monthlyInt>0?'\u2248 '+fmtCur(cur,monthlyInt)+'/mo in interest':'';
 
   const dfdEl=document.getElementById('statDfd');
   if(surplus>0&&totalDebt>0){
@@ -914,8 +943,11 @@ function renderNumbers(od,cur,created_at){
     dfdEl.textContent=dfd.toLocaleDateString('en',{month:'short',year:'numeric'});
     document.getElementById('statDfdSub').textContent='\u2248 '+months+' months at current pace';
   } else if(surplus<=0){
-    dfdEl.textContent='Address deficit first';dfdEl.classList.add('r');
+    dfdEl.textContent='Address deficit first';
+    dfdEl.classList.add('r');
     document.getElementById('statDfdSub').textContent='Surplus needed to calculate';
+  } else {
+    dfdEl.textContent='\u2014';
   }
 
   if(created_at){
@@ -924,7 +956,6 @@ function renderNumbers(od,cur,created_at){
   }
 }
 
-/* ── EMERGENCY CARD ── */
 function renderEmergencyCard(plan,debts,cur,checkState){
   let action='Review your most urgent debt and take one concrete step today.';
   let checks=[
@@ -958,7 +989,7 @@ function renderEmergencyCard(plan,debts,cur,checkState){
     const crit=sorted[0];
     const mi=parseFloat(crit.amount)*(parseFloat(crit.interest)||0)/100/12;
     document.getElementById('ecDebtName').textContent=(crit.creditor||crit.type)+' \u2014 '+fmtCur(crit.currency||cur,crit.amount);
-    document.getElementById('ecDebtDetail').textContent=crit.type+(crit.interest>0?' \u00b7 '+crit.interest+'% p.a.':'')+(mi>0?' \u00b7 '+fmtCur(crit.currency||cur,mi)+'/mo interest':'')+(crit.type==='Debt in collections'?' \u00b7 Urgent — action required':'');
+    document.getElementById('ecDebtDetail').textContent=crit.type+(crit.interest>0?' \u00b7 '+crit.interest+'% p.a.':'')+(mi>0?' \u00b7 '+fmtCur(crit.currency||cur,mi)+'/mo interest':'')+(crit.type==='Debt in collections'?' \u00b7 Urgent \u2014 action required':'');
   } else {
     document.getElementById('ecCritical').style.display='none';
   }
@@ -977,7 +1008,6 @@ function toggleCheck(i){
   fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:states})}).catch(_=>{});
 }
 
-/* ── PLAN TOGGLE ── */
 function togglePlan(){
   planExpanded=!planExpanded;
   document.getElementById('planBody').classList.toggle('expanded',planExpanded);
@@ -988,10 +1018,9 @@ function togglePlan(){
   if(window.lucide)lucide.createIcons();
 }
 
-/* ── DEBT MAP ── */
 function renderDebtMap(debts,cur){
   const body=document.getElementById('debtMapBody');
-  if(!debts.length){body.innerHTML='<p style="font-size:13px;color:var(--muted);">No debts recorded.</p>';return;}
+  if(!debts.length){body.innerHTML='<p style="font-size:13px;color:var(--text-soft);font-weight:300;">No debts recorded.</p>';return;}
   const sorted=[...debts].sort((a,b)=>{
     if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
     if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
@@ -1000,7 +1029,7 @@ function renderDebtMap(debts,cur){
   body.innerHTML=sorted.map(d=>{
     const rate=parseFloat(d.interest)||0;
     let tag=rate>=20?'<span class="debt-tag tag-high">High rate</span>':rate>=10?'<span class="debt-tag tag-med">Medium</span>':'<span class="debt-tag tag-low">Lower risk</span>';
-    if(d.type==='Debt in collections')tag='<span class="debt-tag tag-urgent">Collections — urgent</span>';
+    if(d.type==='Debt in collections')tag='<span class="debt-tag tag-urgent">Collections \u2014 urgent</span>';
     const mi=parseFloat(d.amount)*rate/100/12;
     return`<div class="debt-item">
       <div><div class="debt-name">${esc(d.creditor||d.type)}</div><div class="debt-type">${esc(d.type)}</div><div class="debt-tags">${tag}</div></div>
@@ -1009,14 +1038,12 @@ function renderDebtMap(debts,cur){
   }).join('');
 }
 
-/* ── TOOLS ── */
 function renderTools(od,cur){
   const surplus=(parseFloat(od.income)||0)+(parseFloat(od.extra_amount)||0)-(parseFloat(od.housing_cost)||0)-(parseFloat(od.other_costs)||0);
   const debts=od.debts||[];
   const totalDebt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
   const highestRate=debts.length?Math.max(...debts.map(d=>parseFloat(d.interest)||0)):0;
 
-  // Debt-free date calculator result
   let dfdResult='';
   if(surplus>0&&totalDebt>0){
     const months=Math.ceil(totalDebt/surplus);
@@ -1024,59 +1051,31 @@ function renderTools(od,cur){
     dfdResult=months+' months at current pace. With '+fmtCur(cur,50)+' extra/month: '+with50+' months.';
   }
 
-  // Snowball vs Avalanche
   let strategyResult='';
   if(debts.length>1){
-    if(highestRate>15)strategyResult='Avalanche recommended — pay highest interest rate ('+highestRate+'%) first to minimise total interest cost.';
-    else strategyResult='Snowball recommended — pay smallest balance first to build momentum with quick wins.';
+    if(highestRate>15)strategyResult='Avalanche recommended \u2014 pay highest interest rate ('+highestRate+'%) first to minimise total interest cost.';
+    else strategyResult='Snowball recommended \u2014 pay smallest balance first to build momentum with quick wins.';
   } else if(debts.length===1){
-    strategyResult='Single debt — focus all surplus on '+fmtCur(cur,totalDebt)+' until cleared.';
+    strategyResult='Single debt \u2014 focus all surplus on '+fmtCur(cur,totalDebt)+' until cleared.';
   }
 
   const tools=[
-    {
-      icon:'calculator',
-      name:'Debt-Free Date',
-      desc:dfdResult||'Add your debts to calculate',
-      full:dfdResult?'Based on your surplus of '+fmtCur(cur,surplus)+'/mo and total debt of '+fmtCur(cur,totalDebt)+':\n'+dfdResult:null
-    },
-    {
-      icon:'git-merge',
-      name:'Snowball vs Avalanche',
-      desc:strategyResult||'Add multiple debts to compare',
-      full:strategyResult||null
-    },
-    {
-      icon:'sliders',
-      name:'Crisis Budget Planner',
-      desc:'Identify your essential costs vs reducible spending',
-      full:'Essential costs (cannot reduce): housing '+fmtCur(cur,parseFloat(od.housing_cost)||0)+'/mo\nOther costs: '+fmtCur(cur,parseFloat(od.other_costs)||0)+'/mo\nCurrent surplus: '+fmtCur(cur,surplus)+'/mo\n\nTo increase surplus: review subscriptions, food costs, transport. Every '+fmtCur(cur,50)+' saved/month cuts your debt-free date significantly.'
-    },
-    {
-      icon:'trending-up',
-      name:'Extra Income Simulator',
-      desc:surplus>0&&totalDebt>0?'See impact of extra income':'Add debts to simulate',
-      full:surplus>0&&totalDebt>0
-        ?(function(){
-          const base=Math.ceil(totalDebt/surplus);
-          const r100=Math.ceil(totalDebt/(surplus+100));
-          const r200=Math.ceil(totalDebt/(surplus+200));
-          return fmtCur(cur,100)+'/mo extra: '+(base-r100)+' months sooner ('+r100+' total)\n'+fmtCur(cur,200)+'/mo extra: '+(base-r200)+' months sooner ('+r200+' total)\n\nExtra income ideas: freelance work, selling unused items, overtime, renting assets.';
-        })()
-        :null
-    },
-    {
-      icon:'git-branch',
-      name:'Debt Collection Map',
-      desc:'Understand the process before it escalates',
-      full:'DEBT COLLECTION STAGES:\n1. Creditor reminder — missed payment notice\n2. Final demand — threat of collections\n3. Collections agency — debt sold or assigned\n4. Enforcement — court judgment, possible wage garnishment\n\nYour rights: You can request written proof of debt, dispute amounts, request payment plans at any stage. Collectors cannot threaten actions they are not authorised to take.'
-    },
-    {
-      icon:'shield',
-      name:'Legal Protection Guide',
-      desc:'What collectors can and cannot do',
-      full:'WHAT DEBT COLLECTORS CANNOT DO:\n• Harass, threaten or use abusive language\n• Contact you at unreasonable hours\n• Contact your employer without permission\n• Claim legal powers they do not have\n• Add unauthorised charges\n\nWHAT YOU CAN DO:\n• Request all communication in writing\n• Dispute the debt amount in writing\n• Request a payment plan at any stage\n• Contact a free debt counsellor at any time\n\nFor country-specific legal rules, consult a free debt counsellor in your country.'
-    },
+    {icon:'calculator',name:'Debt-Free Date',desc:dfdResult||'Add your debts to calculate',
+      full:dfdResult?'Based on your surplus of '+fmtCur(cur,surplus)+'/mo and total debt of '+fmtCur(cur,totalDebt)+':\n'+dfdResult:null},
+    {icon:'git-merge',name:'Snowball vs Avalanche',desc:strategyResult||'Add multiple debts to compare',full:strategyResult||null},
+    {icon:'sliders',name:'Crisis Budget Planner',desc:'Identify your essential costs vs reducible spending',
+      full:'Essential costs (cannot reduce): housing '+fmtCur(cur,parseFloat(od.housing_cost)||0)+'/mo\nOther costs: '+fmtCur(cur,parseFloat(od.other_costs)||0)+'/mo\nCurrent surplus: '+fmtCur(cur,surplus)+'/mo\n\nTo increase surplus: review subscriptions, food costs, transport. Every '+fmtCur(cur,50)+' saved/month cuts your debt-free date significantly.'},
+    {icon:'trending-up',name:'Extra Income Simulator',desc:surplus>0&&totalDebt>0?'See impact of extra income':'Add debts to simulate',
+      full:surplus>0&&totalDebt>0?(function(){
+        const base=Math.ceil(totalDebt/surplus);
+        const r100=Math.ceil(totalDebt/(surplus+100));
+        const r200=Math.ceil(totalDebt/(surplus+200));
+        return fmtCur(cur,100)+'/mo extra: '+(base-r100)+' months sooner ('+r100+' total)\n'+fmtCur(cur,200)+'/mo extra: '+(base-r200)+' months sooner ('+r200+' total)\n\nExtra income ideas: freelance work, selling unused items, overtime, renting assets.';
+      })():null},
+    {icon:'git-branch',name:'Debt Collection Map',desc:'Understand the process before it escalates',
+      full:'DEBT COLLECTION STAGES:\n1. Creditor reminder \u2014 missed payment notice\n2. Final demand \u2014 threat of collections\n3. Collections agency \u2014 debt sold or assigned\n4. Enforcement \u2014 court judgment, possible wage garnishment\n\nYour rights: You can request written proof of debt, dispute amounts, request payment plans at any stage. Collectors cannot threaten actions they are not authorised to take.'},
+    {icon:'shield',name:'Legal Protection Guide',desc:'What collectors can and cannot do',
+      full:'WHAT DEBT COLLECTORS CANNOT DO:\n\u2022 Harass, threaten or use abusive language\n\u2022 Contact you at unreasonable hours\n\u2022 Contact your employer without permission\n\u2022 Claim legal powers they do not have\n\u2022 Add unauthorised charges\n\nWHAT YOU CAN DO:\n\u2022 Request all communication in writing\n\u2022 Dispute the debt amount in writing\n\u2022 Request a payment plan at any stage\n\u2022 Contact a free debt counsellor at any time\n\nFor country-specific legal rules, consult a free debt counsellor in your country.'},
   ];
 
   const grid=document.getElementById('toolsGrid');
@@ -1085,15 +1084,17 @@ function renderTools(od,cur){
       <div class="tool-card-icon"><span data-lucide="${t.icon}"></span></div>
       <div>
         <div class="tool-card-name">${t.name}</div>
-        <div class="tool-card-desc">${esc(t.desc.substring(0,60)+(t.desc.length>60?'…':''))}</div>
+        <div class="tool-card-desc">${esc(t.desc.substring(0,60)+(t.desc.length>60?'\u2026':''))}</div>
       </div>
     </div>`).join('');
 
-  // Tool panel container
-  const panelWrap=document.createElement('div');
-  panelWrap.id='toolPanelContainer';
-  panelWrap.style.marginTop='12px';
-  grid.parentNode.insertBefore(panelWrap,grid.nextSibling);
+  let panelWrap=document.getElementById('toolPanelContainer');
+  if(!panelWrap){
+    panelWrap=document.createElement('div');
+    panelWrap.id='toolPanelContainer';
+    panelWrap.style.marginTop='12px';
+    grid.parentNode.insertBefore(panelWrap,grid.nextSibling);
+  }
 
   window._tools=tools;
   if(window.lucide)lucide.createIcons();
@@ -1116,13 +1117,12 @@ function toggleToolPanel(i){
         ${esc(tool.name)}
         <button class="btn-close-panel" onclick="toggleToolPanel(${i})">&#x2715;</button>
       </div>
-      <div style="font-size:13.5px;line-height:1.8;color:#333;white-space:pre-wrap;font-weight:300;">
-        ${tool.full?esc(tool.full):'<span style="color:var(--muted)">Add your debt information during onboarding to see personalised results here.</span>'}
+      <div style="font-size:14px;line-height:1.85;color:var(--text-soft);white-space:pre-wrap;font-weight:300;">
+        ${tool.full?esc(tool.full):'<span style="color:var(--text-soft)">Add your debt information during onboarding to see personalised results here.</span>'}
       </div>
     </div>`;
 }
 
-/* ── LOCAL SUPPORT ── */
 function renderSupport(plan,country){
   const body=document.getElementById('supportBody');
   if(!plan){body.innerHTML=supportFallback(country);return;}
@@ -1140,7 +1140,7 @@ function renderSupport(plan,country){
 
   const orgs=parseOrgs(sl);
   if(!orgs.length){
-    body.innerHTML=`<div style="font-size:13px;color:#444;line-height:1.75;">${sl.map(l=>esc(l)).join('<br/>')}</div>`;
+    body.innerHTML=`<div style="font-size:13.5px;color:var(--text-soft);line-height:1.8;font-weight:300;">${sl.map(l=>esc(l)).join('<br/>')}</div>`;
     return;
   }
   body.innerHTML=orgs.map(o=>`
@@ -1180,21 +1180,72 @@ function parseOrgs(lines){
   return orgs;
 }
 
-/* ── NAV ── */
 function openDrawer(){document.getElementById('toolsDrawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeDrawer(){document.getElementById('toolsDrawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');document.body.style.overflow='';}
 function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
-function changeLang(code){document.getElementById('langCode').textContent=code;document.getElementById('langMenu').classList.remove('open');}
-document.addEventListener('click',e=>{const m=document.getElementById('langMenu');const b=document.getElementById('langBtn');if(m&&!m.contains(e.target)&&e.target!==b)m.classList.remove('open');});
+document.addEventListener('click',e=>{
+  const m=document.getElementById('langMenu');const b=document.getElementById('langBtn');
+  if(m&&!m.contains(e.target)&&e.target!==b)m.classList.remove('open');
+});
 function scrollTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
-function goUpgrade(){window.location.href='/#pricing';}
 function logout(){sessionStorage.removeItem('dfw_member_token');window.location.replace('/');}
 
-/* ── RE-AUTH ── */
+async function goUpgradeStripe(e){
+  if(e)e.preventDefault();
+  try{
+    const res=await fetch(`${WORKER_URL}/create-checkout`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
+        successUrl:'https://www.debt-free.world/thank-you-premium.html',
+        cancelUrl:'https://www.debt-free.world/member-free/?token='+encodeURIComponent(memberToken)
+      })
+    });
+    const data=await res.json();
+    if(data.url){window.location.href=data.url;}
+    else{toast('Could not start checkout. Please try again.');}
+  }catch(err){toast('Could not start checkout. Please try again.');}
+}
+function goUpgrade(){goUpgradeStripe();}
+
+async function goUpgradeCommunity(e){
+  if(e)e.preventDefault();
+  try{
+    const res=await fetch(`${WORKER_URL}/create-checkout-community`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
+        successUrl:'https://www.debt-free.world/thank-you-premium.html',
+        cancelUrl:'https://www.debt-free.world/member-free/?token='+encodeURIComponent(memberToken)
+      })
+    });
+    const data=await res.json();
+    if(data.url){window.location.href=data.url;}
+    else{toast('Could not start checkout. Please contact support@debt-free.world');}
+  }catch(err){toast('Could not start checkout. Please contact support@debt-free.world');}
+}
+
+function openUpdateModal(){
+  document.getElementById('updateModalOverlay').classList.add('show');
+  if(window.lucide)lucide.createIcons();
+}
+function closeUpdateModal(){document.getElementById('updateModalOverlay').classList.remove('show');}
+function closeUpdateModalBg(e){if(e.target.id==='updateModalOverlay')closeUpdateModal();}
+
+function goUpdateExisting(){
+  window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=update`;
+}
+
+function goStartOver(){
+  if(confirm('This will replace your current plan with a brand new one built from scratch. Your old plan will no longer be shown once you finish the new form. Continue?')){
+    window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=fresh`;
+  }
+}
+
 async function requestNewLink(){
   const email=document.getElementById('gateEmail').value.trim();
   if(!email){toast('Please enter your email address.');return;}
-  const btn=document.querySelector('.gate-btn');btn.disabled=true;btn.textContent='Sending…';
+  const btn=document.querySelector('.gate-btn');btn.disabled=true;btn.textContent='Sending\u2026';
   try{
     await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     document.getElementById('gateForm').classList.remove('show');
@@ -1205,7 +1256,6 @@ async function requestNewLink(){
   }
 }
 
-/* ── HELPERS ── */
 function fmtCur(cur,val){const n=Math.round(val||0);try{return new Intl.NumberFormat('en',{style:'currency',currency:cur,maximumFractionDigits:0}).format(n);}catch(_){return cur+' '+n.toLocaleString();}}
 function esc(s){if(!s)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
