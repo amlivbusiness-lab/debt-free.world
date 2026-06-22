@@ -3,610 +3,483 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Pricing — Debt-Free.world</title>
-<meta name="description" content="Choose your path to financial freedom. From debt recovery to wealth building — one ecosystem, one mission."/>
+<title>The Ecosystem — Debt-Free.world</title>
+<meta name="description" content="One path, five stages. From Debt FREE to Debt Recovery, Income Builder, Wealth Architect and Business Engine — see the complete picture and choose how far you go."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
-:root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;--blue:#1d4ed8;--gold:#d97706;--violet:#7c3aed;}
+:root{
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
 body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
-.page{max-width:720px;margin:0 auto;padding:0 24px;}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;}
-.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;}
-.nav-logo em{font-style:italic;color:var(--green);}
-.nav-right{display:flex;align-items:center;gap:8px;}
-.nav-links{display:flex;gap:4px;align-items:center;}
-.nav-link{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
-.nav-link:hover{background:var(--green-bg);}
-.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
-.nav-blog:hover{background:var(--green-bg);}
-.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.2s;}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:1.25rem 24px 1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 6% 0;}
+.logo{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;text-decoration:none;}
+.topbar-right{display:flex;align-items:center;gap:30px;}
+nav{display:flex;align-items:center;gap:28px;}
+nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;}
+nav a.active{color:var(--green);}
+.lang-wrap{position:relative;}
+.lang-pill{font-size:13px;color:var(--text);border:1px solid #e8e8e3;border-radius:20px;padding:6px 16px;cursor:pointer;background:none;font-family:var(--sans);font-weight:500;}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e8e8e3;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.08);min-width:160px;max-height:320px;overflow-y:auto;z-index:50;}
+.lang-menu.open{display:block;}
+.lang-menu button{display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;font-size:13.5px;color:var(--text);cursor:pointer;font-family:var(--sans);}
+.lang-menu button:hover{background:#fafaf8;}
+.hamburger{display:none;width:36px;height:36px;border:1px solid #e8e8e3;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;background:none;}
+.hamburger svg{width:16px;height:16px;}
+
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:24px 6% 28px;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
 .mobile-menu.open{display:block;}
-.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
-.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:#aaa;line-height:1;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft);line-height:1;}
 .mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
 .mobile-menu a:last-child{border-bottom:none;}
 .mobile-menu a.active{color:var(--green);font-weight:600;}
-@media(max-width:600px){
-  .nav-links{display:none;}
+
+.page-intro{padding:90px 6% 0;max-width:760px;margin:0 auto;text-align:center;}
+.page-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-soft);font-weight:500;margin-bottom:24px;display:block;}
+.page-intro h1{font-family:var(--serif);font-size:42px;line-height:1.3;color:var(--text);font-weight:400;margin-bottom:24px;}
+.page-intro p{font-size:17px;line-height:1.8;color:var(--text-soft);font-weight:300;max-width:640px;margin:0 auto;}
+.page-intro p strong{color:var(--text);font-weight:500;}
+
+.rail{padding:50px 6% 0;max-width:1000px;margin:0 auto;}
+.rail-track{display:flex;align-items:flex-start;position:relative;}
+.rail-track::before{content:'';position:absolute;top:11px;left:5%;right:5%;height:1px;background:#e2e0d6;z-index:0;}
+.rail-step{flex:1;text-align:center;position:relative;z-index:1;cursor:pointer;}
+.rail-dot{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid #e2e0d6;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--text-soft);}
+.rail-step.live .rail-dot{border-color:var(--green);color:var(--green);background:#fff;}
+.rail-step.live.first .rail-dot{background:var(--green);color:#fff;}
+.rail-label{font-size:12.5px;font-weight:500;color:var(--text);}
+.rail-step:not(.live) .rail-label{color:var(--text-soft);}
+
+.cards{padding:60px 6% 80px;max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+.card{border:1px solid #e8e8e3;border-radius:8px;overflow:hidden;}
+.card-head{padding:28px 32px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
+.card-head-left{flex:1;}
+.card-num{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
+.card-num.muted{color:#8a8a80;}
+.card-title{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);margin-bottom:8px;}
+.card-tagline{font-size:14.5px;color:var(--text-soft);font-weight:300;line-height:1.5;max-width:480px;}
+.card-head-right{flex-shrink:0;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.card-price{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;}
+.card-price.muted{color:var(--text-soft);font-weight:500;}
+.card-chev{width:30px;height:30px;border-radius:50%;border:1px solid #e8e8e3;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text);transition:transform 0.2s;flex-shrink:0;}
+.card.open .card-chev{transform:rotate(180deg);}
+
+.card-chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 32px 24px;}
+.chip{font-size:11.5px;color:var(--text);background:#fafaf8;border:1px solid #e8e8e3;border-radius:14px;padding:4px 12px;}
+
+.card-body{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.card.open .card-body{max-height:2000px;}
+.card-body-inner{padding:8px 32px 36px;border-top:1px solid #f0efe9;}
+
+.card-lead{font-size:15.5px;color:var(--text-soft);line-height:1.75;font-weight:300;margin:24px 0 26px;max-width:600px;}
+
+.feat-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:30px;}
+.feat-row{display:flex;align-items:flex-start;gap:12px;font-size:14.5px;color:var(--text);line-height:1.55;}
+.feat-row .feat-dash{color:var(--green);flex-shrink:0;}
+.feat-row .feat-mean{color:var(--text-soft);font-weight:300;}
+
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;border:none;border-radius:4px;padding:15px 32px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;}
+.btn-primary:hover{background:var(--green-dark);}
+.btn-waitlist{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--green);border:1.5px solid var(--green);border-radius:4px;padding:13px 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;}
+.btn-waitlist:hover{background:#fafaf8;}
+.card-note{display:block;margin-top:14px;font-size:12.5px;color:var(--text-soft);font-weight:300;}
+.community-link{display:block;margin-top:10px;font-size:12.5px;color:var(--green);font-weight:500;text-decoration:underline;text-decoration-color:#c5dccb;text-underline-offset:3px;}
+.community-link:hover{text-decoration-color:var(--green);}
+
+.waitlist-form{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.waitlist-form input{flex:1;min-width:220px;border:1px solid #e8e8e3;border-radius:4px;padding:13px 16px;font-size:14px;font-family:var(--sans);color:var(--text);}
+.waitlist-form input:focus{outline:none;border-color:var(--green);}
+
+.closing{padding:70px 6% 90px;text-align:center;background:#fafaf8;border-left:3px solid var(--green);margin:0 6%;border-radius:6px;}
+.closing h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);margin-bottom:12px;}
+.closing p{font-size:15px;color:var(--text-soft);font-weight:300;margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;}
+
+footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6% 22px;margin-top:0;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-brand{font-family:var(--serif);font-size:14.5px;color:#fff;}
+.footer-legal{font-size:11.5px;color:rgba(255,255,255,0.5);}
+.footer-tagline{font-size:11.5px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:7px;}
+.footer-links{display:flex;gap:18px;font-size:11.5px;}
+.footer-links a{color:rgba(255,255,255,0.65);text-decoration:none;}
+.footer-links a:hover{color:#fff;}
+
+@media(max-width:900px){
+  .topbar-right nav{display:none;}
   .hamburger{display:flex;}
-  .journey{gap:0;padding:1rem 0 1.5rem;}
-  .journey-step{min-width:0;}
-  .journey-num{width:26px;height:26px;font-size:11px;}
-  .journey-line{width:10px;}
-  .journey-label{font-size:7px;letter-spacing:0;text-align:center;max-width:52px;}
+  .page-intro h1{font-size:30px;}
+  .rail-label{display:none;}
+  .rail-track::before{left:0;right:0;}
+  .card-head{flex-direction:column;}
+  .card-head-right{align-items:flex-start;text-align:left;flex-direction:row;width:100%;justify-content:space-between;}
+  .footer-row{flex-direction:column;text-align:center;}
 }
-.hero{padding:2.5rem 0 2rem;}
-.hero-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1rem;}
-.hero h1{font-family:var(--serif);font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-0.5px;margin-bottom:1rem;}
-.hero h1 em{font-style:italic;color:var(--green);}
-.hero-lead{font-size:16px;line-height:1.7;color:#555;font-weight:300;}
-.journey{display:flex;align-items:center;gap:0;padding:1.5rem 0 2rem;flex-wrap:nowrap;overflow:hidden;}
-.journey-step{display:flex;flex-direction:column;align-items:center;gap:5px;}
-.journey-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff;}
-.journey-num.c1{background:var(--green);}
-.journey-num.c2{background:var(--blue);}
-.journey-num.c3{background:var(--gold);}
-.journey-num.c4{background:var(--violet);}
-.journey-label{font-size:11px;font-weight:600;letter-spacing:0.5px;}
-.journey-label.c1{color:var(--green);}
-.journey-label.c2{color:var(--blue);}
-.journey-label.c3{color:var(--gold);}
-.journey-label.c4{color:var(--violet);}
-.journey-line{height:1px;width:36px;margin-bottom:16px;}
-.journey-line.c1{background:var(--green);}
-.journey-line.c2{background:var(--blue);}
-.journey-line.c3{background:var(--gold);}
-.journey-line.c4{background:var(--violet);}
-.phase{padding:2rem 0;border-top:none;}
-.phase-header{display:flex;align-items:baseline;gap:0.875rem;margin-bottom:1.5rem;}
-.phase-num{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:3px 10px;border-radius:20px;}
-.phase-num.s1{background:var(--green-bg);color:var(--green);}
-.phase-num.s2{background:#eff6ff;color:var(--blue);}
-.phase-num.s3{background:#fffbeb;color:var(--gold);}
-.phase-num.s4{background:#f5f3ff;color:var(--violet);}
-.phase-title{font-family:var(--serif);font-size:22px;color:var(--text);}
-.phase-status{font-size:12px;color:#888;font-style:italic;}
-.card-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px;}
-@media(max-width:560px){.card-row{grid-template-columns:1fr;}}
-.card-row.three{grid-template-columns:1fr 1fr 1fr;}
-@media(max-width:680px){.card-row.three{grid-template-columns:1fr;}}
-.tmv{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-weight:500;margin-bottom:5px;}
-.card{border:0.5px solid var(--border);border-radius:10px;padding:1.25rem;}
-.card.live{border-color:var(--green-border);background:var(--green-bg);}
-.card.live.featured{border:2px solid var(--green);}
-.card.dim{background:#fafafa;border-color:#eee;}
-.card-accent{height:2px;border-radius:2px;margin-bottom:1rem;}
-.card-accent.s1{background:var(--green);}
-.card-accent.s2{background:var(--blue);}
-.card-accent.s3{background:var(--gold);}
-.card-accent.s4{background:var(--violet);}
-.card-name{font-family:var(--serif);font-size:18px;color:var(--text);margin-bottom:3px;}
-.card-tag{font-size:12px;color:#888;margin-bottom:1rem;font-weight:300;line-height:1.5;}
-.price-main{font-size:32px;font-weight:600;color:var(--text);line-height:1;}
-.price-main.dim{color:#ccc;}
-.price-period{font-size:13px;color:#888;margin-bottom:3px;}
-.price-note{font-size:11px;color:#aaa;margin-bottom:1rem;font-style:italic;}
-.divider{height:0.5px;background:var(--border);margin:1rem 0;}
-.feature-group-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-weight:600;margin:0.875rem 0 0.5rem;display:block;}
-.features{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:0.5rem;}
-.features li{font-size:13px;color:#333;display:flex;gap:7px;align-items:flex-start;line-height:1.45;}
-.features li svg{flex-shrink:0;margin-top:2px;}
-.check-s1{width:13px;height:13px;color:var(--green);}
-.check-s2{width:13px;height:13px;color:var(--blue);}
-.check-s3{width:13px;height:13px;color:var(--gold);}
-.check-s4{width:13px;height:13px;color:var(--violet);}
-.check-dim{width:13px;height:13px;color:#ccc;}
-.disclaimer{font-size:11px;color:#888;font-style:italic;margin-bottom:0.875rem;line-height:1.5;}
-.consent-block{background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:10px;}
-.consent-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:7px;cursor:pointer;}
-.consent-row:last-child{margin-bottom:0;}
-.consent-row input[type="checkbox"]{margin-top:2px;flex-shrink:0;accent-color:var(--green);width:15px;height:15px;cursor:pointer;}
-.consent-row span{font-size:12px;color:#444;line-height:1.5;}
-.consent-row a{color:var(--green);}
-.btn{background:var(--green);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);width:100%;text-align:center;display:block;text-decoration:none;transition:background 0.15s;}
-.btn:hover{background:var(--green-dark);}
-.btn-outline{background:transparent;color:var(--green);border:1.5px solid var(--green);border-radius:30px;padding:11px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);width:100%;text-align:center;display:block;text-decoration:none;}
-.btn-outline:hover{background:var(--green-bg);}
-.lock-block{border-radius:8px;padding:10px 14px;text-align:center;margin-bottom:10px;font-size:12px;font-weight:500;}
-.lock-block.s2{background:#eff6ff;color:var(--blue);}
-.lock-block.s3{background:#fffbeb;color:var(--gold);}
-.lock-block.s4{background:#f5f3ff;color:var(--violet);}
-.notify-form{display:flex;gap:7px;margin-top:8px;}
-.notify-input{flex:1;padding:9px 12px;border:0.5px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;}
-.notify-input:focus{border-color:var(--green);}
-.notify-btn{border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;color:#fff;}
-.notify-btn.s2{background:var(--blue);}
-.notify-btn.s3{background:var(--gold);}
-.notify-btn.s4{background:var(--violet);}
-.notify-success{font-size:12px;font-weight:600;text-align:center;margin-top:7px;display:none;}
-.notify-success.s2{color:var(--blue);}
-.notify-success.s3{color:var(--gold);}
-.notify-success.s4{color:var(--violet);}
-.gatekeeper{font-size:11px;color:#bbb;text-align:center;margin-top:8px;font-style:italic;}
-.security-note{font-size:11px;color:#aaa;text-align:center;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:5px;}
-.popup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:10000;align-items:center;justify-content:center;padding:1.5rem;}
-.popup-overlay.show{display:flex;}
-.popup-box{background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 12px 48px rgba(0,0,0,0.18);}
-.popup-title{font-family:var(--serif);font-size:22px;color:var(--text);margin-bottom:0.75rem;}
-.popup-sub{font-size:14px;color:#555;line-height:1.65;margin-bottom:1.5rem;}
-.popup-btn{background:var(--green);color:#fff;border:none;border-radius:30px;padding:12px 28px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);}
-footer{padding:2rem 0;border-top:0.5px solid #eee;margin-top:1rem;}
-.footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;}
-.footer-logo{font-family:var(--serif);font-size:17px;color:var(--text);}
-.footer-logo em{font-style:italic;color:var(--green);}
-.footer-note{font-size:12px;color:#888;}
-.footer-links{display:flex;gap:16px;flex-wrap:wrap;}
-.footer-links a{font-size:12px;color:#888;text-decoration:none;}
-.footer-vat{font-size:12px;color:#bbb;}
-
-
 </style>
 </head>
 <body>
-<div class="page">
 
-<nav>
-  <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <div class="nav-links">
-    <a href="/blog/" id="nav-blog" class="nav-link">Blog</a>
-    <a href="/pricing.html" id="nav-pricing" class="nav-blog">Pricing</a>
-    <a href="/about.html" id="nav-about" class="nav-link">About</a>
-    <a href="/faq.html" id="nav-faq" class="nav-link">FAQ</a>
-  </div>
-  <div class="nav-right">
-    <select class="lang-sel" id="langSel"></select>
+<div class="topbar">
+  <a href="/" class="logo">Debt-Free.world</a>
+  <div class="topbar-right">
+    <nav>
+      <a href="/ecosystem.html" class="active">Ecosystem</a>
+      <a href="/about.html">Our Story</a>
+      <a href="/blog/">Blog</a>
+      <a href="/faq.html">FAQ</a>
+    </nav>
+    <div class="lang-wrap">
+      <button class="lang-pill" id="langBtn" onclick="document.getElementById('langMenu').classList.toggle('open')">EN ▾</button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
+      <svg viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
   </div>
-</nav>
+</div>
 
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top">
-    <span class="nav-logo">Debt-<em>Free</em>.world</span>
+    <span class="logo">Debt-Free.world</span>
     <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
   </div>
   <a href="/">Home</a>
+  <a href="/ecosystem.html" class="active">Ecosystem</a>
+  <a href="/about.html">Our Story</a>
   <a href="/blog/">Blog</a>
-  <a href="/pricing.html" class="active">Pricing</a>
-  <a href="/about.html">About</a>
   <a href="/faq.html">FAQ</a>
 </div>
 
-<section class="hero">
-  <div class="hero-label">Plans</div>
-  <h1>One ecosystem.<br><em>Your whole journey.</em></h1>
-  <p class="hero-lead">From financial crisis to financial independence — four stages, one platform, the same person throughout.</p>
-</section>
-
-<div class="journey">
-  <div class="journey-step"><div class="journey-num c1">1</div><div class="journey-label c1">Debt Recovery</div></div>
-  <div class="journey-line c1"></div>
-  <div class="journey-step"><div class="journey-num c2">2</div><div class="journey-label c2">Income Builder</div></div>
-  <div class="journey-line c2"></div>
-  <div class="journey-step"><div class="journey-num c3">3</div><div class="journey-label c3">Wealth Architect</div></div>
-  <div class="journey-line c3"></div>
-  <div class="journey-step"><div class="journey-num c4">4</div><div class="journey-label c4">Business Engine</div></div>
+<div class="page-intro">
+  <span class="page-eyebrow">The Debt-Free.world Ecosystem</span>
+  <h1>One path. Five stages. Always your choice how far you go.</h1>
+  <p>Most people only ever need the first stage — and it is <strong>free, forever</strong>. That is not an exception: every future stage we build will open with a free tier first, the same way Debt FREE did. The rest exists for when you want it, not because you have to.</p>
 </div>
 
-<!-- ── PHASE 1: DEBT RECOVERY ── -->
-<div class="phase">
-  <div class="phase-header">
-    <span class="phase-num s1">Phase 1</span>
-    <span class="phase-title">Debt</span>
-    <span class="phase-status">Live now</span>
-  </div>
-  <div class="card-row">
-
-    <!-- DEBT FREE -->
-    <div>
-      <div class="tmv">Typical market value: 199 €</div>
-      <div class="card live">
-        <div class="card-accent s1"></div>
-        <div class="card-name">Debt FREE</div>
-        <div class="card-tag">Your personal debt recovery journey starts here — free, always.</div>
-        <div class="price-main">0 €</div>
-        <div class="price-period">forever</div>
-        <div class="price-note">No card. No registration.</div>
-        <div class="divider"></div>
-        <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Personal financial analysis</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt analysis &amp; prioritisation</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Budget &amp; cash flow analysis</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Repayment plan</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt-free date estimate</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Country benefits &amp; support services</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt counselling services by country</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Risk alerts &amp; financial snapshot</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Next recommended steps</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Emergency Action Card — immediate steps for debt crisis</li>
-        </ul>
-        <a href="https://www.debt-free.world" class="btn-outline">Get Debt FREE →</a>
-      </div>
+<div class="rail">
+  <div class="rail-track">
+    <div class="rail-step live first" onclick="document.getElementById('card-1').scrollIntoView({behavior:'smooth',block:'center'})">
+      <div class="rail-dot">1</div>
+      <div class="rail-label">Debt FREE</div>
     </div>
-
-    <!-- DEBT RECOVERY -->
-    <div>
-      <div class="tmv">Typical market value: 990 €</div>
-      <div class="card live featured">
-        <div class="card-accent s1"></div>
-        <div class="card-name">Debt Recovery</div>
-        <div class="card-tag">Your Debt Recovery Companion for 90 days.</div>
-        <div class="price-main">19 €</div>
-        <div class="price-period">/ 90 days</div>
-        <div class="price-note">One-time. No subscription. Yours to keep.</div>
-        <div class="divider"></div>
-
-        <span class="feature-group-label">Your personalised plan</span>
-        <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>In-depth onboarding — built around your actual debts, income, mindset and goals</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Personalised 90-day Debt Recovery plan — three phases, country-specific resources</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly plan update — refresh your priorities every 30 days</li>
-        </ul>
-
-        <span class="feature-group-label">Letter generator</span>
-        <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>7 letter types: hardship, settlement, stop contact, dispute, payment plan, payment holiday, negotiation</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Letters addressed to your specific creditor by name — ready to copy and send</li>
-        </ul>
-
-        <span class="feature-group-label">Calculators &amp; strategy tools</span>
-        <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Crisis Budget Tool</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt-Free Date Calculator</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Snowball vs Avalanche Calculator</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Extra Income Simulator — see how additional income shortens your timeline</li>
-        </ul>
-
-        <span class="feature-group-label">Negotiation &amp; legal tools</span>
-        <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Creditor call practice — prepare before you pick up the phone</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Debt Collection Map — every stage and your rights at each step</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Legal Protection Guide — what collectors can and cannot do in your country</li>
-        </ul>
-
-        <span class="feature-group-label">Mindset &amp; crisis support</span>
-        <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Behavioural Tools — impulse control, habits, financial stress management</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Crisis Action Plans — unemployment, divorce, sick leave and emergencies</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Emergency Action Card — your personal debt crisis checklist</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>90-Day Challenge — weekly framework to stay on track</li>
-        </ul>
-
-        <span class="feature-group-label">Access &amp; guidance</span>
-        <ul class="features">
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Companion mode — guided check-ins and next-step suggestions (optional)</li>
-          <li><svg class="check-s1" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly reminder emails — optional progress prompts</li>
-        </ul>
-
-        <div class="divider"></div>
-        <div class="disclaimer">Not legal or financial advice.</div>
-
-        <!-- ✅ KORJATTU: linkit osoittavat nyt /legal.html#... eikä erillisiin tiedostoihin -->
-        <div class="consent-block">
-          <label class="consent-row">
-            <input type="checkbox" id="consent-tos">
-            <span>I agree to the <a href="/legal.html#terms" target="_blank">Terms of Service</a>, <a href="/legal.html#privacy" target="_blank">Privacy Policy</a> and <a href="/legal.html#refund" target="_blank">Refund Policy</a>.</span>
-          </label>
-          <label class="consent-row">
-            <input type="checkbox" id="consent-art16">
-            <span>I understand my personalised plan is delivered immediately and I waive my right of withdrawal under EU Directive 2011/83/EU Art. 16(m).</span>
-          </label>
-        </div>
-        <button class="btn" id="btn-premium" onclick="startCheckout('premium')">Get Debt Recovery — 19 €</button>
-        <div style="text-align:center;margin-top:10px;">
-          <a href="mailto:support@debt-free.world?subject=Community Access" style="font-size:12px;color:#888;text-decoration:underline;cursor:pointer;">Can't afford this right now? Apply for free access. No explanation needed.</a>
-        </div>
-        <div class="security-note">
-          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Secured by Stripe · Amliv Oy · VAT FI32503518
-        </div>
-      </div>
+    <div class="rail-step live" onclick="document.getElementById('card-2').scrollIntoView({behavior:'smooth',block:'center'})">
+      <div class="rail-dot">2</div>
+      <div class="rail-label">Debt Recovery</div>
     </div>
-
-  </div>
-  <p style="font-size:12px;color:#888;text-align:center;margin-top:10px;font-style:italic;">Both plans include access to your personal member area — sign in with your email, no password needed.</p>
-</div>
-
-<!-- ── PHASE 2: INCOME BUILDER ── -->
-<div class="phase">
-  <div class="phase-header">
-    <span class="phase-num s2">Phase 2</span>
-    <span class="phase-title">Income</span>
-    <span class="phase-status">Coming Q4 2026</span>
-  </div>
-  <div class="card-row three">
-    <div>
-      <div class="tmv">Typical market value: 299 €</div>
-      <div class="card dim">
-        <div class="card-accent s2"></div>
-        <div class="card-name">Income FREE</div>
-        <div class="card-tag"></div>
-        <div class="price-main dim">0 €</div>
-        <div class="price-period">forever</div>
-        <div class="divider"></div>
-        <div class="lock-block s2">Available Q4 2026</div>
-        <div class="notify-form">
-          <input type="email" class="notify-input" id="email-income-free" placeholder="your@email.com">
-          <button class="notify-btn s2" onclick="notifyMe('income-free')">Notify me</button>
-        </div>
-        <div class="notify-success s2" id="success-income-free">You're on the list.</div>
-      </div>
+    <div class="rail-step" onclick="document.getElementById('card-3').scrollIntoView({behavior:'smooth',block:'center'})">
+      <div class="rail-dot">3</div>
+      <div class="rail-label">Income Builder</div>
     </div>
-    <div>
-      <div class="tmv">Typical market value: 1 990 €</div>
-      <div class="card dim">
-        <div class="card-accent s2"></div>
-        <div class="card-name">Income Builder Starter</div>
-        <div class="card-tag"></div>
-        <div class="price-main dim">39 €</div>
-        <div class="price-period">/ 90 days</div>
-        <div class="price-note">One-time. No subscription.</div>
-        <div class="divider"></div>
-        <div class="lock-block s2">Available Q4 2026</div>
-        <div class="notify-form">
-          <input type="email" class="notify-input" id="email-starter" placeholder="your@email.com">
-          <button class="notify-btn s2" onclick="notifyMe('starter')">Notify me</button>
-        </div>
-        <div class="notify-success s2" id="success-starter">You're on the list.</div>
-      </div>
+    <div class="rail-step" onclick="document.getElementById('card-4').scrollIntoView({behavior:'smooth',block:'center'})">
+      <div class="rail-dot">4</div>
+      <div class="rail-label">Wealth Architect</div>
     </div>
-    <div>
-      <div class="tmv">Typical market value: 1 990 €</div>
-      <div class="card dim">
-        <div class="card-accent s2"></div>
-        <div class="card-name">Income Builder Pro</div>
-        <div class="card-tag"></div>
-        <div class="price-main dim">89 €</div>
-        <div class="price-period">/ 180 days</div>
-        <div class="price-note">One-time. No subscription.</div>
-        <div class="divider"></div>
-        <div class="lock-block s2">Available Q4 2026</div>
-        <div class="notify-form">
-          <input type="email" class="notify-input" id="email-pro" placeholder="your@email.com">
-          <button class="notify-btn s2" onclick="notifyMe('pro')">Notify me</button>
-        </div>
-        <div class="notify-success s2" id="success-pro">You're on the list.</div>
-      </div>
+    <div class="rail-step" onclick="document.getElementById('card-5').scrollIntoView({behavior:'smooth',block:'center'})">
+      <div class="rail-dot">5</div>
+      <div class="rail-label">Business Engine</div>
     </div>
   </div>
 </div>
 
-<!-- ── PHASE 3: WEALTH BUILDER ── -->
-<div class="phase">
-  <div class="phase-header">
-    <span class="phase-num s3">Phase 3</span>
-    <span class="phase-title">Wealth</span>
-    <span class="phase-status">Coming Q3 2028</span>
-  </div>
-  <div class="card-row">
-    <div>
-      <div class="tmv">Typical market value: 199 €</div>
-      <div class="card dim">
-        <div class="card-accent s3"></div>
-        <div class="card-name">Wealth FREE</div>
-        <div class="card-tag"></div>
-        <div class="price-main dim">0 €</div>
-        <div class="price-period">forever</div>
-        <div class="divider"></div>
-        <div class="lock-block s3">Available Q3 2028</div>
-        <div class="notify-form">
-          <input type="email" class="notify-input" id="email-wealth-free" placeholder="your@email.com">
-          <button class="notify-btn s3" onclick="notifyMe('wealth-free')">Notify me</button>
-        </div>
-        <div class="notify-success s3" id="success-wealth-free">You're on the list.</div>
+<div class="cards">
+
+  <div class="card open" id="card-1">
+    <div class="card-head" onclick="toggleCard(this)">
+      <div class="card-head-left">
+        <span class="card-num">Phase 01 · Live now</span>
+        <div class="card-title">Debt FREE</div>
+        <div class="card-tagline">Understand your full situation, completely free, forever.</div>
+      </div>
+      <div class="card-head-right">
+        <span class="card-price">0 € forever</span>
+        <div class="card-chev">▾</div>
       </div>
     </div>
-    <div>
-      <div class="tmv">Typical market value: 1 990 €</div>
-      <div class="card dim">
-        <div class="card-accent s3"></div>
-        <div class="card-name">Wealth Architect</div>
-        <div class="card-tag"></div>
-        <div class="price-main dim">199 €</div>
-        <div class="price-period">/ year</div>
-        <div class="price-note">Annual. Cancel anytime.</div>
-        <div class="divider"></div>
-        <div class="lock-block s3">Available Q4 2028</div>
-        <div class="notify-form">
-          <input type="email" class="notify-input" id="email-wealth" placeholder="your@email.com">
-          <button class="notify-btn s3" onclick="notifyMe('wealth')">Notify me</button>
+    <div class="card-chips">
+      <span class="chip">No card, ever</span>
+      <span class="chip">90-day roadmap</span>
+      <span class="chip">19 languages</span>
+      <span class="chip">Local support included</span>
+    </div>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <p class="card-lead">Most people spend months guessing what to do about debt. Debt FREE replaces guessing with a personalised plan built from your real numbers — in about two minutes, at no cost, with no catch.</p>
+        <div class="feat-grid">
+          <div class="feat-row"><span class="feat-dash">—</span><span>A personalised plan built from your real numbers <span class="feat-mean">— not advice that could apply to anyone</span></span></div>
+          <div class="feat-row"><span class="feat-dash">—</span><span>Your exact debt-free date, and what moves it <span class="feat-mean">— so the end stops being a guess</span></span></div>
+          <div class="feat-row"><span class="feat-dash">—</span><span>The one thing to deal with first, and why <span class="feat-mean">— so you stop carrying the whole weight at once</span></span></div>
+          <div class="feat-row"><span class="feat-dash">—</span><span>Verified local support for your country <span class="feat-mean">— real help, not a generic list</span></span></div>
         </div>
-        <div class="notify-success s3" id="success-wealth">You're on the list.</div>
+        <a href="/signup-free.html" class="btn-primary">Build my Debt FREE plan</a>
+        <span class="card-note">Takes about 2 minutes. No card, no trial, no catch.</span>
       </div>
     </div>
   </div>
+
+  <div class="card open" id="card-2">
+    <div class="card-head" onclick="toggleCard(this)">
+      <div class="card-head-left">
+        <span class="card-num">Phase 02 · Live now</span>
+        <div class="card-title">Debt Recovery</div>
+        <div class="card-tagline">Knowing the plan and living it are two different things.</div>
+      </div>
+      <div class="card-head-right">
+        <span class="card-price">19 € once</span>
+        <div class="card-chev">▾</div>
+      </div>
+    </div>
+    <div class="card-chips">
+      <span class="chip">No subscription</span>
+      <span class="chip">90-day companion</span>
+      <span class="chip">Creditor letters</span>
+      <span class="chip">Weekly check-ins</span>
+    </div>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <p class="card-lead">Debt Recovery is the 90-day companion that turns your plan into daily action — built for the moments your free plan can't walk through with you.</p>
+        <div class="feat-grid">
+          <div class="feat-row"><span class="feat-dash">—</span><span>Creditor letters written for you <span class="feat-mean">— hardship, payment plans, settlement, and more</span></span></div>
+          <div class="feat-row"><span class="feat-dash">—</span><span>Guided weekly check-ins <span class="feat-mean">— so the next 90 days have real structure</span></span></div>
+          <div class="feat-row"><span class="feat-dash">—</span><span>Real support through setbacks <span class="feat-mean">— job loss, illness, the moments plans don't predict</span></span></div>
+          <div class="feat-row"><span class="feat-dash">—</span><span>Behaviour tools that outlast the 90 days <span class="feat-mean">— so old patterns don't quietly come back</span></span></div>
+        </div>
+        <a href="#" class="btn-primary" onclick="startDRCheckout(event)">Get Debt Recovery — 19 €</a>
+        <span class="card-note">One-time payment. No subscription. Secure checkout via Stripe.</span>
+        <a href="#" class="community-link" onclick="startCommunityAccess(event)">Can't afford 19 € right now? Get Community Access — free, no explanation needed.</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="card-3">
+    <div class="card-head" onclick="toggleCard(this)">
+      <div class="card-head-left">
+        <span class="card-num muted">Phase 03 · Coming 2026</span>
+        <div class="card-title">Income Builder</div>
+        <div class="card-tagline">Reducing expenses has a ceiling. Increasing income does not. A free tier is planned here too.</div>
+      </div>
+      <div class="card-head-right">
+        <span class="card-price muted">Join the waitlist</span>
+        <div class="card-chev">▾</div>
+      </div>
+    </div>
+    <div class="card-chips">
+      <span class="chip">More income, not less spending</span>
+      <span class="chip">Free tier planned</span>
+      <span class="chip">Coming 2026</span>
+    </div>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <p class="card-lead">Once your debt is under control, the next real lever is income — not another round of cutting back. Income Builder will help you find realistic, achievable ways to earn more, built around your actual time and skills. Like Debt FREE, the first tier will cost nothing.</p>
+        <div class="waitlist-form">
+          <input type="email" placeholder="Your email address" id="waitlist-3"/>
+          <a href="#" class="btn-waitlist" onclick="joinWaitlist(event,'income-builder',3)">Join the waitlist</a>
+        </div>
+        <span class="card-note">We'll let you know the moment this opens. No spam, ever.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="card-4">
+    <div class="card-head" onclick="toggleCard(this)">
+      <div class="card-head-left">
+        <span class="card-num muted">Phase 04 · Coming 2028</span>
+        <div class="card-title">Wealth Architect</div>
+        <div class="card-tagline">Build what lasts, once debt is gone. A free tier is planned here too.</div>
+      </div>
+      <div class="card-head-right">
+        <span class="card-price muted">Join the waitlist</span>
+        <div class="card-chev">▾</div>
+      </div>
+    </div>
+    <div class="card-chips">
+      <span class="chip">Long-term security</span>
+      <span class="chip">Free tier planned</span>
+      <span class="chip">Coming 2028</span>
+    </div>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <p class="card-lead">After debt and income, the question changes from "how do I survive" to "how do I make sure this never happens again." Wealth Architect will help you build savings, protection, and long-term security — at a pace that fits real life. Like every stage here, a free tier comes first.</p>
+        <div class="waitlist-form">
+          <input type="email" placeholder="Your email address" id="waitlist-4"/>
+          <a href="#" class="btn-waitlist" onclick="joinWaitlist(event,'wealth-architect',4)">Join the waitlist</a>
+        </div>
+        <span class="card-note">We'll let you know the moment this opens. No spam, ever.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="card-5">
+    <div class="card-head" onclick="toggleCard(this)">
+      <div class="card-head-left">
+        <span class="card-num muted">Phase 05 · Coming 2029</span>
+        <div class="card-title">Business Engine</div>
+        <div class="card-tagline">For your next chapter, if you ever want one.</div>
+      </div>
+      <div class="card-head-right">
+        <span class="card-price muted">Join the waitlist</span>
+        <div class="card-chev">▾</div>
+      </div>
+    </div>
+    <div class="card-chips">
+      <span class="chip">For entrepreneurs</span>
+      <span class="chip">Free tier planned</span>
+      <span class="chip">Coming 2029</span>
+    </div>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <p class="card-lead">Some people who start this journey in crisis end up somewhere unexpected: ready to build something of their own. Business Engine is for that chapter — entirely optional, entirely later, here whenever you're ready. The starting tier will be free, the same as every stage before it.</p>
+        <div class="waitlist-form">
+          <input type="email" placeholder="Your email address" id="waitlist-5"/>
+          <a href="#" class="btn-waitlist" onclick="joinWaitlist(event,'business-engine',5)">Join the waitlist</a>
+        </div>
+        <span class="card-note">We'll let you know the moment this opens. No spam, ever.</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<!-- ── PHASE 4: BUSINESS BUILDER ── -->
-<div class="phase">
-  <div class="phase-header">
-    <span class="phase-num s4">Phase 4</span>
-    <span class="phase-title">Business</span>
-    <span class="phase-status">Coming Q3 2029</span>
-  </div>
-  <div class="card-row">
-    <div>
-      <div class="tmv">Typical market value: 399 €</div>
-      <div class="card dim">
-        <div class="card-accent s4"></div>
-        <div class="card-name">Business FREE</div>
-        <div class="card-tag"></div>
-        <div class="price-main dim">0 €</div>
-        <div class="price-period">forever</div>
-        <div class="divider"></div>
-        <div class="lock-block s4">Available Q3 2029</div>
-        <div class="notify-form">
-          <input type="email" class="notify-input" id="email-business-free" placeholder="your@email.com">
-          <button class="notify-btn s4" onclick="notifyMe('business-free')">Notify me</button>
-        </div>
-        <div class="notify-success s4" id="success-business-free">You're on the list.</div>
-      </div>
-    </div>
-    <div>
-      <div class="tmv">Typical market value: 4 990 €</div>
-      <div class="card dim">
-        <div class="card-accent s4"></div>
-        <div class="card-name">Business Engine</div>
-        <div class="card-tag"></div>
-        <div class="price-main dim">299 €</div>
-        <div class="price-period">/ year</div>
-        <div class="price-note">Annual. Cancel anytime.</div>
-        <div class="divider"></div>
-        <div class="lock-block s4">Available Q4 2029</div>
-        <div class="notify-form">
-          <input type="email" class="notify-input" id="email-business" placeholder="your@email.com">
-          <button class="notify-btn s4" onclick="notifyMe('business')">Notify me</button>
-        </div>
-        <div class="notify-success s4" id="success-business">You're on the list.</div>
-      </div>
-    </div>
-  </div>
+<div class="closing">
+  <h3>Not sure where you stand yet?</h3>
+  <p>Start with the one stage that costs nothing. Two minutes, no card, no commitment.</p>
+  <a href="/signup-free.html" class="btn-primary">Build my Debt FREE plan</a>
 </div>
 
 <footer>
-  <div class="footer-top">
-    <span class="footer-logo">Debt-<em>Free</em>.world</span>
-    <span class="footer-note">Built with honesty. Free forever for those who need it most.</span>
-  </div>
-  <div class="footer-links">
-    <a href="/about.html">About</a>
-    <a href="/faq.html">FAQ</a>
-    <a href="/legal.html#terms">Terms</a>
-    <a href="/legal.html#privacy">Privacy</a>
-    <a href="/legal.html#refund">Refund Policy</a>
-    <a href="mailto:support@debt-free.world">support@debt-free.world</a>
-    <span class="footer-vat">Amliv Oy · VAT FI32503518</span>
+  <div class="footer-row">
+    <div>
+      <div class="footer-brand">Debt-Free.world</div>
+      <div class="footer-legal">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
+    </div>
+    <div class="footer-links">
+      <a href="/legal.html#privacy">Privacy</a>
+      <a href="/legal.html#terms">Terms</a>
+      <a href="mailto:support@debt-free.world">Contact</a>
+    </div>
+    <div class="footer-tagline">🌍 Free forever for those who need it most</div>
   </div>
 </footer>
 
-</div>
-
-<!-- POPUP -->
-<div class="popup-overlay" id="consent-popup">
-  <div class="popup-box">
-    <div class="popup-title">One quick step</div>
-    <div class="popup-sub">Please read and accept the Terms of Service, Privacy Policy, Refund Policy, and the digital content delivery notice before continuing.</div>
-    <button class="popup-btn" onclick="closePopup()">Got it — let me check the boxes</button>
-  </div>
-</div>
-
 <script>
 function toggleMenu(){
-  const menu=document.getElementById('mobileMenu');
-  menu.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-const PRICE_IDS={premium:'price_1TdqWbIuko2ODVfsv1xuAHsZ'};
-const WORKER_URL='https://debt-free-proxy.amlivbusiness.workers.dev';
-
-function closePopup(){
-  document.getElementById('consent-popup').classList.remove('show');
-  document.getElementById('consent-tos').focus();
+function toggleCard(headEl){
+  const card = headEl.closest('.card');
+  card.classList.toggle('open');
 }
 
-async function startCheckout(product){
-  const tos=document.getElementById('consent-tos').checked;
-  const art16=document.getElementById('consent-art16').checked;
-  if(!tos||!art16){document.getElementById('consent-popup').classList.add('show');return;}
-  const btn=document.getElementById('btn-'+product);
-  btn.disabled=true;btn.textContent='Redirecting...';
-  try{
-    const res=await fetch(WORKER_URL+'/create-checkout',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({priceId:PRICE_IDS[product],successUrl:'https://www.debt-free.world/thank-you-premium.html',cancelUrl:'https://www.debt-free.world/pricing.html'})
-    });
-    const data=await res.json();
-    if(data.url){window.location.href=data.url;}else{throw new Error();}
-  }catch{
-    btn.disabled=false;btn.textContent='Get Debt Recovery — 19 €';
-    alert('Something went wrong. Please try again or contact support@debt-free.world');
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  const menu = document.getElementById('langMenu');
+  if(wrap && menu && !wrap.contains(e.target)){
+    menu.classList.remove('open');
   }
-}
-
-async function notifyMe(product){
-  const input=document.getElementById('email-'+product);
-  const email=input.value.trim();
-  if(!email||!email.includes('@')){input.style.borderColor='#dc2626';return;}
-  input.style.borderColor='';
-  try{
-    await fetch(WORKER_URL+'/api/subscribe',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email,country:'',language:'EN'})
-    });
-  }catch{}
-  const wrap=input.parentElement;
-  if(wrap)wrap.style.display='none';
-  const s=document.getElementById('success-'+product);
-  if(s)s.style.display='block';
-}
-</script>
-<!-- Analytics — loads only after cookie consent -->
-<script>
-function loadTracking(){
-  if(localStorage.getItem('cookie-consent')==='accepted'){
-    var s=document.createElement('script');s.async=true;
-    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
-    document.head.appendChild(s);
-    window.dataLayer=window.dataLayer||[];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window,document,'clarity','script','x6r2dfxj3l');
-  }
-}
-function setCookieConsent(choice){
-  localStorage.setItem('cookie-consent',choice);
-  document.getElementById('dfwCookieBanner').style.display='none';
-  if(choice==='accepted')loadTracking();
-}
-window.addEventListener('DOMContentLoaded',function(){
-  if(!localStorage.getItem('cookie-consent')){
-    document.getElementById('dfwCookieBanner').style.display='flex';
-  }
-  loadTracking();
 });
-</script>
-<div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
-  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
-  <div style="display:flex;gap:8px;flex-shrink:0;">
-    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
-    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:sans-serif;">Accept analytics</button>
-  </div>
-</div>
-<script>
+
 (function(){
   var langs=[
     ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
-    ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
-    ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
-    ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
-    ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']
+    ['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],
+    ['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],
+    ['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],
+    ['HU','Magyar'],['RO','Română'],['HR','Hrvatski']
   ];
   var stored=localStorage.getItem('dfw_lang')||'EN';
   window.addEventListener('DOMContentLoaded',function(){
-    var sel=document.getElementById('langSel');
-    if(!sel)return;
+    var menu=document.getElementById('langMenu');
+    var btn=document.getElementById('langBtn');
+    if(!menu||!btn)return;
     langs.forEach(function(l){
-      var o=document.createElement('option');
-      o.value=l[0];o.textContent=l[1];
-      if(l[0]===stored)o.selected=true;
-      sel.appendChild(o);
+      var b=document.createElement('button');
+      b.textContent=l[1];
+      b.onclick=function(){
+        localStorage.setItem('dfw_lang',l[0]);
+        btn.innerHTML=l[0]+' ▾';
+        menu.classList.remove('open');
+      };
+      menu.appendChild(b);
     });
-    sel.onchange=function(){localStorage.setItem('dfw_lang',this.value);};
+    btn.innerHTML=stored+' ▾';
   });
 })();
+
+// Debt Recovery checkout — calls the existing Worker endpoint used
+// elsewhere on the site for the paid Stripe flow.
+async function startDRCheckout(e){
+  e.preventDefault();
+  try{
+    const res = await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/create-checkout',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        priceId: 'price_1TdqWbIuko2ODVfsv1xuAHsZ',
+        successUrl: 'https://www.debt-free.world/thank-you-premium.html',
+        cancelUrl: 'https://www.debt-free.world/ecosystem.html'
+      })
+    });
+    const data = await res.json();
+    if(data.url){ window.location.href = data.url; }
+    else { alert('Could not start checkout. Please try again or contact support@debt-free.world'); }
+  }catch(err){
+    alert('Could not start checkout. Please try again or contact support@debt-free.world');
+  }
+}
+
+// Community Access — server-side endpoint applies a 100% discount
+// coupon before the Stripe session is created. No code is ever visible
+// here or anywhere else in this file. See COMMUNITY-ACCESS-SPEC.md.
+async function startCommunityAccess(e){
+  e.preventDefault();
+  try{
+    const res = await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/create-checkout-community',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        priceId: 'price_1TdqWbIuko2ODVfsv1xuAHsZ',
+        successUrl: 'https://www.debt-free.world/thank-you-premium.html',
+        cancelUrl: 'https://www.debt-free.world/ecosystem.html'
+      })
+    });
+    const data = await res.json();
+    if(data.url){ window.location.href = data.url; }
+    else { alert('Could not start checkout. Please contact support@debt-free.world'); }
+  }catch(err){
+    alert('Could not start checkout. Please contact support@debt-free.world');
+  }
+}
+
+// Waitlist signup — stores interest via Brevo subscribe endpoint,
+// tagged by which future phase the person is interested in.
+async function joinWaitlist(e, phase, cardNum){
+  e.preventDefault();
+  const input = document.getElementById('waitlist-' + cardNum);
+  const email = input.value.trim();
+  if(!email || !email.includes('@')){
+    alert('Please enter a valid email address.');
+    return;
+  }
+  try{
+    await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/api/subscribe',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email: email, waitlist: phase })
+    });
+    input.value = '';
+    e.target.textContent = 'You\'re on the list';
+    e.target.style.pointerEvents = 'none';
+  }catch(err){
+    alert('Could not join the waitlist right now. Please try again.');
+  }
+}
 </script>
+
 </body>
 </html>
