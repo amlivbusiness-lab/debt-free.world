@@ -4,122 +4,136 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>FAQ — Debt-Free.world</title>
-<meta name="description" content="Answers to the most common questions about Debt-Free.world — how it works, what's free, what's in Premium, privacy, and more."/>
+<meta name="description" content="Answers to the most common questions about Debt-Free.world — how it works, what's free, what's in Debt Recovery, privacy, and more."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
-:root{--green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;--green-border:#86c9a0;--green-bg:#f0f8f3;--text:#111;--border:#ddd;--white:#fff;--serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;}
+:root{
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
-.page{max-width:720px;margin:0 auto;padding:0 24px;}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;}
-.nav-logo{font-family:var(--serif);font-size:22px;color:var(--text);text-decoration:none;}
-.nav-logo em{font-style:italic;color:var(--green);}
-.nav-right{display:flex;align-items:center;gap:8px;}
-.nav-links{display:flex;gap:4px;align-items:center;}
-.nav-link{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
-.nav-link:hover{background:var(--green-bg);}
-.nav-link.active{color:var(--green);font-weight:600;}
-.nav-blog{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
-.nav-blog:hover{background:var(--green-bg);}
-.lang-sel{font-size:13px;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.2s;}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:1.25rem 24px 1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 6% 0;}
+.logo{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;text-decoration:none;}
+.topbar-right{display:flex;align-items:center;gap:30px;}
+nav{display:flex;align-items:center;gap:28px;}
+nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;}
+nav a.active{color:var(--green);}
+.lang-wrap{position:relative;}
+.lang-pill{font-size:13px;color:var(--text);border:1px solid #e8e8e3;border-radius:20px;padding:6px 16px;cursor:pointer;background:none;font-family:var(--sans);font-weight:500;}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e8e8e3;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.08);min-width:160px;max-height:320px;overflow-y:auto;z-index:50;}
+.lang-menu.open{display:block;}
+.lang-menu button{display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;font-size:13.5px;color:var(--text);cursor:pointer;font-family:var(--sans);}
+.lang-menu button:hover{background:#fafaf8;}
+.hamburger{display:none;width:36px;height:36px;border:1px solid #e8e8e3;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;background:none;}
+.hamburger svg{width:16px;height:16px;}
+
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:24px 6% 28px;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
 .mobile-menu.open{display:block;}
-.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
-.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:#aaa;line-height:1;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft);line-height:1;}
 .mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
 .mobile-menu a:last-child{border-bottom:none;}
 .mobile-menu a.active{color:var(--green);font-weight:600;}
-@media(max-width:600px){
-  .nav-links{display:none;}
-  .hamburger{display:flex;}
-}
 
-.hero{padding:2.5rem 0 2rem;}
-.hero-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1rem;}
-.hero h1{font-family:var(--serif);font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-0.5px;margin-bottom:1rem;}
-.hero-lead{font-size:16px;line-height:1.7;color:#555;font-weight:300;}
+.hero{padding:90px 6% 0;max-width:1040px;margin:0 auto;text-align:center;}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-soft);font-weight:500;margin-bottom:24px;display:block;}
+.hero h1{font-family:var(--serif);font-size:42px;line-height:1.3;color:var(--text);font-weight:400;margin-bottom:20px;}
+.hero-lead{font-size:16px;line-height:1.75;color:var(--text-soft);font-weight:300;max-width:560px;margin:0 auto;}
+.hero-lead a{color:var(--green);font-weight:500;}
 
-.toc{display:flex;flex-wrap:wrap;gap:8px;padding:1.25rem 0 2rem;}
-.toc-link{font-size:12px;font-weight:500;color:var(--green);text-decoration:none;padding:5px 12px;border:1px solid var(--green-border);border-radius:20px;background:var(--green-bg);}
-.toc-link:hover{background:var(--green-light);}
+.toc{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:40px 6% 0;max-width:1040px;margin:0 auto;}
+.toc-link{font-size:12.5px;font-weight:500;color:var(--text);text-decoration:none;padding:6px 16px;border:1px solid #e8e8e3;border-radius:20px;background:#fafaf8;}
+.toc-link:hover{border-color:var(--green);color:var(--green);}
 
-.section{padding:1.75rem 0;border-top:none;}
-.section-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#888;font-weight:500;margin-bottom:1.25rem;}
+.section{padding:60px 6% 0;max-width:1040px;margin:0 auto;}
+.section-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:24px;display:block;}
+.qa-list{display:flex;flex-direction:column;gap:10px;max-width:760px;}
 
-details{border:0.5px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:4px;}
-details[open]{border-color:var(--green-border);}
-summary{padding:0.9rem 1rem;font-size:14px;font-weight:500;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:#111;gap:12px;}
+details{border:1px solid #e8e8e3;border-radius:8px;overflow:hidden;}
+details[open]{border-color:var(--green);}
+summary{padding:18px 22px;font-size:15px;font-weight:500;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text);gap:16px;}
 summary::-webkit-details-marker{display:none;}
 .q-icon{color:var(--green);font-size:18px;font-weight:300;line-height:1;flex-shrink:0;transition:transform 0.2s;}
 details[open] .q-icon{transform:rotate(45deg);}
-.ans{padding:0 1rem 0.9rem;font-size:14px;color:#555;line-height:1.7;border-top:none;}
-.ans p{padding-top:0.75rem;}
-.ans p:first-child{padding-top:0.75rem;}
-.ans a{color:var(--green);}
-.ans ul{padding-top:0.75rem;padding-left:1.25rem;display:flex;flex-direction:column;gap:5px;}
-.ans ul li{font-size:14px;color:#555;line-height:1.6;}
+.ans{padding:0 22px 20px;font-size:14.5px;color:var(--text-soft);line-height:1.75;font-weight:300;}
+.ans p{padding-top:14px;}
+.ans p:first-child{padding-top:0;margin-top:-2px;}
+.ans a{color:var(--green);font-weight:500;}
+.ans strong{color:var(--text);font-weight:500;}
+.ans ul{padding-top:12px;padding-left:20px;display:flex;flex-direction:column;gap:8px;}
+.ans ul li{font-size:14.5px;color:var(--text-soft);line-height:1.65;}
 
-.cta-band{background:var(--green);color:#fff;border-radius:10px;padding:1.75rem;text-align:center;margin:2rem 0;}
-.cta-band-title{font-family:var(--serif);font-size:22px;margin-bottom:0.625rem;}
-.cta-band-sub{font-size:14px;opacity:0.85;margin-bottom:1.25rem;}
-.cta-band a{display:inline-block;background:#fff;color:var(--green);border-radius:30px;padding:11px 28px;font-size:14px;font-weight:600;text-decoration:none;}
+.closing{margin:70px 6% 90px;padding:56px 6%;text-align:center;background:#fafaf8;border-left:3px solid var(--green);border-radius:6px;max-width:1040px;margin-left:auto;margin-right:auto;}
+.closing h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);margin-bottom:12px;}
+.closing p{font-size:15px;color:var(--text-soft);font-weight:300;margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;border:none;border-radius:4px;padding:15px 32px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;}
 
-footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:0.5px solid #eee;margin-top:1rem;}
-.footer-logo{font-family:var(--serif);font-size:17px;color:#111;}
-.footer-logo em{font-style:italic;color:var(--green);}
-.footer-note{font-size:12px;color:#888;}
+footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6% 22px;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-brand{font-family:var(--serif);font-size:14.5px;color:#fff;}
+.footer-legal{font-size:11.5px;color:rgba(255,255,255,0.5);}
+.footer-tagline{font-size:11.5px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:7px;}
+.footer-links{display:flex;gap:18px;font-size:11.5px;}
+.footer-links a{color:rgba(255,255,255,0.65);text-decoration:none;}
+.footer-links a:hover{color:#fff;}
 
-
-
+@media(max-width:900px){
+  .topbar-right nav{display:none;}
+  .hamburger{display:flex;}
+  .hero h1{font-size:30px;}
+  .footer-row{flex-direction:column;text-align:center;}
+}
 </style>
 </head>
 <body>
-<div class="page">
-<nav>
-  <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-  <div class="nav-links">
-    <a href="/blog/" id="nav-blog" class="nav-link">Blog</a>
-    <a href="/pricing.html" id="nav-pricing" class="nav-link">Pricing</a>
-    <a href="/about.html" id="nav-about" class="nav-link">About</a>
-    <a href="/faq.html" id="nav-faq" class="nav-blog">FAQ</a>
-  </div>
-  <div class="nav-right">
-    <select class="lang-sel" id="langSel"></select>
+
+<div class="topbar">
+  <a href="/" class="logo">Debt-Free.world</a>
+  <div class="topbar-right">
+    <nav>
+      <a href="/ecosystem.html">Ecosystem</a>
+      <a href="/about.html">Our Story</a>
+      <a href="/blog/">Blog</a>
+      <a href="/faq.html" class="active">FAQ</a>
+    </nav>
+    <div class="lang-wrap">
+      <button class="lang-pill" id="langBtn" onclick="document.getElementById('langMenu').classList.toggle('open')">EN ▾</button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
+      <svg viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
   </div>
-</nav>
+</div>
 
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top">
-    <span class="nav-logo">Debt-<em>Free</em>.world</span>
+    <span class="logo">Debt-Free.world</span>
     <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
   </div>
   <a href="/">Home</a>
+  <a href="/ecosystem.html">Ecosystem</a>
+  <a href="/about.html">Our Story</a>
   <a href="/blog/">Blog</a>
-  <a href="/pricing.html">Pricing</a>
-  <a href="/about.html">About</a>
   <a href="/faq.html" class="active">FAQ</a>
 </div>
 
-
-
-<section class="hero">
-  <div class="hero-label">Frequently asked questions</div>
+<div class="hero">
+  <span class="hero-eyebrow">Frequently asked questions</span>
   <h1>Straight answers.</h1>
-  <p class="hero-lead">No fluff. If your question is not here, write to <a href="mailto:support@debt-free.world" style="color:var(--green);">support@debt-free.world</a> and we'll answer — and add it here.</p>
-</section>
+  <p class="hero-lead">No fluff. If your question is not here, write to <a href="mailto:support@debt-free.world">support@debt-free.world</a> and we'll answer — and add it here.</p>
+</div>
 
 <div class="toc">
   <a href="#free" class="toc-link">What's free</a>
-  <a href="#premium" class="toc-link">Premium</a>
+  <a href="#premium" class="toc-link">Debt Recovery</a>
   <a href="#plan" class="toc-link">Your plan</a>
   <a href="#privacy" class="toc-link">Privacy & data</a>
   <a href="#technical" class="toc-link">Technical</a>
@@ -127,227 +141,295 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <a href="#contact" class="toc-link">Contact</a>
 </div>
 
-<!-- WHAT'S FREE -->
 <div class="section" id="free">
-  <div class="section-label">What's free</div>
+  <span class="section-label">What's free</span>
+  <div class="qa-list">
 
-  <details open>
-    <summary>Is it really free? No catch?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Yes. The free plan, all analysis, and your personal member area are free — permanently. No credit card required. No trial period. No hidden costs. Free means free.</p><p>Debt Recovery (19 €, one-time) is an optional upgrade that gives you a companion programme for 90 days. It is not required to use the service.</p></div>
-  </details>
+    <details open>
+      <summary>Is it really free? No catch?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Yes. The free plan, all analysis, and your personal member area are free — permanently. No credit card required. No trial period. No hidden costs. Free means free.</p><p>Debt Recovery (19 €, one-time) is an optional upgrade that gives you a companion programme for 90 days. It is not required to use the service.</p></div>
+    </details>
 
-  <details>
-    <summary>What exactly do I get for free?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your free plan includes:</p>
-    <ul>
-      <li>A personalised 90-day debt recovery plan based on your exact numbers</li>
-      <li>Debt analysis and prioritisation</li>
-      <li>Budget and cash flow analysis</li>
-      <li>A realistic repayment schedule with a debt-free date estimate</li>
-      <li>Risk alerts — what happens if you do nothing</li>
-      <li>Your legal rights with creditors in your country</li>
-      <li>Local debt counselling services and government support programmes</li>
-      <li>Emergency Action Card — immediate steps if you are in crisis right now</li>
-      <li>One concrete action you can take today</li>
-      <li>Access to your personal member area</li>
-      <li>The full plan delivered to your email — yours to keep</li>
-    </ul></div>
-  </details>
+    <details>
+      <summary>What exactly do I get for free?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Your free plan includes:</p>
+      <ul>
+        <li>A personalised 90-day debt recovery plan based on your exact numbers</li>
+        <li>Debt analysis and prioritisation</li>
+        <li>Budget and cash flow analysis</li>
+        <li>A realistic repayment schedule with a debt-free date estimate</li>
+        <li>Risk alerts — what happens if you do nothing</li>
+        <li>Your legal rights with creditors in your country</li>
+        <li>Local debt counselling services and government support programmes</li>
+        <li>Emergency Action Card — immediate steps if you are in crisis right now</li>
+        <li>One concrete action you can take today</li>
+        <li>Access to your personal member area</li>
+        <li>The full plan delivered to your email — yours to keep</li>
+      </ul></div>
+    </details>
 
-  <details>
-    <summary>Will it always be free?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Yes. The core free service is a permanent commitment — not a temporary offer. Debt-Free.world was built on the principle that financial guidance should be accessible to everyone, regardless of income.</p></div>
-  </details>
+    <details>
+      <summary>Will it always be free?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Yes. The core free service is a permanent commitment — not a temporary offer. Debt-Free.world was built on the principle that financial guidance should be accessible to everyone, regardless of income.</p></div>
+    </details>
 
-  <details>
-    <summary>Do I need to create an account?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>No account or password needed. Enter your email address to receive your plan and access your personal member area. That's it.</p></div>
-  </details>
+    <details>
+      <summary>Do I need to create an account?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>No account or password needed. Enter your email address to receive your plan and access your personal member area. That's it.</p></div>
+    </details>
 
-  <details>
-    <summary>What is the member area?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Both free and paid users get access to a personal member area — sign in with your email, no password needed. The member area is where your plan lives and where you access the tools included in your plan.</p></div>
-  </details>
+    <details>
+      <summary>What is the member area?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Both free and paid users get access to a personal member area — sign in with your email, no password needed. The member area is where your plan lives and where you access the tools included in your plan.</p></div>
+    </details>
+
+  </div>
 </div>
 
 <div class="section" id="premium">
-  <div class="section-label">Debt Recovery — 19 €</div>
+  <span class="section-label">Debt Recovery — 19 €</span>
+  <div class="qa-list">
 
-  <details>
-    <summary>What does Debt Recovery add?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Debt Recovery (19 €, one-time) is your companion programme for 90 days. You get everything in the free plan, plus:</p>
-    <ul>
-      <li>In-depth onboarding built around your exact debts, income, mindset and goals</li>
-      <li>Personalised 90-day programme — three phases, country-specific resources</li>
-      <li>Monthly plan update — refresh your priorities every 30 days</li>
-      <li>Letter generator — 7 letter types addressed to your creditor by name, ready to send</li>
-      <li>Creditor call practice — prepare before you pick up the phone</li>
-      <li>Crisis Budget Tool, Snowball vs Avalanche Calculator, Extra Income Simulator</li>
-      <li>Debt Collection Map — your rights at every stage</li>
-      <li>Legal Protection Guide — what collectors can and cannot do in your country</li>
-      <li>Crisis Action Plans — unemployment, divorce, sick leave, emergencies</li>
-      <li>Behavioural tools — impulse control, habits, financial stress management</li>
-      <li>90-Day Challenge — weekly framework to stay on track</li>
-      <li>Companion Mode — guided check-ins and next-step suggestions</li>
-      <li>Monthly reminder emails</li>
-    </ul></div>
-  </details>
+    <details>
+      <summary>What does Debt Recovery add?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Debt Recovery (19 €, one-time) is your companion programme for 90 days. You get everything in the free plan, plus:</p>
+      <ul>
+        <li>In-depth onboarding built around your exact debts, income, mindset and goals</li>
+        <li>Personalised 90-day programme — three phases, country-specific resources</li>
+        <li>Monthly plan update — refresh your priorities every 30 days</li>
+        <li>Letter generator — 7 letter types addressed to your creditor by name, ready to send</li>
+        <li>Creditor call practice — prepare before you pick up the phone</li>
+        <li>Crisis Budget Tool, Snowball vs Avalanche Calculator, Extra Income Simulator</li>
+        <li>Debt Collection Map — your rights at every stage</li>
+        <li>Legal Protection Guide — what collectors can and cannot do in your country</li>
+        <li>Crisis Action Plans — unemployment, divorce, sick leave, emergencies</li>
+        <li>Behavioural tools — impulse control, habits, financial stress management</li>
+        <li>90-Day Challenge — weekly framework to stay on track</li>
+        <li>Companion Mode — guided check-ins and next-step suggestions</li>
+        <li>Monthly reminder emails</li>
+      </ul></div>
+    </details>
 
-  <details>
-    <summary>Is there a subscription or auto-renewal?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>No. Debt Recovery is a single one-time payment of 19 €. There is no subscription, no auto-renewal, and no recurring charge of any kind. You pay once. Access lasts 90 days.</p></div>
-  </details>
+    <details>
+      <summary>Is there a subscription or auto-renewal?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>No. Debt Recovery is a single one-time payment of 19 €. There is no subscription, no auto-renewal, and no recurring charge of any kind. You pay once. Access lasts 90 days.</p></div>
+    </details>
 
-  <details>
-    <summary>What happens after 90 days?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your Debt Recovery programme access expires after 90 days. Your plan and any letters you generated are yours to keep permanently. The free service and your member area remain available to you at any time.</p></div>
-  </details>
+    <details>
+      <summary>What happens after 90 days?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Your Debt Recovery programme access expires after 90 days. After that, your account moves to a 12-month archive — you can still log in and download your plan and any letters you generated, but the active tools (creditor letter generator, check-ins, calculators) are no longer available.</p><p>Near the end of that 12-month archive period, we'll email you in advance so nothing disappears as a surprise. After 12 months of inactivity, the account and its data are deleted.</p></div>
+    </details>
 
-  <details>
-    <summary>Can't afford 19 €?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Write to <a href="mailto:support@debt-free.world">support@debt-free.world</a> or use the link on the pricing page: "Can't afford this right now? Apply for free access. No explanation needed." We will not ask why. Financial freedom should never depend on your ability to pay.</p></div>
-  </details>
+    <details>
+      <summary>Can't afford 19 €?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>On the <a href="/ecosystem.html">Ecosystem page</a>, under Debt Recovery, you'll find a "Community Access" option. Click it and you'll go straight to checkout with the price already at 0 € — no code to enter, no explanation needed, no waiting for a reply. Financial freedom should never depend on your ability to pay.</p></div>
+    </details>
 
-  <details>
-    <summary>Can I get a refund?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Under EU Directive 2011/83/EU Art. 16(m), digital content delivered immediately upon purchase is exempt from the standard 14-day withdrawal right — which you waive at checkout before payment.</p><p>That said, we operate a goodwill policy. If you have a genuine issue, contact <a href="mailto:support@debt-free.world">support@debt-free.world</a> and we will handle it fairly. We have no interest in keeping money from someone who didn't benefit.</p></div>
-  </details>
+    <details>
+      <summary>Can I get a refund?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Under EU Directive 2011/83/EU Art. 16(m), digital content delivered immediately upon purchase is exempt from the standard 14-day withdrawal right — which you waive at checkout before payment.</p><p>That said, we operate a goodwill policy. If you have a genuine issue, contact <a href="mailto:support@debt-free.world">support@debt-free.world</a> and we will handle it fairly. We have no interest in keeping money from someone who didn't benefit.</p></div>
+    </details>
 
-  <details>
-    <summary>What payment methods are accepted?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Payment is processed via Stripe — the same payment infrastructure used by Amazon, Shopify, and millions of businesses globally. All major credit and debit cards are accepted. The transaction appears as Amliv Oy on your statement.</p></div>
-  </details>
+    <details>
+      <summary>What payment methods are accepted?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Payment is processed via Stripe — the same payment infrastructure used by Amazon, Shopify, and millions of businesses globally. All major credit and debit cards are accepted. The transaction appears as Amliv Oy on your statement.</p></div>
+    </details>
+
+    <details>
+      <summary>How long do you keep my data and my plan?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>We don't promise "forever" for either product — that would not be honest, and honesty matters more to us than a nicer-sounding answer. Instead, here is exactly what happens:</p>
+      <ul>
+        <li><strong>DEBT FREE (free):</strong> your account and data are kept for 90 days from your last activity. If you don't return within that window, everything is deleted.</li>
+        <li><strong>Debt Recovery (19 €):</strong> 90 days of active access, plus a further 12-month archive where you can still log in and download your plan and letters — just without the active tools. After 12 months of inactivity, the account is deleted.</li>
+      </ul>
+      <p>In both cases, we email you before anything is deleted, so it's never a surprise.</p></div>
+    </details>
+
+  </div>
 </div>
 
-<!-- YOUR PLAN -->
 <div class="section" id="plan">
-  <div class="section-label">Your plan</div>
+  <span class="section-label">Your plan</span>
+  <div class="qa-list">
 
-  <details>
-    <summary>How is my plan generated?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your plan is built from the specific data you provide — your income, household type, debt amounts, interest rates, housing costs, employment situation, country, and language. It does not produce generic templates. It calculates your actual monthly gap, projects a realistic debt-free date, and gives you country-specific resources and next steps.</p></div>
-  </details>
+    <details>
+      <summary>How is my plan generated?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Your plan is built from the specific data you provide — your income, household type, debt amounts, interest rates, housing costs, employment situation, country, and language. It does not produce generic templates. It calculates your actual monthly gap, projects a realistic debt-free date, and gives you country-specific resources and next steps.</p></div>
+    </details>
 
-  <details>
-    <summary>How accurate is the debt-free date?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>The date is calculated from your actual numbers using standard amortisation. It assumes you maintain your current payment pace. It is accurate to the extent your input is accurate — which is why we ask for real numbers, not estimates.</p><p>If your situation changes (income, interest rate, new debts), the date will change. The plan is a starting point, not a guarantee.</p></div>
-  </details>
+    <details>
+      <summary>How accurate is the debt-free date?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>The date is calculated from your actual numbers using standard amortisation. It assumes you maintain your current payment pace. It is accurate to the extent your input is accurate — which is why we ask for real numbers, not estimates.</p><p>If your situation changes (income, interest rate, new debts), the date will change. The plan is a starting point, not a guarantee.</p></div>
+    </details>
 
-  <details>
-    <summary>Is the plan delivered to my email?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Yes. Your plan is emailed to you immediately after submission. It is yours to keep permanently — even after any access period ends. Check your spam folder if it does not arrive within a few minutes. The sender is insights@debt-free.world.</p></div>
-  </details>
+    <details>
+      <summary>Is the plan delivered to my email?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Yes. Your plan is emailed to you immediately after submission, and it stays in your member area for as long as you keep using it. If a free account is inactive for 90 days, the account and its data are deleted — we'll email you in advance if that's about to happen. Check your spam folder if your plan does not arrive within a few minutes. The sender is insights@debt-free.world.</p></div>
+    </details>
 
-  <details>
-    <summary>What languages are supported?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your plan can be generated in 19 languages: English, Finnish, Swedish, German, Norwegian, Danish, Dutch, Spanish, French, Italian, Polish, Portuguese, Czech, Estonian, Latvian, Lithuanian, Hungarian, Romanian, and Croatian. Select your language before submitting the form.</p></div>
-  </details>
+    <details>
+      <summary>What languages are supported?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Your plan can be generated in 19 languages: English, Finnish, Swedish, German, Norwegian, Danish, Dutch, Spanish, French, Italian, Polish, Portuguese, Czech, Estonian, Latvian, Lithuanian, Hungarian, Romanian, and Croatian. Select your language before submitting the form.</p></div>
+    </details>
 
-  <details>
-    <summary>Which countries are supported?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>The service works globally. Country-specific content — legal rights, creditor negotiation norms, government support programmes, and debt counselling services — is tailored for 40+ countries. If your country is not listed, select "Other" and your plan will include general guidance applicable to your region.</p></div>
-  </details>
+    <details>
+      <summary>Which countries are supported?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>The service works globally. Country-specific content — legal rights, creditor negotiation norms, government support programmes, and debt counselling services — is tailored for 40+ countries. If your country is not listed, select "Other" and your plan will include general guidance applicable to your region.</p></div>
+    </details>
 
-  <details>
-    <summary>Is this legal advice?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>No. Debt-Free.world provides financial guidance and information — not legal advice. For country-specific legal matters, particularly if you are facing enforcement, court proceedings, or insolvency, consult a qualified legal professional or your country's free debt counselling service. We include local referrals in every plan.</p></div>
-  </details>
+    <details>
+      <summary>Is this legal advice?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>No. Debt-Free.world provides financial guidance and information — not legal advice. For country-specific legal matters, particularly if you are facing enforcement, court proceedings, or insolvency, consult a qualified legal professional or your country's free debt counselling service. We include local referrals in every plan.</p></div>
+    </details>
+
+  </div>
 </div>
 
-<!-- PRIVACY -->
 <div class="section" id="privacy">
-  <div class="section-label">Privacy & data</div>
+  <span class="section-label">Privacy & data</span>
+  <div class="qa-list">
 
-  <details>
-    <summary>What data do you collect?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>We collect the information you provide in the form: income, household type, debt situation, housing costs, country, language, and email address. This data is used solely to generate your plan and send you relevant updates. See our full <a href="/legal.html#privacy">Privacy Policy</a>.</p></div>
-  </details>
+    <details>
+      <summary>What data do you collect?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>We collect the information you provide in the form: income, household type, debt situation, housing costs, country, language, and email address. This data is used solely to generate your plan and send you relevant updates. See our full <a href="/legal.html#privacy">Privacy Policy</a>.</p></div>
+    </details>
 
-  <details>
-    <summary>Who can see my financial information?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Your data is processed by our technology and email provider (Brevo) for the purpose of generating and delivering your plan. It is not shared with any other third party, not sold, and not used for advertising.</p></div>
-  </details>
+    <details>
+      <summary>Who can see my financial information?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Your data is processed by our technology and email provider (Brevo) for the purpose of generating and delivering your plan. It is not shared with any other third party, not sold, and not used for advertising.</p></div>
+    </details>
 
-  <details>
-    <summary>Will anyone contact me?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>We will never call you. We may send relevant email updates — you can unsubscribe at any time from any email we send. We do not have a sales team and we do not do outbound calls.</p></div>
-  </details>
+    <details>
+      <summary>Will anyone contact me?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>We will never call you. We may send relevant email updates — you can unsubscribe at any time from any email we send. We do not have a sales team and we do not do outbound calls.</p></div>
+    </details>
 
-  <details>
-    <summary>How do I delete my data?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Email <a href="mailto:support@debt-free.world">support@debt-free.world</a> with the subject "Data deletion request" and your email address. We will delete all associated data within 30 days and confirm when done.</p></div>
-  </details>
+    <details>
+      <summary>How do I delete my data?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Email <a href="mailto:support@debt-free.world">support@debt-free.world</a> with the subject "Data deletion request" and your email address. We will delete all associated data within 30 days and confirm when done.</p></div>
+    </details>
+
+  </div>
 </div>
 
-<!-- TECHNICAL -->
 <div class="section" id="technical">
-  <div class="section-label">Technical</div>
+  <span class="section-label">Technical</span>
+  <div class="qa-list">
 
-  <details>
-    <summary>How does my member area work?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Both free and paid users get a personal member area. After submitting the form, you receive an access link by email. Clicking it opens your member area directly — no password required. If you purchased Debt Recovery, your 90-day programme tools are available immediately after a short onboarding.</p></div>
-  </details>
+    <details>
+      <summary>How does my member area work?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>The moment you enter your email and continue, we send your access link straight away — before you've even started the questions that build your plan. That link is yours to use any time, whether you finish the form right then or come back to it later.</p><p>Clicking the link opens your member area directly — no password required. Once you complete the short form, your personalised plan appears there. If you purchased Debt Recovery, your 90-day programme tools are available immediately after a short onboarding.</p></div>
+    </details>
 
-  <details>
-    <summary>I did not receive my plan or access link. What do I do?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Check your spam or junk folder first — emails from insights@debt-free.world occasionally get filtered. If it is not there within 5 minutes, write to <a href="mailto:support@debt-free.world">support@debt-free.world</a> with the email address you used and we will resend it manually.</p></div>
-  </details>
+    <details>
+      <summary>I did not receive my plan or access link. What do I do?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Check your spam or junk folder first — emails from insights@debt-free.world occasionally get filtered. If it is not there within 5 minutes, write to <a href="mailto:support@debt-free.world">support@debt-free.world</a> with the email address you used and we will resend it manually.</p></div>
+    </details>
 
-  <details>
-    <summary>Does the service work on mobile?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Yes. Debt-Free.world is fully responsive and works on all modern browsers on mobile, tablet, and desktop. No app download required.</p></div>
-  </details>
+    <details>
+      <summary>Does the service work on mobile?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Yes. Debt-Free.world is fully responsive and works on all modern browsers on mobile, tablet, and desktop. No app download required.</p></div>
+    </details>
+
+  </div>
 </div>
 
-<!-- LEGAL -->
 <div class="section" id="legal">
-  <div class="section-label">Legal</div>
+  <span class="section-label">Legal</span>
+  <div class="qa-list">
 
-  <details>
-    <summary>Who operates Debt-Free.world?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Debt-Free.world is operated by <strong>Amliv Oy</strong>, a Finnish limited company founded and owned by <strong>Vilma Paasikivi</strong>, entrepreneur and founder of Debt-Free.world.<br><br>VAT number: FI32503518<br>Registered address: Lauttakorventie 7 E 36, 37130 Nokia, Finland<br>Contact: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p></div>
-  </details>
+    <details>
+      <summary>Who operates Debt-Free.world?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Debt-Free.world is operated by <strong>Amliv Oy</strong>, a Finnish limited company founded and owned by <strong>Vilma Paasikivi</strong>, entrepreneur and founder of Debt-Free.world.<br><br>VAT number: FI32503518<br>Registered address: Lauttakorventie 7 E 36, 37130 Nokia, Finland<br>Contact: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p></div>
+    </details>
 
-  <details>
-    <summary>Where can I find your Terms of Service and Privacy Policy?<span class="q-icon">+</span></summary>
-    <div class="ans"><p><a href="/legal.html#terms">Terms of Service</a> · <a href="/legal.html#privacy">Privacy Policy</a> · <a href="/legal.html#refund">Refund Policy</a></p></div>
-  </details>
+    <details>
+      <summary>Where can I find your Terms of Service and Privacy Policy?<span class="q-icon">+</span></summary>
+      <div class="ans"><p><a href="/legal.html#terms">Terms of Service</a> · <a href="/legal.html#privacy">Privacy Policy</a> · <a href="/legal.html#refund">Refund Policy</a></p></div>
+    </details>
+
+  </div>
 </div>
 
-<!-- CONTACT -->
 <div class="section" id="contact">
-  <div class="section-label">Contact</div>
+  <span class="section-label">Contact</span>
+  <div class="qa-list">
 
-  <details open>
-    <summary>How do I contact you?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Email: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p><p>We typically respond within one business day. We do not have a phone number or live chat. All support is handled by email.</p></div>
-  </details>
+    <details open>
+      <summary>How do I contact you?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Email: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p><p>We typically respond within one business day. We do not have a phone number or live chat. All support is handled by email.</p></div>
+    </details>
 
-  <details>
-    <summary>I have feedback or a suggestion. Can I share it?<span class="q-icon">+</span></summary>
-    <div class="ans"><p>Yes — and we genuinely want it. Write to <a href="mailto:support@debt-free.world">support@debt-free.world</a>. Vilma reads every message. The most common feedback has directly shaped the product.</p></div>
-  </details>
+    <details>
+      <summary>I have feedback or a suggestion. Can I share it?<span class="q-icon">+</span></summary>
+      <div class="ans"><p>Yes — and we genuinely want it. Write to <a href="mailto:support@debt-free.world">support@debt-free.world</a>. Vilma reads every message. The most common feedback has directly shaped the product.</p></div>
+    </details>
+
+  </div>
 </div>
 
-<!-- CTA -->
-<div class="cta-band">
-  <div class="cta-band-title">Ready to start?</div>
-  <div class="cta-band-sub">Your free plan takes about 3 minutes. No card. No catch.</div>
-  <a href="/">Get my free plan →</a>
+<div class="closing">
+  <h3>Ready to start?</h3>
+  <p>Your free plan takes about 2 minutes. No card. No catch.</p>
+  <a href="/signup-free.html" class="btn-primary">Get my free plan</a>
 </div>
 
 <footer>
-  <div class="footer-logo">Debt-<em>Free</em>.world</div>
-  <div class="footer-note">Built with honesty. Free forever for those who need it most. 🌍</div>
+  <div class="footer-row">
+    <div>
+      <div class="footer-brand">Debt-Free.world</div>
+      <div class="footer-legal">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
+    </div>
+    <div class="footer-links">
+      <a href="/legal.html#privacy">Privacy</a>
+      <a href="/legal.html#terms">Terms</a>
+      <a href="mailto:support@debt-free.world">Contact</a>
+    </div>
+    <div class="footer-tagline">🌍 Free forever for those who need it most</div>
+  </div>
 </footer>
 
-</div>
-<!-- Analytics — loads only after cookie consent -->
 <script>
 function toggleMenu(){
-  const menu=document.getElementById('mobileMenu');
-  menu.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
+
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  const menu = document.getElementById('langMenu');
+  if(wrap && menu && !wrap.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+
+(function(){
+  var langs=[
+    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+    ['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],
+    ['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],
+    ['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],
+    ['HU','Magyar'],['RO','Română'],['HR','Hrvatski']
+  ];
+  var stored=localStorage.getItem('dfw_lang')||'EN';
+  window.addEventListener('DOMContentLoaded',function(){
+    var menu=document.getElementById('langMenu');
+    var btn=document.getElementById('langBtn');
+    if(!menu||!btn)return;
+    langs.forEach(function(l){
+      var b=document.createElement('button');
+      b.textContent=l[1];
+      b.onclick=function(){
+        localStorage.setItem('dfw_lang',l[0]);
+        btn.innerHTML=l[0]+' ▾';
+        menu.classList.remove('open');
+      };
+      menu.appendChild(b);
+    });
+    btn.innerHTML=stored+' ▾';
+  });
+})();
+
+/* Analytics — loads only after cookie consent */
 function loadTracking(){
   if(localStorage.getItem('cookie-consent')==='accepted'){
     var s=document.createElement('script');s.async=true;
@@ -375,35 +457,14 @@ window.addEventListener('DOMContentLoaded',function(){
   loadTracking();
 });
 </script>
+
 <div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
   <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
   <div style="display:flex;gap:8px;flex-shrink:0;">
     <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
-    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:sans-serif;">Accept analytics</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#0f4d28;color:#fff;font-family:sans-serif;">Accept analytics</button>
   </div>
 </div>
-<script>
-(function(){
-  var langs=[
-    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
-    ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
-    ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
-    ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
-    ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']
-  ];
-  var stored=localStorage.getItem('dfw_lang')||'EN';
-  window.addEventListener('DOMContentLoaded',function(){
-    var sel=document.getElementById('langSel');
-    if(!sel)return;
-    langs.forEach(function(l){
-      var o=document.createElement('option');
-      o.value=l[0];o.textContent=l[1];
-      if(l[0]===stored)o.selected=true;
-      sel.appendChild(o);
-    });
-    sel.onchange=function(){localStorage.setItem('dfw_lang',this.value);};
-  });
-})();
-</script>
+
 </body>
 </html>
