@@ -132,6 +132,11 @@ body.ready{visibility:visible;}
 .action-card-body{padding:18px 16px;}
 .action-text{font-family:var(--serif);font-size:18px;color:var(--text);font-weight:400;line-height:1.4;margin-bottom:16px;}
 .ec-critical{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:6px;padding:11px 14px;margin-bottom:14px;}
+.risk-alert{margin:14px 20px 0;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:6px;padding:14px 16px;}
+.risk-alert-top{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.risk-alert-top .icon{color:var(--amber);}
+.risk-alert-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--amber);}
+.risk-alert-body{font-size:13.5px;color:var(--text);line-height:1.65;font-weight:400;}
 .ec-critical-lbl{font-size:10px;font-weight:600;color:var(--amber);letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;}
 .ec-critical-name{font-size:14px;font-weight:600;color:var(--text);}
 .ec-critical-detail{font-size:12.5px;color:var(--text-soft);margin-top:2px;font-weight:300;}
@@ -302,13 +307,13 @@ body.ready{visibility:visible;}
   <div class="gate-card">
     <span class="gate-logo">Debt-Free.world</span>
     <div class="gate-spinner" id="gateSpinner"></div>
-    <div class="gate-title" id="gateTitle">Verifying your access</div>
-    <div class="gate-sub" id="gateSub">This takes only a moment.</div>
+    <div class="gate-title" id="gateTitle" data-i18n="gate_verifying">Verifying your access</div>
+    <div class="gate-sub" id="gateSub" data-i18n="gate_moment">This takes only a moment.</div>
     <div class="gate-form" id="gateForm">
-      <input type="email" id="gateEmail" placeholder="Your email address" inputmode="email" autocomplete="email"/>
-      <button class="gate-btn" onclick="requestNewLink()">Send me a new access link</button>
+      <input type="email" id="gateEmail" placeholder="Your email address" inputmode="email" autocomplete="email" data-i18n-placeholder="gate_email_placeholder"/>
+      <button class="gate-btn" onclick="requestNewLink()" data-i18n="gate_send_link">Send me a new access link</button>
     </div>
-    <div class="gate-success" id="gateSuccess">Your link is on its way. Check your inbox — and spam if it doesn't arrive within 2 minutes.</div>
+    <div class="gate-success" id="gateSuccess" data-i18n="gate_success">Your link is on its way. Check your inbox — and spam if it doesn't arrive within 2 minutes.</div>
   </div>
 </div>
 
@@ -317,7 +322,7 @@ body.ready{visibility:visible;}
   <div class="pf-topbar">
     <span class="pf-logo">Debt-Free.world</span>
     <button class="pf-save" onclick="window.print()">
-      <span data-lucide="printer"></span> Save / Print
+      <span data-lucide="printer"></span> <span data-i18n="pf_save_print">Save / Print</span>
     </button>
   </div>
   <div class="pf-body">
@@ -328,12 +333,12 @@ body.ready{visibility:visible;}
     <div class="pf-plan" id="pfPlan">Loading your plan…</div>
     <div class="pf-actions">
       <button class="btn-pf-cta" onclick="enterDashboard()">
-        Go to my member area
+        <span data-i18n="pf_go_dashboard">Go to my member area</span>
         <span data-lucide="arrow-right"></span>
       </button>
       <button class="btn-pf-secondary" onclick="window.print()">
         <span data-lucide="printer"></span>
-        Save or print my plan
+        <span data-i18n="pf_save_plan">Save or print my plan</span>
       </button>
     </div>
   </div>
@@ -352,7 +357,7 @@ body.ready{visibility:visible;}
         </div>
       </div>
       <button class="menu-pill" onclick="openDrawer()" aria-label="All tools">
-        <span data-lucide="menu"></span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </div>
@@ -361,7 +366,7 @@ body.ready{visibility:visible;}
   <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
   <div class="tools-drawer" id="toolsDrawer">
     <div class="drawer-header">
-      <span class="drawer-title">All tools &amp; services</span>
+      <span class="drawer-title" data-i18n="drawer_title">All tools &amp; services</span>
       <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
     </div>
 
@@ -369,8 +374,8 @@ body.ready{visibility:visible;}
       <div class="drawer-plan-item" onclick="showPlanFirst();closeDrawer();">
         <div class="icon"><span data-lucide="file-text"></span></div>
         <div>
-          <div class="drawer-plan-item-name">My DEBT FREE Plan</div>
-          <div class="drawer-plan-item-desc">Open your full personalised plan</div>
+          <div class="drawer-plan-item-name" data-i18n="drawer_my_plan">My DEBT FREE Plan</div>
+          <div class="drawer-plan-item-desc" data-i18n="drawer_my_plan_desc">Open your full personalised plan</div>
         </div>
       </div>
     </div>
@@ -378,139 +383,139 @@ body.ready{visibility:visible;}
     <div class="drawer-divider"></div>
 
     <div class="drawer-section">
-      <span class="drawer-section-label">Your Plan</span>
-      <div class="drawer-item" onclick="scrollTo('today');closeDrawer();">
+      <span class="drawer-section-label" data-i18n="drawer_yourplan">Your Plan</span>
+      <div class="drawer-item" onclick="scrollToSection('today')">
         <div class="icon"><span data-lucide="zap"></span></div>
-        <div><div class="drawer-item-name">Emergency Action Card</div><div class="drawer-item-desc">Your most urgent step — what to do today</div></div>
+        <div><div class="drawer-item-name" data-i18n="drawer_emergency">Emergency Action Card</div><div class="drawer-item-desc" data-i18n="drawer_emergency_desc">Your most urgent step — what to do today</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('understand');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('understand')">
         <div class="icon"><span data-lucide="bar-chart-2"></span></div>
-        <div><div class="drawer-item-name">Financial Snapshot</div><div class="drawer-item-desc">Income, surplus, debt-free date</div></div>
+        <div><div class="drawer-item-name" data-i18n="drawer_snapshot">Financial Snapshot</div><div class="drawer-item-desc" data-i18n="drawer_snapshot_desc">Income, surplus, debt-free date</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('debtmap');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('debtmap')">
         <div class="icon"><span data-lucide="map"></span></div>
-        <div><div class="drawer-item-name">Debt Map</div><div class="drawer-item-desc">Every debt prioritised by urgency</div></div>
+        <div><div class="drawer-item-name" data-i18n="drawer_debtmap">Debt Map</div><div class="drawer-item-desc" data-i18n="drawer_debtmap_desc">Every debt prioritised by urgency</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('support');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('support')">
         <div class="icon"><span data-lucide="landmark"></span></div>
-        <div><div class="drawer-item-name">Local Support</div><div class="drawer-item-desc">Verified free services in your country</div></div>
+        <div><div class="drawer-item-name" data-i18n="drawer_support">Local Support</div><div class="drawer-item-desc" data-i18n="drawer_support_desc">Verified free services in your country</div></div>
       </div>
       <div class="drawer-item" onclick="openUpdateModal();closeDrawer();">
         <div class="icon"><span data-lucide="refresh-cw"></span></div>
-        <div><div class="drawer-item-name">Update my information</div><div class="drawer-item-desc">Numbers changed? Refresh your plan</div></div>
+        <div><div class="drawer-item-name" data-i18n="drawer_update">Update my information</div><div class="drawer-item-desc" data-i18n="drawer_update_desc">Numbers changed? Refresh your plan</div></div>
       </div>
     </div>
 
     <div class="drawer-divider"></div>
 
     <div class="drawer-section">
-      <span class="drawer-section-label">Tools</span>
-      <div class="drawer-item" onclick="scrollTo('tools');closeDrawer();">
+      <span class="drawer-section-label" data-i18n="drawer_tools">Tools</span>
+      <div class="drawer-item" onclick="scrollToSection('tools')">
         <div class="icon"><span data-lucide="calculator"></span></div>
-        <div><div class="drawer-item-name">Debt-Free Date Calculator</div><div class="drawer-item-desc">Your exact timeline from your numbers</div></div>
+        <div><div class="drawer-item-name" data-i18n="tool_dfd_name_long">Debt-Free Date Calculator</div><div class="drawer-item-desc" data-i18n="tool_dfd_desc">Your exact timeline from your numbers</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('tools');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('tools')">
         <div class="icon"><span data-lucide="git-merge"></span></div>
-        <div><div class="drawer-item-name">Snowball vs Avalanche</div><div class="drawer-item-desc">Which strategy saves you the most?</div></div>
+        <div><div class="drawer-item-name" data-i18n="tool_snowball_name">Snowball vs Avalanche</div><div class="drawer-item-desc" data-i18n="tool_snowball_desc">Which strategy saves you the most?</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('tools');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('tools')">
         <div class="icon"><span data-lucide="sliders"></span></div>
-        <div><div class="drawer-item-name">Crisis Budget Planner</div><div class="drawer-item-desc">See how small changes accelerate freedom</div></div>
+        <div><div class="drawer-item-name" data-i18n="tool_budget_name">Crisis Budget Planner</div><div class="drawer-item-desc" data-i18n="tool_budget_desc">See how small changes accelerate freedom</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('tools');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('tools')">
         <div class="icon"><span data-lucide="trending-up"></span></div>
-        <div><div class="drawer-item-name">Extra Income Simulator</div><div class="drawer-item-desc">How much sooner with more income?</div></div>
+        <div><div class="drawer-item-name" data-i18n="tool_income_name">Extra Income Simulator</div><div class="drawer-item-desc" data-i18n="tool_income_desc">How much sooner with more income?</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('tools');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('tools')">
         <div class="icon"><span data-lucide="git-branch"></span></div>
-        <div><div class="drawer-item-name">Debt Collection Map</div><div class="drawer-item-desc">Every stage of the process and your rights</div></div>
+        <div><div class="drawer-item-name" data-i18n="tool_collection_name">Debt Collection Map</div><div class="drawer-item-desc" data-i18n="tool_collection_desc">Every stage of the process and your rights</div></div>
       </div>
-      <div class="drawer-item" onclick="scrollTo('tools');closeDrawer();">
+      <div class="drawer-item" onclick="scrollToSection('tools')">
         <div class="icon"><span data-lucide="shield"></span></div>
-        <div><div class="drawer-item-name">Legal Protection Guide</div><div class="drawer-item-desc">What collectors can and cannot do</div></div>
+        <div><div class="drawer-item-name" data-i18n="tool_legal_name">Legal Protection Guide</div><div class="drawer-item-desc" data-i18n="tool_legal_desc">What collectors can and cannot do</div></div>
       </div>
     </div>
 
     <div class="drawer-divider"></div>
 
     <div class="drawer-section">
-      <span class="drawer-section-label">Learn</span>
+      <span class="drawer-section-label" data-i18n="drawer_learn">Learn</span>
       <div class="drawer-item" onclick="window.location.href='/blog/';">
         <div class="icon"><span data-lucide="book-open"></span></div>
-        <div><div class="drawer-item-name">Articles</div><div class="drawer-item-desc">Debt education and financial guides</div></div>
+        <div><div class="drawer-item-name" data-i18n="drawer_articles">Articles</div><div class="drawer-item-desc" data-i18n="drawer_articles_desc">Debt education and financial guides</div></div>
       </div>
       <div class="drawer-item" onclick="window.location.href='/ecosystem.html';">
         <div class="icon"><span data-lucide="map-pin"></span></div>
-        <div><div class="drawer-item-name">The Ecosystem</div><div class="drawer-item-desc">See the full journey, all five stages</div></div>
+        <div><div class="drawer-item-name" data-i18n="drawer_ecosystem">The Ecosystem</div><div class="drawer-item-desc" data-i18n="drawer_ecosystem_desc">See the full journey, all five stages</div></div>
       </div>
     </div>
 
     <div class="drawer-divider"></div>
 
     <div class="drawer-section">
-      <span class="drawer-section-label">Debt Recovery — 19 €</span>
+      <span class="drawer-section-label" data-i18n="drawer_recovery_section">Debt Recovery — 19 €</span>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="mail"></span></div>
         <div>
-          <div class="drawer-item-name">Creditor Letter Generator</div>
-          <div class="drawer-item-desc">7 letter types — written to your creditor by name</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_letter_name">Creditor Letter Generator</div>
+          <div class="drawer-item-desc" data-i18n="drawer_letter_desc">7 letter types — written to your creditor by name</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="phone"></span></div>
         <div>
-          <div class="drawer-item-name">Creditor Call Practice</div>
-          <div class="drawer-item-desc">AI roleplay before you pick up the phone</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_call_name">Creditor Call Practice</div>
+          <div class="drawer-item-desc" data-i18n="drawer_call_desc">AI roleplay before you pick up the phone</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="compass"></span></div>
         <div>
-          <div class="drawer-item-name">90-Day Guided Journey</div>
-          <div class="drawer-item-desc">Weekly check-ins and next-step recommendations</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_journey_name">90-Day Guided Journey</div>
+          <div class="drawer-item-desc" data-i18n="drawer_journey_desc">Weekly check-ins and next-step recommendations</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="refresh-cw"></span></div>
         <div>
-          <div class="drawer-item-name">Monthly Plan Update</div>
-          <div class="drawer-item-desc">Refresh your plan every 30 days</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_monthly_name">Monthly Plan Update</div>
+          <div class="drawer-item-desc" data-i18n="drawer_monthly_desc">Refresh your plan every 30 days</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="life-buoy"></span></div>
         <div>
-          <div class="drawer-item-name">Crisis Action Plans</div>
-          <div class="drawer-item-desc">Job loss, divorce, illness, emergencies</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_crisis_name">Crisis Action Plans</div>
+          <div class="drawer-item-desc" data-i18n="drawer_crisis_desc">Job loss, divorce, illness, emergencies</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="brain"></span></div>
         <div>
-          <div class="drawer-item-name">Behaviour &amp; Mindset Tools</div>
-          <div class="drawer-item-desc">Habits, stress management, impulse control</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_behaviour_name">Behaviour &amp; Mindset Tools</div>
+          <div class="drawer-item-desc" data-i18n="drawer_behaviour_desc">Habits, stress management, impulse control</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="award"></span></div>
         <div>
-          <div class="drawer-item-name">90-Day Challenge</div>
-          <div class="drawer-item-desc">Weekly milestones to stay on track</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_challenge_name">90-Day Challenge</div>
+          <div class="drawer-item-desc" data-i18n="drawer_challenge_desc">Weekly milestones to stay on track</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div class="drawer-item" onclick="goUpgrade();">
         <div class="icon"><span data-lucide="folder"></span></div>
         <div>
-          <div class="drawer-item-name">My Documents</div>
-          <div class="drawer-item-desc">All letters and notes from your 90 days</div>
-          <span class="drawer-item-badge badge-unlock">Unlock</span>
+          <div class="drawer-item-name" data-i18n="drawer_docs_name">My Documents</div>
+          <div class="drawer-item-desc" data-i18n="drawer_docs_desc">All letters and notes from your 90 days</div>
+          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
         </div>
       </div>
       <div style="padding:6px 0 2px;">
@@ -521,35 +526,35 @@ body.ready{visibility:visible;}
     <div class="drawer-divider"></div>
 
     <div class="drawer-section">
-      <span class="drawer-section-label">Coming soon</span>
+      <span class="drawer-section-label" data-i18n="drawer_comingsoon">Coming soon</span>
       <div class="drawer-item">
         <div class="icon"><span data-lucide="briefcase"></span></div>
         <div>
-          <div class="drawer-item-name">Income Builder</div>
-          <div class="drawer-item-desc">Realistic ways to increase your income</div>
+          <div class="drawer-item-name" data-i18n="drawer_ib_name">Income Builder</div>
+          <div class="drawer-item-desc" data-i18n="drawer_ib_desc">Realistic ways to increase your income</div>
           <span class="drawer-item-badge badge-coming">Q4 2026</span>
         </div>
       </div>
       <div class="drawer-item">
         <div class="icon"><span data-lucide="trending-up"></span></div>
         <div>
-          <div class="drawer-item-name">Wealth Architect</div>
-          <div class="drawer-item-desc">Build and protect what you earn</div>
+          <div class="drawer-item-name" data-i18n="drawer_wa_name">Wealth Architect</div>
+          <div class="drawer-item-desc" data-i18n="drawer_wa_desc">Build and protect what you earn</div>
           <span class="drawer-item-badge badge-coming">2028</span>
         </div>
       </div>
       <div class="drawer-item">
         <div class="icon"><span data-lucide="building-2"></span></div>
         <div>
-          <div class="drawer-item-name">Business Engine</div>
-          <div class="drawer-item-desc">For entrepreneurs and business owners</div>
+          <div class="drawer-item-name" data-i18n="drawer_be_name">Business Engine</div>
+          <div class="drawer-item-desc" data-i18n="drawer_be_desc">For entrepreneurs and business owners</div>
           <span class="drawer-item-badge badge-coming">2029</span>
         </div>
       </div>
     </div>
 
     <div class="drawer-divider"></div>
-    <button class="drawer-logout" onclick="logout()">Sign out</button>
+    <button class="drawer-logout" onclick="logout()" data-i18n="drawer_signout">Sign out</button>
   </div>
 
   <!-- MAIN CONTENT -->
@@ -558,19 +563,19 @@ body.ready{visibility:visible;}
     <!-- TODAY -->
     <div class="today-section" id="today">
       <div class="greeting">
-        <div class="greeting-name" id="greetingName">Good to see you.</div>
-        <div class="greeting-sub" id="greetingSub">Your journey to financial freedom has already started.</div>
+        <div class="greeting-name" id="greetingName" data-i18n="greeting_default">Good to see you.</div>
+        <div class="greeting-sub" id="greetingSub" data-i18n="greeting_sub">Your journey to financial freedom has already started.</div>
       </div>
 
       <div class="action-card">
         <div class="action-card-top">
           <div class="icon"><span data-lucide="zap"></span></div>
-          <div class="action-card-label">Today's priority</div>
+          <div class="action-card-label" data-i18n="today_priority">Today's priority</div>
         </div>
         <div class="action-card-body">
-          <div class="action-text" id="ecAction">Loading your priority action…</div>
+          <div class="action-text" id="ecAction" data-i18n="loading_priority">Loading your priority action…</div>
           <div class="ec-critical" id="ecCritical">
-            <div class="ec-critical-lbl">Most critical debt</div>
+            <div class="ec-critical-lbl" data-i18n="most_critical_debt">Most critical debt</div>
             <div class="ec-critical-name" id="ecDebtName">—</div>
             <div class="ec-critical-detail" id="ecDebtDetail"></div>
           </div>
@@ -579,24 +584,40 @@ body.ready{visibility:visible;}
         <div class="action-card-footer">
           <button class="btn-green" onclick="showPlanFirst()">
             <span data-lucide="file-text"></span>
-            Read my full plan
+            <span data-i18n="read_full_plan">Read my full plan</span>
           </button>
           <button class="btn-ghost" onclick="window.print()">
             <span data-lucide="printer"></span>
-            Save
+            <span data-i18n="save">Save</span>
           </button>
         </div>
+      </div>
+
+      <!-- RISK ALERT — fulfills the explicit FAQ promise "Risk alerts —
+           what happens if you do nothing", which was previously absent
+           from both this dashboard and the AI plan-generation prompt.
+           Computed directly from the person's own numbers so it's never
+           blank even before the underlying plan text includes this
+           section; if/when the plan prompt is updated to generate this
+           content explicitly, renderRiskAlert() will prefer that text
+           over the computed fallback. -->
+      <div class="risk-alert" id="riskAlert" style="display:none;">
+        <div class="risk-alert-top">
+          <span class="icon"><span data-lucide="alert-triangle"></span></span>
+          <span class="risk-alert-label" data-i18n="risk_alert_label">If nothing changes</span>
+        </div>
+        <div class="risk-alert-body" id="riskAlertBody"></div>
       </div>
     </div>
 
     <!-- UNDERSTAND -->
     <div class="df-section" id="understand">
-      <span class="df-section-label">Understand — Your Financial Reality</span>
+      <span class="df-section-label" data-i18n="understand_section">Understand — Your Financial Reality</span>
       <div class="snapshot-grid">
         <div class="snap-box">
           <div class="snap-label">
             <span class="icon"><span data-lucide="arrow-up-down"></span></span>
-            Monthly surplus
+            <span data-i18n="monthly_surplus">Monthly surplus</span>
           </div>
           <span class="snap-val" id="statSurplus">—</span>
           <span class="snap-sub" id="statSurplusSub"></span>
@@ -604,7 +625,7 @@ body.ready{visibility:visible;}
         <div class="snap-box highlight">
           <div class="snap-label g">
             <span class="icon"><span data-lucide="calendar-check"></span></span>
-            Debt-free date
+            <span data-i18n="debt_free_date">Debt-free date</span>
           </div>
           <span class="snap-val g" id="statDfd">—</span>
           <span class="snap-sub" id="statDfdSub"></span>
@@ -612,7 +633,7 @@ body.ready{visibility:visible;}
         <div class="snap-box">
           <div class="snap-label">
             <span class="icon"><span data-lucide="credit-card"></span></span>
-            Total debt
+            <span data-i18n="total_debt">Total debt</span>
           </div>
           <span class="snap-val" id="statDebt">—</span>
           <span class="snap-sub" id="statDebtSub"></span>
@@ -620,37 +641,37 @@ body.ready{visibility:visible;}
         <div class="snap-box">
           <div class="snap-label">
             <span class="icon"><span data-lucide="clock"></span></span>
-            Days with us
+            <span data-i18n="days_with_us">Days with us</span>
           </div>
           <span class="snap-val g" id="statDays">—</span>
-          <span class="snap-sub">days of progress</span>
+          <span class="snap-sub" data-i18n="days_of_progress">days of progress</span>
         </div>
       </div>
     </div>
 
     <!-- PLAN -->
     <div class="df-section" id="plan">
-      <span class="df-section-label">Plan — My DEBT FREE Plan</span>
+      <span class="df-section-label" data-i18n="plan_section">Plan — My DEBT FREE Plan</span>
       <div class="plan-card">
         <div class="plan-card-header">
-          <span class="plan-card-eyebrow">My DEBT FREE Plan</span>
+          <span class="plan-card-eyebrow" data-i18n="my_plan">My DEBT FREE Plan</span>
           <span style="font-size:11px;color:var(--text-soft);font-weight:300;" id="planMeta"></span>
         </div>
-        <div class="plan-card-body" id="planBody">Loading your plan…</div>
+        <div class="plan-card-body" id="planBody" data-i18n="loading_plan">Loading your plan…</div>
         <div class="plan-card-footer">
           <div class="plan-card-footer-left">
             <button class="btn-expand" id="planExpandBtn" onclick="togglePlan()">
               <span data-lucide="chevron-down"></span>
-              Read full plan
+              <span data-i18n="read_full_plan_btn">Read full plan</span>
             </button>
             <button class="btn-print" onclick="window.print()">
               <span data-lucide="printer"></span>
-              Save / Print
+              <span data-i18n="save_print">Save / Print</span>
             </button>
           </div>
           <button class="btn-update-plan" onclick="openUpdateModal()">
             <span data-lucide="refresh-cw"></span>
-            Update my plan
+            <span data-i18n="update_my_plan">Update my plan</span>
           </button>
         </div>
       </div>
@@ -658,25 +679,25 @@ body.ready{visibility:visible;}
 
     <!-- DEBT MAP -->
     <div class="df-section" id="debtmap">
-      <span class="df-section-label">Debt Map — Prioritised by Urgency</span>
+      <span class="df-section-label" data-i18n="debtmap_section">Debt Map — Prioritised by Urgency</span>
       <div id="debtMapBody"></div>
     </div>
 
     <!-- TOOLS -->
     <div class="df-section" id="tools">
-      <span class="df-section-label">Tools — Take Control</span>
+      <span class="df-section-label" data-i18n="tools_section">Tools — Take Control</span>
       <div class="tools-grid" id="toolsGrid"></div>
     </div>
 
     <!-- SUPPORT -->
     <div class="df-section" id="support">
-      <span class="df-section-label">Support — You Are Not Alone</span>
+      <span class="df-section-label" data-i18n="support_section">Support — You Are Not Alone</span>
       <div id="supportBody"></div>
     </div>
 
     <!-- JOURNEY -->
     <div class="df-section" id="journey">
-      <span class="df-section-label">Your Journey</span>
+      <span class="df-section-label" data-i18n="journey_section">Your Journey</span>
       <div class="journey-timeline">
         <div class="journey-step">
           <div class="journey-step-left">
@@ -684,9 +705,9 @@ body.ready{visibility:visible;}
             <div class="journey-step-line"></div>
           </div>
           <div class="journey-step-body">
-            <span class="journey-step-tag complete">DEBT FREE — Complete</span>
-            <div class="journey-step-title">My DEBT FREE Plan</div>
-            <div class="journey-step-desc">You understand your situation. You have your plan and all the tools to start.</div>
+            <span class="journey-step-tag complete" data-i18n="journey_df_tag">DEBT FREE — Complete</span>
+            <div class="journey-step-title" data-i18n="journey_df_title">My DEBT FREE Plan</div>
+            <div class="journey-step-desc" data-i18n="journey_df_desc">You understand your situation. You have your plan and all the tools to start.</div>
           </div>
         </div>
         <div class="journey-step">
@@ -695,12 +716,12 @@ body.ready{visibility:visible;}
             <div class="journey-step-line"></div>
           </div>
           <div class="journey-step-body">
-            <span class="journey-step-tag active">DEBT RECOVERY — 19 €</span>
-            <div class="journey-step-title">My Recovery Journey</div>
-            <div class="journey-step-desc">90-day guided companion. Creditor letters. Weekly check-ins. The difference between knowing and doing.</div>
+            <span class="journey-step-tag active" data-i18n="journey_dr_tag">DEBT RECOVERY — 19 €</span>
+            <div class="journey-step-title" data-i18n="journey_dr_title">My Recovery Journey</div>
+            <div class="journey-step-desc" data-i18n="journey_dr_desc">90-day guided companion. Creditor letters. Weekly check-ins. The difference between knowing and doing.</div>
             <button class="btn-green" style="margin-top:12px;font-size:13px;padding:10px 18px;" onclick="goUpgrade()">
               <span data-lucide="arrow-right"></span>
-              Continue my journey
+              <span data-i18n="continue_journey">Continue my journey</span>
             </button>
           </div>
         </div>
@@ -710,9 +731,9 @@ body.ready{visibility:visible;}
             <div class="journey-step-line"></div>
           </div>
           <div class="journey-step-body">
-            <span class="journey-step-tag locked">INCOME BUILDER — Q4 2026</span>
-            <div class="journey-step-title">Increase Your Income</div>
-            <div class="journey-step-desc">Reducing expenses has a ceiling. Increasing income changes the game.</div>
+            <span class="journey-step-tag locked" data-i18n="journey_ib_tag">INCOME BUILDER — Q4 2026</span>
+            <div class="journey-step-title" data-i18n="journey_ib_title">Increase Your Income</div>
+            <div class="journey-step-desc" data-i18n="journey_ib_desc">Reducing expenses has a ceiling. Increasing income changes the game.</div>
           </div>
         </div>
         <div class="journey-step">
@@ -721,9 +742,9 @@ body.ready{visibility:visible;}
             <div class="journey-step-line"></div>
           </div>
           <div class="journey-step-body">
-            <span class="journey-step-tag locked">WEALTH ARCHITECT — 2028</span>
-            <div class="journey-step-title">Build and Protect Wealth</div>
-            <div class="journey-step-desc">Once debt is gone, build what lasts.</div>
+            <span class="journey-step-tag locked" data-i18n="journey_wa_tag">WEALTH ARCHITECT — 2028</span>
+            <div class="journey-step-title" data-i18n="journey_wa_title">Build and Protect Wealth</div>
+            <div class="journey-step-desc" data-i18n="journey_wa_desc">Once debt is gone, build what lasts.</div>
           </div>
         </div>
         <div class="journey-step">
@@ -731,9 +752,9 @@ body.ready{visibility:visible;}
             <div class="journey-step-dot locked"><div class="icon"><span data-lucide="lock"></span></div></div>
           </div>
           <div class="journey-step-body">
-            <span class="journey-step-tag locked">BUSINESS ENGINE — 2029</span>
-            <div class="journey-step-title">Build Something Bigger</div>
-            <div class="journey-step-desc">For entrepreneurs ready to build their next chapter.</div>
+            <span class="journey-step-tag locked" data-i18n="journey_be_tag">BUSINESS ENGINE — 2029</span>
+            <div class="journey-step-title" data-i18n="journey_be_title">Build Something Bigger</div>
+            <div class="journey-step-desc" data-i18n="journey_be_desc">For entrepreneurs ready to build their next chapter.</div>
           </div>
         </div>
       </div>
@@ -741,29 +762,29 @@ body.ready{visibility:visible;}
 
     <!-- UPGRADE CARD -->
     <div class="upgrade-card">
-      <span class="upgrade-tag">Debt Recovery</span>
-      <div class="upgrade-title">You understand your situation.<br>Now change it.</div>
-      <div class="upgrade-body">Your Debt Recovery Companion helps you stay on track for the next 90 days with guided actions, creditor communication tools, and support through life's difficult moments.</div>
+      <span class="upgrade-tag" data-i18n="upgrade_tag">Debt Recovery</span>
+      <div class="upgrade-title" data-i18n="upgrade_title" data-i18n-html>You understand your situation.<br>Now change it.</div>
+      <div class="upgrade-body" data-i18n="upgrade_body">Your Debt Recovery Companion helps you stay on track for the next 90 days with guided actions, creditor communication tools, and support through life's difficult moments.</div>
       <ul class="upgrade-includes">
-        <li><div class="icon"><span data-lucide="check"></span></div>Creditor letters written to your creditor by name — 7 types</li>
-        <li><div class="icon"><span data-lucide="check"></span></div>Creditor call practice — AI roleplay before you pick up the phone</li>
-        <li><div class="icon"><span data-lucide="check"></span></div>90-day guided journey with weekly check-ins</li>
-        <li><div class="icon"><span data-lucide="check"></span></div>Monthly plan updates — stays accurate as your situation changes</li>
-        <li><div class="icon"><span data-lucide="check"></span></div>Crisis action plans — job loss, divorce, illness, emergencies</li>
-        <li><div class="icon"><span data-lucide="check"></span></div>Behaviour and mindset tools — habits, stress, impulse control</li>
+        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li1">Creditor letters written to your creditor by name — 7 types</span></li>
+        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li2">Creditor call practice — AI roleplay before you pick up the phone</span></li>
+        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li3">90-day guided journey with weekly check-ins</span></li>
+        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li4">Monthly plan updates — stays accurate as your situation changes</span></li>
+        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li5">Crisis action plans — job loss, divorce, illness, emergencies</span></li>
+        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li6">Behaviour and mindset tools — habits, stress, impulse control</span></li>
       </ul>
-      <div class="upgrade-price">19 € once. <strong>Less than 0,25 €</strong> per day for 90 days. No subscription.</div>
+      <div class="upgrade-price" data-i18n="upgrade_price" data-i18n-html>19 € once. <strong>Less than 0,25 €</strong> per day for 90 days. No subscription.</div>
       <a href="#" class="btn-upgrade" onclick="goUpgradeStripe(event)">
         <span data-lucide="arrow-right"></span>
-        Continue my recovery
+        <span data-i18n="continue_recovery">Continue my recovery</span>
       </a>
       <a href="#" class="upgrade-community" onclick="goUpgradeCommunity(event)">Can't afford 19 € right now? Get Community Access — free, no explanation needed.</a>
     </div>
 
-    <div class="disclaimer">Your plan is created based on the information you provided. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.</div>
+    <div class="disclaimer" data-i18n="disclaimer_text">Your plan is created based on the information you provided. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.</div>
 
     <div class="dash-footer">
-      <a href="/">Home</a><a href="/ecosystem.html">Ecosystem</a><a href="/legal.html#privacy">Privacy</a><a href="mailto:support@debt-free.world">Support</a>
+      <a href="/" data-i18n="footer_home">Home</a><a href="/ecosystem.html" data-i18n="footer_ecosystem">Ecosystem</a><a href="/legal.html#privacy" data-i18n="footer_privacy">Privacy</a><a href="mailto:support@debt-free.world" data-i18n="footer_support">Support</a>
       <p>Amliv Oy · VAT FI32503518 · Nokia, Finland</p>
     </div>
 
@@ -773,25 +794,25 @@ body.ready{visibility:visible;}
 <!-- UPDATE PLAN MODAL -->
 <div class="update-modal-overlay" id="updateModalOverlay" onclick="closeUpdateModalBg(event)">
   <div class="update-modal">
-    <h3>Update your plan</h3>
-    <p>Your situation may have changed since you built your plan. Choose how you'd like to update it — both options take a few minutes.</p>
+    <h3 data-i18n="update_modal_title">Update your plan</h3>
+    <p data-i18n="update_modal_body">Your situation may have changed since you built your plan. Choose how you'd like to update it — both options take a few minutes.</p>
     <div class="update-modal-actions">
       <button class="update-opt" onclick="goUpdateExisting()">
         <div class="icon"><span data-lucide="edit-3"></span></div>
         <div>
-          <div class="update-opt-title">Update my information</div>
-          <div class="update-opt-desc">Go through the form again with your current numbers pre-filled. A new plan replaces your old one.</div>
+          <div class="update-opt-title" data-i18n="update_opt1_title">Update my information</div>
+          <div class="update-opt-desc" data-i18n="update_opt1_desc">Go through the form again with your current numbers pre-filled. A new plan replaces your old one.</div>
         </div>
       </button>
       <button class="update-opt" onclick="goStartOver()">
         <div class="icon"><span data-lucide="rotate-ccw"></span></div>
         <div>
-          <div class="update-opt-title">Start completely over</div>
-          <div class="update-opt-desc">Begin the form from scratch with nothing pre-filled. Useful if your situation has changed a lot.</div>
+          <div class="update-opt-title" data-i18n="update_opt2_title">Start completely over</div>
+          <div class="update-opt-desc" data-i18n="update_opt2_desc">Begin the form from scratch with nothing pre-filled. Useful if your situation has changed a lot.</div>
         </div>
       </button>
     </div>
-    <button class="update-modal-close" onclick="closeUpdateModal()">Cancel</button>
+    <button class="update-modal-close" onclick="closeUpdateModal()" data-i18n="update_cancel">Cancel</button>
   </div>
 </div>
 
@@ -800,7 +821,389 @@ body.ready{visibility:visible;}
 <script>
 const WORKER_URL='https://debt-free-proxy.amlivbusiness.workers.dev';
 const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
+const I18N={
+  EN:{
+  greeting_morning:'Good morning',
+  greeting_afternoon:'Good afternoon',
+  greeting_evening:'Good evening',
+  greeting_default:'Good to see you.',
+  greeting_sub:'Your next priority is waiting below. Your plan has everything you need.',
+  today_priority:'Today\'s priority',
+  most_critical_debt:'Most critical debt',
+  ec_action_default:'Review your most urgent debt and take one concrete step today.',
+  ec_check1:'List all your debts and their minimum monthly payments',
+  ec_check2:'Contact your most urgent creditor to understand your options',
+  ec_check3:'Check if you qualify for any government support in your country',
+  urgent_action_required:'Urgent — action required',
+  risk_alert_label:'If nothing changes',
+  risk_interest_growth:'At your current rate, interest alone is costing you {monthly}/month — that is {yearly}/year, growing your debt even if you never borrow another cent.',
+  risk_collections_escalation:'A debt already in collections can escalate to legal enforcement or wage garnishment if left unaddressed — acting now, even with a small step, protects you.',
+  read_full_plan:'Read my full plan',
+  save:'Save',
+  understand_section:'Understand — Your Financial Reality',
+  monthly_surplus:'Monthly surplus',
+  debt_free_date:'Debt-free date',
+  total_debt:'Total debt',
+  days_with_us:'Days with us',
+  days_of_progress:'days of progress',
+  address_deficit:'Address deficit first',
+  surplus_needed:'Surplus needed to calculate',
+  plan_section:'Plan — My DEBT FREE Plan',
+  my_plan:'My DEBT FREE Plan',
+  loading_plan:'Loading your plan…',
+  loading_priority:'Loading your priority action…',
+  read_full_plan_btn:'Read full plan',
+  show_less:'Show less',
+  save_print:'Save / Print',
+  update_my_plan:'Update my plan',
+  debtmap_section:'Debt Map — Prioritised by Urgency',
+  no_debts:'No debts recorded.',
+  collections_urgent:'Collections — urgent',
+  high_rate:'High rate',
+  medium_risk:'Medium',
+  lower_risk:'Lower risk',
+  tools_section:'Tools — Take Control',
+  tool_dfd_name:'Debt-Free Date',
+  tool_dfd_name_long:'Debt-Free Date Calculator',
+  tool_dfd_desc:'Your exact timeline from your numbers',
+  tool_snowball_name:'Snowball vs Avalanche',
+  tool_snowball_desc:'Which strategy saves you the most?',
+  tool_budget_name:'Crisis Budget Planner',
+  tool_budget_desc:'See how small changes accelerate freedom',
+  tool_income_name:'Extra Income Simulator',
+  tool_income_desc:'How much sooner with more income?',
+  tool_collection_name:'Debt Collection Map',
+  tool_collection_desc:'Every stage of the process and your rights',
+  tool_legal_name:'Legal Protection Guide',
+  tool_legal_desc:'What collectors can and cannot do',
+  months_at_current_pace:'months at current pace',
+  with_extra:'With {amount} extra/month',
+  months_lc:'months',
+  avalanche_recommended:'Avalanche recommended — pay highest interest rate ({rate}%) first to minimise total interest cost.',
+  snowball_recommended:'Snowball recommended — pay smallest balance first to build momentum with quick wins.',
+  single_debt_focus:'Single debt — focus all surplus on {amount} until cleared.',
+  dfd_full_intro:'Based on your surplus of {surplus}/mo and total debt of {total}:',
+  tool_budget_desc_long:'Identify your essential costs vs reducible spending',
+  budget_full:'Essential costs (cannot reduce): housing {housing}/mo\nOther costs: {other}/mo\nCurrent surplus: {surplus}/mo\n\nTo increase surplus: review subscriptions, food costs, transport. Every {saved} saved/month cuts your debt-free date significantly.',
+  see_impact_extra_income:'See impact of extra income',
+  income_sim_line:'{amount}/mo extra: {sooner} months sooner ({total} total)',
+  income_ideas:'Extra income ideas: freelance work, selling unused items, overtime, renting assets.',
+  tool_collection_desc_long:'Understand the process before it escalates',
+  collection_full:'DEBT COLLECTION STAGES:\n1. Creditor reminder — missed payment notice\n2. Final demand — threat of collections\n3. Collections agency — debt sold or assigned\n4. Enforcement — court judgment, possible wage garnishment\n\nYour rights: You can request written proof of debt, dispute amounts, request payment plans at any stage. Collectors cannot threaten actions they are not authorised to take.',
+  legal_full:'WHAT DEBT COLLECTORS CANNOT DO:\n• Harass, threaten or use abusive language\n• Contact you at unreasonable hours\n• Contact your employer without permission\n• Claim legal powers they do not have\n• Add unauthorised charges\n\nWHAT YOU CAN DO:\n• Request all communication in writing\n• Dispute the debt amount in writing\n• Request a payment plan at any stage\n• Contact a free debt counsellor at any time\n\nFor country-specific legal rules, consult a free debt counsellor in your country.',
+  tool_no_data:'Add your debt information during onboarding to see personalised results here.',
+  add_debts_calc:'Add your debts to calculate',
+  add_debts_compare:'Add multiple debts to compare',
+  add_debts_simulate:'Add debts to simulate',
+  support_section:'Support — You Are Not Alone',
+  free_counselling:'Free debt counselling',
+  in_country:'in {country}',
+  in_label:'in',
+  out_label:'out',
+  expenses_exceed_income:'Expenses exceed income',
+  mo_in_interest:'mo in interest',
+  free_counselling_desc:'Free or low-cost debt counselling is available in most countries through government-funded or non-profit services. Your plan includes a list of verified local organisations based on your profile.',
+  search_local:'Search local services',
+  visit_website:'Visit website',
+  free_badge:'Free',
+  journey_section:'Your Journey',
+  journey_df_tag:'DEBT FREE — Complete',
+  journey_df_title:'My DEBT FREE Plan',
+  journey_df_desc:'You understand your situation. You have your plan and all the tools to start.',
+  journey_dr_tag:'DEBT RECOVERY — 19 €',
+  journey_dr_title:'My Recovery Journey',
+  journey_dr_desc:'90-day guided companion. Creditor letters. Weekly check-ins. The difference between knowing and doing.',
+  continue_journey:'Continue my journey',
+  journey_ib_tag:'INCOME BUILDER — Q4 2026',
+  journey_ib_title:'Increase Your Income',
+  journey_ib_desc:'Reducing expenses has a ceiling. Increasing income changes the game.',
+  journey_wa_tag:'WEALTH ARCHITECT — 2028',
+  journey_wa_title:'Build and Protect Wealth',
+  journey_wa_desc:'Once debt is gone, build what lasts.',
+  journey_be_tag:'BUSINESS ENGINE — 2029',
+  journey_be_title:'Build Something Bigger',
+  journey_be_desc:'For entrepreneurs ready to build their next chapter.',
+  upgrade_tag:'Debt Recovery',
+  upgrade_title:'You understand your situation.<br>Now change it.',
+  upgrade_body:'Your Debt Recovery Companion helps you stay on track for the next 90 days with guided actions, creditor communication tools, and support through life\'s difficult moments.',
+  upgrade_li1:'Creditor letters written to your creditor by name — 7 types',
+  upgrade_li2:'Creditor call practice — AI roleplay before you pick up the phone',
+  upgrade_li3:'90-day guided journey with weekly check-ins',
+  upgrade_li4:'Monthly plan updates — stays accurate as your situation changes',
+  upgrade_li5:'Crisis action plans — job loss, divorce, illness, emergencies',
+  upgrade_li6:'Behaviour and mindset tools — habits, stress, impulse control',
+  upgrade_price:'19 € once. <strong>Less than 0,25 €</strong> per day for 90 days. No subscription.',
+  continue_recovery:'Continue my recovery',
+  cant_afford:'Can\'t afford 19 € right now? Get Community Access — free, no explanation needed.',
+  cant_afford_short:'Can\'t afford 19 €? Get Community Access — free',
+  disclaimer_text:'Your plan is created based on the information you provided. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.',
+  footer_home:'Home',
+  footer_ecosystem:'Ecosystem',
+  footer_privacy:'Privacy',
+  footer_support:'Support',
+  drawer_title:'All tools & services',
+  drawer_my_plan:'My DEBT FREE Plan',
+  drawer_my_plan_desc:'Open your full personalised plan',
+  drawer_yourplan:'Your Plan',
+  drawer_emergency:'Emergency Action Card',
+  drawer_emergency_desc:'Your most urgent step — what to do today',
+  drawer_snapshot:'Financial Snapshot',
+  drawer_snapshot_desc:'Income, surplus, debt-free date',
+  drawer_debtmap:'Debt Map',
+  drawer_debtmap_desc:'Every debt prioritised by urgency',
+  drawer_support:'Local Support',
+  drawer_support_desc:'Verified free services in your country',
+  drawer_update:'Update my information',
+  drawer_update_desc:'Numbers changed? Refresh your plan',
+  drawer_tools:'Tools',
+  drawer_learn:'Learn',
+  drawer_articles:'Articles',
+  drawer_articles_desc:'Debt education and financial guides',
+  drawer_ecosystem:'The Ecosystem',
+  drawer_ecosystem_desc:'See the full journey, all five stages',
+  drawer_recovery_section:'Debt Recovery — 19 €',
+  drawer_letter_name:'Creditor Letter Generator',
+  drawer_letter_desc:'7 letter types — written to your creditor by name',
+  drawer_call_name:'Creditor Call Practice',
+  drawer_call_desc:'AI roleplay before you pick up the phone',
+  drawer_journey_name:'90-Day Guided Journey',
+  drawer_journey_desc:'Weekly check-ins and next-step recommendations',
+  drawer_monthly_name:'Monthly Plan Update',
+  drawer_monthly_desc:'Refresh your plan every 30 days',
+  drawer_crisis_name:'Crisis Action Plans',
+  drawer_crisis_desc:'Job loss, divorce, illness, emergencies',
+  drawer_behaviour_name:'Behaviour & Mindset Tools',
+  drawer_behaviour_desc:'Habits, stress management, impulse control',
+  drawer_challenge_name:'90-Day Challenge',
+  drawer_challenge_desc:'Weekly milestones to stay on track',
+  drawer_docs_name:'My Documents',
+  drawer_docs_desc:'All letters and notes from your 90 days',
+  drawer_unlock:'Unlock',
+  drawer_comingsoon:'Coming soon',
+  drawer_ib_name:'Income Builder',
+  drawer_ib_desc:'Realistic ways to increase your income',
+  drawer_wa_name:'Wealth Architect',
+  drawer_wa_desc:'Build and protect what you earn',
+  drawer_be_name:'Business Engine',
+  drawer_be_desc:'For entrepreneurs and business owners',
+  drawer_signout:'Sign out',
+  update_modal_title:'Update your plan',
+  update_modal_body:'Your situation may have changed since you built your plan. Choose how you\'d like to update it — both options take a few minutes.',
+  update_opt1_title:'Update my information',
+  update_opt1_desc:'Go through the form again with your current numbers pre-filled. A new plan replaces your old one.',
+  update_opt2_title:'Start completely over',
+  update_opt2_desc:'Begin the form from scratch with nothing pre-filled. Useful if your situation has changed a lot.',
+  update_cancel:'Cancel',
+  gate_verifying:'Verifying your access',
+  gate_moment:'This takes only a moment.',
+  gate_error_title:'We could not verify your access.',
+  gate_error_sub:'Enter your email and we\'ll send a fresh link to continue your plan.',
+  gate_send_link:'Send me a new access link',
+  gate_sending:'Sending…',
+  gate_success:'Your link is on its way. Check your inbox — and spam if it doesn\'t arrive within 2 minutes.',
+  gate_email_placeholder:'Your email address',
+  pf_save_print:'Save / Print',
+  pf_go_dashboard:'Go to my member area',
+  pf_save_plan:'Save or print my plan',
+  toast_checkout_fail:'Could not start checkout. Please try again.',
+  toast_checkout_fail_community:'Could not start checkout. Please contact support@debt-free.world',
+  toast_email_required:'Please enter your email address.',
+  toast_link_fail:'Could not send link. Please email support@debt-free.world',
+  confirm_start_over:'This will replace your current plan with a brand new one built from scratch. Your old plan will no longer be shown once you finish the new form. Continue?'
+},
+  FI:{
+  greeting_morning:'Hyvää huomenta',
+  greeting_afternoon:'Hyvää iltapäivää',
+  greeting_evening:'Hyvää iltaa',
+  greeting_default:'Mukava nähdä sinut.',
+  greeting_sub:'Seuraava tärkeä askel odottaa alla. Suunnitelmastasi löytyy kaikki tarvittava.',
+  today_priority:'Tämän päivän tärkein',
+  most_critical_debt:'Kiireellisin velka',
+  ec_action_default:'Tarkista kiireellisin velkasi ja ota yksi konkreettinen askel tänään.',
+  ec_check1:'Listaa kaikki velkasi ja niiden vähimmäiskuukausimaksut',
+  ec_check2:'Ota yhteyttä kiireellisimpään velkojaasi ymmärtääksesi vaihtoehtosi',
+  ec_check3:'Tarkista, oletko oikeutettu valtion tukeen maassasi',
+  urgent_action_required:'Kiireellinen — toimenpide vaaditaan',
+  risk_alert_label:'Jos mikään ei muutu',
+  risk_interest_growth:'Nykyisellä korollasi pelkkä korko maksaa sinulle {monthly}/kk — se on {yearly}/vuosi, kasvattaen velkaasi vaikka et lainaisi enää senttiäkään.',
+  risk_collections_escalation:'Perinnässä oleva velka voi edetä oikeudelliseen täytäntöönpanoon tai palkan ulosmittaukseen, jos siihen ei reagoida — toimiminen nyt, pienikin askel, suojaa sinua.',
+  read_full_plan:'Lue koko suunnitelmani',
+  save:'Tallenna',
+  understand_section:'Ymmärrä — taloudellinen tilanteesi',
+  monthly_surplus:'Kuukauden ylijäämä',
+  debt_free_date:'Velaton päivä',
+  total_debt:'Velkaa yhteensä',
+  days_with_us:'Päiviä mukana',
+  days_of_progress:'päivää edistystä',
+  address_deficit:'Korjaa vaje ensin',
+  surplus_needed:'Ylijäämä tarvitaan laskuun',
+  plan_section:'Suunnitelma — Oma DEBT FREE -suunnitelmani',
+  my_plan:'Oma DEBT FREE -suunnitelmani',
+  loading_plan:'Ladataan suunnitelmaasi…',
+  loading_priority:'Ladataan tärkeintä toimenpidettäsi…',
+  read_full_plan_btn:'Lue koko suunnitelma',
+  show_less:'Näytä vähemmän',
+  save_print:'Tallenna / Tulosta',
+  update_my_plan:'Päivitä suunnitelmani',
+  debtmap_section:'Velkakartta — kiireellisyysjärjestyksessä',
+  no_debts:'Ei rekisteröityjä velkoja.',
+  collections_urgent:'Perinnässä — kiireellinen',
+  high_rate:'Korkea korko',
+  medium_risk:'Keskitaso',
+  lower_risk:'Matalampi riski',
+  tools_section:'Työkalut — ota ohjat käsiisi',
+  tool_dfd_name:'Velaton-päivä-laskuri',
+  tool_dfd_name_long:'Velaton-päivä-laskuri',
+  tool_dfd_desc:'Tarkka aikataulusi omista luvuistasi',
+  tool_snowball_name:'Lumipallo vs. Lumivyöry',
+  tool_snowball_desc:'Kumpi strategia säästää enemmän?',
+  tool_budget_name:'Kriisibudjetin suunnittelija',
+  tool_budget_desc:'Näe miten pienet muutokset nopeuttavat vapautta',
+  tool_income_name:'Lisätulosimulaattori',
+  tool_income_desc:'Kuinka paljon aiemmin lisätuloilla?',
+  tool_collection_name:'Perintäprosessin kartta',
+  tool_collection_desc:'Joka vaihe prosessista ja oikeutesi',
+  tool_legal_name:'Oikeusturvaopas',
+  tool_legal_desc:'Mitä perijät saavat ja eivät saa tehdä',
+  months_at_current_pace:'kuukautta nykyisellä tahdilla',
+  with_extra:'Lisäämällä {amount}/kk',
+  months_lc:'kuukautta',
+  avalanche_recommended:'Lumivyöry suositeltu — maksa korkein korko ({rate} %) ensin minimoidaksesi kokonaiskorkokulut.',
+  snowball_recommended:'Lumipallo suositeltu — maksa pienin saldo ensin rakentaaksesi vauhtia nopeilla voitoilla.',
+  single_debt_focus:'Yksi velka — kohdista koko ylijäämä summaan {amount}, kunnes se on maksettu.',
+  dfd_full_intro:'Ylijäämälläsi {surplus}/kk ja kokonaisvelallasi {total}:',
+  tool_budget_desc_long:'Tunnista välttämättömät kulut vs. vähennettävät menot',
+  budget_full:'Välttämättömät kulut (ei vähennettävissä): asuminen {housing}/kk\nMuut kulut: {other}/kk\nNykyinen ylijäämä: {surplus}/kk\n\nYlijäämän kasvattamiseksi: tarkista tilaukset, ruokakulut, liikenne. Joka {saved} säästetty/kk nopeuttaa velaton-päivääsi merkittävästi.',
+  see_impact_extra_income:'Näe lisätulon vaikutus',
+  income_sim_line:'{amount}/kk lisää: {sooner} kuukautta aiemmin (yhteensä {total})',
+  income_ideas:'Lisätuloideoita: freelance-työ, käyttämättömien tavaroiden myynti, ylityöt, omaisuuden vuokraus.',
+  tool_collection_desc_long:'Ymmärrä prosessi ennen kuin se kärjistyy',
+  collection_full:'PERINTÄPROSESSIN VAIHEET:\n1. Velkojan muistutus — myöhästyneen maksun ilmoitus\n2. Viimeinen maksuvaatimus — uhka perinnästä\n3. Perintätoimisto — velka myyty tai siirretty\n4. Täytäntöönpano — tuomioistuimen päätös, mahdollinen palkan ulosmittaus\n\nOikeutesi: voit pyytää kirjallisen todisteen velasta, riitauttaa summia, pyytää maksusuunnitelmaa missä vaiheessa tahansa. Perijät eivät saa uhata toimilla joihin heillä ei ole valtuuksia.',
+  legal_full:'MITÄ PERIJÄT EIVÄT SAA TEHDÄ:\n• Häiritä, uhkailla tai käyttää loukkaavaa kieltä\n• Ottaa yhteyttä epäsopiviin aikoihin\n• Ottaa yhteyttä työnantajaasi ilman lupaa\n• Väittää oikeuksia joita heillä ei ole\n• Lisätä valtuuttamattomia maksuja\n\nMITÄ VOIT TEHDÄ:\n• Pyydä kaikki viestintä kirjallisena\n• Riitauta velan määrä kirjallisesti\n• Pyydä maksusuunnitelmaa missä vaiheessa tahansa\n• Ota yhteyttä maksuttomaan velkaneuvojaan milloin tahansa\n\nMaakohtaisia oikeudellisia ohjeita varten ota yhteyttä maksuttomaan velkaneuvojaan maassasi.',
+  tool_no_data:'Lisää velkatietosi onboardingin aikana nähdäksesi henkilökohtaiset tulokset tässä.',
+  add_debts_calc:'Lisää velkasi laskemista varten',
+  add_debts_compare:'Lisää useampi velka vertailua varten',
+  add_debts_simulate:'Lisää velkoja simulointia varten',
+  support_section:'Tuki — et ole yksin',
+  free_counselling:'Maksuton velkaneuvonta',
+  in_country:'maassa {country}',
+  in_label:'sisään',
+  out_label:'ulos',
+  expenses_exceed_income:'Menot ylittävät tulot',
+  mo_in_interest:'kk korkoa',
+  free_counselling_desc:'Maksutonta tai edullista velkaneuvontaa on saatavilla useimmissa maissa valtion rahoittamien tai voittoa tavoittelemattomien palveluiden kautta. Suunnitelmaasi sisältyy lista vahvistetuista paikallisista organisaatioista profiilisi perusteella.',
+  search_local:'Etsi paikallisia palveluita',
+  visit_website:'Käy sivustolla',
+  free_badge:'Maksuton',
+  journey_section:'Matkasi',
+  journey_df_tag:'DEBT FREE — Valmis',
+  journey_df_title:'Oma DEBT FREE -suunnitelmani',
+  journey_df_desc:'Ymmärrät tilanteesi. Sinulla on suunnitelma ja kaikki työkalut aloittamiseen.',
+  journey_dr_tag:'DEBT RECOVERY — 19 €',
+  journey_dr_title:'Oma Recovery-matkani',
+  journey_dr_desc:'90 päivän ohjattu kumppani. Velkojakirjeet. Viikoittaiset tarkistukset. Ero tietämisen ja tekemisen välillä.',
+  continue_journey:'Jatka matkaani',
+  journey_ib_tag:'INCOME BUILDER — Q4 2026',
+  journey_ib_title:'Kasvata tulojasi',
+  journey_ib_desc:'Menojen vähentämisellä on rajansa. Tulojen kasvattaminen muuttaa pelin.',
+  journey_wa_tag:'WEALTH ARCHITECT — 2028',
+  journey_wa_title:'Rakenna ja suojaa varallisuutta',
+  journey_wa_desc:'Kun velka on poissa, rakenna jotain pysyvää.',
+  journey_be_tag:'BUSINESS ENGINE — 2029',
+  journey_be_title:'Rakenna jotain suurempaa',
+  journey_be_desc:'Yrittäjille, jotka ovat valmiita seuraavaan lukuun.',
+  upgrade_tag:'Debt Recovery',
+  upgrade_title:'Ymmärrät tilanteesi.<br>Nyt muuta se.',
+  upgrade_body:'Debt Recovery -kumppanisi auttaa sinua pysymään raiteilla seuraavat 90 päivää ohjattujen toimien, velkojaviestintätyökalujen ja elämän vaikeiden hetkien tuen avulla.',
+  upgrade_li1:'Velkojakirjeet kirjoitettuna velkojallesi nimellä — 7 kirjetyyppiä',
+  upgrade_li2:'Velkojapuhelun harjoittelu — AI-roolipeli ennen puhelimeen tarttumista',
+  upgrade_li3:'90 päivän ohjattu matka viikoittaisin tarkistuksin',
+  upgrade_li4:'Kuukausittaiset suunnitelmapäivitykset — pysyy ajan tasalla tilanteesi muuttuessa',
+  upgrade_li5:'Kriisitoimintasuunnitelmat — työttömyys, avioero, sairaus, hätätilanteet',
+  upgrade_li6:'Käyttäytymis- ja mielentyökalut — tavat, stressi, impulssien hallinta',
+  upgrade_price:'19 € kerran. <strong>Alle 0,25 €</strong> päivässä 90 päivän ajan. Ei tilausta.',
+  continue_recovery:'Jatka toipumistani',
+  cant_afford:'Etkö pysty maksamaan 19 € juuri nyt? Hae Community Access -tukea — maksutta, ei selityksiä.',
+  cant_afford_short:'Etkö pysty maksamaan 19 €? Hae Community Access — maksutta',
+  disclaimer_text:'Suunnitelmasi on luotu antamiesi tietojen perusteella. Se on suunniteltu ohjaamaan ja tukemaan taloudellista matkaasi, mutta se ei korvaa ammatillista oikeudellista tai taloudellista neuvontaa.',
+  footer_home:'Etusivu',
+  footer_ecosystem:'Ekosysteemi',
+  footer_privacy:'Tietosuoja',
+  footer_support:'Tuki',
+  drawer_title:'Kaikki työkalut ja palvelut',
+  drawer_my_plan:'Oma DEBT FREE -suunnitelmani',
+  drawer_my_plan_desc:'Avaa koko henkilökohtainen suunnitelmasi',
+  drawer_yourplan:'Suunnitelmasi',
+  drawer_emergency:'Hätätoimintakortti',
+  drawer_emergency_desc:'Kiireellisin askeleesi — mitä tehdä tänään',
+  drawer_snapshot:'Talouskatsaus',
+  drawer_snapshot_desc:'Tulot, ylijäämä, velaton päivä',
+  drawer_debtmap:'Velkakartta',
+  drawer_debtmap_desc:'Joka velka kiireellisyysjärjestyksessä',
+  drawer_support:'Paikallinen tuki',
+  drawer_support_desc:'Vahvistetut maksuttomat palvelut maassasi',
+  drawer_update:'Päivitä tietoni',
+  drawer_update_desc:'Numerot muuttuneet? Päivitä suunnitelmasi',
+  drawer_tools:'Työkalut',
+  drawer_learn:'Opi',
+  drawer_articles:'Artikkelit',
+  drawer_articles_desc:'Velkakoulutusta ja talousoppaita',
+  drawer_ecosystem:'Ekosysteemi',
+  drawer_ecosystem_desc:'Näe koko matka, kaikki viisi vaihetta',
+  drawer_recovery_section:'Debt Recovery — 19 €',
+  drawer_letter_name:'Velkojakirjegeneraattori',
+  drawer_letter_desc:'7 kirjetyyppiä — kirjoitettuna velkojallesi nimellä',
+  drawer_call_name:'Velkojapuhelun harjoittelu',
+  drawer_call_desc:'AI-roolipeli ennen puhelimeen tarttumista',
+  drawer_journey_name:'90 päivän ohjattu matka',
+  drawer_journey_desc:'Viikoittaiset tarkistukset ja seuraavan askelen suositukset',
+  drawer_monthly_name:'Kuukausittainen suunnitelmapäivitys',
+  drawer_monthly_desc:'Päivitä suunnitelmasi 30 päivän välein',
+  drawer_crisis_name:'Kriisitoimintasuunnitelmat',
+  drawer_crisis_desc:'Työttömyys, avioero, sairaus, hätätilanteet',
+  drawer_behaviour_name:'Käyttäytymis- ja mielentyökalut',
+  drawer_behaviour_desc:'Tavat, stressinhallinta, impulssien hallinta',
+  drawer_challenge_name:'90 päivän haaste',
+  drawer_challenge_desc:'Viikoittaiset välitavoitteet pysyäksesi raiteilla',
+  drawer_docs_name:'Omat dokumenttini',
+  drawer_docs_desc:'Kaikki kirjeet ja muistiinpanot 90 päivän ajalta',
+  drawer_unlock:'Avaa',
+  drawer_comingsoon:'Tulossa',
+  drawer_ib_name:'Income Builder',
+  drawer_ib_desc:'Realistisia tapoja kasvattaa tulojasi',
+  drawer_wa_name:'Wealth Architect',
+  drawer_wa_desc:'Rakenna ja suojaa ansaitsemaasi',
+  drawer_be_name:'Business Engine',
+  drawer_be_desc:'Yrittäjille ja yritysten omistajille',
+  drawer_signout:'Kirjaudu ulos',
+  update_modal_title:'Päivitä suunnitelmasi',
+  update_modal_body:'Tilanteesi on saattanut muuttua sen jälkeen, kun rakensit suunnitelmasi. Valitse, miten haluat päivittää sen — molemmat vaihtoehdot vievät muutaman minuutin.',
+  update_opt1_title:'Päivitä tietoni',
+  update_opt1_desc:'Käy lomake läpi uudelleen nykyiset tietosi esitäytettynä. Uusi suunnitelma korvaa vanhan.',
+  update_opt2_title:'Aloita kokonaan alusta',
+  update_opt2_desc:'Aloita lomake tyhjästä, ei mitään esitäytettynä. Hyödyllinen, jos tilanteesi on muuttunut paljon.',
+  update_cancel:'Peruuta',
+  gate_verifying:'Vahvistetaan pääsyäsi',
+  gate_moment:'Tämä vie vain hetken.',
+  gate_error_title:'Pääsyäsi ei voitu vahvistaa.',
+  gate_error_sub:'Syötä sähköpostiosoitteesi ja lähetämme uuden linkin suunnitelmasi jatkamiseksi.',
+  gate_send_link:'Lähetä minulle uusi pääsylinkki',
+  gate_sending:'Lähetetään…',
+  gate_success:'Linkkisi on matkalla. Tarkista sähköpostisi — ja roskapostikansio, jos se ei saavu 2 minuutin sisällä.',
+  gate_email_placeholder:'Sähköpostiosoitteesi',
+  pf_save_print:'Tallenna / Tulosta',
+  pf_go_dashboard:'Siirry jäsenalueelleni',
+  pf_save_plan:'Tallenna tai tulosta suunnitelmani',
+  toast_checkout_fail:'Maksun aloitus ei onnistunut. Yritä uudelleen.',
+  toast_checkout_fail_community:'Maksun aloitus ei onnistunut. Ota yhteyttä support@debt-free.world',
+  toast_email_required:'Syötä sähköpostiosoitteesi.',
+  toast_link_fail:'Linkin lähetys ei onnistunut. Lähetä sähköpostia support@debt-free.world',
+  confirm_start_over:'Tämä korvaa nykyisen suunnitelmasi täysin uudella, tyhjästä rakennetulla suunnitelmalla. Vanhaa suunnitelmaa ei enää näytetä uuden lomakkeen valmistuttua. Jatketaanko?'
+}
+};
 const LANGS=[['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],['HU','Magyar'],['RO','Română'],['HR','Hrvatski']];
+const LOCALE_MAP={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',NO:'nb-NO',DA:'da-DK',NL:'nl-NL',ES:'es-ES',FR:'fr-FR',IT:'it-IT',PL:'pl-PL',PT:'pt-PT',CS:'cs-CZ',ET:'et-EE',LV:'lv-LV',LT:'lt-LT',HU:'hu-HU',RO:'ro-RO',HR:'hr-HR'};
+let currentLang='EN';
 
 let memberToken=null,memberData=null,planExpanded=false;
 
@@ -812,7 +1215,10 @@ window.addEventListener('DOMContentLoaded',async()=>{
     LANGS.forEach(l=>{
       const b=document.createElement('button');
       b.textContent=l[1];
-      b.onclick=()=>{document.getElementById('langCode').textContent=l[0];document.getElementById('langMenu').classList.remove('open');};
+      b.onclick=()=>{
+        applyI18n(l[0]);
+        document.getElementById('langMenu').classList.remove('open');
+      };
       menuInner.appendChild(b);
     });
   }
@@ -871,8 +1277,8 @@ window.addEventListener('DOMContentLoaded',async()=>{
 function showGateError(){
   document.body.classList.add('ready');
   document.getElementById('gateSpinner').style.display='none';
-  document.getElementById('gateTitle').textContent='We could not verify your access.';
-  document.getElementById('gateSub').textContent='Enter your email and we\'ll send a fresh link to continue your plan.';
+  document.getElementById('gateTitle').textContent=t('gate_error_title');
+  document.getElementById('gateSub').textContent=t('gate_error_sub');
   document.getElementById('gateForm').classList.add('show');
 }
 
@@ -910,17 +1316,24 @@ function renderDashboard(data){
   const debts=od.debts||[];
   const plan=data.member_plan||'';
 
-  if(od.language)document.getElementById('langCode').textContent=od.language;
+  // Language priority: a manual choice already made in this member area
+  // (stored locally) always wins. Otherwise default to whatever language
+  // the person selected during onboarding — never silently fall back to
+  // English for someone who filled in the form in their own language.
+  const storedLang=localStorage.getItem('dfw_member_lang');
+  const initialLang=storedLang||od.language||'EN';
+  applyI18n(initialLang);
 
   const hour=new Date().getHours();
-  const greet=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening';
-  document.getElementById('greetingName').textContent=greet+(od.firstname?', '+od.firstname:'')+'.';
-  document.getElementById('greetingSub').textContent='Your next priority is waiting below. Your plan has everything you need.';
+  const greetKey=hour<12?'greeting_morning':hour<17?'greeting_afternoon':'greeting_evening';
+  document.getElementById('greetingName').textContent=t(greetKey)+(od.firstname?', '+od.firstname:'')+'.';
+  document.getElementById('greetingSub').textContent=t('greeting_sub');
 
-  document.getElementById('planBody').textContent=plan||'Your plan will appear here.';
-  document.getElementById('planMeta').textContent=od.country?od.country+' \u00b7 '+new Date().toLocaleDateString('en',{month:'short',year:'numeric'}):'';
+  document.getElementById('planBody').textContent=plan||t('loading_plan');
+  document.getElementById('planMeta').textContent=od.country?od.country+' \u00b7 '+new Date().toLocaleDateString(LOCALE_MAP[currentLang]||'en',{month:'short',year:'numeric'}):'';
 
   renderNumbers(od,cur,data.created_at);
+  renderRiskAlert(plan,debts,cur);
   renderEmergencyCard(plan,debts,cur,data.emergency_card_checked||[false,false,false]);
   renderDebtMap(debts,cur);
   renderTools(od,cur);
@@ -939,21 +1352,21 @@ function renderNumbers(od,cur,created_at){
   surplusEl.textContent=fmtCur(cur,surplus);
   surplusEl.classList.add(surplus>=0?'g':'r');
   document.getElementById('statSurplusSub').textContent=surplus>=0
-    ?fmtCur(cur,income)+' in \u2014 '+fmtCur(cur,exp)+' out':'Expenses exceed income';
+    ?fmtCur(cur,income)+' '+t('in_label')+' \u2014 '+fmtCur(cur,exp)+' '+t('out_label'):t('expenses_exceed_income');
 
   document.getElementById('statDebt').textContent=fmtCur(cur,totalDebt);
-  document.getElementById('statDebtSub').textContent=monthlyInt>0?'\u2248 '+fmtCur(cur,monthlyInt)+'/mo in interest':'';
+  document.getElementById('statDebtSub').textContent=monthlyInt>0?'\u2248 '+fmtCur(cur,monthlyInt)+'/'+t('mo_in_interest'):'';
 
   const dfdEl=document.getElementById('statDfd');
   if(surplus>0&&totalDebt>0){
     const months=Math.ceil(totalDebt/surplus);
     const dfd=new Date();dfd.setMonth(dfd.getMonth()+months);
-    dfdEl.textContent=dfd.toLocaleDateString('en',{month:'short',year:'numeric'});
-    document.getElementById('statDfdSub').textContent='\u2248 '+months+' months at current pace';
+    dfdEl.textContent=dfd.toLocaleDateString(LOCALE_MAP[currentLang]||'en',{month:'short',year:'numeric'});
+    document.getElementById('statDfdSub').textContent='\u2248 '+months+' '+t('months_at_current_pace');
   } else if(surplus<=0){
-    dfdEl.textContent='Address deficit first';
+    dfdEl.textContent=t('address_deficit');
     dfdEl.classList.add('r');
-    document.getElementById('statDfdSub').textContent='Surplus needed to calculate';
+    document.getElementById('statDfdSub').textContent=t('surplus_needed');
   } else {
     dfdEl.textContent='\u2014';
   }
@@ -964,14 +1377,71 @@ function renderNumbers(od,cur,created_at){
   }
 }
 
+/* ── RISK ALERT ──
+   Fulfills the FAQ promise "Risk alerts — what happens if you do
+   nothing" that was missing from both the dashboard and the underlying
+   AI plan prompt. Computed directly from the person's real numbers —
+   monthly interest cost compounded forward, and the collections debt's
+   escalation risk if one exists — so it's genuinely personal rather
+   than a generic warning. If the plan text itself later includes an
+   explicit risk-alert section (once the AI prompt is updated to
+   generate one), that text is preferred over this computed version. */
+function renderRiskAlert(plan,debts,cur){
+  const el=document.getElementById('riskAlert');
+  const body=document.getElementById('riskAlertBody');
+  if(!debts||!debts.length){el.style.display='none';return;}
+
+  // Prefer explicit risk-alert content from the plan text itself, if
+  // the plan prompt has been updated to include one.
+  if(plan){
+    const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
+    let inSection=false;const rl=[];
+    for(const line of lines){
+      if(/risk alert|if you do nothing|if nothing changes/i.test(line)){inSection=true;continue;}
+      if(inSection&&/emergency action|days 1|local support|closing/i.test(line))break;
+      if(inSection&&line.length>15)rl.push(line);
+    }
+    if(rl.length){
+      body.textContent=rl.join(' ');
+      el.style.display='block';
+      return;
+    }
+  }
+
+  const monthlyInt=debts.reduce((s,d)=>s+(parseFloat(d.amount)*(parseFloat(d.interest)||0)/100/12),0);
+  const yearlyInt=monthlyInt*12;
+  const hasCollections=debts.some(d=>d.type==='Debt in collections');
+
+  const parts=[];
+  if(monthlyInt>0){
+    parts.push(t('risk_interest_growth').replace('{monthly}',fmtCur(cur,monthlyInt)).replace('{yearly}',fmtCur(cur,yearlyInt)));
+  }
+  if(hasCollections){
+    parts.push(t('risk_collections_escalation'));
+  }
+  if(!parts.length){
+    el.style.display='none';
+    return;
+  }
+  body.textContent=parts.join(' ');
+  el.style.display='block';
+}
+
 function renderEmergencyCard(plan,debts,cur,checkState){
-  let action='Review your most urgent debt and take one concrete step today.';
+  let action=t('ec_action_default');
   let checks=[
-    'List all your debts and their minimum monthly payments',
-    'Contact your most urgent creditor to understand your options',
-    'Check if you qualify for any government support in your country'
+    t('ec_check1'),
+    t('ec_check2'),
+    t('ec_check3')
   ];
 
+  // Note: the pattern-matching below recognises section markers in the
+  // AI-generated plan text. Those markers are currently English (the
+  // plan's internal section headers), so this extraction only overrides
+  // the translated defaults above when the plan itself is in English.
+  // For plans generated in other languages, the translated fallback
+  // action and checklist are shown instead — never the raw English
+  // defaults — so the experience still feels native in every language.
   if(plan){
     const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
     let inSection=false,foundAction=false;const fc=[];
@@ -997,7 +1467,7 @@ function renderEmergencyCard(plan,debts,cur,checkState){
     const crit=sorted[0];
     const mi=parseFloat(crit.amount)*(parseFloat(crit.interest)||0)/100/12;
     document.getElementById('ecDebtName').textContent=(crit.creditor||crit.type)+' \u2014 '+fmtCur(crit.currency||cur,crit.amount);
-    document.getElementById('ecDebtDetail').textContent=crit.type+(crit.interest>0?' \u00b7 '+crit.interest+'% p.a.':'')+(mi>0?' \u00b7 '+fmtCur(crit.currency||cur,mi)+'/mo interest':'')+(crit.type==='Debt in collections'?' \u00b7 Urgent \u2014 action required':'');
+    document.getElementById('ecDebtDetail').textContent=crit.type+(crit.interest>0?' \u00b7 '+crit.interest+'% p.a.':'')+(mi>0?' \u00b7 '+fmtCur(crit.currency||cur,mi)+'/mo interest':'')+(crit.type==='Debt in collections'?' \u00b7 '+t('urgent_action_required'):'');
   } else {
     document.getElementById('ecCritical').style.display='none';
   }
@@ -1021,14 +1491,14 @@ function togglePlan(){
   document.getElementById('planBody').classList.toggle('expanded',planExpanded);
   const btn=document.getElementById('planExpandBtn');
   btn.innerHTML=planExpanded
-    ?'<span data-lucide="chevron-up"></span> Show less'
-    :'<span data-lucide="chevron-down"></span> Read full plan';
+    ?'<span data-lucide="chevron-up"></span> '+t('show_less')
+    :'<span data-lucide="chevron-down"></span> '+t('read_full_plan_btn');
   if(window.lucide)lucide.createIcons();
 }
 
 function renderDebtMap(debts,cur){
   const body=document.getElementById('debtMapBody');
-  if(!debts.length){body.innerHTML='<p style="font-size:13px;color:var(--text-soft);font-weight:300;">No debts recorded.</p>';return;}
+  if(!debts.length){body.innerHTML=`<p style="font-size:13px;color:var(--text-soft);font-weight:300;">${t('no_debts')}</p>`;return;}
   const sorted=[...debts].sort((a,b)=>{
     if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
     if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
@@ -1036,8 +1506,8 @@ function renderDebtMap(debts,cur){
   });
   body.innerHTML=sorted.map(d=>{
     const rate=parseFloat(d.interest)||0;
-    let tag=rate>=20?'<span class="debt-tag tag-high">High rate</span>':rate>=10?'<span class="debt-tag tag-med">Medium</span>':'<span class="debt-tag tag-low">Lower risk</span>';
-    if(d.type==='Debt in collections')tag='<span class="debt-tag tag-urgent">Collections \u2014 urgent</span>';
+    let tag=rate>=20?`<span class="debt-tag tag-high">${t('high_rate')}</span>`:rate>=10?`<span class="debt-tag tag-med">${t('medium_risk')}</span>`:`<span class="debt-tag tag-low">${t('lower_risk')}</span>`;
+    if(d.type==='Debt in collections')tag=`<span class="debt-tag tag-urgent">${t('collections_urgent')}</span>`;
     const mi=parseFloat(d.amount)*rate/100/12;
     return`<div class="debt-item">
       <div><div class="debt-name">${esc(d.creditor||d.type)}</div><div class="debt-type">${esc(d.type)}</div><div class="debt-tags">${tag}</div></div>
@@ -1056,43 +1526,45 @@ function renderTools(od,cur){
   if(surplus>0&&totalDebt>0){
     const months=Math.ceil(totalDebt/surplus);
     const with50=Math.ceil(totalDebt/(surplus+50));
-    dfdResult=months+' months at current pace. With '+fmtCur(cur,50)+' extra/month: '+with50+' months.';
+    dfdResult=months+' '+t('months_at_current_pace')+'. '+t('with_extra').replace('{amount}',fmtCur(cur,50))+': '+with50+' '+t('months_lc')+'.';
   }
 
   let strategyResult='';
   if(debts.length>1){
-    if(highestRate>15)strategyResult='Avalanche recommended \u2014 pay highest interest rate ('+highestRate+'%) first to minimise total interest cost.';
-    else strategyResult='Snowball recommended \u2014 pay smallest balance first to build momentum with quick wins.';
+    if(highestRate>15)strategyResult=t('avalanche_recommended').replace('{rate}',highestRate);
+    else strategyResult=t('snowball_recommended');
   } else if(debts.length===1){
-    strategyResult='Single debt \u2014 focus all surplus on '+fmtCur(cur,totalDebt)+' until cleared.';
+    strategyResult=t('single_debt_focus').replace('{amount}',fmtCur(cur,totalDebt));
   }
 
   const tools=[
-    {icon:'calculator',name:'Debt-Free Date',desc:dfdResult||'Add your debts to calculate',
-      full:dfdResult?'Based on your surplus of '+fmtCur(cur,surplus)+'/mo and total debt of '+fmtCur(cur,totalDebt)+':\n'+dfdResult:null},
-    {icon:'git-merge',name:'Snowball vs Avalanche',desc:strategyResult||'Add multiple debts to compare',full:strategyResult||null},
-    {icon:'sliders',name:'Crisis Budget Planner',desc:'Identify your essential costs vs reducible spending',
-      full:'Essential costs (cannot reduce): housing '+fmtCur(cur,parseFloat(od.housing_cost)||0)+'/mo\nOther costs: '+fmtCur(cur,parseFloat(od.other_costs)||0)+'/mo\nCurrent surplus: '+fmtCur(cur,surplus)+'/mo\n\nTo increase surplus: review subscriptions, food costs, transport. Every '+fmtCur(cur,50)+' saved/month cuts your debt-free date significantly.'},
-    {icon:'trending-up',name:'Extra Income Simulator',desc:surplus>0&&totalDebt>0?'See impact of extra income':'Add debts to simulate',
+    {icon:'calculator',name:t('tool_dfd_name'),desc:dfdResult||t('add_debts_calc'),
+      full:dfdResult?t('dfd_full_intro').replace('{surplus}',fmtCur(cur,surplus)).replace('{total}',fmtCur(cur,totalDebt))+'\n'+dfdResult:null},
+    {icon:'git-merge',name:t('tool_snowball_name'),desc:strategyResult||t('add_debts_compare'),full:strategyResult||null},
+    {icon:'sliders',name:t('tool_budget_name'),desc:t('tool_budget_desc_long'),
+      full:t('budget_full').replace('{housing}',fmtCur(cur,parseFloat(od.housing_cost)||0)).replace('{other}',fmtCur(cur,parseFloat(od.other_costs)||0)).replace('{surplus}',fmtCur(cur,surplus)).replace('{saved}',fmtCur(cur,50))},
+    {icon:'trending-up',name:t('tool_income_name'),desc:surplus>0&&totalDebt>0?t('see_impact_extra_income'):t('add_debts_simulate'),
       full:surplus>0&&totalDebt>0?(function(){
         const base=Math.ceil(totalDebt/surplus);
         const r100=Math.ceil(totalDebt/(surplus+100));
         const r200=Math.ceil(totalDebt/(surplus+200));
-        return fmtCur(cur,100)+'/mo extra: '+(base-r100)+' months sooner ('+r100+' total)\n'+fmtCur(cur,200)+'/mo extra: '+(base-r200)+' months sooner ('+r200+' total)\n\nExtra income ideas: freelance work, selling unused items, overtime, renting assets.';
+        return t('income_sim_line').replace('{amount}',fmtCur(cur,100)).replace('{sooner}',base-r100).replace('{total}',r100)
+          +'\n'+t('income_sim_line').replace('{amount}',fmtCur(cur,200)).replace('{sooner}',base-r200).replace('{total}',r200)
+          +'\n\n'+t('income_ideas');
       })():null},
-    {icon:'git-branch',name:'Debt Collection Map',desc:'Understand the process before it escalates',
-      full:'DEBT COLLECTION STAGES:\n1. Creditor reminder \u2014 missed payment notice\n2. Final demand \u2014 threat of collections\n3. Collections agency \u2014 debt sold or assigned\n4. Enforcement \u2014 court judgment, possible wage garnishment\n\nYour rights: You can request written proof of debt, dispute amounts, request payment plans at any stage. Collectors cannot threaten actions they are not authorised to take.'},
-    {icon:'shield',name:'Legal Protection Guide',desc:'What collectors can and cannot do',
-      full:'WHAT DEBT COLLECTORS CANNOT DO:\n\u2022 Harass, threaten or use abusive language\n\u2022 Contact you at unreasonable hours\n\u2022 Contact your employer without permission\n\u2022 Claim legal powers they do not have\n\u2022 Add unauthorised charges\n\nWHAT YOU CAN DO:\n\u2022 Request all communication in writing\n\u2022 Dispute the debt amount in writing\n\u2022 Request a payment plan at any stage\n\u2022 Contact a free debt counsellor at any time\n\nFor country-specific legal rules, consult a free debt counsellor in your country.'},
+    {icon:'git-branch',name:t('tool_collection_name'),desc:t('tool_collection_desc_long'),
+      full:t('collection_full')},
+    {icon:'shield',name:t('tool_legal_name'),desc:t('tool_legal_desc'),
+      full:t('legal_full')},
   ];
 
   const grid=document.getElementById('toolsGrid');
-  grid.innerHTML=tools.map((t,i)=>`
+  grid.innerHTML=tools.map((tool,i)=>`
     <div class="tool-card" onclick="toggleToolPanel(${i})">
-      <div class="tool-card-icon"><span data-lucide="${t.icon}"></span></div>
+      <div class="tool-card-icon"><span data-lucide="${tool.icon}"></span></div>
       <div>
-        <div class="tool-card-name">${t.name}</div>
-        <div class="tool-card-desc">${esc(t.desc.substring(0,60)+(t.desc.length>60?'\u2026':''))}</div>
+        <div class="tool-card-name">${tool.name}</div>
+        <div class="tool-card-desc">${esc(tool.desc.substring(0,60)+(tool.desc.length>60?'\u2026':''))}</div>
       </div>
     </div>`).join('');
 
@@ -1126,7 +1598,7 @@ function toggleToolPanel(i){
         <button class="btn-close-panel" onclick="toggleToolPanel(${i})">&#x2715;</button>
       </div>
       <div style="font-size:14px;line-height:1.85;color:var(--text-soft);white-space:pre-wrap;font-weight:300;">
-        ${tool.full?esc(tool.full):'<span style="color:var(--text-soft)">Add your debt information during onboarding to see personalised results here.</span>'}
+        ${tool.full?esc(tool.full):'<span style="color:var(--text-soft)">'+t('tool_no_data')+'</span>'}
       </div>
     </div>`;
 }
@@ -1157,9 +1629,9 @@ function renderSupport(plan,country){
       ${o.desc?`<div class="support-desc">${esc(o.desc)}</div>`:''}
       <div class="support-meta">
         ${o.url?`<a href="${esc(o.url)}" class="support-link" target="_blank" rel="noopener">
-          Visit website <span data-lucide="external-link"></span>
+          ${t('visit_website')} <span data-lucide="external-link"></span>
         </a>`:''}
-        ${o.free?'<span class="support-free">Free</span>':''}
+        ${o.free?`<span class="support-free">${t('free_badge')}</span>`:''}
       </div>
     </div>`).join('');
   if(window.lucide)lucide.createIcons();
@@ -1167,9 +1639,9 @@ function renderSupport(plan,country){
 
 function supportFallback(country){
   return`<div class="support-item">
-    <div class="support-name">Free debt counselling${country?' in '+esc(country):''}</div>
-    <div class="support-desc">Free or low-cost debt counselling is available in most countries through government-funded or non-profit services. Your plan includes a list of verified local organisations based on your profile.</div>
-    ${country?`<div class="support-meta"><a href="https://www.google.com/search?q=${encodeURIComponent(country+' free debt counselling')}" class="support-link" target="_blank" rel="noopener">Search local services <span data-lucide="external-link"></span></a></div>`:''}
+    <div class="support-name">${t('free_counselling')}${country?' '+t('in_country').replace('{country}',esc(country)):''}</div>
+    <div class="support-desc">${t('free_counselling_desc')}</div>
+    ${country?`<div class="support-meta"><a href="https://www.google.com/search?q=${encodeURIComponent(country+' free debt counselling')}" class="support-link" target="_blank" rel="noopener">${t('search_local')} <span data-lucide="external-link"></span></a></div>`:''}
   </div>`;
 }
 
@@ -1195,7 +1667,20 @@ document.addEventListener('click',e=>{
   const m=document.getElementById('langMenu');const b=document.getElementById('langBtn');
   if(m&&!m.contains(e.target)&&e.target!==b)m.classList.remove('open');
 });
-function scrollTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+function scrollToSection(id){
+  // Close the drawer FIRST and let body.overflow reset before scrolling —
+  // calling scrollIntoView while body still has overflow:hidden (set by
+  // openDrawer) silently fails in every browser. This function is
+  // deliberately NOT named scrollTo — that name collides with the native
+  // window.scrollTo() browser API, which was the actual root cause of
+  // every drawer link silently failing: inline onclick attributes were
+  // resolving to the native browser method instead of this function.
+  closeDrawer();
+  requestAnimationFrame(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
 function logout(){sessionStorage.removeItem('dfw_member_token');window.location.replace('/');}
 
 async function goUpgradeStripe(e){
@@ -1211,8 +1696,8 @@ async function goUpgradeStripe(e){
     });
     const data=await res.json();
     if(data.url){window.location.href=data.url;}
-    else{toast('Could not start checkout. Please try again.');}
-  }catch(err){toast('Could not start checkout. Please try again.');}
+    else{toast(t('toast_checkout_fail'));}
+  }catch(err){toast(t('toast_checkout_fail'));}
 }
 function goUpgrade(){goUpgradeStripe();}
 
@@ -1229,8 +1714,8 @@ async function goUpgradeCommunity(e){
     });
     const data=await res.json();
     if(data.url){window.location.href=data.url;}
-    else{toast('Could not start checkout. Please contact support@debt-free.world');}
-  }catch(err){toast('Could not start checkout. Please contact support@debt-free.world');}
+    else{toast(t('toast_checkout_fail_community'));}
+  }catch(err){toast(t('toast_checkout_fail_community'));}
 }
 
 function openUpdateModal(){
@@ -1241,27 +1726,78 @@ function closeUpdateModal(){document.getElementById('updateModalOverlay').classL
 function closeUpdateModalBg(e){if(e.target.id==='updateModalOverlay')closeUpdateModal();}
 
 function goUpdateExisting(){
-  window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=update`;
+  window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=update&lang=${encodeURIComponent(currentLang)}`;
 }
 
 function goStartOver(){
-  if(confirm('This will replace your current plan with a brand new one built from scratch. Your old plan will no longer be shown once you finish the new form. Continue?')){
-    window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=fresh`;
+  if(confirm(t('confirm_start_over'))){
+    window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=fresh&lang=${encodeURIComponent(currentLang)}`;
   }
 }
 
 async function requestNewLink(){
   const email=document.getElementById('gateEmail').value.trim();
-  if(!email){toast('Please enter your email address.');return;}
-  const btn=document.querySelector('.gate-btn');btn.disabled=true;btn.textContent='Sending\u2026';
+  if(!email){toast(t('toast_email_required'));return;}
+  const btn=document.querySelector('.gate-btn');btn.disabled=true;btn.textContent=t('gate_sending');
   try{
     await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     document.getElementById('gateForm').classList.remove('show');
     document.getElementById('gateSuccess').classList.add('show');
   }catch(e){
-    toast('Could not send link. Please email support@debt-free.world');
-    btn.disabled=false;btn.textContent='Send me a new access link';
+    toast(t('toast_link_fail'));
+    btn.disabled=false;btn.textContent=t('gate_send_link');
   }
+}
+
+/* ── I18N ──
+   Applies a full UI translation pass. Falls back to English for any key
+   not yet translated in a given language, so a partially-translated
+   language never shows a raw key name or blank text to the person using
+   it. Persists the choice so a manual language switch survives reloads,
+   and re-runs the dynamic render functions afterward so content built
+   from the person's own data (debt names, tool results) picks up the
+   new language for its static labels too. */
+function t(key){
+  const dict=I18N[currentLang]||I18N.EN;
+  return (dict && dict[key]!==undefined) ? dict[key] : (I18N.EN[key]||key);
+}
+
+function applyI18n(langCode){
+  currentLang=I18N[langCode]?langCode:'EN';
+  localStorage.setItem('dfw_member_lang',currentLang);
+  document.getElementById('langCode').textContent=currentLang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    const val=t(key);
+    if(el.hasAttribute('data-i18n-html')){el.innerHTML=val;}
+    else{el.textContent=val;}
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    el.setAttribute('placeholder',t(el.getAttribute('data-i18n-placeholder')));
+  });
+
+  // Re-render dynamic sections so labels generated in JS (debt tags,
+  // tool card text, support fallback) also pick up the new language.
+  if(memberData){
+    const od=memberData.onboarding||{};
+    const cur=CC[od.country]||od.currency||'EUR';
+    const hour=new Date().getHours();
+    const greetKey=hour<12?'greeting_morning':hour<17?'greeting_afternoon':'greeting_evening';
+    const greetingEl=document.getElementById('greetingName');
+    if(greetingEl)greetingEl.textContent=t(greetKey)+(od.firstname?', '+od.firstname:'')+'.';
+    const planMetaEl=document.getElementById('planMeta');
+    if(planMetaEl)planMetaEl.textContent=od.country?od.country+' \u00b7 '+new Date().toLocaleDateString(LOCALE_MAP[currentLang]||'en',{month:'short',year:'numeric'}):'';
+
+    renderRiskAlert(memberData.member_plan||'',od.debts||[],cur);
+    renderEmergencyCard(memberData.member_plan||'',od.debts||[],cur,
+      memberData.emergency_card_checked||[false,false,false]);
+    renderDebtMap(od.debts||[],cur);
+    renderTools(od,cur);
+    renderSupport(memberData.member_plan||'',od.country);
+    renderNumbers(od,cur,memberData.created_at);
+  }
+  if(window.lucide)lucide.createIcons();
 }
 
 function fmtCur(cur,val){
