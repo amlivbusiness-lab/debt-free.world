@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave a word — Debt-Free.world</title>
+<style>
+  :root {
+    --bg: #FBF9F4;
+    --card: #FFFFFF;
+    --border: #E8E2D6;
+    --ink: #2A2E2B;
+    --muted: #8B8478;
+    --green: #166534;
+    --green-soft: #EAF3EC;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 56px 20px 80px;
+  }
+
+  .mark {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    color: var(--green);
+    margin: 0 0 4px;
+  }
+
+  .tagline {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 40px;
+    letter-spacing: 0.02em;
+  }
+
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 1.35;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+
+  .intro {
+    font-size: 16px;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+
+  .intro-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 44px;
+  }
+
+  .divider {
+    text-align: center;
+    color: var(--green);
+    font-size: 14px;
+    margin: 36px 0;
+    opacity: 0.6;
+  }
+
+  .choice {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 26px;
+    margin-bottom: 20px;
+  }
+
+  .choice h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    font-size: 19px;
+    margin: 0 0 10px;
+  }
+
+  .choice p {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin: 0 0 20px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s ease;
+  }
+  .btn:hover { opacity: 0.88; }
+  .btn:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--green);
+  }
+
+  .note {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* Private form */
+  #private-form {
+    display: none;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  #private-form.open { display: block; }
+
+  label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 18px 0 6px;
+  }
+
+  label.first { margin-top: 0; }
+
+  textarea, select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14.5px;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    resize: vertical;
+  }
+
+  textarea { min-height: 80px; }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0;
+  }
+
+  .checkbox-row input { margin-top: 3px; }
+
+  .checkbox-row label {
+    margin: 0;
+    font-weight: normal;
+    font-size: 14px;
+  }
+
+  #attribution-wrap { display: none; }
+  #attribution-wrap.open { display: block; }
+
+  .form-actions {
+    margin-top: 22px;
+  }
+
+  .success {
+    display: none;
+    background: var(--green-soft);
+    border-left: 3px solid var(--green);
+    border-radius: 6px;
+    padding: 18px 20px;
+    font-size: 14.5px;
+    margin-top: 18px;
+  }
+  .success.open { display: block; }
+
+  .error {
+    display: none;
+    color: #9b2c2c;
+    font-size: 13.5px;
+    margin-top: 10px;
+  }
+  .error.open { display: block; }
+
+  footer {
+    margin-top: 56px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="mark">Debt-Free.world</p>
+  <p class="tagline">We do this together ✦</p>
+
+  <h1>Leave a word, whichever kind it is.</h1>
+
+  <p class="intro">This is a free tool, and it only reaches the next person if people can find it.</p>
+  <p class="intro-sub">Whatever your experience has been — it helped, it didn't, it was somewhere in between — true and specific is worth more to us than glowing and vague.</p>
+
+  <div class="choice">
+    <h2>Leave a public review</h2>
+    <p>You don't need your full name. "Maria K." or a first name and initial works on Google, and still counts.</p>
+    <a class="btn" href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID_HERE" target="_blank" rel="noopener">
+      Leave a public review
+    </a>
+  </div>
+
+  <div class="divider">✦</div>
+
+  <div class="choice">
+    <h2>Share it privately instead</h2>
+    <p>No name or email needed. Nobody sees this but us.</p>
+    <button class="btn btn-secondary" id="toggle-private" type="button">Share it privately</button>
+
+    <form id="private-form">
+      <label class="first" for="helped">What helped, or what didn't help?</label>
+      <textarea id="helped" name="helped" placeholder="Optional"></textarea>
+
+      <label for="changed">How has your situation changed, if at all?</label>
+      <textarea id="changed" name="changed" placeholder="Optional"></textarea>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="share-anon" name="share_anonymized">
+        <label for="share-anon">It's okay to share an anonymized version of this on the website or social media, with no name and no identifying details.</label>
+      </div>
+
+      <div id="attribution-wrap">
+        <label for="attribution">How would you like to be credited?</label>
+        <select id="attribution" name="attribution">
+          <option value="">No preference</option>
+          <option value="first_name">First name only</option>
+          <option value="initials">Initials only</option>
+          <option value="member_no_name">"Debt Recovery member, name withheld"</option>
+          <option value="country_only">"A [country] resident"</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" type="submit" id="submit-btn">Send privately</button>
+        <p class="error" id="form-error">Something went wrong on our end — please try again in a moment.</p>
+      </div>
+    </form>
+
+    <div class="success" id="form-success">
+      Thank you, genuinely. This is exactly how we make this better.
+    </div>
+  </div>
+
+  <footer>
+    Amliv Oy · Nokia, Finland · VAT FI32503518<br>
+    Questions? <a href="mailto:support@debt-free.world" style="color:#166534;">support@debt-free.world</a>
+  </footer>
+
+</div>
+
+<script>
+  // ⚠️ REPLACE before going live: your deployed Worker's base URL.
+  const API_BASE = 'https://api.debt-free.world';
+
+  const toggleBtn   = document.getElementById('toggle-private');
+  const formEl      = document.getElementById('private-form');
+  const shareAnon    = document.getElementById('share-anon');
+  const attribution  = document.getElementById('attribution-wrap');
+  const successBox  = document.getElementById('form-success');
+  const errorBox    = document.getElementById('form-error');
+  const submitBtn   = document.getElementById('submit-btn');
+
+  toggleBtn.addEventListener('click', () => {
+    formEl.classList.toggle('open');
+    toggleBtn.style.display = formEl.classList.contains('open') ? 'none' : 'inline-block';
+  });
+
+  shareAnon.addEventListener('change', () => {
+    attribution.classList.toggle('open', shareAnon.checked);
+  });
+
+  formEl.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorBox.classList.remove('open');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const payload = {
+      helped: document.getElementById('helped').value.slice(0, 2000),
+      changed: document.getElementById('changed').value.slice(0, 2000),
+      share_anonymized: shareAnon.checked,
+      attribution: shareAnon.checked ? document.getElementById('attribution').value : null,
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/api/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Request failed');
+
+      formEl.classList.remove('open');
+      successBox.classList.add('open');
+    } catch (err) {
+      errorBox.classList.add('open');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send privately';
+    }
+  });
+</script>
+
+</body>
+</html>
