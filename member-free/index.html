@@ -106,7 +106,19 @@ body.ready{visibility:visible;}
 .drawer-logout{width:calc(100% - 40px);margin:14px 20px 24px;background:none;border:1px solid var(--border);border-radius:4px;padding:11px;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);text-align:center;min-height:44px;display:block;}
 .drawer-logout:hover{border-color:var(--text-soft);color:var(--text);}
 
-.main-wrap{max-width:700px;margin:0 auto;padding:0 0 80px;}
+/* ════ MAIN ════
+   Width architecture matches the public-site principle locked on
+   index/ecosystem/about/faq: a wide outer canvas with a narrower
+   reading measure inside it — not a single narrow tube for the whole
+   page. On desktop the dashboard opens up to 1040px; dense content
+   blocks (plan text, debt list rows) keep their own comfortable
+   max-width inside that wider stage. Below 900px (effectively all
+   real-world usage, since this is a personal dashboard people check
+   on their phones) the layout collapses to a single column exactly as
+   before — width architecture only matters once there is room for it
+   to matter. */
+.main-wrap{max-width:1040px;margin:0 auto;padding:0 0 80px;}
+.main-inner{max-width:700px;}
 
 .today-section{padding:24px 20px 0;}
 .greeting{padding:4px 0 0;}
@@ -137,8 +149,7 @@ body.ready{visibility:visible;}
 
 .action-card-footer{padding:13px 16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;}
 
-.df-divider{height:1px;background:var(--border);margin:28px 20px 0;}
-.df-section{padding:28px 20px 0;}
+.df-section{padding:44px 20px 0;}
 .df-section-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:16px;display:block;}
 
 .snapshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
@@ -271,6 +282,15 @@ body.ready{visibility:visible;}
   .tools-grid{grid-template-columns:1fr;}
   .debt-item{flex-direction:column;gap:4px;}
   .debt-right{text-align:left;}
+}
+@media(min-width:900px){
+  /* Desktop: dense prose-like content (greeting, plan text, upgrade
+     card copy) keeps a readable measure; grid-based content (snapshot
+     numbers, tool cards) is allowed to use the full wide canvas since
+     more columns genuinely help rather than just adding whitespace. */
+  .greeting,.action-card,.plan-card,.upgrade-card,.disclaimer{max-width:700px;}
+  .snapshot-grid{grid-template-columns:repeat(4,1fr);max-width:1040px;}
+  .tools-grid{grid-template-columns:repeat(3,1fr);}
 }
 @media print{.topbar,.upgrade-card,.dash-footer,.action-card-footer,.pf-topbar,.disclaimer{display:none!important;}}
 </style>
@@ -569,8 +589,6 @@ body.ready{visibility:visible;}
       </div>
     </div>
 
-    <div class="df-divider"></div>
-
     <!-- UNDERSTAND -->
     <div class="df-section" id="understand">
       <span class="df-section-label">Understand — Your Financial Reality</span>
@@ -610,8 +628,6 @@ body.ready{visibility:visible;}
       </div>
     </div>
 
-    <div class="df-divider"></div>
-
     <!-- PLAN -->
     <div class="df-section" id="plan">
       <span class="df-section-label">Plan — My DEBT FREE Plan</span>
@@ -640,15 +656,11 @@ body.ready{visibility:visible;}
       </div>
     </div>
 
-    <div class="df-divider"></div>
-
     <!-- DEBT MAP -->
     <div class="df-section" id="debtmap">
       <span class="df-section-label">Debt Map — Prioritised by Urgency</span>
       <div id="debtMapBody"></div>
     </div>
-
-    <div class="df-divider"></div>
 
     <!-- TOOLS -->
     <div class="df-section" id="tools">
@@ -656,15 +668,11 @@ body.ready{visibility:visible;}
       <div class="tools-grid" id="toolsGrid"></div>
     </div>
 
-    <div class="df-divider"></div>
-
     <!-- SUPPORT -->
     <div class="df-section" id="support">
       <span class="df-section-label">Support — You Are Not Alone</span>
       <div id="supportBody"></div>
     </div>
-
-    <div class="df-divider"></div>
 
     <!-- JOURNEY -->
     <div class="df-section" id="journey">
@@ -1256,7 +1264,20 @@ async function requestNewLink(){
   }
 }
 
-function fmtCur(cur,val){const n=Math.round(val||0);try{return new Intl.NumberFormat('en',{style:'currency',currency:cur,maximumFractionDigits:0}).format(n);}catch(_){return cur+' '+n.toLocaleString();}}
+function fmtCur(cur,val){
+  const n=Math.round(val||0);
+  const formatted=n.toLocaleString('en-US');
+  const symbols={EUR:'€',USD:'$',GBP:'£',SEK:'kr',NOK:'kr',DKK:'kr',PLN:'zł',CHF:'CHF',CZK:'Kč',HUF:'Ft',RON:'lei',CAD:'$',AUD:'$',NZD:'$',BRL:'R$',INR:'₹',ZAR:'R'};
+  const sym=symbols[cur]||cur;
+  // Site-wide convention: amount before the symbol (e.g. "900 €"), not
+  // the other way around. Currencies that conventionally lead (USD,
+  // GBP) keep their symbol in front since "900 $" would look wrong to
+  // those readers; everyone else gets the trailing symbol.
+  if(cur==='USD'||cur==='GBP'||cur==='CAD'||cur==='AUD'||cur==='NZD'){
+    return sym+formatted;
+  }
+  return formatted+' '+sym;
+}
 function esc(s){if(!s)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
 </script>
