@@ -4,82 +4,134 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Debt-Free Blog — Free Debt Help by Country, Guides & Calculators</title>
-<meta name="description" content="Free debt help guides for 12 countries in your own language, a debt-free date calculator, 90-day plans and your rights as a debtor. Always free."/>
+<meta name="description" content="Free debt help guides for 12+ countries in your own language, a debt-free date calculator, 90-day plans and your rights as a debtor. Always free."/>
 <link rel="canonical" href="https://www.debt-free.world/blog/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Debt-Free Blog — Free Debt Help by Country, Guides & Calculators"/>
-<meta property="og:description" content="Free debt help guides for 12 countries in your own language. Always free."/>
+<meta property="og:description" content="Free debt help guides for 12+ countries in your own language. Always free."/>
 <meta property="og:url" content="https://www.debt-free.world/blog/"/>
 <meta property="og:site_name" content="Debt-Free.world"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--green:#166534;--green-dark:#0f4d26;--green-bg:#f0f8f3;--green-border:#86c9a0;--green-light:#dcf0e4;--text:#111;--border:#ddd;--white:#fff;--serif:'DM Serif Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;}
-html{font-size:17px;scroll-behavior:smooth;}
-body{font-family:var(--sans);color:var(--text);background:var(--green-bg);line-height:1.75;-webkit-font-smoothing:antialiased;}
-body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;-webkit-font-smoothing:antialiased;}
-.site-nav-wrap{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:100;}
-.site-nav{max-width:720px;margin:0 auto;padding:1.25rem 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;}
-.nav-logo{font-family:var(--serif);font-size:22px;color:#111;text-decoration:none;}
-.nav-logo em{font-style:italic;color:var(--green);}
-.nav-center{display:flex;gap:4px;align-items:center;justify-content:center;}
-.nav-pricing-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;}
-.nav-pricing-link:hover{background:var(--green-bg);}
-.nav-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
-.nav-cta{font-size:13px;font-weight:600;background:var(--green);color:#fff;text-decoration:none;padding:7px 16px;border-radius:20px;white-space:nowrap;}
-.nav-cta:hover{background:var(--green-dark);}
-.lang-sel{font-size:13px;padding:6px 10px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
-@media(max-width:600px){.site-nav{grid-template-columns:1fr auto;}.nav-center{display:none;}}
-.blog-outer{max-width:1080px;margin:0 auto;padding:0 24px 80px;}
-.blog-hero{padding:56px 0 44px;text-align:center;border-bottom:1px solid var(--border);margin-bottom:56px;}
-.blog-hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);line-height:1.15;color:var(--text);margin-bottom:16px;letter-spacing:-0.02em;}
-.blog-hero p{font-size:1.1rem;color:#888;max-width:520px;margin:0 auto;}
-.section-label{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--border);}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;margin-bottom:56px;}
-.card{border:1px solid var(--border);border-radius:12px;padding:26px;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s;background:var(--green-bg);}
-.card:hover{border-color:var(--green);box-shadow:0 4px 20px rgba(22,101,52,0.1);transform:translateY(-2px);}
-.card-flag{font-size:1.5rem;line-height:1;}
-.card-tag{display:inline-block;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:3px 9px;border-radius:4px;}
-.tag-core{background:#eff6ff;color:#1d4ed8;}
-.tag-country{background:var(--green-light);color:var(--green);}
-.card-title{font-family:var(--serif);font-size:1.05rem;color:var(--text);line-height:1.3;}
-.card-desc{font-size:0.85rem;color:#888;line-height:1.55;flex:1;}
-.card-arrow{font-size:0.82rem;color:var(--green);font-weight:600;margin-top:6px;}
-.site-footer{border-top:1px solid var(--border);text-align:center;padding:28px 20px;font-size:0.8rem;color:#888;}
-.site-footer a{color:#888;text-decoration:none;}
-.site-footer a:hover{color:var(--green);}
-@media(max-width:640px){
+:root{
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 6% 0;}
+.logo{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;text-decoration:none;}
+.topbar-right{display:flex;align-items:center;gap:30px;}
+nav{display:flex;align-items:center;gap:28px;}
+nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;}
+nav a.active{color:var(--green);}
+.lang-wrap{position:relative;}
+.lang-pill{font-size:13px;color:var(--text);border:1px solid #e8e8e3;border-radius:20px;padding:6px 16px;cursor:pointer;background:none;font-family:var(--sans);font-weight:500;}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e8e8e3;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.08);min-width:160px;max-height:320px;overflow-y:auto;z-index:50;}
+.lang-menu.open{display:block;}
+.lang-menu button{display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;font-size:13.5px;color:var(--text);cursor:pointer;font-family:var(--sans);}
+.lang-menu button:hover{background:#fafaf8;}
+.hamburger{display:none;width:36px;height:36px;border:1px solid #e8e8e3;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;background:none;}
+.hamburger svg{width:16px;height:16px;}
+
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:24px 6% 28px;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+.mobile-menu.open{display:block;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft);line-height:1;}
+.mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a.active{color:var(--green);font-weight:600;}
+
+.hero{padding:90px 6% 0;max-width:760px;margin:0 auto;text-align:center;}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-soft);font-weight:500;margin-bottom:24px;display:block;}
+.hero h1{font-family:var(--serif);font-size:42px;line-height:1.3;color:var(--text);font-weight:400;margin-bottom:18px;}
+.hero p{font-size:17px;line-height:1.75;color:var(--text-soft);font-weight:300;max-width:560px;margin:0 auto;}
+
+.content{padding:60px 6% 0;max-width:1100px;margin:0 auto;}
+.section-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:22px;display:block;}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:60px;}
+.card{border:1px solid #e8e8e3;border-radius:8px;padding:24px;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:border-color 0.15s;background:var(--white);}
+.card:hover{border-color:var(--green);}
+.card-flag{font-size:1.4rem;line-height:1;}
+.card-tag{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:3px 9px;border-radius:10px;width:fit-content;}
+.tag-core{background:#eaf1f8;color:#2c5a82;}
+.tag-country{background:#fafaf8;color:var(--green);border:1px solid #e8e8e3;}
+.card-title{font-family:var(--serif);font-size:16px;color:var(--text);line-height:1.3;font-weight:400;}
+.card-desc{font-size:13.5px;color:var(--text-soft);line-height:1.6;font-weight:300;flex:1;}
+.card-arrow{font-size:12.5px;color:var(--green);font-weight:600;margin-top:4px;}
+
+.closing{margin:0 6% 90px;padding:56px 6%;text-align:center;background:#fafaf8;border-left:3px solid var(--green);border-radius:6px;max-width:1040px;margin-left:auto;margin-right:auto;}
+.closing h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);margin-bottom:12px;}
+.closing p{font-size:15px;color:var(--text-soft);font-weight:300;margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;border:none;border-radius:4px;padding:15px 32px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;}
+.btn-primary:hover{background:var(--green-dark);}
+
+footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6% 22px;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-brand{font-family:var(--serif);font-size:14.5px;color:#fff;}
+.footer-legal{font-size:11.5px;color:rgba(255,255,255,0.5);}
+.footer-tagline{font-size:11.5px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:7px;}
+.footer-links{display:flex;gap:18px;font-size:11.5px;}
+.footer-links a{color:rgba(255,255,255,0.65);text-decoration:none;}
+.footer-links a:hover{color:#fff;}
+
+@media(max-width:900px){
+  .topbar-right nav{display:none;}
+  .hamburger{display:flex;}
+  .hero h1{font-size:30px;}
   .card-grid{grid-template-columns:1fr;}
-  .site-nav{grid-template-columns:1fr auto;}
-  .nav-center{display:none;}
-  .blog-hero{padding:36px 0 32px;}
+  .footer-row{flex-direction:column;text-align:center;}
 }
 </style>
 </head>
 <body>
-<div class="site-nav-wrap">
-  <nav class="site-nav" aria-label="Site navigation">
-    <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-    <div class="nav-center">
-      <a href="/pricing.html" class="nav-pricing-link">Pricing</a>
-    </div>
-    <div class="nav-right">
-      <a href="/#intake" class="nav-cta">Get free plan →</a>
-      <select class="lang-sel" id="langSel" aria-label="Language"></select>
-    </div>
-  </nav>
-</div>
-<main>
-<div class="blog-outer">
-  <header class="blog-hero">
-    <h1>Free Debt Help — Every Country, Every Language</h1>
-    <p>Guides, calculators and 90-day plans for getting out of debt. Always free. No signup required.</p>
-  </header>
 
-  <div class="section-label">Core guides — English</div>
+<div class="topbar">
+  <a href="/" class="logo">Debt-Free.world</a>
+  <div class="topbar-right">
+    <nav>
+      <a href="/ecosystem.html">Ecosystem</a>
+      <a href="/about.html">Our Story</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="/faq.html">FAQ</a>
+    </nav>
+    <div class="lang-wrap">
+      <button class="lang-pill" id="langBtn" onclick="document.getElementById('langMenu').classList.toggle('open')">EN ▾</button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <svg viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="logo">Debt-Free.world</span>
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <a href="/">Home</a>
+  <a href="/ecosystem.html">Ecosystem</a>
+  <a href="/about.html">Our Story</a>
+  <a href="/blog/" class="active">Blog</a>
+  <a href="/faq.html">FAQ</a>
+</div>
+
+<div class="hero">
+  <span class="hero-eyebrow">From the blog</span>
+  <h1>Free debt help, every country, every language.</h1>
+  <p>Practical guides, calculators and real plans — written by someone who has been there. Always free. No signup required to read.</p>
+</div>
+
+<div class="content">
+
+  <span class="section-label">Core guides</span>
   <div class="card-grid">
     <a href="https://www.debt-free.world/blog/how-to-get-out-of-debt-fast" class="card">
       <span class="card-tag tag-core">Strategy</span>
@@ -105,14 +157,16 @@ body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;
       <div class="card-desc">A proven three-phase action plan with weekly checklists. Works for any income and any debt size.</div>
       <div class="card-arrow">Start plan →</div>
     </a>
+    <a href="https://www.debt-free.world/blog/how-to-write-creditor-letter" class="card">
+      <span class="card-tag tag-core">Templates</span>
+      <div class="card-title">Debt Validation Letter — Free Templates</div>
+      <div class="card-desc">Debt validation, cease and desist, hardship letter and goodwill letter templates — plus a proven negotiation script.</div>
+      <div class="card-arrow">Get templates →</div>
+    </a>
   </div>
 
-  <div class="section-label">Country guides — in your language</div>
+  <span class="section-label">Country guides — in your language</span>
   <div class="card-grid">
-    <a href="https://www.debt-free.world/blog/how-to-write-creditor-letter" class="card">
-      <div class="card-title">Debt Validation Letter — Free Templates</div>
-      <div class="card-desc">Debt validation, cease and desist, hardship letter and goodwill letter templates — plus a proven script for negotiating with creditors.</div>
-    </a>
     <a href="https://www.debt-free.world/blog/free-debt-help-uk" class="card">
       <div class="card-flag">🇬🇧</div>
       <span class="card-tag tag-country">United Kingdom</span>
@@ -124,14 +178,14 @@ body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;
       <div class="card-flag">🇩🇪</div>
       <span class="card-tag tag-country">Deutschland</span>
       <div class="card-title">Privatinsolvenz Deutschland — kostenlos</div>
-      <div class="card-desc">Insolvenz, Privatinsolvenz, P-Konto, kostenlose Schuldnerberatung — Ihre Rechte und der Weg zur Schuldenfreiheit in Deutschland.</div>
+      <div class="card-desc">Insolvenz, Privatinsolvenz, P-Konto, kostenlose Schuldnerberatung — Ihre Rechte und der Weg zur Schuldenfreiheit.</div>
       <div class="card-arrow">Lesen →</div>
     </a>
     <a href="https://www.debt-free.world/blog/aide-pour-dettes-gratuite" class="card">
       <div class="card-flag">🇫🇷</div>
       <span class="card-tag tag-country">France</span>
       <div class="card-title">Dossier de surendettement — aide gratuite</div>
-      <div class="card-desc">Banque de France, commission de surendettement, rétablissement personnel — vos droits et un plan concret pour vous en sortir.</div>
+      <div class="card-desc">Banque de France, commission de surendettement, rétablissement personnel — vos droits et un plan concret.</div>
       <div class="card-arrow">Lire →</div>
     </a>
     <a href="https://www.debt-free.world/blog/skuldfri-gratis-hjalp" class="card">
@@ -145,7 +199,7 @@ body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;
       <div class="card-flag">🇳🇱</div>
       <span class="card-tag tag-country">Nederland</span>
       <div class="card-title">Schuldhulpverlening Nederland — gratis</div>
-      <div class="card-desc">Gemeentelijke schuldhulpverlening, WSNP (18 maanden), Nibud, Geldfit — uw rechten als schuldenaar in Nederland.</div>
+      <div class="card-desc">Gemeentelijke schuldhulpverlening, WSNP (18 maanden), Nibud, Geldfit — uw rechten als schuldenaar.</div>
       <div class="card-arrow">Lees →</div>
     </a>
     <a href="https://www.debt-free.world/blog/pomoc-w-dlugach-za-darmo" class="card">
@@ -159,7 +213,7 @@ body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;
       <div class="card-flag">🇪🇸</div>
       <span class="card-tag tag-country">España</span>
       <div class="card-title">Ley de la Segunda Oportunidad — España</div>
-      <div class="card-desc">Ley de la Segunda Oportunidad, ADICAE, servicios sociales — cómo cancelar deudas y la ayuda gratuita disponible en España.</div>
+      <div class="card-desc">ADICAE, servicios sociales — cómo cancelar deudas y la ayuda gratuita disponible en España.</div>
       <div class="card-arrow">Leer →</div>
     </a>
     <a href="https://www.debt-free.world/blog/bantuan-hutang-gratis-indonesia" class="card">
@@ -171,126 +225,139 @@ body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;
     </a>
     <a href="https://www.debt-free.world/blog/ajuda-dividas-gratis-portugal" class="card">
       <div class="card-flag">🇵🇹</div>
+      <span class="card-tag tag-country">Portugal</span>
       <div class="card-title">Insolvência pessoal — ajuda gratuita</div>
-      <div class="card-desc">DECO, PERSI, insolvência pessoal e exoneração do passivo restante — os seus direitos e ajuda gratuita em Portugal.</div>
+      <div class="card-desc">DECO, PERSI, insolvência pessoal e exoneração do passivo restante — os seus direitos em Portugal.</div>
+      <div class="card-arrow">Ler →</div>
     </a>
     <a href="https://www.debt-free.world/blog/ajuda-dividas-gratis-brasil" class="card">
       <div class="card-flag">🇧🇷</div>
+      <span class="card-tag tag-country">Brasil</span>
       <div class="card-title">Serasa Limpa Nome — como limpar nome</div>
-      <div class="card-desc">Serasa Limpa Nome, Lei do Superendividamento, Procon — como sair das dívidas e limpar o CPF no Brasil.</div>
+      <div class="card-desc">Serasa Limpa Nome, Lei do Superendividamento, Procon — como sair das dívidas e limpar o CPF.</div>
+      <div class="card-arrow">Ler →</div>
     </a>
     <a href="https://www.debt-free.world/blog/aiuto-debiti-gratis-italia" class="card">
       <div class="card-flag">🇮🇹</div>
       <span class="card-tag tag-country">Italia</span>
       <div class="card-title">Sovraindebitamento ed esdebitazione — Italia</div>
-      <div class="card-desc">Sovraindebitamento, esdebitazione, Legge 3/2012, OCC — aiuto gratuito e i tuoi diritti come debitore in Italia.</div>
-      <div class="card-desc">Codacons, Adiconsum, OCC, esdebitazione — i tuoi diritti e l'assistenza gratuita per uscire dai debiti.</div>
+      <div class="card-desc">Sovraindebitamento, esdebitazione, Legge 3/2012, OCC — aiuto gratuito e i tuoi diritti come debitore.</div>
       <div class="card-arrow">Leggi →</div>
     </a>
     <a href="https://www.debt-free.world/blog/gjeldfri-gratis-hjelp-norge" class="card">
       <div class="card-flag">🇳🇴</div>
       <span class="card-tag tag-country">Norge</span>
       <div class="card-title">Gjeldsordning Norge — bli gjeldfri</div>
-      <div class="card-desc">Gjeldsordning via Namsmannen, NAV gjeldsrådgivning — dine rettigheter og gratis hjelp i Norge.</div>
-      <div class="card-desc">NAV, Gjeldsoffer-Alliansen, gjeldsordning — dine rettigheter og gratis gjeldshjelp i Norge.</div>
+      <div class="card-desc">NAV, Gjeldsoffer-Alliansen, gjeldsordning via Namsmannen — dine rettigheter og gratis gjeldshjelp.</div>
       <div class="card-arrow">Les →</div>
     </a>
     <a href="https://www.debt-free.world/blog/gaeldsfri-gratis-hjaelp-danmark" class="card">
       <div class="card-flag">🇩🇰</div>
       <span class="card-tag tag-country">Danmark</span>
       <div class="card-title">Gældsanering Danmark — bliv gældfri</div>
-      <div class="card-desc">Gældsanering via skifteretten, fogedretten, gratis gældsrådgivning — dine rettigheder og hjælp i Danmark.</div>
-      <div class="card-desc">Gældsrådgivning Danmark, Forbrugerrådet Tænk, gældsanering — dine rettigheder som skyldner i Danmark.</div>
+      <div class="card-desc">Gældsrådgivning Danmark, Forbrugerrådet Tænk, gældsanering via skifteretten — dine rettigheder.</div>
       <div class="card-arrow">Læs →</div>
     </a>
   </div>
-</div>
-</main>
-<div style="max-width:720px;margin:0 auto;padding:0 24px;">
-  <footer style="padding:2rem 0;border-top:0.5px solid #eee;margin-top:2rem;">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:0.75rem;">
-      <span style="font-family:'DM Serif Display',serif;font-size:17px;">Debt-<em style="font-style:italic;color:#166534;">Free</em>.world</span>
-      <span style="font-size:12px;color:#888;">Built with honesty. Free forever. 🌍</span>
-    </div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;border-top:0.5px solid #eee;padding-top:0.75rem;">
-      <a href="/about.html" style="font-size:12px;color:#888;text-decoration:none;">About</a>
-      <a href="/faq.html" style="font-size:12px;color:#888;text-decoration:none;">FAQ</a>
-      <a href="/pricing.html" style="font-size:12px;color:#888;text-decoration:none;">Pricing</a>
-      <a href="/legal.html#terms" style="font-size:12px;color:#888;text-decoration:none;">Terms</a>
-      <a href="/legal.html#privacy" style="font-size:12px;color:#888;text-decoration:none;">Privacy</a>
-      <a href="/legal.html#refund" style="font-size:12px;color:#888;text-decoration:none;">Refund Policy</a>
-      <span style="font-size:12px;color:#bbb;">Amliv Oy · VAT FI32503518</span>
-    </div>
-  </footer>
+
 </div>
 
-<!-- Cookie banner + consent-first tracking -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;">
-  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
-  <div style="display:flex;gap:8px;flex-shrink:0;">
-    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:inherit;">Decline</button>
-    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:inherit;">Accept analytics</button>
-  </div>
+<div class="closing">
+  <h3>Not sure where to start?</h3>
+  <p>Skip the reading — get your own personal plan, free, in about two minutes.</p>
+  <a href="/signup-free.html" class="btn-primary">Build my Debt FREE plan</a>
 </div>
+
+<footer>
+  <div class="footer-row">
+    <div>
+      <div class="footer-brand">Debt-Free.world</div>
+      <div class="footer-legal">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
+    </div>
+    <div class="footer-links">
+      <a href="/legal.html#privacy">Privacy</a>
+      <a href="/legal.html#terms">Terms</a>
+      <a href="mailto:support@debt-free.world">Contact</a>
+    </div>
+    <div class="footer-tagline">🌍 Free forever for those who need it most</div>
+  </div>
+</footer>
+
 <script>
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  const menu = document.getElementById('langMenu');
+  if(wrap && menu && !wrap.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+
+(function(){
+  var langs=[
+    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+    ['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],
+    ['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],
+    ['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],
+    ['HU','Magyar'],['RO','Română'],['HR','Hrvatski']
+  ];
+  var stored=localStorage.getItem('dfw_lang')||'EN';
+  window.addEventListener('DOMContentLoaded',function(){
+    var menu=document.getElementById('langMenu');
+    var btn=document.getElementById('langBtn');
+    if(!menu||!btn)return;
+    langs.forEach(function(l){
+      var b=document.createElement('button');
+      b.textContent=l[1];
+      b.onclick=function(){
+        localStorage.setItem('dfw_lang',l[0]);
+        btn.innerHTML=l[0]+' ▾';
+        menu.classList.remove('open');
+      };
+      menu.appendChild(b);
+    });
+    btn.innerHTML=stored+' ▾';
+  });
+})();
+
 function loadTracking(){
-  var s=document.createElement('script');s.async=true;
-  s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
-  document.head.appendChild(s);
-  window.dataLayer=window.dataLayer||[];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window,document,'clarity','script','x6r2dfxj3l');
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','x6r2dfxj3l');
+  }
 }
 function setCookieConsent(choice){
   localStorage.setItem('cookie-consent',choice);
-  document.getElementById('cookie-banner').style.display='none';
+  document.getElementById('dfwCookieBanner').style.display='none';
   if(choice==='accepted')loadTracking();
 }
-(function(){
-  var consent=localStorage.getItem('cookie-consent');
-  if(!consent){
-    document.getElementById('cookie-banner').style.display='flex';
-  } else if(consent==='accepted'){
-    loadTracking();
+window.addEventListener('DOMContentLoaded',function(){
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('dfwCookieBanner').style.display='flex';
   }
-})();
-(function(){
-  var langs=[['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
-    ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
-    ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
-    ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
-    ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']];
-  var URLS={
-    EN:'/blog/how-to-get-out-of-debt-fast',
-    FI:'/',DE:'/blog/schulden-loswerden-kostenlos',
-    FR:'/blog/aide-pour-dettes-gratuite',
-    SV:'/blog/skuldfri-gratis-hjalp',
-    NL:'/blog/schuldhulp-gratis-nederland',
-    PL:'/blog/pomoc-w-dlugach-za-darmo',
-    ES:'/blog/ayuda-deudas-gratis',
-    IT:'/blog/aiuto-debiti-gratis-italia',
-    PT:'/blog/ajuda-dividas-gratis-portugal',
-    ID:'/blog/bantuan-hutang-gratis-indonesia'
-  };
-  var DEFAULT_LANG='EN';
-  var sel=document.getElementById('langSel');
-  if(!sel)return;
-  langs.forEach(function(l){
-    var o=document.createElement('option');
-    o.value=l[0];o.textContent=l[1];
-    if(l[0]===DEFAULT_LANG)o.selected=true;
-    sel.appendChild(o);
-  });
-  sel.addEventListener('change',function(){
-    var url=URLS[this.value]||'/';
-    window.location.href=url;
-  });
-})();
+  loadTracking();
+});
 </script>
+
+<div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#0f4d28;color:#fff;font-family:sans-serif;">Accept analytics</button>
+  </div>
+</div>
+
 </body>
 </html>
