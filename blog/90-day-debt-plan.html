@@ -39,7 +39,7 @@
       "name":"The 90-Day Debt Plan",
       "description":"A three-phase plan to accelerate debt payoff in 90 days",
       "step":[
-        {"@type":"HowToStep","name":"Days 1–30: Foundation","text":"List all debts, calculate net income, identify your target debt, automate minimum payments, find €50–200 to redirect to target debt."},
+        {"@type":"HowToStep","name":"Days 1–30: Foundation","text":"List all debts, calculate net income, identify your target debt, automate minimum payments, find 50–200 € to redirect to target debt."},
         {"@type":"HowToStep","name":"Days 31–60: Acceleration","text":"Contact creditors to negotiate rates, apply any windfall income to target debt, review and cut two recurring expenses."},
         {"@type":"HowToStep","name":"Days 61–90: Momentum","text":"Roll freed payments to next target debt, calculate updated debt-free date, set 12-month milestone with exact number."}
       ]
@@ -53,185 +53,195 @@
         },
         {
           "@type":"Question","name":"What if I can't find extra money to pay toward debt?",
-          "acceptedAnswer":{"@type":"Answer","text":"Start with what you have. Even €20/month extra reduces your total interest paid. Phase 1 of this plan includes a structured audit specifically designed to find hidden cash flow — most people find €50–200 they weren't using intentionally."}
+          "acceptedAnswer":{"@type":"Answer","text":"Start with what you have. Even 20 €/month extra reduces your total interest paid. Phase 1 of this plan includes a structured audit specifically designed to find hidden cash flow — most people find 50–200 € they weren't using intentionally."}
         }
       ]
     }
   ]
 }
 </script>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --green:#166534;
-  --green-dark:#0f4d26;
-  --green-light:#dcf0e4;
-  --green-border:#86c9a0;
-  --green-bg:#f0f8f3;
-  --text:#111;
-  --border:#ddd;
-  --white:#fff;
-  --serif:'DM Serif Display',Georgia,serif;
-  --sans:'DM Sans',system-ui,sans-serif;
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
 }
-html{font-size:17px;scroll-behavior:smooth;}
-body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.75;-webkit-font-smoothing:antialiased;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.75;}
 
-/* ── NAV ── */
-.site-nav-wrap{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:100;}
-.site-nav{max-width:720px;margin:0 auto;padding:1.25rem 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:22px;color:#111;text-decoration:none;}
-.nav-logo em{font-style:italic;color:var(--green);}
-.nav-center{display:flex;gap:4px;align-items:center;justify-content:center;}
-.nav-link-plain{font-size:13px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:20px;transition:background 0.15s;}
-.nav-link-plain:hover{background:var(--green-bg);}
-.nav-pricing-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;padding:6px 14px;border:1.5px solid var(--green);border-radius:20px;transition:background 0.15s;}
-.nav-pricing-link:hover{background:var(--green-bg);}
-.nav-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
-.nav-cta{font-size:13px;font-weight:600;background:var(--green);color:#fff;text-decoration:none;padding:7px 16px;border-radius:20px;white-space:nowrap;transition:background 0.15s;}
-.nav-cta:hover{background:var(--green-dark);}
-.lang-sel{font-size:13px;padding:6px 10px;border:1.5px solid var(--green);border-radius:20px;background:var(--green-bg);color:var(--green);font-family:var(--sans);cursor:pointer;outline:none;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 6% 0;}
+.logo{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;text-decoration:none;}
+.topbar-right{display:flex;align-items:center;gap:30px;}
+nav{display:flex;align-items:center;gap:28px;}
+nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;}
+nav a.active{color:var(--green);}
+.lang-wrap{position:relative;}
+.lang-pill{font-size:13px;color:var(--text);border:1px solid #e8e8e3;border-radius:20px;padding:6px 16px;cursor:pointer;background:none;font-family:var(--sans);font-weight:500;}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e8e8e3;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.08);min-width:160px;max-height:320px;overflow-y:auto;z-index:50;}
+.lang-menu.open{display:block;}
+.lang-menu button{display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;font-size:13.5px;color:var(--text);cursor:pointer;font-family:var(--sans);}
+.lang-menu button:hover{background:#fafaf8;}
+.hamburger{display:none;width:36px;height:36px;border:1px solid #e8e8e3;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;background:none;}
+.hamburger svg{width:16px;height:16px;}
 
-/* ── LAYOUT ── */
-.article-outer{max-width:720px;margin:0 auto;padding:0 24px 80px;}
-.breadcrumb{font-size:0.8rem;color:#888;padding:20px 0 0;}
-.breadcrumb a{color:#888;text-decoration:none;}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:24px 6% 28px;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+.mobile-menu.open{display:block;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft);line-height:1;}
+.mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a.active{color:var(--green);font-weight:600;}
+
+.article-outer{max-width:1040px;margin:0 auto;padding:0 6% 80px;}
+.prose-measure{max-width:700px;}
+.breadcrumb{font-size:13px;color:var(--text-soft);padding:32px 0 0;font-weight:300;}
+.breadcrumb a{color:var(--text-soft);text-decoration:none;}
 .breadcrumb a:hover{color:var(--green);}
 .breadcrumb span{margin:0 6px;}
-.article-hero{padding:32px 0 28px;border-bottom:1px solid var(--border);margin-bottom:40px;}
-.article-tag{display:inline-block;background:var(--green-light);color:var(--green);font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:14px;}
-h1.article-title{font-family:var(--serif);font-size:clamp(28px,5vw,42px);line-height:1.2;color:#111;margin-bottom:16px;letter-spacing:-0.02em;}
-.article-intro{font-size:1.1rem;color:#374151;max-width:640px;margin-bottom:20px;line-height:1.7;}
-.article-meta{font-size:0.8rem;color:#888;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-.article-meta strong{color:#111;}
-.toc{background:var(--green-bg);border:1px solid var(--green-border);border-left:3px solid var(--green);border-radius:8px;padding:20px 24px;margin-bottom:48px;}
-.toc-title{font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:#111;margin-bottom:12px;}
-.toc ol{padding-left:20px;display:flex;flex-direction:column;gap:6px;}
-.toc li{font-size:0.95rem;}
-.toc a{color:var(--green);text-decoration:none;font-weight:500;}
-.toc a:hover{text-decoration:underline;}
 
-/* ── ARTICLE BODY ── */
-.article-body h2{font-family:var(--serif);font-size:22px;line-height:1.25;color:#111;margin:2rem 0 16px;}
-.article-body h3{font-size:1.05rem;font-weight:600;color:#111;margin:28px 0 10px;}
-.article-body p{font-size:15px;line-height:1.85;color:#333;font-weight:300;margin-bottom:20px;}
-.article-body ul,.article-body ol{padding-left:22px;margin-bottom:20px;display:flex;flex-direction:column;gap:8px;}
-.article-body li{font-size:15px;line-height:1.85;color:#333;font-weight:300;}
-.article-body strong{color:#111;}
+.article-hero{padding:28px 0 32px;max-width:760px;}
+.article-tag{display:inline-block;background:#fafaf8;color:var(--green);border:1px solid #e8e8e3;font-size:10.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:14px;margin-bottom:16px;}
+h1.article-title{font-family:var(--serif);font-size:38px;line-height:1.25;color:var(--text);font-weight:400;margin-bottom:18px;letter-spacing:-0.3px;}
+.article-intro{font-size:17px;color:var(--text-soft);max-width:680px;margin-bottom:20px;line-height:1.7;font-weight:300;}
+.article-meta{font-size:13px;color:var(--text-soft);display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-weight:300;}
+.article-meta strong{color:var(--text);font-weight:500;}
+
+.toc{border-left:3px solid var(--green);background:#fafaf8;border-radius:0 6px 6px 0;padding:22px 26px;margin-bottom:48px;max-width:700px;}
+.toc-title{font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:2px;color:var(--green);margin-bottom:12px;}
+.toc ol{padding-left:18px;display:flex;flex-direction:column;gap:7px;}
+.toc li{font-size:14.5px;}
+.toc a{color:var(--text);text-decoration:none;font-weight:500;}
+.toc a:hover{color:var(--green);text-decoration:underline;}
+
+.article-body h2{font-family:var(--serif);font-size:25px;line-height:1.3;color:var(--text);font-weight:400;margin:2.4rem 0 16px;max-width:700px;}
+.article-body h3{font-size:16px;font-weight:600;color:var(--text);margin:28px 0 10px;max-width:700px;}
+.article-body p{font-size:15.5px;line-height:1.85;color:var(--text-soft);font-weight:300;margin-bottom:20px;max-width:700px;}
+.article-body ul,.article-body ol{padding-left:22px;margin-bottom:20px;display:flex;flex-direction:column;gap:8px;max-width:700px;}
+.article-body li{font-size:15.5px;line-height:1.85;color:var(--text-soft);font-weight:300;}
+.article-body strong{color:var(--text);font-weight:500;}
 .article-body a{color:var(--green);text-decoration:underline;text-underline-offset:3px;}
 .article-body a:hover{color:var(--green-dark);}
-.callout{border-radius:8px;padding:18px 22px;margin:28px 0;font-size:0.97rem;}
-.callout-green{background:var(--green-light);border-left:4px solid var(--green);}
-.callout-gray{background:var(--green-bg);border:1px solid var(--border);}
-.callout-title{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:6px;color:#111;}
+.article-body a.upsell-btn-primary{color:#fff;text-decoration:none;}
+.article-body a.upsell-btn-secondary{color:var(--green);text-decoration:none;}
 
-/* ── PHASE BLOCKS ── */
-.phase{border-radius:12px;overflow:hidden;margin:36px 0;}
-.phase-header{padding:18px 24px;display:flex;align-items:center;gap:14px;}
-.phase-1 .phase-header{background:#166534;}
-.phase-2 .phase-header{background:#1a7a3e;}
-.phase-3 .phase-header{background:#1f9050;}
-.phase-num{color:rgba(255,255,255,0.7);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;}
-.phase-title{font-family:var(--serif);font-size:1.3rem;color:#fff;}
-.phase-body{background:var(--green-bg);border:1px solid var(--border);border-top:none;padding:22px 24px;}
-.phase-goal{font-size:11px;font-weight:600;color:#111;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:14px;}
+.callout{border-radius:6px;padding:20px 24px;margin:28px 0;font-size:14.5px;max-width:700px;}
+.callout-green{background:#fafaf8;border-left:3px solid var(--green);color:var(--text-soft);font-weight:300;line-height:1.7;}
+.callout-gray{background:#fafaf8;border:1px solid #e8e8e3;color:var(--text-soft);font-weight:300;line-height:1.7;}
+.callout-title{font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;color:var(--green);}
+
+.phase{border-radius:6px;overflow:hidden;margin:32px 0;max-width:700px;border:1px solid #e8e8e3;}
+.phase-header{padding:16px 22px;display:flex;align-items:center;gap:14px;background:var(--green-deep);}
+.phase-num{color:rgba(255,255,255,0.7);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:2px;}
+.phase-title{font-family:var(--serif);font-size:18px;color:#fff;font-weight:400;}
+.phase-body{background:#fafaf8;padding:20px 22px;}
+.phase-goal{font-size:10.5px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;}
 .task-list{display:flex;flex-direction:column;gap:14px;}
-.task{display:flex;gap:14px;align-items:flex-start;}
-.task-check{width:22px;height:22px;min-width:22px;border:2px solid var(--green);border-radius:4px;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0;background:#fff;}
+.task{display:flex;gap:13px;align-items:flex-start;}
+.task-check{width:20px;height:20px;min-width:20px;border:1.5px solid var(--green);border-radius:4px;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0;background:#fff;}
 .task-check.done{background:var(--green);border-color:var(--green);}
-.task-check.done::after{content:'✓';color:#fff;font-size:13px;font-weight:700;}
+.task-check.done::after{content:'✓';color:#fff;font-size:12px;font-weight:700;}
 .task-body{flex:1;}
-.task-title{font-weight:600;font-size:0.97rem;margin-bottom:3px;color:#111;}
-.task-desc{font-size:0.88rem;color:#333;line-height:1.6;font-weight:300;}
-.task-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;padding:2px 8px;border-radius:3px;margin-bottom:4px;}
-.tag-week1{background:#fef9c3;color:#854d0e;}
-.tag-once{background:#e0f2fe;color:#0369a1;}
-.tag-weekly{background:var(--green-light);color:var(--green);}
+.task-title{font-weight:600;font-size:14.5px;margin-bottom:3px;color:var(--text);}
+.task-desc{font-size:13.5px;color:var(--text-soft);line-height:1.65;font-weight:300;}
+.task-tag{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;padding:2px 9px;border-radius:10px;margin-bottom:4px;}
+.tag-week1{background:#fbf3e6;color:#92611c;}
+.tag-once{background:#eaf1f8;color:#2c5a82;}
+.tag-weekly{background:#fafaf8;color:var(--green);border:1px solid #e8e8e3;}
 
-/* ── TABLE ── */
-.table-wrap{overflow-x:auto;margin:28px 0;}
-table{width:100%;border-collapse:collapse;font-size:0.9rem;}
+.table-wrap{overflow-x:auto;margin:28px 0;max-width:700px;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
 thead th{background:var(--green);color:#fff;text-align:left;padding:11px 14px;font-weight:600;}
-tbody tr:nth-child(even){background:var(--green-bg);}
-tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vertical-align:top;font-weight:300;}
+tbody tr:nth-child(even){background:#fafaf8;}
+tbody td{padding:10px 14px;border-bottom:1px solid #e8e8e3;color:var(--text-soft);vertical-align:top;font-weight:300;}
+tbody strong{color:var(--text);font-weight:500;}
 
-/* ── UPSELL BLOCK ── */
-.upsell-block{border:1.5px solid var(--green-border);border-radius:14px;background:var(--green-bg);padding:32px 28px;margin:52px 0 40px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;}
-.upsell-left{}
-.upsell-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--green);margin-bottom:8px;}
-.upsell-headline{font-family:var(--serif);font-size:1.4rem;color:#111;margin-bottom:10px;line-height:1.25;}
-.upsell-sub{font-size:14px;color:#444;line-height:1.65;font-weight:300;}
-.upsell-actions{display:flex;flex-direction:column;gap:10px;align-items:stretch;min-width:180px;}
-.upsell-btn-primary{display:block;background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:12px 20px;border-radius:30px;text-decoration:none;text-align:center;white-space:nowrap;}
+.upsell-block{border:1px solid #e8e8e3;border-radius:6px;background:#fafaf8;padding:32px 30px;margin:52px 0 40px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;max-width:1040px;}
+.upsell-eyebrow{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--green);margin-bottom:10px;}
+.upsell-headline{font-family:var(--serif);font-size:21px;color:var(--text);font-weight:400;margin-bottom:10px;line-height:1.3;}
+.upsell-sub{font-size:14px;color:var(--text-soft);line-height:1.65;font-weight:300;max-width:480px;}
+.upsell-actions{display:flex;flex-direction:column;gap:10px;align-items:stretch;min-width:200px;}
+.upsell-btn-primary{display:block;background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:13px 22px;border-radius:4px;text-decoration:none;text-align:center;white-space:nowrap;}
 .upsell-btn-primary:hover{background:var(--green-dark);}
-.upsell-btn-secondary{display:block;background:#fff;color:var(--green);font-weight:600;font-size:14px;padding:11px 20px;border-radius:30px;text-decoration:none;text-align:center;border:1.5px solid var(--green);white-space:nowrap;}
-.upsell-btn-secondary:hover{background:var(--green-light);}
-.upsell-note{font-size:11px;color:#888;text-align:center;margin-top:2px;}
+.upsell-btn-secondary{display:block;background:#fff;color:var(--green);font-weight:600;font-size:13.5px;padding:11px 22px;border-radius:4px;text-decoration:none;text-align:center;border:1px solid var(--green);white-space:nowrap;}
+.upsell-btn-secondary:hover{background:#fafaf8;}
+.upsell-note{font-size:11.5px;color:var(--text-soft);text-align:center;margin-top:2px;font-weight:300;}
 
-/* ── CTA ── */
-.cta-block{background:var(--green);color:#fff;border-radius:12px;padding:36px 32px;text-align:center;margin:52px 0 40px;}
-.cta-block p{font-size:15px;line-height:1.85;font-weight:300;opacity:0.9;margin-bottom:20px;color:#fff;}
-.cta-headline{font-family:var(--serif);font-size:1.7rem;margin-bottom:12px;color:#fff;}
-.cta-btn{display:inline-block;background:#fff;color:var(--green);font-weight:700;font-size:1rem;padding:13px 28px;border-radius:20px;text-decoration:none;}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
-.cta-sub{margin-top:12px;font-size:0.8rem;opacity:0.7;color:#fff!important;}
-
-/* ── FAQ ── */
-.faq{margin:40px 0;}
-.faq-item{border-bottom:1px solid var(--border);}
-.faq-q{width:100%;background:none;border:none;text-align:left;padding:18px 0;font-family:var(--sans);font-size:1rem;font-weight:600;color:#111;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
-.faq-q .icon{color:var(--green);font-size:1.4rem;flex-shrink:0;transition:transform 0.2s;}
+.faq{margin:40px 0;max-width:700px;}
+.faq-item{border-bottom:1px solid #e8e8e3;}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:18px 0;font-family:var(--sans);font-size:15px;font-weight:500;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-q .icon{color:var(--green);font-size:18px;flex-shrink:0;transition:transform 0.2s;font-weight:300;}
 .faq-q[aria-expanded="true"] .icon{transform:rotate(45deg);}
-.faq-a{display:none;padding-bottom:16px;color:#333;font-size:15px;line-height:1.85;font-weight:300;}
+.faq-a{display:none;padding-bottom:16px;color:var(--text-soft);font-size:14.5px;line-height:1.8;font-weight:300;}
 .faq-a.open{display:block;}
 
-/* ── RELATED ── */
-.related{padding-top:32px;margin-top:52px;}
-.related-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:2.5px;color:#111;margin-bottom:16px;}
+.related{padding-top:32px;margin-top:52px;border-top:1px solid #e8e8e3;max-width:700px;}
+.related-title{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--green);margin-bottom:16px;}
 .related-links{display:flex;flex-direction:column;gap:10px;}
-.related-links a{color:var(--green);text-decoration:none;font-weight:500;font-size:0.97rem;}
-.related-links a:hover{text-decoration:underline;}
+.related-links a{color:var(--text);text-decoration:none;font-weight:500;font-size:14.5px;}
+.related-links a:hover{color:var(--green);text-decoration:underline;}
 
-/* ── FOOTER ── */
-.site-footer{max-width:720px;margin:0 auto;padding:0 24px;}
+footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6% 22px;margin-top:40px;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-brand{font-family:var(--serif);font-size:14.5px;color:#fff;}
+.footer-legal{font-size:11.5px;color:rgba(255,255,255,0.5);}
+.footer-tagline{font-size:11.5px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:7px;}
+.footer-links{display:flex;gap:18px;font-size:11.5px;}
+.footer-links a{color:rgba(255,255,255,0.65);text-decoration:none;}
+.footer-links a:hover{color:#fff;}
 
-/* ── COOKIE BANNER ── */
 .cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;display:none;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:var(--sans);}
 .cookie-banner a{color:#86c9a0;}
 .cookie-btn{padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:500;border:none;}
-.cookie-btn.accept{background:#166534;color:#fff;}
+.cookie-btn.accept{background:var(--green);color:#fff;}
 .cookie-btn.decline{background:transparent;color:#ccc;border:1px solid #444;}
 
+@media(max-width:900px){
+  .topbar-right nav{display:none;}
+  .hamburger{display:flex;}
+}
 @media(max-width:600px){
   h1.article-title{font-size:28px;}
-  .cta-block{padding:28px 20px;}
-  .cta-headline{font-size:1.4rem!important;}
-  .phase-body{padding:18px 16px;}
-  .site-nav{grid-template-columns:1fr auto;gap:8px;}
-  .nav-center{display:none;}
-  .upsell-block{grid-template-columns:1fr;gap:16px;}
+  .upsell-block{grid-template-columns:1fr;gap:18px;}
   .upsell-actions{flex-direction:row;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<div class="site-nav-wrap">
-  <nav class="site-nav" aria-label="Site navigation">
-    <a href="/" class="nav-logo">Debt-<em>Free</em>.world</a>
-    <div class="nav-center">
-      <a href="/pricing.html" class="nav-pricing-link">Pricing</a>
+<div class="topbar">
+  <a href="/" class="logo">Debt-Free.world</a>
+  <div class="topbar-right">
+    <nav>
+      <a href="/ecosystem.html">Ecosystem</a>
+      <a href="/about.html">Our Story</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="/faq.html">FAQ</a>
+    </nav>
+    <div class="lang-wrap">
+      <button class="lang-pill" id="langBtn" onclick="document.getElementById('langMenu').classList.toggle('open')">EN ▾</button>
+      <div class="lang-menu" id="langMenu"></div>
     </div>
-    <div class="nav-right">
-      <a href="/#intake" class="nav-cta">Get free plan →</a>
-      <select class="lang-sel" id="langSel" aria-label="Language"></select>
-    </div>
-  </nav>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <svg viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="logo">Debt-Free.world</span>
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <a href="/">Home</a>
+  <a href="/ecosystem.html">Ecosystem</a>
+  <a href="/about.html">Our Story</a>
+  <a href="/blog/" class="active">Blog</a>
+  <a href="/faq.html">FAQ</a>
 </div>
 
 <main>
@@ -272,7 +282,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 
     <div class="callout callout-green">
       <div class="callout-title">Personalized version available free</div>
-      <a href="https://www.debt-free.world/#intake">Debt-Free.world</a> generates this exact 90-day plan personalized to your income, debts, country, and situation. Takes 3 minutes. Delivered to your email. Free permanently.
+      <a href="https://www.debt-free.world/signup-free.html">Debt-Free.world</a> generates this exact 90-day plan personalized to your income, debts, country, and situation. Takes 2 minutes. Delivered to your member area. Free permanently.
     </div>
 
     <div class="table-wrap">
@@ -312,7 +322,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-week1">Week 1</div>
               <div class="task-title">Calculate your actual monthly net income and fixed costs</div>
-              <div class="task-desc">Income after tax minus: rent/mortgage, utilities, insurance, subscriptions, food estimate, debt minimums. The remainder is your discretionary cash. Be brutally honest — most people have €200–500 more than they think in committed but flexible expenses.</div>
+              <div class="task-desc">Income after tax minus: rent/mortgage, utilities, insurance, subscriptions, food estimate, debt minimums. The remainder is your discretionary cash. Be brutally honest — most people have 200–500 € more than they think in committed but flexible expenses.</div>
             </div>
           </div>
           <div class="task">
@@ -336,7 +346,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">One-time</div>
               <div class="task-title">Set a fixed extra payment amount for target debt</div>
-              <div class="task-desc">Look at your discretionary cash figure. Allocate a fixed amount — even €50 — to your target debt above the minimum. Automate it on payday. It does not need to be large. It needs to be consistent and automatic.</div>
+              <div class="task-desc">Look at your discretionary cash figure. Allocate a fixed amount — even 50 € — to your target debt above the minimum. Automate it on payday. It does not need to be large. It needs to be consistent and automatic.</div>
             </div>
           </div>
           <div class="task">
@@ -369,7 +379,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">One call</div>
               <div class="task-title">Call your highest-rate creditor and ask for a rate reduction</div>
-              <div class="task-desc">Script: "I've been a customer for [X] years and have always paid on time. I'm working to pay off this balance faster and would like to request a rate reduction." Works ~60% of the time. If denied, ask again in 60 days or ask about a hardship program. A 5% rate reduction on €5,000 saves over €700.</div>
+              <div class="task-desc">Script: "I've been a customer for [X] years and have always paid on time. I'm working to pay off this balance faster and would like to request a rate reduction." Works ~60% of the time. If denied, ask again in 60 days or ask about a hardship program. A 5% rate reduction on 5,000 € saves over 700 €.</div>
             </div>
           </div>
           <div class="task">
@@ -377,7 +387,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">Research</div>
               <div class="task-title">Check balance transfer options for credit card debt</div>
-              <div class="task-desc">If you have credit card debt at 18%+, search for 0% balance transfer offers. Transfer fees are typically 1–3%. A €4,000 transfer saving 12 months of 19% interest saves over €650 minus the transfer fee. Only do this if you commit to not using the old card again.</div>
+              <div class="task-desc">If you have credit card debt at 18%+, search for 0% balance transfer offers. Transfer fees are typically 1–3%. A 4,000 € transfer saving 12 months of 19% interest saves over 650 € minus the transfer fee. Only do this if you commit to not using the old card again.</div>
             </div>
           </div>
           <div class="task">
@@ -393,7 +403,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">Action</div>
               <div class="task-title">Apply any lump sum income to target debt immediately</div>
-              <div class="task-desc">Tax refund, work bonus, freelance payment, sold item, gift money — 100% goes to target debt this month. One €500 payment on a €3,000 debt at 19% APR eliminates 2–3 months from your payoff timeline.</div>
+              <div class="task-desc">Tax refund, work bonus, freelance payment, sold item, gift money — 100% goes to target debt this month. One 500 € payment on a 3,000 € debt at 19% APR eliminates 2–3 months from your payoff timeline.</div>
             </div>
           </div>
           <div class="task">
@@ -442,7 +452,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
             <div class="task-body">
               <div class="task-tag tag-once">Milestone</div>
               <div class="task-title">Set your 12-month concrete target with exact number</div>
-              <div class="task-desc">Write this down: "By [month, year], my total debt will be €[specific number]." Not "less debt" — a specific euro amount. The specificity is what makes it actionable.</div>
+              <div class="task-desc">Write this down: "By [month, year], my total debt will be [specific number] €." Not "less debt" — a specific euro amount. The specificity is what makes it actionable.</div>
             </div>
           </div>
           <div class="task">
@@ -466,20 +476,23 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
     </ul>
 
     <div class="callout callout-gray">
-      <div class="callout-title">The math of payment rollover</div>
-      Start with €200 extra/month on target debt 1. When paid off, roll €200 + the freed minimum (say €80) = €280 to target debt 2. When paid off, roll €280 + that freed minimum (say €120) = €400 to target debt 3. This is why both snowball and avalanche work dramatically better than paying equal extra on all debts.
+      <div class="callout-title">Why this gets easier, not harder</div>
+      Here is the part most people never get told: every debt you pay off makes the next one faster — not because you're trying harder, but because the money you were already paying simply moves to the next target.
+      <br/><br/>
+      Say you're putting 200 € extra a month toward your first debt. Once it's gone, that 200 € doesn't disappear — it joins the minimum payment you were already making on debt two, maybe 80 €. Now you're attacking debt two with 280 € a month, without changing your budget at all. Clear debt two, and that 280 € rolls into debt three along with its minimum, pushing you to 400 €.
+      <br/><br/>
+      This is the real reason snowball and avalanche methods outperform spreading extra payments evenly across everything: each payoff makes the next one shorter, automatically.
     </div>
 
-    <!-- UPSELL BLOCK -->
     <div class="upsell-block">
       <div class="upsell-left">
         <div class="upsell-eyebrow">Ready to go further?</div>
-        <div class="upsell-headline">Your personalised 90-day plan — free in 3 minutes</div>
-        <div class="upsell-sub">AI-generated for your exact debts, income, and country. Or upgrade to Debt Recovery (19 €) for AI creditor letters, negotiation practice, legal protection guides, and 13 more tools.</div>
+        <div class="upsell-headline">Your personalised 90-day plan — free in 2 minutes</div>
+        <div class="upsell-sub">Built for your exact debts, income, and country. Or see Debt Recovery (19 €) for creditor letters, negotiation practice, legal protection guides, and more.</div>
       </div>
       <div class="upsell-actions">
-        <a href="https://www.debt-free.world/#intake" class="upsell-btn-primary">Get free plan →</a>
-        <a href="https://www.debt-free.world/pricing.html" class="upsell-btn-secondary">See Debt Recovery</a>
+        <a href="https://www.debt-free.world/signup-free.html" class="upsell-btn-primary">Get free plan →</a>
+        <a href="https://www.debt-free.world/ecosystem.html#card-2" class="upsell-btn-secondary">See Debt Recovery</a>
         <div class="upsell-note">No card needed for free plan</div>
       </div>
     </div>
@@ -492,7 +505,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq2">What if I can't find extra money to pay toward debt?<span class="icon" aria-hidden="true">+</span></button>
-        <div class="faq-a" id="faq2">Start with what you have. Even €20/month extra reduces total interest paid. Phase 1's cash flow audit finds hidden money for most people — subscriptions, services paid but unused, or recurring charges that crept in. If genuinely no discretionary income exists, Phase 2's rate negotiation alone can accelerate payoff significantly without requiring more money.</div>
+        <div class="faq-a" id="faq2">Start with what you have. Even 20 €/month extra reduces total interest paid. Phase 1's cash flow audit finds hidden money for most people — subscriptions, services paid but unused, or recurring charges that crept in. If genuinely no discretionary income exists, Phase 2's rate negotiation alone can accelerate payoff significantly without requiring more money.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq3">What if I miss a week or fall behind?<span class="icon" aria-hidden="true">+</span></button>
@@ -500,7 +513,7 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq4">Should I save money at the same time as paying off debt?<span class="icon" aria-hidden="true">+</span></button>
-        <div class="faq-a" id="faq4">Keep a small emergency buffer — €500–1,000 — before aggressively attacking debt. Without it, any unexpected expense goes back on the credit card, undoing your progress. Beyond that buffer, if your debt interest rate exceeds 5%, every euro toward debt beats every euro in savings mathematically.</div>
+        <div class="faq-a" id="faq4">Keep a small emergency buffer — 500–1,000 € — before aggressively attacking debt. Without it, any unexpected expense goes back on the credit card, undoing your progress. Beyond that buffer, if your debt interest rate exceeds 5%, every euro toward debt beats every euro in savings mathematically.</div>
       </div>
     </div>
 
@@ -516,25 +529,21 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 </div>
 </main>
 
-<div class="site-footer">
-  <footer style="padding:2rem 0;display:flex;flex-direction:column;gap:0.75rem;border-top:0.5px solid #eee;margin-top:2rem;">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center;">
-      <span style="font-family:'DM Serif Display',serif;font-size:17px;">Debt-<em style="font-style:italic;color:#166534;">Free</em>.world</span>
-      <span style="font-size:12px;color:#888;">Built with honesty. Free forever. 🌍</span>
+<footer>
+  <div class="footer-row">
+    <div>
+      <div class="footer-brand">Debt-Free.world</div>
+      <div class="footer-legal">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
     </div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;border-top:0.5px solid #eee;padding-top:0.75rem;">
-      <a href="/about.html" style="font-size:12px;color:#888;text-decoration:none;">About</a>
-      <a href="/faq.html" style="font-size:12px;color:#888;text-decoration:none;">FAQ</a>
-      <a href="/pricing.html" style="font-size:12px;color:#888;text-decoration:none;">Pricing</a>
-      <a href="/legal.html#terms" style="font-size:12px;color:#888;text-decoration:none;">Terms</a>
-      <a href="/legal.html#privacy" style="font-size:12px;color:#888;text-decoration:none;">Privacy</a>
-      <a href="/legal.html#refund" style="font-size:12px;color:#888;text-decoration:none;">Refund Policy</a>
-      <span style="font-size:12px;color:#bbb;">Amliv Oy · VAT FI32503518</span>
+    <div class="footer-links">
+      <a href="/legal.html#privacy">Privacy</a>
+      <a href="/legal.html#terms">Terms</a>
+      <a href="mailto:support@debt-free.world">Contact</a>
     </div>
-  </footer>
-</div>
+    <div class="footer-tagline">🌍 Free forever for those who need it most</div>
+  </div>
+</footer>
 
-<!-- Cookie banner -->
 <div class="cookie-banner" id="dfwCookieBanner">
   <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal.html#privacy">Privacy Policy</a></span>
   <div style="display:flex;gap:8px;flex-shrink:0;">
@@ -544,7 +553,45 @@ tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vert
 </div>
 
 <script>
-// FAQ
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  const menu = document.getElementById('langMenu');
+  if(wrap && menu && !wrap.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+
+(function(){
+  var langs=[
+    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+    ['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],
+    ['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],
+    ['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],
+    ['HU','Magyar'],['RO','Română'],['HR','Hrvatski']
+  ];
+  var stored=localStorage.getItem('dfw_lang')||'EN';
+  window.addEventListener('DOMContentLoaded',function(){
+    var menu=document.getElementById('langMenu');
+    var btn=document.getElementById('langBtn');
+    if(!menu||!btn)return;
+    langs.forEach(function(l){
+      var b=document.createElement('button');
+      b.textContent=l[1];
+      b.onclick=function(){
+        localStorage.setItem('dfw_lang',l[0]);
+        btn.innerHTML=l[0]+' ▾';
+        menu.classList.remove('open');
+      };
+      menu.appendChild(b);
+    });
+    btn.innerHTML=stored+' ▾';
+  });
+})();
+
 document.querySelectorAll('.faq-q').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const exp=btn.getAttribute('aria-expanded')==='true';
@@ -553,7 +600,6 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
   });
 });
 
-// Tracking
 function loadTracking(){
   if(localStorage.getItem('cookie-consent')==='accepted'){
     var s=document.createElement('script');s.async=true;
@@ -579,40 +625,6 @@ window.addEventListener('DOMContentLoaded',function(){
     document.getElementById('dfwCookieBanner').style.display='flex';
   }
   loadTracking();
-
-  // Lang selector
-  var langs=[
-    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
-    ['FR','Français'],['ES','Español'],['PT','Português'],['IT','Italiano'],
-    ['NL','Nederlands'],['PL','Polski'],['TR','Türkçe'],['RU','Русский'],
-    ['AR','العربية'],['HI','हिन्दी'],['ZH','中文'],['JA','日本語'],
-    ['KO','한국어'],['ID','Indonesia'],['SW','Kiswahili']
-  ];
-  var URLS={
-    EN:'/blog/how-to-get-out-of-debt-fast',
-    FI:'/',DE:'/blog/schulden-loswerden-kostenlos',
-    FR:'/blog/aide-pour-dettes-gratuite',
-    SV:'/blog/skuldfri-gratis-hjalp',
-    NL:'/blog/schuldhulp-gratis-nederland',
-    PL:'/blog/pomoc-w-dlugach-za-darmo',
-    ES:'/blog/ayuda-deudas-gratis',
-    IT:'/blog/aiuto-debiti-gratis-italia',
-    PT:'/blog/ajuda-dividas-gratis-portugal',
-    ID:'/blog/bantuan-hutang-gratis-indonesia'
-  };
-  var DEFAULT_LANG='EN';
-  var sel=document.getElementById('langSel');
-  if(!sel)return;
-  langs.forEach(function(l){
-    var o=document.createElement('option');
-    o.value=l[0];o.textContent=l[1];
-    if(l[0]===DEFAULT_LANG)o.selected=true;
-    sel.appendChild(o);
-  });
-  sel.addEventListener('change',function(){
-    var url=URLS[this.value]||'/';
-    window.location.href=url;
-  });
 });
 </script>
 </body>
