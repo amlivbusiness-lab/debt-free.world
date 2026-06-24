@@ -60,7 +60,7 @@ nav a.active{color:var(--green);}
 .cards{padding:60px 6% 80px;max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
 
 .card{border:1px solid #e8e8e3;border-radius:8px;overflow:hidden;}
-.card-head{padding:28px 32px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
+.card-head{padding:28px 32px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
 .card-head-left{flex:1;}
 .card-num{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
 .card-num.muted{color:#8a8a80;}
@@ -69,14 +69,11 @@ nav a.active{color:var(--green);}
 .card-head-right{flex-shrink:0;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
 .card-price{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;}
 .card-price.muted{color:var(--text-soft);font-weight:500;}
-.card-chev{width:30px;height:30px;border-radius:50%;border:1px solid #e8e8e3;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text);transition:transform 0.2s;flex-shrink:0;}
-.card.open .card-chev{transform:rotate(180deg);}
 
 .card-chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 32px 24px;}
 .chip{font-size:11.5px;color:var(--text);background:#fafaf8;border:1px solid #e8e8e3;border-radius:14px;padding:4px 12px;}
 
-.card-body{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
-.card.open .card-body{max-height:2000px;}
+.card-body{overflow:visible;}
 .card-body-inner{padding:8px 32px 36px;border-top:1px solid #f0efe9;}
 
 .card-lead{font-size:15.5px;color:var(--text-soft);line-height:1.75;font-weight:300;margin:24px 0 26px;max-width:600px;}
@@ -88,8 +85,9 @@ nav a.active{color:var(--green);}
 
 .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;border:none;border-radius:4px;padding:15px 32px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;}
 .btn-primary:hover{background:var(--green-dark);}
-.btn-waitlist{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--green);border:1.5px solid var(--green);border-radius:4px;padding:13px 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;}
-.btn-waitlist:hover{background:#fafaf8;}
+.btn-waitlist{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--green);border:2px solid var(--green);border-radius:4px;padding:13px 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;box-shadow:0 1px 2px rgba(15,77,40,0.08);transition:background .15s ease, box-shadow .15s ease;}
+.btn-waitlist:hover{background:#f0f7f2;box-shadow:0 2px 6px rgba(15,77,40,0.18);}
+.btn-waitlist:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
 .card-note{display:block;margin-top:14px;font-size:12.5px;color:var(--text-soft);font-weight:300;}
 .community-link{display:block;margin-top:10px;font-size:12.5px;color:var(--green);font-weight:500;text-decoration:underline;text-decoration-color:#c5dccb;text-underline-offset:3px;}
 .community-link:hover{text-decoration-color:var(--green);}
@@ -189,8 +187,8 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
 
 <div class="cards">
 
-  <div class="card open" id="card-1">
-    <div class="card-head" onclick="toggleCard(this)">
+  <div class="card" id="card-1">
+    <div class="card-head">
       <div class="card-head-left">
         <span class="card-num">Phase 01 · Live now</span>
         <div class="card-title">Debt FREE</div>
@@ -198,7 +196,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
       </div>
       <div class="card-head-right">
         <span class="card-price">0 € forever</span>
-        <div class="card-chev">▾</div>
+        
       </div>
     </div>
     <div class="card-chips">
@@ -222,8 +220,8 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
     </div>
   </div>
 
-  <div class="card open" id="card-2">
-    <div class="card-head" onclick="toggleCard(this)">
+  <div class="card" id="card-2">
+    <div class="card-head">
       <div class="card-head-left">
         <span class="card-num">Phase 02 · Live now</span>
         <div class="card-title">Debt Recovery</div>
@@ -231,7 +229,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
       </div>
       <div class="card-head-right">
         <span class="card-price">19 € once</span>
-        <div class="card-chev">▾</div>
+        
       </div>
     </div>
     <div class="card-chips">
@@ -257,7 +255,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   </div>
 
   <div class="card" id="card-3">
-    <div class="card-head" onclick="toggleCard(this)">
+    <div class="card-head">
       <div class="card-head-left">
         <span class="card-num muted">Phase 03 · Coming 2026</span>
         <div class="card-title">Income Builder</div>
@@ -265,7 +263,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
       </div>
       <div class="card-head-right">
         <span class="card-price muted">Join the waitlist</span>
-        <div class="card-chev">▾</div>
+        
       </div>
     </div>
     <div class="card-chips">
@@ -286,7 +284,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   </div>
 
   <div class="card" id="card-4">
-    <div class="card-head" onclick="toggleCard(this)">
+    <div class="card-head">
       <div class="card-head-left">
         <span class="card-num muted">Phase 04 · Coming 2028</span>
         <div class="card-title">Wealth Architect</div>
@@ -294,7 +292,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
       </div>
       <div class="card-head-right">
         <span class="card-price muted">Join the waitlist</span>
-        <div class="card-chev">▾</div>
+        
       </div>
     </div>
     <div class="card-chips">
@@ -315,7 +313,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   </div>
 
   <div class="card" id="card-5">
-    <div class="card-head" onclick="toggleCard(this)">
+    <div class="card-head">
       <div class="card-head-left">
         <span class="card-num muted">Phase 05 · Coming 2029</span>
         <div class="card-title">Business Engine</div>
@@ -323,7 +321,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
       </div>
       <div class="card-head-right">
         <span class="card-price muted">Join the waitlist</span>
-        <div class="card-chev">▾</div>
+        
       </div>
     </div>
     <div class="card-chips">
@@ -371,10 +369,20 @@ function toggleMenu(){
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-function toggleCard(headEl){
-  const card = headEl.closest('.card');
-  card.classList.toggle('open');
-}
+// All cards are always fully expanded now (no accordion) — this script only
+// handles scrolling to the right card when arriving via a deep link like
+// ecosystem.html#card-3 (used in email CTAs).
+(function(){
+  var hash = window.location.hash;
+  if (hash && hash.startsWith('#card-')) {
+    var target = document.querySelector(hash);
+    if (target && target.classList.contains('card')) {
+      window.addEventListener('load', function(){
+        target.scrollIntoView({behavior:'smooth', block:'center'});
+      });
+    }
+  }
+})();
 
 document.addEventListener('click', function(e){
   const wrap = document.querySelector('.lang-wrap');
