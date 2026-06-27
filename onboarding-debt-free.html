@@ -11,52 +11,73 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;
-  --green-border:#86c9a0;--green-bg:#f0f8f3;--green-pale:#f7fcf9;
-  --text:#111;--muted:#6b7280;--border:#e5e7eb;--white:#fff;
-  --red:#dc2626;--red-bg:#fef2f2;--red-border:#fca5a5;
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --green-pale:#fafaf8;--green-border:#bcd9c5;
+  --text:#111;--text-soft:#2b2b2b;--border:#e8e8e3;--white:#fff;
+  --red:#b3261e;--red-bg:#fdf0ef;
   --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
-  --radius:14px;--shadow:0 2px 20px rgba(22,101,52,0.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-height:100vh;-webkit-font-smoothing:antialiased;}
 
 /* ── TOPBAR ── */
-.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.topbar-logo{font-family:var(--serif);font-size:1.05rem;color:var(--green);text-decoration:none;letter-spacing:-0.01em;}
-.topbar-step{font-size:12px;color:var(--muted);font-weight:500;}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-logo{font-family:var(--serif);font-size:1.05rem;color:var(--text);text-decoration:none;}
+.topbar-step{font-size:12px;color:var(--text-soft);font-weight:500;}
 
 /* ── PROGRESS ── */
 .progress-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px 14px;}
-.progress-track{background:var(--green-light);border-radius:100px;height:4px;overflow:hidden;margin-bottom:9px;}
+.progress-track{background:#eee;border-radius:100px;height:4px;overflow:hidden;margin-bottom:9px;}
 .progress-fill{background:var(--green);height:100%;border-radius:100px;transition:width 0.5s cubic-bezier(.4,0,.2,1);}
 .progress-steps{display:flex;justify-content:space-between;}
-.progress-steps span{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;font-weight:600;color:#bbb;transition:color 0.3s;}
+.progress-steps span{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;font-weight:600;color:#ccc;transition:color 0.3s;}
 .progress-steps span.active{color:var(--green);}
 
-/* ── MAIN WRAP ── */
-.wrap{max-width:560px;margin:0 auto;padding:28px 16px 100px;}
+/* ── MAIN WRAP ──
+   Width architecture matches the rest of the site: wide outer canvas,
+   readable measure inside. On mobile (the dominant use case for this
+   form) the two collapse to the same single column — width architecture
+   only matters once there is room for it to matter. */
+.wrap{max-width:680px;margin:0 auto;padding:28px 16px 100px;}
 
 /* ── QUESTION CARD ── */
-.q-card{background:var(--white);border-radius:var(--radius);padding:32px 28px;box-shadow:var(--shadow);display:none;animation:fadeUp 0.28s ease;}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:32px 28px;display:none;animation:fadeUp 0.28s ease;}
 .q-card.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .q-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:12px;display:block;}
-.q-title{font-family:var(--serif);font-size:24px;line-height:1.18;color:var(--text);margin-bottom:8px;}
-.q-sub{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:26px;font-weight:300;}
+.q-title{font-family:var(--serif);font-size:26px;font-weight:400;line-height:1.22;color:var(--text);margin-bottom:8px;}
+.q-sub{font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:8px;font-weight:300;}
 
-/* ── SECTION DIVIDER ── */
+/* ── MICRO-SUMMARY — quiet, building confirmation that appears as the
+   person answers, instead of the picture only resolving at the very
+   end. Used in steps with multiple progressive groups (3, 4, 5, 6). ── */
+.micro-summary{font-size:12.5px;color:var(--green);font-weight:500;margin-bottom:22px;min-height:18px;display:flex;align-items:flex-start;gap:7px;opacity:0;transition:opacity 0.3s;}
+.micro-summary.show{opacity:1;}
+.micro-summary .dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:6px;}
+
+/* ── PROGRESSIVE GROUPS — reveal 2-3 fields at a time rather than a
+   full step's worth at once. Settled groups stay visible (so the
+   person can review/edit) but dim slightly so attention stays on the
+   active group. ── */
+.q-group{margin-bottom:26px;}
+.q-group.pending{display:none;}
+.q-group.settled{opacity:0.6;}
+.q-group:not(.pending){animation:fadeUp 0.3s ease;}
+.group-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-soft);font-weight:600;margin-bottom:14px;display:block;}
+
+/* ── SECTION DIVIDER (used outside progressive groups, e.g. Step 3's
+   collections sub-section which always shows) ── */
 .q-section{margin-top:26px;padding-top:22px;border-top:1px solid var(--border);}
-.q-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:14px;display:block;}
+.q-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-soft);font-weight:600;margin-bottom:14px;display:block;}
 
 /* ── INPUT FIELD ── */
 .field{margin-bottom:16px;}
-.field-label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:6px;line-height:1.4;}
-.field-hint{font-size:12px;color:var(--muted);margin-bottom:7px;line-height:1.5;}
+.field-label{display:block;font-size:13.5px;font-weight:500;color:var(--text);margin-bottom:6px;line-height:1.4;}
+.field-hint{font-size:12px;color:var(--text-soft);margin-bottom:7px;line-height:1.5;}
 .field input,.field select,.field textarea{
   width:100%;font-family:var(--sans);font-size:15px;
-  border:1.5px solid var(--border);border-radius:10px;
+  border:1.5px solid var(--border);border-radius:6px;
   padding:13px 15px;color:var(--text);background:var(--white);
   outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;
 }
@@ -68,86 +89,87 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .amount-row{display:flex;gap:10px;}
 .amount-row input{flex:1;min-width:0;}
-.amount-row select{width:120px;flex-shrink:0;}
+.amount-row select{width:110px;flex-shrink:0;}
 
 /* ── OPTION BUTTONS ── */
 .opts{display:flex;flex-direction:column;gap:8px;}
 .opts.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .opt{
-  border:1.5px solid var(--border);border-radius:10px;
+  border:1.5px solid var(--border);border-radius:6px;
   padding:13px 16px;background:var(--white);cursor:pointer;
   text-align:left;font-family:var(--sans);
-  color:#333;transition:border-color 0.15s,background 0.15s;
-  line-height:1.3;-webkit-tap-highlight-color:transparent;user-select:none;
+  color:var(--text);transition:border-color 0.15s,background 0.15s;
+  line-height:1.35;-webkit-tap-highlight-color:transparent;user-select:none;
 }
 .opt:active{transform:scale(0.985);}
-.opt.selected{border-color:var(--green);background:var(--green-bg);}
-.opt-label{display:block;font-size:13.5px;font-weight:500;color:#222;line-height:1.3;}
-.opt-desc{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45;font-weight:300;}
+.opt.selected{border-color:var(--green);background:var(--green-pale);}
+.opt-label{display:block;font-size:13.5px;font-weight:500;color:var(--text);line-height:1.35;}
+.opt-desc{display:block;font-size:12px;color:var(--text-soft);margin-top:3px;line-height:1.5;font-weight:300;}
 .opt.selected .opt-label{color:var(--green-dark);}
-.opt.selected .opt-desc{color:var(--green-dark);opacity:0.75;}
-.multi-hint{font-size:12px;color:var(--muted);margin-bottom:10px;font-style:italic;}
+.multi-hint{font-size:12px;color:var(--text-soft);margin-bottom:10px;font-style:italic;}
 
 /* ── DEBT LIST ── */
 .debt-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
-.debt-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:10px;animation:fadeUp 0.2s ease;}
+.debt-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--green-pale);border:1px solid var(--green-border);border-radius:6px;animation:fadeUp 0.2s ease;}
 .debt-row-info{flex:1;min-width:0;}
 .debt-row-type{font-size:13px;font-weight:600;color:var(--green-dark);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.debt-row-creditor{font-size:12px;color:var(--muted);font-weight:300;}
+.debt-row-creditor{font-size:12px;color:var(--text-soft);font-weight:300;}
 .debt-row-right{text-align:right;flex-shrink:0;}
 .debt-row-amount{font-size:14px;font-weight:600;color:var(--text);display:block;}
-.debt-row-rate{font-size:11px;color:var(--muted);}
 .debt-row-remove{background:none;border:none;color:#ccc;cursor:pointer;font-size:16px;padding:4px 6px;line-height:1;border-radius:4px;flex-shrink:0;}
 .debt-row-remove:hover{color:var(--red);}
 
-/* debt mini form */
-.debt-mini-form{background:var(--green-bg);border:1px solid var(--green-border);border-radius:10px;padding:18px;margin-bottom:10px;display:none;}
+.debt-mini-form{background:var(--green-pale);border:1px solid var(--green-border);border-radius:6px;padding:18px;margin-bottom:10px;display:none;}
 .debt-mini-form.open{display:block;animation:fadeUp 0.2s ease;}
 .debt-mini-form .field{margin-bottom:12px;}
 .debt-mini-form .field:last-child{margin-bottom:0;}
-.add-debt-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:none;border:1.5px dashed var(--green-border);border-radius:10px;padding:12px 16px;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--green);width:100%;transition:all 0.15s;}
-.add-debt-btn:hover{background:var(--green-bg);border-style:solid;}
+.add-debt-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:none;border:1.5px dashed var(--green-border);border-radius:6px;padding:12px 16px;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--green);width:100%;transition:all 0.15s;}
+.add-debt-btn:hover{background:var(--green-pale);border-style:solid;}
 
 /* ── CONFIDENCE SLIDER ── */
 .conf-wrap{padding:4px 0 2px;}
-.conf-labels-top{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px;}
-.conf-track{background:var(--green-light);border-radius:100px;height:7px;cursor:pointer;position:relative;touch-action:none;}
+.conf-labels-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text-soft);margin-bottom:10px;}
+.conf-track{background:#eee;border-radius:100px;height:7px;cursor:pointer;position:relative;touch-action:none;}
 .conf-fill{background:var(--green);height:100%;border-radius:100px;transition:width 0.1s;pointer-events:none;}
 .conf-thumb{position:absolute;top:50%;transform:translateY(-50%);width:20px;height:20px;background:var(--green);border-radius:50%;border:3px solid var(--white);box-shadow:0 1px 5px rgba(0,0,0,0.2);margin-left:-10px;pointer-events:none;}
 .conf-ticks{display:flex;justify-content:space-between;font-size:11px;color:#ccc;margin-top:6px;padding:0 2px;}
 
-/* ── CTA ROW ── */
-.cta-row{display:flex;gap:10px;margin-top:26px;}
-.btn-back{background:none;border:1.5px solid var(--border);border-radius:30px;padding:13px 22px;font-size:14px;font-weight:400;color:var(--muted);cursor:pointer;font-family:var(--sans);flex-shrink:0;transition:all 0.15s;-webkit-tap-highlight-color:transparent;}
+/* ── CTA ── */
+.btn-continue-group{display:none;background:var(--green);color:#fff;border:none;border-radius:6px;padding:12px 22px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);margin-top:4px;align-items:center;gap:6px;}
+.btn-continue-group.show{display:inline-flex;}
+.btn-continue-group:hover{background:var(--green-dark);}
+
+.cta-row{display:flex;gap:10px;margin-top:28px;padding-top:22px;border-top:1px solid var(--border);}
+.btn-back{background:none;border:1.5px solid var(--border);border-radius:30px;padding:13px 22px;font-size:14px;font-weight:400;color:var(--text-soft);cursor:pointer;font-family:var(--sans);flex-shrink:0;transition:all 0.15s;-webkit-tap-highlight-color:transparent;}
 .btn-back:hover{border-color:var(--green);color:var(--green);}
-.btn-next{flex:1;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px 20px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background 0.2s;-webkit-tap-highlight-color:transparent;letter-spacing:0.01em;}
+.btn-next{flex:1;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:14px 20px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background 0.2s;-webkit-tap-highlight-color:transparent;}
 .btn-next:hover{background:var(--green-dark);}
 .btn-next:disabled{background:#ccc;cursor:not-allowed;}
-.btn-full{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:16px 20px;font-size:16px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background 0.2s;letter-spacing:0.01em;margin-top:8px;}
+.btn-full{width:100%;background:var(--green);color:var(--white);border:none;border-radius:30px;padding:16px 20px;font-size:16px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:background 0.2s;margin-top:8px;}
 .btn-full:hover{background:var(--green-dark);}
-.submit-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.5;}
+.submit-note{font-size:12px;color:var(--text-soft);text-align:center;margin-top:10px;line-height:1.5;}
 
 /* ── LOADING ── */
 .loading-screen{display:none;text-align:center;padding:70px 20px 40px;}
 .loading-screen.active{display:block;}
-.loader-ring{width:48px;height:48px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 28px;}
+.loader-ring{width:48px;height:48px;border:3px solid var(--green-pale);border-top-color:var(--green);border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 28px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.loader-title{font-family:var(--serif);font-size:22px;color:var(--green-dark);margin-bottom:8px;}
-.loader-sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
+.loader-title{font-family:var(--serif);font-size:22px;color:var(--text);font-weight:400;margin-bottom:8px;}
+.loader-sub{font-size:13px;color:var(--text-soft);margin-bottom:28px;}
 .loader-steps{list-style:none;text-align:left;max-width:300px;margin:0 auto;}
 .loader-steps li{font-size:13px;color:#bbb;padding:6px 0 6px 24px;position:relative;transition:color 0.3s;}
 .loader-steps li::before{content:"—";position:absolute;left:0;color:#ddd;}
-.loader-steps li.ls-done{color:var(--muted);}
+.loader-steps li.ls-done{color:var(--text-soft);}
 .loader-steps li.ls-done::before{content:"✓";color:var(--green);}
 .loader-steps li.ls-active{color:var(--text);}
 .loader-steps li.ls-active::before{content:"·";color:var(--green);font-size:20px;top:-1px;}
 
 /* ── INVALID TOKEN ── */
-.invalid-wrap{max-width:400px;margin:60px auto;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 24px;text-align:center;display:none;}
+.invalid-wrap{max-width:400px;margin:60px auto;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:32px 24px;text-align:center;display:none;}
 .invalid-wrap.show{display:block;}
-.invalid-icon{font-size:44px;margin-bottom:1rem;}
-.invalid-title{font-family:var(--serif);font-size:22px;margin-bottom:8px;}
-.invalid-sub{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;font-weight:300;}
+.invalid-icon{font-size:40px;margin-bottom:1rem;}
+.invalid-title{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px;}
+.invalid-sub{font-size:13.5px;color:var(--text-soft);line-height:1.7;margin-bottom:1.25rem;font-weight:300;}
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:400;z-index:9999;transition:transform 0.3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;}
@@ -157,7 +179,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 @media(max-width:480px){
   .wrap{padding:20px 12px 100px;}
   .q-card{padding:24px 18px;}
-  .q-title{font-size:21px;}
+  .q-title{font-size:22px;}
   .opts.grid2{grid-template-columns:1fr;}
   .two-col{grid-template-columns:1fr;}
   .amount-row{flex-direction:column;}
@@ -170,19 +192,19 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <body>
 
 <nav class="topbar">
-  <span class="topbar-logo">✦ Debt-Free.world</span>
-  <span class="topbar-step" id="topbarStep">Step 1 of 7</span>
+  <span class="topbar-logo">Debt-Free.world</span>
+  <span class="topbar-step" id="topbarStep" data-i18n="topStep">Step 1 of 7</span>
 </nav>
 <div class="progress-wrap">
   <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:14%"></div></div>
   <div class="progress-steps">
-    <span id="ps1" class="active" data-i="0">You</span>
-    <span id="ps2" data-i="1">Situation</span>
-    <span id="ps3" data-i="2">Debts</span>
-    <span id="ps4" data-i="3">Finances</span>
-    <span id="ps5" data-i="4">Mindset</span>
-    <span id="ps6" data-i="5">Goals</span>
-    <span id="ps7" data-i="6">Ready</span>
+    <span id="ps1" class="active" data-i18n="ps1">You</span>
+    <span id="ps2" data-i18n="ps2">Situation</span>
+    <span id="ps3" data-i18n="ps3">Debts</span>
+    <span id="ps4" data-i18n="ps4">Finances</span>
+    <span id="ps5" data-i18n="ps5">Mindset</span>
+    <span id="ps6" data-i18n="ps6">Goals</span>
+    <span id="ps7" data-i18n="ps7">Ready</span>
   </div>
 </div>
 
@@ -190,33 +212,34 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
 <!-- TOKEN LOADING STATE -->
 <div id="tokenLoading" style="display:none;text-align:center;padding:60px 20px;">
-  <div style="width:36px;height:36px;border:3px solid var(--green-light);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
-  <p style="font-size:13px;color:var(--muted);">Verifying your access…</p>
+  <div style="width:36px;height:36px;border:3px solid var(--green-pale);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
+  <p style="font-size:13px;color:var(--text-soft);" data-i18n="gate_verifying">Verifying your access…</p>
 </div>
 
 <!-- INVALID TOKEN -->
 <div class="invalid-wrap" id="invalidWrap">
   <div class="invalid-icon">🔑</div>
-  <div class="invalid-title">This link has expired.</div>
-  <p class="invalid-sub">Magic links are valid for 48 hours. Enter your email and we'll send a fresh one right away.</p>
-  <div class="field"><input type="email" id="f_relink" placeholder="your@email.com" autocomplete="email"/></div>
-  <button class="btn-full" onclick="requestNewLink()">Send new link →</button>
+  <div class="invalid-title" data-i18n="invalid_title">This link has expired.</div>
+  <p class="invalid-sub" data-i18n="invalid_sub">Magic links are valid for 48 hours. Enter your email and we'll send a fresh one right away.</p>
+  <div class="field"><input type="email" id="f_relink" placeholder="your@email.com" autocomplete="email" data-i18n-placeholder="email_placeholder"/></div>
+  <button class="btn-full" onclick="requestNewLink()" data-i18n="send_new_link">Send new link →</button>
 </div>
 
 <!-- ══ STEP 1 — WHO YOU ARE ══ -->
 <div class="q-card" id="step1">
-  <span class="q-eyebrow" id="s1ey">Step 1 of 7</span>
-  <h1 class="q-title" id="s1title">Let's start with you.</h1>
-  <p class="q-sub" id="s1sub">Your plan will be built around your real situation — not a template. Everything you share stays private.</p>
+  <span class="q-eyebrow" data-i18n="topStep1">Step 1 of 7</span>
+  <h1 class="q-title" data-i18n="s1title">Hello. I'm glad you're here.</h1>
+  <p class="q-sub" data-i18n="s1sub">Whatever brought you here, you're not alone — and you're already doing the hardest part by showing up. Your information is kept private and secure, and your plan will be built around your real life, not a template.</p>
 
+  <div style="margin-top:22px;">
   <div class="two-col">
     <div class="field" id="wrap_firstname">
-      <label class="field-label" id="lbl_firstname">First name</label>
+      <label class="field-label" data-i18n="lbl_firstname">What's your name?</label>
       <input type="text" id="f_firstname" placeholder="Anna" autocomplete="given-name" inputmode="text"/>
-      <div class="err-msg" id="err_firstname">Please enter your first name.</div>
+      <div class="err-msg" id="err_firstname" data-i18n="err_firstname">Please enter your name.</div>
     </div>
     <div class="field">
-      <label class="field-label" id="lbl_language">Plan language</label>
+      <label class="field-label" data-i18n="lbl_language">Which language should your plan be in?</label>
       <select id="f_language" onchange="setLang(this.value)">
         <option value="EN">English</option>
         <option value="FI">Suomi</option>
@@ -242,9 +265,9 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
 
   <div class="field" id="wrap_country">
-    <label class="field-label" id="lbl_country">Country</label>
+    <label class="field-label" data-i18n="lbl_country">Where do you live?</label>
     <select id="f_country" onchange="onCountryChange(this.value)">
-      <option value="" id="opt_country_placeholder">— Select your country —</option>
+      <option value="" id="opt_country_placeholder" data-i18n="opt_country_placeholder">— Select your country —</option>
       <optgroup label="Europe">
         <option value="Finland">Finland</option>
         <option value="Sweden">Sweden</option>
@@ -290,70 +313,73 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
         <option value="Other">Other</option>
       </optgroup>
     </select>
-    <div class="err-msg" id="err_country">Please select your country.</div>
+    <div class="err-msg" id="err_country" data-i18n="err_country">Please select your country.</div>
+  </div>
   </div>
 
-  <div class="cta-row"><button class="btn-next" onclick="goNext(1)" id="btn1">Continue</button></div>
+  <div class="cta-row"><button class="btn-next" onclick="goNext(1)" id="btn1" data-i18n="btn_next">Continue</button></div>
 </div>
 
 <!-- ══ STEP 2 — SITUATION ══ -->
 <div class="q-card" id="step2">
-  <span class="q-eyebrow" id="s2ey">Step 2 of 7</span>
-  <h1 class="q-title" id="s2title">What's going on right now?</h1>
-  <p class="q-sub" id="s2sub">This helps us understand the full picture — not just the numbers. Select everything that applies.</p>
+  <span class="q-eyebrow" data-i18n="topStep2">Step 2 of 7</span>
+  <h1 class="q-title" data-i18n="s2title">What brought you here?</h1>
+  <p class="q-sub" data-i18n="s2sub">Pick everything that fits. There's no wrong answer, and nothing here is judged.</p>
 
-  <p class="multi-hint" id="s2multi">Select all that apply</p>
-  <div class="opts" id="opts_situation">
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Over-indebted — debt has grown beyond what I can manage"><span class="opt-label" id="sit1">Debts have grown beyond what I can manage</span></button>
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Lost job or income recently"><span class="opt-label" id="sit2">Lost my job or income recently</span></button>
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Going through divorce or separation"><span class="opt-label" id="sit3">Going through divorce or separation</span></button>
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Dealing with illness or sick leave"><span class="opt-label" id="sit4">Dealing with illness or sick leave</span></button>
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Business closed or self-employment difficulties"><span class="opt-label" id="sit5">Business closed or self-employment difficulties</span></button>
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Victim of fraud, scam or broken contract"><span class="opt-label" id="sit6">Victim of fraud, scam or broken contract</span></button>
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Debt accumulated gradually over time"><span class="opt-label" id="sit7">Debt accumulated gradually — it just kept growing</span></button>
-    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Tried to help someone financially and it went wrong"><span class="opt-label" id="sit8">Tried to help someone financially and it went wrong</span></button>
+  <p class="multi-hint" data-i18n="s2multi">Select all that apply</p>
+  <div class="opts" id="opts_situation" style="margin-top:14px;">
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Over-indebted — debt has grown beyond what I can manage"><span class="opt-label" data-i18n="sit1">My debts have grown beyond what I can manage</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Lost job or income recently"><span class="opt-label" data-i18n="sit2">I lost my job or income recently</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Going through divorce or separation"><span class="opt-label" data-i18n="sit3">I'm going through a divorce or separation</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Dealing with illness or sick leave"><span class="opt-label" data-i18n="sit4">I'm dealing with illness or sick leave</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Business closed or self-employment difficulties"><span class="opt-label" data-i18n="sit5">My business closed, or self-employment got hard</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Victim of fraud, scam or broken contract"><span class="opt-label" data-i18n="sit6">I was a victim of fraud, a scam, or a broken contract</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Debt accumulated gradually over time"><span class="opt-label" data-i18n="sit7">It built up gradually — it just kept growing</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Tried to help someone financially and it went wrong"><span class="opt-label" data-i18n="sit8">I tried to help someone financially and it went wrong</span></button>
+    <button class="opt" onclick="toggleOpt(this,'situation')" data-val="Curious — exploring how this works"><span class="opt-label" data-i18n="sit9">I'm just curious — I want to see how this works</span></button>
   </div>
 
   <div class="cta-row">
-    <button class="btn-back" onclick="goBack(2)" id="back2">Back</button>
-    <button class="btn-next" onclick="goNext(2)" id="btn2">Continue</button>
+    <button class="btn-back" onclick="goBack(2)" data-i18n="btn_back">Back</button>
+    <button class="btn-next" onclick="goNext(2)" id="btn2" data-i18n="btn_next">Continue</button>
   </div>
 </div>
 
 <!-- ══ STEP 3 — DEBT MAP ══ -->
 <div class="q-card" id="step3">
-  <span class="q-eyebrow" id="s3ey">Step 3 of 7</span>
-  <h1 class="q-title" id="s3title">Tell me about your debts.</h1>
-  <p class="q-sub" id="s3sub">Add each debt separately. This is how we build the right priority order — not a guess. Rough estimates are fine.</p>
+  <span class="q-eyebrow" data-i18n="topStep3">Step 3 of 7</span>
+  <h1 class="q-title" data-i18n="s3title">Now, tell me about your debts.</h1>
+  <p class="q-sub" data-i18n="s3sub">Add each one separately — this is how I work out what to tackle first, instead of guessing. Rough numbers are completely fine.</p>
 
   <div class="debt-list" id="debtList"></div>
 
   <div class="debt-mini-form" id="debtMiniForm">
     <div class="field">
-      <label class="field-label" id="lbl_mini_type">Type of debt</label>
+      <label class="field-label" data-i18n="lbl_mini_type">Type of debt</label>
       <select id="mini_type">
-        <option value="" id="mini_type_ph">— Select type —</option>
-        <option value="Consumer loan">Consumer loan / personal loan</option>
-        <option value="Credit card">Credit card</option>
-        <option value="Payday / fast loan">Payday loan / fast loan</option>
-        <option value="Mortgage">Mortgage / home loan</option>
-        <option value="Student loan">Student loan</option>
-        <option value="Tax debt">Tax debt</option>
-        <option value="Medical debt">Medical debt</option>
-        <option value="Rent arrears">Rent arrears</option>
-        <option value="Business debt">Business debt</option>
-        <option value="Debt in collections">Debt in collections / enforcement</option>
-        <option value="Informal debt">Informal debt (friend / family)</option>
-        <option value="Other">Other</option>
+        <option value="" data-i18n="mini_type_ph">— Select type —</option>
+        <option value="Consumer loan" data-i18n="dt_consumer">Consumer loan / personal loan</option>
+        <option value="Credit card" data-i18n="dt_card">Credit card</option>
+        <option value="Car loan" data-i18n="dt_car">Car loan</option>
+        <option value="Payday / fast loan" data-i18n="dt_payday">Payday loan / fast loan</option>
+        <option value="Mortgage" data-i18n="dt_mortgage">Mortgage / home loan</option>
+        <option value="Student loan" data-i18n="dt_student">Student loan</option>
+        <option value="Tax debt" data-i18n="dt_tax">Tax debt</option>
+        <option value="Medical debt" data-i18n="dt_medical">Medical debt</option>
+        <option value="Rent arrears" data-i18n="dt_rent">Rent arrears</option>
+        <option value="Business debt" data-i18n="dt_business">Business debt</option>
+        <option value="Debt in collections" data-i18n="dt_collections">Debt in collections / enforcement</option>
+        <option value="Informal debt" data-i18n="dt_informal">Informal debt (friend / family)</option>
+        <option value="Other" data-i18n="dt_other">Other</option>
       </select>
     </div>
     <div class="field">
-      <label class="field-label" id="lbl_mini_creditor">Who is this owed to?</label>
-      <div class="field-hint" id="hint_mini_creditor">Company or person name — e.g. Nordea, Klarna, HMRC. Used to personalise your plan.</div>
-      <input type="text" id="mini_creditor" placeholder="e.g. Nordea, Klarna, HMRC…"/>
+      <label class="field-label" data-i18n="lbl_mini_creditor">Who is it owed to?</label>
+      <div class="field-hint" data-i18n="hint_mini_creditor">A company or person's name — Nordea, Klarna, your landlord. This helps me personalise your plan.</div>
+      <input type="text" id="mini_creditor" placeholder="e.g. Nordea, Klarna…"/>
     </div>
     <div class="field">
-      <label class="field-label" id="lbl_mini_amount">Amount owed</label>
+      <label class="field-label" data-i18n="lbl_mini_amount">Roughly how much?</label>
       <div class="amount-row">
         <input type="number" id="mini_amount" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
         <select id="mini_currency">
@@ -370,194 +396,207 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
       </div>
     </div>
     <div class="field">
-      <label class="field-label" id="lbl_mini_interest">Approximate interest rate (%)</label>
-      <div class="field-hint" id="hint_mini_interest">Enter 0 if you don't know — we'll note it as unknown, not as zero-interest.</div>
+      <label class="field-label" data-i18n="lbl_mini_interest">Roughly what interest rate?</label>
+      <div class="field-hint" data-i18n="hint_mini_interest">Don't know? Leave it as 0 — I'll treat it as "unknown", not as interest-free.</div>
       <input type="number" id="mini_interest" placeholder="0" min="0" max="150" step="0.1" inputmode="decimal"/>
     </div>
     <div style="display:flex;gap:8px;margin-top:4px;">
-      <button class="btn-next" style="padding:12px 16px;font-size:13px;" id="addDebtConfirm" onclick="addDebt()">Add debt</button>
-      <button class="btn-back" style="padding:12px 16px;font-size:13px;" id="cancelDebtBtn" onclick="closeMiniForm()">Cancel</button>
+      <button class="btn-next" style="padding:12px 16px;font-size:13px;" onclick="addDebt()" data-i18n="addDebtConfirm">Add debt</button>
+      <button class="btn-back" style="padding:12px 16px;font-size:13px;" onclick="closeMiniForm()" data-i18n="cancelDebtBtn">Cancel</button>
     </div>
   </div>
 
-  <button class="add-debt-btn" onclick="openMiniForm()" id="addDebtBtn">
+  <button class="add-debt-btn" onclick="openMiniForm()">
     <span style="font-size:17px;line-height:1;">+</span>
-    <span id="addDebtLabel">Add a debt</span>
+    <span id="addDebtLabel" data-i18n="addDebtLabel">Add a debt</span>
   </button>
 
   <div class="q-section">
-    <span class="q-section-label" id="lbl_collections_section">Collections &amp; enforcement</span>
-    <p class="field-hint" style="margin-bottom:12px;" id="hint_collections">Is any debt already being handled by a collections agency or court enforcement?</p>
+    <span class="q-section-label" data-i18n="lbl_collections_section">Collections & enforcement</span>
+    <p class="field-hint" style="margin-bottom:12px;" data-i18n="hint_collections">Is any of this already with a collections agency or in court?</p>
     <div class="opts grid2" id="opts_collections">
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="No"><span class="opt-label" id="col_no">No</span></button>
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Yes — collections agency"><span class="opt-label" id="col_agency">Collections agency</span></button>
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Yes — court or enforcement"><span class="opt-label" id="col_court">Court / enforcement</span></button>
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Not sure"><span class="opt-label" id="col_unknown">Not sure</span></button>
+      <button class="opt" onclick="selectOpt(this,'collections')" data-val="No"><span class="opt-label" data-i18n="col_no">No</span></button>
+      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Yes — collections agency"><span class="opt-label" data-i18n="col_agency">Collections agency</span></button>
+      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Yes — court or enforcement"><span class="opt-label" data-i18n="col_court">Court / enforcement</span></button>
+      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Not sure"><span class="opt-label" data-i18n="col_unknown">Not sure</span></button>
     </div>
   </div>
 
   <div class="cta-row">
-    <button class="btn-back" onclick="goBack(3)" id="back3">Back</button>
-    <button class="btn-next" onclick="goNext(3)" id="btn3">Continue</button>
+    <button class="btn-back" onclick="goBack(3)" data-i18n="btn_back">Back</button>
+    <button class="btn-next" onclick="goNext(3)" id="btn3" data-i18n="btn_next">Continue</button>
   </div>
 </div>
 
-<!-- ══ STEP 4 — FINANCES ══ -->
+<!-- ══ STEP 4 — FINANCES (progressive disclosure) ══ -->
 <div class="q-card" id="step4">
-  <span class="q-eyebrow" id="s4ey">Step 4 of 7</span>
-  <h1 class="q-title" id="s4title">Your monthly finances.</h1>
-  <p class="q-sub" id="s4sub">Real numbers only — we build a realistic plan, not an optimistic one. Rough estimates are fine.</p>
+  <span class="q-eyebrow" data-i18n="topStep4">Step 4 of 7</span>
+  <h1 class="q-title" data-i18n="s4title">Now let's look at the numbers.</h1>
+  <p class="q-sub" data-i18n="s4sub">Real figures only — I build a realistic plan, not a hopeful one. A few at a time, nothing overwhelming.</p>
 
-  <span class="q-section-label" id="lbl_income_section">Income</span>
-  <div class="field" id="wrap_income">
-    <label class="field-label" id="lbl_income">Monthly take-home income</label>
-    <div class="field-hint" id="hint_income">After tax. If income varies, use your lowest typical month.</div>
-    <div class="amount-row">
-      <input type="number" id="f_income" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
-      <select id="f_currency" onchange="formData.currency=this.value">
-        <option value="EUR">EUR</option><option value="GBP">GBP</option>
-        <option value="SEK">SEK</option><option value="NOK">NOK</option>
-        <option value="DKK">DKK</option><option value="USD">USD</option>
-        <option value="CHF">CHF</option><option value="PLN">PLN</option>
-        <option value="CZK">CZK</option><option value="HUF">HUF</option>
-        <option value="RON">RON</option><option value="CAD">CAD</option>
-        <option value="AUD">AUD</option><option value="BRL">BRL</option>
-        <option value="INR">INR</option><option value="IDR">IDR</option>
-        <option value="PHP">PHP</option>
-      </select>
-    </div>
-    <div class="err-msg" id="err_income">Please enter your monthly income.</div>
-  </div>
+  <div class="micro-summary" id="s4MicroSummary"><span class="dot"></span><span id="s4MicroSummaryText"></span></div>
 
-  <div class="field">
-    <label class="field-label" id="lbl_extra_income">Any additional income not in your main salary?</label>
-    <div class="opts grid2" id="opts_extra">
-      <button class="opt selected" onclick="selectOpt(this,'extra_income')" data-val="No additional income"><span class="opt-label" id="extra_no">No, that's it</span></button>
-      <button class="opt" onclick="selectOpt(this,'extra_income')" data-val="Yes — side work or gig income"><span class="opt-label" id="extra_gig">Side work / gig</span></button>
-      <button class="opt" onclick="selectOpt(this,'extra_income')" data-val="Yes — rental income"><span class="opt-label" id="extra_rent">Rental income</span></button>
-      <button class="opt" onclick="selectOpt(this,'extra_income')" data-val="Yes — government benefits or support"><span class="opt-label" id="extra_ben">Benefits / support</span></button>
-    </div>
-  </div>
-  <div class="field" id="wrap_extra_amount" style="display:none;">
-    <label class="field-label" id="lbl_extra_amount">Approximately how much extra per month?</label>
-    <input type="number" id="f_extra_amount" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
-  </div>
-
-  <div class="q-section">
-    <span class="q-section-label" id="lbl_expenses_section">Monthly expenses</span>
-    <div class="two-col">
-      <div class="field" id="wrap_housing">
-        <label class="field-label" id="lbl_housing_cost">Housing cost</label>
-        <div class="field-hint" id="hint_housing">Rent, mortgage or maintenance</div>
-        <input type="number" id="f_housing_cost" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
-        <div class="err-msg" id="err_housing">Required.</div>
+  <!-- GROUP 1: Income -->
+  <div class="q-group" id="s4group1">
+    <span class="group-label" data-i18n="lbl_income_section">Income</span>
+    <div class="field" id="wrap_income">
+      <label class="field-label" data-i18n="lbl_income">What do you take home each month?</label>
+      <div class="field-hint" data-i18n="hint_income">After tax. If it varies, use a typical low month.</div>
+      <div class="amount-row">
+        <input type="number" id="f_income" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;" oninput="onIncomeInput()"/>
+        <select id="f_currency">
+          <option value="EUR">EUR</option><option value="GBP">GBP</option>
+          <option value="SEK">SEK</option><option value="NOK">NOK</option>
+          <option value="DKK">DKK</option><option value="USD">USD</option>
+          <option value="CHF">CHF</option><option value="PLN">PLN</option>
+          <option value="CZK">CZK</option><option value="HUF">HUF</option>
+          <option value="RON">RON</option><option value="CAD">CAD</option>
+          <option value="AUD">AUD</option><option value="BRL">BRL</option>
+          <option value="INR">INR</option><option value="IDR">IDR</option>
+          <option value="PHP">PHP</option>
+        </select>
       </div>
-      <div class="field" id="wrap_other">
-        <label class="field-label" id="lbl_other_costs">Other fixed costs</label>
-        <div class="field-hint" id="hint_other">Food, transport, utilities, phone</div>
-        <input type="number" id="f_other_costs" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
-        <div class="err-msg" id="err_other">Required.</div>
-      </div>
+      <div class="err-msg" id="err_income" data-i18n="err_income">Please enter your monthly income.</div>
     </div>
-  </div>
 
-  <div class="q-section">
-    <span class="q-section-label" id="lbl_buffer_section">Financial buffer</span>
     <div class="field">
-      <label class="field-label" id="lbl_savings">Current savings or emergency buffer</label>
+      <label class="field-label" data-i18n="lbl_extra_income">Any other income, besides your main one?</label>
+      <div class="opts grid2" id="opts_extra">
+        <button class="opt selected" onclick="selectOpt(this,'extra_income')" data-val="No additional income"><span class="opt-label" data-i18n="extra_no">No, that's it</span></button>
+        <button class="opt" onclick="selectOpt(this,'extra_income')" data-val="Yes — side work or gig income"><span class="opt-label" data-i18n="extra_gig">Side work / gig</span></button>
+        <button class="opt" onclick="selectOpt(this,'extra_income')" data-val="Yes — rental income"><span class="opt-label" data-i18n="extra_rent">Rental income</span></button>
+        <button class="opt" onclick="selectOpt(this,'extra_income')" data-val="Yes — government benefits or support"><span class="opt-label" data-i18n="extra_ben">Benefits / support</span></button>
+      </div>
+    </div>
+    <div class="field" id="wrap_extra_amount" style="display:none;">
+      <label class="field-label" data-i18n="lbl_extra_amount">Roughly how much extra, per month?</label>
+      <input type="number" id="f_extra_amount" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
+    </div>
+
+    <button class="btn-continue-group" id="s4btn1" onclick="revealS4Group(2)" data-i18n="btn_next">Continue →</button>
+  </div>
+
+  <!-- GROUP 2: Fixed costs -->
+  <div class="q-group pending" id="s4group2">
+    <span class="group-label" data-i18n="lbl_expenses_section">Fixed costs</span>
+    <div class="field" id="wrap_housing">
+      <label class="field-label" data-i18n="lbl_housing_cost">What's your housing cost?</label>
+      <div class="field-hint" data-i18n="hint_housing">Rent, mortgage, or maintenance fee.</div>
+      <input type="number" id="f_housing_cost" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;" oninput="onCostInput()"/>
+      <div class="err-msg" id="err_housing" data-i18n="err_required">Required.</div>
+    </div>
+    <div class="field" id="wrap_other">
+      <label class="field-label" data-i18n="lbl_other_costs">What about everything else?</label>
+      <div class="field-hint" data-i18n="hint_other">Food, transport, bills, phone — your other fixed costs.</div>
+      <input type="number" id="f_other_costs" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;" oninput="onCostInput()"/>
+      <div class="err-msg" id="err_other" data-i18n="err_required">Required.</div>
+    </div>
+    <button class="btn-continue-group" id="s4btn2" onclick="revealS4Group(3)" data-i18n="btn_next">Continue →</button>
+  </div>
+
+  <!-- GROUP 3: Buffer -->
+  <div class="q-group pending" id="s4group3">
+    <span class="group-label" data-i18n="lbl_buffer_section">A little about your safety net</span>
+    <div class="field">
+      <label class="field-label" data-i18n="lbl_savings">Do you have any savings or emergency buffer right now?</label>
       <div class="opts grid2" id="opts_savings">
-        <button class="opt" onclick="selectOpt(this,'savings')" data-val="None at all"><span class="opt-label" id="sav1">None at all</span></button>
-        <button class="opt" onclick="selectOpt(this,'savings')" data-val="Under 500"><span class="opt-label" id="sav2">Under 500</span></button>
-        <button class="opt" onclick="selectOpt(this,'savings')" data-val="500 to 2 000"><span class="opt-label" id="sav3">500 – 2 000</span></button>
-        <button class="opt" onclick="selectOpt(this,'savings')" data-val="Over 2 000"><span class="opt-label" id="sav4">Over 2 000</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="None at all"><span class="opt-label" data-i18n="sav1">None at all</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Under 500"><span class="opt-label" data-i18n="sav2">Under 500</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="500 to 2 000"><span class="opt-label" data-i18n="sav3">500 – 2 000</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Over 2 000"><span class="opt-label" data-i18n="sav4">Over 2 000</span></button>
       </div>
     </div>
   </div>
 
-  <div class="q-section">
-    <span class="q-section-label" id="lbl_household_section">Household</span>
+  <!-- GROUP 4: Household -->
+  <div class="q-group pending" id="s4group4">
+    <span class="group-label" data-i18n="lbl_household_section">And your household</span>
     <div class="two-col">
       <div class="field">
-        <label class="field-label" id="lbl_employment">Employment status</label>
+        <label class="field-label" data-i18n="lbl_employment">What's your work situation?</label>
         <select id="f_employment">
-          <option value="" id="emp_ph">— Select —</option>
-          <option value="Employed full-time" id="emp1">Employed full-time</option>
-          <option value="Employed part-time" id="emp2">Employed part-time</option>
-          <option value="Self-employed or business owner" id="emp3">Self-employed / business owner</option>
-          <option value="Unemployed" id="emp4">Unemployed</option>
-          <option value="On sick leave" id="emp5">On sick leave</option>
-          <option value="On parental leave" id="emp6">On parental leave</option>
-          <option value="Retired" id="emp7">Retired</option>
-          <option value="Student" id="emp8">Student</option>
+          <option value="" data-i18n="emp_ph">— Select —</option>
+          <option value="Employed full-time" data-i18n="emp1">Employed full-time</option>
+          <option value="Employed part-time" data-i18n="emp2">Employed part-time</option>
+          <option value="Self-employed or business owner" data-i18n="emp3">Self-employed / business owner</option>
+          <option value="Unemployed" data-i18n="emp4">Unemployed</option>
+          <option value="On sick leave" data-i18n="emp5">On sick leave</option>
+          <option value="On parental leave" data-i18n="emp6">On parental leave</option>
+          <option value="Retired" data-i18n="emp7">Retired</option>
+          <option value="Student" data-i18n="emp8">Student</option>
         </select>
       </div>
       <div class="field">
-        <label class="field-label" id="lbl_household">Household type</label>
+        <label class="field-label" data-i18n="lbl_household">Who's in your household?</label>
         <select id="f_household">
-          <option value="" id="hh_ph">— Select —</option>
-          <option value="Single, no children" id="hh1">Single, no children</option>
-          <option value="Single parent" id="hh2">Single parent</option>
-          <option value="Couple, no children" id="hh3">Couple, no children</option>
-          <option value="Couple with children" id="hh4">Couple with children</option>
-          <option value="Other" id="hh5">Other</option>
+          <option value="" data-i18n="hh_ph">— Select —</option>
+          <option value="Single, no children" data-i18n="hh1">Single, no children</option>
+          <option value="Single parent" data-i18n="hh2">Single parent</option>
+          <option value="Couple, no children" data-i18n="hh3">Couple, no children</option>
+          <option value="Couple with children" data-i18n="hh4">Couple with children</option>
+          <option value="Other" data-i18n="hh5">Other</option>
         </select>
       </div>
     </div>
     <div class="field">
-      <label class="field-label" id="lbl_children">Minor children (under 18) living at the same address</label>
+      <label class="field-label" data-i18n="lbl_children">Any children under 18 at home?</label>
       <select id="f_children">
-        <option value="0" id="ch0">0 — no minor children at home</option>
+        <option value="0" data-i18n="ch0">0 — no children at home</option>
         <option value="1">1</option><option value="2">2</option>
         <option value="3">3</option><option value="4">4</option>
-        <option value="5+">5 or more</option>
+        <option value="5+">5+</option>
       </select>
     </div>
   </div>
 
   <div class="cta-row">
-    <button class="btn-back" onclick="goBack(4)" id="back4">Back</button>
-    <button class="btn-next" onclick="goNext(4)" id="btn4">Continue</button>
+    <button class="btn-back" onclick="goBack(4)" data-i18n="btn_back">Back</button>
+    <button class="btn-next" onclick="goNext(4)" id="btn4" data-i18n="btn_next">Continue</button>
   </div>
 </div>
 
-<!-- ══ STEP 5 — MINDSET ══ -->
+<!-- ══ STEP 5 — MINDSET (progressive disclosure) ══ -->
 <div class="q-card" id="step5">
-  <span class="q-eyebrow" id="s5ey">Step 5 of 7</span>
-  <h1 class="q-title" id="s5title">How does this feel right now?</h1>
-  <p class="q-sub" id="s5sub">No judgement here. This shapes how your plan is written — not whether we help you.</p>
+  <span class="q-eyebrow" data-i18n="topStep5">Step 5 of 7</span>
+  <h1 class="q-title" data-i18n="s5title">How does this feel, right now?</h1>
+  <p class="q-sub" data-i18n="s5sub">There's no judgement here — I just want to understand, so your plan is written the right way for you.</p>
 
-  <div class="field">
-    <label class="field-label" id="lbl_barrier">What has felt hardest so far?</label>
-    <div class="opts" id="opts_barrier">
-      <button class="opt" onclick="selectOpt(this,'barrier')" data-val="I don't know where to start — it's overwhelming"><span class="opt-label" id="bar1">I don't know where to start — it's overwhelming</span></button>
-      <button class="opt" onclick="selectOpt(this,'barrier')" data-val="I'm afraid to open letters or answer creditor calls"><span class="opt-label" id="bar2">I'm afraid to open letters or answer creditor calls</span></button>
-      <button class="opt" onclick="selectOpt(this,'barrier')" data-val="I feel ashamed — nobody in my life knows about this"><span class="opt-label" id="bar3">I feel ashamed — nobody in my life knows about this</span></button>
-      <button class="opt" onclick="selectOpt(this,'barrier')" data-val="I've tried before and failed — I'm exhausted"><span class="opt-label" id="bar4">I've tried before and failed — I'm exhausted</span></button>
-      <button class="opt" onclick="selectOpt(this,'barrier')" data-val="It feels hopeless — the numbers don't add up"><span class="opt-label" id="bar5">It feels hopeless — the numbers don't add up</span></button>
-      <button class="opt" onclick="selectOpt(this,'barrier')" data-val="I know what to do — I just can't make myself start"><span class="opt-label" id="bar6">I know what to do — I just can't make myself start</span></button>
+  <div class="micro-summary" id="s5MicroSummary"><span class="dot"></span><span id="s5MicroSummaryText"></span></div>
+
+  <div class="q-group" id="s5group1">
+    <div class="field">
+      <label class="field-label" data-i18n="lbl_barrier">What's felt hardest so far?</label>
+      <div class="opts" id="opts_barrier" style="margin-top:10px;">
+        <button class="opt" onclick="selectOpt(this,'barrier');revealS5Group(2)" data-val="I don't know where to start — it's overwhelming"><span class="opt-label" data-i18n="bar1">I don't know where to start — it's overwhelming</span></button>
+        <button class="opt" onclick="selectOpt(this,'barrier');revealS5Group(2)" data-val="I'm afraid to open letters or answer creditor calls"><span class="opt-label" data-i18n="bar2">I'm scared to open letters or answer calls from creditors</span></button>
+        <button class="opt" onclick="selectOpt(this,'barrier');revealS5Group(2)" data-val="I feel ashamed — nobody in my life knows about this"><span class="opt-label" data-i18n="bar3">I feel ashamed — no one in my life knows about this</span></button>
+        <button class="opt" onclick="selectOpt(this,'barrier');revealS5Group(2)" data-val="I've tried before and failed — I'm exhausted"><span class="opt-label" data-i18n="bar4">I've tried before and it didn't work — I'm exhausted</span></button>
+        <button class="opt" onclick="selectOpt(this,'barrier');revealS5Group(2)" data-val="It feels hopeless — the numbers don't add up"><span class="opt-label" data-i18n="bar5">It feels hopeless — the numbers just don't add up</span></button>
+        <button class="opt" onclick="selectOpt(this,'barrier');revealS5Group(2)" data-val="I know what to do — I just can't make myself start"><span class="opt-label" data-i18n="bar6">I know what to do — I just can't make myself start</span></button>
+      </div>
+      <div class="err-msg" id="err_barrier" style="display:none;" data-i18n="err_barrier">Please select the option that fits best.</div>
     </div>
-    <div class="err-msg" id="err_barrier" style="display:none;">Please select the option that fits best.</div>
   </div>
 
-  <div class="q-section">
-    <span class="q-section-label" id="lbl_support_section">Support</span>
+  <div class="q-group pending" id="s5group2">
+    <span class="group-label" data-i18n="lbl_support_section">Who's around you</span>
     <div class="field">
-      <label class="field-label" id="lbl_support">Does anyone in your life know about your situation?</label>
+      <label class="field-label" data-i18n="lbl_support">Does anyone in your life know what's going on?</label>
       <div class="opts grid2" id="opts_support">
-        <button class="opt" onclick="selectOpt(this,'support_network')" data-val="Yes — I have support"><span class="opt-label" id="sup1">Yes, I have support</span></button>
-        <button class="opt" onclick="selectOpt(this,'support_network')" data-val="Partly — some people know"><span class="opt-label" id="sup2">Some people know</span></button>
-        <button class="opt" onclick="selectOpt(this,'support_network')" data-val="No — I'm handling this alone"><span class="opt-label" id="sup3">I'm handling this alone</span></button>
-        <button class="opt" onclick="selectOpt(this,'support_network')" data-val="I prefer not to say"><span class="opt-label" id="sup4">Prefer not to say</span></button>
+        <button class="opt" onclick="selectOpt(this,'support_network');revealS5Group(3)" data-val="Yes — I have support"><span class="opt-label" data-i18n="sup1">Yes, I have support</span></button>
+        <button class="opt" onclick="selectOpt(this,'support_network');revealS5Group(3)" data-val="Partly — some people know"><span class="opt-label" data-i18n="sup2">Some people know</span></button>
+        <button class="opt" onclick="selectOpt(this,'support_network');revealS5Group(3)" data-val="No — I'm handling this alone"><span class="opt-label" data-i18n="sup3">I'm handling this alone</span></button>
+        <button class="opt" onclick="selectOpt(this,'support_network');revealS5Group(3)" data-val="I prefer not to say"><span class="opt-label" data-i18n="sup4">Prefer not to say</span></button>
       </div>
     </div>
   </div>
 
-  <div class="q-section">
-    <span class="q-section-label" id="lbl_conf_section">Confidence</span>
+  <div class="q-group pending" id="s5group3">
+    <span class="group-label" data-i18n="lbl_conf_section">How you're feeling about the future</span>
     <div class="field">
-      <label class="field-label" id="lbl_confidence">How confident are you that things can get better?</label>
+      <label class="field-label" data-i18n="lbl_confidence">How confident do you feel that things can get better?</label>
       <div class="conf-wrap" style="margin-top:10px;">
-        <div class="conf-labels-top"><span id="conf_low_lbl">Not at all confident</span><span id="conf_high_lbl">Completely confident</span></div>
+        <div class="conf-labels-top"><span data-i18n="conf_low_lbl">Not confident at all</span><span data-i18n="conf_high_lbl">Completely confident</span></div>
         <div class="conf-track" id="confTrack">
           <div class="conf-fill" id="confFill" style="width:40%;"></div>
           <div class="conf-thumb" id="confThumb" style="left:40%;"></div>
@@ -568,111 +607,110 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
 
   <div class="cta-row">
-    <button class="btn-back" onclick="goBack(5)" id="back5">Back</button>
-    <button class="btn-next" onclick="goNext(5)" id="btn5">Continue</button>
+    <button class="btn-back" onclick="goBack(5)" data-i18n="btn_back">Back</button>
+    <button class="btn-next" onclick="goNext(5)" id="btn5" data-i18n="btn_next">Continue</button>
   </div>
 </div>
 
-<!-- ══ STEP 6 — GOALS ══ -->
+<!-- ══ STEP 6 — GOALS (progressive disclosure) ══ -->
 <div class="q-card" id="step6">
-  <span class="q-eyebrow" id="s6ey">Step 6 of 7</span>
-  <h1 class="q-title" id="s6title">What does debt-free mean to you?</h1>
-  <p class="q-sub" id="s6sub">Your plan will close with your own words. This matters more than it might seem.</p>
+  <span class="q-eyebrow" data-i18n="topStep6">Step 6 of 7</span>
+  <h1 class="q-title" data-i18n="s6title">What does "debt-free" really mean to you?</h1>
+  <p class="q-sub" data-i18n="s6sub">Your plan will end with your own words — this matters more than it might seem.</p>
 
-  <div class="field">
-    <label class="field-label" id="lbl_primary_goal">What is your deepest reason for wanting this?</label>
-    <div class="opts" id="opts_goal" style="margin-top:10px;">
-      <button class="opt" onclick="selectOpt(this,'primary_goal')" data-val="Peace — stop feeling anxious about money every day">
-        <span class="opt-label" id="goal1">Peace of mind</span>
-        <span class="opt-desc" id="goal1d">Stop feeling anxious about money every single day</span>
-      </button>
-      <button class="opt" onclick="selectOpt(this,'primary_goal')" data-val="Family — provide real security for my children and loved ones">
-        <span class="opt-label" id="goal2">My family</span>
-        <span class="opt-desc" id="goal2d">Provide real security for the people I love</span>
-      </button>
-      <button class="opt" onclick="selectOpt(this,'primary_goal')" data-val="Freedom — make real choices in my life again, not just survive">
-        <span class="opt-label" id="goal3">Freedom</span>
-        <span class="opt-desc" id="goal3d">Make real choices again — not just survive</span>
-      </button>
-      <button class="opt" onclick="selectOpt(this,'primary_goal')" data-val="Normal life — feel like myself again without the weight of debt and shame">
-        <span class="opt-label" id="goal4">A normal life</span>
-        <span class="opt-desc" id="goal4d">Feel like myself again — without the weight of shame</span>
-      </button>
-      <button class="opt" onclick="selectOpt(this,'primary_goal')" data-val="A specific goal — save for something meaningful once the debt is gone">
-        <span class="opt-label" id="goal5">A specific goal</span>
-        <span class="opt-desc" id="goal5d">Save for something meaningful once this is behind me</span>
-      </button>
+  <div class="micro-summary" id="s6MicroSummary"><span class="dot"></span><span id="s6MicroSummaryText"></span></div>
+
+  <div class="q-group" id="s6group1">
+    <div class="field">
+      <label class="field-label" data-i18n="lbl_primary_goal">What's the real reason you want this?</label>
+      <div class="opts" id="opts_goal" style="margin-top:10px;">
+        <button class="opt" onclick="selectOpt(this,'primary_goal');revealS6Group(2)" data-val="Peace — stop feeling anxious about money every day">
+          <span class="opt-label" data-i18n="goal1">Peace of mind — I want to stop feeling anxious about money every day</span>
+        </button>
+        <button class="opt" onclick="selectOpt(this,'primary_goal');revealS6Group(2)" data-val="Family — provide real security for my children and loved ones">
+          <span class="opt-label" data-i18n="goal2">My family — I want real security for the people I love</span>
+        </button>
+        <button class="opt" onclick="selectOpt(this,'primary_goal');revealS6Group(2)" data-val="Freedom — make real choices in my life again, not just survive">
+          <span class="opt-label" data-i18n="goal3">Freedom — I want to make real choices again, not just survive</span>
+        </button>
+        <button class="opt" onclick="selectOpt(this,'primary_goal');revealS6Group(2)" data-val="Normal life — feel like myself again without the weight of debt and shame">
+          <span class="opt-label" data-i18n="goal4">Feeling like myself — without the weight of this hanging over me</span>
+        </button>
+        <button class="opt" onclick="selectOpt(this,'primary_goal');revealS6Group(2)" data-val="A specific goal — save for something meaningful once the debt is gone">
+          <span class="opt-label" data-i18n="goal5">A specific goal — something meaningful I want to save for, once this is behind me</span>
+        </button>
+      </div>
+      <div class="err-msg" id="err_goal" style="display:none;" data-i18n="err_goal">Please select what matters most to you.</div>
     </div>
-    <div class="err-msg" id="err_goal" style="display:none;">Please select what matters most to you.</div>
   </div>
 
-  <div class="q-section">
-    <span class="q-section-label" id="lbl_ownwords_section">In your own words</span>
+  <div class="q-group pending" id="s6group2">
+    <span class="group-label" data-i18n="lbl_ownwords_section">In your own words</span>
     <div class="field">
-      <label class="field-label" id="lbl_own_words">What does success look like one year from now?</label>
-      <div class="field-hint" id="hint_own_words">Optional — but powerful. Your exact words will appear in your plan.</div>
-      <textarea id="f_own_words" rows="6" maxlength="600"></textarea>
+      <label class="field-label" data-i18n="lbl_own_words">What would success look like, one year from now?</label>
+      <div class="field-hint" data-i18n="hint_own_words">Optional, but it matters — your exact words will appear in your plan.</div>
+      <textarea id="f_own_words" rows="5" maxlength="600" data-i18n-placeholder="s6_placeholder"></textarea>
     </div>
   </div>
 
   <div class="cta-row">
-    <button class="btn-back" onclick="goBack(6)" id="back6">Back</button>
-    <button class="btn-next" onclick="goNext(6)" id="btn6">Continue</button>
+    <button class="btn-back" onclick="goBack(6)" data-i18n="btn_back">Back</button>
+    <button class="btn-next" onclick="goNext(6)" id="btn6" data-i18n="btn_next">Continue</button>
   </div>
 </div>
 
-<!-- ══ STEP 7 — READY (DEBT FREE — modified) ══ -->
+<!-- ══ STEP 7 — READY ══ -->
 <div class="q-card" id="step7">
-  <span class="q-eyebrow" id="s7ey">Step 7 of 7</span>
-  <h1 class="q-title" id="s7title">One last thing.</h1>
-  <p class="q-sub" id="s7sub">What would feel most important to understand today? This shapes the focus of your Clarity Report.</p>
+  <span class="q-eyebrow" data-i18n="topStep7">Step 7 of 7</span>
+  <h1 class="q-title" data-i18n="s7title">One last thing.</h1>
+  <p class="q-sub" data-i18n="s7sub">This helps me know exactly where to focus first.</p>
 
   <div class="field">
-    <label class="field-label" id="lbl_focus">What would feel like the most important thing to understand today?</label>
+    <label class="field-label" data-i18n="lbl_focus">What matters most to understand today?</label>
     <div class="opts" id="opts_focus" style="margin-top:10px;">
       <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="What my debts actually cost me — in real numbers">
-        <span class="opt-label" id="foc1">What my debts actually cost me — in real numbers</span>
+        <span class="opt-label" data-i18n="foc1">What my debt is actually costing me — in real numbers</span>
       </button>
       <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="Whether my situation is legally serious or manageable">
-        <span class="opt-label" id="foc2">Whether my situation is legally serious or manageable</span>
+        <span class="opt-label" data-i18n="foc2">Whether my situation is legally serious, or manageable</span>
       </button>
       <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="What I can realistically do this week">
-        <span class="opt-label" id="foc3">What I can realistically do this week</span>
+        <span class="opt-label" data-i18n="foc3">What I can realistically do this week</span>
       </button>
       <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="Whether there is government help I am not using">
-        <span class="opt-label" id="foc4">Whether there is government help I am not using</span>
+        <span class="opt-label" data-i18n="foc4">Whether there's government help I'm not using</span>
       </button>
       <button class="opt" onclick="selectOpt(this,'immediate_focus')" data-val="How long this will realistically take">
-        <span class="opt-label" id="foc5">How long this will realistically take</span>
+        <span class="opt-label" data-i18n="foc5">How long this will realistically take</span>
       </button>
     </div>
-    <div class="err-msg" id="err_focus" style="display:none;">Please select what feels most important.</div>
+    <div class="err-msg" id="err_focus" style="display:none;" data-i18n="err_focus">Please select what feels most important.</div>
   </div>
 
   <div class="q-section">
-    <span class="q-section-label" id="lbl_extra_section">Optional</span>
+    <span class="q-section-label" data-i18n="lbl_extra_section">Anything else</span>
     <div class="field">
-      <label class="field-label" id="lbl_anything_else">Anything else you want us to know?</label>
-      <div class="field-hint" id="hint_anything">Anything that didn't fit the questions above. Completely optional.</div>
+      <label class="field-label" data-i18n="lbl_anything_else">Is there anything else I should know?</label>
+      <div class="field-hint" data-i18n="hint_anything">Completely optional — just whatever didn't fit above.</div>
       <textarea id="f_anything_else" rows="3" maxlength="400"></textarea>
     </div>
   </div>
 
-  <button class="btn-full" onclick="submitForm()" id="btnSubmit"><span id="submitText">Build my Debt FREE plan</span></button>
-  <p class="submit-note" id="submitNote">This takes 20–30 seconds. Your plan will be waiting in your member area.</p>
+  <button class="btn-full" onclick="submitForm()" id="btnSubmit"><span id="submitText" data-i18n="submitText">Build my plan</span></button>
+  <p class="submit-note" id="submitNote" data-i18n="submitNote">This takes about 30 seconds. Your plan will be waiting for you.</p>
 </div>
 
 <!-- LOADING -->
 <div class="loading-screen" id="loadingScreen">
   <div class="loader-ring"></div>
-  <p class="loader-title" id="load_title">Building your plan…</p>
-  <p class="loader-sub" id="load_sub">This takes about 30 seconds.</p>
+  <p class="loader-title" id="load_title" data-i18n="load_title">Building your plan…</p>
+  <p class="loader-sub" id="load_sub" data-i18n="load_sub">This takes about 30 seconds.</p>
   <ul class="loader-steps" id="loaderSteps">
-    <li id="ls1">Reading your debt situation</li>
-    <li id="ls2">Calculating your repayment path</li>
-    <li id="ls3">Finding local support for your country</li>
-    <li id="ls4">Personalising the tone and focus</li>
-    <li id="ls5">Writing your Clarity Report</li>
+    <li id="ls1" data-i18n="ls1">Reading through your situation</li>
+    <li id="ls2" data-i18n="ls2">Working out your repayment path</li>
+    <li id="ls3" data-i18n="ls3">Finding local support where you are</li>
+    <li id="ls4" data-i18n="ls4">Getting the tone right for you</li>
+    <li id="ls5" data-i18n="ls5">Writing your plan</li>
   </ul>
 </div>
 
@@ -684,104 +722,337 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 const STEP_PCT = [0,14,28,42,57,71,86,100];
 
-/* ── TRANSLATIONS ──
-   Identical architecture to onboarding-debt-recovery.
-   Keys map to element IDs. data-val attributes always sent in EN.
-   Step 7 keys differ (focus instead of companion_mode).
-*/
-const T = {
-EN:{
-  topStep:"Step {n} of 7",
-  ps:["You","Situation","Debts","Finances","Mindset","Goals","Ready"],
-  s1ey:"Step 1 of 7",s1title:"Let's start with you.",s1sub:"Your plan will be built around your real situation — not a template. Everything you share stays private.",lbl_firstname:"First name",lbl_language:"Plan language",lbl_country:"Country",opt_country_placeholder:"— Select your country —",
-  s2ey:"Step 2 of 7",s2title:"What's going on right now?",s2sub:"This helps us understand the full picture — not just the numbers. Select everything that applies.",s2multi:"Select all that apply",
-  sit1:"Debts have grown beyond what I can manage",sit2:"Lost my job or income recently",sit3:"Going through divorce or separation",sit4:"Dealing with illness or sick leave",sit5:"Business closed or self-employment difficulties",sit6:"Victim of fraud, scam or broken contract",sit7:"Debt accumulated gradually — it just kept growing",sit8:"Tried to help someone financially and it went wrong",
-  s3ey:"Step 3 of 7",s3title:"Tell me about your debts.",s3sub:"Add each debt separately. This is how we build the right priority order — not a guess. Rough estimates are fine.",
-  lbl_mini_type:"Type of debt",mini_type_ph:"— Select type —",lbl_mini_creditor:"Who is this owed to?",hint_mini_creditor:"Company or person name — e.g. Nordea, Klarna, HMRC. Used to personalise your plan.",lbl_mini_amount:"Amount owed",lbl_mini_interest:"Approximate interest rate (%)",hint_mini_interest:"Enter 0 if you don't know — we'll note it as unknown, not as zero-interest.",
-  addDebtLabel:"Add a debt",addDebtConfirm:"Add debt",cancelDebtBtn:"Cancel",
-  lbl_collections_section:"Collections & enforcement",hint_collections:"Is any debt already being handled by a collections agency or court enforcement?",col_no:"No",col_agency:"Collections agency",col_court:"Court / enforcement",col_unknown:"Not sure",
-  s4ey:"Step 4 of 7",s4title:"Your monthly finances.",s4sub:"Real numbers only — we build a realistic plan, not an optimistic one. Rough estimates are fine.",
-  lbl_income_section:"Income",lbl_income:"Monthly take-home income",hint_income:"After tax. If income varies, use your lowest typical month.",lbl_extra_income:"Any additional income not in your main salary?",extra_no:"No, that's it",extra_gig:"Side work / gig",extra_rent:"Rental income",extra_ben:"Benefits / support",lbl_extra_amount:"Approximately how much extra per month?",
-  lbl_expenses_section:"Monthly expenses",lbl_housing_cost:"Housing cost",hint_housing:"Rent, mortgage or maintenance",lbl_other_costs:"Other fixed costs",hint_other:"Food, transport, utilities, phone",
-  lbl_buffer_section:"Financial buffer",lbl_savings:"Current savings or emergency buffer",sav1:"None at all",sav2:"Under 500",sav3:"500 – 2 000",sav4:"Over 2 000",
-  lbl_household_section:"Household",lbl_employment:"Employment status",emp_ph:"— Select —",emp1:"Employed full-time",emp2:"Employed part-time",emp3:"Self-employed / business owner",emp4:"Unemployed",emp5:"On sick leave",emp6:"On parental leave",emp7:"Retired",emp8:"Student",
-  lbl_household:"Household type",hh_ph:"— Select —",hh1:"Single, no children",hh2:"Single parent",hh3:"Couple, no children",hh4:"Couple with children",hh5:"Other",lbl_children:"Minor children (under 18) living at the same address",ch0:"0 — no minor children at home",
-  s5ey:"Step 5 of 7",s5title:"How does this feel right now?",s5sub:"No judgement here. This shapes how your plan is written — not whether we help you.",
-  lbl_barrier:"What has felt hardest so far?",bar1:"I don't know where to start — it's overwhelming",bar2:"I'm afraid to open letters or answer creditor calls",bar3:"I feel ashamed — nobody in my life knows about this",bar4:"I've tried before and failed — I'm exhausted",bar5:"It feels hopeless — the numbers don't add up",bar6:"I know what to do — I just can't make myself start",
-  lbl_support_section:"Support",lbl_support:"Does anyone in your life know about your situation?",sup1:"Yes, I have support",sup2:"Some people know",sup3:"I'm handling this alone",sup4:"Prefer not to say",
-  lbl_conf_section:"Confidence",lbl_confidence:"How confident are you that things can get better?",conf_low_lbl:"Not at all confident",conf_high_lbl:"Completely confident",
-  s6ey:"Step 6 of 7",s6title:"What does debt-free mean to you?",s6sub:"Your plan will close with your own words. This matters more than it might seem.",
-  lbl_primary_goal:"What is your deepest reason for wanting this?",
-  goal1:"Peace of mind",goal1d:"Stop feeling anxious about money every single day",goal2:"My family",goal2d:"Provide real security for the people I love",goal3:"Freedom",goal3d:"Make real choices again — not just survive",goal4:"A normal life",goal4d:"Feel like myself again — without the weight of shame",goal5:"A specific goal",goal5d:"Save for something meaningful once this is behind me",
-  lbl_ownwords_section:"In your own words",lbl_own_words:"What does success look like one year from now?",hint_own_words:"Optional — but powerful. Your exact words will appear in your plan.",s6_placeholder:"e.g. I open my bank account without dread. My children don't notice the stress anymore.",
-  s7ey:"Step 7 of 7",s7title:"One last thing.",s7sub:"What would feel most important to understand today? This shapes the focus of your Clarity Report.",
-  lbl_focus:"What would feel like the most important thing to understand today?",
-  foc1:"What my debts actually cost me — in real numbers",foc2:"Whether my situation is legally serious or manageable",foc3:"What I can realistically do this week",foc4:"Whether there is government help I am not using",foc5:"How long this will realistically take",
-  lbl_extra_section:"Optional",lbl_anything_else:"Anything else you want us to know?",hint_anything:"Anything that didn't fit the questions above. Completely optional.",
-  submitText:"Build my Debt FREE plan",submitNote:"This takes 20–30 seconds. Your plan will be waiting in your member area.",
-  load_title:"Building your plan…",load_sub:"This takes about 30 seconds.",ls1:"Reading your debt situation",ls2:"Calculating your repayment path",ls3:"Finding local support for your country",ls4:"Personalising the tone and focus",ls5:"Writing your Clarity Report",
-  btn_back:"Back",btn_next:"Continue",
-  err_firstname:"Please enter your first name.",err_country:"Please select your country.",err_income:"Please enter your monthly income.",err_focus:"Please select what feels most important.",err_barrier:"Please select the option that fits best.",err_goal:"Please select what matters most to you.",
-  toast_situation:"Please select at least one option.",toast_collections:"Please indicate whether any debt is in collections.",toast_savings:"Please select your savings level.",toast_employment:"Please select your employment status.",toast_support:"Please answer the support question.",toast_debt_type:"Please select a debt type and enter an amount.",
-  debtLabel_unknown_rate:"unknown rate"
+const I18N = {
+EN: {
+  topStep:'Step {n} of 7',
+  topStep1:'Step 1 of 7',topStep2:'Step 2 of 7',topStep3:'Step 3 of 7',topStep4:'Step 4 of 7',topStep5:'Step 5 of 7',topStep6:'Step 6 of 7',topStep7:'Step 7 of 7',
+  ps1:'You',ps2:'Situation',ps3:'Debts',ps4:'Finances',ps5:'Mindset',ps6:'Goals',ps7:'Ready',
+  gate_verifying:'Verifying your access…',
+  invalid_title:"This link has expired.",invalid_sub:"Magic links are valid for 48 hours. Enter your email and we'll send a fresh one right away.",
+  email_placeholder:'your@email.com',send_new_link:'Send new link →',
+  link_sent_title:'Link sent.',link_sent_sub:'Check your inbox — your new access link is on its way.',
+
+  s1title:"Hello. I'm glad you're here.",
+  s1sub:"Whatever brought you here, you're not alone — and you're already doing the hardest part by showing up. Your information is kept private and secure, and your plan will be built around your real life, not a template.",
+  lbl_firstname:"What's your name?",lbl_language:'Which language should your plan be in?',lbl_country:'Where do you live?',
+  opt_country_placeholder:'— Select your country —',
+  err_firstname:'Please enter your name.',err_country:'Please select your country.',
+
+  s2title:'What brought you here?',
+  s2sub:"Pick everything that fits. There's no wrong answer, and nothing here is judged.",
+  s2multi:'Select all that apply',
+  sit1:'My debts have grown beyond what I can manage',
+  sit2:'I lost my job or income recently',
+  sit3:"I'm going through a divorce or separation",
+  sit4:"I'm dealing with illness or sick leave",
+  sit5:'My business closed, or self-employment got hard',
+  sit6:'I was a victim of fraud, a scam, or a broken contract',
+  sit7:'It built up gradually — it just kept growing',
+  sit8:'I tried to help someone financially and it went wrong',
+  sit9:"I'm just curious — I want to see how this works",
+  toast_situation:'Please select at least one option.',
+
+  s3title:'Now, tell me about your debts.',
+  s3sub:"Add each one separately — this is how I work out what to tackle first, instead of guessing. Rough numbers are completely fine.",
+  lbl_mini_type:'Type of debt',mini_type_ph:'— Select type —',
+  dt_consumer:'Consumer loan / personal loan',dt_card:'Credit card',dt_car:'Car loan',dt_payday:'Payday loan / fast loan',
+  dt_mortgage:'Mortgage / home loan',dt_student:'Student loan',dt_tax:'Tax debt',dt_medical:'Medical debt',
+  dt_rent:'Rent arrears',dt_business:'Business debt',dt_collections:'Debt in collections / enforcement',
+  dt_informal:'Informal debt (friend / family)',dt_other:'Other',
+  lbl_mini_creditor:'Who is it owed to?',
+  hint_mini_creditor:"A company or person's name — Nordea, Klarna, your landlord. This helps me personalise your plan.",
+  lbl_mini_amount:'Roughly how much?',lbl_mini_interest:'Roughly what interest rate?',
+  hint_mini_interest:"Don't know? Leave it as 0 — I'll treat it as \"unknown\", not as interest-free.",
+  addDebtLabel:'Add a debt',addAnotherDebtLabel:'Add another debt',addDebtConfirm:'Add debt',cancelDebtBtn:'Cancel',
+  debtLabel_unknown_rate:'unknown rate',
+  lbl_collections_section:'Collections & enforcement',
+  hint_collections:'Is any of this already with a collections agency or in court?',
+  col_no:'No',col_agency:'Collections agency',col_court:'Court / enforcement',col_unknown:'Not sure',
+  toast_collections:'Please let me know if any debt is in collections.',
+  toast_debt_type:'Please select a debt type and enter an amount.',
+
+  s4title:"Now let's look at the numbers.",
+  s4sub:"Real figures only — I build a realistic plan, not a hopeful one. A few at a time, nothing overwhelming.",
+  lbl_income_section:'Income',lbl_income:'What do you take home each month?',
+  hint_income:'After tax. If it varies, use a typical low month.',
+  err_income:'Please enter your monthly income.',
+  lbl_extra_income:'Any other income, besides your main one?',
+  extra_no:"No, that's it",extra_gig:'Side work / gig',extra_rent:'Rental income',extra_ben:'Benefits / support',
+  lbl_extra_amount:'Roughly how much extra, per month?',
+  lbl_expenses_section:'Fixed costs',
+  lbl_housing_cost:"What's your housing cost?",hint_housing:'Rent, mortgage, or maintenance fee.',
+  lbl_other_costs:'What about everything else?',hint_other:'Food, transport, bills, phone — your other fixed costs.',
+  err_required:'Required.',
+  lbl_buffer_section:'A little about your safety net',
+  lbl_savings:'Do you have any savings or emergency buffer right now?',
+  sav1:'None at all',sav2:'Under 500',sav3:'500 – 2,000',sav4:'Over 2,000',
+  lbl_household_section:'And your household',
+  lbl_employment:"What's your work situation?",emp_ph:'— Select —',
+  emp1:'Employed full-time',emp2:'Employed part-time',emp3:'Self-employed / business owner',
+  emp4:'Unemployed',emp5:'On sick leave',emp6:'On parental leave',emp7:'Retired',emp8:'Student',
+  lbl_household:"Who's in your household?",hh_ph:'— Select —',
+  hh1:'Single, no children',hh2:'Single parent',hh3:'Couple, no children',hh4:'Couple with children',hh5:'Other',
+  lbl_children:'Any children under 18 at home?',ch0:'0 — no children at home',
+  toast_employment:'Please select your work situation.',toast_savings:'Please select your savings level.',
+  ms_income_noted:'Income noted — {amount}/month',
+  ms_surplus_positive:'Looking good — about {amount} left over each month',
+  ms_surplus_negative:"Noted — your costs currently outweigh your income. We'll work with that.",
+
+  s5title:'How does this feel, right now?',
+  s5sub:"There's no judgement here — I just want to understand, so your plan is written the right way for you.",
+  lbl_barrier:"What's felt hardest so far?",
+  bar1:"I don't know where to start — it's overwhelming",
+  bar2:"I'm scared to open letters or answer calls from creditors",
+  bar3:'I feel ashamed — no one in my life knows about this',
+  bar4:"I've tried before and it didn't work — I'm exhausted",
+  bar5:"It feels hopeless — the numbers just don't add up",
+  bar6:"I know what to do — I just can't make myself start",
+  err_barrier:'Please select the option that fits best.',
+  lbl_support_section:"Who's around you",
+  lbl_support:"Does anyone in your life know what's going on?",
+  sup1:'Yes, I have support',sup2:'Some people know',sup3:"I'm handling this alone",sup4:'Prefer not to say',
+  toast_support:'Please answer the support question.',
+  lbl_conf_section:"How you're feeling about the future",
+  lbl_confidence:'How confident do you feel that things can get better?',
+  conf_low_lbl:'Not confident at all',conf_high_lbl:'Completely confident',
+  ms_thanks_sharing:"Thank you for sharing that — it helps me write this the right way for you.",
+
+  s6title:'What does "debt-free" really mean to you?',
+  s6sub:'Your plan will end with your own words — this matters more than it might seem.',
+  lbl_primary_goal:"What's the real reason you want this?",
+  goal1:'Peace of mind — I want to stop feeling anxious about money every day',
+  goal2:'My family — I want real security for the people I love',
+  goal3:'Freedom — I want to make real choices again, not just survive',
+  goal4:'Feeling like myself — without the weight of this hanging over me',
+  goal5:'A specific goal — something meaningful I want to save for, once this is behind me',
+  err_goal:'Please select what matters most to you.',
+  lbl_ownwords_section:'In your own words',
+  lbl_own_words:'What would success look like, one year from now?',
+  hint_own_words:'Optional, but it matters — your exact words will appear in your plan.',
+  s6_placeholder:"e.g. I open my bank account without dread. My children don't notice the stress anymore.",
+
+  s7title:'One last thing.',
+  s7sub:'This helps me know exactly where to focus first.',
+  lbl_focus:'What matters most to understand today?',
+  foc1:'What my debt is actually costing me — in real numbers',
+  foc2:'Whether my situation is legally serious, or manageable',
+  foc3:'What I can realistically do this week',
+  foc4:"Whether there's government help I'm not using",
+  foc5:'How long this will realistically take',
+  err_focus:'Please select what feels most important.',
+  lbl_extra_section:'Anything else',
+  lbl_anything_else:'Is there anything else I should know?',
+  hint_anything:"Completely optional — just whatever didn't fit above.",
+  submitText:'Build my plan',submitNote:'This takes about 30 seconds. Your plan will be waiting for you.',
+  load_title:'Building your plan…',load_sub:'This takes about 30 seconds.',
+  ls1:'Reading through your situation',ls2:'Working out your repayment path',
+  ls3:'Finding local support where you are',ls4:'Getting the tone right for you',ls5:'Writing your plan',
+
+  btn_back:'Back',btn_next:'Continue',
+  toast_email_required:'Please enter your email address.',
+  toast_link_fail:'Could not send link. Please email support@debt-free.world'
 },
-FI:{
-  topStep:"Vaihe {n} / 7",
-  ps:["Sinä","Tilanne","Velat","Talous","Tuntemukset","Tavoitteet","Valmis"],
-  s1ey:"Vaihe 1 / 7",s1title:"Aloitetaan sinusta.",s1sub:"Suunnitelmasi rakennetaan todellisen tilanteesi pohjalle — ei mallipohjan. Kaikki jakamasi tiedot pysyvät yksityisinä.",lbl_firstname:"Etunimi",lbl_language:"Suunnitelman kieli",lbl_country:"Maa",opt_country_placeholder:"— Valitse maa —",
-  s2ey:"Vaihe 2 / 7",s2title:"Mitä juuri nyt tapahtuu?",s2sub:"Tämä auttaa meitä ymmärtämään koko tilanteen — ei pelkästään numeroita. Valitse kaikki sopivat.",s2multi:"Valitse kaikki sopivat",
-  sit1:"Velat ovat kasvaneet yli hallintakyvyn",sit2:"Menetin työni tai tuloni äskettäin",sit3:"Olen erotilantessa tai eron jälkeen",sit4:"Sairaus tai sairausloma",sit5:"Yritys sulkeutui tai yrittäjyys ei toimi",sit6:"Petoksen, huijauksen tai rikotun sopimuksen uhri",sit7:"Velka on kasautunut vähitellen ajan myötä",sit8:"Yritin auttaa toista taloudellisesti ja se meni pieleen",
-  s3ey:"Vaihe 3 / 7",s3title:"Kerro veloistasi.",s3sub:"Lisää jokainen velka erikseen. Näin rakennamme oikean prioriteettijärjestyksen — ei arvauksia. Arviot riittävät.",
-  lbl_mini_type:"Velkatyyppi",mini_type_ph:"— Valitse tyyppi —",lbl_mini_creditor:"Kenelle tämä on velkaa?",hint_mini_creditor:"Yrityksen tai henkilön nimi — esim. Nordea, Ferratum, Vero. Käytetään suunnitelmasi personointiin.",lbl_mini_amount:"Velan määrä",lbl_mini_interest:"Arvioitu korko (%)",hint_mini_interest:"Laita 0 jos et tiedä — merkitsemme sen tuntemattomaksi, ei nollakorkoiseksi.",
-  addDebtLabel:"Lisää velka",addDebtConfirm:"Lisää",cancelDebtBtn:"Peruuta",
-  lbl_collections_section:"Perintä ja ulosotto",hint_collections:"Onko jokin velka jo perinnässä tai ulosotossa?",col_no:"Ei",col_agency:"Perintätoimistossa",col_court:"Oikeudessa / ulosotossa",col_unknown:"En tiedä",
-  s4ey:"Vaihe 4 / 7",s4title:"Kuukausitaloutesi.",s4sub:"Vain todelliset luvut — rakennamme realistisen suunnitelman, emme optimistisen. Arviot riittävät.",
-  lbl_income_section:"Tulot",lbl_income:"Kuukausittaiset nettotulot",hint_income:"Verojen jälkeen. Jos tulot vaihtelevat, käytä tyypillisintä matalaa kuukautta.",lbl_extra_income:"Onko muita tuloja palkan lisäksi?",extra_no:"Ei, siinä kaikki",extra_gig:"Sivutyö / keikkatyö",extra_rent:"Vuokratulo",extra_ben:"Etuudet / tuki",lbl_extra_amount:"Kuinka paljon lisää kuukaudessa arviolta?",
-  lbl_expenses_section:"Kuukausimenot",lbl_housing_cost:"Asumiskustannukset",hint_housing:"Vuokra, asuntolaina tai yhtiövastike",lbl_other_costs:"Muut kiinteät kulut",hint_other:"Ruoka, liikenne, laskut, puhelin",
-  lbl_buffer_section:"Taloudellinen puskuri",lbl_savings:"Nykyiset säästöt tai hätäpuskuri",sav1:"Ei lainkaan",sav2:"Alle 500",sav3:"500 – 2 000",sav4:"Yli 2 000",
-  lbl_household_section:"Kotitalous",lbl_employment:"Työtilanne",emp_ph:"— Valitse —",emp1:"Kokoaikainen työ",emp2:"Osa-aikainen työ",emp3:"Yrittäjä / toiminimi",emp4:"Työtön",emp5:"Sairauslomalla",emp6:"Vanhempainvapaalla",emp7:"Eläkkeellä",emp8:"Opiskelija",
-  lbl_household:"Kotitaloustyyppi",hh_ph:"— Valitse —",hh1:"Yksin, ei lapsia",hh2:"Yksinhuoltaja",hh3:"Pari, ei lapsia",hh4:"Pari ja lapsia",hh5:"Muu",lbl_children:"Alaikäiset lapset (alle 18) samassa osoitteessa",ch0:"0 — ei lapsia kotona",
-  s5ey:"Vaihe 5 / 7",s5title:"Miltä tämä tuntuu juuri nyt?",s5sub:"Ei tuomitsemista. Tämä vaikuttaa siihen, miten suunnitelmasi kirjoitetaan — ei siihen, autammeko sinua.",
-  lbl_barrier:"Mikä on tuntunut vaikeimmalta tähän mennessä?",bar1:"En tiedä mistä aloittaa — tilanne on ylivoimainen",bar2:"Pelkään avata kirjeitä tai vastata perijöiden puheluihin",bar3:"Häpeän — kukaan lähipiirissäni ei tiedä tästä",bar4:"Olen yrittänyt ennenkin ja epäonnistunut — olen uupunut",bar5:"Tilanne tuntuu toivottomalta — luvut eivät täsmää",bar6:"Tiedän mitä pitäisi tehdä — en vain pysty aloittamaan",
-  lbl_support_section:"Tuki",lbl_support:"Tietääkö kukaan lähipiirissäsi tilanteestasi?",sup1:"Kyllä, minulla on tuki",sup2:"Jotkut tietävät",sup3:"Hoidan tämän yksin",sup4:"En halua kertoa",
-  lbl_conf_section:"Luottamus",lbl_confidence:"Kuinka luottavainen olet siihen, että asiat voivat parantua?",conf_low_lbl:"Ei lainkaan luottavainen",conf_high_lbl:"Täysin luottavainen",
-  s6ey:"Vaihe 6 / 7",s6title:"Mitä velaton elämä merkitsee sinulle?",s6sub:"Suunnitelmasi päättyy omilla sanoillasi. Tällä on enemmän merkitystä kuin ehkä luulet.",
-  lbl_primary_goal:"Mikä on syvin syysi tähän?",
-  goal1:"Mielenrauha",goal1d:"Lopeta rahasta aiheutuva ahdistus joka ikinen päivä",goal2:"Perheeni",goal2d:"Anna rakkaimmilleni todellinen turvallisuus",goal3:"Vapaus",goal3d:"Tee taas oikeita valintoja — älä vain selviä",goal4:"Normaali elämä",goal4d:"Tunne itsesi jälleen — ilman häpeän taakkaa",goal5:"Konkreettinen tavoite",goal5d:"Säästä johonkin merkitykselliseen kun tämä on takana",
-  lbl_ownwords_section:"Omin sanoin",lbl_own_words:"Miltä menestys näyttää vuoden päästä?",hint_own_words:"Valinnainen — mutta voimakas. Omat sanasi ilmestyvät suunnitelmassasi.",s6_placeholder:"esim. Avaan pankkitilini ilman pelkoa. Lapseni eivät enää huomaa stressiäni.",
-  s7ey:"Vaihe 7 / 7",s7title:"Yksi asia vielä.",s7sub:"Mikä tuntuisi tärkeimmältä asialta ymmärtää tänään? Tämä muokkaa raporttisi painopistettä.",
-  lbl_focus:"Mikä tuntuisi tärkeimmältä asialta ymmärtää tänään?",
-  foc1:"Mitä velkani todella maksavat — todellisissa luvuissa",foc2:"Onko tilanteeni juridisesti vakava vai hallittavissa",foc3:"Mitä voin realistisesti tehdä tällä viikolla",foc4:"Onko olemassa valtion tukea jota en käytä",foc5:"Kuinka kauan tämä realistisesti kestää",
-  lbl_extra_section:"Valinnainen",lbl_anything_else:"Haluatko kertoa meille jotain muuta?",hint_anything:"Mitä tahansa mitä ei mahtunut kysymyksiin. Täysin valinnainen.",
-  submitText:"Rakenna DEBT FREE -suunnitelmani",submitNote:"Tämä kestää 20–30 sekuntia. Suunnitelmasi odottaa sinua jäsenalueellasi.",
-  load_title:"Rakennetaan suunnitelmaasi…",load_sub:"Tämä kestää noin 30 sekuntia.",ls1:"Luetaan velkatilannettasi",ls2:"Lasketaan maksupolku",ls3:"Etsitään paikallinen tuki maallesi",ls4:"Personoidaan sävy ja painopiste",ls5:"Kirjoitetaan selkeysraporttisi",
-  btn_back:"Takaisin",btn_next:"Jatka",
-  err_firstname:"Anna etunimesi.",err_country:"Valitse maa.",err_income:"Anna kuukausitulosi.",err_focus:"Valitse sinulle tärkein.",err_barrier:"Valitse sopivin vaihtoehto.",err_goal:"Valitse sinulle tärkein.",
-  toast_situation:"Valitse vähintään yksi vaihtoehto.",toast_collections:"Kerro onko jokin velka perinnässä.",toast_savings:"Valitse säästötasosi.",toast_employment:"Valitse työtilanne.",toast_support:"Vastaa tukikysymykseen.",toast_debt_type:"Valitse velkatyyppi ja syötä summa.",
-  debtLabel_unknown_rate:"korko tuntematon"
+FI: {
+  topStep:'Vaihe {n} / 7',
+  topStep1:'Vaihe 1 / 7',topStep2:'Vaihe 2 / 7',topStep3:'Vaihe 3 / 7',topStep4:'Vaihe 4 / 7',topStep5:'Vaihe 5 / 7',topStep6:'Vaihe 6 / 7',topStep7:'Vaihe 7 / 7',
+  ps1:'Sinä',ps2:'Tilanne',ps3:'Velat',ps4:'Talous',ps5:'Tuntemukset',ps6:'Tavoitteet',ps7:'Valmis',
+  gate_verifying:'Vahvistetaan pääsyäsi…',
+  invalid_title:'Tämä linkki on vanhentunut.',invalid_sub:'Linkit ovat voimassa 48 tuntia. Syötä sähköpostiosoitteesi ja lähetämme uuden heti.',
+  email_placeholder:'oma@sahkoposti.fi',send_new_link:'Lähetä uusi linkki →',
+  link_sent_title:'Linkki lähetetty.',link_sent_sub:'Tarkista sähköpostisi — uusi pääsylinkkisi on matkalla.',
+
+  s1title:'Hei. Olen iloinen että olet täällä.',
+  s1sub:'Mikä tahansa tuonut sinut tähän, et ole yksin — ja teet jo vaikeimman osan tulemalla tänne. Tietosi pidetään yksityisinä ja turvassa, ja suunnitelmasi rakennetaan todellisen elämäsi pohjalle, ei mallipohjan.',
+  lbl_firstname:'Mikä on nimesi?',lbl_language:'Millä kielellä suunnitelmasi pitäisi olla?',lbl_country:'Missä asut?',
+  opt_country_placeholder:'— Valitse maasi —',
+  err_firstname:'Anna nimesi.',err_country:'Valitse maa.',
+
+  s2title:'Mikä tuonut sinut tähän?',
+  s2sub:'Valitse kaikki sopivat. Ei väärää vastausta, eikä tässä tuomita mitään.',
+  s2multi:'Valitse kaikki sopivat',
+  sit1:'Velkani ovat kasvaneet yli sen, mitä pystyn hallitsemaan',
+  sit2:'Menetin työni tai tuloni äskettäin',
+  sit3:'Olen erotilanteessa tai eron jälkeen',
+  sit4:'Käsittelen sairautta tai sairauslomaa',
+  sit5:'Yritykseni sulkeutui, tai yrittäjyys vaikeutui',
+  sit6:'Olin petoksen, huijauksen tai rikotun sopimuksen uhri',
+  sit7:'Se kasautui vähitellen — se vain jatkoi kasvamista',
+  sit8:'Yritin auttaa toista taloudellisesti ja se meni pieleen',
+  sit9:'Olen vain utelias — haluan nähdä miten tämä toimii',
+  toast_situation:'Valitse vähintään yksi vaihtoehto.',
+
+  s3title:'Kerro nyt veloistasi.',
+  s3sub:'Lisää jokainen erikseen — näin selvitän mitä kannattaa hoitaa ensin, arvaamisen sijaan. Arviot käyvät täysin hyvin.',
+  lbl_mini_type:'Velkatyyppi',mini_type_ph:'— Valitse tyyppi —',
+  dt_consumer:'Kulutusluotto / henkilökohtainen laina',dt_card:'Luottokortti',dt_car:'Autolaina',dt_payday:'Pikavippi / pikalaina',
+  dt_mortgage:'Asuntolaina',dt_student:'Opintolaina',dt_tax:'Verovelka',dt_medical:'Sairauskulut',
+  dt_rent:'Vuokrarästi',dt_business:'Yritysvelka',dt_collections:'Perinnässä / ulosotossa oleva velka',
+  dt_informal:'Epävirallinen velka (ystävä / perhe)',dt_other:'Muu',
+  lbl_mini_creditor:'Kenelle se on velkaa?',
+  hint_mini_creditor:'Yrityksen tai henkilön nimi — Nordea, Klarna, vuokranantajasi. Tämä auttaa personoimaan suunnitelmasi.',
+  lbl_mini_amount:'Arviolta kuinka paljon?',lbl_mini_interest:'Arviolta mikä korko?',
+  hint_mini_interest:'Etkö tiedä? Jätä se 0:ksi — käsittelen sen "tuntemattomana", en korkovapaana.',
+  addDebtLabel:'Lisää velka',addAnotherDebtLabel:'Lisää toinen velka',addDebtConfirm:'Lisää velka',cancelDebtBtn:'Peruuta',
+  debtLabel_unknown_rate:'korko tuntematon',
+  lbl_collections_section:'Perintä ja ulosotto',
+  hint_collections:'Onko jokin näistä jo perintätoimistossa tai oikeudessa?',
+  col_no:'Ei',col_agency:'Perintätoimistossa',col_court:'Oikeudessa / ulosotossa',col_unknown:'En ole varma',
+  toast_collections:'Kerro, onko jokin velka perinnässä.',
+  toast_debt_type:'Valitse velkatyyppi ja syötä summa.',
+
+  s4title:'Katsotaan nyt lukuja.',
+  s4sub:'Vain todellisia lukuja — rakennan realistisen, en toiveajatteluun perustuvan suunnitelman. Muutama kerrallaan, ei mitään ylivoimaista.',
+  lbl_income_section:'Tulot',lbl_income:'Mitä tienaat kuukaudessa nettona?',
+  hint_income:'Verojen jälkeen. Jos tulot vaihtelevat, käytä tyypillistä matalaa kuukautta.',
+  err_income:'Anna kuukausitulosi.',
+  lbl_extra_income:'Onko muita tuloja, pääasiallisen lisäksi?',
+  extra_no:'Ei, siinä kaikki',extra_gig:'Sivutyö / keikkatyö',extra_rent:'Vuokratulo',extra_ben:'Etuudet / tuki',
+  lbl_extra_amount:'Arviolta kuinka paljon lisää kuukaudessa?',
+  lbl_expenses_section:'Kiinteät kulut',
+  lbl_housing_cost:'Mitkä ovat asumiskustannuksesi?',hint_housing:'Vuokra, asuntolaina tai yhtiövastike.',
+  lbl_other_costs:'Mitä muuta?',hint_other:'Ruoka, liikenne, laskut, puhelin — muut kiinteät kulusi.',
+  err_required:'Pakollinen.',
+  lbl_buffer_section:'Hieman turvaverkostasi',
+  lbl_savings:'Onko sinulla säästöjä tai hätäpuskuria juuri nyt?',
+  sav1:'Ei lainkaan',sav2:'Alle 500',sav3:'500 – 2 000',sav4:'Yli 2 000',
+  lbl_household_section:'Ja kotitaloudestasi',
+  lbl_employment:'Mikä on työtilanteesi?',emp_ph:'— Valitse —',
+  emp1:'Kokoaikainen työ',emp2:'Osa-aikainen työ',emp3:'Yrittäjä / toiminimi',
+  emp4:'Työtön',emp5:'Sairauslomalla',emp6:'Vanhempainvapaalla',emp7:'Eläkkeellä',emp8:'Opiskelija',
+  lbl_household:'Ketä kotitaloudessasi on?',hh_ph:'— Valitse —',
+  hh1:'Yksin, ei lapsia',hh2:'Yksinhuoltaja',hh3:'Pari, ei lapsia',hh4:'Pari ja lapsia',hh5:'Muu',
+  lbl_children:'Onko alaikäisiä lapsia kotona?',ch0:'0 — ei lapsia kotona',
+  toast_employment:'Valitse työtilanteesi.',toast_savings:'Valitse säästötasosi.',
+  ms_income_noted:'Tulot merkitty — {amount}/kk',
+  ms_surplus_positive:'Näyttää hyvältä — noin {amount} jää käteen kuukaudessa',
+  ms_surplus_negative:'Merkitty — kulusi ylittävät tällä hetkellä tulosi. Työskentelemme sen kanssa.',
+
+  s5title:'Miltä tämä tuntuu juuri nyt?',
+  s5sub:'Ei tuomitsemista — haluan vain ymmärtää, jotta suunnitelmasi kirjoitetaan sinulle oikealla tavalla.',
+  lbl_barrier:'Mikä on tuntunut vaikeimmalta tähän mennessä?',
+  bar1:'En tiedä mistä aloittaa — tilanne on ylivoimainen',
+  bar2:'Pelkään avata kirjeitä tai vastata perijöiden puheluihin',
+  bar3:'Häpeän — kukaan lähipiirissäni ei tiedä tästä',
+  bar4:'Olen yrittänyt ennenkin ja se ei toiminut — olen uupunut',
+  bar5:'Tilanne tuntuu toivottomalta — luvut eivät yksinkertaisesti täsmää',
+  bar6:'Tiedän mitä pitäisi tehdä — en vain pysty aloittamaan',
+  err_barrier:'Valitse sopivin vaihtoehto.',
+  lbl_support_section:'Ketä ympärilläsi on',
+  lbl_support:'Tietääkö kukaan lähipiirissäsi mitä on meneillään?',
+  sup1:'Kyllä, minulla on tukea',sup2:'Jotkut tietävät',sup3:'Hoidan tämän yksin',sup4:'En halua kertoa',
+  toast_support:'Vastaa tukikysymykseen.',
+  lbl_conf_section:'Miten tunnet tulevaisuudesta',
+  lbl_confidence:'Kuinka luottavainen olet siihen, että asiat voivat parantua?',
+  conf_low_lbl:'Ei lainkaan luottavainen',conf_high_lbl:'Täysin luottavainen',
+  ms_thanks_sharing:'Kiitos kun kerroit tämän — se auttaa minua kirjoittamaan suunnitelmasi sinulle oikealla tavalla.',
+
+  s6title:'Mitä "velaton" todella tarkoittaa sinulle?',
+  s6sub:'Suunnitelmasi päättyy omilla sanoillasi — tällä on enemmän merkitystä kuin ehkä luulet.',
+  lbl_primary_goal:'Mikä on todellinen syysi tähän?',
+  goal1:'Mielenrauha — haluan lopettaa rahasta aiheutuvan ahdistuksen joka päivä',
+  goal2:'Perheeni — haluan todellisen turvallisuuden rakkaimmilleni',
+  goal3:'Vapaus — haluan tehdä taas oikeita valintoja, en vain selvitä',
+  goal4:'Tunne itsestäni — ilman tämän taakkaa harteillani',
+  goal5:'Konkreettinen tavoite — jokin merkityksellinen, jota haluan säästää kun tämä on takana',
+  err_goal:'Valitse sinulle tärkein.',
+  lbl_ownwords_section:'Omin sanoin',
+  lbl_own_words:'Miltä menestys näyttäisi vuoden päästä?',
+  hint_own_words:'Valinnainen, mutta merkityksellinen — omat sanasi ilmestyvät suunnitelmassasi.',
+  s6_placeholder:'esim. Avaan pankkitilini ilman pelkoa. Lapseni eivät enää huomaa stressiäni.',
+
+  s7title:'Yksi asia vielä.',
+  s7sub:'Tämä auttaa minua tietämään tarkalleen mihin keskittyä ensin.',
+  lbl_focus:'Mikä tuntuu tärkeimmältä ymmärtää tänään?',
+  foc1:'Mitä velkani todella maksavat minulle — todellisissa luvuissa',
+  foc2:'Onko tilanteeni juridisesti vakava vai hallittavissa',
+  foc3:'Mitä voin realistisesti tehdä tällä viikolla',
+  foc4:'Onko olemassa valtion tukea jota en käytä',
+  foc5:'Kuinka kauan tämä realistisesti kestää',
+  err_focus:'Valitse sinulle tärkein.',
+  lbl_extra_section:'Jotain muuta',
+  lbl_anything_else:'Onko jotain muuta, jonka pitäisi tietää?',
+  hint_anything:'Täysin valinnainen — vain jos jokin ei mahtunut yllä oleviin.',
+  submitText:'Rakenna suunnitelmani',submitNote:'Tämä kestää noin 30 sekuntia. Suunnitelmasi odottaa sinua.',
+  load_title:'Rakennetaan suunnitelmaasi…',load_sub:'Tämä kestää noin 30 sekuntia.',
+  ls1:'Luetaan tilannettasi',ls2:'Lasketaan maksupolkuasi',
+  ls3:'Etsitään paikallista tukea sinulle',ls4:'Haetaan oikea sävy sinulle',ls5:'Kirjoitetaan suunnitelmaasi',
+
+  btn_back:'Takaisin',btn_next:'Jatka',
+  toast_email_required:'Syötä sähköpostiosoitteesi.',
+  toast_link_fail:'Linkin lähetys ei onnistunut. Lähetä sähköpostia support@debt-free.world'
 }
 };
-['SV','DE','NO','DA','NL','ES','FR','IT','PL','PT','CS','ET','LV','LT','HU','RO','HR'].forEach(code=>{ T[code]=Object.assign({},T.EN); });
-Object.assign(T['SV'],{ps:["Du","Situation","Skulder","Ekonomi","Känsla","Mål","Klar"],s1title:"Låt oss börja med dig.",s1sub:"Din plan byggs kring din verkliga situation — inte en mall.",submitText:"Bygg min DEBT FREE-plan",submitNote:"Det tar 20–30 sekunder. Din plan väntar i ditt medlemsområde.",btn_back:"Tillbaka",btn_next:"Fortsätt"});
+
+/* ── I18N ──
+   Same architecture as the member area: data-i18n attributes walked at
+   apply time, full English fallback for any missing key in a given
+   language so a partially-translated language never shows a blank or
+   raw key name. Default language is EN; user selection in Step 1
+   immediately re-applies the whole form, including all dropdown option
+   labels — not just headings, which was the gap in the previous
+   ID-based system. */
+let currentLang = 'EN';
+
+function t(key){
+  const dict = I18N[currentLang] || I18N.EN;
+  return (dict && dict[key] !== undefined) ? dict[key] : (I18N.EN[key] || key);
+}
+
+function applyI18n(langCode){
+  currentLang = I18N[langCode] ? langCode : 'EN';
+  formData.language = currentLang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (el.tagName === 'TEXTAREA' || (el.tagName==='INPUT' && el.type!=='button')) {
+      // inputs/textareas with data-i18n are rare; treat as placeholder fallback
+      el.textContent = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+  });
+
+  // Step-counter strings that include {n} — re-applied per current step
+  const tbs = document.getElementById('topbarStep');
+  if (tbs) tbs.textContent = t('topStep').replace('{n}', currentStep);
+
+  renderDebts();
+}
+
+window.setLang = applyI18n; // keep old name as alias, called from the <select> in Step 1
 
 /* ── STATE ── */
-let lang = 'EN';
 let currentStep = 1;
-let formData = { extra_income:'No additional income', confidence:4 };
+let formData = { extra_income:'No additional income', confidence:4, language:'EN' };
 let multiSelects = { situation:[] };
 let debts = [];
 let confidenceVal = 4;
+let prefillMode = null; // 'update' | 'fresh' | null
 
 const params = new URLSearchParams(window.location.search);
 const memberToken = params.get('token') || null;
+const urlMode = params.get('mode'); // set by the member area's "Update my plan" flow
+const urlLang = params.get('lang'); // language carried over from the member area, if present
 
-/* ── TOKEN VALIDATION ON LOAD ── */
-// Steps are hidden via CSS until token is confirmed valid.
-// This prevents the ghost-step bug where step1 shows but Continue does nothing.
+/* ── TOKEN VALIDATION ON LOAD ──
+   Three outcomes depending on the member's existing data and the
+   requested mode:
+   - mode=fresh (or no existing onboarding data): blank form, as before.
+   - mode=update with existing onboarding data: form is pre-filled with
+     their current answers so they only have to change what's different.
+   - no mode param, existing onboarding already complete: this page
+     should not normally be reached this way (the member area only
+     links here with an explicit mode), but if it is, default to fresh
+     rather than silently showing someone else's old data unexplained. */
 window.addEventListener('DOMContentLoaded', async ()=>{
-  // Show loading state — hide all steps until validated
   document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
   document.getElementById('invalidWrap').style.display='none';
+
+  if (urlLang) applyI18n(urlLang);
 
   const loadEl=document.getElementById('tokenLoading');
   if(loadEl)loadEl.style.display='block';
@@ -792,8 +1063,8 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     return;
   }
 
-  // Try up to 2 times — handles transient network errors
   let validated=false;
+  let existingData=null;
   for(let attempt=0;attempt<2;attempt++){
     try{
       const res=await fetch(`${WORKER_URL}/member/validate`,{
@@ -802,70 +1073,128 @@ window.addEventListener('DOMContentLoaded', async ()=>{
       });
       if(res.ok){
         validated=true;
+        existingData=await res.json();
         break;
       }
       if(res.status===401||res.status===403){
-        // Definitively invalid — don't retry
         break;
       }
     }catch(e){
-      // Network error — retry
       if(attempt===0) await new Promise(r=>setTimeout(r,1200));
     }
   }
 
   if(loadEl)loadEl.style.display='none';
 
-  if(validated){
-    // Show step 1 — explicit multi-method activation for mobile reliability
-    const step1 = document.getElementById('step1');
-    if(step1){
-      // Remove active from all cards first (belt and suspenders)
-      document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
-      // Force display before adding class — fixes Android WebView timing bug
-      step1.style.display = 'block';
-      step1.classList.add('active');
-      // Scroll to top — important on mobile where page may have scrolled
-      window.scrollTo(0, 0);
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-  } else {
+  if(!validated){
     showInvalidScreen();
+    return;
   }
+
+  prefillMode = urlMode;
+  if (prefillMode === 'update' && existingData && existingData.onboarding) {
+    prefillForm(existingData.onboarding);
+  }
+  // mode=fresh (or no mode): leave the form blank, default state stands.
+
+  const step1 = document.getElementById('step1');
+  if(step1){
+    document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+    step1.style.display = 'block';
+    step1.classList.add('active');
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  applyI18n(currentLang);
 });
+
+/* ── PRE-FILL FROM EXISTING ONBOARDING DATA ──
+   Called only in mode=update. Populates every field with the person's
+   previous answers so updating feels like editing, not starting over. */
+function prefillForm(od){
+  if(od.firstname) document.getElementById('f_firstname').value = od.firstname;
+  if(od.language){ document.getElementById('f_language').value = od.language; applyI18n(od.language); }
+  if(od.country){ document.getElementById('f_country').value = od.country; onCountryChange(od.country); }
+
+  if(od.situation){
+    const vals = od.situation.split(' | ');
+    multiSelects.situation = vals;
+    document.querySelectorAll('#opts_situation .opt').forEach(btn=>{
+      if(vals.includes(btn.getAttribute('data-val'))) btn.classList.add('selected');
+    });
+  }
+
+  if(od.debts && od.debts.length){
+    debts = od.debts.map(d=>({...d}));
+    renderDebts();
+  }
+  if(od.collections){
+    selectExistingOpt('opts_collections', od.collections, 'collections');
+  }
+
+  if(od.income) document.getElementById('f_income').value = od.income;
+  if(od.currency) document.getElementById('f_currency').value = od.currency;
+  if(od.extra_income){
+    selectExistingOpt('opts_extra', od.extra_income, 'extra_income');
+    if(od.extra_income !== 'No additional income'){
+      document.getElementById('wrap_extra_amount').style.display = 'block';
+      if(od.extra_amount) document.getElementById('f_extra_amount').value = od.extra_amount;
+    }
+  }
+  if(od.housing_cost) document.getElementById('f_housing_cost').value = od.housing_cost;
+  if(od.other_costs) document.getElementById('f_other_costs').value = od.other_costs;
+  if(od.savings) selectExistingOpt('opts_savings', od.savings, 'savings');
+  if(od.employment) document.getElementById('f_employment').value = od.employment;
+  if(od.household) document.getElementById('f_household').value = od.household;
+  if(od.children) document.getElementById('f_children').value = od.children;
+
+  if(od.barrier) selectExistingOpt('opts_barrier', od.barrier, 'barrier');
+  if(od.support_network) selectExistingOpt('opts_support', od.support_network, 'support_network');
+  if(od.confidence){ confidenceVal = od.confidence; formData.confidence = od.confidence; }
+
+  if(od.primary_goal) selectExistingOpt('opts_goal', od.primary_goal, 'primary_goal');
+  if(od.own_words) document.getElementById('f_own_words').value = od.own_words;
+
+  if(od.immediate_focus) selectExistingOpt('opts_focus', od.immediate_focus, 'immediate_focus');
+  if(od.anything_else) document.getElementById('f_anything_else').value = od.anything_else;
+
+  // When pre-filled, reveal all progressive groups immediately in each
+  // step rather than making the person click through groups they've
+  // already answered before — progressive disclosure exists to reduce
+  // first-time overwhelm, not to make editing tedious.
+  ['s4group2','s4group3','s4group4','s5group2','s5group3','s6group2'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.classList.remove('pending');
+  });
+}
+function selectExistingOpt(containerId, val, field){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  container.querySelectorAll('.opt').forEach(btn=>{
+    if(btn.getAttribute('data-val') === val){
+      btn.classList.add('selected');
+      formData[field] = val;
+    }
+  });
+}
 
 function showInvalidScreen(){
   document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
-  document.getElementById('invalidWrap').classList.add('show');
+  const wrap = document.getElementById('invalidWrap');
+  wrap.style.display=''; // clear the inline display:none set during init —
+                          // inline styles always win over the .show CSS
+                          // class, which silently blocked this screen
+  wrap.classList.add('show');
 }
 
 async function requestNewLink(){
   const email=document.getElementById('f_relink').value.trim();
-  if(!email){ toast('Please enter your email address.'); return; }
+  if(!email){ toast(t('toast_email_required')); return; }
   try{
     await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-    document.getElementById('invalidWrap').innerHTML='<div class="invalid-icon">✉️</div><div class="invalid-title">Link sent.</div><p class="invalid-sub">Check your inbox — your new access link is on its way.</p>';
-  }catch(e){ toast('Could not send link. Please email support@debt-free.world'); }
-}
-
-/* ── LANGUAGE ── */
-function setLang(code){
-  lang=code; formData.language=code;
-  const t=T[code]||T.EN;
-  Object.keys(t).forEach(k=>{
-    if(k==='ps'||typeof t[k]!=='string')return;
-    const el=document.getElementById(k); if(!el)return;
-    if(el.tagName==='OPTION')el.textContent=t[k];
-    else if(el.tagName==='INPUT'&&el.type==='text'){}
-    else if(el.tagName==='TEXTAREA')el.placeholder=t[k]||'';
-    else el.textContent=t[k];
-  });
-  if(t.ps){ t.ps.forEach((label,i)=>{ const el=document.getElementById('ps'+(i+1)); if(el)el.textContent=label; }); }
-  const tbs=document.getElementById('topbarStep'); if(tbs&&t.topStep)tbs.textContent=t.topStep.replace('{n}',currentStep);
-  const ta=document.getElementById('f_own_words'); if(ta&&t.s6_placeholder)ta.placeholder=t.s6_placeholder;
-  ['back2','back3','back4','back5','back6'].forEach(id=>{ const el=document.getElementById(id); if(el&&t.btn_back)el.textContent=t.btn_back; });
-  ['btn1','btn2','btn3','btn4','btn5','btn6'].forEach(id=>{ const el=document.getElementById(id); if(el&&t.btn_next)el.textContent=t.btn_next; });
+    document.getElementById('invalidWrap').innerHTML='<div class="invalid-icon">✉️</div><div class="invalid-title">'+t('link_sent_title')+'</div><p class="invalid-sub">'+t('link_sent_sub')+'</p>';
+  }catch(e){ toast(t('toast_link_fail')); }
 }
 
 /* ── NAVIGATION ── */
@@ -881,37 +1210,98 @@ function showStep(n){
     target.style.display='block';
     target.classList.add('active');
   }
-  // Scroll to top — multi-method for Android compatibility
   try{window.scrollTo({top:0,behavior:'smooth'});}catch(_){}
   document.body.scrollTop=0;
   document.documentElement.scrollTop=0;
   currentStep=n;
   document.getElementById('progressFill').style.width=STEP_PCT[n]+'%';
-  const t=T[lang]||T.EN;
-  const tbs=document.getElementById('topbarStep'); if(tbs)tbs.textContent=(t.topStep||'Step {n} of 7').replace('{n}',n);
+  const tbs=document.getElementById('topbarStep'); if(tbs)tbs.textContent=t('topStep').replace('{n}',n);
   for(let i=1;i<=7;i++){ document.getElementById('ps'+i)?.classList.toggle('active',i<=n); }
 }
 
+/* ── PROGRESSIVE DISCLOSURE — STEP 4 (Finances) ──
+   Mirrors the approved mockup: income first, alone. Once entered, a
+   quiet "Income noted" line appears and a Continue button reveals the
+   next group. Once both cost fields are filled, the surplus is
+   calculated and shown immediately — this is the moment that earns
+   its own reaction, since seeing your numbers add up in real time is
+   the actual point of doing this digitally at all. */
+function onIncomeInput(){
+  const income = parseFloat(document.getElementById('f_income').value) || 0;
+  const btn = document.getElementById('s4btn1');
+  if(income > 0){
+    btn.classList.add('show');
+    const cur = document.getElementById('f_currency').value || 'EUR';
+    showMicroSummary('s4', t('ms_income_noted').replace('{amount}', fmtNum(income)+' '+cur));
+  } else {
+    btn.classList.remove('show');
+  }
+}
+function revealS4Group(n){
+  document.getElementById('s4group'+(n-1)).classList.add('settled');
+  document.getElementById('s4group'+n).classList.remove('pending');
+  document.getElementById('s4group'+n).scrollIntoView({behavior:'smooth',block:'start'});
+}
+function onCostInput(){
+  const income = parseFloat(document.getElementById('f_income').value) || 0;
+  const housing = parseFloat(document.getElementById('f_housing_cost').value) || 0;
+  const other = parseFloat(document.getElementById('f_other_costs').value) || 0;
+  const btn = document.getElementById('s4btn2');
+  if(housing > 0 && other > 0){
+    btn.classList.add('show');
+    const cur = document.getElementById('f_currency').value || 'EUR';
+    const surplus = income - housing - other;
+    const msg = surplus >= 0
+      ? t('ms_surplus_positive').replace('{amount}', fmtNum(surplus)+' '+cur)
+      : t('ms_surplus_negative');
+    showMicroSummary('s4', msg);
+  }
+}
+
+/* ── PROGRESSIVE DISCLOSURE — STEP 5 (Mindset) ── */
+function revealS5Group(n){
+  document.getElementById('s5group'+(n-1)).classList.add('settled');
+  document.getElementById('s5group'+n).classList.remove('pending');
+  document.getElementById('s5group'+n).scrollIntoView({behavior:'smooth',block:'start'});
+  showMicroSummary('s5', t('ms_thanks_sharing'));
+}
+
+/* ── PROGRESSIVE DISCLOSURE — STEP 6 (Goals) ── */
+function revealS6Group(n){
+  document.getElementById('s6group'+(n-1)).classList.add('settled');
+  document.getElementById('s6group'+n).classList.remove('pending');
+  document.getElementById('s6group'+n).scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showMicroSummary(prefix, text){
+  const el = document.getElementById(prefix+'MicroSummary');
+  const textEl = document.getElementById(prefix+'MicroSummaryText');
+  if(!el || !textEl) return;
+  textEl.textContent = text;
+  el.classList.add('show');
+}
+function fmtNum(n){ return Math.round(n).toLocaleString('en-US'); }
+
 /* ── VALIDATION ── */
 function validateStep(step){
-  const t=T[lang]||T.EN; let ok=true;
+  let ok=true;
   if(step===1){
     const fn=document.getElementById('f_firstname'); const co=document.getElementById('f_country');
     if(!fn.value.trim()){ setFieldErr('wrap_firstname','err_firstname'); ok=false; }else clearFieldErr('wrap_firstname');
     if(!co.value){ setFieldErr('wrap_country','err_country'); ok=false; }else clearFieldErr('wrap_country');
   }
-  if(step===2){ if(multiSelects.situation.length===0){ toast(t.toast_situation); ok=false; } }
-  if(step===3){ if(!formData.collections){ toast(t.toast_collections); ok=false; } }
+  if(step===2){ if(multiSelects.situation.length===0){ toast(t('toast_situation')); ok=false; } }
+  if(step===3){ if(!formData.collections){ toast(t('toast_collections')); ok=false; } }
   if(step===4){
     if(!document.getElementById('f_income').value){ setFieldErr('wrap_income','err_income'); ok=false; }else clearFieldErr('wrap_income');
     if(!document.getElementById('f_housing_cost').value){ setFieldErr('wrap_housing','err_housing'); ok=false; }else clearFieldErr('wrap_housing');
     if(!document.getElementById('f_other_costs').value){ setFieldErr('wrap_other','err_other'); ok=false; }else clearFieldErr('wrap_other');
-    if(!document.getElementById('f_employment').value){ toast(t.toast_employment); ok=false; }
-    if(!formData.savings){ toast(t.toast_savings); ok=false; }
+    if(!document.getElementById('f_employment').value){ toast(t('toast_employment')); ok=false; }
+    if(!formData.savings){ toast(t('toast_savings')); ok=false; }
   }
   if(step===5){
     if(!formData.barrier){ showInlineErr('err_barrier'); ok=false; }
-    if(!formData.support_network){ toast(t.toast_support||'Please answer the support question.'); ok=false; }
+    if(!formData.support_network){ toast(t('toast_support')); ok=false; }
   }
   if(step===6){ if(!formData.primary_goal){ showInlineErr('err_goal'); ok=false; } }
   if(step===7){ if(!formData.immediate_focus){ showInlineErr('err_focus'); ok=false; } }
@@ -947,29 +1337,30 @@ function toggleOpt(btn,field){
 }
 
 /* ── DEBT MANAGEMENT ── */
-function openMiniForm(){ document.getElementById('debtMiniForm').classList.add('open'); document.getElementById('addDebtBtn').style.display='none'; setTimeout(()=>document.getElementById('mini_amount').focus(),100); }
-function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.getElementById('addDebtBtn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; }); }
+function openMiniForm(){ document.getElementById('debtMiniForm').classList.add('open'); document.querySelector('.add-debt-btn').style.display='none'; setTimeout(()=>document.getElementById('mini_amount').focus(),100); }
+function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.querySelector('.add-debt-btn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; }); }
 function addDebt(){
-  const t=T[lang]||T.EN;
   const type=document.getElementById('mini_type').value; const amt=document.getElementById('mini_amount').value;
-  if(!type||!amt){ toast(t.toast_debt_type); return; }
+  if(!type||!amt){ toast(t('toast_debt_type')); return; }
   debts.push({type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0});
   renderDebts(); closeMiniForm();
 }
 function removeDebt(i){ debts.splice(i,1); renderDebts(); }
 function renderDebts(){
-  const t=T[lang]||T.EN; const list=document.getElementById('debtList'); const cur=formData.currency||'EUR';
+  const list=document.getElementById('debtList'); if(!list)return;
+  const cur=formData.currency||'EUR';
   list.innerHTML='';
   debts.forEach((d,i)=>{
     const el=document.createElement('div'); el.className='debt-row';
     const creditorStr=d.creditor?` — ${d.creditor}`:'';
-    const rateStr=d.interest>0?`${d.interest}%`:(t.debtLabel_unknown_rate||'unknown rate');
-    el.innerHTML=`<div class="debt-row-info"><span class="debt-row-type">${d.type}${creditorStr}</span><span class="debt-row-creditor">${rateStr}</span></div><div class="debt-row-right"><span class="debt-row-amount">${d.amount.toLocaleString('en')} ${d.currency||cur}</span></div><button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
+    const rateStr=d.interest>0?`${d.interest}%`:t('debtLabel_unknown_rate');
+    el.innerHTML=`<div class="debt-row-info"><span class="debt-row-type">${esc(d.type)}${esc(creditorStr)}</span><span class="debt-row-creditor">${esc(rateStr)}</span></div><div class="debt-row-right"><span class="debt-row-amount">${d.amount.toLocaleString('en-US')} ${d.currency||cur}</span></div><button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
     list.appendChild(el);
   });
-  const addBtn=document.getElementById('addDebtLabel');
-  if(addBtn)addBtn.textContent=debts.length===0?(t.addDebtLabel||'Add a debt'):((t.addDebtLabel||'Add a debt').replace('Add a','Add another').replace('Lisää velka','Lisää toinen velka'));
+  const addLbl=document.getElementById('addDebtLabel');
+  if(addLbl) addLbl.textContent = debts.length===0 ? t('addDebtLabel') : t('addAnotherDebtLabel');
 }
+function esc(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 /* ── CONFIDENCE SLIDER ── */
 (function initSlider(){
@@ -1003,7 +1394,6 @@ function animateLoader(){
   function next(){ if(i>0){const prev=document.getElementById(ids[i-1]);if(prev)prev.classList.add('ls-done');} if(i<ids.length){const cur=document.getElementById(ids[i]);if(cur)cur.classList.add('ls-active');i++;setTimeout(next,i===ids.length?99999:4500);} }
   next();
 }
-
 /* ── BUILD AI PROMPT — My DEBT FREE Plan ── */
 function buildPrompt(d){
   const langNames={EN:'English',FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',
@@ -1155,7 +1545,7 @@ Format each as: Organisation name on its own line, then URL, then one sentence o
 PLAN STRUCTURE — write entirely in ${planLang}:
 
 1. OPENING (2–3 sentences):
-Address ${d.firstname||'them'} by name. Reference their specific situation. Acknowledge the hardest thing they named.
+Address ${d.firstname||'them'} by name. Reference their specific situation. Acknowledge the hardest thing they named. Write the way a genuinely warm, competent person would speak to someone they respect — never a corporate tone, never clinical.
 
 2. YOUR NUMBERS:
 Show the surplus calculation explicitly with their actual figures.
@@ -1187,18 +1577,23 @@ Format: Name, URL, one sentence description, free or paid.
 Reference their deepest goal (${d.primary_goal||'not specified'}) directly.
 ${d.own_words?'Close with their exact words: "'+d.own_words+'"':'End with: "We do this together. ✦"'}
 
+QUALITY BAR — read before writing:
+This plan is the single most important thing this person will read this week. It must read as if it were written by one specific, exceptional human advisor who has fully understood this exact person — never as if generated. Every sentence should feel necessary; cut anything generic enough to apply to a different person's plan. Specificity is warmth: use their actual numbers, their actual creditor names, their actual words, constantly — not abstractions.
+Exceptional quality here does NOT mean formal, corporate, or impressive-sounding language. It means the opposite: simple, warm, human sentences that a person in crisis can read in one breath without re-reading. If a sentence sounds like it belongs in a press release or a financial report, rewrite it. The best version of this plan would sound like a wise, direct friend talking — never a brand, never an institution.
+
 FORMAT RULES:
 No markdown symbols. No bullet points with symbols.
 Plain text. Clear section headings on their own line in capitals.
 Use numbered lists for actions.
 Maximum 900 words.
 Write entirely in ${planLang}.
+Never call this document a "report" — it is a plan, something to be lived, not read once.
 Never mention competitors. Never give legal advice — always refer to a professional.`;
 }
+
 /* ── SUBMIT ── */
 async function submitForm(){
   collectStep(7);
-  const t=T[lang]||T.EN;
   if(!formData.immediate_focus){ showInlineErr('err_focus'); return; }
 
   document.getElementById('step7').classList.remove('active');
@@ -1206,7 +1601,6 @@ async function submitForm(){
   loader.classList.add('active');
   animateLoader();
 
-  // Fetch member email
   let memberEmail='';
   if(memberToken){
     try{
@@ -1216,7 +1610,6 @@ async function submitForm(){
   }
   formData.email=memberEmail;
 
-  // Generate Clarity Report
   let plan='';
   try{
     const headers={'Content-Type':'application/json'};
@@ -1255,11 +1648,8 @@ async function submitForm(){
     });
   }catch(e){}
 
-  // Redirect to free member area
   window.location.replace(`https://www.debt-free.world/member-free/?token=${memberToken}&fresh=1`);
 }
-
-formData.language='EN';
 </script>
 </body>
 </html>
