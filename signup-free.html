@@ -6,13 +6,14 @@
 <meta name="robots" content="index,follow"/>
 <title>Get My Free Plan — Debt-Free.world</title>
 <meta name="description" content="Create your DEBT FREE account. No payment card. No subscription. Your personalised debt clarity plan, free forever."/>
+<link rel="canonical" href="https://www.debt-free.world/signup-free"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --green:#166534;--green-dark:#0f4d26;--green-light:#dcf0e4;
+  --green:#0f4d28;--green-dark:#0f4d28;--green-light:#dcf0e4;
   --green-border:#86c9a0;--green-bg:#f0f8f3;--green-pale:#f7fcf9;
   --text:#111;--muted:#6b7280;--border:#e5e7eb;--white:#fff;
   --red:#dc2626;
@@ -87,7 +88,7 @@ footer a{color:#aaa;}
     <a class="logo" href="/">✦ Debt-Free.world</a>
     <div class="badge">✦ DEBT FREE — 0 €</div>
     <h1>Your clarity starts here.</h1>
-    <p class="sub">Enter your email and you'll go straight to building your plan. No card. No subscription. About 2 minutes.</p>
+    <p class="sub">Enter your email and you'll go straight to building your plan. No card. No subscription. Most people finish in under 5 minutes — take all the time you need.</p>
 
     <div class="promises">
       <div class="pr"><span class="pr-tick">✓</span>Complete financial overview &amp; debt prioritisation</div>
@@ -108,7 +109,7 @@ footer a{color:#aaa;}
 
     <label class="check-row" id="privacy-row">
       <input type="checkbox" id="f_privacy"/>
-      <span class="check-lbl">I have read and accept the <a href="/legal.html#privacy" target="_blank">Privacy Policy</a>. My data is used only to create my personalised plan.</span>
+      <span class="check-lbl">I have read and accept the <a href="/legal#privacy" target="_blank">Privacy Policy</a>. My data is used only to create my personalised plan.</span>
     </label>
     <div class="check-err" id="err_privacy">Please accept the Privacy Policy to continue.</div>
 
@@ -135,7 +136,7 @@ footer a{color:#aaa;}
 
 </div>
 
-<footer>Amliv Oy · VAT FI32503518 · <a href="mailto:support@debt-free.world">support@debt-free.world</a> · <a href="/legal.html">Privacy &amp; Terms</a></footer>
+<footer>Amliv Oy · VAT FI32503518 · <a href="mailto:support@debt-free.world">support@debt-free.world</a> · <a href="/legal">Privacy &amp; Terms</a></footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -254,10 +255,10 @@ function setCookieConsent(choice){localStorage.setItem('cookie-consent',choice);
 window.addEventListener('DOMContentLoaded',function(){if(!localStorage.getItem('cookie-consent')){document.getElementById('dfwCookieBanner').style.display='flex';}loadTracking();});
 </script>
 <div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
-  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising. <a href="/legal.html#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising. <a href="/legal#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
   <div style="display:flex;gap:8px;flex-shrink:0;">
     <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
-    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#166534;color:#fff;font-family:sans-serif;">Accept analytics</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#0f4d28;color:#fff;font-family:sans-serif;">Accept analytics</button>
   </div>
 </div>
 </body>
