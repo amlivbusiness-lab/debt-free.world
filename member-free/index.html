@@ -2,1820 +2,1087 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta name="robots" content="noindex,nofollow"/>
 <title>My DEBT FREE Plan — Debt-Free.world</title>
+<meta name="description" content="Your personal DEBT FREE member area."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.383.0/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
 :root{
-  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
-  --green-pale:#fafaf8;--green-border:#bcd9c5;
-  --text:#111;--text-soft:#2b2b2b;--border:#e8e8e3;--white:#fff;
-  --red:#b3261e;--red-bg:#fdf0ef;--amber:#92611c;--amber-bg:#fbf3e6;--amber-border:#e9d3a4;
-  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
-  --icon-size:18px;--icon-stroke:1.5;
+  --green:#0f4d28;            /* LOCKED brand green */
+  --green-dark:#0a3a1e;
+  --green-deep:#093218;
+  --green-tint:#eaf3ed;       /* pale fill */
+  --green-pale:#f4f9f6;       /* card wash */
+  --green-line:#cfe2d6;
+  --text:#111;                /* body text — black, not grey */
+  --muted:#586b5f;            /* warm muted, used sparingly */
+  --soft:#7d8a82;
+  --border:#e3e8e4;
+  --white:#fff;
+  --bg:#f6f8f6;
+  --amber:#b45309; --amber-bg:#fdf6ec;
+  --red:#b3261e;  --red-bg:#fcefee;
+  --serif:"DM Serif Display",Georgia,serif;
+  --sans:"DM Sans",system-ui,sans-serif;
+  --canvas:1040px; --content:700px;
+  --radius:14px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{font-family:var(--sans);color:var(--text);background:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;visibility:hidden;}
-body.ready{visibility:visible;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--green);text-decoration:none;}
+a:hover{text-decoration:underline;}
+button{font-family:var(--sans);cursor:pointer;}
+.serif{font-family:var(--serif);font-weight:400;}
+.hidden{display:none !important;}
 
-.icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
-.icon svg{width:var(--icon-size);height:var(--icon-size);stroke-width:var(--icon-stroke);stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round;}
-
-@keyframes spin{to{transform:rotate(360deg);}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-
-#gate{display:none;min-height:100vh;align-items:center;justify-content:center;background:var(--green-pale);padding:24px;}
-#gate.show{display:flex;}
-.gate-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:40px 32px;max-width:420px;width:100%;text-align:center;}
-.gate-logo{font-family:var(--serif);font-size:1.1rem;color:var(--text);display:block;margin-bottom:28px;}
-.gate-spinner{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px;}
-.gate-title{font-family:var(--serif);font-size:20px;color:var(--text);font-weight:400;margin-bottom:8px;}
-.gate-sub{font-size:13.5px;color:var(--text-soft);line-height:1.65;font-weight:300;}
-.gate-form{margin-top:20px;display:none;flex-direction:column;gap:10px;}
-.gate-form.show{display:flex;}
-.gate-form input{width:100%;font-family:var(--sans);font-size:15px;border:1px solid var(--border);border-radius:4px;padding:13px 15px;outline:none;-webkit-appearance:none;color:var(--text);}
-.gate-form input:focus{border-color:var(--green);}
-.gate-btn{width:100%;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;}
-.gate-btn:hover{background:var(--green-dark);}
-.gate-success{background:var(--green-pale);border:1px solid var(--green-border);border-radius:4px;padding:14px 16px;font-size:13px;color:var(--text);line-height:1.6;margin-top:16px;display:none;font-weight:300;}
-.gate-success.show{display:block;}
-
-#planFirst{position:fixed;inset:0;background:var(--white);z-index:1000;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-#planFirst.show{display:flex;}
-.pf-topbar{background:var(--white);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-shrink:0;border-bottom:1px solid var(--border);}
-.pf-logo{font-family:var(--serif);font-size:15px;color:var(--text);}
-.pf-save{background:none;border:1px solid var(--border);border-radius:4px;padding:7px 16px;font-size:12px;font-weight:500;color:var(--text-soft);cursor:pointer;font-family:var(--sans);min-height:36px;display:flex;align-items:center;gap:6px;}
-.pf-save:hover{border-color:var(--green);color:var(--green);}
-.pf-body{flex:1;max-width:700px;width:100%;margin:0 auto;padding:32px 20px 48px;}
-.pf-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
-.pf-title{font-family:var(--serif);font-size:28px;color:var(--text);font-weight:400;margin-bottom:8px;line-height:1.25;}
-.pf-meta{font-size:13px;color:var(--text-soft);margin-bottom:18px;font-weight:300;}
-.pf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;}
-.pf-chip{font-size:11px;color:var(--text);background:var(--green-pale);border:1px solid var(--border);border-radius:14px;padding:4px 12px;}
-.pf-plan{font-size:14.5px;line-height:1.9;color:var(--text-soft);white-space:pre-wrap;font-weight:300;padding:0;margin-bottom:32px;}
-.pf-actions{display:flex;flex-direction:column;gap:10px;}
-.btn-pf-cta{width:100%;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:15px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-pf-cta:hover{background:var(--green-dark);}
-.btn-pf-secondary{width:100%;background:var(--white);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:13px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:46px;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-pf-secondary:hover{border-color:var(--green);color:var(--green);}
-
-#dashboard{display:none;}
-#dashboard.show{display:block;}
-.topbar{background:var(--white);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:200;}
-.topbar-logo{font-family:var(--serif);font-size:15px;color:var(--text);}
-.topbar-right{display:flex;align-items:center;gap:8px;}
-.lang-selector-wrap{position:relative;}
-.lang-pill{font-size:12px;color:var(--text);border:1px solid var(--border);border-radius:14px;padding:5px 12px;background:none;cursor:pointer;font-family:var(--sans);font-weight:500;min-height:34px;}
-.lang-pill:hover{border-color:var(--green);color:var(--green);}
-.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--white);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.08);z-index:500;min-width:170px;overflow:hidden;}
-.lang-menu.open{display:block;animation:fadeUp 0.2s ease;}
-.lang-menu-inner{display:flex;flex-direction:column;max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.lang-menu-inner button{background:none;border:none;padding:10px 16px;text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--text);cursor:pointer;min-height:40px;}
+/* ── TOPBAR ── */
+.topbar{position:sticky;top:0;z-index:600;background:rgba(246,248,246,.92);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--border);}
+.topbar-inner{max-width:var(--canvas);margin:0 auto;display:flex;align-items:center;gap:12px;padding:11px 18px;}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--border);background:var(--white);border-radius:11px;color:var(--green);flex-shrink:0;transition:border-color .15s,background .15s;}
+.icon-btn:hover{border-color:var(--green-line);background:var(--green-pale);}
+.icon-btn svg{width:20px;height:20px;}
+.wordmark{font-family:var(--serif);font-size:1.05rem;color:var(--green);display:flex;align-items:center;gap:6px;margin-right:auto;white-space:nowrap;}
+.wordmark .spark{font-size:.9em;}
+.lang-wrap{position:relative;}
+.lang-btn{display:inline-flex;align-items:center;gap:7px;height:42px;padding:0 13px;border:1px solid var(--border);background:var(--white);border-radius:11px;color:var(--text);font-size:13.5px;font-weight:500;}
+.lang-btn:hover{border-color:var(--green-line);}
+.lang-btn svg{width:16px;height:16px;color:var(--green);}
+.lang-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:184px;background:var(--white);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 34px rgba(9,50,24,.12);overflow:hidden;display:none;}
+.lang-menu.open{display:block;animation:pop .16s ease;}
+.lang-menu-inner{max-height:330px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;}
+.lang-menu-inner button{background:none;border:none;text-align:left;padding:11px 16px;font-size:13.5px;color:var(--text);min-height:42px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
 .lang-menu-inner button:hover{background:var(--green-pale);}
-.menu-pill{border:1px solid var(--border);border-radius:6px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:none;color:var(--text-soft);}
-.menu-pill:hover{border-color:var(--green);color:var(--green);}
+.lang-menu-inner button.active{color:var(--green);font-weight:600;}
+.lang-menu-inner button .tick{width:15px;height:15px;color:var(--green);opacity:0;}
+.lang-menu-inner button.active .tick{opacity:1;}
+@keyframes pop{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
 
-.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:300;display:none;opacity:0;transition:opacity 0.25s;}
-.drawer-overlay.open{display:block;opacity:1;}
-.tools-drawer{position:fixed;top:0;right:0;bottom:0;width:min(360px,92vw);background:var(--white);z-index:400;transform:translateX(100%);transition:transform 0.3s cubic-bezier(.4,0,.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.tools-drawer.open{transform:translateX(0);}
-.drawer-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1;}
-.drawer-title{font-family:var(--serif);font-size:16px;color:var(--text);font-weight:400;}
-.drawer-close{background:none;border:none;font-size:20px;color:var(--text-soft);cursor:pointer;padding:4px 8px;line-height:1;}
-.drawer-section{padding:16px 20px 6px;}
-.drawer-section-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
-.drawer-item{display:flex;align-items:flex-start;gap:12px;padding:11px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;min-height:44px;margin:0 -20px;transition:background .15s;}
-.drawer-item:hover{background:var(--green-pale);}
-.drawer-item .icon{color:var(--text-soft);margin-top:2px;flex-shrink:0;}
-.drawer-item-name{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.3;}
-.drawer-item-desc{font-size:11.5px;color:var(--text-soft);margin-top:2px;line-height:1.4;font-weight:300;}
-.drawer-item-badge{display:inline-flex;align-items:center;font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:5px;letter-spacing:0.3px;}
-.badge-unlock{background:var(--amber-bg);color:var(--amber);}
-.badge-coming{background:#f1f1ed;color:var(--text-soft);}
-.drawer-plan-item{display:flex;align-items:flex-start;gap:12px;padding:13px 20px;cursor:pointer;min-height:44px;margin:0 -20px;background:var(--green-pale);border-left:3px solid var(--green);}
-.drawer-plan-item .icon{color:var(--green);margin-top:2px;}
-.drawer-plan-item-name{font-size:13.5px;font-weight:600;color:var(--text);}
-.drawer-plan-item-desc{font-size:11.5px;color:var(--text-soft);margin-top:1px;font-weight:300;}
-.drawer-divider{height:1px;background:var(--border);margin:8px 0;}
-.drawer-logout{width:calc(100% - 40px);margin:14px 20px 24px;background:none;border:1px solid var(--border);border-radius:4px;padding:11px;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);text-align:center;min-height:44px;display:block;}
-.drawer-logout:hover{border-color:var(--text-soft);color:var(--text);}
+/* ── DRAWER ── */
+.scrim{position:fixed;inset:0;background:rgba(9,30,18,.42);z-index:700;opacity:0;pointer-events:none;transition:opacity .22s;}
+.scrim.show{opacity:1;pointer-events:auto;}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:300px;max-width:86vw;background:var(--white);z-index:800;transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(9,30,18,.18);}
+.drawer.open{transform:translateX(0);}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border);}
+.drawer-head .wordmark{font-size:1rem;margin:0;}
+.drawer-nav{flex:1;overflow-y:auto;padding:8px 0 24px;-webkit-overflow-scrolling:touch;}
+.nav-group{padding:14px 8px 6px;}
+.nav-group-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);padding:0 14px 8px;display:flex;align-items:center;gap:8px;}
+.nav-group-label svg{width:14px;height:14px;}
+.nav-item{display:flex;align-items:center;gap:12px;width:100%;background:none;border:none;text-align:left;padding:11px 14px;border-radius:10px;color:var(--text);font-size:14.5px;font-weight:500;border-left:3px solid transparent;}
+.nav-item:hover{background:var(--green-pale);}
+.nav-item svg{width:18px;height:18px;color:var(--green);flex-shrink:0;stroke-width:1.5;}
+.nav-item.locked{color:var(--soft);}
+.nav-item.locked svg{color:var(--soft);}
+.nav-item .lock{margin-left:auto;width:15px;height:15px;color:var(--soft);}
+.nav-unlock{margin:8px 16px 0;display:block;text-align:center;background:var(--green);color:#fff;border-radius:24px;padding:11px;font-size:13.5px;font-weight:600;}
+.nav-unlock:hover{background:var(--green-dark);text-decoration:none;}
 
-/* ════ MAIN ════
-   Width architecture matches the public-site principle locked on
-   index/ecosystem/about/faq: a wide outer canvas with a narrower
-   reading measure inside it — not a single narrow tube for the whole
-   page. On desktop the dashboard opens up to 1040px; dense content
-   blocks (plan text, debt list rows) keep their own comfortable
-   max-width inside that wider stage. Below 900px (effectively all
-   real-world usage, since this is a personal dashboard people check
-   on their phones) the layout collapses to a single column exactly as
-   before — width architecture only matters once there is room for it
-   to matter. */
-.main-wrap{max-width:1040px;margin:0 auto;padding:0 0 80px;}
-.main-inner{max-width:700px;}
+/* ── LAYOUT ── */
+.wrap{max-width:var(--content);margin:0 auto;padding:26px 18px 80px;}
+.view{display:none;}
+.view.active{display:block;animation:fade .3s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
-.today-section{padding:24px 20px 0;}
-.greeting{padding:4px 0 0;}
-.greeting-name{font-family:var(--serif);font-size:24px;color:var(--text);font-weight:400;margin-bottom:5px;}
-.greeting-sub{font-size:13.5px;color:var(--text-soft);line-height:1.55;font-weight:300;}
+/* gate + reauth */
+.center-card{max-width:440px;margin:9vh auto 0;background:var(--white);border:1px solid var(--border);border-radius:18px;padding:38px 30px;text-align:center;box-shadow:0 4px 30px rgba(9,50,24,.06);}
+.spinner{width:38px;height:38px;border:3px solid var(--green-tint);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 18px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.center-card h2{font-family:var(--serif);font-size:22px;margin-bottom:10px;}
+.center-card p{font-size:14px;color:var(--muted);margin-bottom:18px;}
+.center-card .field input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:11px;padding:13px 15px;outline:none;margin-bottom:12px;}
+.center-card .field input:focus{border-color:var(--green);}
+.btn-primary{width:100%;background:var(--green);color:#fff;border:none;border-radius:26px;padding:14px;font-size:15px;font-weight:600;min-height:50px;transition:background .18s;}
+.btn-primary:hover{background:var(--green-dark);}
+.btn-primary:disabled{background:#b9c4bd;}
 
-.action-card{margin-top:18px;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 6px 6px 0;overflow:hidden;}
-.action-card-top{display:flex;align-items:center;gap:9px;padding:13px 16px;background:var(--green-pale);}
-.action-card-top .icon{color:var(--green);}
-.action-card-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--green);}
-.action-card-body{padding:18px 16px;}
-.action-text{font-family:var(--serif);font-size:18px;color:var(--text);font-weight:400;line-height:1.4;margin-bottom:16px;}
-.ec-critical{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:6px;padding:11px 14px;margin-bottom:14px;}
-.risk-alert{margin:14px 20px 0;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:6px;padding:14px 16px;}
-.risk-alert-top{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
-.risk-alert-top .icon{color:var(--amber);}
-.risk-alert-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--amber);}
-.risk-alert-body{font-size:13.5px;color:var(--text);line-height:1.65;font-weight:400;}
-.ec-critical-lbl{font-size:10px;font-weight:600;color:var(--amber);letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;}
-.ec-critical-name{font-size:14px;font-weight:600;color:var(--text);}
-.ec-critical-detail{font-size:12.5px;color:var(--text-soft);margin-top:2px;font-weight:300;}
+/* greeting */
+.hello{margin-bottom:22px;}
+.hello .eyebrow{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:6px;}
+.hello h1{font-family:var(--serif);font-size:30px;line-height:1.12;}
+.hello p{font-size:14.5px;color:var(--muted);margin-top:6px;}
 
-.checklist{display:flex;flex-direction:column;gap:8px;}
-.check-item{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border:1px solid var(--border);border-radius:6px;cursor:pointer;background:var(--white);transition:border-color .15s;-webkit-tap-highlight-color:transparent;user-select:none;min-height:44px;}
-.check-item.done{border-color:var(--green-border);background:var(--green-pale);}
-.check-item.done .check-label{color:var(--text-soft);text-decoration:line-through;}
-.check-box{width:19px;height:19px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
-.check-item.done .check-box{background:var(--green);border-color:var(--green);}
-.check-icon{display:none;}
-.check-item.done .check-icon{display:block;color:var(--white);}
-.check-icon svg{width:11px;height:11px;stroke-width:3;}
-.check-label{font-size:14px;line-height:1.45;font-weight:400;}
+/* section shell */
+.section{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px 22px;margin-bottom:18px;border-left:3px solid var(--green);scroll-margin-top:74px;}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.section-head svg{width:19px;height:19px;color:var(--green);stroke-width:1.5;}
+.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);}
+.section h2{font-family:var(--serif);font-size:21px;line-height:1.2;margin:2px 0 4px;}
+.section .lead{font-size:14px;color:var(--muted);margin-bottom:16px;}
 
-.action-card-footer{padding:13px 16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;}
+/* TODAY emergency */
+.emerg{background:var(--green-pale);border-radius:12px;padding:16px 16px;}
+.emerg-action{display:flex;gap:13px;align-items:flex-start;padding:12px 4px;border-left:3px solid var(--green);padding-left:14px;margin-bottom:10px;background:var(--white);border-radius:0 10px 10px 0;}
+.emerg-action:last-child{margin-bottom:0;}
+.emerg-check{appearance:none;-webkit-appearance:none;width:24px;height:24px;border:2px solid var(--green-line);border-radius:7px;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer;transition:background .15s,border-color .15s;}
+.emerg-check:checked{background:var(--green);border-color:var(--green);}
+.emerg-check:checked::after{content:"";position:absolute;left:7px;top:3px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);}
+.emerg-body .ea-title{font-weight:600;font-size:14.5px;margin-bottom:2px;}
+.emerg-body .ea-sub{font-size:13px;color:var(--muted);line-height:1.5;}
+.emerg-action.done .ea-title{text-decoration:line-through;color:var(--soft);}
+.emerg-progress{font-size:12.5px;color:var(--green);font-weight:600;margin-top:12px;display:flex;align-items:center;gap:7px;}
+.emerg-progress svg{width:15px;height:15px;}
 
-.df-section{padding:44px 20px 0;}
-.df-section-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:16px;display:block;}
+/* snapshot grid */
+.snap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.snap-cell{background:var(--green-pale);border-radius:11px;padding:13px 14px;}
+.snap-cell .k{font-size:11.5px;color:var(--muted);font-weight:500;margin-bottom:3px;display:flex;align-items:center;gap:6px;}
+.snap-cell .k svg{width:14px;height:14px;color:var(--green);}
+.snap-cell .v{font-family:var(--serif);font-size:20px;color:var(--text);}
+.snap-cell .v.pos{color:var(--green);}
+.snap-cell .v.neg{color:var(--red);}
+.snap-hero{background:var(--green);color:#fff;border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:14px;}
+.snap-hero .sh-icon{width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.snap-hero .sh-icon svg{width:22px;height:22px;color:#fff;}
+.snap-hero .sh-k{font-size:12px;opacity:.85;margin-bottom:2px;}
+.snap-hero .sh-v{font-family:var(--serif);font-size:23px;line-height:1.1;}
+.snap-hero .sh-note{font-size:12.5px;opacity:.85;margin-top:3px;}
+.snap-note{font-size:13px;color:var(--muted);margin-top:12px;background:var(--amber-bg);border-radius:10px;padding:11px 13px;border-left:3px solid var(--amber);}
 
-.snapshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.snap-box{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 15px;}
-.snap-box.highlight{border:1.5px solid var(--green-border);background:var(--green-pale);}
-.snap-label{font-size:10.5px;color:var(--text-soft);font-weight:500;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
-.snap-label .icon{--icon-size:13px;color:var(--text-soft);}
-.snap-label.g{color:var(--green);}
-.snap-label.g .icon{color:var(--green);}
-.snap-val{font-family:var(--serif);font-size:19px;color:var(--text);display:block;line-height:1.2;font-weight:400;}
-.snap-val.g{color:var(--green);}
-.snap-val.r{color:var(--red);}
-.snap-sub{font-size:11px;color:var(--text-soft);margin-top:4px;display:block;line-height:1.4;font-weight:300;}
+/* plan */
+.plan-box{position:relative;}
+.plan-render{font-size:14.5px;line-height:1.72;color:var(--text);overflow:hidden;transition:max-height .35s ease;}
+.plan-render.collapsed{max-height:230px;}
+.plan-render h4{font-family:var(--serif);font-size:15px;letter-spacing:.02em;color:var(--green);margin:18px 0 7px;text-transform:none;}
+.plan-render h4:first-child{margin-top:0;}
+.plan-render p{margin:0 0 11px;}
+.plan-render .pl-num{display:flex;gap:10px;margin:0 0 9px;}
+.plan-render .pl-num .n{color:var(--green);font-weight:700;flex-shrink:0;}
+.plan-fade{position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(transparent,var(--white));pointer-events:none;}
+.plan-render:not(.collapsed)+.plan-fade{display:none;}
+.plan-toggle{margin-top:14px;display:inline-flex;align-items:center;gap:7px;background:none;border:none;color:var(--green);font-weight:600;font-size:14px;padding:0;}
+.plan-toggle svg{width:16px;height:16px;transition:transform .2s;}
+.plan-toggle.open svg{transform:rotate(180deg);}
+.plan-empty{font-size:14px;color:var(--muted);background:var(--green-pale);border-radius:11px;padding:16px;}
+.plan-empty a{font-weight:600;}
 
-.plan-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
-.plan-card-header{padding:15px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.plan-card-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;}
-.plan-card-body{padding:18px;font-size:14.5px;line-height:1.9;color:var(--text-soft);white-space:pre-wrap;font-weight:300;max-height:220px;overflow:hidden;position:relative;}
-.plan-card-body.expanded{max-height:none;}
-.plan-card-body:not(.expanded)::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--white));pointer-events:none;}
-.plan-card-footer{padding:13px 18px;border-top:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;}
-.plan-card-footer-left{display:flex;gap:16px;}
-.btn-expand{background:none;border:none;font-size:13px;color:var(--green);font-weight:600;cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
-.btn-print{background:none;border:none;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
-.btn-print:hover{color:var(--text);}
-.btn-update-plan{background:none;border:none;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);padding:0;display:flex;align-items:center;gap:5px;}
-.btn-update-plan:hover{color:var(--green);}
-
-.debt-item{padding:13px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-.debt-item:last-child{border-bottom:none;}
-.debt-name{font-size:14.5px;font-weight:600;color:var(--text);}
-.debt-type{font-size:12px;color:var(--text-soft);margin-top:2px;font-weight:300;}
-.debt-tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;}
-.debt-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;}
-.tag-urgent{background:var(--red-bg);color:var(--red);}
-.tag-high{background:var(--amber-bg);color:var(--amber);}
-.tag-med{background:#eaf1f8;color:#2c5a82;}
-.tag-low{background:var(--green-pale);color:var(--green);}
+/* debt map */
+.debt-row{display:flex;align-items:center;gap:13px;padding:13px 0;}
+.debt-row+.debt-row{border-top:1px solid var(--border);}
+.debt-rank{width:26px;height:26px;border-radius:8px;background:var(--green-tint);color:var(--green);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--serif);}
+.debt-main{flex:1;min-width:0;}
+.debt-main .dt{font-weight:600;font-size:14.5px;}
+.debt-main .dc{font-size:12.5px;color:var(--muted);}
 .debt-right{text-align:right;flex-shrink:0;}
-.debt-amount{font-size:16px;font-weight:700;color:var(--text);}
-.debt-rate{font-size:12px;color:var(--text-soft);font-weight:300;}
-.debt-interest{font-size:11px;color:var(--amber);margin-top:1px;}
+.debt-amt{font-family:var(--serif);font-size:16px;}
+.utag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-top:3px;}
+.utag.crit{background:var(--red-bg);color:var(--red);}
+.utag.high{background:var(--amber-bg);color:var(--amber);}
+.utag.mon{background:var(--green-tint);color:var(--green);}
+.debt-banner{background:var(--red-bg);border-left:3px solid var(--red);border-radius:10px;padding:12px 14px;font-size:13.5px;color:#7a1d17;margin-bottom:14px;display:flex;gap:10px;}
+.debt-banner svg{width:18px;height:18px;color:var(--red);flex-shrink:0;margin-top:1px;}
 
-.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.tool-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:15px 14px;cursor:pointer;transition:border-color .15s;-webkit-tap-highlight-color:transparent;min-height:84px;display:flex;flex-direction:column;justify-content:space-between;}
-.tool-card:hover{border-color:var(--green);}
-.tool-card-icon{color:var(--text-soft);margin-bottom:9px;}
-.tool-card-icon svg{width:19px;height:19px;stroke-width:1.5;}
-.tool-card-name{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.3;}
-.tool-card-desc{font-size:11.5px;color:var(--text-soft);margin-top:3px;line-height:1.4;font-weight:300;}
-.tool-panel-wrap{display:none;margin-top:12px;border:1px solid var(--border);border-radius:6px;padding:22px;animation:fadeUp 0.2s ease;}
-.tool-panel-wrap.open{display:block;}
-.tool-panel-title{font-family:var(--serif);font-size:17px;color:var(--text);font-weight:400;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
-.btn-close-panel{background:none;border:none;color:var(--text-soft);cursor:pointer;font-size:18px;line-height:1;}
+/* tools grid */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tool-card{text-align:left;background:var(--green-pale);border:1px solid var(--green-line);border-radius:12px;padding:15px 14px;display:flex;flex-direction:column;gap:8px;transition:transform .12s,box-shadow .12s;}
+.tool-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(9,50,24,.09);}
+.tool-card .ti{width:38px;height:38px;border-radius:10px;background:var(--white);display:flex;align-items:center;justify-content:center;}
+.tool-card .ti svg{width:20px;height:20px;color:var(--green);stroke-width:1.5;}
+.tool-card .tn{font-weight:600;font-size:14px;line-height:1.25;}
+.tool-card .td{font-size:12px;color:var(--muted);line-height:1.4;}
 
-.support-item{background:var(--white);border:1px solid var(--green-border);border-radius:6px;padding:15px;margin-bottom:9px;}
-.support-item:last-child{margin-bottom:0;}
-.support-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
-.support-desc{font-size:13px;color:var(--text-soft);line-height:1.6;margin-bottom:9px;font-weight:300;}
-.support-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.support-link{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:4px;}
-.support-link:hover{text-decoration:underline;}
-.support-free{font-size:10px;font-weight:600;color:var(--green);background:var(--green-pale);padding:2px 8px;border-radius:10px;}
+/* support */
+.support-org{padding:13px 0;}
+.support-org+.support-org{border-top:1px solid var(--border);}
+.support-org .so-name{font-weight:600;font-size:14.5px;}
+.support-org .so-url{font-size:13px;}
+.support-org .so-desc{font-size:13px;color:var(--muted);margin-top:2px;}
+.support-org .so-free{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--green);background:var(--green-tint);border-radius:20px;padding:2px 8px;margin-top:5px;}
+.disclaimer{font-size:12px;color:var(--soft);margin-top:14px;line-height:1.5;}
 
-.journey-timeline{display:flex;flex-direction:column;gap:0;}
-.journey-step{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);}
-.journey-step:last-child{border-bottom:none;}
-.journey-step-left{display:flex;flex-direction:column;align-items:center;gap:0;width:28px;flex-shrink:0;}
-.journey-step-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.journey-step-dot.complete{background:var(--green);}
-.journey-step-dot.active{background:var(--white);border:2px solid var(--green);}
-.journey-step-dot.locked{background:var(--white);border:1.5px solid var(--border);}
-.journey-step-dot .icon svg{width:14px;height:14px;stroke-width:2;}
-.journey-step-dot.complete .icon{color:var(--white);}
-.journey-step-dot.active .icon{color:var(--green);}
-.journey-step-dot.locked .icon{color:#ccc;}
-.journey-step-line{width:1px;flex:1;min-height:20px;background:var(--border);margin:4px 0;}
-.journey-step-body{flex:1;padding-top:4px;}
-.journey-step-tag{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:5px;display:block;}
-.journey-step-tag.complete{color:var(--green);}
-.journey-step-tag.active{color:var(--green);}
-.journey-step-tag.locked{color:var(--text-soft);}
-.journey-step-title{font-size:15px;font-weight:600;color:var(--text);line-height:1.3;}
-.journey-step-desc{font-size:13px;color:var(--text-soft);margin-top:4px;line-height:1.55;font-weight:300;}
+/* journey */
+.journey{position:relative;padding-left:6px;}
+.j-step{display:flex;gap:14px;padding-bottom:18px;position:relative;}
+.j-step:last-child{padding-bottom:0;}
+.j-step::before{content:"";position:absolute;left:13px;top:28px;bottom:-2px;width:2px;background:var(--border);}
+.j-step:last-child::before{display:none;}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.j-dot svg{width:15px;height:15px;color:var(--soft);}
+.j-step.here .j-dot{background:var(--green);border-color:var(--green);}
+.j-step.here .j-dot svg{color:#fff;}
+.j-step.done .j-dot{border-color:var(--green);}
+.j-step.done .j-dot svg{color:var(--green);}
+.j-body .j-title{font-weight:600;font-size:14.5px;}
+.j-body .j-title .you{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--green);border-radius:20px;padding:2px 8px;margin-left:7px;vertical-align:middle;}
+.j-body .j-meta{font-size:12.5px;color:var(--muted);margin-top:1px;}
 
-.upgrade-card{margin:20px 20px 0;border:1px solid var(--border);border-radius:6px;padding:26px 22px;background:var(--white);}
-.upgrade-tag{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:var(--green);margin-bottom:12px;display:block;}
-.upgrade-title{font-family:var(--serif);font-size:22px;color:var(--text);font-weight:400;margin-bottom:10px;line-height:1.3;}
-.upgrade-body{font-size:13.5px;color:var(--text-soft);line-height:1.7;font-weight:300;margin-bottom:16px;}
-.upgrade-includes{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
-.upgrade-includes li{font-size:13.5px;color:var(--text);display:flex;align-items:flex-start;gap:9px;line-height:1.45;}
-.upgrade-includes .icon{color:var(--green);margin-top:2px;--icon-size:14px;}
-.upgrade-price{font-size:12.5px;color:var(--text-soft);margin-bottom:18px;font-weight:300;}
-.upgrade-price strong{color:var(--text);font-weight:600;}
-.btn-upgrade{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:15px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;min-height:48px;}
-.btn-upgrade:hover{background:var(--green-dark);}
-.upgrade-community{display:block;text-align:center;margin-top:12px;font-size:12.5px;color:var(--green);font-weight:500;text-decoration:underline;text-decoration-color:var(--green-border);text-underline-offset:3px;}
-.upgrade-community:hover{text-decoration-color:var(--green);}
+/* upgrade */
+.upgrade{background:linear-gradient(150deg,var(--green-deep),var(--green));color:#fff;border:none;border-left:3px solid var(--green-deep);}
+.upgrade .section-eyebrow{color:#bfe6cd;}
+.upgrade h2{color:#fff;}
+.upgrade .up-lead{font-size:14px;color:rgba(255,255,255,.86);margin:8px 0 16px;}
+.up-feats{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
+.up-feat{display:flex;gap:10px;align-items:flex-start;font-size:14px;}
+.up-feat svg{width:18px;height:18px;color:#bfe6cd;flex-shrink:0;margin-top:2px;}
+.up-price{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;}
+.up-price .amt{font-family:var(--serif);font-size:30px;}
+.up-price .per{font-size:13px;opacity:.82;}
+.up-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#fff;color:var(--green-deep);border-radius:26px;padding:14px;font-size:15px;font-weight:700;}
+.up-cta:hover{background:var(--green-tint);text-decoration:none;}
+.up-cta svg{width:18px;height:18px;}
 
-.disclaimer{margin:20px 20px 0;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-size:12px;color:var(--text-soft);line-height:1.65;font-weight:300;}
+/* PLAN-FIRST overlay */
+.overlay{position:fixed;inset:0;z-index:900;background:rgba(9,30,18,.55);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:5vh 16px 16px;}
+.overlay.show{display:flex;animation:fade .25s ease;}
+.overlay-card{background:var(--white);max-width:600px;width:100%;border-radius:20px;padding:30px 28px;box-shadow:0 24px 60px rgba(9,30,18,.3);}
+.overlay-eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.overlay-card h2{font-family:var(--serif);font-size:26px;line-height:1.15;margin-bottom:6px;}
+.overlay-card .ov-sub{font-size:14.5px;color:var(--muted);margin-bottom:20px;}
+.overlay-plan{font-size:14.5px;line-height:1.72;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-right:6px;margin-bottom:22px;}
+.overlay-plan h4{font-family:var(--serif);font-size:15px;color:var(--green);margin:16px 0 7px;}
+.overlay-plan h4:first-child{margin-top:0;}
+.overlay-plan p{margin:0 0 11px;}
+.overlay-plan .pl-num{display:flex;gap:10px;margin:0 0 9px;}
+.overlay-plan .pl-num .n{color:var(--green);font-weight:700;flex-shrink:0;}
 
-.dash-footer{text-align:center;padding:28px 20px 14px;border-top:1px solid var(--border);margin-top:28px;}
-.dash-footer a{color:var(--green);font-size:12.5px;text-decoration:none;margin:0 10px;}
-.dash-footer p{font-size:11.5px;color:var(--text-soft);margin-top:8px;font-weight:300;}
+/* MODAL (tools) */
+.modal{position:fixed;inset:0;z-index:850;background:rgba(9,30,18,.5);display:none;align-items:flex-end;justify-content:center;}
+.modal.show{display:flex;animation:fade .2s ease;}
+.modal-card{background:var(--white);width:100%;max-width:560px;max-height:90vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;animation:slideup .26s cubic-bezier(.4,0,.2,1);}
+@keyframes slideup{from{transform:translateY(40px);}to{transform:translateY(0);}}
+.modal-head{display:flex;align-items:center;gap:11px;padding:18px 20px;border-bottom:1px solid var(--border);}
+.modal-head .mh-icon{width:36px;height:36px;border-radius:10px;background:var(--green-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.modal-head .mh-icon svg{width:19px;height:19px;color:var(--green);}
+.modal-head h3{font-family:var(--serif);font-size:18px;flex:1;}
+.modal-head .close{margin-left:auto;width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;color:var(--text);}
+.modal-head .close svg{width:18px;height:18px;}
+.modal-body{padding:20px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.tool-result{background:var(--green);color:#fff;border-radius:13px;padding:18px;text-align:center;margin-bottom:18px;}
+.tool-result .tr-k{font-size:12.5px;opacity:.85;margin-bottom:4px;}
+.tool-result .tr-v{font-family:var(--serif);font-size:30px;line-height:1.1;}
+.tool-result .tr-note{font-size:12.5px;opacity:.85;margin-top:5px;}
+.slider-row{margin-bottom:18px;}
+.slider-row label{display:flex;justify-content:space-between;font-size:13.5px;font-weight:500;margin-bottom:9px;}
+.slider-row label .sv{color:var(--green);font-weight:700;}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:var(--green-tint);outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--green);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 5px rgba(9,50,24,.3);}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--green);cursor:pointer;border:3px solid #fff;}
+.tool-field{margin-bottom:14px;}
+.tool-field label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;}
+.tool-field input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;outline:none;}
+.tool-field input:focus{border-color:var(--green);}
+.seg{display:flex;gap:8px;margin-bottom:16px;}
+.seg button{flex:1;padding:10px;border:1.5px solid var(--border);background:var(--white);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--muted);}
+.seg button.on{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+.olist{list-style:none;}
+.olist li{display:flex;align-items:center;gap:11px;padding:11px 0;}
+.olist li+li{border-top:1px solid var(--border);}
+.olist .oi{width:24px;height:24px;border-radius:7px;background:var(--green-tint);color:var(--green);font-family:var(--serif);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.olist .om{flex:1;min-width:0;}
+.olist .om .t{font-weight:600;font-size:14px;}
+.olist .om .s{font-size:12px;color:var(--muted);}
+.olist .oa{font-family:var(--serif);font-size:15px;}
+.olist li.first .oi{background:var(--green);color:#fff;}
+.tool-note{font-size:13px;color:var(--muted);line-height:1.6;background:var(--green-pale);border-radius:11px;padding:13px 15px;}
+.tool-note strong{color:var(--text);}
+.legal-block h5{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin:16px 0 7px;}
+.legal-block h5:first-child{margin-top:0;}
+.legal-block p{font-size:14px;margin-bottom:11px;}
+.legal-warn{font-size:12.5px;color:var(--amber);background:var(--amber-bg);border-radius:10px;padding:11px 13px;border-left:3px solid var(--amber);margin-top:6px;}
 
-.btn-green{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:var(--white);border:none;border-radius:4px;padding:12px 18px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);min-height:44px;}
-.btn-green:hover{background:var(--green-dark);}
-.btn-ghost{display:flex;align-items:center;justify-content:center;gap:8px;background:none;color:var(--text-soft);border:1px solid var(--border);border-radius:4px;padding:12px 18px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);min-height:44px;}
-.btn-ghost:hover{border-color:var(--text-soft);color:var(--text);}
-
-.update-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:600;display:none;align-items:center;justify-content:center;padding:20px;}
-.update-modal-overlay.show{display:flex;animation:fadeUp 0.2s ease;}
-.update-modal{background:var(--white);border-radius:8px;max-width:460px;width:100%;padding:32px 28px;}
-.update-modal h3{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--text);margin-bottom:10px;}
-.update-modal p{font-size:14px;color:var(--text-soft);line-height:1.65;font-weight:300;margin-bottom:24px;}
-.update-modal-actions{display:flex;flex-direction:column;gap:10px;}
-.update-opt{display:flex;align-items:flex-start;gap:13px;border:1px solid var(--border);border-radius:6px;padding:16px;cursor:pointer;transition:border-color .15s;text-align:left;background:none;width:100%;font-family:var(--sans);}
-.update-opt:hover{border-color:var(--green);}
-.update-opt .icon{color:var(--green);margin-top:1px;flex-shrink:0;}
-.update-opt-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
-.update-opt-desc{font-size:12.5px;color:var(--text-soft);line-height:1.5;font-weight:300;}
-.update-modal-close{display:block;width:100%;background:none;border:none;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:var(--sans);padding:14px 0 0;text-align:center;}
-.update-modal-close:hover{color:var(--text);}
-
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:30px;padding:10px 22px;font-size:13px;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
+/* toast + footer */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:26px;padding:11px 22px;font-size:13px;z-index:999;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;max-width:90vw;}
 .toast.show{transform:translateX(-50%) translateY(0);}
+.foot{max-width:var(--content);margin:0 auto;padding:24px 18px 40px;text-align:center;font-size:12px;color:var(--soft);line-height:1.7;}
+.foot a{color:var(--soft);}
+.foot .tag{font-family:var(--serif);color:var(--green);font-size:13px;margin-bottom:8px;}
 
+@media(min-width:760px){
+  .modal{align-items:center;}
+  .modal-card{border-radius:20px;}
+}
 @media(max-width:480px){
-  .snapshot-grid{grid-template-columns:1fr;}
+  .hello h1{font-size:25px;}
+  .snap-grid{grid-template-columns:1fr 1fr;}
   .tools-grid{grid-template-columns:1fr;}
-  .debt-item{flex-direction:column;gap:4px;}
-  .debt-right{text-align:left;}
+  .section{padding:18px 16px;}
 }
-@media(min-width:900px){
-  /* Desktop: dense prose-like content (greeting, plan text, upgrade
-     card copy) keeps a readable measure; grid-based content (snapshot
-     numbers, tool cards) is allowed to use the full wide canvas since
-     more columns genuinely help rather than just adding whitespace. */
-  .greeting,.action-card,.plan-card,.upgrade-card,.disclaimer{max-width:700px;}
-  .snapshot-grid{grid-template-columns:repeat(4,1fr);max-width:1040px;}
-  .tools-grid{grid-template-columns:repeat(3,1fr);}
-}
-@media print{.topbar,.upgrade-card,.dash-footer,.action-card-footer,.pf-topbar,.disclaimer{display:none!important;}}
+@media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
 </style>
 </head>
 <body>
 
-<!-- GATE -->
-<div id="gate">
-  <div class="gate-card">
-    <span class="gate-logo">Debt-Free.world</span>
-    <div class="gate-spinner" id="gateSpinner"></div>
-    <div class="gate-title" id="gateTitle" data-i18n="gate_verifying">Verifying your access</div>
-    <div class="gate-sub" id="gateSub" data-i18n="gate_moment">This takes only a moment.</div>
-    <div class="gate-form" id="gateForm">
-      <input type="email" id="gateEmail" placeholder="Your email address" inputmode="email" autocomplete="email" data-i18n-placeholder="gate_email_placeholder"/>
-      <button class="gate-btn" onclick="requestNewLink()" data-i18n="gate_send_link">Send me a new access link</button>
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="icon-btn" onclick="openDrawer()" aria-label="Menu" data-i18n-aria="aria_menu"><i data-lucide="menu"></i></button>
+    <span class="wordmark"><span class="spark">✦</span> Debt-Free.world</span>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" onclick="toggleLang(event)"><i data-lucide="globe"></i><span id="langLabel">EN</span></button>
+      <div class="lang-menu" id="langMenu"><div class="lang-menu-inner" id="langMenuInner"></div></div>
     </div>
-    <div class="gate-success" id="gateSuccess" data-i18n="gate_success">Your link is on its way. Check your inbox — and spam if it doesn't arrive within 2 minutes.</div>
+  </div>
+</header>
+
+<!-- DRAWER -->
+<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+<nav class="drawer" id="drawer" aria-label="Main">
+  <div class="drawer-head">
+    <span class="wordmark"><span class="spark">✦</span> Debt-Free.world</span>
+    <button class="icon-btn" onclick="closeDrawer()" aria-label="Close"><i data-lucide="x"></i></button>
+  </div>
+  <div class="drawer-nav">
+    <div class="nav-group">
+      <div class="nav-group-label"><i data-lucide="badge-check"></i><span data-i18n="nav_g_debtfree">Debt FREE</span></div>
+      <button class="nav-item" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
+      <button class="nav-item" onclick="navTo('sec-today')"><i data-lucide="circle-alert"></i><span data-i18n="nav_emergency">Emergency Card</span></button>
+      <button class="nav-item" onclick="navTo('sec-understand')"><i data-lucide="wallet"></i><span data-i18n="nav_snapshot">Financial Snapshot</span></button>
+      <button class="nav-item" onclick="navTo('sec-debtmap')"><i data-lucide="map"></i><span data-i18n="nav_debtmap">Debt Map</span></button>
+      <button class="nav-item" onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i><span data-i18n="nav_support">Support</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label"><i data-lucide="wrench"></i><span data-i18n="nav_g_tools">Tools</span></div>
+      <button class="nav-item" onclick="openTool('dfd')"><i data-lucide="calendar-check"></i><span data-i18n="tool_dfd_n">Debt-Free Date Calculator</span></button>
+      <button class="nav-item" onclick="openTool('strat')"><i data-lucide="layers"></i><span data-i18n="tool_strat_n">Snowball vs Avalanche</span></button>
+      <button class="nav-item" onclick="openTool('budget')"><i data-lucide="piggy-bank"></i><span data-i18n="tool_budget_n">Crisis Budget Planner</span></button>
+      <button class="nav-item" onclick="openTool('income')"><i data-lucide="trending-up"></i><span data-i18n="tool_income_n">Extra Income Simulator</span></button>
+      <button class="nav-item" onclick="openTool('collect')"><i data-lucide="shield-alert"></i><span data-i18n="tool_collect_n">Debt Collection Map</span></button>
+      <button class="nav-item" onclick="openTool('legal')"><i data-lucide="scale"></i><span data-i18n="tool_legal_n">Legal Protection Guide</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label"><i data-lucide="book-open"></i><span data-i18n="nav_g_learn">Learn</span></div>
+      <a class="nav-item" href="/blog/"><i data-lucide="newspaper"></i><span data-i18n="nav_articles">Articles</span></a>
+      <a class="nav-item" href="/ecosystem.html"><i data-lucide="layout-grid"></i><span data-i18n="nav_ecosystem">Ecosystem</span></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label"><i data-lucide="lock"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
+      <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span><i data-lucide="lock" class="lock"></i></button>
+      <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="shield"></i><span data-i18n="nav_crisis">Crisis Plans</span><i data-lucide="lock" class="lock"></i></button>
+      <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><i data-lucide="lock" class="lock"></i></button>
+      <a class="nav-unlock" href="/ecosystem.html#card-2" data-i18n="nav_unlock">Unlock Debt Recovery — 19€</a>
+    </div>
+  </div>
+</nav>
+
+<!-- GATE -->
+<div class="view active" id="view-gate">
+  <div class="center-card">
+    <div class="spinner"></div>
+    <h2 data-i18n="gate_title">Opening your member area…</h2>
+    <p data-i18n="gate_sub">One moment — checking your access.</p>
   </div>
 </div>
 
-<!-- PLAN-FIRST OVERLAY -->
-<div id="planFirst">
-  <div class="pf-topbar">
-    <span class="pf-logo">Debt-Free.world</span>
-    <button class="pf-save" onclick="window.print()">
-      <span data-lucide="printer"></span> <span data-i18n="pf_save_print">Save / Print</span>
-    </button>
-  </div>
-  <div class="pf-body">
-    <span class="pf-eyebrow">My DEBT FREE Plan</span>
-    <div class="pf-title" id="pfTitle">Your personalised plan</div>
-    <div class="pf-meta" id="pfMeta"></div>
-    <div class="pf-chips" id="pfChips"></div>
-    <div class="pf-plan" id="pfPlan">Loading your plan…</div>
-    <div class="pf-actions">
-      <button class="btn-pf-cta" onclick="enterDashboard()">
-        <span data-i18n="pf_go_dashboard">Go to my member area</span>
-        <span data-lucide="arrow-right"></span>
-      </button>
-      <button class="btn-pf-secondary" onclick="window.print()">
-        <span data-lucide="printer"></span>
-        <span data-i18n="pf_save_plan">Save or print my plan</span>
-      </button>
+<!-- REAUTH -->
+<div class="view" id="view-reauth">
+  <div class="center-card">
+    <h2 data-i18n="reauth_title">Welcome back.</h2>
+    <p data-i18n="reauth_sub">Enter your email and we'll send a fresh access link straight away. It's always free.</p>
+    <div class="field">
+      <input type="email" id="reauthEmail" placeholder="your@email.com" data-i18n-placeholder="email_ph" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false"/>
     </div>
+    <button class="btn-primary" id="reauthBtn" onclick="requestLink()" data-i18n="reauth_btn">Send my access link</button>
+    <p id="reauthMsg" style="margin-top:14px;display:none;font-size:13.5px;color:var(--green);"></p>
   </div>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboard">
-
-  <div class="topbar">
-    <span class="topbar-logo">Debt-Free.world</span>
-    <div class="topbar-right">
-      <div class="lang-selector-wrap">
-        <button class="lang-pill" id="langBtn" onclick="toggleLangMenu()"><span id="langCode">EN</span> ▾</button>
-        <div class="lang-menu" id="langMenu">
-          <div class="lang-menu-inner" id="langMenuInner"></div>
-        </div>
-      </div>
-      <button class="menu-pill" onclick="openDrawer()" aria-label="All tools">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
+<div class="view" id="view-dash">
+  <div class="wrap">
+    <div class="hello">
+      <div class="eyebrow" data-i18n="hello_eyebrow">Your member area</div>
+      <h1 id="helloTitle" class="serif">Welcome.</h1>
+      <p data-i18n="hello_sub">Everything here is built around your real situation. Take it one step at a time.</p>
     </div>
-  </div>
-
-  <!-- DRAWER -->
-  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-  <div class="tools-drawer" id="toolsDrawer">
-    <div class="drawer-header">
-      <span class="drawer-title" data-i18n="drawer_title">All tools &amp; services</span>
-      <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
-    </div>
-
-    <div style="padding:10px 20px 4px;">
-      <div class="drawer-plan-item" onclick="showPlanFirst();closeDrawer();">
-        <div class="icon"><span data-lucide="file-text"></span></div>
-        <div>
-          <div class="drawer-plan-item-name" data-i18n="drawer_my_plan">My DEBT FREE Plan</div>
-          <div class="drawer-plan-item-desc" data-i18n="drawer_my_plan_desc">Open your full personalised plan</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="drawer-divider"></div>
-
-    <div class="drawer-section">
-      <span class="drawer-section-label" data-i18n="drawer_yourplan">Your Plan</span>
-      <div class="drawer-item" onclick="scrollToSection('today')">
-        <div class="icon"><span data-lucide="zap"></span></div>
-        <div><div class="drawer-item-name" data-i18n="drawer_emergency">Emergency Action Card</div><div class="drawer-item-desc" data-i18n="drawer_emergency_desc">Your most urgent step — what to do today</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('understand')">
-        <div class="icon"><span data-lucide="bar-chart-2"></span></div>
-        <div><div class="drawer-item-name" data-i18n="drawer_snapshot">Financial Snapshot</div><div class="drawer-item-desc" data-i18n="drawer_snapshot_desc">Income, surplus, debt-free date</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('debtmap')">
-        <div class="icon"><span data-lucide="map"></span></div>
-        <div><div class="drawer-item-name" data-i18n="drawer_debtmap">Debt Map</div><div class="drawer-item-desc" data-i18n="drawer_debtmap_desc">Every debt prioritised by urgency</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('support')">
-        <div class="icon"><span data-lucide="landmark"></span></div>
-        <div><div class="drawer-item-name" data-i18n="drawer_support">Local Support</div><div class="drawer-item-desc" data-i18n="drawer_support_desc">Verified free services in your country</div></div>
-      </div>
-      <div class="drawer-item" onclick="openUpdateModal();closeDrawer();">
-        <div class="icon"><span data-lucide="refresh-cw"></span></div>
-        <div><div class="drawer-item-name" data-i18n="drawer_update">Update my information</div><div class="drawer-item-desc" data-i18n="drawer_update_desc">Numbers changed? Refresh your plan</div></div>
-      </div>
-    </div>
-
-    <div class="drawer-divider"></div>
-
-    <div class="drawer-section">
-      <span class="drawer-section-label" data-i18n="drawer_tools">Tools</span>
-      <div class="drawer-item" onclick="scrollToSection('tools')">
-        <div class="icon"><span data-lucide="calculator"></span></div>
-        <div><div class="drawer-item-name" data-i18n="tool_dfd_name_long">Debt-Free Date Calculator</div><div class="drawer-item-desc" data-i18n="tool_dfd_desc">Your exact timeline from your numbers</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('tools')">
-        <div class="icon"><span data-lucide="git-merge"></span></div>
-        <div><div class="drawer-item-name" data-i18n="tool_snowball_name">Snowball vs Avalanche</div><div class="drawer-item-desc" data-i18n="tool_snowball_desc">Which strategy saves you the most?</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('tools')">
-        <div class="icon"><span data-lucide="sliders"></span></div>
-        <div><div class="drawer-item-name" data-i18n="tool_budget_name">Crisis Budget Planner</div><div class="drawer-item-desc" data-i18n="tool_budget_desc">See how small changes accelerate freedom</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('tools')">
-        <div class="icon"><span data-lucide="trending-up"></span></div>
-        <div><div class="drawer-item-name" data-i18n="tool_income_name">Extra Income Simulator</div><div class="drawer-item-desc" data-i18n="tool_income_desc">How much sooner with more income?</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('tools')">
-        <div class="icon"><span data-lucide="git-branch"></span></div>
-        <div><div class="drawer-item-name" data-i18n="tool_collection_name">Debt Collection Map</div><div class="drawer-item-desc" data-i18n="tool_collection_desc">Every stage of the process and your rights</div></div>
-      </div>
-      <div class="drawer-item" onclick="scrollToSection('tools')">
-        <div class="icon"><span data-lucide="shield"></span></div>
-        <div><div class="drawer-item-name" data-i18n="tool_legal_name">Legal Protection Guide</div><div class="drawer-item-desc" data-i18n="tool_legal_desc">What collectors can and cannot do</div></div>
-      </div>
-    </div>
-
-    <div class="drawer-divider"></div>
-
-    <div class="drawer-section">
-      <span class="drawer-section-label" data-i18n="drawer_learn">Learn</span>
-      <div class="drawer-item" onclick="window.location.href='/blog/';">
-        <div class="icon"><span data-lucide="book-open"></span></div>
-        <div><div class="drawer-item-name" data-i18n="drawer_articles">Articles</div><div class="drawer-item-desc" data-i18n="drawer_articles_desc">Debt education and financial guides</div></div>
-      </div>
-      <div class="drawer-item" onclick="window.location.href='/ecosystem.html';">
-        <div class="icon"><span data-lucide="map-pin"></span></div>
-        <div><div class="drawer-item-name" data-i18n="drawer_ecosystem">The Ecosystem</div><div class="drawer-item-desc" data-i18n="drawer_ecosystem_desc">See the full journey, all five stages</div></div>
-      </div>
-    </div>
-
-    <div class="drawer-divider"></div>
-
-    <div class="drawer-section">
-      <span class="drawer-section-label" data-i18n="drawer_recovery_section">Debt Recovery — 19 €</span>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="mail"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_letter_name">Creditor Letter Generator</div>
-          <div class="drawer-item-desc" data-i18n="drawer_letter_desc">7 letter types — written to your creditor by name</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="phone"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_call_name">Creditor Call Practice</div>
-          <div class="drawer-item-desc" data-i18n="drawer_call_desc">AI roleplay before you pick up the phone</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="compass"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_journey_name">90-Day Guided Journey</div>
-          <div class="drawer-item-desc" data-i18n="drawer_journey_desc">Weekly check-ins and next-step recommendations</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="refresh-cw"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_monthly_name">Monthly Plan Update</div>
-          <div class="drawer-item-desc" data-i18n="drawer_monthly_desc">Refresh your plan every 30 days</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="life-buoy"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_crisis_name">Crisis Action Plans</div>
-          <div class="drawer-item-desc" data-i18n="drawer_crisis_desc">Job loss, divorce, illness, emergencies</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="brain"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_behaviour_name">Behaviour &amp; Mindset Tools</div>
-          <div class="drawer-item-desc" data-i18n="drawer_behaviour_desc">Habits, stress management, impulse control</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="award"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_challenge_name">90-Day Challenge</div>
-          <div class="drawer-item-desc" data-i18n="drawer_challenge_desc">Weekly milestones to stay on track</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div class="drawer-item" onclick="goUpgrade();">
-        <div class="icon"><span data-lucide="folder"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_docs_name">My Documents</div>
-          <div class="drawer-item-desc" data-i18n="drawer_docs_desc">All letters and notes from your 90 days</div>
-          <span class="drawer-item-badge badge-unlock" data-i18n="drawer_unlock">Unlock</span>
-        </div>
-      </div>
-      <div style="padding:6px 0 2px;">
-        <a href="#" class="upgrade-community" onclick="goUpgradeCommunity(event)" style="text-align:left;display:block;">Can't afford 19 €? Get Community Access — free</a>
-      </div>
-    </div>
-
-    <div class="drawer-divider"></div>
-
-    <div class="drawer-section">
-      <span class="drawer-section-label" data-i18n="drawer_comingsoon">Coming soon</span>
-      <div class="drawer-item">
-        <div class="icon"><span data-lucide="briefcase"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_ib_name">Income Builder</div>
-          <div class="drawer-item-desc" data-i18n="drawer_ib_desc">Realistic ways to increase your income</div>
-          <span class="drawer-item-badge badge-coming">Q4 2026</span>
-        </div>
-      </div>
-      <div class="drawer-item">
-        <div class="icon"><span data-lucide="trending-up"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_wa_name">Wealth Architect</div>
-          <div class="drawer-item-desc" data-i18n="drawer_wa_desc">Build and protect what you earn</div>
-          <span class="drawer-item-badge badge-coming">2028</span>
-        </div>
-      </div>
-      <div class="drawer-item">
-        <div class="icon"><span data-lucide="building-2"></span></div>
-        <div>
-          <div class="drawer-item-name" data-i18n="drawer_be_name">Business Engine</div>
-          <div class="drawer-item-desc" data-i18n="drawer_be_desc">For entrepreneurs and business owners</div>
-          <span class="drawer-item-badge badge-coming">2029</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="drawer-divider"></div>
-    <button class="drawer-logout" onclick="logout()" data-i18n="drawer_signout">Sign out</button>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <div class="main-wrap">
 
     <!-- TODAY -->
-    <div class="today-section" id="today">
-      <div class="greeting">
-        <div class="greeting-name" id="greetingName" data-i18n="greeting_default">Good to see you.</div>
-        <div class="greeting-sub" id="greetingSub" data-i18n="greeting_sub">Your journey to financial freedom has already started.</div>
-      </div>
-
-      <div class="action-card">
-        <div class="action-card-top">
-          <div class="icon"><span data-lucide="zap"></span></div>
-          <div class="action-card-label" data-i18n="today_priority">Today's priority</div>
-        </div>
-        <div class="action-card-body">
-          <div class="action-text" id="ecAction" data-i18n="loading_priority">Loading your priority action…</div>
-          <div class="ec-critical" id="ecCritical">
-            <div class="ec-critical-lbl" data-i18n="most_critical_debt">Most critical debt</div>
-            <div class="ec-critical-name" id="ecDebtName">—</div>
-            <div class="ec-critical-detail" id="ecDebtDetail"></div>
-          </div>
-          <div class="checklist" id="checklist"></div>
-        </div>
-        <div class="action-card-footer">
-          <button class="btn-green" onclick="showPlanFirst()">
-            <span data-lucide="file-text"></span>
-            <span data-i18n="read_full_plan">Read my full plan</span>
-          </button>
-          <button class="btn-ghost" onclick="window.print()">
-            <span data-lucide="printer"></span>
-            <span data-i18n="save">Save</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- RISK ALERT — fulfills the explicit FAQ promise "Risk alerts —
-           what happens if you do nothing", which was previously absent
-           from both this dashboard and the AI plan-generation prompt.
-           Computed directly from the person's own numbers so it's never
-           blank even before the underlying plan text includes this
-           section; if/when the plan prompt is updated to generate this
-           content explicitly, renderRiskAlert() will prefer that text
-           over the computed fallback. -->
-      <div class="risk-alert" id="riskAlert" style="display:none;">
-        <div class="risk-alert-top">
-          <span class="icon"><span data-lucide="alert-triangle"></span></span>
-          <span class="risk-alert-label" data-i18n="risk_alert_label">If nothing changes</span>
-        </div>
-        <div class="risk-alert-body" id="riskAlertBody"></div>
-      </div>
-    </div>
+    <section class="section" id="sec-today">
+      <div class="section-head"><i data-lucide="circle-alert"></i><span class="section-eyebrow" data-i18n="today_eyebrow">Today</span></div>
+      <h2 data-i18n="today_title">Start here — three things that change today</h2>
+      <p class="lead" data-i18n="today_lead">You don't need to fix everything. You need to do the next right thing. Tick each one as you go.</p>
+      <div class="emerg" id="emergCard"></div>
+    </section>
 
     <!-- UNDERSTAND -->
-    <div class="df-section" id="understand">
-      <span class="df-section-label" data-i18n="understand_section">Understand — Your Financial Reality</span>
-      <div class="snapshot-grid">
-        <div class="snap-box">
-          <div class="snap-label">
-            <span class="icon"><span data-lucide="arrow-up-down"></span></span>
-            <span data-i18n="monthly_surplus">Monthly surplus</span>
-          </div>
-          <span class="snap-val" id="statSurplus">—</span>
-          <span class="snap-sub" id="statSurplusSub"></span>
-        </div>
-        <div class="snap-box highlight">
-          <div class="snap-label g">
-            <span class="icon"><span data-lucide="calendar-check"></span></span>
-            <span data-i18n="debt_free_date">Debt-free date</span>
-          </div>
-          <span class="snap-val g" id="statDfd">—</span>
-          <span class="snap-sub" id="statDfdSub"></span>
-        </div>
-        <div class="snap-box">
-          <div class="snap-label">
-            <span class="icon"><span data-lucide="credit-card"></span></span>
-            <span data-i18n="total_debt">Total debt</span>
-          </div>
-          <span class="snap-val" id="statDebt">—</span>
-          <span class="snap-sub" id="statDebtSub"></span>
-        </div>
-        <div class="snap-box">
-          <div class="snap-label">
-            <span class="icon"><span data-lucide="clock"></span></span>
-            <span data-i18n="days_with_us">Days with us</span>
-          </div>
-          <span class="snap-val g" id="statDays">—</span>
-          <span class="snap-sub" data-i18n="days_of_progress">days of progress</span>
-        </div>
-      </div>
-    </div>
+    <section class="section" id="sec-understand">
+      <div class="section-head"><i data-lucide="wallet"></i><span class="section-eyebrow" data-i18n="snap_eyebrow">Understand</span></div>
+      <h2 data-i18n="snap_title">Your financial snapshot</h2>
+      <p class="lead" data-i18n="snap_lead">Real numbers, no judgement. This is the ground we build on.</p>
+      <div id="snapBody"></div>
+    </section>
 
     <!-- PLAN -->
-    <div class="df-section" id="plan">
-      <span class="df-section-label" data-i18n="plan_section">Plan — My DEBT FREE Plan</span>
-      <div class="plan-card">
-        <div class="plan-card-header">
-          <span class="plan-card-eyebrow" data-i18n="my_plan">My DEBT FREE Plan</span>
-          <span style="font-size:11px;color:var(--text-soft);font-weight:300;" id="planMeta"></span>
-        </div>
-        <div class="plan-card-body" id="planBody" data-i18n="loading_plan">Loading your plan…</div>
-        <div class="plan-card-footer">
-          <div class="plan-card-footer-left">
-            <button class="btn-expand" id="planExpandBtn" onclick="togglePlan()">
-              <span data-lucide="chevron-down"></span>
-              <span data-i18n="read_full_plan_btn">Read full plan</span>
-            </button>
-            <button class="btn-print" onclick="window.print()">
-              <span data-lucide="printer"></span>
-              <span data-i18n="save_print">Save / Print</span>
-            </button>
-          </div>
-          <button class="btn-update-plan" onclick="openUpdateModal()">
-            <span data-lucide="refresh-cw"></span>
-            <span data-i18n="update_my_plan">Update my plan</span>
-          </button>
-        </div>
-      </div>
-    </div>
+    <section class="section" id="sec-plan">
+      <div class="section-head"><i data-lucide="file-text"></i><span class="section-eyebrow" data-i18n="plan_eyebrow">Your plan</span></div>
+      <h2 data-i18n="plan_title">My DEBT FREE Plan</h2>
+      <p class="lead" data-i18n="plan_lead">Written for your situation — something to live, not read once.</p>
+      <div id="planBody"></div>
+    </section>
 
     <!-- DEBT MAP -->
-    <div class="df-section" id="debtmap">
-      <span class="df-section-label" data-i18n="debtmap_section">Debt Map — Prioritised by Urgency</span>
+    <section class="section" id="sec-debtmap">
+      <div class="section-head"><i data-lucide="map"></i><span class="section-eyebrow" data-i18n="dm_eyebrow">Debt map</span></div>
+      <h2 data-i18n="dm_title">What to tackle first</h2>
+      <p class="lead" data-i18n="dm_lead">Ordered by urgency, not by size. The top of this list is where your attention belongs.</p>
       <div id="debtMapBody"></div>
-    </div>
+    </section>
 
     <!-- TOOLS -->
-    <div class="df-section" id="tools">
-      <span class="df-section-label" data-i18n="tools_section">Tools — Take Control</span>
-      <div class="tools-grid" id="toolsGrid"></div>
-    </div>
+    <section class="section" id="sec-tools">
+      <div class="section-head"><i data-lucide="wrench"></i><span class="section-eyebrow" data-i18n="tools_eyebrow">Tools</span></div>
+      <h2 data-i18n="tools_title">Work it through yourself</h2>
+      <p class="lead" data-i18n="tools_lead">Each tool starts from your own numbers. Change anything and see what happens.</p>
+      <div class="tools-grid">
+        <button class="tool-card" onclick="openTool('dfd')"><span class="ti"><i data-lucide="calendar-check"></i></span><span class="tn" data-i18n="tool_dfd_n">Debt-Free Date Calculator</span><span class="td" data-i18n="tool_dfd_d">See the date you could be free — and how to pull it closer.</span></button>
+        <button class="tool-card" onclick="openTool('strat')"><span class="ti"><i data-lucide="layers"></i></span><span class="tn" data-i18n="tool_strat_n">Snowball vs Avalanche</span><span class="td" data-i18n="tool_strat_d">Two proven orders. See which clears your debts faster.</span></button>
+        <button class="tool-card" onclick="openTool('budget')"><span class="ti"><i data-lucide="piggy-bank"></i></span><span class="tn" data-i18n="tool_budget_n">Crisis Budget Planner</span><span class="td" data-i18n="tool_budget_d">Essentials first. See exactly what's left for debt.</span></button>
+        <button class="tool-card" onclick="openTool('income')"><span class="ti"><i data-lucide="trending-up"></i></span><span class="tn" data-i18n="tool_income_n">Extra Income Simulator</span><span class="td" data-i18n="tool_income_d">Even a little extra each month moves your free date.</span></button>
+        <button class="tool-card" onclick="openTool('collect')"><span class="ti"><i data-lucide="shield-alert"></i></span><span class="tn" data-i18n="tool_collect_n">Debt Collection Map</span><span class="td" data-i18n="tool_collect_d">Know which debts are urgent and which can wait.</span></button>
+        <button class="tool-card" onclick="openTool('legal')"><span class="ti"><i data-lucide="scale"></i></span><span class="tn" data-i18n="tool_legal_n">Legal Protection Guide</span><span class="td" data-i18n="tool_legal_d">Your rights and protections, for your country.</span></button>
+      </div>
+    </section>
 
     <!-- SUPPORT -->
-    <div class="df-section" id="support">
-      <span class="df-section-label" data-i18n="support_section">Support — You Are Not Alone</span>
+    <section class="section" id="sec-support">
+      <div class="section-head"><i data-lucide="life-buoy"></i><span class="section-eyebrow" data-i18n="sup_eyebrow">Support</span></div>
+      <h2 data-i18n="sup_title">Verified help where you are</h2>
+      <p class="lead" id="supLead" data-i18n="sup_lead">Free and trusted services in your country. You don't have to do this alone.</p>
       <div id="supportBody"></div>
-    </div>
+    </section>
 
     <!-- JOURNEY -->
-    <div class="df-section" id="journey">
-      <span class="df-section-label" data-i18n="journey_section">Your Journey</span>
-      <div class="journey-timeline">
-        <div class="journey-step">
-          <div class="journey-step-left">
-            <div class="journey-step-dot complete"><div class="icon"><span data-lucide="check"></span></div></div>
-            <div class="journey-step-line"></div>
-          </div>
-          <div class="journey-step-body">
-            <span class="journey-step-tag complete" data-i18n="journey_df_tag">DEBT FREE — Complete</span>
-            <div class="journey-step-title" data-i18n="journey_df_title">My DEBT FREE Plan</div>
-            <div class="journey-step-desc" data-i18n="journey_df_desc">You understand your situation. You have your plan and all the tools to start.</div>
-          </div>
-        </div>
-        <div class="journey-step">
-          <div class="journey-step-left">
-            <div class="journey-step-dot active"><div class="icon"><span data-lucide="arrow-right"></span></div></div>
-            <div class="journey-step-line"></div>
-          </div>
-          <div class="journey-step-body">
-            <span class="journey-step-tag active" data-i18n="journey_dr_tag">DEBT RECOVERY — 19 €</span>
-            <div class="journey-step-title" data-i18n="journey_dr_title">My Recovery Journey</div>
-            <div class="journey-step-desc" data-i18n="journey_dr_desc">90-day guided companion. Creditor letters. Weekly check-ins. The difference between knowing and doing.</div>
-            <button class="btn-green" style="margin-top:12px;font-size:13px;padding:10px 18px;" onclick="goUpgrade()">
-              <span data-lucide="arrow-right"></span>
-              <span data-i18n="continue_journey">Continue my journey</span>
-            </button>
-          </div>
-        </div>
-        <div class="journey-step">
-          <div class="journey-step-left">
-            <div class="journey-step-dot locked"><div class="icon"><span data-lucide="lock"></span></div></div>
-            <div class="journey-step-line"></div>
-          </div>
-          <div class="journey-step-body">
-            <span class="journey-step-tag locked" data-i18n="journey_ib_tag">INCOME BUILDER — Q4 2026</span>
-            <div class="journey-step-title" data-i18n="journey_ib_title">Increase Your Income</div>
-            <div class="journey-step-desc" data-i18n="journey_ib_desc">Reducing expenses has a ceiling. Increasing income changes the game.</div>
-          </div>
-        </div>
-        <div class="journey-step">
-          <div class="journey-step-left">
-            <div class="journey-step-dot locked"><div class="icon"><span data-lucide="lock"></span></div></div>
-            <div class="journey-step-line"></div>
-          </div>
-          <div class="journey-step-body">
-            <span class="journey-step-tag locked" data-i18n="journey_wa_tag">WEALTH ARCHITECT — 2028</span>
-            <div class="journey-step-title" data-i18n="journey_wa_title">Build and Protect Wealth</div>
-            <div class="journey-step-desc" data-i18n="journey_wa_desc">Once debt is gone, build what lasts.</div>
-          </div>
-        </div>
-        <div class="journey-step">
-          <div class="journey-step-left">
-            <div class="journey-step-dot locked"><div class="icon"><span data-lucide="lock"></span></div></div>
-          </div>
-          <div class="journey-step-body">
-            <span class="journey-step-tag locked" data-i18n="journey_be_tag">BUSINESS ENGINE — 2029</span>
-            <div class="journey-step-title" data-i18n="journey_be_title">Build Something Bigger</div>
-            <div class="journey-step-desc" data-i18n="journey_be_desc">For entrepreneurs ready to build their next chapter.</div>
-          </div>
-        </div>
+    <section class="section" id="sec-journey">
+      <div class="section-head"><i data-lucide="route"></i><span class="section-eyebrow" data-i18n="jr_eyebrow">Your journey</span></div>
+      <h2 data-i18n="jr_title">Where this goes</h2>
+      <p class="lead" data-i18n="jr_lead">You're at the start. Each step only opens when you're ready — there's no rush.</p>
+      <div class="journey" id="journeyBody"></div>
+    </section>
+
+    <!-- UPGRADE -->
+    <section class="section upgrade" id="sec-upgrade">
+      <div class="section-head"><span class="section-eyebrow" data-i18n="up_eyebrow">When you're ready</span></div>
+      <h2 data-i18n="up_title">You understand your situation. Now change it.</h2>
+      <p class="up-lead" data-i18n="up_lead">Debt Recovery gives you the tools to act — not just to understand. Letters that get written for you, crisis plans, and a clear 90-day path.</p>
+      <div class="up-feats">
+        <div class="up-feat"><i data-lucide="mail-plus"></i><span data-i18n="up_f1">Creditor letters written for your exact situation</span></div>
+        <div class="up-feat"><i data-lucide="shield"></i><span data-i18n="up_f2">Crisis plans for job loss, illness, separation</span></div>
+        <div class="up-feat"><i data-lucide="folder"></i><span data-i18n="up_f3">Every letter and document saved in one place</span></div>
+        <div class="up-feat"><i data-lucide="compass"></i><span data-i18n="up_f4">A clear, guided 90-day recovery path</span></div>
       </div>
-    </div>
+      <div class="up-price"><span class="amt">19€</span><span class="per" data-i18n="up_price">one-time · 90 days · no subscription</span></div>
+      <a class="up-cta" href="/ecosystem.html#card-2"><span data-i18n="up_cta">See Debt Recovery</span><i data-lucide="arrow-right"></i></a>
+    </section>
 
-    <!-- UPGRADE CARD -->
-    <div class="upgrade-card">
-      <span class="upgrade-tag" data-i18n="upgrade_tag">Debt Recovery</span>
-      <div class="upgrade-title" data-i18n="upgrade_title" data-i18n-html>You understand your situation.<br>Now change it.</div>
-      <div class="upgrade-body" data-i18n="upgrade_body">Your Debt Recovery Companion helps you stay on track for the next 90 days with guided actions, creditor communication tools, and support through life's difficult moments.</div>
-      <ul class="upgrade-includes">
-        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li1">Creditor letters written to your creditor by name — 7 types</span></li>
-        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li2">Creditor call practice — AI roleplay before you pick up the phone</span></li>
-        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li3">90-day guided journey with weekly check-ins</span></li>
-        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li4">Monthly plan updates — stays accurate as your situation changes</span></li>
-        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li5">Crisis action plans — job loss, divorce, illness, emergencies</span></li>
-        <li><div class="icon"><span data-lucide="check"></span></div><span data-i18n="upgrade_li6">Behaviour and mindset tools — habits, stress, impulse control</span></li>
-      </ul>
-      <div class="upgrade-price" data-i18n="upgrade_price" data-i18n-html>19 € once. <strong>Less than 0,25 €</strong> per day for 90 days. No subscription.</div>
-      <a href="#" class="btn-upgrade" onclick="goUpgradeStripe(event)">
-        <span data-lucide="arrow-right"></span>
-        <span data-i18n="continue_recovery">Continue my recovery</span>
-      </a>
-      <a href="#" class="upgrade-community" onclick="goUpgradeCommunity(event)">Can't afford 19 € right now? Get Community Access — free, no explanation needed.</a>
-    </div>
+  </div>
+  <footer class="foot">
+    <div class="tag">We do this together ✦</div>
+    <div>Amliv Oy · VAT FI32503518 · <a href="mailto:support@debt-free.world">support@debt-free.world</a></div>
+    <div style="margin-top:4px;"><a href="/legal.html#privacy" data-i18n="foot_privacy">Privacy</a> · <a href="/legal.html#terms" data-i18n="foot_terms">Terms</a></div>
+  </footer>
+</div>
 
-    <div class="disclaimer" data-i18n="disclaimer_text">Your plan is created based on the information you provided. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.</div>
-
-    <div class="dash-footer">
-      <a href="/" data-i18n="footer_home">Home</a><a href="/ecosystem.html" data-i18n="footer_ecosystem">Ecosystem</a><a href="/legal.html#privacy" data-i18n="footer_privacy">Privacy</a><a href="mailto:support@debt-free.world" data-i18n="footer_support">Support</a>
-      <p>Amliv Oy · VAT FI32503518 · Nokia, Finland</p>
-    </div>
-
+<!-- PLAN-FIRST OVERLAY -->
+<div class="overlay" id="planOverlay">
+  <div class="overlay-card">
+    <div class="overlay-eyebrow" data-i18n="ov_eyebrow">Your plan is ready</div>
+    <h2 id="ovTitle" class="serif">Here's your DEBT FREE Plan.</h2>
+    <p class="ov-sub" data-i18n="ov_sub">Read this first. It was written for your situation — everything else in your member area supports it.</p>
+    <div class="overlay-plan" id="ovPlan"></div>
+    <button class="btn-primary" onclick="closeOverlay()" data-i18n="ov_btn">Take me to my member area</button>
   </div>
 </div>
 
-<!-- UPDATE PLAN MODAL -->
-<div class="update-modal-overlay" id="updateModalOverlay" onclick="closeUpdateModalBg(event)">
-  <div class="update-modal">
-    <h3 data-i18n="update_modal_title">Update your plan</h3>
-    <p data-i18n="update_modal_body">Your situation may have changed since you built your plan. Choose how you'd like to update it — both options take a few minutes.</p>
-    <div class="update-modal-actions">
-      <button class="update-opt" onclick="goUpdateExisting()">
-        <div class="icon"><span data-lucide="edit-3"></span></div>
-        <div>
-          <div class="update-opt-title" data-i18n="update_opt1_title">Update my information</div>
-          <div class="update-opt-desc" data-i18n="update_opt1_desc">Go through the form again with your current numbers pre-filled. A new plan replaces your old one.</div>
-        </div>
-      </button>
-      <button class="update-opt" onclick="goStartOver()">
-        <div class="icon"><span data-lucide="rotate-ccw"></span></div>
-        <div>
-          <div class="update-opt-title" data-i18n="update_opt2_title">Start completely over</div>
-          <div class="update-opt-desc" data-i18n="update_opt2_desc">Begin the form from scratch with nothing pre-filled. Useful if your situation has changed a lot.</div>
-        </div>
-      </button>
+<!-- TOOL MODAL -->
+<div class="modal" id="toolModal" onclick="if(event.target===this)closeTool()">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span class="mh-icon"><i data-lucide="wrench" id="modalIcon"></i></span>
+      <h3 id="modalTitle">Tool</h3>
+      <button class="close" onclick="closeTool()" aria-label="Close"><i data-lucide="x"></i></button>
     </div>
-    <button class="update-modal-close" onclick="closeUpdateModal()" data-i18n="update_cancel">Cancel</button>
+    <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const WORKER_URL='https://debt-free-proxy.amlivbusiness.workers.dev';
-const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
-const I18N={
-  EN:{
-  greeting_morning:'Good morning',
-  greeting_afternoon:'Good afternoon',
-  greeting_evening:'Good evening',
-  greeting_default:'Good to see you.',
-  greeting_sub:'Your next priority is waiting below. Your plan has everything you need.',
-  today_priority:'Today\'s priority',
-  most_critical_debt:'Most critical debt',
-  ec_action_default:'Review your most urgent debt and take one concrete step today.',
-  ec_check1:'List all your debts and their minimum monthly payments',
-  ec_check2:'Contact your most urgent creditor to understand your options',
-  ec_check3:'Check if you qualify for any government support in your country',
-  urgent_action_required:'Urgent — action required',
-  risk_alert_label:'If nothing changes',
-  risk_interest_growth:'At your current rate, interest alone is costing you {monthly}/month — that is {yearly}/year, growing your debt even if you never borrow another cent.',
-  risk_collections_escalation:'A debt already in collections can escalate to legal enforcement or wage garnishment if left unaddressed — acting now, even with a small step, protects you.',
-  read_full_plan:'Read my full plan',
-  save:'Save',
-  understand_section:'Understand — Your Financial Reality',
-  monthly_surplus:'Monthly surplus',
-  debt_free_date:'Debt-free date',
-  total_debt:'Total debt',
-  days_with_us:'Days with us',
-  days_of_progress:'days of progress',
-  address_deficit:'Address deficit first',
-  surplus_needed:'Surplus needed to calculate',
-  plan_section:'Plan — My DEBT FREE Plan',
-  my_plan:'My DEBT FREE Plan',
-  loading_plan:'Loading your plan…',
-  loading_priority:'Loading your priority action…',
-  read_full_plan_btn:'Read full plan',
-  show_less:'Show less',
-  save_print:'Save / Print',
-  update_my_plan:'Update my plan',
-  debtmap_section:'Debt Map — Prioritised by Urgency',
-  no_debts:'No debts recorded.',
-  collections_urgent:'Collections — urgent',
-  high_rate:'High rate',
-  medium_risk:'Medium',
-  lower_risk:'Lower risk',
-  tools_section:'Tools — Take Control',
-  tool_dfd_name:'Debt-Free Date',
-  tool_dfd_name_long:'Debt-Free Date Calculator',
-  tool_dfd_desc:'Your exact timeline from your numbers',
-  tool_snowball_name:'Snowball vs Avalanche',
-  tool_snowball_desc:'Which strategy saves you the most?',
-  tool_budget_name:'Crisis Budget Planner',
-  tool_budget_desc:'See how small changes accelerate freedom',
-  tool_income_name:'Extra Income Simulator',
-  tool_income_desc:'How much sooner with more income?',
-  tool_collection_name:'Debt Collection Map',
-  tool_collection_desc:'Every stage of the process and your rights',
-  tool_legal_name:'Legal Protection Guide',
-  tool_legal_desc:'What collectors can and cannot do',
-  months_at_current_pace:'months at current pace',
-  with_extra:'With {amount} extra/month',
-  months_lc:'months',
-  avalanche_recommended:'Avalanche recommended — pay highest interest rate ({rate}%) first to minimise total interest cost.',
-  snowball_recommended:'Snowball recommended — pay smallest balance first to build momentum with quick wins.',
-  single_debt_focus:'Single debt — focus all surplus on {amount} until cleared.',
-  dfd_full_intro:'Based on your surplus of {surplus}/mo and total debt of {total}:',
-  tool_budget_desc_long:'Identify your essential costs vs reducible spending',
-  budget_full:'Essential costs (cannot reduce): housing {housing}/mo\nOther costs: {other}/mo\nCurrent surplus: {surplus}/mo\n\nTo increase surplus: review subscriptions, food costs, transport. Every {saved} saved/month cuts your debt-free date significantly.',
-  see_impact_extra_income:'See impact of extra income',
-  income_sim_line:'{amount}/mo extra: {sooner} months sooner ({total} total)',
-  income_ideas:'Extra income ideas: freelance work, selling unused items, overtime, renting assets.',
-  tool_collection_desc_long:'Understand the process before it escalates',
-  collection_full:'DEBT COLLECTION STAGES:\n1. Creditor reminder — missed payment notice\n2. Final demand — threat of collections\n3. Collections agency — debt sold or assigned\n4. Enforcement — court judgment, possible wage garnishment\n\nYour rights: You can request written proof of debt, dispute amounts, request payment plans at any stage. Collectors cannot threaten actions they are not authorised to take.',
-  legal_full:'WHAT DEBT COLLECTORS CANNOT DO:\n• Harass, threaten or use abusive language\n• Contact you at unreasonable hours\n• Contact your employer without permission\n• Claim legal powers they do not have\n• Add unauthorised charges\n\nWHAT YOU CAN DO:\n• Request all communication in writing\n• Dispute the debt amount in writing\n• Request a payment plan at any stage\n• Contact a free debt counsellor at any time\n\nFor country-specific legal rules, consult a free debt counsellor in your country.',
-  tool_no_data:'Add your debt information during onboarding to see personalised results here.',
-  add_debts_calc:'Add your debts to calculate',
-  add_debts_compare:'Add multiple debts to compare',
-  add_debts_simulate:'Add debts to simulate',
-  support_section:'Support — You Are Not Alone',
-  free_counselling:'Free debt counselling',
-  in_country:'in {country}',
-  in_label:'in',
-  out_label:'out',
-  expenses_exceed_income:'Expenses exceed income',
-  mo_in_interest:'mo in interest',
-  free_counselling_desc:'Free or low-cost debt counselling is available in most countries through government-funded or non-profit services. Your plan includes a list of verified local organisations based on your profile.',
-  search_local:'Search local services',
-  visit_website:'Visit website',
-  free_badge:'Free',
-  journey_section:'Your Journey',
-  journey_df_tag:'DEBT FREE — Complete',
-  journey_df_title:'My DEBT FREE Plan',
-  journey_df_desc:'You understand your situation. You have your plan and all the tools to start.',
-  journey_dr_tag:'DEBT RECOVERY — 19 €',
-  journey_dr_title:'My Recovery Journey',
-  journey_dr_desc:'90-day guided companion. Creditor letters. Weekly check-ins. The difference between knowing and doing.',
-  continue_journey:'Continue my journey',
-  journey_ib_tag:'INCOME BUILDER — Q4 2026',
-  journey_ib_title:'Increase Your Income',
-  journey_ib_desc:'Reducing expenses has a ceiling. Increasing income changes the game.',
-  journey_wa_tag:'WEALTH ARCHITECT — 2028',
-  journey_wa_title:'Build and Protect Wealth',
-  journey_wa_desc:'Once debt is gone, build what lasts.',
-  journey_be_tag:'BUSINESS ENGINE — 2029',
-  journey_be_title:'Build Something Bigger',
-  journey_be_desc:'For entrepreneurs ready to build their next chapter.',
-  upgrade_tag:'Debt Recovery',
-  upgrade_title:'You understand your situation.<br>Now change it.',
-  upgrade_body:'Your Debt Recovery Companion helps you stay on track for the next 90 days with guided actions, creditor communication tools, and support through life\'s difficult moments.',
-  upgrade_li1:'Creditor letters written to your creditor by name — 7 types',
-  upgrade_li2:'Creditor call practice — AI roleplay before you pick up the phone',
-  upgrade_li3:'90-day guided journey with weekly check-ins',
-  upgrade_li4:'Monthly plan updates — stays accurate as your situation changes',
-  upgrade_li5:'Crisis action plans — job loss, divorce, illness, emergencies',
-  upgrade_li6:'Behaviour and mindset tools — habits, stress, impulse control',
-  upgrade_price:'19 € once. <strong>Less than 0,25 €</strong> per day for 90 days. No subscription.',
-  continue_recovery:'Continue my recovery',
-  cant_afford:'Can\'t afford 19 € right now? Get Community Access — free, no explanation needed.',
-  cant_afford_short:'Can\'t afford 19 €? Get Community Access — free',
-  disclaimer_text:'Your plan is created based on the information you provided. It is designed to guide and support your financial journey, but it does not replace professional legal or financial advice.',
-  footer_home:'Home',
-  footer_ecosystem:'Ecosystem',
-  footer_privacy:'Privacy',
-  footer_support:'Support',
-  drawer_title:'All tools & services',
-  drawer_my_plan:'My DEBT FREE Plan',
-  drawer_my_plan_desc:'Open your full personalised plan',
-  drawer_yourplan:'Your Plan',
-  drawer_emergency:'Emergency Action Card',
-  drawer_emergency_desc:'Your most urgent step — what to do today',
-  drawer_snapshot:'Financial Snapshot',
-  drawer_snapshot_desc:'Income, surplus, debt-free date',
-  drawer_debtmap:'Debt Map',
-  drawer_debtmap_desc:'Every debt prioritised by urgency',
-  drawer_support:'Local Support',
-  drawer_support_desc:'Verified free services in your country',
-  drawer_update:'Update my information',
-  drawer_update_desc:'Numbers changed? Refresh your plan',
-  drawer_tools:'Tools',
-  drawer_learn:'Learn',
-  drawer_articles:'Articles',
-  drawer_articles_desc:'Debt education and financial guides',
-  drawer_ecosystem:'The Ecosystem',
-  drawer_ecosystem_desc:'See the full journey, all five stages',
-  drawer_recovery_section:'Debt Recovery — 19 €',
-  drawer_letter_name:'Creditor Letter Generator',
-  drawer_letter_desc:'7 letter types — written to your creditor by name',
-  drawer_call_name:'Creditor Call Practice',
-  drawer_call_desc:'AI roleplay before you pick up the phone',
-  drawer_journey_name:'90-Day Guided Journey',
-  drawer_journey_desc:'Weekly check-ins and next-step recommendations',
-  drawer_monthly_name:'Monthly Plan Update',
-  drawer_monthly_desc:'Refresh your plan every 30 days',
-  drawer_crisis_name:'Crisis Action Plans',
-  drawer_crisis_desc:'Job loss, divorce, illness, emergencies',
-  drawer_behaviour_name:'Behaviour & Mindset Tools',
-  drawer_behaviour_desc:'Habits, stress management, impulse control',
-  drawer_challenge_name:'90-Day Challenge',
-  drawer_challenge_desc:'Weekly milestones to stay on track',
-  drawer_docs_name:'My Documents',
-  drawer_docs_desc:'All letters and notes from your 90 days',
-  drawer_unlock:'Unlock',
-  drawer_comingsoon:'Coming soon',
-  drawer_ib_name:'Income Builder',
-  drawer_ib_desc:'Realistic ways to increase your income',
-  drawer_wa_name:'Wealth Architect',
-  drawer_wa_desc:'Build and protect what you earn',
-  drawer_be_name:'Business Engine',
-  drawer_be_desc:'For entrepreneurs and business owners',
-  drawer_signout:'Sign out',
-  update_modal_title:'Update your plan',
-  update_modal_body:'Your situation may have changed since you built your plan. Choose how you\'d like to update it — both options take a few minutes.',
-  update_opt1_title:'Update my information',
-  update_opt1_desc:'Go through the form again with your current numbers pre-filled. A new plan replaces your old one.',
-  update_opt2_title:'Start completely over',
-  update_opt2_desc:'Begin the form from scratch with nothing pre-filled. Useful if your situation has changed a lot.',
-  update_cancel:'Cancel',
-  gate_verifying:'Verifying your access',
-  gate_moment:'This takes only a moment.',
-  gate_error_title:'We could not verify your access.',
-  gate_error_sub:'Enter your email and we\'ll send a fresh link to continue your plan.',
-  gate_send_link:'Send me a new access link',
-  gate_sending:'Sending…',
-  gate_success:'Your link is on its way. Check your inbox — and spam if it doesn\'t arrive within 2 minutes.',
-  gate_email_placeholder:'Your email address',
-  pf_save_print:'Save / Print',
-  pf_go_dashboard:'Go to my member area',
-  pf_save_plan:'Save or print my plan',
-  toast_checkout_fail:'Could not start checkout. Please try again.',
-  toast_checkout_fail_community:'Could not start checkout. Please contact support@debt-free.world',
-  toast_email_required:'Please enter your email address.',
-  toast_link_fail:'Could not send link. Please email support@debt-free.world',
-  confirm_start_over:'This will replace your current plan with a brand new one built from scratch. Your old plan will no longer be shown once you finish the new form. Continue?'
+/* ════════════════════════════════════════════════
+   DEBT FREE MEMBER AREA — member-free/index.html
+   Worker v16.14 · brand #0f4d28 · DM Serif + DM Sans
+   ════════════════════════════════════════════════ */
+const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
+const LANGS = ['EN','FI','SV','DE','NO','DA','NL','ES','FR','IT','PL','PT','CS','ET','LV','LT','HU','RO','HR'];
+const LANG_LABELS = {EN:'English',FI:'Suomi',SV:'Svenska',DE:'Deutsch',NO:'Norsk',DA:'Dansk',NL:'Nederlands',ES:'Español',FR:'Français',IT:'Italiano',PL:'Polski',PT:'Português',CS:'Čeština',ET:'Eesti',LV:'Latviešu',LT:'Lietuvių',HU:'Magyar',RO:'Română',HR:'Hrvatski'};
+
+let M = null;            /* member data from /member/validate */
+let memberToken = null;
+let currentLang = 'EN';
+
+/* ── helpers ── */
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function num(v){const n=parseFloat(v);return isNaN(n)?0:n;}
+function fmtMoney(n,cur){return Math.round(num(n)).toLocaleString('en-US')+' '+(cur||M&&M.currency||'EUR');}
+function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+function icons(){if(window.lucide)lucide.createIcons();}
+function showView(id){['view-gate','view-reauth','view-dash'].forEach(v=>$(v).classList.toggle('active',v===id));}
+function scrollToSection(id){const el=$(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* derived financial model */
+function model(){
+  const income=num(M.income), extra=num(M.extra_amount), housing=num(M.housing_cost), other=num(M.other_costs);
+  const surplus=income+extra-housing-other;
+  const debts=Array.isArray(M.debts)?M.debts:[];
+  const totalDebt=debts.length?debts.reduce((s,d)=>s+num(d.amount),0):num(M.total_debt);
+  const highestRate=debts.length?Math.max(...debts.map(d=>num(d.interest))):0;
+  return {income,extra,housing,other,surplus,debts,totalDebt,highestRate,cur:M.currency||'EUR'};
+}
+function monthsToFree(total,monthly){if(monthly<=0||total<=0)return null;return Math.ceil(total/monthly);}
+function dateFromMonths(m){if(m==null)return null;const d=new Date();d.setMonth(d.getMonth()+m);return d.toLocaleDateString(localeForLang(),{month:'short',year:'numeric'});}
+function localeForLang(){const map={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',NO:'nb-NO',DA:'da-DK',NL:'nl-NL',ES:'es-ES',FR:'fr-FR',IT:'it-IT',PL:'pl-PL',PT:'pt-PT',CS:'cs-CZ',ET:'et-EE',LV:'lv-LV',LT:'lt-LT',HU:'hu-HU',RO:'ro-RO',HR:'hr-HR'};return map[currentLang]||'en-GB';}
+
+/* ════════════════════════════════════════════════
+   I18N — same architecture as onboarding: data-i18n
+   walked at apply time, full EN fallback per key.
+   EN + FI complete. 17 languages are slotted as empty
+   objects for the translation team — they fall back to
+   EN until populated (identical pattern to onboarding).
+   ════════════════════════════════════════════════ */
+const I18N = {
+EN:{
+  aria_menu:'Menu',
+  nav_g_debtfree:'Debt FREE',nav_plan:'My Plan',nav_emergency:'Emergency Card',nav_snapshot:'Financial Snapshot',nav_debtmap:'Debt Map',nav_support:'Support',
+  nav_g_tools:'Tools',nav_g_learn:'Learn',nav_articles:'Articles',nav_ecosystem:'Ecosystem',
+  nav_g_recovery:'Debt Recovery',nav_letters:'Creditor Letters',nav_crisis:'Crisis Plans',nav_archive:'Document Archive',nav_unlock:'Unlock Debt Recovery — 19€',
+  gate_title:'Opening your member area…',gate_sub:'One moment — checking your access.',
+  reauth_title:'Welcome back.',reauth_sub:"Enter your email and we'll send a fresh access link straight away. It's always free.",
+  email_ph:'your@email.com',reauth_btn:'Send my access link',reauth_sent:'Link sent. Check your inbox — and your spam folder, just in case.',reauth_invalid:'Please enter a valid email address.',
+  hello_eyebrow:'Your member area',hello_hi:'Hi {name}.',hello_welcome:'Welcome.',hello_sub:'Everything here is built around your real situation. Take it one step at a time.',
+  today_eyebrow:'Today',today_title:'Start here — three things that change today',today_lead:"You don't need to fix everything. You need to do the next right thing. Tick each one as you go.",
+  em_a1_t:'Open everything you\u2019ve been avoiding',em_a1_s:'Gather the unopened letters, emails and messages. Nothing here is as bad once it\u2019s seen.',
+  em_a2_t:'Pause what you can, today',em_a2_s:'Stop non-essential spending and cancel any subscription you won\u2019t miss this month.',
+  em_a3_t:'Find your one nearest deadline',em_a3_s:'The soonest payment or court date. Write it down so it can\u2019t pass unseen.',
+  em_progress:'{n} of 3 done',em_alldone:'All three done. That took real courage — well done.',
+  snap_eyebrow:'Understand',snap_title:'Your financial snapshot',snap_lead:'Real numbers, no judgement. This is the ground we build on.',
+  snap_income:'Money in',snap_costs:'Fixed costs',snap_surplus:'Monthly surplus',snap_debt:'Total debt',
+  snap_dfd:'Estimated debt-free',snap_dfd_note:'at your current surplus',snap_per_month:'/mo',
+  snap_surplus_neg:'Your costs currently outweigh your income. We work with that — the first goal is breathing room, not repayment.',
+  snap_dfd_stabilise:'Stabilise first',snap_dfd_stab_note:'repayment date opens up once there\u2019s surplus',
+  plan_eyebrow:'Your plan',plan_title:'My DEBT FREE Plan',plan_lead:'Written for your situation — something to live, not read once.',
+  plan_expand:'Read the full plan',plan_collapse:'Show less',
+  plan_empty:'Your plan is being prepared. If it doesn\u2019t appear here shortly, you can rebuild it from your details.',plan_empty_link:'Build my plan',
+  dm_eyebrow:'Debt map',dm_title:'What to tackle first',dm_lead:'Ordered by urgency, not by size. The top of this list is where your attention belongs.',
+  dm_empty:'No debts recorded yet. When you add them, they\u2019ll appear here in priority order.',
+  dm_unknown_rate:'rate unknown',utag_crit:'Act now',utag_high:'Soon',utag_mon:'Keep current',
+  dm_banner_court:'One or more debts are in court or enforcement — the most urgent thing to address. See the Legal Protection Guide and your local support services.',
+  dm_banner_agency:'One or more debts are with a collections agency. Contacting them early almost always helps — most will agree a realistic plan.',
+  tools_eyebrow:'Tools',tools_title:'Work it through yourself',tools_lead:'Each tool starts from your own numbers. Change anything and see what happens.',
+  tool_dfd_n:'Debt-Free Date Calculator',tool_dfd_d:'See the date you could be free — and how to pull it closer.',
+  tool_strat_n:'Snowball vs Avalanche',tool_strat_d:'Two proven orders. See which clears your debts faster.',
+  tool_budget_n:'Crisis Budget Planner',tool_budget_d:"Essentials first. See exactly what's left for debt.",
+  tool_income_n:'Extra Income Simulator',tool_income_d:'Even a little extra each month moves your free date.',
+  tool_collect_n:'Debt Collection Map',tool_collect_d:'Know which debts are urgent and which can wait.',
+  tool_legal_n:'Legal Protection Guide',tool_legal_d:'Your rights and protections, for your country.',
+  sup_eyebrow:'Support',sup_title:'Verified help where you are',sup_lead:"Free and trusted services in your country. You don't have to do this alone.",
+  sup_free:'Free',sup_generic:'Free or low-cost debt counselling exists in most countries through government-funded or non-profit services. Search \u201c{country} free debt counselling\u201d to find local help.',
+  sup_disclaimer:'These are independent organisations, listed because they\u2019re trusted and free. Debt-Free.world isn\u2019t affiliated with them and doesn\u2019t share your data with them.',
+  jr_eyebrow:'Your journey',jr_title:'Where this goes',jr_lead:"You're at the start. Each step only opens when you're ready — there's no rush.",
+  jr_you:'You are here',
+  jr_s1:'Debt FREE',jr_s1m:'Understand your situation — free, always',
+  jr_s2:'Debt Recovery',jr_s2m:'Act on it — letters, crisis plans, 90-day path · 19€',
+  jr_s3:'Income',jr_s3m:'Rebuild what comes in · coming Q4 2026',
+  jr_s4:'Wealth Architect',jr_s4m:'Build beyond zero · 2028',
+  jr_s5:'Business Engine',jr_s5m:'Turn skills into income · 2029',
+  up_eyebrow:'When you\u2019re ready',up_title:'You understand your situation. Now change it.',
+  up_lead:'Debt Recovery gives you the tools to act — not just to understand. Letters that get written for you, crisis plans, and a clear 90-day path.',
+  up_f1:'Creditor letters written for your exact situation',up_f2:'Crisis plans for job loss, illness, separation',up_f3:'Every letter and document saved in one place',up_f4:'A clear, guided 90-day recovery path',
+  up_price:'one-time · 90 days · no subscription',up_cta:'See Debt Recovery',
+  foot_privacy:'Privacy',foot_terms:'Terms',
+  ov_eyebrow:'Your plan is ready',ov_title:'Here\u2019s your DEBT FREE Plan, {name}.',ov_title_plain:'Here\u2019s your DEBT FREE Plan.',
+  ov_sub:'Read this first. It was written for your situation — everything else in your member area supports it.',ov_btn:'Take me to my member area',
+  /* tools */
+  dfd_result_k:'Estimated debt-free date',dfd_months:'about {m} months',dfd_extra:'Extra payment each month',
+  dfd_note:'At {monthly}/month you clear {total} in debt. Adding even a little each month brings this date closer.',
+  dfd_stabilise:'Your costs currently exceed your income, so there\u2019s no repayment date yet. The first goal is breathing room — start with the Crisis Budget Planner.',
+  strat_snow:'Snowball',strat_aval:'Avalanche',strat_first:'Clear this first',
+  strat_snow_note:'Smallest balance first. Quick wins build momentum — powerful when starting is the hardest part.',
+  strat_aval_note:'Highest interest first. Costs you the least over time — powerful when expensive debt is draining you.',
+  strat_empty:'Add your debts during onboarding to compare strategies side by side.',strat_unknown:'rate unknown',
+  budget_in:'Money in',budget_housing:'Housing',budget_other:'Other essentials',budget_left:'Left for debt & savings',budget_shortfall:'Monthly shortfall',
+  budget_note:'In a crisis, essentials come first — housing, food, power, transport. Whatever\u2019s left is your repayment power. If it\u2019s negative, that\u2019s not failure: it\u2019s the signal to use the free support in your plan.',
+  income_k:'New debt-free date',income_add:'Extra income each month',income_sooner:'About {m} months sooner.',
+  income_note:'A side shift, selling something unused, a small raise — extra income is the fastest lever you control.',
+  income_nostart:'Once you have a monthly surplus, extra income will shorten your timeline here.',
+  collect_note:'Debts in collections or court move first — they carry legal weight. High-interest debt comes next, because it grows the fastest.',
+  collect_empty:'No debts recorded yet.',
+  legal_rights:'Your protections',legal_support:'Where to get help',
+  legal_warn:'This is general information, not legal advice. For your situation, speak to one of the free, qualified services below.'
 },
-  FI:{
-  greeting_morning:'Hyvää huomenta',
-  greeting_afternoon:'Hyvää iltapäivää',
-  greeting_evening:'Hyvää iltaa',
-  greeting_default:'Mukava nähdä sinut.',
-  greeting_sub:'Seuraava tärkeä askel odottaa alla. Suunnitelmastasi löytyy kaikki tarvittava.',
-  today_priority:'Tämän päivän tärkein',
-  most_critical_debt:'Kiireellisin velka',
-  ec_action_default:'Tarkista kiireellisin velkasi ja ota yksi konkreettinen askel tänään.',
-  ec_check1:'Listaa kaikki velkasi ja niiden vähimmäiskuukausimaksut',
-  ec_check2:'Ota yhteyttä kiireellisimpään velkojaasi ymmärtääksesi vaihtoehtosi',
-  ec_check3:'Tarkista, oletko oikeutettu valtion tukeen maassasi',
-  urgent_action_required:'Kiireellinen — toimenpide vaaditaan',
-  risk_alert_label:'Jos mikään ei muutu',
-  risk_interest_growth:'Nykyisellä korollasi pelkkä korko maksaa sinulle {monthly}/kk — se on {yearly}/vuosi, kasvattaen velkaasi vaikka et lainaisi enää senttiäkään.',
-  risk_collections_escalation:'Perinnässä oleva velka voi edetä oikeudelliseen täytäntöönpanoon tai palkan ulosmittaukseen, jos siihen ei reagoida — toimiminen nyt, pienikin askel, suojaa sinua.',
-  read_full_plan:'Lue koko suunnitelmani',
-  save:'Tallenna',
-  understand_section:'Ymmärrä — taloudellinen tilanteesi',
-  monthly_surplus:'Kuukauden ylijäämä',
-  debt_free_date:'Velaton päivä',
-  total_debt:'Velkaa yhteensä',
-  days_with_us:'Päiviä mukana',
-  days_of_progress:'päivää edistystä',
-  address_deficit:'Korjaa vaje ensin',
-  surplus_needed:'Ylijäämä tarvitaan laskuun',
-  plan_section:'Suunnitelma — Oma DEBT FREE -suunnitelmani',
-  my_plan:'Oma DEBT FREE -suunnitelmani',
-  loading_plan:'Ladataan suunnitelmaasi…',
-  loading_priority:'Ladataan tärkeintä toimenpidettäsi…',
-  read_full_plan_btn:'Lue koko suunnitelma',
-  show_less:'Näytä vähemmän',
-  save_print:'Tallenna / Tulosta',
-  update_my_plan:'Päivitä suunnitelmani',
-  debtmap_section:'Velkakartta — kiireellisyysjärjestyksessä',
-  no_debts:'Ei rekisteröityjä velkoja.',
-  collections_urgent:'Perinnässä — kiireellinen',
-  high_rate:'Korkea korko',
-  medium_risk:'Keskitaso',
-  lower_risk:'Matalampi riski',
-  tools_section:'Työkalut — ota ohjat käsiisi',
-  tool_dfd_name:'Velaton-päivä-laskuri',
-  tool_dfd_name_long:'Velaton-päivä-laskuri',
-  tool_dfd_desc:'Tarkka aikataulusi omista luvuistasi',
-  tool_snowball_name:'Lumipallo vs. Lumivyöry',
-  tool_snowball_desc:'Kumpi strategia säästää enemmän?',
-  tool_budget_name:'Kriisibudjetin suunnittelija',
-  tool_budget_desc:'Näe miten pienet muutokset nopeuttavat vapautta',
-  tool_income_name:'Lisätulosimulaattori',
-  tool_income_desc:'Kuinka paljon aiemmin lisätuloilla?',
-  tool_collection_name:'Perintäprosessin kartta',
-  tool_collection_desc:'Joka vaihe prosessista ja oikeutesi',
-  tool_legal_name:'Oikeusturvaopas',
-  tool_legal_desc:'Mitä perijät saavat ja eivät saa tehdä',
-  months_at_current_pace:'kuukautta nykyisellä tahdilla',
-  with_extra:'Lisäämällä {amount}/kk',
-  months_lc:'kuukautta',
-  avalanche_recommended:'Lumivyöry suositeltu — maksa korkein korko ({rate} %) ensin minimoidaksesi kokonaiskorkokulut.',
-  snowball_recommended:'Lumipallo suositeltu — maksa pienin saldo ensin rakentaaksesi vauhtia nopeilla voitoilla.',
-  single_debt_focus:'Yksi velka — kohdista koko ylijäämä summaan {amount}, kunnes se on maksettu.',
-  dfd_full_intro:'Ylijäämälläsi {surplus}/kk ja kokonaisvelallasi {total}:',
-  tool_budget_desc_long:'Tunnista välttämättömät kulut vs. vähennettävät menot',
-  budget_full:'Välttämättömät kulut (ei vähennettävissä): asuminen {housing}/kk\nMuut kulut: {other}/kk\nNykyinen ylijäämä: {surplus}/kk\n\nYlijäämän kasvattamiseksi: tarkista tilaukset, ruokakulut, liikenne. Joka {saved} säästetty/kk nopeuttaa velaton-päivääsi merkittävästi.',
-  see_impact_extra_income:'Näe lisätulon vaikutus',
-  income_sim_line:'{amount}/kk lisää: {sooner} kuukautta aiemmin (yhteensä {total})',
-  income_ideas:'Lisätuloideoita: freelance-työ, käyttämättömien tavaroiden myynti, ylityöt, omaisuuden vuokraus.',
-  tool_collection_desc_long:'Ymmärrä prosessi ennen kuin se kärjistyy',
-  collection_full:'PERINTÄPROSESSIN VAIHEET:\n1. Velkojan muistutus — myöhästyneen maksun ilmoitus\n2. Viimeinen maksuvaatimus — uhka perinnästä\n3. Perintätoimisto — velka myyty tai siirretty\n4. Täytäntöönpano — tuomioistuimen päätös, mahdollinen palkan ulosmittaus\n\nOikeutesi: voit pyytää kirjallisen todisteen velasta, riitauttaa summia, pyytää maksusuunnitelmaa missä vaiheessa tahansa. Perijät eivät saa uhata toimilla joihin heillä ei ole valtuuksia.',
-  legal_full:'MITÄ PERIJÄT EIVÄT SAA TEHDÄ:\n• Häiritä, uhkailla tai käyttää loukkaavaa kieltä\n• Ottaa yhteyttä epäsopiviin aikoihin\n• Ottaa yhteyttä työnantajaasi ilman lupaa\n• Väittää oikeuksia joita heillä ei ole\n• Lisätä valtuuttamattomia maksuja\n\nMITÄ VOIT TEHDÄ:\n• Pyydä kaikki viestintä kirjallisena\n• Riitauta velan määrä kirjallisesti\n• Pyydä maksusuunnitelmaa missä vaiheessa tahansa\n• Ota yhteyttä maksuttomaan velkaneuvojaan milloin tahansa\n\nMaakohtaisia oikeudellisia ohjeita varten ota yhteyttä maksuttomaan velkaneuvojaan maassasi.',
-  tool_no_data:'Lisää velkatietosi onboardingin aikana nähdäksesi henkilökohtaiset tulokset tässä.',
-  add_debts_calc:'Lisää velkasi laskemista varten',
-  add_debts_compare:'Lisää useampi velka vertailua varten',
-  add_debts_simulate:'Lisää velkoja simulointia varten',
-  support_section:'Tuki — et ole yksin',
-  free_counselling:'Maksuton velkaneuvonta',
-  in_country:'maassa {country}',
-  in_label:'sisään',
-  out_label:'ulos',
-  expenses_exceed_income:'Menot ylittävät tulot',
-  mo_in_interest:'kk korkoa',
-  free_counselling_desc:'Maksutonta tai edullista velkaneuvontaa on saatavilla useimmissa maissa valtion rahoittamien tai voittoa tavoittelemattomien palveluiden kautta. Suunnitelmaasi sisältyy lista vahvistetuista paikallisista organisaatioista profiilisi perusteella.',
-  search_local:'Etsi paikallisia palveluita',
-  visit_website:'Käy sivustolla',
-  free_badge:'Maksuton',
-  journey_section:'Matkasi',
-  journey_df_tag:'DEBT FREE — Valmis',
-  journey_df_title:'Oma DEBT FREE -suunnitelmani',
-  journey_df_desc:'Ymmärrät tilanteesi. Sinulla on suunnitelma ja kaikki työkalut aloittamiseen.',
-  journey_dr_tag:'DEBT RECOVERY — 19 €',
-  journey_dr_title:'Oma Recovery-matkani',
-  journey_dr_desc:'90 päivän ohjattu kumppani. Velkojakirjeet. Viikoittaiset tarkistukset. Ero tietämisen ja tekemisen välillä.',
-  continue_journey:'Jatka matkaani',
-  journey_ib_tag:'INCOME BUILDER — Q4 2026',
-  journey_ib_title:'Kasvata tulojasi',
-  journey_ib_desc:'Menojen vähentämisellä on rajansa. Tulojen kasvattaminen muuttaa pelin.',
-  journey_wa_tag:'WEALTH ARCHITECT — 2028',
-  journey_wa_title:'Rakenna ja suojaa varallisuutta',
-  journey_wa_desc:'Kun velka on poissa, rakenna jotain pysyvää.',
-  journey_be_tag:'BUSINESS ENGINE — 2029',
-  journey_be_title:'Rakenna jotain suurempaa',
-  journey_be_desc:'Yrittäjille, jotka ovat valmiita seuraavaan lukuun.',
-  upgrade_tag:'Debt Recovery',
-  upgrade_title:'Ymmärrät tilanteesi.<br>Nyt muuta se.',
-  upgrade_body:'Debt Recovery -kumppanisi auttaa sinua pysymään raiteilla seuraavat 90 päivää ohjattujen toimien, velkojaviestintätyökalujen ja elämän vaikeiden hetkien tuen avulla.',
-  upgrade_li1:'Velkojakirjeet kirjoitettuna velkojallesi nimellä — 7 kirjetyyppiä',
-  upgrade_li2:'Velkojapuhelun harjoittelu — AI-roolipeli ennen puhelimeen tarttumista',
-  upgrade_li3:'90 päivän ohjattu matka viikoittaisin tarkistuksin',
-  upgrade_li4:'Kuukausittaiset suunnitelmapäivitykset — pysyy ajan tasalla tilanteesi muuttuessa',
-  upgrade_li5:'Kriisitoimintasuunnitelmat — työttömyys, avioero, sairaus, hätätilanteet',
-  upgrade_li6:'Käyttäytymis- ja mielentyökalut — tavat, stressi, impulssien hallinta',
-  upgrade_price:'19 € kerran. <strong>Alle 0,25 €</strong> päivässä 90 päivän ajan. Ei tilausta.',
-  continue_recovery:'Jatka toipumistani',
-  cant_afford:'Etkö pysty maksamaan 19 € juuri nyt? Hae Community Access -tukea — maksutta, ei selityksiä.',
-  cant_afford_short:'Etkö pysty maksamaan 19 €? Hae Community Access — maksutta',
-  disclaimer_text:'Suunnitelmasi on luotu antamiesi tietojen perusteella. Se on suunniteltu ohjaamaan ja tukemaan taloudellista matkaasi, mutta se ei korvaa ammatillista oikeudellista tai taloudellista neuvontaa.',
-  footer_home:'Etusivu',
-  footer_ecosystem:'Ekosysteemi',
-  footer_privacy:'Tietosuoja',
-  footer_support:'Tuki',
-  drawer_title:'Kaikki työkalut ja palvelut',
-  drawer_my_plan:'Oma DEBT FREE -suunnitelmani',
-  drawer_my_plan_desc:'Avaa koko henkilökohtainen suunnitelmasi',
-  drawer_yourplan:'Suunnitelmasi',
-  drawer_emergency:'Hätätoimintakortti',
-  drawer_emergency_desc:'Kiireellisin askeleesi — mitä tehdä tänään',
-  drawer_snapshot:'Talouskatsaus',
-  drawer_snapshot_desc:'Tulot, ylijäämä, velaton päivä',
-  drawer_debtmap:'Velkakartta',
-  drawer_debtmap_desc:'Joka velka kiireellisyysjärjestyksessä',
-  drawer_support:'Paikallinen tuki',
-  drawer_support_desc:'Vahvistetut maksuttomat palvelut maassasi',
-  drawer_update:'Päivitä tietoni',
-  drawer_update_desc:'Numerot muuttuneet? Päivitä suunnitelmasi',
-  drawer_tools:'Työkalut',
-  drawer_learn:'Opi',
-  drawer_articles:'Artikkelit',
-  drawer_articles_desc:'Velkakoulutusta ja talousoppaita',
-  drawer_ecosystem:'Ekosysteemi',
-  drawer_ecosystem_desc:'Näe koko matka, kaikki viisi vaihetta',
-  drawer_recovery_section:'Debt Recovery — 19 €',
-  drawer_letter_name:'Velkojakirjegeneraattori',
-  drawer_letter_desc:'7 kirjetyyppiä — kirjoitettuna velkojallesi nimellä',
-  drawer_call_name:'Velkojapuhelun harjoittelu',
-  drawer_call_desc:'AI-roolipeli ennen puhelimeen tarttumista',
-  drawer_journey_name:'90 päivän ohjattu matka',
-  drawer_journey_desc:'Viikoittaiset tarkistukset ja seuraavan askelen suositukset',
-  drawer_monthly_name:'Kuukausittainen suunnitelmapäivitys',
-  drawer_monthly_desc:'Päivitä suunnitelmasi 30 päivän välein',
-  drawer_crisis_name:'Kriisitoimintasuunnitelmat',
-  drawer_crisis_desc:'Työttömyys, avioero, sairaus, hätätilanteet',
-  drawer_behaviour_name:'Käyttäytymis- ja mielentyökalut',
-  drawer_behaviour_desc:'Tavat, stressinhallinta, impulssien hallinta',
-  drawer_challenge_name:'90 päivän haaste',
-  drawer_challenge_desc:'Viikoittaiset välitavoitteet pysyäksesi raiteilla',
-  drawer_docs_name:'Omat dokumenttini',
-  drawer_docs_desc:'Kaikki kirjeet ja muistiinpanot 90 päivän ajalta',
-  drawer_unlock:'Avaa',
-  drawer_comingsoon:'Tulossa',
-  drawer_ib_name:'Income Builder',
-  drawer_ib_desc:'Realistisia tapoja kasvattaa tulojasi',
-  drawer_wa_name:'Wealth Architect',
-  drawer_wa_desc:'Rakenna ja suojaa ansaitsemaasi',
-  drawer_be_name:'Business Engine',
-  drawer_be_desc:'Yrittäjille ja yritysten omistajille',
-  drawer_signout:'Kirjaudu ulos',
-  update_modal_title:'Päivitä suunnitelmasi',
-  update_modal_body:'Tilanteesi on saattanut muuttua sen jälkeen, kun rakensit suunnitelmasi. Valitse, miten haluat päivittää sen — molemmat vaihtoehdot vievät muutaman minuutin.',
-  update_opt1_title:'Päivitä tietoni',
-  update_opt1_desc:'Käy lomake läpi uudelleen nykyiset tietosi esitäytettynä. Uusi suunnitelma korvaa vanhan.',
-  update_opt2_title:'Aloita kokonaan alusta',
-  update_opt2_desc:'Aloita lomake tyhjästä, ei mitään esitäytettynä. Hyödyllinen, jos tilanteesi on muuttunut paljon.',
-  update_cancel:'Peruuta',
-  gate_verifying:'Vahvistetaan pääsyäsi',
-  gate_moment:'Tämä vie vain hetken.',
-  gate_error_title:'Pääsyäsi ei voitu vahvistaa.',
-  gate_error_sub:'Syötä sähköpostiosoitteesi ja lähetämme uuden linkin suunnitelmasi jatkamiseksi.',
-  gate_send_link:'Lähetä minulle uusi pääsylinkki',
-  gate_sending:'Lähetetään…',
-  gate_success:'Linkkisi on matkalla. Tarkista sähköpostisi — ja roskapostikansio, jos se ei saavu 2 minuutin sisällä.',
-  gate_email_placeholder:'Sähköpostiosoitteesi',
-  pf_save_print:'Tallenna / Tulosta',
-  pf_go_dashboard:'Siirry jäsenalueelleni',
-  pf_save_plan:'Tallenna tai tulosta suunnitelmani',
-  toast_checkout_fail:'Maksun aloitus ei onnistunut. Yritä uudelleen.',
-  toast_checkout_fail_community:'Maksun aloitus ei onnistunut. Ota yhteyttä support@debt-free.world',
-  toast_email_required:'Syötä sähköpostiosoitteesi.',
-  toast_link_fail:'Linkin lähetys ei onnistunut. Lähetä sähköpostia support@debt-free.world',
-  confirm_start_over:'Tämä korvaa nykyisen suunnitelmasi täysin uudella, tyhjästä rakennetulla suunnitelmalla. Vanhaa suunnitelmaa ei enää näytetä uuden lomakkeen valmistuttua. Jatketaanko?'
-}
+FI:{
+  aria_menu:'Valikko',
+  nav_g_debtfree:'Debt FREE',nav_plan:'Suunnitelmani',nav_emergency:'Hätäkortti',nav_snapshot:'Taloustilanne',nav_debtmap:'Velkakartta',nav_support:'Tuki',
+  nav_g_tools:'Työkalut',nav_g_learn:'Opi',nav_articles:'Artikkelit',nav_ecosystem:'Ekosysteemi',
+  nav_g_recovery:'Debt Recovery',nav_letters:'Velkojakirjeet',nav_crisis:'Kriisisuunnitelmat',nav_archive:'Asiakirja-arkisto',nav_unlock:'Avaa Debt Recovery — 19€',
+  gate_title:'Avataan jäsenaluettasi…',gate_sub:'Hetki — tarkistetaan pääsysi.',
+  reauth_title:'Tervetuloa takaisin.',reauth_sub:'Syötä sähköpostisi, niin lähetämme uuden pääsylinkin heti. Aina ilmaiseksi.',
+  email_ph:'sinun@sähköposti.fi',reauth_btn:'Lähetä pääsylinkki',reauth_sent:'Linkki lähetetty. Tarkista postilaatikkosi — ja varmuuden vuoksi roskaposti.',reauth_invalid:'Syötä kelvollinen sähköpostiosoite.',
+  hello_eyebrow:'Jäsenalueesi',hello_hi:'Hei {name}.',hello_welcome:'Tervetuloa.',hello_sub:'Kaikki täällä on rakennettu todellisen tilanteesi ympärille. Yksi askel kerrallaan.',
+  today_eyebrow:'Tänään',today_title:'Aloita tästä — kolme asiaa, jotka muuttuvat tänään',today_lead:'Sinun ei tarvitse korjata kaikkea. Riittää että teet seuraavan oikean asian. Merkitse jokainen kun etenet.',
+  em_a1_t:'Avaa kaikki, mitä olet vältellyt',em_a1_s:'Kerää avaamattomat kirjeet, sähköpostit ja viestit. Mikään ei ole yhtä paha, kun sen näkee.',
+  em_a2_t:'Pysäytä se, minkä voit, tänään',em_a2_s:'Lopeta turha kulutus ja peru tilaukset, joita et tällä kuussa kaipaa.',
+  em_a3_t:'Etsi lähin määräaikasi',em_a3_s:'Lähin maksu- tai oikeuspäivä. Kirjoita se ylös, ettei se mene ohi huomaamatta.',
+  em_progress:'{n}/3 tehty',em_alldone:'Kaikki kolme tehty. Se vaati todellista rohkeutta — hienoa.',
+  snap_eyebrow:'Ymmärrä',snap_title:'Taloutesi tilannekuva',snap_lead:'Todellisia lukuja, ei tuomitsemista. Tälle rakennamme.',
+  snap_income:'Tulot',snap_costs:'Kiinteät kulut',snap_surplus:'Kuukausiylijäämä',snap_debt:'Velka yhteensä',
+  snap_dfd:'Arvioitu velaton',snap_dfd_note:'nykyisellä ylijäämällä',snap_per_month:'/kk',
+  snap_surplus_neg:'Kulusi ylittävät tällä hetkellä tulosi. Työskentelemme sen kanssa — ensin haetaan hengitystilaa, ei takaisinmaksua.',
+  snap_dfd_stabilise:'Vakauta ensin',snap_dfd_stab_note:'maksupäivä avautuu, kun ylijäämää syntyy',
+  plan_eyebrow:'Suunnitelmasi',plan_title:'My DEBT FREE Plan',plan_lead:'Kirjoitettu tilanteeseesi — elettäväksi, ei kerran luettavaksi.',
+  plan_expand:'Lue koko suunnitelma',plan_collapse:'Näytä vähemmän',
+  plan_empty:'Suunnitelmaasi valmistellaan. Jos se ei näy hetken kuluttua, voit rakentaa sen uudelleen tiedoistasi.',plan_empty_link:'Rakenna suunnitelmani',
+  dm_eyebrow:'Velkakartta',dm_title:'Mihin tartutaan ensin',dm_lead:'Järjestys kiireellisyyden, ei koon mukaan. Listan kärki ansaitsee huomiosi.',
+  dm_empty:'Velkoja ei vielä kirjattu. Kun lisäät ne, ne näkyvät tässä tärkeysjärjestyksessä.',
+  dm_unknown_rate:'korko tuntematon',utag_crit:'Heti',utag_high:'Pian',utag_mon:'Pidä ajan tasalla',
+  dm_banner_court:'Yksi tai useampi velka on oikeudessa tai ulosotossa — kiireellisin asia hoidettavaksi. Katso Oikeusturvaopas ja paikalliset tukipalvelut.',
+  dm_banner_agency:'Yksi tai useampi velka on perintätoimistolla. Yhteydenotto ajoissa auttaa lähes aina — useimmat sopivat realistisen maksusuunnitelman.',
+  tools_eyebrow:'Työkalut',tools_title:'Käy se itse läpi',tools_lead:'Jokainen työkalu lähtee omista luvuistasi. Muuta mitä tahansa ja katso mitä tapahtuu.',
+  tool_dfd_n:'Velaton-päivä-laskuri',tool_dfd_d:'Näe päivä, jolloin voisit olla vapaa — ja miten lähentää sitä.',
+  tool_strat_n:'Lumipallo vs. lumivyöry',tool_strat_d:'Kaksi todistettua järjestystä. Näe kumpi vapauttaa nopeammin.',
+  tool_budget_n:'Kriisibudjetti',tool_budget_d:'Välttämättömät ensin. Näe tarkalleen mitä jää velkaan.',
+  tool_income_n:'Lisätulosimulaattori',tool_income_d:'Pienikin lisä kuukaudessa siirtää vapauspäivääsi.',
+  tool_collect_n:'Perintäkartta',tool_collect_d:'Tiedä mitkä velat ovat kiireellisiä ja mitkä voivat odottaa.',
+  tool_legal_n:'Oikeusturvaopas',tool_legal_d:'Oikeutesi ja suojasi, omassa maassasi.',
+  sup_eyebrow:'Tuki',sup_title:'Vahvistettua apua siellä missä olet',sup_lead:'Ilmaisia ja luotettavia palveluja maassasi. Sinun ei tarvitse tehdä tätä yksin.',
+  sup_free:'Ilmainen',sup_generic:'Ilmaista tai edullista velkaneuvontaa on useimmissa maissa julkisten tai voittoa tavoittelemattomien palvelujen kautta. Hae \u201d{country} ilmainen velkaneuvonta\u201d löytääksesi apua.',
+  sup_disclaimer:'Nämä ovat riippumattomia organisaatioita, listattu koska ne ovat luotettavia ja ilmaisia. Debt-Free.world ei ole sidoksissa niihin eikä jaa tietojasi niille.',
+  jr_eyebrow:'Polkusi',jr_title:'Mihin tämä johtaa',jr_lead:'Olet alussa. Jokainen askel avautuu vasta kun olet valmis — ei kiirettä.',
+  jr_you:'Olet tässä',
+  jr_s1:'Debt FREE',jr_s1m:'Ymmärrä tilanteesi — ilmaiseksi, aina',
+  jr_s2:'Debt Recovery',jr_s2m:'Toimi — kirjeet, kriisisuunnitelmat, 90 päivän polku · 19€',
+  jr_s3:'Income',jr_s3m:'Rakenna tulot uudelleen · tulossa Q4 2026',
+  jr_s4:'Wealth Architect',jr_s4m:'Rakenna nollan yli · 2028',
+  jr_s5:'Business Engine',jr_s5m:'Muuta taidot tuloksi · 2029',
+  up_eyebrow:'Kun olet valmis',up_title:'Ymmärrät tilanteesi. Muuta se nyt.',
+  up_lead:'Debt Recovery antaa työkalut toimia — ei vain ymmärtää. Kirjeet, jotka kirjoitetaan puolestasi, kriisisuunnitelmat ja selkeä 90 päivän polku.',
+  up_f1:'Velkojakirjeet kirjoitettuna juuri sinun tilanteeseesi',up_f2:'Kriisisuunnitelmat työttömyyteen, sairauteen, eroon',up_f3:'Jokainen kirje ja asiakirja tallessa yhdessä paikassa',up_f4:'Selkeä, ohjattu 90 päivän polku',
+  up_price:'kertamaksu · 90 päivää · ei tilausta',up_cta:'Katso Debt Recovery',
+  foot_privacy:'Tietosuoja',foot_terms:'Ehdot',
+  ov_eyebrow:'Suunnitelmasi on valmis',ov_title:'Tässä on DEBT FREE -suunnitelmasi, {name}.',ov_title_plain:'Tässä on DEBT FREE -suunnitelmasi.',
+  ov_sub:'Lue tämä ensin. Se on kirjoitettu tilanteeseesi — kaikki muu jäsenalueellasi tukee tätä.',ov_btn:'Vie minut jäsenalueelleni',
+  dfd_result_k:'Arvioitu velaton-päivä',dfd_months:'noin {m} kuukautta',dfd_extra:'Lisämaksu kuukaudessa',
+  dfd_note:'Summalla {monthly}/kk maksat {total} velkaa. Pienikin lisä kuukaudessa lähentää tätä päivää.',
+  dfd_stabilise:'Kulusi ylittävät tällä hetkellä tulosi, joten maksupäivää ei vielä ole. Ensin haetaan hengitystilaa — aloita Kriisibudjetista.',
+  strat_snow:'Lumipallo',strat_aval:'Lumivyöry',strat_first:'Maksa tämä ensin',
+  strat_snow_note:'Pienin saldo ensin. Nopeat voitot luovat vauhtia — tehokas kun aloittaminen on vaikeinta.',
+  strat_aval_note:'Korkein korko ensin. Halvin pitkällä aikavälillä — tehokas kun kallis velka kuluttaa sinua.',
+  strat_empty:'Lisää velkasi onboardingissa vertaillaksesi strategioita rinnakkain.',strat_unknown:'korko tuntematon',
+  budget_in:'Tulot',budget_housing:'Asuminen',budget_other:'Muut välttämättömät',budget_left:'Jää velkaan & säästöön',budget_shortfall:'Kuukausivaje',
+  budget_note:'Kriisissä välttämättömät tulevat ensin — asuminen, ruoka, sähkö, liikenne. Mitä jää, on maksukykysi. Jos se on negatiivinen, se ei ole epäonnistuminen: se on merkki käyttää suunnitelmasi ilmaista tukea.',
+  income_k:'Uusi velaton-päivä',income_add:'Lisätulo kuukaudessa',income_sooner:'Noin {m} kuukautta aiemmin.',
+  income_note:'Sivukeikka, jonkin myyminen, pieni korotus — lisätulo on nopein hallinnassasi oleva vipu.',
+  income_nostart:'Kun sinulla on kuukausiylijäämä, lisätulo lyhentää aikatauluasi tässä.',
+  collect_note:'Perinnässä tai oikeudessa olevat velat menevät ensin — niillä on oikeudellinen painoarvo. Korkeakorkoinen velka tulee seuraavaksi, koska se kasvaa nopeimmin.',
+  collect_empty:'Velkoja ei vielä kirjattu.',
+  legal_rights:'Suojasi',legal_support:'Mistä saat apua',
+  legal_warn:'Tämä on yleistä tietoa, ei oikeudellista neuvontaa. Tilannettasi varten käänny jonkin alla olevan ilmaisen, pätevän palvelun puoleen.'
+},
+SV:{},DE:{},NO:{},DA:{},NL:{},ES:{},FR:{},IT:{},PL:{},PT:{},CS:{},ET:{},LV:{},LT:{},HU:{},RO:{},HR:{}
 };
-const LANGS=[['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],['HU','Magyar'],['RO','Română'],['HR','Hrvatski']];
-const LOCALE_MAP={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',NO:'nb-NO',DA:'da-DK',NL:'nl-NL',ES:'es-ES',FR:'fr-FR',IT:'it-IT',PL:'pl-PL',PT:'pt-PT',CS:'cs-CZ',ET:'et-EE',LV:'lv-LV',LT:'lt-LT',HU:'hu-HU',RO:'ro-RO',HR:'hr-HR'};
-let currentLang='EN';
 
-let memberToken=null,memberData=null,planExpanded=false;
-
-window.addEventListener('DOMContentLoaded',async()=>{
-  if(window.lucide)lucide.createIcons();
-
-  const menuInner=document.getElementById('langMenuInner');
-  if(menuInner){
-    LANGS.forEach(l=>{
-      const b=document.createElement('button');
-      b.textContent=l[1];
-      b.onclick=()=>{
-        applyI18n(l[0]);
-        document.getElementById('langMenu').classList.remove('open');
-      };
-      menuInner.appendChild(b);
-    });
-  }
-
-  const p=new URLSearchParams(window.location.search);
-  memberToken=p.get('token')||sessionStorage.getItem('dfw_member_token');
-  const isFresh=p.get('fresh')==='1';
-
-  document.getElementById('gate').classList.add('show');
-
-  if(!memberToken){
-    document.body.classList.add('ready');
-    window.location.replace('/signup-free.html');
-    return;
-  }
-  sessionStorage.setItem('dfw_member_token',memberToken);
-
-  try{
-    const res=await fetch(`${WORKER_URL}/member/validate`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({token:memberToken})
-    });
-
-    if(!res.ok){
-      showGateError();
-      return;
-    }
-    const data=await res.json();
-
-    if(data.tier&&data.tier!=='free'){
-      window.location.replace(`/member/?token=${encodeURIComponent(memberToken)}`);
-      return;
-    }
-
-    if(!data.onboarding_complete){
-      window.location.replace(`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}`);
-      return;
-    }
-
-    memberData=data;
-    document.body.classList.add('ready');
-
-    if(isFresh){
-      document.getElementById('gate').classList.remove('show');
-      showPlanFirst(data);
-    } else {
-      document.getElementById('gate').classList.remove('show');
-      document.getElementById('dashboard').classList.add('show');
-      renderDashboard(data);
-    }
-  }catch(e){
-    showGateError();
-  }
-});
-
-function showGateError(){
-  document.body.classList.add('ready');
-  document.getElementById('gateSpinner').style.display='none';
-  document.getElementById('gateTitle').textContent=t('gate_error_title');
-  document.getElementById('gateSub').textContent=t('gate_error_sub');
-  document.getElementById('gateForm').classList.add('show');
-}
-
-function showPlanFirst(data){
-  const d=data||memberData;
-  if(!d)return;
-  const od=d.onboarding||{};
-  const plan=d.member_plan||'';
-
-  document.getElementById('pfTitle').textContent=(od.firstname?od.firstname+'\u2019s':' My')+' DEBT FREE Plan';
-  document.getElementById('pfMeta').textContent=od.country
-    ?'Personalised for '+od.country+' \u00b7 '+new Date().toLocaleDateString('en',{month:'long',year:'numeric'}):'';
-
-  const chips=[];
-  if(od.country)chips.push(od.country);
-  if(od.employment)chips.push(od.employment);
-  if(od.debts&&od.debts.length)chips.push(od.debts.length+(od.debts.length===1?' debt':' debts'));
-  document.getElementById('pfChips').innerHTML=chips.map(c=>`<span class="pf-chip">${esc(c)}</span>`).join('');
-  document.getElementById('pfPlan').textContent=plan||'Your plan will appear here once onboarding is complete.';
-  document.getElementById('planFirst').classList.add('show');
-
-  if(window.lucide)lucide.createIcons();
-}
-
-function enterDashboard(){
-  document.getElementById('planFirst').classList.remove('show');
-  document.getElementById('dashboard').classList.add('show');
-  if(memberData)renderDashboard(memberData);
-  if(window.lucide)lucide.createIcons();
-}
-
-function renderDashboard(data){
-  const od=data.onboarding||{};
-  const cur=CC[od.country]||od.currency||'EUR';
-  const debts=od.debts||[];
-  const plan=data.member_plan||'';
-
-  // Language priority: a manual choice already made in this member area
-  // (stored locally) always wins. Otherwise default to whatever language
-  // the person selected during onboarding — never silently fall back to
-  // English for someone who filled in the form in their own language.
-  const storedLang=localStorage.getItem('dfw_member_lang');
-  const initialLang=storedLang||od.language||'EN';
-  applyI18n(initialLang);
-
-  const hour=new Date().getHours();
-  const greetKey=hour<12?'greeting_morning':hour<17?'greeting_afternoon':'greeting_evening';
-  document.getElementById('greetingName').textContent=t(greetKey)+(od.firstname?', '+od.firstname:'')+'.';
-  document.getElementById('greetingSub').textContent=t('greeting_sub');
-
-  document.getElementById('planBody').textContent=plan||t('loading_plan');
-  document.getElementById('planMeta').textContent=od.country?od.country+' \u00b7 '+new Date().toLocaleDateString(LOCALE_MAP[currentLang]||'en',{month:'short',year:'numeric'}):'';
-
-  renderNumbers(od,cur,data.created_at);
-  renderRiskAlert(plan,debts,cur);
-  renderEmergencyCard(plan,debts,cur,data.emergency_card_checked||[false,false,false]);
-  renderDebtMap(debts,cur);
-  renderTools(od,cur);
-  renderSupport(plan,od.country);
-}
-
-function renderNumbers(od,cur,created_at){
-  const income=(parseFloat(od.income)||0)+(parseFloat(od.extra_amount)||0);
-  const exp=(parseFloat(od.housing_cost)||0)+(parseFloat(od.other_costs)||0);
-  const surplus=income-exp;
-  const debts=od.debts||[];
-  const totalDebt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
-  const monthlyInt=debts.reduce((s,d)=>s+(parseFloat(d.amount)*(parseFloat(d.interest)||0)/100/12),0);
-
-  const surplusEl=document.getElementById('statSurplus');
-  surplusEl.textContent=fmtCur(cur,surplus);
-  surplusEl.classList.add(surplus>=0?'g':'r');
-  document.getElementById('statSurplusSub').textContent=surplus>=0
-    ?fmtCur(cur,income)+' '+t('in_label')+' \u2014 '+fmtCur(cur,exp)+' '+t('out_label'):t('expenses_exceed_income');
-
-  document.getElementById('statDebt').textContent=fmtCur(cur,totalDebt);
-  document.getElementById('statDebtSub').textContent=monthlyInt>0?'\u2248 '+fmtCur(cur,monthlyInt)+'/'+t('mo_in_interest'):'';
-
-  const dfdEl=document.getElementById('statDfd');
-  if(surplus>0&&totalDebt>0){
-    const months=Math.ceil(totalDebt/surplus);
-    const dfd=new Date();dfd.setMonth(dfd.getMonth()+months);
-    dfdEl.textContent=dfd.toLocaleDateString(LOCALE_MAP[currentLang]||'en',{month:'short',year:'numeric'});
-    document.getElementById('statDfdSub').textContent='\u2248 '+months+' '+t('months_at_current_pace');
-  } else if(surplus<=0){
-    dfdEl.textContent=t('address_deficit');
-    dfdEl.classList.add('r');
-    document.getElementById('statDfdSub').textContent=t('surplus_needed');
-  } else {
-    dfdEl.textContent='\u2014';
-  }
-
-  if(created_at){
-    const days=Math.floor((Date.now()-new Date(created_at).getTime())/86400000);
-    document.getElementById('statDays').textContent=days===0?'Day 1':days+' days';
-  }
-}
-
-/* ── RISK ALERT ──
-   Fulfills the FAQ promise "Risk alerts — what happens if you do
-   nothing" that was missing from both the dashboard and the underlying
-   AI plan prompt. Computed directly from the person's real numbers —
-   monthly interest cost compounded forward, and the collections debt's
-   escalation risk if one exists — so it's genuinely personal rather
-   than a generic warning. If the plan text itself later includes an
-   explicit risk-alert section (once the AI prompt is updated to
-   generate one), that text is preferred over this computed version. */
-function renderRiskAlert(plan,debts,cur){
-  const el=document.getElementById('riskAlert');
-  const body=document.getElementById('riskAlertBody');
-  if(!debts||!debts.length){el.style.display='none';return;}
-
-  // Prefer explicit risk-alert content from the plan text itself, if
-  // the plan prompt has been updated to include one.
-  if(plan){
-    const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
-    let inSection=false;const rl=[];
-    for(const line of lines){
-      if(/risk alert|if you do nothing|if nothing changes/i.test(line)){inSection=true;continue;}
-      if(inSection&&/emergency action|days 1|local support|closing/i.test(line))break;
-      if(inSection&&line.length>15)rl.push(line);
-    }
-    if(rl.length){
-      body.textContent=rl.join(' ');
-      el.style.display='block';
-      return;
-    }
-  }
-
-  const monthlyInt=debts.reduce((s,d)=>s+(parseFloat(d.amount)*(parseFloat(d.interest)||0)/100/12),0);
-  const yearlyInt=monthlyInt*12;
-  const hasCollections=debts.some(d=>d.type==='Debt in collections');
-
-  const parts=[];
-  if(monthlyInt>0){
-    parts.push(t('risk_interest_growth').replace('{monthly}',fmtCur(cur,monthlyInt)).replace('{yearly}',fmtCur(cur,yearlyInt)));
-  }
-  if(hasCollections){
-    parts.push(t('risk_collections_escalation'));
-  }
-  if(!parts.length){
-    el.style.display='none';
-    return;
-  }
-  body.textContent=parts.join(' ');
-  el.style.display='block';
-}
-
-function renderEmergencyCard(plan,debts,cur,checkState){
-  let action=t('ec_action_default');
-  let checks=[
-    t('ec_check1'),
-    t('ec_check2'),
-    t('ec_check3')
-  ];
-
-  // Note: the pattern-matching below recognises section markers in the
-  // AI-generated plan text. Those markers are currently English (the
-  // plan's internal section headers), so this extraction only overrides
-  // the translated defaults above when the plan itself is in English.
-  // For plans generated in other languages, the translated fallback
-  // action and checklist are shown instead — never the raw English
-  // defaults — so the experience still feels native in every language.
-  if(plan){
-    const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
-    let inSection=false,foundAction=false;const fc=[];
-    for(const line of lines){
-      if(/emergency action|days 1|today/i.test(line)&&!foundAction){inSection=true;continue;}
-      if(inSection&&/days 31|local support|closing|we do this/i.test(line))break;
-      if(inSection){
-        if(!foundAction&&line.length>20&&!/^[\d\-]/.test(line)){action=line;foundAction=true;}
-        else if(/^[\d\-]/.test(line)){const c=line.replace(/^[\d\.\-]+\s*/,'').trim();if(c.length>10)fc.push(c);}
-      }
-    }
-    if(fc.length>=2)checks=fc.slice(0,3);
-  }
-
-  document.getElementById('ecAction').textContent=action;
-
-  if(debts.length>0){
-    const sorted=[...debts].sort((a,b)=>{
-      if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
-      if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
-      return((parseFloat(b.interest)||0)*parseFloat(b.amount))-((parseFloat(a.interest)||0)*parseFloat(a.amount));
-    });
-    const crit=sorted[0];
-    const mi=parseFloat(crit.amount)*(parseFloat(crit.interest)||0)/100/12;
-    document.getElementById('ecDebtName').textContent=(crit.creditor||crit.type)+' \u2014 '+fmtCur(crit.currency||cur,crit.amount);
-    document.getElementById('ecDebtDetail').textContent=crit.type+(crit.interest>0?' \u00b7 '+crit.interest+'% p.a.':'')+(mi>0?' \u00b7 '+fmtCur(crit.currency||cur,mi)+'/mo interest':'')+(crit.type==='Debt in collections'?' \u00b7 '+t('urgent_action_required'):'');
-  } else {
-    document.getElementById('ecCritical').style.display='none';
-  }
-
-  document.getElementById('checklist').innerHTML=checks.map((item,i)=>`
-    <div class="check-item ${checkState[i]?'done':''}" id="ci-${i}" onclick="toggleCheck(${i})">
-      <div class="check-box"><span class="check-icon" data-lucide="check"></span></div>
-      <div class="check-label">${esc(item)}</div>
-    </div>`).join('');
-  if(window.lucide)lucide.createIcons();
-}
-
-function toggleCheck(i){
-  document.getElementById('ci-'+i).classList.toggle('done');
-  const states=[0,1,2].map(i=>{const el=document.getElementById('ci-'+i);return el?el.classList.contains('done'):false;});
-  fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:states})}).catch(_=>{});
-}
-
-function togglePlan(){
-  planExpanded=!planExpanded;
-  document.getElementById('planBody').classList.toggle('expanded',planExpanded);
-  const btn=document.getElementById('planExpandBtn');
-  btn.innerHTML=planExpanded
-    ?'<span data-lucide="chevron-up"></span> '+t('show_less')
-    :'<span data-lucide="chevron-down"></span> '+t('read_full_plan_btn');
-  if(window.lucide)lucide.createIcons();
-}
-
-function renderDebtMap(debts,cur){
-  const body=document.getElementById('debtMapBody');
-  if(!debts.length){body.innerHTML=`<p style="font-size:13px;color:var(--text-soft);font-weight:300;">${t('no_debts')}</p>`;return;}
-  const sorted=[...debts].sort((a,b)=>{
-    if(a.type==='Debt in collections'&&b.type!=='Debt in collections')return -1;
-    if(b.type==='Debt in collections'&&a.type!=='Debt in collections')return 1;
-    return((parseFloat(b.interest)||0)*parseFloat(b.amount))-((parseFloat(a.interest)||0)*parseFloat(a.amount));
-  });
-  body.innerHTML=sorted.map(d=>{
-    const rate=parseFloat(d.interest)||0;
-    let tag=rate>=20?`<span class="debt-tag tag-high">${t('high_rate')}</span>`:rate>=10?`<span class="debt-tag tag-med">${t('medium_risk')}</span>`:`<span class="debt-tag tag-low">${t('lower_risk')}</span>`;
-    if(d.type==='Debt in collections')tag=`<span class="debt-tag tag-urgent">${t('collections_urgent')}</span>`;
-    const mi=parseFloat(d.amount)*rate/100/12;
-    return`<div class="debt-item">
-      <div><div class="debt-name">${esc(d.creditor||d.type)}</div><div class="debt-type">${esc(d.type)}</div><div class="debt-tags">${tag}</div></div>
-      <div class="debt-right"><div class="debt-amount">${fmtCur(d.currency||cur,d.amount)}</div><div class="debt-rate">${rate}% p.a.</div>${mi>0?`<div class="debt-interest">+${fmtCur(d.currency||cur,mi)}/mo</div>`:''}</div>
-    </div>`;
-  }).join('');
-}
-
-function renderTools(od,cur){
-  const surplus=(parseFloat(od.income)||0)+(parseFloat(od.extra_amount)||0)-(parseFloat(od.housing_cost)||0)-(parseFloat(od.other_costs)||0);
-  const debts=od.debts||[];
-  const totalDebt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
-  const highestRate=debts.length?Math.max(...debts.map(d=>parseFloat(d.interest)||0)):0;
-
-  let dfdResult='';
-  if(surplus>0&&totalDebt>0){
-    const months=Math.ceil(totalDebt/surplus);
-    const with50=Math.ceil(totalDebt/(surplus+50));
-    dfdResult=months+' '+t('months_at_current_pace')+'. '+t('with_extra').replace('{amount}',fmtCur(cur,50))+': '+with50+' '+t('months_lc')+'.';
-  }
-
-  let strategyResult='';
-  if(debts.length>1){
-    if(highestRate>15)strategyResult=t('avalanche_recommended').replace('{rate}',highestRate);
-    else strategyResult=t('snowball_recommended');
-  } else if(debts.length===1){
-    strategyResult=t('single_debt_focus').replace('{amount}',fmtCur(cur,totalDebt));
-  }
-
-  const tools=[
-    {icon:'calculator',name:t('tool_dfd_name'),desc:dfdResult||t('add_debts_calc'),
-      full:dfdResult?t('dfd_full_intro').replace('{surplus}',fmtCur(cur,surplus)).replace('{total}',fmtCur(cur,totalDebt))+'\n'+dfdResult:null},
-    {icon:'git-merge',name:t('tool_snowball_name'),desc:strategyResult||t('add_debts_compare'),full:strategyResult||null},
-    {icon:'sliders',name:t('tool_budget_name'),desc:t('tool_budget_desc_long'),
-      full:t('budget_full').replace('{housing}',fmtCur(cur,parseFloat(od.housing_cost)||0)).replace('{other}',fmtCur(cur,parseFloat(od.other_costs)||0)).replace('{surplus}',fmtCur(cur,surplus)).replace('{saved}',fmtCur(cur,50))},
-    {icon:'trending-up',name:t('tool_income_name'),desc:surplus>0&&totalDebt>0?t('see_impact_extra_income'):t('add_debts_simulate'),
-      full:surplus>0&&totalDebt>0?(function(){
-        const base=Math.ceil(totalDebt/surplus);
-        const r100=Math.ceil(totalDebt/(surplus+100));
-        const r200=Math.ceil(totalDebt/(surplus+200));
-        return t('income_sim_line').replace('{amount}',fmtCur(cur,100)).replace('{sooner}',base-r100).replace('{total}',r100)
-          +'\n'+t('income_sim_line').replace('{amount}',fmtCur(cur,200)).replace('{sooner}',base-r200).replace('{total}',r200)
-          +'\n\n'+t('income_ideas');
-      })():null},
-    {icon:'git-branch',name:t('tool_collection_name'),desc:t('tool_collection_desc_long'),
-      full:t('collection_full')},
-    {icon:'shield',name:t('tool_legal_name'),desc:t('tool_legal_desc'),
-      full:t('legal_full')},
-  ];
-
-  const grid=document.getElementById('toolsGrid');
-  grid.innerHTML=tools.map((tool,i)=>`
-    <div class="tool-card" onclick="toggleToolPanel(${i})">
-      <div class="tool-card-icon"><span data-lucide="${tool.icon}"></span></div>
-      <div>
-        <div class="tool-card-name">${tool.name}</div>
-        <div class="tool-card-desc">${esc(tool.desc.substring(0,60)+(tool.desc.length>60?'\u2026':''))}</div>
-      </div>
-    </div>`).join('');
-
-  let panelWrap=document.getElementById('toolPanelContainer');
-  if(!panelWrap){
-    panelWrap=document.createElement('div');
-    panelWrap.id='toolPanelContainer';
-    panelWrap.style.marginTop='12px';
-    grid.parentNode.insertBefore(panelWrap,grid.nextSibling);
-  }
-
-  window._tools=tools;
-  if(window.lucide)lucide.createIcons();
-}
-
-let activeToolIdx=null;
-function toggleToolPanel(i){
-  const container=document.getElementById('toolPanelContainer');
-  if(!container)return;
-  const tool=window._tools[i];
-  if(!tool)return;
-
-  if(activeToolIdx===i){
-    container.innerHTML='';activeToolIdx=null;return;
-  }
-  activeToolIdx=i;
-  container.innerHTML=`
-    <div class="tool-panel-wrap open">
-      <div class="tool-panel-title">
-        ${esc(tool.name)}
-        <button class="btn-close-panel" onclick="toggleToolPanel(${i})">&#x2715;</button>
-      </div>
-      <div style="font-size:14px;line-height:1.85;color:var(--text-soft);white-space:pre-wrap;font-weight:300;">
-        ${tool.full?esc(tool.full):'<span style="color:var(--text-soft)">'+t('tool_no_data')+'</span>'}
-      </div>
-    </div>`;
-}
-
-function renderSupport(plan,country){
-  const body=document.getElementById('supportBody');
-  if(!plan){body.innerHTML=supportFallback(country);return;}
-
-  const lines=plan.split('\n').map(l=>l.trim()).filter(Boolean);
-  let inSection=false;const sl=[];
-  for(const line of lines){
-    if(/local support|section 6/i.test(line)){inSection=true;continue;}
-    if(inSection&&/closing|we do this together|\u2726|✦|section 7/i.test(line))break;
-    if(inSection&&line.length>8)sl.push(line);
-  }
-
-  if(!sl.length){body.innerHTML=supportFallback(country);return;}
-  if(/support@debt-free\.world/i.test(sl.join(' '))&&sl.length<=3){body.innerHTML=supportFallback(country);return;}
-
-  const orgs=parseOrgs(sl);
-  if(!orgs.length){
-    body.innerHTML=`<div style="font-size:13.5px;color:var(--text-soft);line-height:1.8;font-weight:300;">${sl.map(l=>esc(l)).join('<br/>')}</div>`;
-    return;
-  }
-  body.innerHTML=orgs.map(o=>`
-    <div class="support-item">
-      <div class="support-name">${esc(o.name)}</div>
-      ${o.desc?`<div class="support-desc">${esc(o.desc)}</div>`:''}
-      <div class="support-meta">
-        ${o.url?`<a href="${esc(o.url)}" class="support-link" target="_blank" rel="noopener">
-          ${t('visit_website')} <span data-lucide="external-link"></span>
-        </a>`:''}
-        ${o.free?`<span class="support-free">${t('free_badge')}</span>`:''}
-      </div>
-    </div>`).join('');
-  if(window.lucide)lucide.createIcons();
-}
-
-function supportFallback(country){
-  return`<div class="support-item">
-    <div class="support-name">${t('free_counselling')}${country?' '+t('in_country').replace('{country}',esc(country)):''}</div>
-    <div class="support-desc">${t('free_counselling_desc')}</div>
-    ${country?`<div class="support-meta"><a href="https://www.google.com/search?q=${encodeURIComponent(country+' free debt counselling')}" class="support-link" target="_blank" rel="noopener">${t('search_local')} <span data-lucide="external-link"></span></a></div>`:''}
-  </div>`;
-}
-
-function parseOrgs(lines){
-  const orgs=[];let cur=null;
-  for(const line of lines){
-    const urlM=line.match(/https?:\/\/[\w\.\-\/\?\=\&\%]+/);
-    if(urlM&&cur){cur.url=urlM[0];continue;}
-    if(/\bfree\b/i.test(line)&&cur)cur.free=true;
-    if(line.length<100&&!line.startsWith('-')&&!urlM&&!/^\d+\./.test(line)){
-      if(cur&&cur.name)orgs.push(cur);
-      cur={name:line,desc:'',url:'',free:false};
-    } else if(cur&&!cur.desc&&line.length>20&&!urlM){cur.desc=line;}
-  }
-  if(cur&&cur.name)orgs.push(cur);
-  return orgs;
-}
-
-function openDrawer(){document.getElementById('toolsDrawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');document.body.style.overflow='hidden';}
-function closeDrawer(){document.getElementById('toolsDrawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');document.body.style.overflow='';}
-function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
-document.addEventListener('click',e=>{
-  const m=document.getElementById('langMenu');const b=document.getElementById('langBtn');
-  if(m&&!m.contains(e.target)&&e.target!==b)m.classList.remove('open');
-});
-function scrollToSection(id){
-  // Close the drawer FIRST and let body.overflow reset before scrolling —
-  // calling scrollIntoView while body still has overflow:hidden (set by
-  // openDrawer) silently fails in every browser. This function is
-  // deliberately NOT named scrollTo — that name collides with the native
-  // window.scrollTo() browser API, which was the actual root cause of
-  // every drawer link silently failing: inline onclick attributes were
-  // resolving to the native browser method instead of this function.
-  closeDrawer();
-  requestAnimationFrame(()=>{
-    const el=document.getElementById(id);
-    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-}
-function logout(){sessionStorage.removeItem('dfw_member_token');window.location.replace('/');}
-
-async function goUpgradeStripe(e){
-  if(e)e.preventDefault();
-  try{
-    const res=await fetch(`${WORKER_URL}/create-checkout`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
-        successUrl:'https://www.debt-free.world/thank-you-premium.html',
-        cancelUrl:'https://www.debt-free.world/member-free/?token='+encodeURIComponent(memberToken)
-      })
-    });
-    const data=await res.json();
-    if(data.url){window.location.href=data.url;}
-    else{toast(t('toast_checkout_fail'));}
-  }catch(err){toast(t('toast_checkout_fail'));}
-}
-function goUpgrade(){goUpgradeStripe();}
-
-async function goUpgradeCommunity(e){
-  if(e)e.preventDefault();
-  try{
-    const res=await fetch(`${WORKER_URL}/create-checkout-community`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
-        successUrl:'https://www.debt-free.world/thank-you-premium.html',
-        cancelUrl:'https://www.debt-free.world/member-free/?token='+encodeURIComponent(memberToken)
-      })
-    });
-    const data=await res.json();
-    if(data.url){window.location.href=data.url;}
-    else{toast(t('toast_checkout_fail_community'));}
-  }catch(err){toast(t('toast_checkout_fail_community'));}
-}
-
-function openUpdateModal(){
-  document.getElementById('updateModalOverlay').classList.add('show');
-  if(window.lucide)lucide.createIcons();
-}
-function closeUpdateModal(){document.getElementById('updateModalOverlay').classList.remove('show');}
-function closeUpdateModalBg(e){if(e.target.id==='updateModalOverlay')closeUpdateModal();}
-
-function goUpdateExisting(){
-  window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=update&lang=${encodeURIComponent(currentLang)}`;
-}
-
-function goStartOver(){
-  if(confirm(t('confirm_start_over'))){
-    window.location.href=`/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=fresh&lang=${encodeURIComponent(currentLang)}`;
-  }
-}
-
-async function requestNewLink(){
-  const email=document.getElementById('gateEmail').value.trim();
-  if(!email){toast(t('toast_email_required'));return;}
-  const btn=document.querySelector('.gate-btn');btn.disabled=true;btn.textContent=t('gate_sending');
-  try{
-    await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-    document.getElementById('gateForm').classList.remove('show');
-    document.getElementById('gateSuccess').classList.add('show');
-  }catch(e){
-    toast(t('toast_link_fail'));
-    btn.disabled=false;btn.textContent=t('gate_send_link');
-  }
-}
-
-/* ── I18N ──
-   Applies a full UI translation pass. Falls back to English for any key
-   not yet translated in a given language, so a partially-translated
-   language never shows a raw key name or blank text to the person using
-   it. Persists the choice so a manual language switch survives reloads,
-   and re-runs the dynamic render functions afterward so content built
-   from the person's own data (debt names, tool results) picks up the
-   new language for its static labels too. */
-function t(key){
+function t(key,vars){
   const dict=I18N[currentLang]||I18N.EN;
-  return (dict && dict[key]!==undefined) ? dict[key] : (I18N.EN[key]||key);
+  let s=(dict&&dict[key]!==undefined)?dict[key]:(I18N.EN[key]!==undefined?I18N.EN[key]:key);
+  if(vars)Object.keys(vars).forEach(k=>{s=s.replace(new RegExp('\\{'+k+'\\}','g'),vars[k]);});
+  return s;
+}
+function applyI18n(lang){
+  currentLang=I18N[lang]?lang:'EN';
+  if(M)M.language=currentLang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.getAttribute('data-i18n'));});
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.setAttribute('placeholder',t(el.getAttribute('data-i18n-placeholder')));});
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',t(el.getAttribute('data-i18n-aria')));});
+  $('langLabel').textContent=currentLang;
+  buildLangMenu();
+  if(M&&$('view-dash').classList.contains('active'))renderAll();
+  icons();
 }
 
-function applyI18n(langCode){
-  currentLang=I18N[langCode]?langCode:'EN';
-  localStorage.setItem('dfw_member_lang',currentLang);
-  document.getElementById('langCode').textContent=currentLang;
+/* ── LANGUAGE MENU ── */
+function buildLangMenu(){
+  const inner=$('langMenuInner');
+  inner.innerHTML=LANGS.map(code=>`<button class="${code===currentLang?'active':''}" onclick="setLang('${code}')">${esc(LANG_LABELS[code])}<i data-lucide="check" class="tick"></i></button>`).join('');
+  icons();
+}
+function setLang(code){applyI18n(code);$('langMenu').classList.remove('open');}
+function toggleLang(e){e.stopPropagation();$('langMenu').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=$('langMenu');if(w.classList.contains('open')&&!e.target.closest('.lang-wrap'))w.classList.remove('open');});
 
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key=el.getAttribute('data-i18n');
-    const val=t(key);
-    if(el.hasAttribute('data-i18n-html')){el.innerHTML=val;}
-    else{el.textContent=val;}
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-    el.setAttribute('placeholder',t(el.getAttribute('data-i18n-placeholder')));
-  });
+/* ── DRAWER ── */
+function openDrawer(){$('drawer').classList.add('open');$('scrim').classList.add('show');}
+function closeDrawer(){$('drawer').classList.remove('open');$('scrim').classList.remove('show');}
+function navTo(id){closeDrawer();setTimeout(()=>scrollToSection(id),180);}
 
-  // Re-render dynamic sections so labels generated in JS (debt tags,
-  // tool card text, support fallback) also pick up the new language.
-  if(memberData){
-    const od=memberData.onboarding||{};
-    const cur=CC[od.country]||od.currency||'EUR';
-    const hour=new Date().getHours();
-    const greetKey=hour<12?'greeting_morning':hour<17?'greeting_afternoon':'greeting_evening';
-    const greetingEl=document.getElementById('greetingName');
-    if(greetingEl)greetingEl.textContent=t(greetKey)+(od.firstname?', '+od.firstname:'')+'.';
-    const planMetaEl=document.getElementById('planMeta');
-    if(planMetaEl)planMetaEl.textContent=od.country?od.country+' \u00b7 '+new Date().toLocaleDateString(LOCALE_MAP[currentLang]||'en',{month:'short',year:'numeric'}):'';
+/* ════════════════════════════════════════════════
+   BOOT + AUTH
+   ════════════════════════════════════════════════ */
+async function boot(){
+  buildLangMenu();icons();
+  const params=new URLSearchParams(location.search);
+  memberToken=params.get('token');
+  const fresh=params.get('fresh')==='1';
+  if(!memberToken||memberToken.length!==64){showReauth();return;}
+  try{
+    const res=await fetch(`${WORKER_URL}/member/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:memberToken})});
+    if(!res.ok){showReauth();return;}
+    const data=await res.json();
+    /* TIER GATE — validate defaults missing tier to 'premium', so test explicitly for 'free' */
+    if(data.tier!=='free'){location.replace('/member/?token='+encodeURIComponent(memberToken));return;}
+    M=data;
+    /* default language from onboarding selection */
+    const lang=(M.language||(M.onboarding&&M.onboarding.language)||'EN').toUpperCase();
+    applyI18n(I18N[lang]?lang:'EN');
+    showView('view-dash');
+    renderAll();
+    icons();
+    /* Plan-First overlay: forced on fresh arrival from onboarding, else once per browser */
+    const seenKey='dfw_planseen_'+(M.email||'x');
+    let seen=false;try{seen=localStorage.getItem(seenKey)==='1';}catch(_){}
+    if((fresh||!seen)&&M.member_plan){openOverlay();try{localStorage.setItem(seenKey,'1');}catch(_){}}
+    /* clean token/fresh out of the visible URL */
+    try{history.replaceState({},'',location.pathname);}catch(_){}
+  }catch(e){showReauth();}
+}
+function showReauth(){showView('view-reauth');applyI18n(currentLang);icons();}
+async function requestLink(){
+  const email=$('reauthEmail').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast(t('reauth_invalid'));return;}
+  $('reauthBtn').disabled=true;
+  try{await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});}catch(_){}
+  const msg=$('reauthMsg');msg.textContent=t('reauth_sent');msg.style.display='block';
+}
+$('reauthEmail')&&$('reauthEmail').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();requestLink();}});
 
-    renderRiskAlert(memberData.member_plan||'',od.debts||[],cur);
-    renderEmergencyCard(memberData.member_plan||'',od.debts||[],cur,
-      memberData.emergency_card_checked||[false,false,false]);
-    renderDebtMap(od.debts||[],cur);
-    renderTools(od,cur);
-    renderSupport(memberData.member_plan||'',od.country);
-    renderNumbers(od,cur,memberData.created_at);
+/* ════════════════════════════════════════════════
+   RENDER
+   ════════════════════════════════════════════════ */
+function renderAll(){
+  renderHello();renderEmergency();renderSnapshot();renderPlan();renderDebtMap();renderSupport();renderJourney();
+  icons();
+}
+function firstName(){return (M.firstname||(M.onboarding&&M.onboarding.firstname)||'').trim();}
+function country(){return (M.country||(M.onboarding&&M.onboarding.country)||'').trim();}
+
+function renderHello(){
+  const n=firstName();
+  $('helloTitle').textContent=n?t('hello_hi',{name:n}):t('hello_welcome');
+}
+
+/* TODAY */
+function renderEmergency(){
+  const checked=Array.isArray(M.emergency_card_checked)?M.emergency_card_checked:[false,false,false];
+  const acts=[['em_a1_t','em_a1_s'],['em_a2_t','em_a2_s'],['em_a3_t','em_a3_s']];
+  let html=acts.map((a,i)=>`<label class="emerg-action${checked[i]?' done':''}">
+    <input type="checkbox" class="emerg-check" ${checked[i]?'checked':''} onchange="toggleEmergency(${i},this.checked)"/>
+    <span class="emerg-body"><span class="ea-title">${esc(t(a[0]))}</span><span class="ea-sub">${esc(t(a[1]))}</span></span></label>`).join('');
+  const done=checked.filter(Boolean).length;
+  html+=`<div class="emerg-progress"><i data-lucide="${done===3?'check-circle-2':'circle-dashed'}"></i>${done===3?esc(t('em_alldone')):esc(t('em_progress',{n:done}))}</div>`;
+  $('emergCard').innerHTML=html;icons();
+}
+async function toggleEmergency(i,val){
+  const arr=Array.isArray(M.emergency_card_checked)?M.emergency_card_checked.slice():[false,false,false];
+  arr[i]=val;M.emergency_card_checked=arr;
+  renderEmergency();
+  try{await fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:arr})});}catch(_){}
+}
+
+/* UNDERSTAND */
+function renderSnapshot(){
+  const m=model();
+  const surplusPos=m.surplus>=0;
+  const months=monthsToFree(m.totalDebt,m.surplus);
+  const dfd=dateFromMonths(months);
+  let html=`<div class="snap-grid">
+    <div class="snap-cell"><div class="k"><i data-lucide="arrow-down-to-line"></i>${esc(t('snap_income'))}</div><div class="v">${esc(fmtMoney(m.income+m.extra,m.cur))}<span style="font-size:12px;color:var(--muted)">${esc(t('snap_per_month'))}</span></div></div>
+    <div class="snap-cell"><div class="k"><i data-lucide="arrow-up-from-line"></i>${esc(t('snap_costs'))}</div><div class="v">${esc(fmtMoney(m.housing+m.other,m.cur))}<span style="font-size:12px;color:var(--muted)">${esc(t('snap_per_month'))}</span></div></div>
+    <div class="snap-cell"><div class="k"><i data-lucide="scale"></i>${esc(t('snap_surplus'))}</div><div class="v ${surplusPos?'pos':'neg'}">${esc(fmtMoney(m.surplus,m.cur))}</div></div>
+    <div class="snap-cell"><div class="k"><i data-lucide="layers"></i>${esc(t('snap_debt'))}</div><div class="v">${esc(fmtMoney(m.totalDebt,m.cur))}</div></div>
+  </div>`;
+  if(months){
+    html+=`<div class="snap-hero"><div class="sh-icon"><i data-lucide="calendar-check"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(dfd)}</div><div class="sh-note">${esc(t('snap_dfd_note'))}</div></div></div>`;
+  }else{
+    html+=`<div class="snap-hero" style="background:var(--green-dark)"><div class="sh-icon"><i data-lucide="life-buoy"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(t('snap_dfd_stabilise'))}</div><div class="sh-note">${esc(t('snap_dfd_stab_note'))}</div></div></div>`;
+    html+=`<div class="snap-note">${esc(t('snap_surplus_neg'))}</div>`;
   }
-  if(window.lucide)lucide.createIcons();
+  $('snapBody').innerHTML=html;icons();
 }
 
-function fmtCur(cur,val){
-  const n=Math.round(val||0);
-  const formatted=n.toLocaleString('en-US');
-  const symbols={EUR:'€',USD:'$',GBP:'£',SEK:'kr',NOK:'kr',DKK:'kr',PLN:'zł',CHF:'CHF',CZK:'Kč',HUF:'Ft',RON:'lei',CAD:'$',AUD:'$',NZD:'$',BRL:'R$',INR:'₹',ZAR:'R'};
-  const sym=symbols[cur]||cur;
-  // Site-wide convention: amount before the symbol (e.g. "900 €"), not
-  // the other way around. Currencies that conventionally lead (USD,
-  // GBP) keep their symbol in front since "900 $" would look wrong to
-  // those readers; everyone else gets the trailing symbol.
-  if(cur==='USD'||cur==='GBP'||cur==='CAD'||cur==='AUD'||cur==='NZD'){
-    return sym+formatted;
-  }
-  return formatted+' '+sym;
+/* PLAN */
+function planToHtml(text){
+  const lines=String(text||'').split(/\r?\n/);
+  let html='',inList=false;
+  const closeList=()=>{if(inList){html+='';inList=false;}};
+  lines.forEach(raw=>{
+    const line=raw.trim();
+    if(!line){return;}
+    const isHead=line.length<=64&&/[A-Za-zÀ-ž]/.test(line)&&line===line.toLocaleUpperCase(localeForLang())&&!/^\d/.test(line);
+    const numMatch=line.match(/^(\d+)[\.\)]\s+(.*)$/);
+    if(isHead){html+=`<h4>${esc(line.replace(/[:：]\s*$/,''))}</h4>`;}
+    else if(numMatch){html+=`<div class="pl-num"><span class="n">${esc(numMatch[1])}.</span><span>${esc(numMatch[2])}</span></div>`;}
+    else{html+=`<p>${esc(line)}</p>`;}
+  });
+  return html||`<p>${esc(String(text||''))}</p>`;
 }
-function esc(s){if(!s)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
+function renderPlan(){
+  const plan=M.member_plan||(M.onboarding&&M.onboarding.member_plan)||'';
+  const el=$('planBody');
+  if(!plan){
+    el.innerHTML=`<div class="plan-empty">${esc(t('plan_empty'))}<br><a href="/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}">${esc(t('plan_empty_link'))} →</a></div>`;
+    return;
+  }
+  el.innerHTML=`<div class="plan-box"><div class="plan-render collapsed" id="planRender">${planToHtml(plan)}</div><div class="plan-fade"></div></div>
+    <button class="plan-toggle" id="planToggle" onclick="togglePlan()"><span id="planToggleLbl">${esc(t('plan_expand'))}</span><i data-lucide="chevron-down"></i></button>`;
+  icons();
+}
+function togglePlan(){
+  const r=$('planRender'),btn=$('planToggle'),lbl=$('planToggleLbl');
+  const collapsed=r.classList.toggle('collapsed');
+  btn.classList.toggle('open',!collapsed);
+  lbl.textContent=collapsed?t('plan_expand'):t('plan_collapse');
+}
+
+/* DEBT MAP */
+function debtUrgency(d){
+  const rate=num(d.interest),type=(d.type||'').toLowerCase();
+  if(type.includes('payday')||type.includes('fast')||rate>=25)return'crit';
+  if(rate>=10||type.includes('tax')||type.includes('collection')||type.includes('enforcement'))return'high';
+  return'mon';
+}
+function renderDebtMap(){
+  const m=model();const el=$('debtMapBody');
+  const col=(M.collections||(M.onboarding&&M.onboarding.collections)||'');
+  let banner='';
+  if(/court|enforcement/i.test(col))banner=`<div class="debt-banner"><i data-lucide="gavel"></i><span>${esc(t('dm_banner_court'))}</span></div>`;
+  else if(/collections agency|agency/i.test(col))banner=`<div class="debt-banner" style="background:var(--amber-bg);border-color:var(--amber);color:#7a4a0a"><i data-lucide="shield-alert"></i><span>${esc(t('dm_banner_agency'))}</span></div>`;
+  if(!m.debts.length){el.innerHTML=banner+`<div class="plan-empty">${esc(t('dm_empty'))}</div>`;icons();return;}
+  const order={crit:0,high:1,mon:2};
+  const sorted=m.debts.map((d,idx)=>({...d,_u:debtUrgency(d),_i:idx})).sort((a,b)=>order[a._u]-order[b._u]||num(b.interest)-num(a.interest)||num(b.amount)-num(a.amount));
+  const utagLbl={crit:t('utag_crit'),high:t('utag_high'),mon:t('utag_mon')};
+  let html=banner;
+  sorted.forEach((d,i)=>{
+    const rate=num(d.interest)>0?num(d.interest)+'%':t('dm_unknown_rate');
+    html+=`<div class="debt-row"><div class="debt-rank">${i+1}</div>
+      <div class="debt-main"><div class="dt">${esc(d.type||'Debt')}${d.creditor?' · '+esc(d.creditor):''}</div><div class="dc">${esc(rate)}</div></div>
+      <div class="debt-right"><div class="debt-amt">${esc(fmtMoney(d.amount,d.currency||m.cur))}</div><span class="utag ${d._u}">${esc(utagLbl[d._u])}</span></div></div>`;
+  });
+  el.innerHTML=html;icons();
+}
+
+/* SUPPORT */
+function renderSupport(){
+  const c=country();const el=$('supportBody');
+  const orgs=SUPPORT_ORGS[c];
+  if(orgs&&orgs.length){
+    el.innerHTML=orgs.map(o=>`<div class="support-org"><div class="so-name">${esc(o.name)}</div>${o.url?`<div class="so-url"><a href="https://${esc(o.url)}" target="_blank" rel="noopener">${esc(o.url)}</a></div>`:''}<div class="so-desc">${esc(o.desc)}</div>${o.free!==false?`<span class="so-free">${esc(t('sup_free'))}</span>`:''}</div>`).join('')
+      +`<p class="disclaimer">${esc(t('sup_disclaimer'))}</p>`;
+  }else{
+    el.innerHTML=`<div class="plan-empty">${esc(t('sup_generic',{country:c||'your country'}))}</div><p class="disclaimer">${esc(t('sup_disclaimer'))}</p>`;
+  }
+  icons();
+}
+
+/* JOURNEY */
+function renderJourney(){
+  const steps=[
+    {t:'jr_s1',m:'jr_s1m',state:'here',icon:'badge-check'},
+    {t:'jr_s2',m:'jr_s2m',state:'next',icon:'shield'},
+    {t:'jr_s3',m:'jr_s3m',state:'future',icon:'trending-up'},
+    {t:'jr_s4',m:'jr_s4m',state:'future',icon:'building-2'},
+    {t:'jr_s5',m:'jr_s5m',state:'future',icon:'rocket'}
+  ];
+  $('journeyBody').innerHTML=steps.map(s=>`<div class="j-step ${s.state==='here'?'here':''}">
+    <div class="j-dot"><i data-lucide="${s.state==='here'?'check':s.icon}"></i></div>
+    <div class="j-body"><div class="j-title">${esc(t(s.t))}${s.state==='here'?`<span class="you">${esc(t('jr_you'))}</span>`:''}</div><div class="j-meta">${esc(t(s.m))}</div></div></div>`).join('');
+  icons();
+}
+
+/* ── PLAN-FIRST OVERLAY ── */
+function openOverlay(){
+  const plan=M.member_plan||'';
+  const n=firstName();
+  $('ovTitle').textContent=n?t('ov_title',{name:n}):t('ov_title_plain');
+  $('ovPlan').innerHTML=planToHtml(plan);
+  $('planOverlay').classList.add('show');icons();
+}
+function closeOverlay(){$('planOverlay').classList.remove('show');}
+
+/* ════════════════════════════════════════════════
+   TOOLS
+   ════════════════════════════════════════════════ */
+const TOOL_META={
+  dfd:{icon:'calendar-check',title:'tool_dfd_n'},strat:{icon:'layers',title:'tool_strat_n'},
+  budget:{icon:'piggy-bank',title:'tool_budget_n'},income:{icon:'trending-up',title:'tool_income_n'},
+  collect:{icon:'shield-alert',title:'tool_collect_n'},legal:{icon:'scale',title:'tool_legal_n'}
+};
+function openTool(id){
+  closeDrawer();
+  const meta=TOOL_META[id];
+  $('modalIcon').setAttribute('data-lucide',meta.icon);
+  $('modalTitle').textContent=t(meta.title);
+  $('modalBody').innerHTML=TOOLS[id]();
+  $('toolModal').classList.add('show');
+  icons();
+  if(TOOL_INIT[id])TOOL_INIT[id]();
+}
+function closeTool(){$('toolModal').classList.remove('show');}
+
+const TOOLS={
+  dfd(){
+    const m=model();
+    if(m.surplus<=0&&m.totalDebt>0)return `<div class="tool-note">${esc(t('dfd_stabilise'))}</div>`;
+    const maxExtra=Math.max(50,Math.round(m.surplus));
+    return `<div class="tool-result"><div class="tr-k">${esc(t('dfd_result_k'))}</div><div class="tr-v" id="dfdDate">—</div><div class="tr-note" id="dfdMonths"></div></div>
+      <div class="slider-row"><label>${esc(t('dfd_extra'))}<span class="sv" id="dfdExtraLbl">0 ${esc(m.cur)}</span></label>
+      <input type="range" id="dfdSlider" min="0" max="${maxExtra}" step="10" value="0" oninput="updDfd()"/></div>
+      <div class="tool-note" id="dfdNote"></div>`;
+  },
+  strat(){
+    const m=model();
+    if(!m.debts.length)return `<div class="tool-note">${esc(t('strat_empty'))}</div>`;
+    return `<div class="seg"><button class="on" id="segSnow" onclick="setStrat('snow')">${esc(t('strat_snow'))}</button><button id="segAval" onclick="setStrat('aval')">${esc(t('strat_aval'))}</button></div>
+      <ul class="olist" id="stratList"></ul><div class="tool-note" id="stratNote" style="margin-top:16px"></div>`;
+  },
+  budget(){
+    const m=model();
+    const left=m.surplus;
+    const neg=left<0;
+    return `<div class="tool-result" style="${neg?'background:var(--red)':''}"><div class="tr-k">${esc(neg?t('budget_shortfall'):t('budget_left'))}</div><div class="tr-v">${esc(fmtMoney(Math.abs(left),m.cur))}</div></div>
+      <ul class="olist">
+        <li><span class="oi"><i data-lucide="arrow-down"></i></span><div class="om"><div class="t">${esc(t('budget_in'))}</div></div><div class="oa">${esc(fmtMoney(m.income+m.extra,m.cur))}</div></li>
+        <li><span class="oi"><i data-lucide="home"></i></span><div class="om"><div class="t">${esc(t('budget_housing'))}</div></div><div class="oa">−${esc(fmtMoney(m.housing,m.cur))}</div></li>
+        <li><span class="oi"><i data-lucide="shopping-basket"></i></span><div class="om"><div class="t">${esc(t('budget_other'))}</div></div><div class="oa">−${esc(fmtMoney(m.other,m.cur))}</div></li>
+      </ul><div class="tool-note" style="margin-top:16px">${esc(t('budget_note'))}</div>`;
+  },
+  income(){
+    const m=model();
+    if(m.totalDebt<=0)return `<div class="tool-note">${esc(t('income_note'))}</div>`;
+    const base=monthsToFree(m.totalDebt,m.surplus);
+    return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div></div>
+      <div class="slider-row"><label>${esc(t('income_add'))}<span class="sv" id="incLbl">0 ${esc(m.cur)}</span></label>
+      <input type="range" id="incSlider" min="0" max="500" step="25" value="0" oninput="updInc()"/></div>
+      <div class="tool-note">${esc(m.surplus<=0?t('income_nostart'):t('income_note'))}</div>`;
+  },
+  collect(){
+    const m=model();
+    if(!m.debts.length)return `<div class="tool-note">${esc(t('collect_empty'))}</div>`;
+    const col=(M.collections||'');
+    let banner='';
+    if(/court|enforcement/i.test(col))banner=`<div class="debt-banner"><i data-lucide="gavel"></i><span>${esc(t('dm_banner_court'))}</span></div>`;
+    else if(/agency/i.test(col))banner=`<div class="debt-banner" style="background:var(--amber-bg);border-color:var(--amber);color:#7a4a0a"><i data-lucide="shield-alert"></i><span>${esc(t('dm_banner_agency'))}</span></div>`;
+    const order={crit:0,high:1,mon:2};
+    const sorted=m.debts.map(d=>({...d,_u:debtUrgency(d)})).sort((a,b)=>order[a._u]-order[b._u]||num(b.interest)-num(a.interest));
+    const utagLbl={crit:t('utag_crit'),high:t('utag_high'),mon:t('utag_mon')};
+    let rows=sorted.map((d,i)=>`<div class="debt-row"><div class="debt-rank">${i+1}</div><div class="debt-main"><div class="dt">${esc(d.type||'Debt')}${d.creditor?' · '+esc(d.creditor):''}</div><div class="dc">${num(d.interest)>0?num(d.interest)+'%':esc(t('dm_unknown_rate'))}</div></div><div class="debt-right"><div class="debt-amt">${esc(fmtMoney(d.amount,d.currency||m.cur))}</div><span class="utag ${d._u}">${esc(utagLbl[d._u])}</span></div></div>`).join('');
+    return banner+rows+`<div class="tool-note" style="margin-top:16px">${esc(t('collect_note'))}</div>`;
+  },
+  legal(){
+    const c=country();
+    const note=COUNTRY_LEGAL[c]||COUNTRY_LEGAL['_other'];
+    const orgs=SUPPORT_ORGS[c]||[];
+    let supp=orgs.slice(0,3).map(o=>`<div class="support-org"><div class="so-name">${esc(o.name)}</div>${o.url?`<div class="so-url"><a href="https://${esc(o.url)}" target="_blank" rel="noopener">${esc(o.url)}</a></div>`:''}</div>`).join('');
+    return `<div class="legal-block"><h5>${esc(t('legal_rights'))}${c?' · '+esc(c):''}</h5><p>${esc(note)}</p>
+      <div class="legal-warn">${esc(t('legal_warn'))}</div>
+      ${supp?`<h5 style="margin-top:18px">${esc(t('legal_support'))}</h5>${supp}`:''}</div>`;
+  }
+};
+const TOOL_INIT={
+  dfd(){updDfd();},
+  strat(){setStrat('snow');},
+  income(){updInc();}
+};
+function updDfd(){
+  const m=model();const extra=num($('dfdSlider').value);
+  $('dfdExtraLbl').textContent=fmtMoney(extra,m.cur);
+  const months=monthsToFree(m.totalDebt,m.surplus+extra);
+  $('dfdDate').textContent=months?dateFromMonths(months):'—';
+  $('dfdMonths').textContent=months?t('dfd_months',{m:months}):'';
+  $('dfdNote').textContent=t('dfd_note',{monthly:fmtMoney(m.surplus+extra,m.cur),total:fmtMoney(m.totalDebt,m.cur)});
+}
+function setStrat(mode){
+  const m=model();
+  $('segSnow').classList.toggle('on',mode==='snow');
+  $('segAval').classList.toggle('on',mode==='aval');
+  let list=m.debts.slice();
+  if(mode==='snow')list.sort((a,b)=>num(a.amount)-num(b.amount));
+  else list.sort((a,b)=>num(b.interest)-num(a.interest)||num(a.amount)-num(b.amount));
+  $('stratList').innerHTML=list.map((d,i)=>`<li class="${i===0?'first':''}"><span class="oi">${i+1}</span><div class="om"><div class="t">${esc(d.type||'Debt')}${d.creditor?' · '+esc(d.creditor):''}</div><div class="s">${num(d.interest)>0?num(d.interest)+'%':esc(t('strat_unknown'))}${i===0?' · '+esc(t('strat_first')):''}</div></div><div class="oa">${esc(fmtMoney(d.amount,d.currency||m.cur))}</div></li>`).join('');
+  $('stratNote').textContent=mode==='snow'?t('strat_snow_note'):t('strat_aval_note');
+  icons();
+}
+function updInc(){
+  const m=model();const add=num($('incSlider').value);
+  $('incLbl').textContent=fmtMoney(add,m.cur);
+  const base=monthsToFree(m.totalDebt,m.surplus);
+  const now=monthsToFree(m.totalDebt,m.surplus+add);
+  $('incDate').textContent=now?dateFromMonths(now):'—';
+  $('incSooner').textContent=(base&&now&&base>now)?t('income_sooner',{m:base-now}):'';
+}
+
+/* ════════════════════════════════════════════════
+   COUNTRY DATA — support orgs + legal notes
+   Master File OSA 7 corrections applied (26.6.2026):
+   Hungary → MNB Pénzügyi Navigátor (Magyar Bankszövetség retired)
+   Brazil  → Consumidor.gov.br / Desenrola / Registrato (SERASA retired)
+   Greece  → Εξωδικαστικός Μηχανισμός (added)
+   ════════════════════════════════════════════════ */
+const SUPPORT_ORGS={
+  'Finland':[{name:'Takuusäätiö',url:'takuusaatio.fi',desc:'Guarantees and free debt counselling.'},{name:'Talous- ja velkaneuvonta (oikeusapu.fi)',url:'oikeusapu.fi',desc:'Statutory free debt counselling.'},{name:'Kela',url:'kela.fi',desc:'Benefits and financial support.'}],
+  'Sweden':[{name:'Budget- och skuldrådgivning',desc:'Free municipal debt counselling, by law — contact your kommun.'},{name:'Kronofogden',url:'kronofogden.se',desc:'Debt enforcement and voluntary payment plans.'},{name:'Konsumentverket',url:'konsumentverket.se',desc:'Consumer guidance.'}],
+  'Norway':[{name:'NAV',url:'nav.no',desc:'Benefits, unemployment and social support.'},{name:'Kommunal gjeldsrådgivning',desc:'Free municipal debt counselling, by law.'},{name:'Forbrukerrådet',url:'forbrukerradet.no',desc:'Consumer rights.'}],
+  'Denmark':[{name:'Gældsrådgivning Danmark',url:'gaeldsraadgivning.dk',desc:'Free debt counselling.'},{name:'Forbrugerrådet Tænk',url:'taenk.dk',desc:'Consumer advice.'},{name:'Kommunal gældsrådgivning',desc:'Contact your local municipality.'}],
+  'Germany':[{name:'Caritas Schuldnerberatung',url:'caritas.de',desc:'Free debt counselling.'},{name:'Verbraucherzentrale',url:'verbraucherzentrale.de',desc:'Consumer advice centres.'},{name:'Diakonie',url:'diakonie.de',desc:'Social support including debt help.'}],
+  'Netherlands':[{name:'Nibud',url:'nibud.nl',desc:'Budget and debt guidance.'},{name:'Schuldhulpverlening via gemeente',desc:'Free municipal debt help.'},{name:'NVVK',url:'nvvk.eu',desc:'Debt restructuring.'}],
+  'Belgium':[{name:'OCMW / CPAS',desc:'Public social welfare centre — contact locally.'},{name:'CAW',url:'caw.be',desc:'Free social and financial support.'}],
+  'France':[{name:'CRESUS',url:'cresus.fr',desc:'Debt mediation and prevention.'},{name:'CCAS',desc:'Municipal social support centres.'},{name:'CDAD',desc:'Free local legal and financial advice.'}],
+  'Spain':[{name:'ADICAE',url:'adicae.net',desc:'Consumer and debt advocacy.'},{name:'Cáritas',url:'caritas.es',desc:'Social and financial support.'},{name:'OCU',url:'ocu.org',desc:'Consumer rights.'}],
+  'Portugal':[{name:'DECO',url:'deco.proteste.pt',desc:'Consumer and debt advice.'},{name:'Santa Casa da Misericórdia',desc:'Social support.'}],
+  'Italy':[{name:'Adiconsum',url:'adiconsum.it',desc:'Consumer and debt support.'},{name:'Caritas',url:'caritas.it',desc:'Social support.'}],
+  'Poland':[{name:'Federacja Konsumentów',url:'federacja-konsumentow.org.pl',desc:'Consumer rights and debt advice.'},{name:'UOKiK',url:'uokik.gov.pl',desc:'Consumer protection office.'}],
+  'Czech Republic':[{name:'Poradna při finanční tísni',url:'financnitisen.cz',desc:'Free debt counselling.'},{name:'dTest',url:'dtest.cz',desc:'Consumer advice.'}],
+  'Estonia':[{name:'Tarbijakaitse',url:'tarbijakaitse.ee',desc:'Consumer and financial protection.'},{name:'Kohalik omavalitsus',desc:'Local municipality debt support.'}],
+  'Latvia':[{name:'PTAC',url:'ptac.gov.lv',desc:'Consumer rights and financial guidance.'},{name:'Sociālais dienests',desc:'Municipal social support.'}],
+  'Lithuania':[{name:'VVTAT',url:'vvtat.lt',desc:'State consumer rights protection.'},{name:'Savivaldybės socialinė tarnyba',desc:'Municipal social support.'}],
+  'Hungary':[{name:'MNB Pénzügyi Navigátor',url:'mnb.hu/penzugyinavigator',desc:'Central bank financial guidance and dispute resolution.'},{name:'Fogyasztóvédelem',url:'fogyasztovedelem.kormany.hu',desc:'Consumer protection.'}],
+  'Romania':[{name:'ANPC',url:'anpc.ro',desc:'National Consumer Protection Authority.'},{name:'Caritas Romania',url:'caritas.ro',desc:'Social support.'}],
+  'Croatia':[{name:'HANFA',url:'hanfa.hr',desc:'Financial regulation authority.'},{name:'Potrošač.hr',url:'potrosac.hr',desc:'Consumer rights.'}],
+  'United Kingdom':[{name:'StepChange',url:'stepchange.org',desc:'Free debt charity — full debt management.'},{name:'National Debtline',url:'nationaldebtline.org',desc:'Free phone and online advice.'},{name:'Citizens Advice',url:'citizensadvice.org.uk',desc:'Free legal and financial guidance.'}],
+  'Ireland':[{name:'MABS',url:'mabs.ie',desc:'Money Advice and Budgeting Service, free.'},{name:'ISI',url:'isi.gov.ie',desc:'Insolvency Service of Ireland — formal options.'},{name:'Citizens Information',url:'citizensinformation.ie',desc:'Benefits and rights.'}],
+  'Austria':[{name:'Schuldnerberatung',url:'schuldenberatung.at',desc:'Free public debt counselling.'},{name:'AK Konsumentenschutz',url:'arbeiterkammer.at',desc:'Free consumer and debt advice.'}],
+  'Switzerland':[{name:'Schuldenberatung Schweiz',url:'schulden.ch',desc:'Free debt counselling.'}],
+  'Greece':[{name:'Εξωδικαστικός Μηχανισμός',url:'keyd.gov.gr',desc:'Out-of-court debt settlement mechanism.'},{name:'Συνήγορος του Καταναλωτή',url:'synigoroskatanaloti.gr',desc:'Consumer ombudsman.'}],
+  'United States':[{name:'NFCC',url:'nfcc.org',desc:'Find local nonprofit credit counselling.'},{name:'CFPB',url:'consumerfinance.gov',desc:'Consumer Financial Protection Bureau.'},{name:'211.org',url:'211.org',desc:'Local social services including financial help.'}],
+  'Canada':[{name:'Credit Counselling Canada',url:'creditcounsellingcanada.ca',desc:'Accredited nonprofit agencies.'},{name:'FCAC',url:'canada.ca/fcac',desc:'Financial Consumer Agency of Canada.'}],
+  'Australia':[{name:'National Debt Helpline',url:'ndh.org.au',desc:'Free phone advice from financial counsellors.'},{name:'MoneySmart',url:'moneysmart.gov.au',desc:'Government financial guidance.'}],
+  'New Zealand':[{name:'MoneyTalks',url:'moneytalks.co.nz',desc:'Free financial helpline.'},{name:'Sorted',url:'sorted.org.nz',desc:'Free budgeting tools and guides.'}],
+  'Brazil':[{name:'Consumidor.gov.br',url:'consumidor.gov.br',desc:'Official consumer dispute platform.'},{name:'Desenrola Brasil',desc:'Government debt renegotiation programme.'},{name:'Registrato (Banco Central)',url:'registrato.bcb.gov.br',desc:'See all debts registered in your name.'}],
+  'Mexico':[{name:'PROFECO',url:'profeco.gob.mx',desc:'Consumer protection.'},{name:'CONDUSEF',url:'condusef.gob.mx',desc:'Financial services protection.'}],
+  'India':[{name:'RBI Ombudsman',url:'cms.rbi.org.in',desc:'Banking dispute resolution.'}],
+  'Indonesia':[{name:'OJK',url:'ojk.go.id',desc:'Financial Services Authority.'},{name:'YLKI',url:'ylki.or.id',desc:'Consumer protection.'}],
+  'Philippines':[{name:'BSP Consumer Assistance',url:'bsp.gov.ph',desc:'Central bank consumer help.'},{name:'SEC',url:'sec.gov.ph',desc:'Lending regulation.'}],
+  'South Africa':[{name:'National Debt Counsellors Association',url:'ndca.org.za',desc:'Registered debt counsellors.'},{name:'DebtBusters',url:'debtbusters.co.za',desc:'Debt counselling.'}]
+};
+const COUNTRY_LEGAL={
+  'United Kingdom':'If your total debt is unmanageable, an Individual Voluntary Arrangement (IVA) or a Debt Relief Order may be options — always arranged through a licensed insolvency practitioner, never as a quick fix. Creditors must stop contact once a formal plan is agreed.',
+  'United States':'Federal law (the FDCPA) limits how collectors can contact you and bars harassment. For very high debt, Chapter 7 or 13 bankruptcy exists as a last resort — speak to a qualified attorney before deciding.',
+  'Ireland':'MABS is free and statutory. The ISI offers formal Debt Settlement and Personal Insolvency Arrangements. Creditors must follow the Central Bank\u2019s arrears process before enforcement.',
+  'Finland':'You have the right to free statutory debt counselling (talous- ja velkaneuvonta). Järjestelyvelka (debt adjustment) through the court can restructure unmanageable debt; Takuusäätiö may guarantee a consolidation loan.',
+  'Sweden':'Municipal budget- och skuldrådgivning is free by law. Kronofogden runs skuldsanering (debt relief) for people who cannot reasonably repay within the foreseeable future.',
+  'Germany':'Free Schuldnerberatung is available through Caritas and Diakonie. A Privatinsolvenz (consumer insolvency) can discharge remaining debt after a defined good-conduct period.',
+  'Netherlands':'Municipalities must offer schuldhulpverlening. The WSNP route can lead to a court-supervised debt clean slate after roughly three years.',
+  'France':'The Banque de France commission de surendettement can freeze and restructure debts for over-indebted households — applying pauses most enforcement.',
+  'Spain':'The Ley de Segunda Oportunidad (second-chance law) can cancel unpayable debt for individuals acting in good faith. Free advice via ADICAE and Cáritas.',
+  'Australia':'Financial counsellors via the National Debt Helpline are free. Hardship provisions require lenders to consider variations; bankruptcy and debt agreements exist as last resorts via AFSA.',
+  'Canada':'Licensed Insolvency Trustees administer consumer proposals and bankruptcy. Provincial law caps collector conduct. Nonprofit credit counselling is widely available.',
+  '_other':'Most countries protect you from harassment by collectors and offer a formal route to restructure debt you genuinely cannot repay — usually through a court or a government-funded service. Use the free services below to find the protections that apply where you live.'
+};
+
+/* ── go ── */
+window.addEventListener('DOMContentLoaded',boot);
 </script>
 </body>
 </html>
