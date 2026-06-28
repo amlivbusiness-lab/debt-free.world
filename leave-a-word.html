@@ -12,34 +12,38 @@
 <style>
 :root{
   --green:#0f4d28;--green-dark:#0a3a1d;
-  --text:#111;--text-soft:#2b2b2b;--white:#fff;--surface:#fafaf8;--line:#e8e8e3;
+  --green-line:rgba(15,77,40,0.34); /* delicate hairline — same brand color, low alpha */
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;--line:#e8e8e3;
   --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;}
 
-/* Page canvas: locked 1040 + 6% gutter on every section */
+/* Page canvas: locked 1040 + 6% gutter */
 .wrap{max-width:1040px;margin:0 auto;padding:72px 6% 96px;}
 
-/* Masthead — reading measure 760, centered to canvas (house hero pattern) */
+/* Masthead — centered hero, reading measure 760 */
 .masthead{max-width:760px;margin:0 auto;text-align:center;}
 .mark{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;margin-bottom:4px;}
 .tagline{font-size:12px;color:var(--text-soft);letter-spacing:0.02em;margin-bottom:40px;display:flex;justify-content:center;align-items:center;gap:7px;}
 h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.3;letter-spacing:-0.3px;color:var(--text);margin-bottom:0;}
 
-/* Intro/lead — compact reading measure 640, centered */
-.intro-block{max-width:640px;margin:22px auto 48px;text-align:center;}
+/* Intro/lead — centered, compact 640 */
+.intro-block{max-width:640px;margin:22px auto 52px;text-align:center;}
 .intro{font-size:17px;color:var(--text);line-height:1.7;margin-bottom:10px;}
 .intro-sub{font-size:15px;color:var(--text-soft);line-height:1.7;font-weight:300;}
 
-/* Route cards — multi-field form components, 580 centered to canvas */
-.choice{max-width:580px;margin:0 auto 22px;background:var(--surface);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:30px 32px;}
+/* Two-up route row (desktop): public left, private right, equal height, no scroll */
+.choices{display:flex;gap:26px;align-items:stretch;max-width:900px;margin:0 auto;}
+
+/* Cards: page-background, delicate thin dark-green border (no fill, no left bar) */
+.choice{flex:1;display:flex;flex-direction:column;background:transparent;border:1px solid var(--green-line);border-radius:8px;padding:28px 30px;}
 .choice-head{display:flex;align-items:center;gap:11px;margin-bottom:12px;}
 .choice-head svg{width:18px;height:18px;color:var(--green);flex-shrink:0;}
 .choice h2{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--text);line-height:1.3;}
 .choice p{font-size:14.5px;color:var(--text-soft);line-height:1.65;margin-bottom:22px;font-weight:300;}
 
-.btn{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;text-decoration:none;font-size:14.5px;font-weight:600;padding:14px 26px;border-radius:4px;border:none;cursor:pointer;font-family:var(--sans);transition:background 0.15s ease;}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;text-decoration:none;font-size:14.5px;font-weight:600;padding:14px 26px;border-radius:4px;border:none;cursor:pointer;font-family:var(--sans);transition:background 0.15s ease;align-self:flex-start;}
 .btn:hover{background:var(--green-dark);}
 .btn:focus-visible{outline:2px solid var(--green);outline-offset:3px;}
 .btn svg{width:18px;height:18px;}
@@ -48,10 +52,8 @@ h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.3;lette
 .btn-secondary{background:transparent;color:var(--green);border:1px solid var(--green);}
 .btn-secondary:hover{background:var(--green);color:#fff;}
 
-.between{max-width:580px;margin:30px auto;text-align:center;color:var(--green);font-size:13px;letter-spacing:0.04em;}
-
 /* Private form */
-#private-form{display:none;margin-top:24px;padding-top:24px;}
+#private-form{display:none;margin-top:24px;}
 #private-form.open{display:block;}
 
 label{display:block;font-size:13.5px;font-weight:500;color:var(--text);margin:20px 0 7px;}
@@ -70,21 +72,23 @@ textarea:focus,select:focus{outline:none;border-color:var(--green);}
 
 .form-actions{margin-top:24px;}
 
-.success{display:none;background:var(--surface);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:20px 22px;font-size:14.5px;color:var(--text);line-height:1.65;margin-top:20px;}
+.success{display:none;background:transparent;padding:20px 0 0;font-size:14.5px;color:var(--text);line-height:1.65;margin-top:4px;}
 .success.open{display:flex;align-items:flex-start;gap:11px;}
 .success svg{width:18px;height:18px;color:var(--green);flex-shrink:0;margin-top:2px;}
 
 .error{display:none;color:#9b2c2c;font-size:13.5px;margin-top:12px;line-height:1.5;}
 .error.open{display:block;}
 
-footer{max-width:640px;margin:64px auto 0;text-align:center;font-size:12px;color:var(--text-soft);line-height:1.7;}
+footer{max-width:640px;margin:56px auto 0;text-align:center;font-size:12px;color:var(--text-soft);line-height:1.7;}
 footer a{color:var(--green);text-decoration:none;}
 footer a:hover{text-decoration:underline;}
 
-/* Mobile: keep 6% gutter, stack; tighten form card on small screens */
+/* Mobile: stack the two cards full-width, keep 6% gutter */
 @media(max-width:900px){
   .wrap{padding:56px 6% 80px;}
   h1{font-size:30px;}
+  .choices{flex-direction:column;align-items:center;gap:20px;}
+  .choice{flex:none;width:100%;max-width:580px;}
 }
 @media(max-width:520px){
   h1{font-size:26px;}
@@ -107,64 +111,66 @@ footer a:hover{text-decoration:underline;}
     <p class="intro-sub">Whatever your experience has been — it helped, it didn't, it was somewhere in between — true and specific is worth more to us than glowing and vague.</p>
   </div>
 
-  <!-- PRIMARY: public Google review -->
-  <div class="choice">
-    <div class="choice-head">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.48 3.5a.56.56 0 0 1 1.04 0l2.13 4.32a.56.56 0 0 0 .42.31l4.77.69a.56.56 0 0 1 .31.96l-3.45 3.36a.56.56 0 0 0-.16.5l.81 4.75a.56.56 0 0 1-.81.59l-4.27-2.24a.56.56 0 0 0-.52 0l-4.27 2.24a.56.56 0 0 1-.81-.59l.81-4.75a.56.56 0 0 0-.16-.5L3.65 9.78a.56.56 0 0 1 .31-.96l4.77-.69a.56.56 0 0 0 .42-.31Z"/></svg>
-      <h2>Leave a public review</h2>
-    </div>
-    <p>You don't need your full name. "Maria K." or a first name and initial works on Google, and still counts.</p>
-    <!-- TODO (T10): Place ID delivered separately by PL. Replace YOUR_PLACE_ID_HERE before this route goes live. -->
-    <a class="btn" href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID_HERE" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-      Leave a public review
-    </a>
-  </div>
+  <div class="choices">
 
-  <div class="between">✦</div>
-
-  <!-- SECONDARY: private, anonymous -->
-  <div class="choice">
-    <div class="choice-head">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      <h2>Share it privately instead</h2>
-    </div>
-    <p>No name or email needed. Nobody sees this but us.</p>
-    <button class="btn btn-secondary" id="toggle-private" type="button">Share it privately</button>
-
-    <form id="private-form" novalidate>
-      <label class="first" for="helped">What helped, or what didn't help?</label>
-      <textarea id="helped" name="helped" placeholder="Optional"></textarea>
-
-      <label for="changed">How has your situation changed, if at all?</label>
-      <textarea id="changed" name="changed" placeholder="Optional"></textarea>
-
-      <div class="checkbox-row">
-        <input type="checkbox" id="share-anon" name="share_anonymized"/>
-        <label for="share-anon">It's okay to share an anonymized version of this on the website or social media, with no name and no identifying details.</label>
+    <!-- PRIMARY: public Google review (left) -->
+    <div class="choice">
+      <div class="choice-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.48 3.5a.56.56 0 0 1 1.04 0l2.13 4.32a.56.56 0 0 0 .42.31l4.77.69a.56.56 0 0 1 .31.96l-3.45 3.36a.56.56 0 0 0-.16.5l.81 4.75a.56.56 0 0 1-.81.59l-4.27-2.24a.56.56 0 0 0-.52 0l-4.27 2.24a.56.56 0 0 1-.81-.59l.81-4.75a.56.56 0 0 0-.16-.5L3.65 9.78a.56.56 0 0 1 .31-.96l4.77-.69a.56.56 0 0 0 .42-.31Z"/></svg>
+        <h2>Leave a public review</h2>
       </div>
-
-      <div id="attribution-wrap">
-        <label for="attribution">How would you like to be credited?</label>
-        <select id="attribution" name="attribution">
-          <option value="">No preference</option>
-          <option value="first_name">First name only</option>
-          <option value="initials">Initials only</option>
-          <option value="member_no_name">"Debt Recovery member, name withheld"</option>
-          <option value="country_only">"A [country] resident"</option>
-        </select>
-      </div>
-
-      <div class="form-actions">
-        <button class="btn" type="submit" id="submit-btn">Send privately</button>
-        <p class="error" id="form-error">Something went wrong on our end — please try again in a moment.</p>
-      </div>
-    </form>
-
-    <div class="success" id="form-success">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.34"/><path d="m9 11 3 3L22 4"/></svg>
-      <span>Thank you, genuinely. This is exactly how we make this better.</span>
+      <p>You don't need your full name. "Maria K." or a first name and initial works on Google, and still counts.</p>
+      <!-- TODO (T10): Place ID delivered separately by PL. Replace YOUR_PLACE_ID_HERE before this route goes live. -->
+      <a class="btn" href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID_HERE" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+        Leave a public review
+      </a>
     </div>
+
+    <!-- SECONDARY: private, anonymous (right) -->
+    <div class="choice">
+      <div class="choice-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <h2>Share it privately instead</h2>
+      </div>
+      <p>No name or email needed. Nobody sees this but us.</p>
+      <button class="btn btn-secondary" id="toggle-private" type="button">Share it privately</button>
+
+      <form id="private-form" novalidate>
+        <label class="first" for="helped">What helped, or what didn't help?</label>
+        <textarea id="helped" name="helped" placeholder="Optional"></textarea>
+
+        <label for="changed">How has your situation changed, if at all?</label>
+        <textarea id="changed" name="changed" placeholder="Optional"></textarea>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="share-anon" name="share_anonymized"/>
+          <label for="share-anon">It's okay to share an anonymized version of this on the website or social media, with no name and no identifying details.</label>
+        </div>
+
+        <div id="attribution-wrap">
+          <label for="attribution">How would you like to be credited?</label>
+          <select id="attribution" name="attribution">
+            <option value="">No preference</option>
+            <option value="first_name">First name only</option>
+            <option value="initials">Initials only</option>
+            <option value="member_no_name">"Debt Recovery member, name withheld"</option>
+            <option value="country_only">"A [country] resident"</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn" type="submit" id="submit-btn">Send privately</button>
+          <p class="error" id="form-error">Something went wrong on our end — please try again in a moment.</p>
+        </div>
+      </form>
+
+      <div class="success" id="form-success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.34"/><path d="m9 11 3 3L22 4"/></svg>
+        <span>Thank you, genuinely. This is exactly how we make this better.</span>
+      </div>
+    </div>
+
   </div>
 
   <footer>
