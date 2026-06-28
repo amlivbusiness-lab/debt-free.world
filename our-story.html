@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Our Story — Debt-Free.world</title>
+<meta name="description" content="The story behind Debt-Free.world. Why a mother of three from Nokia, Finland built a global debt recovery platform — and what it means for you."/>
+<link rel="canonical" href="https://www.debt-free.world/our-story"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 6% 0;}
+.logo{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;text-decoration:none;}
+.topbar-right{display:flex;align-items:center;gap:30px;}
+nav{display:flex;align-items:center;gap:28px;}
+nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;}
+nav a.active{color:var(--green);}
+.lang-wrap{position:relative;}
+.lang-pill{font-size:13px;color:var(--text);border:1px solid #e8e8e3;border-radius:20px;padding:6px 16px;cursor:pointer;background:none;font-family:var(--sans);font-weight:500;}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e8e8e3;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.08);min-width:160px;max-height:320px;overflow-y:auto;z-index:50;}
+.lang-menu.open{display:block;}
+.lang-menu button{display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;font-size:13.5px;color:var(--text);cursor:pointer;font-family:var(--sans);}
+.lang-menu button:hover{background:#fafaf8;}
+.hamburger{display:none;width:36px;height:36px;border:1px solid #e8e8e3;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;background:none;}
+.hamburger svg{width:16px;height:16px;}
+
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:24px 6% 28px;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+.mobile-menu.open{display:block;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft);line-height:1;}
+.mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a.active{color:var(--green);font-weight:600;}
+
+.hero{padding:90px 6% 0;max-width:1040px;margin:0 auto;text-align:center;}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-soft);font-weight:500;margin-bottom:24px;display:block;}
+.hero h1{font-family:var(--serif);font-size:42px;line-height:1.3;color:var(--text);font-weight:400;margin-bottom:24px;max-width:760px;margin-left:auto;margin-right:auto;}
+.hero-lead{font-size:17px;line-height:1.8;color:var(--text-soft);font-weight:300;max-width:620px;margin:0 auto;}
+
+.founder-block{margin:70px 6% 0;max-width:1040px;margin-left:auto;margin-right:auto;border-left:3px solid var(--green);background:#fafaf8;padding:36px 40px;display:flex;gap:32px;align-items:flex-start;}
+.founder-photo{width:120px;height:120px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid #e2e0d6;}
+.founder-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.founder-quote{font-family:var(--serif);font-size:18px;line-height:1.6;color:var(--text);font-style:italic;font-weight:400;margin-bottom:14px;}
+.founder-credit{font-size:13.5px;color:var(--text-soft);line-height:1.6;}
+.founder-credit strong{color:var(--text);display:block;font-size:15px;font-weight:600;margin-bottom:2px;}
+
+.section{padding:70px 6% 0;max-width:1040px;margin:0 auto;}
+.section-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:28px;display:block;}
+.prose{font-size:16px;line-height:1.9;color:var(--text-soft);font-weight:300;max-width:700px;}
+.prose p{margin-bottom:22px;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{font-weight:500;color:var(--text);}
+
+.pull-quote{border-left:3px solid var(--green);background:#fafaf8;border-radius:0 6px 6px 0;padding:26px 30px;margin:36px 0;font-family:var(--serif);font-size:19px;color:var(--text);line-height:1.55;font-style:italic;font-weight:400;max-width:700px;}
+
+.sign-off{font-size:16px;color:var(--green);font-family:var(--serif);font-style:italic;margin-top:28px;}
+
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+.value-card{border:1px solid #e8e8e3;border-radius:8px;padding:24px;}
+.value-card.full{grid-column:1/-1;}
+.value-num{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:10px;display:block;}
+.value-title{font-family:var(--serif);font-size:17px;color:var(--text);margin-bottom:8px;font-weight:400;}
+.value-text{font-size:13.5px;color:var(--text-soft);line-height:1.65;font-weight:300;}
+
+.community-block{border-left:3px solid var(--green);background:#fafaf8;border-radius:0 6px 6px 0;padding:24px 28px;margin-top:24px;}
+.community-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;display:block;}
+.mv-block{border-left:3px solid var(--green);background:#fafaf8;border-radius:0 6px 6px 0;padding:26px 30px;margin-top:20px;max-width:700px;}
+.mv-block:first-of-type{margin-top:0;}
+.mv-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:12px;display:block;}
+.mv-statement{font-family:var(--serif);font-size:21px;line-height:1.45;color:var(--text);font-weight:400;margin-bottom:12px;}
+.mv-sub{font-size:15.5px;line-height:1.8;color:var(--text-soft);font-weight:300;}
+.community-block p{font-size:14.5px;color:var(--text-soft);line-height:1.7;font-weight:300;}
+.community-block a{color:var(--green);font-weight:500;text-decoration:none;}
+
+.timeline{display:flex;flex-direction:column;gap:20px;margin-top:8px;}
+.tl-item{display:flex;gap:24px;align-items:flex-start;}
+.tl-year{font-size:12.5px;font-weight:600;color:var(--green);min-width:64px;padding-top:2px;flex-shrink:0;}
+.tl-text{font-size:14.5px;color:var(--text-soft);line-height:1.65;font-weight:300;}
+
+.eco-row{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-top:8px;}
+.eco-item{border-top:2px solid var(--green-deep);padding-top:14px;}
+.eco-item.muted{border-top:2px solid #e2e0d6;}
+.eco-phase-num{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:8px;display:block;}
+.eco-phase-num.muted{color:#8a8a80;}
+.eco-item h4{font-size:14.5px;font-weight:600;color:var(--text);}
+
+.company-line{font-size:14.5px;color:var(--text-soft);line-height:1.8;font-weight:300;margin-bottom:14px;}
+.company-line a{color:var(--green);font-weight:500;}
+
+.closing{margin:70px 6% 90px;padding:56px 6%;text-align:center;background:#fafaf8;border-left:3px solid var(--green);border-radius:6px;max-width:1040px;margin-left:auto;margin-right:auto;}
+.closing h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);margin-bottom:12px;}
+.closing p{font-size:15px;color:var(--text-soft);font-weight:300;margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;border:none;border-radius:4px;padding:15px 32px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;}
+.btn-primary:hover{background:var(--green-dark);}
+
+footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6% 22px;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-brand{font-family:var(--serif);font-size:14.5px;color:#fff;}
+.footer-legal{font-size:11.5px;color:rgba(255,255,255,0.5);}
+.footer-tagline{font-size:11.5px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:7px;}
+.footer-links{display:flex;gap:18px;font-size:11.5px;}
+.footer-links a{color:rgba(255,255,255,0.65);text-decoration:none;}
+.footer-links a:hover{color:#fff;}
+
+@media(max-width:900px){
+  .topbar-right nav{display:none;}
+  .hamburger{display:flex;}
+  .hero h1{font-size:30px;}
+  .founder-block{flex-direction:column;align-items:center;text-align:center;}
+  .values-grid{grid-template-columns:1fr;}
+  .eco-row{grid-template-columns:1fr 1fr;gap:20px;}
+  .footer-row{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="logo">Debt-Free.world</a>
+  <div class="topbar-right">
+    <nav>
+      <a href="/ecosystem">Ecosystem</a>
+      <a href="/our-story" class="active">Our Story</a>
+      <a href="/blog/">Blog</a>
+      <a href="/faq">FAQ</a>
+    </nav>
+    <div class="lang-wrap">
+      <button class="lang-pill" id="langBtn" onclick="document.getElementById('langMenu').classList.toggle('open')">EN ▾</button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <svg viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="logo">Debt-Free.world</span>
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <a href="/">Home</a>
+  <a href="/ecosystem">Ecosystem</a>
+  <a href="/our-story" class="active">Our Story</a>
+  <a href="/blog/">Blog</a>
+  <a href="/faq">FAQ</a>
+</div>
+
+<div class="hero">
+  <span class="hero-eyebrow">Our story</span>
+  <h1>Built from the inside of a financial crisis.</h1>
+  <p class="hero-lead">Debt-Free.world was not built by a bank, a consulting firm, or a financial expert. It was built by a woman who lost nearly everything — and couldn't find the help, guidance, or companion she needed when she was drowning in debt.</p>
+</div>
+
+<div class="founder-block">
+  <div class="founder-photo"><img src="https://raw.githubusercontent.com/amlivbusiness-lab/debt-free.world/main/vilma.png" alt="Vilma Paasikivi, Founder"/></div>
+  <div>
+    <div class="founder-quote">"I didn't create Debt-Free.world as a financial expert. I created it because I lived through financial collapse myself — and came out the other side knowing exactly what was missing."</div>
+    <div class="founder-credit"><strong>Vilma Paasikivi</strong>Founder, Debt-Free.world · Nokia, Finland · Mother of three</div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="section-label">The full story</span>
+  <div class="prose">
+    <p>I am not a financial expert. I didn't study economics. I didn't work in banking. What I am is someone who built a life for herself and her three young children through her own work — and then watched nearly 45 000 € disappear through a business partner's betrayal, a construction scam, and a chain of consequences I didn't see coming.</p>
+    <p>The largest single blow wasn't a bad decision I made. It was trust that was abused. A partner I had worked with for about a year took what wasn't theirs to take. That changed everything overnight.</p>
+    <p>What followed was the kind of period that quietly breaks people. More debt than assets. That amount of shame. And a level of exhaustion — mental, financial, emotional — that I hadn't let myself acknowledge until I was already running on empty.</p>
+    <p>I want to be honest about that. I got tired. Not defeated — but genuinely, deeply tired.</p>
+    <p>Every service I found was either unaffordable, hopelessly generic, or built for people who already had their finances under control. Nobody spoke to me like a real person. Nobody asked what I was actually working toward. Nobody said: here is your exact situation, here are your real options, here is what you do today.</p>
+    <p>I spent months doing it myself — reading, calling, waiting, filling in forms that led nowhere. I got through it. But it took far longer than it should have.</p>
+  </div>
+
+  <div class="pull-quote">"I spent years helping others navigate hard times. I never built a safety net for myself. When I finally needed help — I couldn't find it."</div>
+
+  <div class="prose">
+    <p>I need to tell you something about who I am — because I think it explains why I built what I built. For years, alongside raising my children and running my own work, I've organized community charity events — not because I had excess to spare, but because looking after the people around you has always felt like the only natural way to live. Do unto others. No conditions attached.</p>
+    <p>When my own financial world collapsed, I realized something uncomfortable: I had spent years helping others navigate hard times, and I had never once built a safety net for myself. I knew how to give — I hadn't learned how to ask.</p>
+    <p>That's the gap Debt-Free.world is built to close.</p>
+    <p>But here's what I learned that I didn't expect: the problem isn't just debt. The problem is that nobody asks the right question first. Not how much do you owe — but why do you want to get out. Because the answer to that question changes everything. It changes the plan. It changes the timeline. It changes what's actually worth doing tomorrow morning.</p>
+    <p>I don't bring you credentials. I bring you the lived experience of someone who went through the system that's supposed to help people in financial distress — and found it inadequate at every turn. Someone who understands that the path out of debt doesn't end at zero. It ends where you actually wanted to be when you started.</p>
+    <p>In 2025 I started building the tool I wish had existed. Not another article. Not a calculator with a phone number at the bottom. A real companion — one that takes your actual numbers, understands your actual situation, listens to what you're working toward, and gives you a real plan in your own language, without judgment. Something that feels like talking to someone who has actually been there.</p>
+    <p>Debt-Free.world launched in 2026. It's free. That was never up for discussion. <strong>Debt freedom should never depend on your ability to pay for help first.</strong> The people who need this most are the ones who can least afford to wait — and I built this for them, for us.</p>
+  </div>
+  <p class="sign-off">— Vilma P.</p>
+</div>
+
+<div class="section">
+  <span class="section-label">Mission &amp; Vision</span>
+  <div class="mv-block">
+    <span class="mv-label">Mission</span>
+    <div class="mv-statement">Financial freedom belongs to everyone.</div>
+    <p class="mv-sub">Getting out of debt should never depend on your income, your country, or your ability to pay for help first. The people who need this most are the ones who can least afford to wait — so we built it for them, and we keep it free.</p>
+  </div>
+  <div class="mv-block">
+    <span class="mv-label">Vision</span>
+    <div class="mv-statement">A debt crisis should be a chapter — not a life sentence.</div>
+    <p class="mv-sub">We are building toward a world where honest help to escape debt is free and within reach of anyone, in any country — and where the same companion that meets you in your worst month stays with you all the way to financial independence. We do this together. ✦</p>
+  </div>
+</div>
+
+<div class="section">
+  <span class="section-label">What we stand for</span>
+  <div class="values-grid">
+    <div class="value-card">
+      <span class="value-num">01</span>
+      <div class="value-title">Honesty over comfort</div>
+      <div class="value-text">We tell you what your numbers actually mean — not what you want to hear. A plan built on false hope is no plan at all.</div>
+    </div>
+    <div class="value-card">
+      <span class="value-num">02</span>
+      <div class="value-title">Free means free</div>
+      <div class="value-text">The core service will always be free. No hidden costs. No credit card. No timer. Financial guidance should not be a luxury.</div>
+    </div>
+    <div class="value-card">
+      <span class="value-num">03</span>
+      <div class="value-title">Local context matters</div>
+      <div class="value-text">Debt law, support services, and creditor behaviour differ by country. Generic advice fails people. We build for your reality.</div>
+    </div>
+    <div class="value-card">
+      <span class="value-num">04</span>
+      <div class="value-title">We do this together</div>
+      <div class="value-text">This is not a transaction. This is a commitment. We are with you from the first step to the last payment.</div>
+    </div>
+    <div class="value-card full">
+      <span class="value-num">05</span>
+      <div class="value-title">Give the support you would want to receive</div>
+      <div class="value-text">We give the kind of help we would want when we are the ones in crisis — honest, practical, without judgment, and without a price tag. That standard shapes every decision we make.</div>
+    </div>
+  </div>
+
+  <div class="community-block">
+    <span class="community-label">Community Access</span>
+    <p>Can't afford the 19 € Debt Recovery right now? On the <a href="/ecosystem#card-2">Ecosystem page</a>, you'll find a Community Access link under Debt Recovery — click it and the price is already 0 €, no explanation needed. Financial freedom should never depend on your ability to pay for help first.</p>
+  </div>
+</div>
+
+<div class="section">
+  <span class="section-label">How we got here</span>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2020–24</div><div class="tl-text">Vilma experiences financial collapse through failed contracts, fraud, and business loss. The gap becomes clear: there is no accessible, honest, personalised financial guidance for people in crisis.</div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-text">Development begins. Amliv Oy incorporated in Nokia, Finland. The platform is built around personalised plans tailored to income, household, debt type, and country.</div></div>
+    <div class="tl-item"><div class="tl-year">Q2 2026</div><div class="tl-text">Debt-Free.world launches. 19 languages. 40+ countries. Free, forever.</div></div>
+    <div class="tl-item"><div class="tl-year">Q4 2026</div><div class="tl-text">Income Builder launches — for users who have stabilised their debt and are ready to grow their income.</div></div>
+    <div class="tl-item"><div class="tl-year">2028+</div><div class="tl-text">Wealth Architect and Business Engine. One platform. The full journey from financial crisis to financial independence.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="section-label">The bigger picture</span>
+  <div class="prose">
+    <p>We didn't build a debt app. We built something that stays with you. The same person who comes to us in crisis — overwhelmed, not knowing where to start — should be able to come back when they're ready to grow their income, build savings, or start a business. That's why Debt-Free.world is designed as an ecosystem, not a one-time tool.</p>
+    <p>We start with debt because that's where most people are when they find us. But this platform is built for the entire journey — from the worst month to the best decade.</p>
+  </div>
+  <div class="eco-row">
+    <div class="eco-item">
+      <span class="eco-phase-num">01 · Live</span>
+      <h4>Debt FREE</h4>
+    </div>
+    <div class="eco-item">
+      <span class="eco-phase-num">02 · Live</span>
+      <h4>Debt Recovery</h4>
+    </div>
+    <div class="eco-item muted">
+      <span class="eco-phase-num muted">03 · 2026</span>
+      <h4>Income Builder</h4>
+    </div>
+    <div class="eco-item muted">
+      <span class="eco-phase-num muted">04 · 2028</span>
+      <h4>Wealth Architect</h4>
+    </div>
+    <div class="eco-item muted">
+      <span class="eco-phase-num muted">05 · 2029</span>
+      <h4>Business Engine</h4>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text-soft);text-align:center;margin-top:24px;font-weight:300;">Most services help with one step. Debt-Free.world helps with the entire journey. <a href="/ecosystem" style="color:var(--green);font-weight:500;">See the full picture →</a></p>
+</div>
+
+<div class="section">
+  <span class="section-label">The company</span>
+  <div>
+    <p class="company-line">Debt-Free.world is operated by <strong style="color:var(--text);font-weight:500;">Amliv Oy</strong>, a Finnish limited company registered in Nokia, Finland.</p>
+    <p class="company-line">VAT number: FI32503518 · Contact: <a href="mailto:support@debt-free.world">support@debt-free.world</a></p>
+    <p class="company-line">Vilma Paasikivi is the founder, product lead, and the person who reads every message you send. Everything else runs automatically — by design, so we can keep this free without compromise.</p>
+  </div>
+</div>
+
+<div class="closing">
+  <h3>You deserve to be free of debt.</h3>
+  <p>Start with your free plan — no card, no catch, always free.</p>
+  <a href="/signup-free" class="btn-primary">Get my free plan</a>
+</div>
+
+<footer>
+  <div class="footer-row">
+    <div>
+      <div class="footer-brand">Debt-Free.world</div>
+      <div class="footer-legal">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
+    </div>
+    <div class="footer-links">
+      <a href="/legal#privacy">Privacy</a>
+      <a href="/legal#terms">Terms</a>
+      <a href="mailto:support@debt-free.world">Contact</a>
+    </div>
+    <div class="footer-tagline">🌍 Free forever for those who need it most</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  const menu = document.getElementById('langMenu');
+  if(wrap && menu && !wrap.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+
+(function(){
+  var langs=[
+    ['EN','English'],['FI','Suomi'],['SV','Svenska'],['DE','Deutsch'],
+    ['NO','Norsk'],['DA','Dansk'],['NL','Nederlands'],['ES','Español'],
+    ['FR','Français'],['IT','Italiano'],['PL','Polski'],['PT','Português'],
+    ['CS','Čeština'],['ET','Eesti'],['LV','Latviešu'],['LT','Lietuvių'],
+    ['HU','Magyar'],['RO','Română'],['HR','Hrvatski']
+  ];
+  var stored=localStorage.getItem('dfw_lang')||'EN';
+  window.addEventListener('DOMContentLoaded',function(){
+    var menu=document.getElementById('langMenu');
+    var btn=document.getElementById('langBtn');
+    if(!menu||!btn)return;
+    langs.forEach(function(l){
+      var b=document.createElement('button');
+      b.textContent=l[1];
+      b.onclick=function(){
+        localStorage.setItem('dfw_lang',l[0]);
+        btn.innerHTML=l[0]+' ▾';
+        menu.classList.remove('open');
+      };
+      menu.appendChild(b);
+    });
+    btn.innerHTML=stored+' ▾';
+  });
+})();
+
+function loadTracking(){
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','x6r2dfxj3l');
+  }
+}
+function setCookieConsent(choice){
+  localStorage.setItem('cookie-consent',choice);
+  document.getElementById('dfwCookieBanner').style.display='none';
+  if(choice==='accepted')loadTracking();
+}
+window.addEventListener('DOMContentLoaded',function(){
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('dfwCookieBanner').style.display='flex';
+  }
+  loadTracking();
+});
+</script>
+
+<div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
+  <span>We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing. <a href="/legal#privacy" style="color:#86c9a0;">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;">Decline</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#0f4d28;color:#fff;font-family:sans-serif;">Accept analytics</button>
+  </div>
+</div>
+
+</body>
+</html>
