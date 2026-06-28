@@ -1,213 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Leave a word — Debt-Free.world</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #FBF9F4;
-    --card: #FFFFFF;
-    --border: #E8E2D6;
-    --ink: #2A2E2B;
-    --muted: #8B8478;
-    --green: #166534;
-    --green-soft: #EAF3EC;
-  }
+:root{
+  --green:#0f4d28;--green-dark:#0a3a1d;
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;--surface:#fafaf8;--line:#e8e8e3;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;}
 
-  * { box-sizing: border-box; }
+.wrap{max-width:680px;margin:0 auto;padding:64px 6% 96px;}
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+.mark{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;margin-bottom:4px;}
+.tagline{font-size:12px;color:var(--text-soft);letter-spacing:0.02em;margin-bottom:48px;display:flex;align-items:center;gap:7px;}
 
-  .wrap {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 56px 20px 80px;
-  }
+h1{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.3;letter-spacing:-0.3px;color:var(--text);margin-bottom:22px;}
 
-  .mark {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 18px;
-    color: var(--green);
-    margin: 0 0 4px;
-  }
+.intro{font-size:17px;color:var(--text);line-height:1.7;margin-bottom:10px;}
+.intro-sub{font-size:15px;color:var(--text-soft);line-height:1.7;margin-bottom:48px;font-weight:300;}
 
-  .tagline {
-    font-size: 12px;
-    color: var(--muted);
-    margin: 0 0 40px;
-    letter-spacing: 0.02em;
-  }
+.choice{background:var(--surface);border-left:3px solid var(--green);padding:30px 32px;margin-bottom:22px;}
+.choice-head{display:flex;align-items:center;gap:11px;margin-bottom:12px;}
+.choice-head svg{width:18px;height:18px;color:var(--green);flex-shrink:0;}
+.choice h2{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--text);line-height:1.3;}
+.choice p{font-size:14.5px;color:var(--text-soft);line-height:1.65;margin-bottom:22px;font-weight:300;}
 
-  h1 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: normal;
-    font-size: 26px;
-    line-height: 1.35;
-    margin: 0 0 20px;
-    color: var(--ink);
-  }
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;text-decoration:none;font-size:14.5px;font-weight:600;padding:14px 26px;border-radius:4px;border:none;cursor:pointer;font-family:var(--sans);transition:background 0.15s ease;}
+.btn:hover{background:var(--green-dark);}
+.btn:focus-visible{outline:2px solid var(--green);outline-offset:3px;}
+.btn svg{width:18px;height:18px;}
+.btn:disabled{opacity:0.6;cursor:default;}
 
-  .intro {
-    font-size: 16px;
-    color: var(--ink);
-    margin: 0 0 8px;
-  }
+.btn-secondary{background:transparent;color:var(--green);border:1px solid var(--green);}
+.btn-secondary:hover{background:var(--green);color:#fff;}
 
-  .intro-sub {
-    font-size: 14px;
-    color: var(--muted);
-    margin: 0 0 44px;
-  }
+.between{text-align:center;color:var(--green);font-size:13px;margin:30px 0;letter-spacing:0.04em;}
 
-  .divider {
-    text-align: center;
-    color: var(--green);
-    font-size: 14px;
-    margin: 36px 0;
-    opacity: 0.6;
-  }
+/* Private form */
+#private-form{display:none;margin-top:24px;padding-top:24px;}
+#private-form.open{display:block;}
 
-  .choice {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 28px 26px;
-    margin-bottom: 20px;
-  }
+label{display:block;font-size:13.5px;font-weight:500;color:var(--text);margin:20px 0 7px;}
+label.first{margin-top:0;}
 
-  .choice h2 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: normal;
-    font-size: 19px;
-    margin: 0 0 10px;
-  }
+textarea,select{width:100%;font-family:inherit;font-size:14.5px;color:var(--text);background:var(--white);border:1px solid var(--line);border-radius:4px;padding:11px 13px;resize:vertical;}
+textarea{min-height:84px;}
+textarea:focus,select:focus{outline:none;border-color:var(--green);}
 
-  .choice p {
-    font-size: 14.5px;
-    color: var(--muted);
-    margin: 0 0 20px;
-  }
+.checkbox-row{display:flex;align-items:flex-start;gap:11px;margin:22px 0;}
+.checkbox-row input{margin-top:3px;accent-color:var(--green);}
+.checkbox-row label{margin:0;font-weight:400;font-size:14px;color:var(--text-soft);line-height:1.55;}
 
-  .btn {
-    display: inline-block;
-    background: var(--green);
-    color: #fff;
-    text-decoration: none;
-    font-size: 14.5px;
-    font-weight: 600;
-    padding: 12px 22px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.15s ease;
-  }
-  .btn:hover { opacity: 0.88; }
-  .btn:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+#attribution-wrap{display:none;}
+#attribution-wrap.open{display:block;}
 
-  .btn-secondary {
-    background: transparent;
-    color: var(--green);
-    border: 1px solid var(--green);
-  }
+.form-actions{margin-top:24px;}
 
-  .note {
-    font-size: 12.5px;
-    color: var(--muted);
-    margin-top: 14px;
-    line-height: 1.6;
-  }
+.success{display:none;background:var(--surface);border-left:3px solid var(--green);padding:20px 22px;font-size:14.5px;color:var(--text);line-height:1.65;margin-top:20px;}
+.success.open{display:flex;align-items:flex-start;gap:11px;}
+.success svg{width:18px;height:18px;color:var(--green);flex-shrink:0;margin-top:2px;}
 
-  /* Private form */
-  #private-form {
-    display: none;
-    margin-top: 22px;
-    padding-top: 22px;
-    border-top: 1px solid var(--border);
-  }
+.error{display:none;color:#9b2c2c;font-size:13.5px;margin-top:12px;line-height:1.5;}
+.error.open{display:block;}
 
-  #private-form.open { display: block; }
-
-  label {
-    display: block;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 18px 0 6px;
-  }
-
-  label.first { margin-top: 0; }
-
-  textarea, select {
-    width: 100%;
-    font-family: inherit;
-    font-size: 14.5px;
-    color: var(--ink);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 12px;
-    resize: vertical;
-  }
-
-  textarea { min-height: 80px; }
-
-  .checkbox-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin: 18px 0;
-  }
-
-  .checkbox-row input { margin-top: 3px; }
-
-  .checkbox-row label {
-    margin: 0;
-    font-weight: normal;
-    font-size: 14px;
-  }
-
-  #attribution-wrap { display: none; }
-  #attribution-wrap.open { display: block; }
-
-  .form-actions {
-    margin-top: 22px;
-  }
-
-  .success {
-    display: none;
-    background: var(--green-soft);
-    border-left: 3px solid var(--green);
-    border-radius: 6px;
-    padding: 18px 20px;
-    font-size: 14.5px;
-    margin-top: 18px;
-  }
-  .success.open { display: block; }
-
-  .error {
-    display: none;
-    color: #9b2c2c;
-    font-size: 13.5px;
-    margin-top: 10px;
-  }
-  .error.open { display: block; }
-
-  footer {
-    margin-top: 56px;
-    font-size: 12px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-  }
+footer{margin-top:64px;font-size:12px;color:var(--text-soft);line-height:1.7;}
+footer a{color:var(--green);text-decoration:none;}
+footer a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -221,22 +88,32 @@
   <p class="intro">This is a free tool, and it only reaches the next person if people can find it.</p>
   <p class="intro-sub">Whatever your experience has been — it helped, it didn't, it was somewhere in between — true and specific is worth more to us than glowing and vague.</p>
 
+  <!-- PRIMARY: public Google review -->
   <div class="choice">
-    <h2>Leave a public review</h2>
+    <div class="choice-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.48 3.5a.56.56 0 0 1 1.04 0l2.13 4.32a.56.56 0 0 0 .42.31l4.77.69a.56.56 0 0 1 .31.96l-3.45 3.36a.56.56 0 0 0-.16.5l.81 4.75a.56.56 0 0 1-.81.59l-4.27-2.24a.56.56 0 0 0-.52 0l-4.27 2.24a.56.56 0 0 1-.81-.59l.81-4.75a.56.56 0 0 0-.16-.5L3.65 9.78a.56.56 0 0 1 .31-.96l4.77-.69a.56.56 0 0 0 .42-.31Z"/></svg>
+      <h2>Leave a public review</h2>
+    </div>
     <p>You don't need your full name. "Maria K." or a first name and initial works on Google, and still counts.</p>
+    <!-- TODO (T10): Place ID delivered separately by PL. Replace YOUR_PLACE_ID_HERE before this route goes live. -->
     <a class="btn" href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID_HERE" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
       Leave a public review
     </a>
   </div>
 
-  <div class="divider">✦</div>
+  <div class="between">✦</div>
 
+  <!-- SECONDARY: private, anonymous -->
   <div class="choice">
-    <h2>Share it privately instead</h2>
+    <div class="choice-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <h2>Share it privately instead</h2>
+    </div>
     <p>No name or email needed. Nobody sees this but us.</p>
     <button class="btn btn-secondary" id="toggle-private" type="button">Share it privately</button>
 
-    <form id="private-form">
+    <form id="private-form" novalidate>
       <label class="first" for="helped">What helped, or what didn't help?</label>
       <textarea id="helped" name="helped" placeholder="Optional"></textarea>
 
@@ -244,7 +121,7 @@
       <textarea id="changed" name="changed" placeholder="Optional"></textarea>
 
       <div class="checkbox-row">
-        <input type="checkbox" id="share-anon" name="share_anonymized">
+        <input type="checkbox" id="share-anon" name="share_anonymized"/>
         <label for="share-anon">It's okay to share an anonymized version of this on the website or social media, with no name and no identifying details.</label>
       </div>
 
@@ -266,32 +143,34 @@
     </form>
 
     <div class="success" id="form-success">
-      Thank you, genuinely. This is exactly how we make this better.
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.34"/><path d="m9 11 3 3L22 4"/></svg>
+      <span>Thank you, genuinely. This is exactly how we make this better.</span>
     </div>
   </div>
 
   <footer>
-    Amliv Oy · Nokia, Finland · VAT FI32503518<br>
-    Questions? <a href="mailto:support@debt-free.world" style="color:#166534;">support@debt-free.world</a>
+    Amliv Oy · Nokia, Finland · VAT FI32503518<br/>
+    Questions? <a href="mailto:support@debt-free.world">support@debt-free.world</a>
   </footer>
 
 </div>
 
 <script>
-  // ⚠️ REPLACE before going live: your deployed Worker's base URL.
-  const API_BASE = 'https://api.debt-free.world';
+  // Verified live Worker (v16.14, deployment feeafaba). /api/feedback = POST anonymous [v16.7].
+  // If a custom route (e.g. api.debt-free.world) is later confirmed mapped to this Worker, swap here.
+  const API_BASE = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 
   const toggleBtn   = document.getElementById('toggle-private');
   const formEl      = document.getElementById('private-form');
-  const shareAnon    = document.getElementById('share-anon');
-  const attribution  = document.getElementById('attribution-wrap');
+  const shareAnon   = document.getElementById('share-anon');
+  const attribution = document.getElementById('attribution-wrap');
   const successBox  = document.getElementById('form-success');
   const errorBox    = document.getElementById('form-error');
   const submitBtn   = document.getElementById('submit-btn');
 
   toggleBtn.addEventListener('click', () => {
     formEl.classList.toggle('open');
-    toggleBtn.style.display = formEl.classList.contains('open') ? 'none' : 'inline-block';
+    toggleBtn.style.display = formEl.classList.contains('open') ? 'none' : 'inline-flex';
   });
 
   shareAnon.addEventListener('change', () => {
@@ -301,12 +180,23 @@
   formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorBox.classList.remove('open');
+
+    const helped  = document.getElementById('helped').value.trim();
+    const changed = document.getElementById('changed').value.trim();
+
+    // Nothing typed — don't post an empty record.
+    if (!helped && !changed) {
+      errorBox.textContent = 'Add a line in either box before sending.';
+      errorBox.classList.add('open');
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
     const payload = {
-      helped: document.getElementById('helped').value.slice(0, 2000),
-      changed: document.getElementById('changed').value.slice(0, 2000),
+      helped:  helped.slice(0, 2000),
+      changed: changed.slice(0, 2000),
       share_anonymized: shareAnon.checked,
       attribution: shareAnon.checked ? document.getElementById('attribution').value : null,
     };
@@ -317,11 +207,12 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error('Request failed');
+      if (!res.ok) throw new Error('Request failed: ' + res.status);
 
       formEl.classList.remove('open');
       successBox.classList.add('open');
     } catch (err) {
+      errorBox.textContent = 'Something went wrong on our end — please try again in a moment.';
       errorBox.classList.add('open');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send privately';
