@@ -1616,7 +1616,7 @@ async function submitForm(){
     if(memberToken)headers['x-member-token']=memberToken;
     const aiRes=await fetch(`${WORKER_URL}/api/chat`,{
       method:'POST',headers,
-      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2500,messages:[{role:'user',content:buildPrompt(formData)}]})
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:2500,messages:[{role:'user',content:buildPrompt(formData)}]})
     });
     if(aiRes.ok){const aiData=await aiRes.json();plan=aiData.content?.[0]?.text||'';}
   }catch(e){}
