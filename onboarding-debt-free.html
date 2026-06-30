@@ -1092,10 +1092,29 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   }
 
   prefillMode = urlMode;
+
+  /* ── LOAD GUARD ──
+     An already-onboarded member must never land on a blank form. Only an
+     explicit mode=update (deliberate edit) — or a genuinely new member with
+     no completed onboarding — may see the form. This also protects against
+     stale magic links and accidental navigation back to this page.
+     We honour onboarding_complete if the Worker returns it, and fall back to
+     the presence of a generated member_plan (verified to be returned by
+     /member/validate) so the guard cannot become dead code. */
+  const hasPlan = existingData && existingData.member_plan && (
+    (typeof existingData.member_plan === 'string' && existingData.member_plan.trim() !== '') ||
+    (typeof existingData.member_plan === 'object' && Object.keys(existingData.member_plan).length > 0)
+  );
+  const alreadyOnboarded = !!existingData && (existingData.onboarding_complete === true || hasPlan);
+  if (alreadyOnboarded && prefillMode !== 'update') {
+    location.replace('/member-free/?token=' + encodeURIComponent(memberToken));
+    return;
+  }
+
   if (prefillMode === 'update' && existingData && existingData.onboarding) {
     prefillForm(existingData.onboarding);
   }
-  // mode=fresh (or no mode): leave the form blank, default state stands.
+  // mode=fresh (or no mode), genuinely new member: leave the form blank, default state stands.
 
   const step1 = document.getElementById('step1');
   if(step1){
@@ -1439,6 +1458,39 @@ function buildPrompt(d){
   if(highestRate>25)strategy='REPAYMENT STRATEGY: Avalanche method — highest interest rate first. The interest cost on the highest-rate debt is destroying progress. Name this explicitly.';
   else if(totalDebt>0&&d.debts&&d.debts.length>1)strategy='REPAYMENT STRATEGY: Snowball method — smallest balance first. Quick wins build momentum. Name the first debt to eliminate.';
 
+  // ── Emergency fund & savings logic (data-locked — computed in the client's own numbers) ──
+  const essential=(parseFloat(d.housing_cost)||0)+(parseFloat(d.other_costs)||0);
+  const insecureIncome=!!(d.employment&&(d.employment.includes('Part-time')||d.employment.includes('gig')||d.employment.includes('Self-employed')||d.employment.includes('Unemployed')||d.employment.includes('illness')));
+  const efMonths=insecureIncome?6:3;
+  const efTarget=Math.round(essential*efMonths);
+  const starterTarget=Math.round(essential); // ~1 month of essentials
+  const sav=d.savings||'unknown';
+  const hasSomeBuffer=sav!=='None at all'&&sav!=='unknown';
+  const strongBuffer=sav==='Over 2 000';
+  const hasHighInterestDebt=highestRate>=20;
+  const efTargetLine=essential>0
+    ?`Emergency-fund target for this person: ${efMonths} months of essential costs = ${efTarget} ${cur} (${insecureIncome?'6 months, because their income is irregular or insecure':'3 months baseline'}). Starter buffer (~1 month): ${starterTarget} ${cur}.`
+    :`Emergency-fund target: ${efMonths} months of their essential costs. Essential costs were not given as a number — estimate a sensible essentials figure from their profile before naming any target; never output a target of 0.`;
+  let efSequence;
+  const targetPhrase=essential>0?`${efTarget} ${cur}`:`the ${efMonths}-month fund (set from their real essential costs, never 0)`;
+  const starterPhrase=essential>0?`about ${starterTarget} ${cur}`:`roughly one month of their essential costs`;
+  if(hasHighInterestDebt&&totalDebt>0){
+    efSequence=`SEQUENCE: (1) a small starter buffer of ${starterPhrase} FIRST, then (2) attack the high-interest debt (highest rate ${highestRate}%), then (3) build the full ${targetPhrase} fund. Explain plainly why a tiny buffer comes before the debt: it stops the next surprise expense from creating brand-new high-interest debt.`;
+  }else if(totalDebt>0){
+    efSequence=`SEQUENCE: There is debt but no high-interest emergency. Balance modest saving with steady repayment in their own numbers. Do not tell them to halt all saving, and do not tell them to halt all repayment.`;
+  }else{
+    efSequence=`SEQUENCE: There is NO debt — do NOT deliver a generic "pay off your debt" or a beginner savings lecture. ${strongBuffer?`Their buffer is already substantial ("Over 2 000"). If it already meets or approaches ${targetPhrase}, ACKNOWLEDGE they are in a stable position and give a fitting next step (top up toward ${efMonths} months if not yet there, then direct surplus toward their stated goal) — not a starter-savings instruction.`:`Guide them toward the ${efMonths}-month fund (${targetPhrase}) at a realistic pace in their own numbers, then toward their stated goal.`}`;
+  }
+  const savingsLogic=`EMERGENCY FUND & SAVINGS LOGIC — data-locked. Use THEIR numbers below, never a flat round figure, and never contradict what they told us:
+  Stated savings/buffer right now: ${sav}
+  Essential monthly costs (housing + other fixed): ${essential>0?essential+' '+cur:'not provided as a number'}
+  ${efTargetLine}
+  HARD RULES:
+  → They stated their buffer is "${sav}". Never write advice that assumes a different reality — never tell someone with "Over 2 000" to start a buffer from zero, and never tell someone with "None at all" that they already have savings.
+  ${hasSomeBuffer?'→ They already have some buffer. Treat it as a real asset and build from it — do not restart from zero.':'→ They have no buffer yet. The first savings goal is the small, reachable starter buffer above, not the full fund.'}
+  → ${efSequence}
+  → Express every savings figure in their own numbers above. Never invent a flat round target (e.g. "save 1 000") that ignores their essential costs.`;
+
   // Country-specific legal context
   const countryLegal={
     'United Kingdom':'If total debt is unmanageable, mention Individual Voluntary Arrangement (IVA) as a formal option — always with a referral to a licensed insolvency practitioner, never as a recommendation.',
@@ -1527,6 +1579,8 @@ DEBT MAP — use these exact figures throughout the plan:
 ${debtDetail}
 Total debt: ${totalDebt} ${cur}
 Highest interest rate in portfolio: ${highestRate}%
+
+${savingsLogic}
 
 TONE RULES — apply all that match:
 ${toneRules.length>0?toneRules.map(r=>'→ '+r).join('\n'):'→ Warm, direct, honest. Use "we" occasionally. Never clinical or generic.'}
