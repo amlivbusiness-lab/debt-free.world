@@ -84,6 +84,10 @@ button{font-family:var(--sans);cursor:pointer;}
 .nav-item .lock{margin-left:auto;width:15px;height:15px;color:var(--soft);}
 .nav-unlock{margin:8px 16px 0;display:block;text-align:center;background:var(--green);color:#fff;border-radius:24px;padding:11px;font-size:13.5px;font-weight:600;}
 .nav-unlock:hover{background:var(--green-dark);text-decoration:none;}
+.nav-foot{margin-top:6px;padding-top:10px;border-top:1px solid var(--border);}
+.nav-logout{color:var(--soft);font-weight:600;}
+.nav-logout svg{color:var(--soft);}
+.nav-logout:hover{background:var(--green-pale);color:var(--text);}
 
 /* ── LAYOUT ── */
 .wrap{max-width:var(--content);margin:0 auto;padding:26px 18px 80px;}
@@ -162,6 +166,11 @@ button{font-family:var(--sans);cursor:pointer;}
 .plan-toggle.open svg{transform:rotate(180deg);}
 .plan-empty{font-size:14px;color:var(--muted);background:var(--green-pale);border-radius:11px;padding:16px;}
 .plan-empty a{font-weight:600;}
+.plan-update{margin-top:18px;padding:14px 16px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:8px;}
+.plan-update-link{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:600;font-size:14.5px;cursor:pointer;}
+.plan-update-link svg{width:17px;height:17px;stroke-width:1.5;}
+.plan-update-link:hover{text-decoration:underline;}
+.plan-update-sub{display:block;margin-top:6px;font-size:13px;color:var(--muted);}
 
 /* debt map */
 .debt-row{display:flex;align-items:center;gap:13px;padding:13px 0;}
@@ -332,6 +341,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="badge-check"></i><span data-i18n="nav_g_debtfree">Debt FREE</span></div>
       <button class="nav-item" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
+      <button class="nav-item" onclick="goUpdatePlan()"><i data-lucide="refresh-cw"></i><span data-i18n="nav_update">Update my numbers</span></button>
       <button class="nav-item" onclick="navTo('sec-today')"><i data-lucide="circle-alert"></i><span data-i18n="nav_emergency">Emergency Card</span></button>
       <button class="nav-item" onclick="navTo('sec-understand')"><i data-lucide="wallet"></i><span data-i18n="nav_snapshot">Financial Snapshot</span></button>
       <button class="nav-item" onclick="navTo('sec-debtmap')"><i data-lucide="map"></i><span data-i18n="nav_debtmap">Debt Map</span></button>
@@ -357,6 +367,9 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="shield"></i><span data-i18n="nav_crisis">Crisis Plans</span><i data-lucide="lock" class="lock"></i></button>
       <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><i data-lucide="lock" class="lock"></i></button>
       <a class="nav-unlock" href="/ecosystem.html#card-2" data-i18n="nav_unlock">Unlock Debt Recovery — 19 €</a>
+    </div>
+    <div class="nav-group nav-foot">
+      <button class="nav-item nav-logout" onclick="logout()"><i data-lucide="log-out"></i><span data-i18n="logout">Log out</span></button>
     </div>
   </div>
 </nav>
@@ -579,6 +592,33 @@ function openDrawer(){$('drawer').classList.add('open');$('scrim').classList.add
 function closeDrawer(){$('drawer').classList.remove('open');$('scrim').classList.remove('show');}
 function navTo(id){closeDrawer();setTimeout(()=>scrollToSection(id),180);}
 
+/* ── UPDATE MY NUMBERS ──
+   Sends the member back to onboarding with their saved answers pre-filled
+   (mode=update) in their current language. On submit, onboarding regenerates
+   the plan and overwrites member_plan via /onboarding/save. No auth/API change. */
+function goUpdatePlan(){
+  if(!memberToken){showReauth();return;}
+  closeDrawer();
+  const url='/onboarding-debt-free.html?token='+encodeURIComponent(memberToken)
+    +'&mode=update&lang='+encodeURIComponent(DFWI18n.current);
+  location.href=url;
+}
+
+/* ── LOG OUT ──
+   The token is never persisted (it lives only in memory and is wiped from the
+   URL on boot), so logging out clears the in-memory token + member record,
+   defensively clears any stored token, scrubs the URL, and returns the user to
+   the clean re-auth screen. Their plan stays safe server-side. */
+function logout(){
+  memberToken=null; M=null;
+  try{sessionStorage.removeItem('dfw_token');localStorage.removeItem('dfw_token');}catch(_){}
+  try{history.replaceState({},'',location.pathname);}catch(_){}
+  closeDrawer();
+  showReauth();
+  try{window.scrollTo(0,0);}catch(_){}
+  showToast(t('logout_done'));
+}
+
 /* ════════════════════════════════════════════════
    BOOT + AUTH
    ════════════════════════════════════════════════ */
@@ -693,11 +733,15 @@ function renderPlan(){
   const plan=M.member_plan||(M.onboarding&&M.onboarding.member_plan)||'';
   const el=$('planBody');
   if(!plan){
-    el.innerHTML=`<div class="plan-empty">${esc(t('plan_empty'))}<br><a href="/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}">${esc(t('plan_empty_link'))} →</a></div>`;
+    el.innerHTML=`<div class="plan-empty">${esc(t('plan_empty'))}<br><a href="/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=fresh&lang=${encodeURIComponent(DFWI18n.current)}">${esc(t('plan_empty_link'))} →</a></div>`;
     return;
   }
   el.innerHTML=`<div class="plan-box"><div class="plan-render collapsed" id="planRender">${planToHtml(plan)}</div><div class="plan-fade"></div></div>
-    <button class="plan-toggle" id="planToggle" onclick="togglePlan()"><span id="planToggleLbl">${esc(t('plan_expand'))}</span><i data-lucide="chevron-down"></i></button>`;
+    <button class="plan-toggle" id="planToggle" onclick="togglePlan()"><span id="planToggleLbl">${esc(t('plan_expand'))}</span><i data-lucide="chevron-down"></i></button>
+    <div class="plan-update">
+      <a class="plan-update-link" onclick="goUpdatePlan()"><i data-lucide="refresh-cw"></i>${esc(t('plan_update'))}</a>
+      <span class="plan-update-sub">${esc(t('plan_update_sub'))}</span>
+    </div>`;
   icons();
 }
 function togglePlan(){
