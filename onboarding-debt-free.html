@@ -182,8 +182,8 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   .q-title{font-size:22px;}
   .opts.grid2{grid-template-columns:1fr;}
   .two-col{grid-template-columns:1fr;}
-  .amount-row{flex-direction:column;}
-  .amount-row select{width:100%;}
+  .amount-row{flex-direction:row;}
+  .amount-row select{width:92px;flex-shrink:0;}
   .cta-row{flex-direction:column-reverse;}
   .btn-back{text-align:center;}
 }
@@ -504,6 +504,10 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
         <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Under 500"><span class="opt-label" data-i18n="sav2">Under 500</span></button>
         <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="500 to 2 000"><span class="opt-label" data-i18n="sav3">500 – 2 000</span></button>
         <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Over 2 000"><span class="opt-label" data-i18n="sav4">Over 2 000</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Over 4 000"><span class="opt-label" data-i18n="sav5">Over 4 000</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Over 6 000"><span class="opt-label" data-i18n="sav6">Over 6 000</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Over 8 000"><span class="opt-label" data-i18n="sav7">Over 8 000</span></button>
+        <button class="opt" onclick="selectOpt(this,'savings');revealS4Group(4)" data-val="Over 10 000"><span class="opt-label" data-i18n="sav8">Over 10 000</span></button>
       </div>
     </div>
   </div>
@@ -785,7 +789,7 @@ EN: {
   err_required:'Required.',
   lbl_buffer_section:'A little about your safety net',
   lbl_savings:'Do you have any savings or emergency buffer right now?',
-  sav1:'None at all',sav2:'Under 500',sav3:'500 – 2,000',sav4:'Over 2,000',
+  sav1:'None at all',sav2:'Under 500',sav3:'500 – 2,000',sav4:'Over 2,000',sav5:'Over 4,000',sav6:'Over 6,000',sav7:'Over 8,000',sav8:'Over 10,000',
   lbl_household_section:'And your household',
   lbl_employment:"What's your work situation?",emp_ph:'— Select —',
   emp1:'Employed full-time',emp2:'Employed part-time',emp3:'Self-employed / business owner',
@@ -914,7 +918,7 @@ FI: {
   err_required:'Pakollinen.',
   lbl_buffer_section:'Hieman turvaverkostasi',
   lbl_savings:'Onko sinulla säästöjä tai hätäpuskuria juuri nyt?',
-  sav1:'Ei lainkaan',sav2:'Alle 500',sav3:'500 – 2 000',sav4:'Yli 2 000',
+  sav1:'Ei lainkaan',sav2:'Alle 500',sav3:'500 – 2 000',sav4:'Yli 2 000',sav5:'Yli 4 000',sav6:'Yli 6 000',sav7:'Yli 8 000',sav8:'Yli 10 000',
   lbl_household_section:'Ja kotitaloudestasi',
   lbl_employment:'Mikä on työtilanteesi?',emp_ph:'— Valitse —',
   emp1:'Kokoaikainen työ',emp2:'Osa-aikainen työ',emp3:'Yrittäjä / toiminimi',
@@ -1356,7 +1360,7 @@ function toggleOpt(btn,field){
 }
 
 /* ── DEBT MANAGEMENT ── */
-function openMiniForm(){ document.getElementById('debtMiniForm').classList.add('open'); document.querySelector('.add-debt-btn').style.display='none'; setTimeout(()=>document.getElementById('mini_amount').focus(),100); }
+function openMiniForm(){ document.getElementById('debtMiniForm').classList.add('open'); document.querySelector('.add-debt-btn').style.display='none'; setTimeout(()=>document.getElementById('mini_type').focus(),100); }
 function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.querySelector('.add-debt-btn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; }); }
 function addDebt(){
   const type=document.getElementById('mini_type').value; const amt=document.getElementById('mini_amount').value;
@@ -1458,38 +1462,43 @@ function buildPrompt(d){
   if(highestRate>25)strategy='REPAYMENT STRATEGY: Avalanche method — highest interest rate first. The interest cost on the highest-rate debt is destroying progress. Name this explicitly.';
   else if(totalDebt>0&&d.debts&&d.debts.length>1)strategy='REPAYMENT STRATEGY: Snowball method — smallest balance first. Quick wins build momentum. Name the first debt to eliminate.';
 
-  // ── Emergency fund & savings logic (data-locked — computed in the client's own numbers) ──
+  // ── Emergency fund & savings logic (data-locked, income-based: target = 6x net monthly income) ──
+  const netIncome=parseFloat(d.income)||0;
   const essential=(parseFloat(d.housing_cost)||0)+(parseFloat(d.other_costs)||0);
-  const insecureIncome=!!(d.employment&&(d.employment.includes('Part-time')||d.employment.includes('gig')||d.employment.includes('Self-employed')||d.employment.includes('Unemployed')||d.employment.includes('illness')));
-  const efMonths=insecureIncome?6:3;
-  const efTarget=Math.round(essential*efMonths);
-  const starterTarget=Math.round(essential); // ~1 month of essentials
+  const starterTarget=Math.round(essential); // ~1 month of essential costs (starter buffer only)
+  const efTarget=Math.round(netIncome*6);    // FULL emergency fund = 6 months of NET INCOME
+  const lowIncome=netIncome<=0;              // 0 / near-zero income -> defer numeric target, never 0
+  const hasHighInterestDebt=highestRate>=20;
   const sav=d.savings||'unknown';
   const hasSomeBuffer=sav!=='None at all'&&sav!=='unknown';
-  const strongBuffer=sav==='Over 2 000';
-  const hasHighInterestDebt=highestRate>=20;
-  const efTargetLine=essential>0
-    ?`Emergency-fund target for this person: ${efMonths} months of essential costs = ${efTarget} ${cur} (${insecureIncome?'6 months, because their income is irregular or insecure':'3 months baseline'}). Starter buffer (~1 month): ${starterTarget} ${cur}.`
-    :`Emergency-fund target: ${efMonths} months of their essential costs. Essential costs were not given as a number — estimate a sensible essentials figure from their profile before naming any target; never output a target of 0.`;
-  let efSequence;
-  const targetPhrase=essential>0?`${efTarget} ${cur}`:`the ${efMonths}-month fund (set from their real essential costs, never 0)`;
+  const bufferFloorMap={'None at all':0,'Under 500':0,'500 to 2 000':500,'Over 2 000':2000,'Over 4 000':4000,'Over 6 000':6000,'Over 8 000':8000,'Over 10 000':10000};
+  const bufferFloor=bufferFloorMap[sav]!==undefined?bufferFloorMap[sav]:0;
+  const adequateBuffer=efTarget>0&&bufferFloor>=efTarget;
+  const targetPhrase=lowIncome
+    ?`a full six-month emergency fund once their income is stable (do NOT state a number while income is near zero — never 0)`
+    :`${efTarget} ${cur} — six months of their net monthly income`;
   const starterPhrase=essential>0?`about ${starterTarget} ${cur}`:`roughly one month of their essential costs`;
+  let efSequence;
   if(hasHighInterestDebt&&totalDebt>0){
-    efSequence=`SEQUENCE: (1) a small starter buffer of ${starterPhrase} FIRST, then (2) attack the high-interest debt (highest rate ${highestRate}%), then (3) build the full ${targetPhrase} fund. Explain plainly why a tiny buffer comes before the debt: it stops the next surprise expense from creating brand-new high-interest debt.`;
+    efSequence=`SEQUENCE: (1) a small starter buffer of ${starterPhrase} FIRST, then (2) attack the high-interest debt (highest rate ${highestRate}%), then (3) build the full fund of ${targetPhrase}. Explain plainly why a tiny buffer comes before the debt: it stops the next surprise expense from creating brand-new high-interest debt.`;
   }else if(totalDebt>0){
-    efSequence=`SEQUENCE: There is debt but no high-interest emergency. Balance modest saving with steady repayment in their own numbers. Do not tell them to halt all saving, and do not tell them to halt all repayment.`;
+    efSequence=`SEQUENCE: There is debt but no high-interest emergency. Balance steady repayment with slowly growing toward the full fund of ${targetPhrase}, in their own numbers. Do not tell them to halt all saving, and do not tell them to halt all repayment.`;
   }else{
-    efSequence=`SEQUENCE: There is NO debt — do NOT deliver a generic "pay off your debt" or a beginner savings lecture. ${strongBuffer?`Their buffer is already substantial ("Over 2 000"). If it already meets or approaches ${targetPhrase}, ACKNOWLEDGE they are in a stable position and give a fitting next step (top up toward ${efMonths} months if not yet there, then direct surplus toward their stated goal) — not a starter-savings instruction.`:`Guide them toward the ${efMonths}-month fund (${targetPhrase}) at a realistic pace in their own numbers, then toward their stated goal.`}`;
+    efSequence=`SEQUENCE: There is NO debt — do NOT deliver a generic "pay off your debt" or a beginner savings lecture. ${adequateBuffer?`Their stated buffer already meets or exceeds a six-month fund (${targetPhrase}). ACKNOWLEDGE they are in a genuinely stable position and give a fitting next step (protect and maintain it, then direct surplus toward their stated goal) — not a starter-savings instruction.`:`Guide them warmly toward the full fund of ${targetPhrase} as a staged, longer-term goal in their own numbers, then toward their stated goal.`}`;
   }
-  const savingsLogic=`EMERGENCY FUND & SAVINGS LOGIC — data-locked. Use THEIR numbers below, never a flat round figure, and never contradict what they told us:
+  const savingsLogic=`EMERGENCY FUND & SAVINGS LOGIC — data-locked. The emergency-fund target is SIX MONTHS OF NET MONTHLY INCOME. Never present three months (or anything less than six months of income) as an adequate emergency fund. Use THEIR numbers below, never a flat round figure, and never contradict what they told us:
   Stated savings/buffer right now: ${sav}
-  Essential monthly costs (housing + other fixed): ${essential>0?essential+' '+cur:'not provided as a number'}
-  ${efTargetLine}
+  Net monthly income: ${netIncome>0?netIncome+' '+cur:'not provided / near zero'}
+  Full emergency-fund target: ${targetPhrase}.
+  Starter buffer (only relevant when there is high-interest debt): ${starterPhrase} — about one month of essential costs.
   HARD RULES:
-  → They stated their buffer is "${sav}". Never write advice that assumes a different reality — never tell someone with "Over 2 000" to start a buffer from zero, and never tell someone with "None at all" that they already have savings.
-  ${hasSomeBuffer?'→ They already have some buffer. Treat it as a real asset and build from it — do not restart from zero.':'→ They have no buffer yet. The first savings goal is the small, reachable starter buffer above, not the full fund.'}
+  → Present the full six-month figure as a FINAL, staged goal to grow toward over time — warm and reassuring, never an immediate demand and never a precondition for making progress.
+  → Never present 3 months as enough. The fund is six months of income.
+  → They stated their buffer is "${sav}". Never write advice that assumes a different reality — never tell someone with a large stated buffer to start from zero, and never tell someone with "None at all" that they already have savings.
+  ${lowIncome?'→ Their income is at or near zero. Do NOT state a numeric fund target; frame the six-month fund as a goal for once income stabilises, and make the immediate focus stabilising income and covering essential costs. Never state a target of 0.':''}
+  ${hasSomeBuffer?'→ They already have some buffer. Treat it as a real asset and build from it — do not restart from zero.':'→ They have no buffer yet. The first concrete savings step is small and reachable, not the full fund.'}
   → ${efSequence}
-  → Express every savings figure in their own numbers above. Never invent a flat round target (e.g. "save 1 000") that ignores their essential costs.`;
+  → Express every savings figure in their own numbers. Never invent a flat round target that ignores their income.`;
 
   // Country-specific legal context
   const countryLegal={
@@ -1651,8 +1660,13 @@ async function submitForm(){
   if(!formData.immediate_focus){ showInlineErr('err_focus'); return; }
 
   document.getElementById('step7').classList.remove('active');
+  // (e) Generation is its own clean, centered full screen — hide the form chrome
+  //     (step tracker + step counter) so nothing trails after the form.
+  const progWrap=document.querySelector('.progress-wrap'); if(progWrap)progWrap.style.display='none';
+  const tbStep=document.getElementById('topbarStep'); if(tbStep)tbStep.style.display='none';
   const loader=document.getElementById('loadingScreen');
   loader.classList.add('active');
+  try{window.scrollTo(0,0);}catch(_){}
   animateLoader();
 
   let memberEmail='';
