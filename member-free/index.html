@@ -133,6 +133,11 @@ button{font-family:var(--sans);cursor:pointer;}
 .emerg-action.done .ea-title{text-decoration:line-through;color:var(--soft);}
 .emerg-progress{font-size:12.5px;color:var(--green);font-weight:600;margin-top:12px;display:flex;align-items:center;gap:7px;}
 .emerg-progress svg{width:15px;height:15px;}
+.emerg-next{margin-top:16px;padding:14px 16px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 10px 10px 0;}
+.emerg-next .en-title{font-family:var(--serif);font-size:15.5px;color:var(--text);margin-bottom:10px;}
+.emerg-next .en-step{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--text);line-height:1.5;margin-bottom:8px;}
+.emerg-next .en-step:last-child{margin-bottom:0;}
+.emerg-next .en-step svg{width:15px;height:15px;color:var(--green);flex-shrink:0;margin-top:3px;stroke-width:1.5;}
 
 /* snapshot grid */
 .snap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
@@ -683,7 +688,25 @@ function renderEmergency(){
     <span class="emerg-body"><span class="ea-title">${esc(t(a[0]))}</span><span class="ea-sub">${esc(t(a[1]))}</span></span></label>`).join('');
   const done=checked.filter(Boolean).length;
   html+=`<div class="emerg-progress"><i data-lucide="${done===3?'check-circle-2':'circle-dashed'}"></i>${done===3?esc(t('em_alldone')):esc(t('em_progress',{n:done}))}</div>`;
+  if(done===3){html+=nextStepsHtml();}
   $('emergCard').innerHTML=html;icons();
+}
+/* (g) Progress-aware TODAY: once the base emergency actions are done, show
+   situation-appropriate NEXT steps for the free tier. These are free actions
+   only — they never promise paid companion features. Steering
+   toward Debt Recovery stays as the single UPGRADE card, untouched. */
+function nextStepsHtml(){
+  const m=model();
+  const col=(M.collections||(M.onboarding&&M.onboarding.collections)||'').toString();
+  const steps=[t('em_next_plan')];
+  if(col.includes('Yes'))steps.push(t('em_next_collections'));
+  else if(m.surplus<=0)steps.push(t('em_next_stabilise'));
+  else if(m.highestRate>=20)steps.push(t('em_next_highint'));
+  else steps.push(t('em_next_surplus'));
+  steps.push(t('em_next_revisit'));
+  return `<div class="emerg-next"><div class="en-title">${esc(t('em_next_title'))}</div>`+
+    steps.map(s=>`<div class="en-step"><i data-lucide="arrow-right"></i><span>${esc(s)}</span></div>`).join('')+
+    `</div>`;
 }
 async function toggleEmergency(i,val){
   const arr=Array.isArray(M.emergency_card_checked)?M.emergency_card_checked.slice():[false,false,false];
@@ -721,6 +744,7 @@ function planToHtml(text){
   lines.forEach(raw=>{
     const line=raw.trim();
     if(!line){return;}
+    if(/^[-–—\s]{2,}$/.test(line)){return;} // skip divider/rule-only lines (e.g. "---", "—")
     const isHead=line.length<=64&&/[A-Za-zÀ-ž]/.test(line)&&line===line.toLocaleUpperCase(localeForLang())&&!/^\d/.test(line);
     const numMatch=line.match(/^(\d+)[\.\)]\s+(.*)$/);
     if(isHead){html+=`<h4>${esc(line.replace(/[:：]\s*$/,''))}</h4>`;}
