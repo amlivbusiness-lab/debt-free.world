@@ -230,6 +230,14 @@ button{font-family:var(--sans);cursor:pointer;}
 .utag.mon{background:var(--green-tint);color:var(--green);}
 .debt-banner{background:var(--red-bg);border-left:3px solid var(--red);border-radius:10px;padding:12px 14px;font-size:13.5px;color:#7a1d17;margin-bottom:14px;display:flex;gap:10px;}
 .debt-banner svg{width:18px;height:18px;color:var(--red);flex-shrink:0;margin-top:1px;}
+.debt-focus{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:16px 18px;margin-bottom:16px;}
+.debt-focus .df-eyebrow{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:11px;}
+.debt-focus .df-eyebrow svg{width:15px;height:15px;color:var(--green);stroke-width:1.5;flex-shrink:0;}
+.debt-focus .df-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:9px;}
+.debt-focus .df-name{font-weight:600;font-size:15px;color:var(--text);min-width:0;}
+.debt-focus .df-amt{font-family:var(--serif);font-size:23px;line-height:1.05;color:var(--green);flex-shrink:0;white-space:nowrap;}
+.debt-focus .df-why{font-size:14.5px;color:var(--text);line-height:1.5;}
+.debt-focus .df-frame{font-size:13px;color:var(--muted);margin-top:11px;}
 
 /* tools grid */
 .tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
@@ -1017,6 +1025,15 @@ function renderDebtMap(){
   const sorted=m.debts.map((d,idx)=>({...d,_u:debtUrgency(d),_i:idx})).sort((a,b)=>order[a._u]-order[b._u]||num(b.interest)-num(a.interest)||num(b.amount)-num(a.amount));
   const utagLbl={crit:t('utag_crit'),high:t('utag_high'),mon:t('utag_mon')};
   let html=banner;
+  /* #1 TARGET focus card — turns the list into a direction (one target + why).
+     Uses only the already-computed classification (sorted[0]._u); no new data. */
+  const top=sorted[0];
+  const whyKey={crit:'dm_why_crit',high:'dm_why_high',mon:'dm_why_mon'}[top._u];
+  html+=`<div class="debt-focus">
+      <div class="df-eyebrow"><i data-lucide="target"></i><span>${esc(t('dm_focus_eyebrow'))}</span></div>
+      <div class="df-top"><div class="df-name">${esc(top.type||'Debt')}${top.creditor?' · '+esc(top.creditor):''}</div><div class="df-amt">${esc(fmtMoney(top.amount,top.currency||m.cur))}</div></div>
+      <div class="df-why">${esc(t(whyKey))}</div>
+      <div class="df-frame">${esc(t('dm_focus_frame'))}</div></div>`;
   sorted.forEach((d,i)=>{
     const rate=num(d.interest)>0?num(d.interest)+'%':t('dm_unknown_rate');
     html+=`<div class="debt-row"><div class="debt-rank">${i+1}</div>
