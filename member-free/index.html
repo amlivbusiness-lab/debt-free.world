@@ -202,6 +202,18 @@ button{font-family:var(--sans);cursor:pointer;}
 .plan-update-link svg{width:17px;height:17px;stroke-width:1.5;}
 .plan-update-link:hover{text-decoration:underline;}
 .plan-update-sub{display:block;margin-top:6px;font-size:13px;color:var(--muted);}
+/* plan — your next move (always visible) */
+.plan-next{background:var(--green-pale);border-left:3px solid var(--green);border-radius:12px;padding:18px 20px;margin-bottom:20px;}
+.plan-next-eyebrow{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:11px;}
+.plan-next-eyebrow svg{width:16px;height:16px;stroke-width:1.5;}
+.plan-next-step{font-family:var(--serif);font-size:20px;line-height:1.34;color:var(--text);}
+.plan-next-fallback{font-size:15.5px;line-height:1.56;color:var(--text);}
+.plan-next-frame{margin-top:11px;font-size:13px;color:var(--muted);line-height:1.5;}
+/* plan render — read as a walkable path, not a document */
+.plan-render h4{position:relative;padding-left:24px;font-size:16px;margin:24px 0 9px;}
+.plan-render h4::before{content:"";position:absolute;left:2px;top:.55em;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--green-tint);}
+.plan-render .pl-num{align-items:flex-start;gap:12px;padding:11px 14px;margin:0 0 8px;background:var(--green-pale);border-radius:10px;}
+.plan-render .pl-num .n{font-family:var(--serif);font-size:15px;line-height:1.5;}
 
 /* debt map */
 .debt-row{display:flex;align-items:center;gap:13px;padding:13px 0;}
@@ -946,6 +958,16 @@ function planToHtml(text){
   });
   return html||`<p>${esc(String(text||''))}</p>`;
 }
+/* firstPlanStep — returns the text of the plan's FIRST numbered step,
+   using the SAME regex as planToHtml (/^(\d+)[.)]\s+(.*)$/). Null if none. */
+function firstPlanStep(plan){
+  const lines=String(plan||'').split(/\r?\n/);
+  for(let i=0;i<lines.length;i++){
+    const m=lines[i].trim().match(/^(\d+)[\.\)]\s+(.*)$/);
+    if(m&&m[2].trim()){return m[2].trim();}
+  }
+  return null;
+}
 function renderPlan(){
   const plan=M.member_plan||(M.onboarding&&M.onboarding.member_plan)||'';
   const el=$('planBody');
@@ -953,7 +975,16 @@ function renderPlan(){
     el.innerHTML=`<div class="plan-empty">${esc(t('plan_empty'))}<br><a href="/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=fresh&lang=${encodeURIComponent(DFWI18n.current)}">${esc(t('plan_empty_link'))} →</a></div>`;
     return;
   }
-  el.innerHTML=`<div class="plan-box"><div class="plan-render collapsed" id="planRender">${planToHtml(plan)}</div><div class="plan-fade"></div></div>
+  const step=firstPlanStep(plan);
+  const nextInner=step
+    ? `<div class="plan-next-step">${esc(step)}</div>`
+    : `<div class="plan-next-fallback">${esc(t('plan_next_fallback'))}</div>`;
+  const nextCard=`<div class="plan-next">
+      <div class="plan-next-eyebrow"><i data-lucide="arrow-right"></i><span>${esc(t('plan_next_eyebrow'))}</span></div>
+      ${nextInner}
+      <div class="plan-next-frame">${esc(t('plan_next_frame'))}</div>
+    </div>`;
+  el.innerHTML=nextCard+`<div class="plan-box"><div class="plan-render collapsed" id="planRender">${planToHtml(plan)}</div><div class="plan-fade"></div></div>
     <button class="plan-toggle" id="planToggle" onclick="togglePlan()"><span id="planToggleLbl">${esc(t('plan_expand'))}</span><i data-lucide="chevron-down"></i></button>
     <div class="plan-update">
       <a class="plan-update-link" onclick="goUpdatePlan()"><i data-lucide="refresh-cw"></i>${esc(t('plan_update'))}</a>
