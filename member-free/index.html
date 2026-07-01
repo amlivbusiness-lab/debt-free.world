@@ -154,6 +154,32 @@ button{font-family:var(--sans);cursor:pointer;}
 .snap-hero .sh-v{font-family:var(--serif);font-size:23px;line-height:1.1;}
 .snap-hero .sh-note{font-size:12.5px;opacity:.85;margin-top:3px;}
 .snap-note{font-size:13px;color:var(--muted);margin-top:12px;background:var(--amber-bg);border-radius:10px;padding:11px 13px;border-left:3px solid var(--amber);}
+/* Snapshot v2 — money flow + room for life (P-C honesty · P-D room for life · P-H one notch richer) */
+.snap-flow{background:var(--green-pale);border-radius:14px;padding:6px 6px 8px;margin-bottom:12px;}
+.snap-flow-debt{background:var(--green-tint);margin-bottom:14px;}
+.snap-flow-debt .sf-row{padding-bottom:13px;}
+.sf-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px 10px;}
+.sf-l{display:flex;align-items:center;gap:10px;min-width:0;}
+.sf-l svg{width:18px;height:18px;color:var(--green);flex-shrink:0;}
+.sf-lab{font-size:14px;font-weight:500;color:var(--text);}
+.sf-num{font-family:var(--serif);font-size:20px;color:var(--text);white-space:nowrap;}
+.sf-per{font-size:12px;color:var(--muted);margin-left:5px;font-family:var(--sans);}
+.sf-comp{display:flex;justify-content:space-between;gap:14px;font-size:12.5px;color:var(--muted);padding:2px 16px 2px 44px;}
+.sf-comp b{font-weight:500;color:var(--text);}
+.sf-comp:last-of-type{padding-bottom:4px;}
+.sf-anchor{margin:9px 8px 4px;padding:14px 16px;background:var(--white);border-left:3px solid var(--green);border-radius:0 12px 12px 0;}
+.sf-ak{font-size:12.5px;color:var(--muted);margin-bottom:4px;}
+.sf-av{font-family:var(--serif);font-size:27px;line-height:1;}
+.sf-av.pos{color:var(--green);}
+.sf-av.neg{color:var(--red);}
+.snap-life{background:var(--white);border:1px solid var(--green-line);border-radius:14px;padding:16px 18px;margin-bottom:14px;}
+.sl-head{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:16px;color:var(--green);margin-bottom:13px;}
+.sl-head svg{width:18px;height:18px;color:var(--green);}
+.sl-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:13px;}
+.sl-part{background:var(--green-pale);border-radius:11px;padding:13px 14px;}
+.sl-v{font-family:var(--serif);font-size:22px;color:var(--text);line-height:1.1;margin-bottom:4px;}
+.sl-k{font-size:12.5px;color:var(--muted);line-height:1.4;}
+.sl-frame{font-size:13px;color:var(--text);line-height:1.55;}
 
 /* plan */
 .plan-box{position:relative;}
@@ -836,17 +862,64 @@ async function toggleEmergency(i,val){
 }
 
 /* UNDERSTAND */
+/* Share of positive monthly surplus reserved for living (P-D). Tunable — one number, one place. */
+const LIFE_ALLOWANCE_PCT=0.20;
 function renderSnapshot(){
   const m=model();
   const surplusPos=m.surplus>=0;
   const months=monthsToFree(m.totalDebt,m.surplus);
   const dfd=dateFromMonths(months);
-  let html=`<div class="snap-grid">
-    <div class="snap-cell"><div class="k"><i data-lucide="arrow-down-to-line"></i>${esc(t('snap_income'))}</div><div class="v">${esc(fmtMoney(m.income+m.extra,m.cur))}<span style="font-size:12px;color:var(--muted)">${esc(t('snap_per_month'))}</span></div></div>
-    <div class="snap-cell"><div class="k"><i data-lucide="arrow-up-from-line"></i>${esc(t('snap_costs'))}</div><div class="v">${esc(fmtMoney(m.housing+m.other,m.cur))}<span style="font-size:12px;color:var(--muted)">${esc(t('snap_per_month'))}</span></div></div>
-    <div class="snap-cell"><div class="k"><i data-lucide="scale"></i>${esc(t('snap_surplus'))}</div><div class="v ${surplusPos?'pos':'neg'}">${esc(fmtMoney(m.surplus,m.cur))}</div></div>
-    <div class="snap-cell"><div class="k"><i data-lucide="layers"></i>${esc(t('snap_debt'))}</div><div class="v">${esc(fmtMoney(m.totalDebt,m.cur))}</div></div>
+
+  /* Personalisation — MIRROR lifeLineHtml exactly; never assume children. Default is self. */
+  const hh=(M.household||(M.onboarding&&M.onboarding.household)||'');
+  const kids=/parent|with children/i.test(hh)||num(M.children||(M.onboarding&&M.onboarding.children))>0;
+  const couple=/couple|partner|married|spouse|two adults/i.test(hh);
+  const whoKey=kids?'snap_life_for_family':(couple?'snap_life_for_partner':'snap_life_for_self');
+
+  /* ── LAYER 1 · MONEY FLOW (honest, no judgement — warmth to the person, cold facts to the numbers) ── */
+  const perMo=`<span class="sf-per">${esc(t('snap_per_month'))}</span>`;
+  const sideRow=m.extra>0
+    ? `<div class="sf-comp"><span>${esc(t('snap_side_income'))}</span><b>${esc(fmtMoney(m.extra,m.cur))}</b></div>`
+    : '';
+  let html=`<div class="snap-flow">
+    <div class="sf-row">
+      <div class="sf-l"><i data-lucide="arrow-down-to-line"></i><span class="sf-lab">${esc(t('snap_in'))}</span></div>
+      <div class="sf-num">${esc(fmtMoney(m.income+m.extra,m.cur))}${perMo}</div>
+    </div>
+    ${sideRow}
+    <div class="sf-row">
+      <div class="sf-l"><i data-lucide="arrow-up-from-line"></i><span class="sf-lab">${esc(t('snap_out'))}</span></div>
+      <div class="sf-num">${esc(fmtMoney(m.housing+m.other,m.cur))}${perMo}</div>
+    </div>
+    <div class="sf-comp"><span>${esc(t('snap_housing'))}</span><b>${esc(fmtMoney(m.housing,m.cur))}</b></div>
+    <div class="sf-comp"><span>${esc(t('snap_other'))}</span><b>${esc(fmtMoney(m.other,m.cur))}</b></div>
+    <div class="sf-anchor">
+      <div class="sf-ak">${esc(t('snap_left'))}</div>
+      <div class="sf-av ${surplusPos?'pos':'neg'}">${esc(fmtMoney(m.surplus,m.cur))}${perMo}</div>
+    </div>
+  </div>
+  <div class="snap-flow snap-flow-debt">
+    <div class="sf-row">
+      <div class="sf-l"><i data-lucide="layers"></i><span class="sf-lab">${esc(t('snap_debt'))}</span></div>
+      <div class="sf-num">${esc(fmtMoney(m.totalDebt,m.cur))}</div>
+    </div>
   </div>`;
+
+  /* ── LAYER 2 · ROOM FOR LIFE (P-D) — only when there's surplus to split ── */
+  if(m.surplus>0){
+    const living=Math.round(m.surplus*LIFE_ALLOWANCE_PCT);
+    const toDebt=m.surplus-living;
+    html+=`<div class="snap-life">
+      <div class="sl-head"><i data-lucide="heart"></i><span>${esc(t('snap_life_title'))}</span></div>
+      <div class="sl-split">
+        <div class="sl-part"><div class="sl-v">${esc(fmtMoney(living,m.cur))}</div><div class="sl-k">${esc(t('snap_life_living',{who:t(whoKey)}))}</div></div>
+        <div class="sl-part"><div class="sl-v">${esc(fmtMoney(toDebt,m.cur))}</div><div class="sl-k">${esc(t('snap_to_debt'))}</div></div>
+      </div>
+      <div class="sl-frame">${esc(t('snap_life_frame'))}</div>
+    </div>`;
+  }
+
+  /* ── LAYER 3 · DEBT-FREE DATE — behaviour preserved exactly ── */
   if(months){
     html+=`<div class="snap-hero"><div class="sh-icon"><i data-lucide="calendar-check"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(dfd)}</div><div class="sh-note">${esc(t('snap_dfd_note'))}</div></div></div>`;
   }else{
