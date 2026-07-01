@@ -319,6 +319,61 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   .section{padding:18px 16px;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+/* ══ HOME front-screen components ══ */
+.depth{display:none;}
+.depth-bar{display:none;margin:0 0 10px;}
+.depth-back{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--green);background:var(--green-pale);border:1px solid var(--green-line);border-radius:11px;padding:9px 14px;}
+.depth-back svg{width:16px;height:16px;stroke-width:1.5;}
+/* Hero — debt-free date */
+.hero-card{background:var(--green);color:#fff;border-radius:16px;padding:26px 22px;text-align:center;box-shadow:0 10px 30px rgba(9,50,24,.16);}
+.hero-card .hc-k{font-size:12px;letter-spacing:.05em;text-transform:uppercase;opacity:.82;margin-bottom:6px;}
+.hero-card .hc-date{font-family:var(--serif);font-size:46px;line-height:1.04;}
+.hero-card .hc-sub{font-size:13px;opacity:.85;margin-top:7px;}
+.hero-figs{display:flex;gap:10px;margin-top:16px;}
+.hero-fig{flex:1;background:var(--white);border-radius:12px;border-left:3px solid var(--green);padding:13px 12px;text-align:left;}
+.hero-fig .hf-v{font-family:var(--serif);font-size:21px;color:var(--green);line-height:1.1;}
+.hero-fig .hf-k{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.35;}
+.hero-lever{margin-top:18px;}
+.hero-life{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.5;}
+.hero-locked{background:var(--green-dark);color:#fff;border-radius:16px;padding:24px 22px;}
+.hero-locked .hl-t{font-family:var(--serif);font-size:21px;line-height:1.18;margin-bottom:8px;}
+.hero-locked .hl-s{font-size:13.5px;opacity:.92;line-height:1.55;}
+.hero-nodebt{background:var(--green);color:#fff;border-radius:16px;padding:28px 22px;text-align:center;font-family:var(--serif);font-size:23px;line-height:1.22;}
+/* Safety buffer */
+.buf-card{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:18px;}
+.buf-goal{font-size:13px;color:var(--muted);margin-bottom:14px;}
+.buf-goal strong{color:var(--text);}
+.buf-rungs{display:flex;align-items:flex-end;gap:10px;margin-bottom:14px;}
+.buf-rung{flex:1;text-align:center;}
+.buf-rung .br-mark{font-family:var(--serif);font-size:15px;color:#fff;background:var(--green);border-radius:10px;padding:11px 0;}
+.buf-rung.next .br-mark{background:var(--white);color:var(--green);border:1.5px dashed var(--green-line);}
+.buf-rung .br-lbl{font-size:11.5px;color:var(--muted);margin-top:6px;}
+.buf-count{font-size:13.5px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+.buf-count svg{width:15px;height:15px;stroke-width:1.5;}
+.buf-sub{font-size:13px;color:var(--text);line-height:1.55;}
+.buf-done{background:var(--green);color:#fff;border-radius:14px;padding:20px;}
+.buf-done .bd-t{font-family:var(--serif);font-size:20px;line-height:1.2;margin-bottom:7px;}
+.buf-done .bd-s{font-size:13.5px;opacity:.92;line-height:1.55;}
+.buf-disc{font-size:11.5px;color:var(--muted);margin-top:10px;font-style:italic;line-height:1.45;}
+/* First win */
+.win-banner{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:15px 16px;font-size:14.5px;color:var(--text);line-height:1.5;margin-bottom:16px;}
+.win-banner strong{color:var(--green);}
+/* Light progress */
+.progress-marker{display:flex;width:100%;align-items:center;gap:13px;text-align:left;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:6px 0 4px;transition:border-color .15s;}
+.progress-marker:hover{border-color:var(--green-line);}
+.pm-track{flex:1;min-width:0;}
+.pm-k{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.pm-bar{height:6px;border-radius:6px;background:var(--green-line);overflow:hidden;}
+.pm-fill{height:100%;background:var(--green);border-radius:6px;}
+.pm-v{font-size:13.5px;font-weight:600;color:var(--text);margin-top:7px;}
+.progress-marker>svg{width:18px;height:18px;color:var(--green);flex-shrink:0;stroke-width:1.5;}
+/* Glance */
+.glance-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.glance-cell{background:var(--green-pale);border-radius:12px;padding:15px 10px;text-align:center;}
+.glance-cell .gc-v{font-family:var(--serif);font-size:20px;color:var(--green);line-height:1.08;word-break:break-word;}
+.glance-cell .gc-v.neg{color:var(--amber);}
+.glance-cell .gc-k{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.3;}
+@media(max-width:420px){.hero-card .hc-date{font-size:38px;}.glance-cell .gc-v{font-size:17px;}}
 </style>
 </head>
 <body>
@@ -347,7 +402,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <div class="nav-group-label"><i data-lucide="badge-check"></i><span data-i18n="nav_g_debtfree">Debt FREE</span></div>
       <button class="nav-item" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
       <button class="nav-item" onclick="goUpdatePlan()"><i data-lucide="refresh-cw"></i><span data-i18n="nav_update">Update my numbers</span></button>
-      <button class="nav-item" onclick="navTo('sec-today')"><i data-lucide="circle-alert"></i><span data-i18n="nav_emergency">Emergency Card</span></button>
+      <button class="nav-item" onclick="dashHome()"><i data-lucide="circle-alert"></i><span data-i18n="nav_emergency">Emergency Card</span></button>
       <button class="nav-item" onclick="navTo('sec-understand')"><i data-lucide="wallet"></i><span data-i18n="nav_snapshot">Financial Snapshot</span></button>
       <button class="nav-item" onclick="navTo('sec-debtmap')"><i data-lucide="map"></i><span data-i18n="nav_debtmap">Debt Map</span></button>
       <button class="nav-item" onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i><span data-i18n="nav_support">Support</span></button>
@@ -368,9 +423,9 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
     </div>
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="lock"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
-      <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span><i data-lucide="lock" class="lock"></i></button>
-      <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="shield"></i><span data-i18n="nav_crisis">Crisis Plans</span><i data-lucide="lock" class="lock"></i></button>
-      <button class="nav-item locked" onclick="navTo('sec-upgrade')"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><i data-lucide="lock" class="lock"></i></button>
+      <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span><i data-lucide="lock" class="lock"></i></button>
+      <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="shield"></i><span data-i18n="nav_crisis">Crisis Plans</span><i data-lucide="lock" class="lock"></i></button>
+      <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><i data-lucide="lock" class="lock"></i></button>
       <a class="nav-unlock" href="/ecosystem.html#card-2" data-i18n="nav_unlock">Unlock Debt Recovery — 19 €</a>
     </div>
     <div class="nav-group nav-foot">
@@ -404,38 +459,84 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 <!-- DASHBOARD -->
 <div class="view" id="view-dash">
   <div class="wrap">
+    <!-- depth back bar (shown only inside a depth sub-view) -->
+    <div class="depth-bar" id="depthBar"><button class="depth-back" onclick="dashHome()"><i data-lucide="arrow-left"></i><span data-i18n="back_home">Home</span></button></div>
+
+    <!-- ════════ HOME — the curated front screen ════════ -->
+    <div id="dash-home">
+
+    <!-- 1 · ANCHOR -->
     <div class="hello">
       <div class="eyebrow" data-i18n="hello_eyebrow">Your member area</div>
       <h1 id="helloTitle" class="serif">Welcome.</h1>
-      <p data-i18n="hello_sub">Everything here is built around your real situation. Take it one step at a time.</p>
+      <p id="anchorSub" data-i18n="hello_sub">Everything here is built around your real situation. Take it one step at a time.</p>
     </div>
 
-    <!-- TODAY -->
-    <section class="section" id="sec-today">
-      <div class="section-head"><i data-lucide="circle-alert"></i><span class="section-eyebrow" data-i18n="today_eyebrow">Today</span></div>
-      <h2 data-i18n="today_title">Start here — three things that change today</h2>
-      <p class="lead" data-i18n="today_lead">You don't need to fix everything. You need to do the next right thing. Tick each one as you go.</p>
+    <!-- 2 · HERO — interactive debt-free date -->
+    <section class="section hero-sec" id="sec-hero">
+      <div class="section-head"><i data-lucide="calendar-check"></i><span class="section-eyebrow" data-i18n="hero_eyebrow">Your debt-free date</span></div>
+      <div id="heroBody"></div>
+    </section>
+
+    <!-- 3 · SAFETY BUFFER -->
+    <section class="section" id="sec-buffer">
+      <div class="section-head"><i data-lucide="shield"></i><span class="section-eyebrow" data-i18n="buf_eyebrow">Your safety buffer</span></div>
+      <div id="bufferBody"></div>
+    </section>
+
+    <!-- 4 + 5 · FIRST WIN + NEXT STEP -->
+    <section class="section" id="sec-win">
+      <div class="section-head"><i data-lucide="award"></i><span class="section-eyebrow" data-i18n="win_eyebrow">Your first win</span></div>
+      <div class="win-banner" id="winBanner"></div>
       <div class="emerg" id="emergCard"></div>
     </section>
 
-    <!-- UNDERSTAND -->
-    <section class="section" id="sec-understand">
-      <div class="section-head"><i data-lucide="wallet"></i><span class="section-eyebrow" data-i18n="snap_eyebrow">Understand</span></div>
-      <h2 data-i18n="snap_title">Your financial snapshot</h2>
-      <p class="lead" data-i18n="snap_lead">Real numbers, no judgement. This is the ground we build on.</p>
-      <div id="snapBody"></div>
+    <!-- 6 · LIGHT PROGRESS -->
+    <button class="progress-marker" id="progressMarker" onclick="navTo('sec-journey')"></button>
+
+    <!-- 7 · GLANCE -->
+    <section class="section" id="sec-glance">
+      <div class="section-head"><i data-lucide="eye"></i><span class="section-eyebrow" data-i18n="glance_eyebrow">At a glance</span></div>
+      <div id="glanceBody"></div>
     </section>
 
+    <!-- 8 · UPGRADE -->
+    <section class="section upgrade" id="sec-upgrade">
+      <div class="section-head"><span class="section-eyebrow" data-i18n="up_eyebrow">When you're ready</span></div>
+      <h2 data-i18n="up_title">You understand your situation. Now change it.</h2>
+      <p class="up-lead" data-i18n="up_lead2">In Debt Recovery you watch your buffer and your debt-free date move week by week, and we build and follow the plan with you.</p>
+      <div class="up-feats">
+        <div class="up-feat"><i data-lucide="mail-plus"></i><span data-i18n="up_f1">Creditor letters written for your exact situation</span></div>
+        <div class="up-feat"><i data-lucide="shield"></i><span data-i18n="up_f2">Crisis plans for job loss, illness, separation</span></div>
+        <div class="up-feat"><i data-lucide="folder"></i><span data-i18n="up_f3">Every letter and document saved in one place</span></div>
+        <div class="up-feat"><i data-lucide="compass"></i><span data-i18n="up_f4">A clear, guided 90-day recovery path</span></div>
+      </div>
+      <div class="up-price"><span class="amt">19 €</span><span class="per" data-i18n="up_price">one-time · 90 days · no subscription</span></div>
+      <a class="up-cta" href="/ecosystem.html#card-2"><span data-i18n="up_cta2">When you're ready, there's more support</span><i data-lucide="arrow-right"></i></a>
+    </section>
+
+    </div><!-- /#dash-home -->
+
+    <!-- ════════ DEPTH — one tap away (left as-is, hidden until navTo) ════════ -->
+
     <!-- PLAN -->
-    <section class="section" id="sec-plan">
+    <section class="section depth" id="sec-plan">
       <div class="section-head"><i data-lucide="file-text"></i><span class="section-eyebrow" data-i18n="plan_eyebrow">Your plan</span></div>
       <h2 data-i18n="plan_title">My DEBT FREE Plan</h2>
       <p class="lead" data-i18n="plan_lead">Written for your situation — something to live, not read once.</p>
       <div id="planBody"></div>
     </section>
 
+    <!-- UNDERSTAND -->
+    <section class="section depth" id="sec-understand">
+      <div class="section-head"><i data-lucide="wallet"></i><span class="section-eyebrow" data-i18n="snap_eyebrow">Understand</span></div>
+      <h2 data-i18n="snap_title">Your financial snapshot</h2>
+      <p class="lead" data-i18n="snap_lead">Real numbers, no judgement. This is the ground we build on.</p>
+      <div id="snapBody"></div>
+    </section>
+
     <!-- DEBT MAP -->
-    <section class="section" id="sec-debtmap">
+    <section class="section depth" id="sec-debtmap">
       <div class="section-head"><i data-lucide="map"></i><span class="section-eyebrow" data-i18n="dm_eyebrow">Debt map</span></div>
       <h2 data-i18n="dm_title">What to tackle first</h2>
       <p class="lead" data-i18n="dm_lead">Ordered by urgency, not by size. The top of this list is where your attention belongs.</p>
@@ -443,7 +544,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
     </section>
 
     <!-- TOOLS -->
-    <section class="section" id="sec-tools">
+    <section class="section depth" id="sec-tools">
       <div class="section-head"><i data-lucide="wrench"></i><span class="section-eyebrow" data-i18n="tools_eyebrow">Tools</span></div>
       <h2 data-i18n="tools_title">Work it through yourself</h2>
       <p class="lead" data-i18n="tools_lead">Each tool starts from your own numbers. Change anything and see what happens.</p>
@@ -458,7 +559,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
     </section>
 
     <!-- SUPPORT -->
-    <section class="section" id="sec-support">
+    <section class="section depth" id="sec-support">
       <div class="section-head"><i data-lucide="life-buoy"></i><span class="section-eyebrow" data-i18n="sup_eyebrow">Support</span></div>
       <h2 data-i18n="sup_title">Verified help where you are</h2>
       <p class="lead" id="supLead" data-i18n="sup_lead">Free and trusted services in your country. You don't have to do this alone.</p>
@@ -466,26 +567,11 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
     </section>
 
     <!-- JOURNEY -->
-    <section class="section" id="sec-journey">
+    <section class="section depth" id="sec-journey">
       <div class="section-head"><i data-lucide="route"></i><span class="section-eyebrow" data-i18n="jr_eyebrow">Your journey</span></div>
       <h2 data-i18n="jr_title">Where this goes</h2>
       <p class="lead" data-i18n="jr_lead">You're at the start. Each step only opens when you're ready — there's no rush.</p>
       <div class="journey" id="journeyBody"></div>
-    </section>
-
-    <!-- UPGRADE -->
-    <section class="section upgrade" id="sec-upgrade">
-      <div class="section-head"><span class="section-eyebrow" data-i18n="up_eyebrow">When you're ready</span></div>
-      <h2 data-i18n="up_title">You understand your situation. Now change it.</h2>
-      <p class="up-lead" data-i18n="up_lead">Debt Recovery gives you the tools to act — not just to understand. Letters that get written for you, crisis plans, and a clear 90-day path.</p>
-      <div class="up-feats">
-        <div class="up-feat"><i data-lucide="mail-plus"></i><span data-i18n="up_f1">Creditor letters written for your exact situation</span></div>
-        <div class="up-feat"><i data-lucide="shield"></i><span data-i18n="up_f2">Crisis plans for job loss, illness, separation</span></div>
-        <div class="up-feat"><i data-lucide="folder"></i><span data-i18n="up_f3">Every letter and document saved in one place</span></div>
-        <div class="up-feat"><i data-lucide="compass"></i><span data-i18n="up_f4">A clear, guided 90-day recovery path</span></div>
-      </div>
-      <div class="up-price"><span class="amt">19 €</span><span class="per" data-i18n="up_price">one-time · 90 days · no subscription</span></div>
-      <a class="up-cta" href="/ecosystem.html#card-2"><span data-i18n="up_cta">See Debt Recovery</span><i data-lucide="arrow-right"></i></a>
     </section>
 
   </div>
@@ -551,7 +637,40 @@ function model(){
   const highestRate=debts.length?Math.max(...debts.map(d=>num(d.interest))):0;
   return {income,extra,housing,other,surplus,debts,totalDebt,highestRate,cur:M.currency||'EUR'};
 }
-function monthsToFree(total,monthly){if(monthly<=0||total<=0)return null;return Math.ceil(total/monthly);}
+/* ── DEBT-FREE-DATE ENGINE (single shared source — hero AND TOOLS.dfd/income use this) ──
+   Interest-aware amortisation. With rate 0 (no/unknown interest) it reduces to the
+   previous naive total/monthly, so existing tool output is preserved when rate is 0.
+   When a payment cannot cover the monthly interest, payoff is impossible → months=null
+   (never a hopeful number you can't afford). */
+function blendedRate(){
+  const ds=model().debts;
+  const tot=ds.reduce((s,d)=>s+num(d.amount),0);
+  if(tot<=0)return 0;
+  const w=ds.reduce((s,d)=>s+num(d.amount)*num(d.interest),0);
+  return w/tot; // weighted-average annual rate %
+}
+function amortise(balance,monthlyPayment,annualRatePct){
+  balance=num(balance);monthlyPayment=num(monthlyPayment);
+  if(balance<=0)return{months:0,interest:0};
+  if(monthlyPayment<=0)return{months:null,interest:0};
+  const r=num(annualRatePct)/100/12;
+  if(r<=0){const m=Math.ceil(balance/monthlyPayment);return{months:m,interest:0};}
+  if(monthlyPayment<=balance*r)return{months:null,interest:0}; // payment doesn't cover interest
+  const n=Math.ceil(-Math.log(1-(r*balance/monthlyPayment))/Math.log(1+r));
+  const interest=Math.max(0,Math.round(n*monthlyPayment-balance)); // ≈ total interest (last payment rounds up)
+  return{months:n,interest};
+}
+/* Hero helper: project a debt-free outcome at a given extra monthly amount. */
+function projectFree(extraMonthly){
+  const m=model();
+  const monthly=m.surplus+num(extraMonthly||0);
+  const rate=blendedRate();
+  const a=amortise(m.totalDebt,monthly,rate);
+  return{months:a.months,interest:a.interest,monthly,rate,date:a.months!=null?dateFromMonths(a.months):null};
+}
+/* monthsToFree keeps its signature; now routes through the shared engine so every
+   existing caller (snapshot, TOOLS.dfd, income tool) is interest-aware and identical. */
+function monthsToFree(total,monthly){return amortise(total,monthly,blendedRate()).months;}
 function dateFromMonths(m){if(m==null)return null;const d=new Date();d.setMonth(d.getMonth()+m);return d.toLocaleDateString(localeForLang(),{month:'short',year:'numeric'});}
 function localeForLang(){const map={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',NO:'nb-NO',DA:'da-DK',NL:'nl-NL',ES:'es-ES',FR:'fr-FR',IT:'it-IT',PL:'pl-PL',PT:'pt-PT',CS:'cs-CZ',ET:'et-EE',LV:'lv-LV',LT:'lt-LT',HU:'hu-HU',RO:'ro-RO',HR:'hr-HR'};return map[DFWI18n.current]||'en-GB';}
 
@@ -595,7 +714,7 @@ document.addEventListener('click',e=>{const w=$('langMenu');if(w.classList.conta
 /* ── DRAWER ── */
 function openDrawer(){$('drawer').classList.add('open');$('scrim').classList.add('show');}
 function closeDrawer(){$('drawer').classList.remove('open');$('scrim').classList.remove('show');}
-function navTo(id){closeDrawer();setTimeout(()=>scrollToSection(id),180);}
+function navTo(id){showSection(id);}
 
 /* ── UPDATE MY NUMBERS ──
    Sends the member back to onboarding with their saved answers pre-filled
@@ -668,7 +787,8 @@ $('reauthEmail')&&$('reauthEmail').addEventListener('keydown',e=>{if(e.key==='En
    RENDER
    ════════════════════════════════════════════════ */
 function renderAll(){
-  renderHello();renderEmergency();renderSnapshot();renderPlan();renderDebtMap();renderSupport();renderJourney();
+  renderHello();renderHero();renderBuffer();renderWin();renderEmergency();renderProgress();renderGlance();
+  renderSnapshot();renderPlan();renderDebtMap();renderSupport();renderJourney();
   icons();
 }
 function firstName(){return (M.firstname||(M.onboarding&&M.onboarding.firstname)||'').trim();}
@@ -829,6 +949,127 @@ function renderJourney(){
     <div class="j-body"><div class="j-title">${esc(t(s.t))}${s.state==='here'?`<span class="you">${esc(t('jr_you'))}</span>`:''}</div><div class="j-meta">${esc(t(s.m))}</div></div></div>`).join('');
   icons();
 }
+
+/* ════════════════════════════════════════════════
+   HOME front-screen renders (curated composition)
+   ════════════════════════════════════════════════ */
+function lifeLineHtml(){
+  const hh=(M.household||(M.onboarding&&M.onboarding.household)||'');
+  const kids=/parent|with children/i.test(hh)||num(M.children||(M.onboarding&&M.onboarding.children))>0;
+  return `<div class="hero-life">${esc(t(kids?'life_room_family':'life_room'))}</div>`;
+}
+/* HERO — interactive debt-free date (uses the shared projectFree engine) */
+function renderHero(){
+  const m=model();const el=$('heroBody');if(!el)return;
+  if(m.totalDebt<=0){
+    el.innerHTML=`<div class="hero-nodebt">${esc(t('hero_nodebt'))}</div>`+lifeLineHtml();icons();return;
+  }
+  const base=projectFree(0);
+  /* surplus ≤ 0, or a payment that can't even cover interest → never a hopeful number */
+  if(m.surplus<=0||base.months==null){
+    el.innerHTML=`<div class="hero-locked"><div class="hl-t">${esc(t('snap_dfd_stabilise'))}</div><div class="hl-s">${esc(t('snap_surplus_neg'))}</div></div>`
+      +nextStepsHtml()+lifeLineHtml();
+    icons();return;
+  }
+  const maxExtra=Math.max(10,Math.round(m.surplus));
+  el.innerHTML=`<div class="hero-card">
+      <div class="hc-k">${esc(t('hero_eyebrow'))}</div>
+      <div class="hc-date" id="heroDate">—</div>
+      <div class="hc-sub" id="heroDateNote"></div>
+      <div class="hero-figs">
+        <div class="hero-fig"><div class="hf-v" id="heroSooner">0</div><div class="hf-k">${esc(t('hero_sooner_k'))}</div></div>
+        <div class="hero-fig"><div class="hf-v" id="heroInterest">—</div><div class="hf-k">${esc(t('hero_interest_k'))}</div></div>
+      </div>
+    </div>
+    <div class="hero-lever slider-row"><label>${esc(t('hero_lever'))}<span class="sv" id="heroExtraLbl">0 ${esc(m.cur)}</span></label>
+      <input type="range" id="heroSlider" min="0" max="${maxExtra}" step="10" value="0" oninput="updHero()"/></div>`
+    +lifeLineHtml();
+  icons();updHero();
+}
+function updHero(){
+  const m=model();const sl=$('heroSlider');if(!sl)return;
+  const extra=num(sl.value);
+  $('heroExtraLbl').textContent=fmtMoney(extra,m.cur);
+  const base=projectFree(0),cur=projectFree(extra);
+  $('heroDate').textContent=cur.date||'—';
+  $('heroDateNote').textContent=t('hero_date_note',{monthly:fmtMoney(cur.monthly,m.cur)});
+  const sooner=(base.months!=null&&cur.months!=null)?Math.max(0,base.months-cur.months):0;
+  const so=$('heroSooner');if(so)so.textContent=sooner>0?('−'+sooner):'0';
+  const ie=$('heroInterest');
+  if(ie){
+    if(cur.rate>0){const saved=Math.max(0,(base.interest||0)-(cur.interest||0));ie.textContent='≈ '+fmtMoney(saved,m.cur);}
+    else ie.textContent='—';
+  }
+}
+/* SAFETY BUFFER — target = 6× net monthly income; states A (ladder) / B (met) / C (met + debt-free) */
+function renderBuffer(){
+  const m=model();const el=$('bufferBody');if(!el)return;
+  const netIncome=num(M.income||(M.onboarding&&M.onboarding.income));
+  const target=Math.round(netIncome*6);
+  const savings=(M.savings||(M.onboarding&&M.onboarding.savings)||'');
+  const floorMap={'None at all':0,'Under 500':0,'500 to 2 000':500,'Over 2 000':2000,'Over 4 000':4000,'Over 6 000':6000,'Over 8 000':8000,'Over 10 000':10000};
+  const buffer=floorMap[savings]!==undefined?floorMap[savings]:0;
+  if(netIncome<=0){ /* income near zero → defer the number, lean on the first win below */
+    el.innerHTML=`<div class="buf-card"><div class="buf-sub">${esc(t('buf_defer'))}</div></div>`;icons();return;
+  }
+  if(m.totalDebt<=0&&buffer>=target){ /* C */
+    el.innerHTML=`<div class="buf-done"><div class="bd-t">${esc(t('buf_c_title'))}</div><div class="bd-s">${esc(t('buf_c_sub'))}</div></div><div class="buf-disc">${esc(t('buf_c_disc'))}</div>`;icons();return;
+  }
+  if(buffer>=target){ /* B */
+    el.innerHTML=`<div class="buf-done"><div class="bd-t">${esc(t('buf_b_title'))}</div><div class="bd-s">${esc(t('buf_b_sub'))}</div></div>`;icons();return;
+  }
+  /* A — steady 1/16 ladder: show current rung + next rung + count only */
+  const rung=Math.max(1,Math.round(target/16));
+  const reached=Math.max(0,Math.min(16,Math.floor(buffer/rung)));
+  const nextN=Math.min(16,reached+1);
+  el.innerHTML=`<div class="buf-card">
+    <div class="buf-goal">${esc(t('buf_goal',{amt:fmtMoney(target,m.cur)}))}</div>
+    <div class="buf-rungs">
+      <div class="buf-rung"><div class="br-mark">${reached}/16</div><div class="br-lbl">${esc(t('buf_lbl_now'))} · ${esc(fmtMoney(buffer,m.cur))}</div></div>
+      <div class="buf-rung next"><div class="br-mark">${nextN}/16</div><div class="br-lbl">${esc(t('buf_lbl_next'))} · ${esc(fmtMoney(rung*nextN,m.cur))}</div></div>
+    </div>
+    ${reached>0?`<div class="buf-count"><i data-lucide="check-circle-2"></i>${esc(t('buf_count',{n:reached}))}</div>`:''}
+    <div class="buf-sub">${esc(t('buf_a_sub'))}</div>
+  </div>`;
+  icons();
+}
+/* FIRST WIN banner — guaranteed, non-financial; every member who has a plan earns it */
+function renderWin(){const el=$('winBanner');if(el)el.innerHTML=esc(t('win_banner'));}
+/* LIGHT PROGRESS — a feeling of movement, not a static summary */
+function renderProgress(){
+  const el=$('progressMarker');if(!el)return;
+  el.innerHTML=`<div class="pm-track"><div class="pm-k">${esc(t('prog_eyebrow'))}</div>
+    <div class="pm-bar"><div class="pm-fill" style="width:20%"></div></div>
+    <div class="pm-v">${esc(t('prog_step',{n:1,stage:t('jr_s1')}))}</div></div><i data-lucide="chevron-right"></i>`;
+  icons();
+}
+/* GLANCE — 2–3 key numbers, hopeful (reuses snapshot labels; not the full table) */
+function renderGlance(){
+  const m=model();const el=$('glanceBody');if(!el)return;
+  const dfd=projectFree(0);
+  el.innerHTML=`<div class="glance-grid">
+    <div class="glance-cell"><div class="gc-v">${esc(fmtMoney(m.totalDebt,m.cur))}</div><div class="gc-k">${esc(t('snap_debt'))}</div></div>
+    <div class="glance-cell"><div class="gc-v ${m.surplus>=0?'':'neg'}">${esc(fmtMoney(m.surplus,m.cur))}</div><div class="gc-k">${esc(t('snap_surplus'))}</div></div>
+    <div class="glance-cell"><div class="gc-v">${esc(dfd.date||t('snap_dfd_stabilise'))}</div><div class="gc-k">${esc(t('snap_dfd'))}</div></div>
+  </div>`;
+  icons();
+}
+/* ── SUB-VIEW ROUTING — depth is one tap away; front screen never shows everything ── */
+function showSection(id){
+  closeDrawer();
+  const home=$('dash-home');if(home)home.style.display='none';
+  document.querySelectorAll('.section.depth').forEach(s=>{s.style.display='none';});
+  const el=$(id);if(el)el.style.display='block';
+  const bar=$('depthBar');if(bar)bar.style.display='block';
+  window.scrollTo(0,0);icons();
+}
+function dashHome(){
+  const home=$('dash-home');if(home)home.style.display='';
+  document.querySelectorAll('.section.depth').forEach(s=>{s.style.display='none';});
+  const bar=$('depthBar');if(bar)bar.style.display='none';
+  window.scrollTo(0,0);icons();
+}
+function goUpgrade(){closeDrawer();dashHome();setTimeout(()=>scrollToSection('sec-upgrade'),120);}
 
 /* ── PLAN-FIRST OVERLAY ── */
 function openOverlay(){
