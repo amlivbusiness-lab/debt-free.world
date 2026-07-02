@@ -319,6 +319,10 @@ button{font-family:var(--sans);cursor:pointer;}
 .tool-result .tr-k{font-size:12.5px;opacity:.85;margin-bottom:4px;}
 .tool-result .tr-v{font-family:var(--serif);font-size:30px;line-height:1.1;}
 .tool-result .tr-note{font-size:12.5px;opacity:.85;margin-top:5px;}
+.tool-result .tr-note.has-delta{opacity:1;font-weight:700;}
+.tool-result .tr-base{font-size:12px;opacity:.75;margin-top:9px;}
+.olist li.life .oi{background:var(--green);color:#fff;}
+.olist li.life .oa{color:var(--green);}
 .slider-row{margin-bottom:18px;}
 .slider-row label{display:flex;justify-content:space-between;font-size:13.5px;font-weight:500;margin-bottom:9px;}
 .slider-row label .sv{color:var(--green);font-weight:700;}
@@ -1342,6 +1346,23 @@ const TOOLS={
   },
   budget(){
     const m=model();
+    /* [P-D] "elämää varten": when money is left over, life is reserved BEFORE
+       debt. Room for life reuses the shared LIFE_ALLOWANCE_PCT constant — no new
+       constant, no new logic — so debt only ever gets what's genuinely spare.
+       This makes the tool finally match its own intro (tool_intro_budget). */
+    if(m.surplus>0){
+      const living=Math.round(m.surplus*LIFE_ALLOWANCE_PCT);
+      const free=m.surplus-living;
+      return `<div class="tool-result"><div class="tr-k">${esc(t('budget_free'))}</div><div class="tr-v">${esc(fmtMoney(free,m.cur))}</div></div>
+      <ul class="olist">
+        <li><span class="oi"><i data-lucide="arrow-down"></i></span><div class="om"><div class="t">${esc(t('budget_in'))}</div></div><div class="oa">${esc(fmtMoney(m.income+m.extra,m.cur))}</div></li>
+        <li><span class="oi"><i data-lucide="home"></i></span><div class="om"><div class="t">${esc(t('budget_housing'))}</div></div><div class="oa">−${esc(fmtMoney(m.housing,m.cur))}</div></li>
+        <li><span class="oi"><i data-lucide="shopping-basket"></i></span><div class="om"><div class="t">${esc(t('budget_other'))}</div></div><div class="oa">−${esc(fmtMoney(m.other,m.cur))}</div></li>
+        <li class="life"><span class="oi"><i data-lucide="heart"></i></span><div class="om"><div class="t">${esc(t('budget_life'))}</div></div><div class="oa">−${esc(fmtMoney(living,m.cur))}</div></li>
+      </ul><div class="tool-note" style="margin-top:16px">${esc(t('budget_life_note'))}</div>`;
+    }
+    /* Deficit / break-even (surplus<=0): a gap has no life to carve out — cold
+       fact, warm tone, "close the gap first", never shame. Preserved verbatim. */
     const left=m.surplus;
     const neg=left<0;
     return `<div class="tool-result" style="${neg?'background:var(--red)':''}"><div class="tr-k">${esc(neg?t('budget_shortfall'):t('budget_left'))}</div><div class="tr-v">${esc(fmtMoney(Math.abs(left),m.cur))}</div></div>
@@ -1354,8 +1375,12 @@ const TOOLS={
   income(){
     const m=model();
     if(m.totalDebt<=0)return `<div class="tool-note">${esc(t('income_note'))}</div>`;
-    const base=monthsToFree(m.totalDebt,m.surplus);
-    return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div></div>
+    /* before→after anchor: show the baseline free-date "as things stand now"
+       so every month the slider adds becomes a concrete pull-forward, not an
+       abstract number. Reuses the shared monthsToFree engine — no new logic. */
+    const baseMonths=(m.surplus>0)?monthsToFree(m.totalDebt,m.surplus):null;
+    const baseDate=baseMonths?dateFromMonths(baseMonths):'—';
+    return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div><div class="tr-base" id="incBase">${esc(t('income_base',{date:baseDate}))}</div></div>
       <div class="slider-row"><label>${esc(t('income_add'))}<span class="sv" id="incLbl">0 ${esc(m.cur)}</span></label>
       <input type="range" id="incSlider" min="0" max="500" step="25" value="0" oninput="updInc()"/></div>
       <div class="tool-note">${esc(m.surplus<=0?t('income_nostart'):t('income_note'))}</div>`;
@@ -1435,7 +1460,13 @@ function updInc(){
   const base=monthsToFree(m.totalDebt,m.surplus);
   const now=monthsToFree(m.totalDebt,m.surplus+add);
   $('incDate').textContent=now?dateFromMonths(now):'—';
-  $('incSooner').textContent=(base&&now&&base>now)?t('income_sooner',{m:base-now}):'';
+  /* same engine, same calc — only the presentation of the delta is sharpened:
+     when there is a real "sooner" the note is highlighted so the before→after
+     gap reads clearly against the static baseline shown in the card. */
+  const sooner=(base&&now&&base>now)?t('income_sooner',{m:base-now}):'';
+  const se=$('incSooner');
+  se.textContent=sooner;
+  se.classList.toggle('has-delta',!!sooner);
 }
 
 /* ════════════════════════════════════════════════
