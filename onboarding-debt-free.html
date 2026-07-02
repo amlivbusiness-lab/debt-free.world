@@ -293,6 +293,8 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
         <option value="Austria">Austria</option>
         <option value="Switzerland">Switzerland</option>
         <option value="Greece">Greece</option>
+        <option value="Bulgaria">Bulgaria</option>
+        <option value="Slovakia">Slovakia</option>
       </optgroup>
       <optgroup label="Americas">
         <option value="United States">United States</option>
@@ -307,9 +309,14 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
         <option value="India">India</option>
         <option value="Indonesia">Indonesia</option>
         <option value="Philippines">Philippines</option>
+        <option value="Singapore">Singapore</option>
+        <option value="Malaysia">Malaysia</option>
+        <option value="Thailand">Thailand</option>
       </optgroup>
       <optgroup label="Other">
         <option value="South Africa">South Africa</option>
+        <option value="United Arab Emirates">United Arab Emirates</option>
+        <option value="Kenya">Kenya</option>
         <option value="Other">Other</option>
       </optgroup>
     </select>
@@ -384,13 +391,13 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
         <input type="number" id="mini_amount" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
         <select id="mini_currency">
           <option value="EUR">EUR</option><option value="GBP">GBP</option>
-          <option value="SEK">SEK</option><option value="NOK">NOK</option>
+          <option value="SEK">SEK</option><option value="SGD">SGD</option><option value="THB">THB</option><option value="NOK">NOK</option>
           <option value="DKK">DKK</option><option value="USD">USD</option>
           <option value="CHF">CHF</option><option value="PLN">PLN</option>
           <option value="CZK">CZK</option><option value="HUF">HUF</option>
           <option value="RON">RON</option><option value="CAD">CAD</option>
-          <option value="AUD">AUD</option><option value="BRL">BRL</option>
-          <option value="INR">INR</option><option value="IDR">IDR</option>
+          <option value="AED">AED</option><option value="AUD">AUD</option><option value="BGN">BGN</option><option value="BRL">BRL</option>
+          <option value="INR">INR</option><option value="KES">KES</option><option value="MYR">MYR</option><option value="IDR">IDR</option>
           <option value="PHP">PHP</option><option value="OTHER">Other</option>
         </select>
       </div>
@@ -446,13 +453,13 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
         <input type="number" id="f_income" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;" oninput="onIncomeInput()"/>
         <select id="f_currency">
           <option value="EUR">EUR</option><option value="GBP">GBP</option>
-          <option value="SEK">SEK</option><option value="NOK">NOK</option>
+          <option value="SEK">SEK</option><option value="SGD">SGD</option><option value="THB">THB</option><option value="NOK">NOK</option>
           <option value="DKK">DKK</option><option value="USD">USD</option>
           <option value="CHF">CHF</option><option value="PLN">PLN</option>
           <option value="CZK">CZK</option><option value="HUF">HUF</option>
           <option value="RON">RON</option><option value="CAD">CAD</option>
-          <option value="AUD">AUD</option><option value="BRL">BRL</option>
-          <option value="INR">INR</option><option value="IDR">IDR</option>
+          <option value="AED">AED</option><option value="AUD">AUD</option><option value="BGN">BGN</option><option value="BRL">BRL</option>
+          <option value="INR">INR</option><option value="KES">KES</option><option value="MYR">MYR</option><option value="IDR">IDR</option>
           <option value="PHP">PHP</option>
         </select>
       </div>
@@ -1402,7 +1409,7 @@ function esc(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, c=>({'&'
 })();
 
 /* ── COUNTRY → CURRENCY ── */
-const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR'};
+const CC={'Finland':'EUR','Sweden':'SEK','Norway':'NOK','Denmark':'DKK','Germany':'EUR','Netherlands':'EUR','Belgium':'EUR','France':'EUR','Spain':'EUR','Portugal':'EUR','Italy':'EUR','Greece':'EUR','Austria':'EUR','Ireland':'EUR','Estonia':'EUR','Latvia':'EUR','Lithuania':'EUR','Croatia':'EUR','Poland':'PLN','Czech Republic':'CZK','Hungary':'HUF','Romania':'RON','Switzerland':'CHF','United Kingdom':'GBP','United States':'USD','Canada':'CAD','Australia':'AUD','New Zealand':'NZD','Brazil':'BRL','Mexico':'MXN','Argentina':'ARS','India':'INR','Indonesia':'IDR','Philippines':'PHP','South Africa':'ZAR','Bulgaria':'BGN','Slovakia':'EUR','Singapore':'SGD','Malaysia':'MYR','Thailand':'THB','United Arab Emirates':'AED','Kenya':'KES'};
 function onCountryChange(country){
   const cur=CC[country]; if(!cur)return;
   ['f_currency','mini_currency'].forEach(id=>{ const s=document.getElementById(id); if(s){for(let o of s.options){if(o.value===cur){o.selected=true;break;}}} });
