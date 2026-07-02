@@ -342,6 +342,8 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .olist li.first .oi{background:var(--green);color:#fff;}
 .tool-note{font-size:13px;color:var(--muted);line-height:1.6;background:var(--green-pale);border-radius:11px;padding:13px 15px;}
 .tool-note strong{color:var(--text);}
+.dfd-buffer{margin-bottom:18px;padding:11px 14px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:12.5px;line-height:1.55;color:var(--text);}
+.strat-why{margin-top:10px;padding-left:11px;border-left:3px solid var(--green);font-size:12.5px;line-height:1.55;color:var(--text);}
 .legal-block h5{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin:16px 0 7px;}
 .legal-block h5:first-child{margin-top:0;}
 .legal-block p{font-size:14px;margin-bottom:11px;}
@@ -1123,13 +1125,21 @@ function updHero(){
   }
 }
 /* SAFETY BUFFER — target = 6× net monthly income; states A (ladder) / B (met) / C (met + debt-free) */
-function renderBuffer(){
-  const m=model();const el=$('bufferBody');if(!el)return;
+/* bufferInfo — single source for the 6× net-income emergency-buffer maths.
+   Used by renderBuffer() (dashboard) and updDfd() (dfd tool) so the cushion
+   figure is computed identically in both places. Logic + floorMap lifted
+   verbatim from the former inline block in renderBuffer(); behaviour unchanged. */
+function bufferInfo(){
   const netIncome=num(M.income||(M.onboarding&&M.onboarding.income));
   const target=Math.round(netIncome*6);
   const savings=(M.savings||(M.onboarding&&M.onboarding.savings)||'');
   const floorMap={'None at all':0,'Under 500':0,'500 to 2 000':500,'Over 2 000':2000,'Over 4 000':4000,'Over 6 000':6000,'Over 8 000':8000,'Over 10 000':10000};
   const buffer=floorMap[savings]!==undefined?floorMap[savings]:0;
+  return {netIncome,target,buffer};
+}
+function renderBuffer(){
+  const m=model();const el=$('bufferBody');if(!el)return;
+  const {netIncome,target,buffer}=bufferInfo();
   if(netIncome<=0){ /* income near zero → defer the number, lean on the first win below */
     el.innerHTML=`<div class="buf-card"><div class="buf-sub">${esc(t('buf_defer'))}</div></div>`;icons();return;
   }
@@ -1230,6 +1240,7 @@ const TOOLS={
     return `<div class="tool-result"><div class="tr-k">${esc(t('dfd_result_k'))}</div><div class="tr-v" id="dfdDate">—</div><div class="tr-note" id="dfdMonths"></div></div>
       <div class="slider-row"><label>${esc(t('dfd_extra'))}<span class="sv" id="dfdExtraLbl">0 ${esc(m.cur)}</span></label>
       <input type="range" id="dfdSlider" min="0" max="${maxExtra}" step="10" value="0" oninput="updDfd()"/></div>
+      <div class="dfd-buffer" id="dfdBuffer" hidden></div>
       <div class="tool-note" id="dfdNote"></div>`;
   },
   strat(){
@@ -1293,6 +1304,21 @@ function updDfd(){
   $('dfdDate').textContent=months?dateFromMonths(months):'—';
   $('dfdMonths').textContent=months?t('dfd_months',{m:months}):'';
   $('dfdNote').textContent=t('dfd_note',{monthly:fmtMoney(m.surplus+extra,m.cur),total:fmtMoney(m.totalDebt,m.cur)});
+  /* [P-E] cushion before extra repayment — GUIDING, never blocking. The slider
+     and the projection above always work as before; this only advises when the
+     emergency buffer is below 6× net income, so a surprise bill can't become
+     new debt. When extra>0, {gap} is how far the cushion still is from that goal
+     — i.e. the very money the slider is steering to debt could go to safety first. */
+  const buf=$('dfdBuffer');
+  if(buf){
+    const {target,buffer}=bufferInfo();
+    if(buffer<target){
+      buf.textContent=t('dfd_buffer_first',{gap:fmtMoney(target-buffer,m.cur)});
+      buf.hidden=false;
+    }else{
+      buf.textContent='';buf.hidden=true;
+    }
+  }
 }
 function setStrat(mode){
   const m=model();
@@ -1302,7 +1328,14 @@ function setStrat(mode){
   if(mode==='snow')list.sort((a,b)=>num(a.amount)-num(b.amount));
   else list.sort((a,b)=>num(b.interest)-num(a.interest)||num(a.amount)-num(b.amount));
   $('stratList').innerHTML=list.map((d,i)=>`<li class="${i===0?'first':''}"><span class="oi">${i+1}</span><div class="om"><div class="t">${esc(d.type||'Debt')}${d.creditor?' · '+esc(d.creditor):''}</div><div class="s">${num(d.interest)>0?num(d.interest)+'%':esc(t('strat_unknown'))}${i===0?' · '+esc(t('strat_first')):''}</div></div><div class="oa">${esc(fmtMoney(d.amount,d.currency||m.cur))}</div></li>`).join('');
-  $('stratNote').textContent=mode==='snow'?t('strat_snow_note'):t('strat_aval_note');
+  /* Principle note stays; add a concrete, data-backed first target from the
+     already-sorted list[0] — reliable (no per-debt schedule simulation). */
+  const first=list[0]||{};
+  const note=mode==='snow'?t('strat_snow_note'):t('strat_aval_note');
+  const why=mode==='snow'
+    ?t('strat_snow_why',{target:fmtMoney(num(first.amount),first.currency||m.cur)})
+    :t('strat_aval_why',{target:num(first.interest)>0?num(first.interest)+'%':t('strat_unknown')});
+  $('stratNote').innerHTML=`<div>${esc(note)}</div><div class="strat-why">${esc(why)}</div>`;
   icons();
 }
 function updInc(){
