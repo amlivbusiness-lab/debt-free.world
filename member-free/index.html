@@ -369,6 +369,9 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .legal-block h5:first-child{margin-top:0;}
 .legal-block p{font-size:14px;margin-bottom:11px;}
 .legal-warn{font-size:12.5px;color:var(--amber);background:var(--amber-bg);border-radius:10px;padding:11px 13px;border-left:3px solid var(--amber);margin-top:6px;}
+.legal-signpost{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;font-family:inherit;font-size:14px;line-height:1.55;color:var(--text);background:var(--green-tint);border:0;border-left:3px solid var(--green);border-radius:0 11px 11px 0;padding:13px 15px;margin-bottom:14px;}
+.legal-signpost svg{width:18px;height:18px;color:var(--green);flex-shrink:0;margin-top:2px;}
+button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 
 /* toast + footer */
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;border-radius:26px;padding:11px 22px;font-size:13px;z-index:999;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;max-width:90vw;}
@@ -1396,16 +1399,38 @@ const TOOLS={
     const sorted=m.debts.map(d=>({...d,_u:debtUrgency(d)})).sort((a,b)=>order[a._u]-order[b._u]||num(b.interest)-num(a.interest));
     const utagLbl={crit:t('utag_crit'),high:t('utag_high'),mon:t('utag_mon')};
     let rows=sorted.map((d,i)=>`<div class="debt-row"><div class="debt-rank">${i+1}</div><div class="debt-main"><div class="dt">${esc(d.type||'Debt')}${d.creditor?' · '+esc(d.creditor):''}</div><div class="dc">${num(d.interest)>0?num(d.interest)+'%':esc(t('dm_unknown_rate'))}</div></div><div class="debt-right"><div class="debt-amt">${esc(fmtMoney(d.amount,d.currency||m.cur))}</div><span class="utag ${d._u}">${esc(utagLbl[d._u])}</span></div></div>`).join('');
-    return banner+rows+`<div class="tool-note" style="margin-top:16px">${esc(t('collect_note'))}</div>`;
+    /* [signpost bridge] enforcement lens → free national help. When a debt is with
+       a collector/court, close the loop to the Legal Protection tool (which fronts
+       the free, statutory services). Same signposting loop as legal(). */
+    let bridge='';
+    if(/court|enforcement|agency/i.test(col))bridge=`<button class="legal-signpost" onclick="openTool('legal')"><i data-lucide="life-buoy"></i><span>${esc(t('collect_signpost'))}</span><i data-lucide="chevron-right" style="margin-left:auto"></i></button>`;
+    return banner+rows+bridge+`<div class="tool-note" style="margin-top:16px">${esc(t('collect_note'))}</div>`;
   },
   legal(){
     const c=country();
     const note=COUNTRY_LEGAL[c]||COUNTRY_LEGAL['_other'];
     const orgs=SUPPORT_ORGS[c]||[];
-    let supp=orgs.slice(0,3).map(o=>`<div class="support-org"><div class="so-name">${esc(o.name)}</div>${o.url?`<div class="so-url"><a href="https://${esc(o.url)}" target="_blank" rel="noopener">${esc(o.url)}</a></div>`:''}</div>`).join('');
-    return `<div class="legal-block"><h5>${esc(t('legal_rights'))}${c?' · '+esc(c):''}</h5><p>${esc(note)}</p>
-      <div class="legal-warn">${esc(t('legal_warn'))}</div>
-      ${supp?`<h5 style="margin-top:18px">${esc(t('legal_support'))}</h5>${supp}`:''}</div>`;
+    /* [signpost] Reciprocal signposting is the whole point of this tool: the free,
+       national help is the HERO, not a footnote. (1) warm you're-not-alone line,
+       (2) the real services rendered in FULL — name, link, what they do, and a FREE
+       badge where the service is free/statutory — (3) legal context, (4) the caveat.
+       Renders the same SUPPORT_ORGS/COUNTRY_LEGAL data, only re-ordered + fuller. */
+    const hero=`<div class="legal-signpost"><i data-lucide="life-buoy"></i><span>${esc(t('legal_signpost'))}</span></div>`;
+    let help='';
+    if(orgs.length){
+      const rows=orgs.slice(0,4).map(o=>{
+        const isFree=o.desc&&/free|statutory|no.?cost/i.test(o.desc);
+        return `<div class="support-org"><div class="so-name">${esc(o.name)}</div>`
+          +(o.url?`<div class="so-url"><a href="https://${esc(o.url)}" target="_blank" rel="noopener">${esc(o.url)}</a></div>`:'')
+          +(o.desc?`<div class="so-desc">${esc(o.desc)}</div>`:'')
+          +(isFree?`<span class="so-free">${esc(t('legal_free'))}</span>`:'')
+          +`</div>`;
+      }).join('');
+      help=`<h5>${esc(t('legal_help_title'))}</h5>${rows}`;
+    }
+    return `<div class="legal-block">${hero}${help}
+      <h5>${esc(t('legal_rights'))}${c?' · '+esc(c):''}</h5><p>${esc(note)}</p>
+      <div class="legal-warn">${esc(t('legal_warn'))}</div></div>`;
   }
 };
 const TOOL_INIT={
