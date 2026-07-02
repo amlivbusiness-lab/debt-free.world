@@ -76,6 +76,7 @@ button{font-family:var(--sans);cursor:pointer;}
 .nav-group{padding:14px 8px 6px;}
 .nav-group-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);padding:0 14px 8px;display:flex;align-items:center;gap:8px;}
 .nav-group-label svg{width:14px;height:14px;}
+.nav-group-sub{font-size:11.5px;line-height:1.45;color:var(--soft);padding:0 14px 10px;margin-top:-4px;}
 .nav-item{display:flex;align-items:center;gap:12px;width:100%;background:none;border:none;text-align:left;padding:11px 14px;border-radius:10px;color:var(--text);font-size:14.5px;font-weight:500;border-left:3px solid transparent;}
 .nav-item:hover{background:var(--green-pale);}
 .nav-item svg{width:18px;height:18px;color:var(--green);flex-shrink:0;stroke-width:1.5;}
@@ -344,6 +345,22 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .tool-note strong{color:var(--text);}
 .dfd-buffer{margin-bottom:18px;padding:11px 14px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:12.5px;line-height:1.55;color:var(--text);}
 .strat-why{margin-top:10px;padding-left:11px;border-left:3px solid var(--green);font-size:12.5px;line-height:1.55;color:var(--text);}
+/* [A1] per-tool framing intro */
+.tool-intro{font-size:13.5px;line-height:1.6;color:var(--text);background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;padding:12px 15px;margin-bottom:18px;}
+/* [B2] side-by-side strategy comparison card */
+.scmp{margin-bottom:20px;}
+.scmp-title{font-family:var(--serif);font-size:16px;margin-bottom:12px;}
+.scmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.scmp-col{border:1.5px solid var(--green-line);border-radius:13px;padding:14px;background:var(--green-pale);}
+.scmp-h{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin-bottom:8px;}
+.scmp-date{font-family:var(--serif);font-size:22px;line-height:1.1;color:var(--text);}
+.scmp-sub{font-size:12px;color:var(--muted);margin-bottom:10px;}
+.scmp-int{display:flex;flex-direction:column;gap:1px;font-size:12px;color:var(--muted);}
+.scmp-int strong{font-family:var(--serif);font-size:16px;color:var(--text);font-weight:400;}
+.scmp-first{margin-top:10px;padding-top:9px;border-top:1px solid var(--green-line);font-size:12px;color:var(--green);font-weight:600;line-height:1.4;}
+.scmp-verdict{margin-top:14px;padding-left:12px;border-left:3px solid var(--green);font-size:13.5px;line-height:1.55;color:var(--text);}
+.scmp-approx{margin-top:12px;font-size:11.5px;line-height:1.5;color:var(--soft);}
+@media(max-width:460px){.scmp-grid{grid-template-columns:1fr;}}
 .legal-block h5{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin:16px 0 7px;}
 .legal-block h5:first-child{margin-top:0;}
 .legal-block p{font-size:14px;margin-bottom:11px;}
@@ -448,6 +465,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   <div class="drawer-nav">
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="badge-check"></i><span data-i18n="nav_g_debtfree">Debt FREE</span></div>
+      <div class="nav-group-sub" data-i18n="nav_g_debtfree_sub">Everything you need to see your situation clearly and plan your way out.</div>
       <button class="nav-item" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
       <button class="nav-item" onclick="goUpdatePlan()"><i data-lucide="refresh-cw"></i><span data-i18n="nav_update">Update my numbers</span></button>
       <button class="nav-item" onclick="dashHome()"><i data-lucide="circle-alert"></i><span data-i18n="nav_emergency">Emergency Card</span></button>
@@ -457,6 +475,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
     </div>
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="wrench"></i><span data-i18n="nav_g_tools">Tools</span></div>
+      <div class="nav-group-sub" data-i18n="nav_g_tools_sub">Six calculators. Each answers one real question about your money.</div>
       <button class="nav-item" onclick="openTool('dfd')"><i data-lucide="calendar-check"></i><span data-i18n="tool_dfd_n">Debt-Free Date Calculator</span></button>
       <button class="nav-item" onclick="openTool('strat')"><i data-lucide="layers"></i><span data-i18n="tool_strat_n">Snowball vs Avalanche</span></button>
       <button class="nav-item" onclick="openTool('budget')"><i data-lucide="piggy-bank"></i><span data-i18n="tool_budget_n">Crisis Budget Planner</span></button>
@@ -466,11 +485,13 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
     </div>
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="book-open"></i><span data-i18n="nav_g_learn">Learn</span></div>
+      <div class="nav-group-sub" data-i18n="nav_g_learn_sub">Short, honest reads — no filler, nothing to buy.</div>
       <a class="nav-item" href="/blog/"><i data-lucide="newspaper"></i><span data-i18n="nav_articles">Articles</span></a>
       <a class="nav-item" href="/ecosystem.html"><i data-lucide="layout-grid"></i><span data-i18n="nav_ecosystem">Ecosystem</span></a>
     </div>
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="lock"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
+      <div class="nav-group-sub" data-i18n="nav_g_recovery_sub">When you're ready, deeper tools to push back and rebuild.</div>
       <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span><i data-lucide="lock" class="lock"></i></button>
       <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="shield"></i><span data-i18n="nav_crisis">Crisis Plans</span><i data-lucide="lock" class="lock"></i></button>
       <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><i data-lucide="lock" class="lock"></i></button>
@@ -719,6 +740,44 @@ function projectFree(extraMonthly){
 /* monthsToFree keeps its signature; now routes through the shared engine so every
    existing caller (snapshot, TOOLS.dfd, income tool) is interest-aware and identical. */
 function monthsToFree(total,monthly){return amortise(total,monthly,blendedRate()).months;}
+/* [B1] simulateStrategy — deterministic month-by-month payoff for ONE ordering.
+   ASSUMPTION (directional, surfaced in UI via strat_cmp_approx): the whole
+   `monthly` amount is thrown at debts one at a time in `mode` order; overflow
+   rolls to the next debt when one clears. The dataset carries no per-debt
+   minimum payments, so this compares ORDER only — not a full schedule.
+   ROBUST: monthly<=0, or a month that makes no dent (payment can't cover
+   accruing interest), or a run past the 600-month cap → returns nulls (never a
+   payoff you can't actually reach). Never emits NaN/Infinity. */
+function simulateStrategy(debts,monthly,mode){
+  monthly=num(monthly);
+  let bal=(Array.isArray(debts)?debts:[]).map(d=>({
+    amount:Math.max(0,num(d.amount)),
+    rate:Math.max(0,num(d.interest))/100/12
+  })).filter(d=>d.amount>0);
+  if(!bal.length)return{months:0,totalInterest:0,firstCleared:0};
+  if(monthly<=0)return{months:null,totalInterest:null,firstCleared:null};
+  if(mode==='snow')bal.sort((a,b)=>a.amount-b.amount);
+  else bal.sort((a,b)=>b.rate-a.rate||a.amount-b.amount);
+  const totalOf=()=>bal.reduce((s,d)=>s+d.amount,0);
+  let months=0,totalInterest=0,firstCleared=null;const CAP=600;
+  while(totalOf()>0.005&&months<CAP){
+    const before=totalOf();
+    months++;
+    for(const d of bal){if(d.amount>0){const i=d.amount*d.rate;d.amount+=i;totalInterest+=i;}}
+    let pay=monthly;
+    for(const d of bal){
+      if(pay<=0)break;
+      if(d.amount<=0)continue;
+      const cut=Math.min(pay,d.amount);
+      d.amount-=cut;pay-=cut;
+      if(d.amount<=0.005){d.amount=0;if(firstCleared==null)firstCleared=months;}
+    }
+    if(totalOf()>=before-0.005)return{months:null,totalInterest:null,firstCleared:null};
+  }
+  if(totalOf()>0.005)return{months:null,totalInterest:null,firstCleared:null};
+  totalInterest=isFinite(totalInterest)?Math.max(0,Math.round(totalInterest)):0;
+  return{months,totalInterest,firstCleared:firstCleared==null?months:firstCleared};
+}
 function dateFromMonths(m){if(m==null)return null;const d=new Date();d.setMonth(d.getMonth()+m);return d.toLocaleDateString(localeForLang(),{month:'short',year:'numeric'});}
 function localeForLang(){const map={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',NO:'nb-NO',DA:'da-DK',NL:'nl-NL',ES:'es-ES',FR:'fr-FR',IT:'it-IT',PL:'pl-PL',PT:'pt-PT',CS:'cs-CZ',ET:'et-EE',LV:'lv-LV',LT:'lt-LT',HU:'hu-HU',RO:'ro-RO',HR:'hr-HR'};return map[DFWI18n.current]||'en-GB';}
 
@@ -1225,7 +1284,9 @@ function openTool(id){
   const meta=TOOL_META[id];
   $('modalIcon').setAttribute('data-lucide',meta.icon);
   $('modalTitle').textContent=t(meta.title);
-  $('modalBody').innerHTML=TOOLS[id]();
+  /* [A1] warm framing layer — every tool is introduced (what it does for you +
+     why it's here), never dropped on the user raw. Single injection point. */
+  $('modalBody').innerHTML=`<div class="tool-intro">${esc(t('tool_intro_'+id))}</div>`+TOOLS[id]();
   $('toolModal').classList.add('show');
   icons();
   if(TOOL_INIT[id])TOOL_INIT[id]();
@@ -1246,7 +1307,37 @@ const TOOLS={
   strat(){
     const m=model();
     if(!m.debts.length)return `<div class="tool-note">${esc(t('strat_empty'))}</div>`;
-    return `<div class="seg"><button class="on" id="segSnow" onclick="setStrat('snow')">${esc(t('strat_snow'))}</button><button id="segAval" onclick="setStrat('aval')">${esc(t('strat_aval'))}</button></div>
+    /* [B2] Side-by-side comparison ON TOP. It needs a positive monthly amount to
+       project a payoff, so when there's nothing left over we don't fake a date —
+       we say so and keep the concrete ordering tool below (unchanged behaviour). */
+    let cmp;
+    if(m.surplus>0){
+      const s=simulateStrategy(m.debts,m.surplus,'snow');
+      const a=simulateStrategy(m.debts,m.surplus,'aval');
+      const col=(lbl,sim,firstLine)=>`<div class="scmp-col"><div class="scmp-h">${esc(lbl)}</div>`
+        +`<div class="scmp-date">${sim.months!=null?esc(dateFromMonths(sim.months)):'—'}</div>`
+        +`<div class="scmp-sub">${sim.months!=null?esc(t('strat_cmp_months',{m:sim.months})):''}</div>`
+        +`<div class="scmp-int"><span>${esc(t('strat_cmp_interest'))}</span><strong>${sim.totalInterest!=null?esc(fmtMoney(sim.totalInterest,m.cur)):'—'}</strong></div>`
+        +(firstLine?`<div class="scmp-first">${firstLine}</div>`:'')
+        +`</div>`;
+      const snowFirst=(s.firstCleared!=null)?esc(t('strat_cmp_first',{m:s.firstCleared})):'';
+      let verdict='';
+      if(s.months!=null&&a.months!=null){
+        const diff=s.totalInterest-a.totalInterest;   // >0 → avalanche costs less
+        const monthsDiff=s.months-a.months;           // >0 → avalanche finishes sooner
+        const meaningful=diff>Math.max(50,a.totalInterest*0.05); // >5% or >50 units
+        verdict=meaningful
+          ?t('strat_cmp_verdict_aval',{save:fmtMoney(diff,m.cur),months:Math.max(0,monthsDiff)})
+          :t('strat_cmp_verdict_snow',{first:(s.firstCleared!=null?s.firstCleared:s.months),extra:fmtMoney(Math.max(0,diff),m.cur)});
+      }
+      cmp=`<div class="scmp"><div class="scmp-title">${esc(t('strat_cmp_title'))}</div>`
+        +`<div class="scmp-grid">`+col(t('strat_cmp_snow'),s,snowFirst)+col(t('strat_cmp_aval'),a,'')+`</div>`
+        +(verdict?`<div class="scmp-verdict">${esc(verdict)}</div>`:'')
+        +`<div class="scmp-approx">${esc(t('strat_cmp_approx'))}</div></div>`;
+    }else{
+      cmp=`<div class="tool-note" style="margin-bottom:18px">${esc(t('strat_cmp_needsurplus'))}</div>`;
+    }
+    return cmp+`<div class="seg"><button class="on" id="segSnow" onclick="setStrat('snow')">${esc(t('strat_snow'))}</button><button id="segAval" onclick="setStrat('aval')">${esc(t('strat_aval'))}</button></div>
       <ul class="olist" id="stratList"></ul><div class="tool-note" id="stratNote" style="margin-top:16px"></div>`;
   },
   budget(){
