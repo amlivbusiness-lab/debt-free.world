@@ -1114,13 +1114,24 @@ function renderDebtMap(){
 /* SUPPORT */
 function renderSupport(){
   const c=country();const el=$('supportBody');
-  const orgs=SUPPORT_ORGS[c];
-  if(orgs&&orgs.length){
-    el.innerHTML=orgs.map(o=>`<div class="support-org"><div class="so-name">${esc(o.name)}</div>${o.url?`<div class="so-url"><a href="https://${esc(o.url)}" target="_blank" rel="noopener">${esc(o.url)}</a></div>`:''}<div class="so-desc">${esc(o.desc)}</div>${o.free!==false?`<span class="so-free">${esc(t('sup_free'))}</span>`:''}</div>`).join('')
-      +`<p class="disclaimer">${esc(t('sup_disclaimer'))}</p>`;
+  const orgs=SUPPORT_ORGS[c]||[];
+  const note=COUNTRY_LEGAL[c]||COUNTRY_LEGAL['_other'];
+  const hero=`<div class="legal-signpost"><i data-lucide="life-buoy"></i><span>${esc(t('legal_signpost'))}</span></div>`;
+  let services;
+  if(orgs.length){
+    services=orgs.map(o=>{
+      const isFree=o.free!==false&&(!o.desc||/free|statutory|no.?cost/i.test(o.desc));
+      return `<div class="support-org"><div class="so-name">${esc(o.name)}</div>`
+        +(o.url?`<div class="so-url"><a href="https://${esc(o.url)}" target="_blank" rel="noopener">${esc(o.url)}</a></div>`:'')
+        +(o.desc?`<div class="so-desc">${esc(o.desc)}</div>`:'')
+        +(isFree?`<span class="so-free">${esc(t('sup_free'))}</span>`:'')
+        +`</div>`;
+    }).join('');
   }else{
-    el.innerHTML=`<div class="plan-empty">${esc(t('sup_generic',{country:c||'your country'}))}</div><p class="disclaimer">${esc(t('sup_disclaimer'))}</p>`;
+    services=`<div class="plan-empty">${esc(t('sup_generic',{country:c||'your country'}))}</div>`;
   }
+  const rights=`<div class="legal-block"><h5>${esc(t('legal_rights'))}${c?' · '+esc(c):''}</h5><p>${esc(note)}</p></div>`;
+  el.innerHTML=hero+services+rights+`<p class="disclaimer">${esc(t('sup_disclaimer'))}</p>`;
   icons();
 }
 
