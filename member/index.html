@@ -448,6 +448,65 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 .p9-v{font-family:var(--serif);font-size:24px;line-height:1.08;}
 .p9-note{font-size:13px;opacity:.9;line-height:1.5;}
 @media(max-width:420px){.p9-figs{grid-template-columns:1fr;}.p9-title{font-size:19px;}}
+/* ══ PASS 2 · CREDITOR LETTERS ══ */
+.lw-steps{display:flex;gap:6px;margin:0 0 22px;}
+.lw-steps .lw-dot{flex:1;height:4px;border-radius:3px;background:var(--border);transition:background .2s;}
+.lw-steps .lw-dot.on{background:var(--green);}
+.lw-panel{animation:lwFade .22s ease;}
+@keyframes lwFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+.lw-q{font-family:var(--serif);font-size:1.32rem;line-height:1.25;margin:0 0 6px;}
+.lw-help{font-size:13.5px;color:var(--soft);margin:0 0 16px;}
+.lw-field{margin:0 0 16px;}
+.lw-field label{display:block;font-size:13px;font-weight:600;margin:0 0 6px;}
+.lw-field input,.lw-field textarea,.lw-field select{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:11px;padding:12px 13px;transition:border-color .15s;}
+.lw-field input:focus,.lw-field textarea:focus,.lw-field select:focus{outline:none;border-color:var(--green);}
+.lw-field textarea{min-height:88px;resize:vertical;line-height:1.55;}
+.lw-row{display:flex;gap:12px;}
+.lw-row .lw-field{flex:1;}
+.lw-row .lw-cur{flex:0 0 110px;}
+.lw-types{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 6px;}
+@media(max-width:560px){.lw-types{grid-template-columns:1fr;}.lw-row{flex-direction:column;gap:0;}.lw-row .lw-cur{flex:1;}}
+.lw-type{text-align:left;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:12px;padding:13px 14px;transition:border-color .15s,background .15s;}
+.lw-type:hover{border-color:var(--green-line);border-left-color:var(--green);background:var(--green-pale);}
+.lw-type.sel{border-color:var(--green);border-left-color:var(--green);background:var(--green-pale);}
+.lw-type .lwt-h{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14.5px;}
+.lw-type .lwt-h svg{width:17px;height:17px;stroke-width:1.6;color:var(--green);}
+.lw-type .lwt-d{font-size:12.5px;color:var(--soft);margin-top:5px;line-height:1.45;}
+.lw-caution{display:flex;gap:9px;align-items:flex-start;font-size:12.8px;line-height:1.5;color:var(--text);background:var(--green-pale);border-left:3px solid var(--green);border-radius:9px;padding:11px 13px;margin:2px 0 16px;}
+.lw-caution svg{width:16px;height:16px;stroke-width:1.6;color:var(--green);flex-shrink:0;margin-top:2px;}
+.lw-actions{display:flex;gap:10px;align-items:center;margin-top:20px;}
+.lw-actions .lw-spacer{flex:1;}
+.lw-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:24px;padding:11px 20px;transition:background .15s,border-color .15s,color .15s;}
+.lw-btn.prim{background:var(--green);border:1px solid var(--green);color:#fff;}
+.lw-btn.prim:hover{background:var(--green-dark);}
+.lw-btn.prim:disabled{opacity:.6;cursor:default;}
+.lw-btn.ghost{background:var(--white);border:1px solid var(--border);color:var(--text);}
+.lw-btn.ghost:hover{border-color:var(--green-line);}
+.lw-btn svg{width:16px;height:16px;stroke-width:1.6;}
+.lw-review{background:var(--green-pale);border-left:3px solid var(--green);border-radius:11px;padding:14px 16px;margin:0 0 6px;}
+.lw-review .lwr-row{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:4px 0;}
+.lw-review .lwr-row span{color:var(--soft);}
+.lw-review .lwr-row b{font-weight:600;text-align:right;}
+.lw-load{display:flex;align-items:center;gap:12px;color:var(--soft);font-size:14.5px;padding:26px 4px;}
+.lw-load .spin{width:20px;height:20px;border:2.5px solid var(--green-line);border-top-color:var(--green);border-radius:50%;animation:lwSpin .8s linear infinite;}
+@keyframes lwSpin{to{transform:rotate(360deg);}}
+.lw-note{font-family:var(--serif);font-size:1.05rem;line-height:1.5;color:var(--green-deep);background:var(--green-pale);border-left:3px solid var(--green);border-radius:11px;padding:14px 18px;margin:0 0 18px;}
+.lw-letter{background:var(--white);border:1px solid var(--border);border-radius:13px;padding:22px 24px;white-space:pre-wrap;font-family:var(--sans);font-size:14.5px;line-height:1.72;color:var(--text);}
+@media(max-width:560px){.lw-letter{padding:18px 16px;font-size:14px;}}
+.lw-fillhint{display:flex;gap:9px;align-items:flex-start;font-size:12.8px;line-height:1.5;color:var(--soft);margin:12px 2px 0;}
+.lw-fillhint svg{width:15px;height:15px;stroke-width:1.6;color:var(--green);flex-shrink:0;margin-top:2px;}
+.lw-out-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0;}
+.lw-next{margin:22px 0 0;border-left:3px solid var(--green);background:var(--green-pale);border-radius:11px;padding:15px 18px;}
+.lw-next h5{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+.lw-next h5 svg{width:15px;height:15px;stroke-width:1.7;}
+.lw-next ul{list-style:none;margin:0;padding:0;}
+.lw-next li{position:relative;padding:0 0 8px 20px;font-size:13.6px;line-height:1.55;color:var(--text);}
+.lw-next li:last-child{padding-bottom:0;}
+.lw-next li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);}
+.lw-next li a{font-weight:600;text-decoration:underline;text-underline-offset:2px;}
+.lw-err{background:var(--red-bg);border-left:3px solid var(--red);border-radius:10px;padding:13px 16px;font-size:14px;color:var(--red);margin:0;}
+.nav-soon{opacity:.55;}
+.nav-soon .nav-soon-tag{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);border:1px solid var(--border);border-radius:20px;padding:2px 8px;}
 </style>
 </head>
 <body>
@@ -469,6 +528,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
     <button data-nav="sec-debtmap" onclick="navTo('sec-debtmap')"><i data-lucide="map"></i><span data-i18n="nav_debtmap">Debt Map</span></button>
     <button data-nav="sec-tools" onclick="navTo('sec-tools')"><i data-lucide="wrench"></i><span data-i18n="nav_g_tools">Tools</span></button>
     <button data-nav="sec-support" onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i><span data-i18n="nav_support">Support</span></button>
+    <button data-nav="sec-letters" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
   </nav>
 </header>
 
@@ -504,6 +564,13 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div class="nav-group-sub" data-i18n="nav_g_learn_sub">Short, honest reads — no filler, nothing to buy.</div>
       <a class="nav-item" href="/blog/"><i data-lucide="newspaper"></i><span data-i18n="nav_articles">Articles</span></a>
       <a class="nav-item" href="/ecosystem.html"><i data-lucide="layout-grid"></i><span data-i18n="nav_ecosystem">Ecosystem</span></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label"><i data-lucide="shield"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
+      <div class="nav-group-sub" data-i18n="nav_g_recovery_sub">When you're ready, deeper tools to push back and rebuild.</div>
+      <button class="nav-item" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
+      <button class="nav-item nav-soon" disabled aria-disabled="true"><i data-lucide="clipboard-list"></i><span data-i18n="nav_crisis">Crisis Plans</span><span class="nav-soon-tag" data-i18n="letter_soon">Soon</span></button>
+      <button class="nav-item nav-soon" disabled aria-disabled="true"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><span class="nav-soon-tag" data-i18n="letter_soon">Soon</span></button>
     </div>
     <div class="nav-group nav-foot">
       <button class="nav-item nav-logout" onclick="logout()"><i data-lucide="log-out"></i><span data-i18n="logout">Log out</span></button>
@@ -617,6 +684,14 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <h2 data-i18n="sup_title">Verified help where you are</h2>
       <p class="lead" id="supLead" data-i18n="sup_lead">Free and trusted services in your country. You don't have to do this alone.</p>
       <div id="supportBody"></div>
+    </section>
+
+    <!-- CREDITOR LETTERS (Pass 2) -->
+    <section class="section depth" id="sec-letters">
+      <div class="section-head"><i data-lucide="mail-plus"></i><span class="section-eyebrow" data-i18n="letter_eyebrow">Creditor letters</span></div>
+      <h2 data-i18n="letter_title">Write a creditor letter</h2>
+      <p class="lead" data-i18n="letter_lead">A calm, honest letter to a creditor — drafted for your situation, in your language. You review it and send it yourself.</p>
+      <div id="lettersBody"></div>
     </section>
 
   </div>
@@ -1508,6 +1583,252 @@ const COUNTRY_LEGAL={
 };
 
 /* ── go ── */
+/* ════════════════════════════════════════════════
+   CREDITOR LETTERS (Pass 2) — wizard + AI wiring
+   ════════════════════════════════════════════════ */
+/* English typeLabels — sent to the model AND used for the saved-document title
+   (server-stable). meta.subtype carries the raw key. */
+const typeLabels={
+  hardship:'hardship and payment difficulty',
+  settlement:'debt settlement offer',
+  stop:'cease and desist / stop contact',
+  dispute:'debt dispute',
+  plan:'proposed payment plan',
+  holiday:'payment holiday request',
+  negotiation:'general negotiation'
+};
+/* Constructive options first; the two caution types (dispute, stop) last. */
+const LW_TYPES=[
+  {k:'hardship',ic:'heart-handshake'},
+  {k:'plan',ic:'calendar-clock'},
+  {k:'settlement',ic:'handshake'},
+  {k:'holiday',ic:'pause'},
+  {k:'negotiation',ic:'messages-square'},
+  {k:'dispute',ic:'file-question'},
+  {k:'stop',ic:'hand'}
+];
+/* Active i18n code → English language name for the letter body. */
+const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
+function letterLang(){const c=(DFWI18n.current||'EN').toUpperCase();return LANG_NAMES[c]||'English';}
+
+let lwStep=1, lwReady=false, lwOut=null;
+const lwData={creditor:'',type:'',amount:'',currency:'',hardship:'',situation:''};
+
+function lwInit(){
+  const m=model();
+  lwData.currency=m.cur;
+  const named=(m.debts||[]).filter(d=>d.creditor&&String(d.creditor).trim());
+  if(named.length===1){
+    lwData.creditor=String(named[0].creditor).trim();
+    if(named[0].amount)lwData.amount=String(named[0].amount);
+    if(named[0].currency)lwData.currency=named[0].currency;
+  }
+  lwReady=true;
+}
+function openLetters(){ if(!lwReady)lwInit(); showSection('sec-letters'); setActiveNav('sec-letters'); renderLetters(); }
+
+function lwCreditorInput(v){
+  lwData.creditor=v;
+  const hit=(model().debts||[]).find(d=>d.creditor&&String(d.creditor).trim().toLowerCase()===v.trim().toLowerCase());
+  if(hit){ if(hit.amount)lwData.amount=String(hit.amount); if(hit.currency)lwData.currency=hit.currency; }
+}
+function lwPickType(k){ lwData.type=k; renderLetters(); }
+
+function lwCapture(){
+  const a=$('lwAmount'); if(a)lwData.amount=a.value.trim();
+  const c=$('lwCurrency'); if(c)lwData.currency=(c.value.trim()||lwData.currency);
+  const h=$('lwHardship'); if(h)lwData.hardship=h.value.trim();
+  const s=$('lwSituation'); if(s)lwData.situation=s.value.trim();
+}
+function lwNext(){
+  if(lwStep===1){ const el=$('lwCreditor'); if(el)lwData.creditor=el.value.trim(); if(!lwData.creditor){showToast(t('lw_need_creditor'));return;} }
+  if(lwStep===2){ if(!lwData.type){showToast(t('lw_need_type'));return;} }
+  if(lwStep===3){ lwCapture(); }
+  if(lwStep<4){ lwStep++; renderLetters(); }
+}
+function lwBack(){ if(lwStep===3)lwCapture(); if(lwStep>1){ lwStep--; renderLetters(); } }
+function lwReset(){ lwOut=null; lwStep=1; lwData.type=''; lwData.hardship=''; lwData.situation=''; renderLetters(); }
+
+/* net-new AI call — EXACT current /api/chat contract (Worker v16.14): single
+   user message, no system field, claude-sonnet-4-6, max_tokens 2000. */
+async function callAI(prompt){
+  const res=await fetch(`${WORKER_URL}/api/chat`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-member-token':memberToken},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-6',
+      max_tokens:2000,
+      messages:[{role:'user',content:prompt}]
+    })
+  });
+  if(res.status===401)throw{code:401};
+  if(res.status===429)throw{code:429};
+  if(!res.ok)throw{code:0};
+  const data=await res.json();
+  const text=data&&data.content&&data.content[0]&&data.content[0].text||'';
+  if(!text)throw{code:0};
+  return text;
+}
+/* Full instruction block lives in the user content (two-part contract). */
+function buildLetterPrompt(d){
+  const language=letterLang();
+  const typeLabel=typeLabels[d.type]||typeLabels.negotiation;
+  const cc=country()||'your country';
+  const fn=firstName();
+  const instr=
+`You are a professional debt-letter writer at Debt-Free.world.
+Return EXACTLY two parts separated by a line containing ONLY: ---LETTER---
+ABOVE the delimiter: ONE warm empathy sentence addressed to the USER, in ${language} (this is for the user's eyes only and must NEVER appear inside the letter).
+BELOW the delimiter: the formal letter ONLY — nothing else.
+The letter is of type: ${typeLabel}, from the debtor to the named creditor ${d.creditor}, in ${language}. The debtor is in ${cc}; do NOT make legal claims specific to any other jurisdiction, and do not cite specific statutes unless certain they apply in ${cc}.
+Reflect the debtor's genuine hardship and figures honestly.
+The letter MUST include a debtor identity block and clearly-marked fill-in placeholders in square brackets that the user completes before sending: the debtor's surname if not provided, [account/reference number], and [date]. NEVER invent or guess an account/reference number or a date — always leave them as bracketed fill-ins. Keep the letter concise (fits one page): date line, debtor identity, creditor name, salutation, body, sign-off.
+Rules: never threaten, never admit to more than stated, never guarantee legal outcomes, do not advise anything unlawful, keep a calm non-adversarial tone that protects the debtor's position while remaining truthful.
+For 'stop contact' letters, state the request to cease contact plainly WITHOUT overstating rights that vary by country — frame it as a request and point the reader to national free debt-help for enforcement.`;
+  const params=
+`\n\n--- LETTER PARAMETERS ---
+Creditor: ${d.creditor}
+Letter type: ${typeLabel}
+Debtor first name (use in the identity block; leave the surname as a [surname] fill-in): ${fn||'[not provided]'}
+Amount owed: ${d.amount?(d.amount+' '+(d.currency||'')).trim():'[not specified]'}
+Debtor's hardship / what changed: ${d.hardship||'[not specified]'}
+Additional context: ${d.situation||'[none]'}
+Debtor country: ${cc}
+Write the empathy sentence AND the letter in: ${language}.`;
+  return instr+params;
+}
+
+async function lwGenerate(){
+  lwCapture();
+  const body=$('lettersBody');
+  body.innerHTML=`<div class="lw-load"><span class="spin"></span><span>${esc(t('lw_generating'))}</span></div>`;
+  try{
+    const result=await callAI(buildLetterPrompt(lwData));
+    const [note,letter]=result.includes('---LETTER---')
+      ? result.split('---LETTER---').map(s=>s.trim())
+      : ['',result.trim()];
+    lwOut={note,letter,type:lwData.type,creditor:lwData.creditor};
+    renderLetters();
+  }catch(err){
+    const code=err&&err.code;
+    const msg=code===401?t('ai_err_session'):code===429?t('ai_err_limit'):t('ai_err_generic');
+    body.innerHTML=`<div class="lw-err">${esc(msg)}</div>`
+      +`<div class="lw-actions"><button class="lw-btn ghost" onclick="renderLetters()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button></div>`;
+    icons();
+  }
+}
+
+function lwCopyFallback(txt,done){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){}document.body.removeChild(ta);}
+function lwCopy(){
+  if(!lwOut)return;
+  const txt=lwOut.letter, done=()=>showToast(t('lw_copied'));
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>lwCopyFallback(txt,done));}
+  else lwCopyFallback(txt,done);
+}
+async function lwSave(){
+  if(!lwOut)return;
+  const btn=$('lwSaveBtn'); if(btn)btn.disabled=true;
+  const title=(lwOut.creditor+' · '+(typeLabels[lwOut.type]||'')).trim();
+  try{
+    const res=await fetch(`${WORKER_URL}/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({type:'letter',title,text:lwOut.letter,meta:{creditor:lwOut.creditor,subtype:lwOut.type}})});
+    if(!res.ok)throw 0;
+    showToast(t('lw_saved'));
+    if(btn){btn.innerHTML=`<i data-lucide="check"></i> ${esc(t('lw_saved'))}`;icons();}
+  }catch(_){ showToast(t('lw_save_err')); if(btn)btn.disabled=false; }
+}
+
+function lwDots(n){let h='<div class="lw-steps">';for(let i=1;i<=4;i++)h+=`<div class="lw-dot${i<=n?' on':''}"></div>`;return h+'</div>';}
+
+function lwWizardHtml(){
+  if(lwStep===1){
+    const creds=[...new Set((model().debts||[]).map(d=>String(d.creditor||'').trim()).filter(Boolean))];
+    const opts=creds.map(c=>`<option value="${esc(c)}"></option>`).join('');
+    return lwDots(1)+`<div class="lw-panel">
+      <div class="lw-q">${esc(t('lw_step_creditor'))}</div>
+      <div class="lw-help">${esc(t('lw_creditor_help'))}</div>
+      <div class="lw-field">
+        <label>${esc(t('lw_creditor_lbl'))}</label>
+        <input id="lwCreditor" list="lwCredList" value="${esc(lwData.creditor)}" oninput="lwCreditorInput(this.value)" placeholder="${esc(t('lw_creditor_ph'))}" autocomplete="off"/>
+        <datalist id="lwCredList">${opts}</datalist>
+      </div>
+      <div class="lw-actions"><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwNext()">${esc(t('lw_next'))} <i data-lucide="arrow-right"></i></button></div>
+    </div>`;
+  }
+  if(lwStep===2){
+    const cards=LW_TYPES.map(x=>`<button class="lw-type${lwData.type===x.k?' sel':''}" onclick="lwPickType('${x.k}')">
+      <div class="lwt-h"><i data-lucide="${x.ic}"></i>${esc(t('lw_t_'+x.k))}</div>
+      <div class="lwt-d">${esc(t('lw_t_'+x.k+'_d'))}</div></button>`).join('');
+    let caution='';
+    if(lwData.type==='dispute')caution=`<div class="lw-caution"><i data-lucide="alert-triangle"></i><span>${esc(t('lw_caution_dispute'))}</span></div>`;
+    else if(lwData.type==='stop')caution=`<div class="lw-caution"><i data-lucide="alert-triangle"></i><span>${esc(t('lw_caution_stop'))}</span></div>`;
+    return lwDots(2)+`<div class="lw-panel">
+      <div class="lw-q">${esc(t('lw_step_type'))}</div>
+      <div class="lw-types">${cards}</div>
+      ${caution}
+      <div class="lw-actions"><button class="lw-btn ghost" onclick="lwBack()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwNext()">${esc(t('lw_next'))} <i data-lucide="arrow-right"></i></button></div>
+    </div>`;
+  }
+  if(lwStep===3){
+    return lwDots(3)+`<div class="lw-panel">
+      <div class="lw-q">${esc(t('lw_step_details'))}</div>
+      <div class="lw-row">
+        <div class="lw-field"><label>${esc(t('lw_amount_lbl'))}</label><input id="lwAmount" inputmode="decimal" value="${esc(lwData.amount)}" oninput="lwData.amount=this.value.trim()" placeholder="0"/></div>
+        <div class="lw-field lw-cur"><label>${esc(t('lw_currency_lbl'))}</label><input id="lwCurrency" value="${esc(lwData.currency)}" oninput="lwData.currency=this.value.trim()" autocomplete="off"/></div>
+      </div>
+      <div class="lw-field"><label>${esc(t('lw_hardship_lbl'))}</label><textarea id="lwHardship" oninput="lwData.hardship=this.value.trim()" placeholder="${esc(t('lw_hardship_ph'))}">${esc(lwData.hardship)}</textarea></div>
+      <div class="lw-field"><label>${esc(t('lw_situation_lbl'))}</label><textarea id="lwSituation" oninput="lwData.situation=this.value.trim()" placeholder="${esc(t('lw_situation_ph'))}">${esc(lwData.situation)}</textarea></div>
+      <div class="lw-actions"><button class="lw-btn ghost" onclick="lwBack()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwNext()">${esc(t('lw_next'))} <i data-lucide="arrow-right"></i></button></div>
+    </div>`;
+  }
+  /* step 4 — review + generate */
+  const amt=lwData.amount?`${esc(lwData.amount)} ${esc(lwData.currency)}`:'—';
+  return lwDots(4)+`<div class="lw-panel">
+    <div class="lw-q">${esc(t('lw_step_generate'))}</div>
+    <div class="lw-review">
+      <div class="lwr-row"><span>${esc(t('lw_creditor_lbl'))}</span><b>${esc(lwData.creditor)}</b></div>
+      <div class="lwr-row"><span>${esc(t('lw_review_type'))}</span><b>${esc(t('lw_t_'+lwData.type))}</b></div>
+      <div class="lwr-row"><span>${esc(t('lw_amount_lbl'))}</span><b>${amt}</b></div>
+      <div class="lwr-row"><span>${esc(t('lw_review_lang'))}</span><b>${esc(letterLang())}</b></div>
+    </div>
+    <div class="lw-actions"><button class="lw-btn ghost" onclick="lwBack()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwGenerate()"><i data-lucide="pen-line"></i> ${esc(t('lw_generate'))}</button></div>
+  </div>`;
+}
+
+function lwOutputHtml(){
+  const noteHtml=lwOut.note?`<div class="lw-note">${esc(lwOut.note)}</div>`:'';
+  /* maakohtainen signpost — SUPPORT_ORGS[country][0]; ei geneeristä ulkolinkiä */
+  const orgs=SUPPORT_ORGS[country()]||[]; const org=orgs[0];
+  let helpLink;
+  if(org&&org.url)helpLink=`<a href="https://${esc(org.url)}" target="_blank" rel="noopener">${esc(org.name)}</a>`;
+  else if(org)helpLink=`<a href="javascript:void(0)" onclick="navTo('sec-support')">${esc(org.name)}</a>`;
+  else helpLink=`<a href="javascript:void(0)" onclick="navTo('sec-support')">${esc(t('letter_next_help_generic'))}</a>`;
+  return `<div class="lw-panel">
+    ${noteHtml}
+    <div class="lw-letter" id="lwLetterText">${esc(lwOut.letter)}</div>
+    <div class="lw-fillhint"><i data-lucide="info"></i><span>${esc(t('letter_fillin_hint'))}</span></div>
+    <div class="lw-out-actions">
+      <button class="lw-btn prim" onclick="lwCopy()"><i data-lucide="copy"></i> ${esc(t('lw_copy'))}</button>
+      <button class="lw-btn ghost" id="lwSaveBtn" onclick="lwSave()"><i data-lucide="save"></i> ${esc(t('lw_save'))}</button>
+      <button class="lw-btn ghost" onclick="lwReset()"><i data-lucide="rotate-ccw"></i> ${esc(t('lw_another'))}</button>
+    </div>
+    <div class="lw-next">
+      <h5><i data-lucide="compass"></i>${esc(t('letter_next_title'))}</h5>
+      <ul>
+        <li>${esc(t('letter_next_send'))}</li>
+        <li>${esc(t('letter_next_keep'))}</li>
+        <li>${esc(t('letter_next_help'))} ${helpLink}</li>
+      </ul>
+    </div>
+  </div>`;
+}
+
+function renderLetters(){
+  if(!lwReady)lwInit();
+  const body=$('lettersBody'); if(!body)return;
+  body.innerHTML=lwOut?lwOutputHtml():lwWizardHtml();
+  icons();
+}
+
 window.addEventListener('DOMContentLoaded',boot);
 </script>
 </body>
