@@ -1562,6 +1562,10 @@ Highest interest rate in portfolio: ${highestRate}%
 
 ${savingsLogic}
 
+HARD CONSTRAINTS — non-negotiable, apply to every plan:
+→ NEVER state or imply this person will be debt-free within 90 days, or promise debt freedom by any guaranteed date. We make NO promise of debt freedom. The 90-day period is only about building a clear PATH, a workable PLAN and sustainable NEW HABITS — frame it exactly that way. The plan's name ("My DEBT FREE Plan") names the direction and the goal, never a guaranteed date. When you mention 90 days, describe what they will BUILD in that time, never what they will be free FROM. You MAY give an honest, clearly-labelled ESTIMATE of how long full repayment could realistically take at their current surplus — always framed as an estimate that changes with their circumstances, never a guarantee and never a fixed promised date.
+→ NEVER assume, name, or advise on specific national benefits or entitlements (child benefit, unemployment benefit, housing allowance, disability payments, tax credits, etc.). These vary by country and are often paid automatically — telling someone to "check if you qualify" for a named benefit can be both wrong and patronising. Do NOT name any benefit. Only signpost the support organisations listed below; let those organisations advise on entitlements.
+
 TONE RULES — apply all that match:
 ${toneRules.length>0?toneRules.map(r=>'→ '+r).join('\n'):'→ Warm, direct, honest. Use "we" occasionally. Never clinical or generic.'}
 
@@ -1574,9 +1578,12 @@ LOCAL SUPPORT ORGANISATIONS FOR ${d.country}:
 ${supportRef}
 Use the above as your source. List 3 to 5 that match this person's profile (${d.employment}, ${d.household}).
 Do not list unemployment services if employed. Do not list organisations from other countries.
-Format each as: Organisation name on its own line, then URL, then one sentence on what they offer and whether it is free.
+Use ONLY the exact organisation names and URLs from the list above. Copy each URL CHARACTER-FOR-CHARACTER exactly as it appears in the list (including any path that is already part of it). NEVER invent a URL. NEVER add or append a path, subpage or segment to a domain that does not already have one in the list above (e.g. never turn "kela.fi" into "kela.fi/anything"). NEVER modify or guess a URL. If an organisation in the list has no URL, give its name with NO URL — do not fabricate one. If you are not certain a URL appears verbatim in the list above, omit the URL rather than guess.
+Under a clear sub-heading for local support, put each organisation NAME on its own line so a stressed reader can scan them instantly, then its URL (if any) on the same or next line, then one short sentence on what they offer and whether it is free. Use plain text only — do NOT use markdown, asterisks or any formatting characters anywhere in the plan.
 
 PLAN STRUCTURE — write entirely in ${planLang}:
+
+LENGTH DISCIPLINE — read first: the ENTIRE plan must be complete and self-contained, aiming for roughly 700–850 words and never exceeding 900. Never leave any section unfinished or cut off mid-sentence — the final CLOSING section (section 7) MUST always complete fully. Completeness of the whole plan takes priority over the length of any single section: if you are running long, shorten the earlier sections so the plan still finishes cleanly. Keep every sentence tight — a complete shorter plan is far better than a rich plan that stops mid-thought.
 
 1. OPENING (2–3 sentences):
 Address ${d.firstname||'them'} by name. Reference their specific situation. Acknowledge the hardest thing they named. Write the way a genuinely warm, competent person would speak to someone they respect — never a corporate tone, never clinical.
@@ -1604,8 +1611,8 @@ If surplus exists: name exactly how much debt they will have eliminated by day 9
 One forward-looking sentence: what becomes possible once the first debt is cleared.
 
 6. LOCAL SUPPORT:
-List the organisations from the reference above that match this person's profile.
-Format: Name, URL, one sentence description, free or paid.
+List the organisations from the reference above that match this person's profile, following the LOCAL SUPPORT ORGANISATIONS rules exactly (verbatim URLs copied character-for-character, each name on its own line under a clear sub-heading, plain text only, no fabricated URLs).
+Format per organisation: Name, URL (verbatim, if any), one short sentence description, free or paid.
 
 7. CLOSING (2 sentences):
 Reference their deepest goal (${d.primary_goal||'not specified'}) directly.
@@ -1619,7 +1626,7 @@ FORMAT RULES:
 No markdown symbols. No bullet points with symbols.
 Plain text. Clear section headings on their own line in capitals.
 Use numbered lists for actions.
-Maximum 900 words.
+Length is governed by the LENGTH DISCIPLINE rule at the top of the plan structure — the plan must always finish completely and never exceed 900 words.
 Write entirely in ${planLang}.
 Never call this document a "report" — it is a plan, something to be lived, not read once.
 Never mention competitors. Never give legal advice — always refer to a professional.`;
