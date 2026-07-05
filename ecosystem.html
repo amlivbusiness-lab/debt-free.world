@@ -96,6 +96,18 @@ nav a.active{color:var(--green);}
 .waitlist-form{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
 .waitlist-form input{flex:1;min-width:220px;border:1px solid #e8e8e3;border-radius:4px;padding:13px 16px;font-size:14px;font-family:var(--sans);color:var(--text);}
 .waitlist-form input:focus{outline:none;border-color:var(--green);}
+/* ── Pre-purchase artefacts + community band (Fix Pass 1) ── */
+.pp-artifact{border-left:3px solid var(--green);background:#f7faf8;padding:16px 18px;margin:0 0 16px;border-radius:0 4px 4px 0;}
+.pp-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.pp-letter{font-family:var(--sans);font-size:12.5px;line-height:1.65;color:var(--text);white-space:pre-wrap;margin:0 0 10px;background:#fff;border:1px solid #e8efe9;border-radius:4px;padding:14px 16px;overflow-x:auto;}
+.pp-legal{font-family:var(--sans);font-size:13.5px;line-height:1.6;color:var(--text);margin:0 0 8px;}
+.pp-note{font-family:var(--sans);font-size:12px;line-height:1.55;color:#4a5a50;}
+.notify-lead{font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--text);margin:0 0 12px;}
+#dr-buy-gated .waitlist-form{margin-top:2px;}
+.community-band{max-width:760px;margin:8px auto 0;padding:22px 24px;border-left:3px solid var(--green);background:#f7faf8;border-radius:0 4px 4px 0;}
+.community-band h3{font-family:var(--serif);font-size:19px;color:var(--green);margin:0 0 8px;}
+.community-band p{font-family:var(--sans);font-size:13.5px;line-height:1.65;color:var(--text);margin:0 0 12px;}
+.community-band .community-link{display:inline-block;margin-top:2px;font-size:13px;}
 
 .closing{padding:70px 6% 90px;text-align:center;background:#fafaf8;border-left:3px solid var(--green);margin:0 6%;border-radius:6px;}
 .closing h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);margin-bottom:12px;}
@@ -248,9 +260,45 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
           <div class="feat-row"><span class="feat-dash">—</span><span>Real support through setbacks <span class="feat-mean">— job loss, illness, the moments plans don't predict</span></span></div>
           <div class="feat-row"><span class="feat-dash">—</span><span>Behaviour tools that outlast the 90 days <span class="feat-mean">— so old patterns don't quietly come back</span></span></div>
         </div>
-        <a href="#" class="btn-primary" onclick="startDRCheckout(event)">Get Debt Recovery — 19 €</a>
-        <span class="card-note">One-time payment. No subscription. Secure checkout via Stripe.</span>
-        <a href="#" class="community-link" onclick="startCommunityAccess(event)">Can't afford 19 € right now? Get Community Access — free, no explanation needed.</a>
+        <!-- ══ PRE-PURCHASE ARTEFACTS — show the depth before asking 19 € ══ -->
+        <div class="pp-artifact">
+          <div class="pp-eyebrow">This is the kind of letter we write for you — in seconds</div>
+          <pre class="pp-letter">[Your name]
+[Your address]
+[Date]
+
+To: [Creditor name]
+Re: Account [account / reference number]
+
+I'm writing about the account above. My circumstances have recently changed — [reason: reduced income / job loss / illness] — and I can't currently meet the agreed payments.
+
+I want to resolve this responsibly rather than let it drift. Based on what I can realistically afford, I'm proposing [amount] per month from [date], and I'll keep you updated if my situation changes.
+
+Please confirm this in writing and pause further charges or collection activity while we agree a way forward.
+
+Yours faithfully,
+[Your name]</pre>
+          <div class="pp-note">Every field in brackets is filled from your own plan — a template we personalise, not a blank page you face alone. Seven letter types: hardship, payment plan, settlement, and more.</div>
+        </div>
+
+        <div class="pp-artifact">
+          <div class="pp-eyebrow">Your legal protections, made plain</div>
+          <p class="pp-legal">In Ireland, for example, a Debt Relief Notice can write off qualifying unsecured debts after a supervised period, and a Debt Settlement Arrangement can restructure larger debts without going to court.</p>
+          <div class="pp-note">Your own country's exact protections are inside — 42 countries, kept current.</div>
+        </div>
+
+        <!-- ══ BUY (live) vs NOTIFY (gated until go-live QA) — toggled by DR_LIVE ══ -->
+        <div id="dr-buy-live" style="display:none;">
+          <a href="#" class="btn-primary" onclick="startDRCheckout(event)">Get Debt Recovery — 19 €</a>
+          <span class="card-note">One-time payment. No subscription. Secure checkout via Stripe.</span>
+        </div>
+        <div id="dr-buy-gated">
+          <div class="notify-lead">We're finishing final checks before this opens. Leave your email and you'll be first through the door — no spam.</div>
+          <div class="waitlist-form">
+            <input type="email" placeholder="Your email address" id="notify-dr"/>
+            <a href="#" class="btn-primary" onclick="notifyDR(event)">Debt Recovery opens soon — notify me</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -342,6 +390,13 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
 
 </div>
 
+<section class="community-band">
+  <h3>No one is turned away for money.</h3>
+  <p>Debt Recovery is 19 € because building it and keeping it accurate costs money. But if paying it would mean choosing between this and something essential, you don't have to. <strong>Community Access</strong> gives you the full 90-day companion, free — no explanation needed. It's here for people who genuinely can't pay right now, offered the way we'd want it offered to us.</p>
+  <a href="#" class="community-link" id="community-cta" onclick="startCommunityAccess(event)">Get Community Access — free</a>
+  <div class="notify-lead" id="community-gated-note" style="display:none;">Community Access opens together with Debt Recovery — we're finishing final checks. It'll be here the moment we open.</div>
+</section>
+
 <div class="closing">
   <h3>Not sure where you stand yet?</h3>
   <p>Start with the one stage that costs nothing. Two minutes, no card, no commitment.</p>
@@ -364,6 +419,21 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
 </footer>
 
 <script>
+/* ══════════════════════════════════════════════════════════════════════
+   GO-LIVE GATE — Debt Recovery purchase stays closed until BOTH go-live
+   gates pass: (1) live E2E smoke test (/api/chat + /member/save-document),
+   (2) AI letter-QA across 7 letter types × countries (no hallucinated
+   jurisdiction claims). Flip to true ONLY after both are signed off.
+   While false: the buy path is replaced by an email-capture ("notify me")
+   that tags interest as 'debt-recovery-prelaunch' for launch-day conversion.
+   Community Access is gated on the SAME flag — it leads to the same
+   un-QA'd product, so a free user faces the identical risk as a paying one.
+   To keep Community Access live independently of the purchase, set
+   COMMUNITY_LIVE = true below (it defaults to following DR_LIVE).
+   ══════════════════════════════════════════════════════════════════════ */
+const DR_LIVE = false;
+const COMMUNITY_LIVE = DR_LIVE; // set to `true` to open Community Access before the paid product
+
 function toggleMenu(){
   document.getElementById('mobileMenu').classList.toggle('open');
 }
@@ -486,6 +556,48 @@ async function joinWaitlist(e, phase, cardNum){
     alert('Could not join the waitlist right now. Please try again.');
   }
 }
+
+// Debt Recovery pre-launch notify — reuses the existing Brevo subscribe
+// endpoint, tagged distinctly so these warm leads can be converted the
+// moment DR_LIVE flips. Vilma: create a Brevo list/segment keyed on
+// waitlist === 'debt-recovery-prelaunch' to capture this exact intent.
+async function notifyDR(e){
+  e.preventDefault();
+  const input = document.getElementById('notify-dr');
+  const email = input.value.trim();
+  if(!email || !email.includes('@')){
+    alert('Please enter a valid email address.');
+    return;
+  }
+  try{
+    await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/api/subscribe',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email: email, waitlist: 'debt-recovery-prelaunch' })
+    });
+    input.value = '';
+    e.target.textContent = "You're first in line";
+    e.target.style.pointerEvents = 'none';
+  }catch(err){
+    alert('Could not add you right now. Please try again.');
+  }
+}
+
+// Apply the go-live gate on load: buy vs notify, and Community Access CTA.
+(function(){
+  var live = document.getElementById('dr-buy-live');
+  var gated = document.getElementById('dr-buy-gated');
+  if(live && gated){
+    live.style.display  = DR_LIVE ? 'block' : 'none';
+    gated.style.display = DR_LIVE ? 'none'  : 'block';
+  }
+  var cta = document.getElementById('community-cta');
+  var note = document.getElementById('community-gated-note');
+  if(cta && note){
+    cta.style.display  = COMMUNITY_LIVE ? 'inline-block' : 'none';
+    note.style.display = COMMUNITY_LIVE ? 'none' : 'block';
+  }
+})();
 </script>
 
 </body>
