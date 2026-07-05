@@ -448,6 +448,76 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 .p9-v{font-family:var(--serif);font-size:24px;line-height:1.08;}
 .p9-note{font-size:13px;opacity:.9;line-height:1.5;}
 @media(max-width:420px){.p9-figs{grid-template-columns:1fr;}.p9-title{font-size:19px;}}
+/* ══ PASS 3 · WEEKLY CHECK-IN + TREND ══ */
+.ci-trend{margin-top:14px;background:var(--green-pale);border:1px solid var(--border);border-radius:14px;padding:15px 16px;}
+.ci-trend.empty{background:var(--white);}
+.ci-trend-h{font-size:12px;font-weight:600;color:var(--soft);letter-spacing:.02em;margin-bottom:10px;}
+.ci-spark{display:block;overflow:visible;}
+.ci-trend-cap{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin-top:8px;}
+.ci-empty{font-size:13.5px;color:var(--soft);line-height:1.55;margin:0;}
+.ci-card{margin-top:14px;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:14px;padding:18px 18px;}
+.ci-title{font-family:var(--serif);font-size:1.25rem;line-height:1.2;margin:0 0 5px;}
+.ci-lead{font-size:13.5px;color:var(--soft);line-height:1.55;margin:0 0 14px;}
+.ci-field{margin:0 0 13px;}
+.ci-field label{display:block;font-size:13px;font-weight:600;margin:0 0 6px;}
+.ci-field input{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:11px;padding:12px 13px;transition:border-color .15s;}
+.ci-field input:focus{outline:none;border-color:var(--green);}
+.ci-save{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border:none;border-radius:11px;padding:12px 18px;font-size:14.5px;font-weight:600;transition:opacity .15s;}
+.ci-save:hover{opacity:.92;}
+.ci-save:disabled{opacity:.55;}
+.ci-save svg{width:17px;height:17px;}
+/* ══ PASS 3 · CRISIS PLANS ══ */
+.cr-lead{font-size:14.5px;color:var(--text);line-height:1.6;margin:0 0 16px;}
+.cr-card{border:1px solid var(--border);border-left:3px solid var(--green);border-radius:13px;margin:0 0 11px;overflow:hidden;background:var(--white);}
+.cr-toggle{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:none;border:none;padding:15px 16px;}
+.cr-toggle:hover{background:var(--green-pale);}
+.cr-ic{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:var(--green-tint);color:var(--green);flex-shrink:0;}
+.cr-ic svg{width:18px;height:18px;stroke-width:1.5;}
+.cr-t{font-family:var(--serif);font-size:1.12rem;flex:1;line-height:1.2;}
+.cr-chev{width:18px;height:18px;color:var(--soft);flex-shrink:0;}
+.cr-body{padding:2px 16px 18px;animation:lwFade .22s ease;}
+.cr-intro{font-size:14px;color:var(--text);line-height:1.62;margin:4px 0 16px;}
+.cr-block{margin:0 0 15px;}
+.cr-bh{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);margin:0 0 9px;}
+.cr-bh svg{width:15px;height:15px;stroke-width:2;}
+.cr-steps{margin:0;padding:0 0 0 20px;}
+.cr-steps li{font-size:14px;line-height:1.62;margin:0 0 11px;padding-left:3px;}
+.cr-steps li::marker{color:var(--green);font-weight:700;}
+.cr-act{margin:9px 0 2px;}
+.cr-act button{display:inline-flex;align-items:center;gap:7px;background:var(--green-pale);border:1px solid var(--green-line);color:var(--green);border-radius:9px;padding:8px 13px;font-size:13px;font-weight:600;transition:background .15s,border-color .15s;}
+.cr-act button:hover{background:var(--green-tint);border-color:var(--green);}
+.cr-act button svg{width:15px;height:15px;}
+.cr-safe{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--soft);line-height:1.55;background:var(--green-pale);border-radius:10px;padding:12px 14px;margin:16px 0 0;}
+.cr-safe svg{width:16px;height:16px;color:var(--green);flex-shrink:0;margin-top:1px;}
+/* ══ PASS 3 · DOCUMENT ARCHIVE ══ */
+.arch-group{margin:0 0 22px;}
+.arch-gh{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);margin:0 0 11px;}
+.arch-gh svg{width:15px;height:15px;color:var(--green);}
+.arch-none{font-size:13.5px;color:var(--soft);margin:0 0 4px;}
+.arch-item{border:1px solid var(--border);border-radius:12px;margin:0 0 9px;overflow:hidden;background:var(--white);}
+.arch-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;padding:13px 15px;}
+.arch-row:hover{background:var(--green-pale);}
+.arch-ic{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--green-tint);color:var(--green);flex-shrink:0;}
+.arch-ic svg{width:16px;height:16px;}
+.arch-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.arch-title{font-size:14px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.arch-sub{font-size:12px;color:var(--soft);}
+.arch-chev{width:17px;height:17px;color:var(--soft);flex-shrink:0;}
+.arch-open{padding:0 15px 15px;}
+.arch-text{font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--text);white-space:pre-wrap;word-wrap:break-word;background:var(--green-pale);border-radius:10px;padding:14px 15px;margin:0 0 11px;}
+.arch-copy{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;border:none;border-radius:9px;padding:9px 15px;font-size:13px;font-weight:600;}
+.arch-copy:hover{opacity:.92;}
+.arch-copy svg{width:15px;height:15px;}
+.arch-ci{border:1px solid var(--border);border-left:3px solid var(--green);border-radius:12px;padding:13px 15px;margin:0 0 9px;background:var(--white);}
+.arch-ci-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 7px;}
+.arch-ci-wk{font-size:13.5px;font-weight:700;color:var(--green);}
+.arch-ci-date{font-size:12px;color:var(--soft);}
+.arch-ci-buf{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;}
+.arch-ci-buf span{color:var(--soft);}
+.arch-ci-note{font-size:13px;color:var(--text);line-height:1.55;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.arch-empty{text-align:center;padding:32px 16px;color:var(--soft);}
+.arch-empty svg{width:34px;height:34px;color:var(--green-line);margin-bottom:10px;}
+.arch-empty p{font-size:14px;line-height:1.55;margin:0;max-width:340px;margin-left:auto;margin-right:auto;}
 /* ══ PASS 2 · CREDITOR LETTERS ══ */
 .lw-steps{display:flex;gap:6px;margin:0 0 22px;}
 .lw-steps .lw-dot{flex:1;height:4px;border-radius:3px;background:var(--border);transition:background .2s;}
@@ -569,8 +639,8 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div class="nav-group-label"><i data-lucide="shield"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
       <div class="nav-group-sub" data-i18n="nav_g_recovery_sub">When you're ready, deeper tools to push back and rebuild.</div>
       <button class="nav-item" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
-      <button class="nav-item nav-soon" disabled aria-disabled="true"><i data-lucide="clipboard-list"></i><span data-i18n="nav_crisis">Crisis Plans</span><span class="nav-soon-tag" data-i18n="letter_soon">Soon</span></button>
-      <button class="nav-item nav-soon" disabled aria-disabled="true"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><span class="nav-soon-tag" data-i18n="letter_soon">Soon</span></button>
+      <button class="nav-item" onclick="navTo('sec-crisis')"><i data-lucide="clipboard-list"></i><span data-i18n="nav_crisis">Crisis Plans</span></button>
+      <button class="nav-item" onclick="navTo('sec-archive')"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span></button>
     </div>
     <div class="nav-group nav-foot">
       <button class="nav-item nav-logout" onclick="logout()"><i data-lucide="log-out"></i><span data-i18n="logout">Log out</span></button>
@@ -620,6 +690,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
     <section class="section" id="sec-progress">
       <div class="section-head"><i data-lucide="activity"></i><span class="section-eyebrow" data-i18n="dr_progress_title">Your 90-day recovery</span></div>
       <div id="progBody"></div>
+      <div id="ciBody"></div>
     </section>
 
     <!-- 4 + 5 · FIRST WIN + NEXT STEP -->
@@ -692,6 +763,22 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <h2 data-i18n="letter_title">Write a creditor letter</h2>
       <p class="lead" data-i18n="letter_lead">A calm, honest letter to a creditor — drafted for your situation, in your language. You review it and send it yourself.</p>
       <div id="lettersBody"></div>
+    </section>
+
+    <!-- CRISIS PLANS (Pass 3) -->
+    <section class="section depth" id="sec-crisis">
+      <div class="section-head"><i data-lucide="clipboard-list"></i><span class="section-eyebrow" data-i18n="crisis_eyebrow">Crisis plans</span></div>
+      <h2 data-i18n="crisis_title">When life suddenly changes</h2>
+      <p class="lead" data-i18n="crisis_lead">A sudden change doesn't undo your progress. Pick what's closest to your situation.</p>
+      <div id="crisisBody"></div>
+    </section>
+
+    <!-- DOCUMENT ARCHIVE (Pass 3) -->
+    <section class="section depth" id="sec-archive">
+      <div class="section-head"><i data-lucide="folder"></i><span class="section-eyebrow" data-i18n="arch_eyebrow">Document archive</span></div>
+      <h2 data-i18n="arch_title">Everything you've saved</h2>
+      <p class="lead" data-i18n="arch_lead">Your saved creditor letters and weekly check-ins, in one place. Nothing here is shared — it's yours.</p>
+      <div id="archiveBody"></div>
     </section>
 
   </div>
@@ -939,6 +1026,7 @@ $('reauthEmail')&&$('reauthEmail').addEventListener('keydown',e=>{if(e.key==='En
 function renderAll(){
   renderHello();renderProgress90();renderWin();renderEmergency();renderGlance();
   renderSnapshot();renderPlan();renderDebtMap();renderSupport();
+  renderCheckin();renderCrisis();renderArchive();
   setActiveNav('home');icons();
 }
 function firstName(){return (M.firstname||(M.onboarding&&M.onboarding.firstname)||'').trim();}
@@ -1730,8 +1818,10 @@ async function lwSave(){
   const btn=$('lwSaveBtn'); if(btn)btn.disabled=true;
   const title=(lwOut.creditor+' · '+(typeLabels[lwOut.type]||'')).trim();
   try{
-    const res=await fetch(`${WORKER_URL}/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({type:'letter',title,text:lwOut.letter,meta:{creditor:lwOut.creditor,subtype:lwOut.type}})});
+    const res=await fetch(`${WORKER_URL}/member/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({document:{type:'letter',title,creditor:lwOut.creditor,subtype:lwOut.type,text:lwOut.letter}})});
     if(!res.ok)throw 0;
+    pushDoc({type:'letter',title,creditor:lwOut.creditor,subtype:lwOut.type,text:lwOut.letter,created_at:new Date().toISOString()});
+    renderArchive();
     showToast(t('lw_saved'));
     if(btn){btn.innerHTML=`<i data-lucide="check"></i> ${esc(t('lw_saved'))}`;icons();}
   }catch(_){ showToast(t('lw_save_err')); if(btn)btn.disabled=false; }
@@ -1826,6 +1916,173 @@ function renderLetters(){
   if(!lwReady)lwInit();
   const body=$('lettersBody'); if(!body)return;
   body.innerHTML=lwOut?lwOutputHtml():lwWizardHtml();
+  icons();
+}
+
+/* ════════════════════════════════════════════════
+   PASS 3 — Crisis Plans · Weekly Check-in + Trend · Document Archive
+   All frontend. Reads M.documents (returned by /member/validate v16.16).
+   ════════════════════════════════════════════════ */
+
+/* Guarded documents accessor — house style (mirrors the M.debts guard at model()).
+   NEVER chain array methods on the raw property: it throws when it is undefined. */
+function memberDocs(){return Array.isArray(M&&M.documents)?M.documents:[];}
+/* Optimistic local append so a just-saved doc appears this session; the next
+   /member/validate reconciles with the server copy (server sets created_at, caps 50). */
+function pushDoc(doc){if(!M)return;if(!Array.isArray(M.documents))M.documents=[];M.documents.unshift(doc);}
+
+/* ── WEEKLY CHECK-IN + BUFFER TREND (inside the 90-day hero) ── */
+function checkinData(){
+  return memberDocs()
+    .filter(d=>d&&d.type==='update'&&d.subtype==='checkin')
+    .map(d=>{try{const p=JSON.parse(d.text||'{}');return {buffer:num(p.buffer),week:num(p.week)||null,note:(p.note||''),at:d.created_at||null};}catch(_){return null;}})
+    .filter(Boolean)
+    .sort((a,b)=>{const ta=a.at?new Date(a.at).getTime():0,tb=b.at?new Date(b.at).getTime():0;return ta-tb;});
+}
+/* Lightweight inline SVG sparkline — brand green #0f4d28, no library. Only ever
+   called with >=2 points (a single point never draws a fake line). */
+function trendSparkline(pts){
+  const vals=pts.map(p=>p.buffer);
+  const W=280,H=64,pad=8,n=vals.length;
+  const min=Math.min.apply(null,vals),max=Math.max.apply(null,vals),span=(max-min)||1;
+  const x=i=>pad+(i*(W-2*pad)/(n-1));
+  const y=v=>H-pad-((v-min)/span)*(H-2*pad);
+  let d='';vals.forEach((v,i)=>{d+=(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)+' ';});
+  let dots='';vals.forEach((v,i)=>{dots+=`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="2.6" fill="#0f4d28"/>`;});
+  return `<svg class="ci-spark" viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="none" role="img" aria-hidden="true"><path d="${d.trim()}" fill="none" stroke="#0f4d28" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
+}
+function renderCheckin(){
+  const el=$('ciBody'); if(!el)return;
+  const pts=checkinData();
+  let trend;
+  if(pts.length>=2){
+    trend=`<div class="ci-trend">
+        <div class="ci-trend-h">${esc(t('ci_trend_title'))}</div>
+        ${trendSparkline(pts)}
+        <div class="ci-trend-cap"><span>${esc(t('dr_week',{n:pts[0].week||1}))}</span><span>${esc(fmtMoney(pts[pts.length-1].buffer,model().cur))}</span></div>
+      </div>`;
+  }else{
+    /* Honest empty state — the Pass 1 promise: no fake trend on a single point. */
+    trend=`<div class="ci-trend empty"><div class="ci-trend-h">${esc(t('ci_trend_title'))}</div><p class="ci-empty">${esc(t('ci_trend_empty'))}</p></div>`;
+  }
+  const m=model();
+  const prefill=Math.round(m.surplus>0?m.surplus:0);
+  el.innerHTML=trend+`<div class="ci-card">
+      <div class="ci-title">${esc(t('ci_title'))}</div>
+      <p class="ci-lead">${esc(t('ci_lead'))}</p>
+      <div class="ci-field"><label for="ciBuffer">${esc(t('ci_buffer_lbl'))}</label>
+        <input id="ciBuffer" inputmode="decimal" value="${prefill}"/></div>
+      <div class="ci-field"><label for="ciNote">${esc(t('ci_note_lbl'))}</label>
+        <input id="ciNote" placeholder="${esc(t('ci_note_ph'))}" maxlength="600" autocomplete="off"/></div>
+      <button class="ci-save" id="ciSaveBtn" onclick="saveCheckin()"><i data-lucide="check-circle-2"></i> ${esc(t('ci_save'))}</button>
+    </div>`;
+  icons();
+}
+async function saveCheckin(){
+  const btn=$('ciSaveBtn'); if(btn)btn.disabled=true;
+  const buffer=num($('ciBuffer')?$('ciBuffer').value:0);
+  const note=($('ciNote')?$('ciNote').value:'').trim().slice(0,600);
+  const week=planWeek();
+  const date=new Date().toLocaleDateString(localeForLang(),{day:'numeric',month:'short'});
+  const payload=JSON.stringify({buffer:buffer,week:week,note:note});
+  try{
+    const res=await fetch(`${WORKER_URL}/member/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({document:{type:'update',subtype:'checkin',title:`Week ${week} · ${date}`,text:payload}})});
+    if(!res.ok)throw 0;
+    pushDoc({type:'update',subtype:'checkin',title:`Week ${week} · ${date}`,text:payload,created_at:new Date().toISOString()});
+    showToast(t('ci_saved'));
+    renderCheckin();renderArchive();
+  }catch(_){ showToast(t('ci_save_err')); if(btn)btn.disabled=false; }
+}
+
+/* ── CRISIS PLANS (sec-crisis) — universal, non-predatory, no country-specific
+   benefit / law / amount names; cross-links into letters, support, budget. ── */
+const CRISIS=[
+  {k:'jobloss', ic:'briefcase',       letter:'hardship'},
+  {k:'illness', ic:'heart-pulse',     letter:'hardship'},
+  {k:'sep',     ic:'users',           letter:'hardship'},
+  {k:'emerg',   ic:'alert-triangle',  letter:'holiday'}
+];
+let crisisOpen=null;
+function crisisToggle(k){crisisOpen=(crisisOpen===k)?null:k;renderCrisis();}
+function crisisOpenLetter(type){ if(!lwReady)lwInit(); lwOut=null; lwStep=1; lwData.type=type; openLetters(); }
+function renderCrisis(){
+  const el=$('crisisBody'); if(!el)return;
+  const cards=CRISIS.map(c=>{
+    const open=crisisOpen===c.k;
+    const body=open?`<div class="cr-body">
+        <p class="cr-intro">${esc(t('crisis_'+c.k+'_intro'))}</p>
+        <div class="cr-block">
+          <div class="cr-bh"><i data-lucide="zap"></i>${esc(t('crisis_immediate'))}</div>
+          <ol class="cr-steps">
+            <li>${esc(t('crisis_'+c.k+'_i1'))}</li>
+            <li>${esc(t('crisis_'+c.k+'_i2'))}<div class="cr-act"><button onclick="crisisOpenLetter('${c.letter}')"><i data-lucide="mail-plus"></i>${esc(t('crisis_act_letter'))}</button></div></li>
+            <li>${esc(t('crisis_'+c.k+'_i3'))}<div class="cr-act"><button onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i>${esc(t('crisis_act_support'))}</button></div></li>
+          </ol>
+        </div>
+        <div class="cr-block">
+          <div class="cr-bh"><i data-lucide="anchor"></i>${esc(t('crisis_stabilise'))}</div>
+          <ol class="cr-steps">
+            <li>${esc(t('crisis_'+c.k+'_s1'))}<div class="cr-act"><button onclick="openTool('budget')"><i data-lucide="piggy-bank"></i>${esc(t('crisis_act_budget'))}</button></div></li>
+            <li>${esc(t('crisis_'+c.k+'_s2'))}</li>
+            <li>${esc(t('crisis_'+c.k+'_s3'))}</li>
+          </ol>
+        </div>
+        <p class="cr-safe"><i data-lucide="info"></i><span>${esc(t('crisis_safe_note'))}</span></p>
+      </div>`:'';
+    return `<div class="cr-card${open?' open':''}">
+        <button class="cr-toggle" onclick="crisisToggle('${c.k}')" aria-expanded="${open?'true':'false'}">
+          <span class="cr-ic"><i data-lucide="${c.ic}"></i></span>
+          <span class="cr-t">${esc(t('crisis_'+c.k+'_t'))}</span>
+          <i class="cr-chev" data-lucide="chevron-${open?'up':'down'}"></i>
+        </button>${body}</div>`;
+  }).join('');
+  el.innerHTML=`<p class="cr-lead">${esc(t('crisis_lead'))}</p>${cards}`;
+  icons();
+}
+
+/* ── DOCUMENT ARCHIVE (sec-archive) — reads the guarded docs, no extra list call ── */
+let archiveOpenId=null;
+function archToggle(id){archiveOpenId=(archiveOpenId===id)?null:id;renderArchive();}
+function archCopy(id){
+  const i=parseInt(id.slice(1),10);
+  const letters=memberDocs().filter(d=>d&&d.type==='letter');
+  const d=letters[i]; if(!d)return;
+  const txt=String(d.text||''), done=()=>showToast(t('arch_copied'));
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>lwCopyFallback(txt,done));}
+  else lwCopyFallback(txt,done);
+}
+function archFmtDate(iso){if(!iso)return '';const d=new Date(iso);return isNaN(d.getTime())?'':d.toLocaleDateString(localeForLang(),{day:'numeric',month:'short',year:'numeric'});}
+function renderArchive(){
+  const el=$('archiveBody'); if(!el)return;
+  const docs=memberDocs();
+  const letters=docs.filter(d=>d&&d.type==='letter');
+  const checkins=docs.filter(d=>d&&d.type==='update'&&d.subtype==='checkin');
+  if(!letters.length&&!checkins.length){
+    el.innerHTML=`<div class="arch-empty"><i data-lucide="folder-open"></i><p>${esc(t('arch_empty'))}</p></div>`;
+    icons();return;
+  }
+  const lettersHtml=letters.length?letters.map((d,i)=>{
+    const id='L'+i, open=archiveOpenId===id, text=String(d.text||'');
+    return `<div class="arch-item${open?' open':''}">
+      <button class="arch-row" onclick="archToggle('${id}')">
+        <span class="arch-ic"><i data-lucide="mail"></i></span>
+        <span class="arch-meta"><span class="arch-title">${esc(d.title||d.creditor||t('arch_letters'))}</span><span class="arch-sub">${esc(archFmtDate(d.created_at))}</span></span>
+        <i class="arch-chev" data-lucide="chevron-${open?'up':'down'}"></i>
+      </button>
+      ${open?`<div class="arch-open"><pre class="arch-text">${esc(text)}</pre><button class="arch-copy" onclick="archCopy('${id}')"><i data-lucide="copy"></i> ${esc(t('arch_copy'))}</button></div>`:''}
+    </div>`;
+  }).join(''):`<p class="arch-none">${esc(t('arch_empty_letters'))}</p>`;
+  const ciHtml=checkins.length?checkins.slice().reverse().map(d=>{
+    let p={};try{p=JSON.parse(d.text||'{}');}catch(_){}
+    const wk=num(p.week)||null, buf=num(p.buffer), note=String(p.note||'').trim();
+    return `<div class="arch-ci">
+      <div class="arch-ci-h"><span class="arch-ci-wk">${wk?esc(t('dr_week',{n:wk})):esc(t('arch_checkins'))}</span><span class="arch-ci-date">${esc(archFmtDate(d.created_at))}</span></div>
+      <div class="arch-ci-buf"><span>${esc(t('arch_buffer'))}</span><strong>${esc(fmtMoney(buf,model().cur))}</strong></div>
+      ${note?`<div class="arch-ci-note">${esc(note)}</div>`:''}
+    </div>`;
+  }).join(''):`<p class="arch-none">${esc(t('arch_empty_checkins'))}</p>`;
+  el.innerHTML=`<div class="arch-group"><div class="arch-gh"><i data-lucide="mail"></i>${esc(t('arch_letters'))}</div>${lettersHtml}</div>
+    <div class="arch-group"><div class="arch-gh"><i data-lucide="calendar-check"></i>${esc(t('arch_checkins'))}</div>${ciHtml}</div>`;
   icons();
 }
 
