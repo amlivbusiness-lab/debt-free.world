@@ -728,6 +728,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 </div><!-- /wrap -->
 <div class="toast" id="toast"></div>
 
+<script src="/support-data.js"></script>
 <script>
 /* ── CONFIG ── */
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
@@ -1533,47 +1534,10 @@ function buildPrompt(d){
   };
   const legalNote=countryLegal[d.country]||countryLegal['Other'];
 
-  // Support org reference list — comprehensive
-  const supportOrgs={
-    'Finland':'Takuusäätiö (takuusaatio.fi) — guarantees and debt counselling, free | Talous- ja velkaneuvonta via oikeusapu.fi — statutory free debt counselling | Kela (kela.fi) — benefits and financial support | Marttaliitto (martat.fi) — household budgeting support | Suomen Kuluttajaliitto (kuluttajaliitto.fi) — consumer rights',
-    'Sweden':'Budget- och skuldrådgivning via kommunen — free by law, contact your local municipality | Kronofogden (kronofogden.se) — debt enforcement and voluntary payment plans | Konsumentverket (konsumentverket.se) — consumer guidance | Skuldsanering via Kronofogden — formal debt relief for insolvent individuals',
-    'United Kingdom':'StepChange (stepchange.org) — free debt charity, full debt management | National Debtline (nationaldebtline.org) — free phone and online advice | Citizens Advice (citizensadvice.org.uk) — free legal and financial guidance | MoneyHelper (moneyhelper.org.uk) — government-backed financial guidance',
-    'Ireland':'MABS (mabs.ie) — Money Advice and Budgeting Service, free | ISI (isi.gov.ie) — Insolvency Service of Ireland for formal options | Citizens Information (citizensinformation.ie) — benefits and rights | Clann Housing Association for housing debt',
-    'United States':'NFCC (nfcc.org) — National Foundation for Credit Counseling, find local nonprofit agencies | CFPB (consumerfinance.gov) — Consumer Financial Protection Bureau | 211.org — local social services including financial help | HUD-approved housing counsellors for mortgage issues',
-    'Canada':'Credit Counselling Canada (creditcounsellingcanada.ca) — find accredited nonprofit agencies | FCAC (canada.ca/fcac) — Financial Consumer Agency of Canada | Provincial consumer protection offices',
-    'Australia':'National Debt Helpline (ndh.org.au) — free phone advice from professional financial counsellors | MoneySmart (moneysmart.gov.au) — government financial guidance | Financial counsellors via fcaweb.org.au',
-    'New Zealand':'MoneyTalks (moneytalks.co.nz) — free financial helpline | Sorted (sorted.org.nz) — free budgeting tools and guides | Community law centres for legal debt questions',
-    'Germany':'Caritas Schuldnerberatung (caritas.de) — free debt counselling | Verbraucherzentrale (verbraucherzentrale.de) — consumer advice centres | Diakonie (diakonie.de) — social support including debt help',
-    'Austria':'AK Konsumentenschutz (arbeiterkammer.at) — free consumer and debt advice | Schuldnerberatung (schuldenberatung.at) — free public debt counselling',
-    'Switzerland':'Schuldenberatung Schweiz (schulden.ch) — free debt counselling | SKOS (skos.ch) — social support guidelines',
-    'Netherlands':'Nibud (nibud.nl) — budget and debt guidance | Schuldhulpverlening via gemeente — contact your local municipality for free debt help | NVVK (nvvk.eu) — debt restructuring',
-    'Belgium':'OCMW/CPAS — public social welfare centre, contact locally | CAW (caw.be) — free social and financial support | Ombudsfin (ombudsfin.be) — financial disputes',
-    'France':'CRESUS (cresus.fr) — debt mediation and prevention | CDAD — local legal and financial advice | CCAS — municipal social support centres',
-    'Spain':'ADICAE (adicae.net) — consumer and debt advocacy | Caritas (caritas.es) — social and financial support | OCU (ocu.org) — consumer rights',
-    'Portugal':'DECO (deco.proteste.pt) — consumer and debt advice | Santa Casa da Misericórdia for social support | CPCJ for family financial difficulties',
-    'Italy':'Adiconsum (adiconsum.it) — consumer and debt support | Caritas (caritas.it) — social support | Banca d\'Italia (bancaditalia.it) — financial dispute resolution',
-    'Poland':'Federacja Konsumentów (federacja-konsumentow.org.pl) — consumer rights and debt advice | UOKiK (uokik.gov.pl) — consumer protection office',
-    'Czech Republic':'Poradna při finanční tísni (financnitisen.cz) — free debt counselling | dTest (dtest.cz) — consumer advice | Czech Bar Association for legal debt questions',
-    'Hungary':'Magyar Bankszövetség — contact for banking disputes | Fogyasztóvédelem (fogyasztovédelem.hu) — consumer protection',
-    'Romania':'ANPC (anpc.ro) — National Consumer Protection Authority | Caritas Romania (caritas.ro) for social support',
-    'Denmark':'Gældsrådgivning Danmark (gaeldsraadgivning.dk) — free debt counselling | Forbrugerrådet Tænk (taenk.dk) — consumer advice | Kommunal gældsrådgivning — contact your local municipality',
-    'Norway':'NAV (nav.no) — benefits, unemployment and social support | Kommunal gjeldsrådgivning — free by law, contact your local municipality | Forbrukerrådet (forbrukerradet.no) — consumer rights',
-    'Estonia':'Tarbijakaitse (tarbijakaitse.ee) — consumer and financial protection | Kohalik omavalitsus — local municipality for debt support',
-    'Latvia':'PTAC (ptac.gov.lv) — consumer rights and financial guidance | Sociālais dienests — municipal social support',
-    'Lithuania':'VVTAT (vvtat.lt) — state consumer rights protection | Savivaldybės socialinė tarnyba — municipal social support',
-    'Croatia':'HANFA (hanfa.hr) — financial regulation authority | Potrošač.hr — consumer rights',
-    'Slovakia':'SOS (sos-financne.sk) — financial counselling | Spotrebiteľ.sk — consumer protection',
-    'Bulgaria':'КЗП (kzp.bg) — consumer protection commission | Caritas Bulgaria for social support',
-    'Greece':'ΕΛΚΕΠΑ (elkepaa.gr) — consumer protection | Κέντρα Κοινότητας — community centres for social support',
-    'South Africa':'National Debt Counsellors Association (ndca.org.za) | DebtBusters (debtbusters.co.za) | National Credit Regulator (ncr.org.za)',
-    'India':'RBI Ombudsman (cms.rbi.org.in) for banking disputes | NITI Aayog financial literacy resources',
-    'Indonesia':'OJK (ojk.go.id) — Financial Services Authority | YLKI (ylki.or.id) — consumer protection',
-    'Philippines':'SEC (sec.gov.ph) — lending regulation | BSP (bsp.gov.ph) — central bank consumer assistance',
-    'Brazil':'PROCON (procon.sp.gov.br) — consumer protection | SERASA (serasa.com.br) — credit negotiation portal',
-    'Mexico':'PROFECO (profeco.gob.mx) — consumer protection | CONDUSEF (condusef.gob.mx) — financial services protection',
-    'Argentina':'Defensa del Consumidor — municipal consumer protection offices',
-  };
-  const supportRef=supportOrgs[d.country]||'Search "[country] free debt counselling" to find local non-profit or government-funded services. Most countries offer free debt counselling through municipalities, charities or government agencies.';
+  const _orgs=(window.SUPPORT_DATA&&window.SUPPORT_DATA[d.country])||null;
+  const supportRef=_orgs
+    ? _orgs.map(o=>o.url?`${o.name} (${o.url}) — ${o.desc}`:`${o.name} — ${o.desc}`).join(' | ')
+    : 'Search "[country] free debt counselling" to find local non-profit or government-funded services. Most countries offer free debt counselling through municipalities, charities or government agencies.';
 
   return `You are a senior financial coach at Debt-Free.world. Write a fully personalised My DEBT FREE Plan for ${d.firstname||'this person'} — entirely in ${planLang}.
 
