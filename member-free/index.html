@@ -289,6 +289,7 @@ button{font-family:var(--sans);cursor:pointer;}
 .up-price .amt{font-family:var(--serif);font-size:30px;}
 .up-price .per{font-size:13px;opacity:.82;}
 .up-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#fff;color:var(--green-deep);border-radius:26px;padding:14px;font-size:15px;font-weight:700;}
+button.up-cta,button.nav-unlock{appearance:none;-webkit-appearance:none;border:none;cursor:pointer;font-family:inherit;}
 .up-cta:hover{background:var(--green-tint);text-decoration:none;}
 .up-cta svg{width:18px;height:18px;}
 
@@ -505,7 +506,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span><i data-lucide="lock" class="lock"></i></button>
       <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="shield"></i><span data-i18n="nav_crisis">Crisis Plans</span><i data-lucide="lock" class="lock"></i></button>
       <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><i data-lucide="lock" class="lock"></i></button>
-      <a class="nav-unlock" href="/ecosystem.html#card-2" data-i18n="nav_unlock">Unlock Debt Recovery — 19 €</a>
+      <button type="button" class="nav-unlock" onclick="closeDrawer();openUpgradeModal()" data-i18n="nav_unlock">Unlock Debt Recovery</button>
     </div>
     <div class="nav-group nav-foot">
       <button class="nav-item nav-logout" onclick="logout()"><i data-lucide="log-out"></i><span data-i18n="logout">Log out</span></button>
@@ -591,7 +592,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
         <div class="up-feat"><i data-lucide="compass"></i><span data-i18n="up_f4">A clear, guided 90-day recovery path</span></div>
       </div>
       <div class="up-price"><span class="amt">19 €</span><span class="per" data-i18n="up_price">one-time · 90 days · no subscription</span></div>
-      <a class="up-cta" href="/ecosystem.html#card-2"><span data-i18n="up_cta2">When you're ready, there's more support</span><i data-lucide="arrow-right"></i></a>
+      <button type="button" class="up-cta" onclick="openUpgradeModal()"><span data-i18n="nav_unlock">Unlock Debt Recovery</span><i data-lucide="arrow-right"></i></button>
     </section>
 
     </div><!-- /#dash-home -->
@@ -1564,6 +1565,84 @@ const COUNTRY_LEGAL={
 
 /* ── go ── */
 window.addEventListener('DOMContentLoaded',boot);
+
+/* ââ UPGRADE MODAL (EU consent gate + v16.18 email-lock) ââ */
+var $u=function(id){return document.getElementById(id);};
+var UP_T={
+  EN:{title:'Unlock Debt Recovery',price:'· one-time · 90 days · no subscription',
+      b1:'Pre-filled creditor letters',b2:'Crisis plans for the worst weeks',b3:'A debt-free date that moves',
+      consent:'I understand this is a personalised digital product delivered immediately, and I waive my 14-day right of withdrawal (EU Directive 2011/83/EU Art. 16(m)). I accept the <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
+      go:'Continue to secure checkout',cancel:'Not now',
+      noemail:'Please re-open your member area from your email link, then try again.',
+      err:'Something went wrong. Please try again or contact support@debt-free.world.'},
+  FI:{title:'Avaa Debt Recovery',price:'· kertamaksu · 90 päivää · ei tilausta',
+      b1:'Esitäytetyt velkojakirjeet',b2:'Kriisisuunnitelmat pahimpiin viikkoihin',b3:'Velaton-päivä joka liikkuu',
+      consent:'Ymmärrän että kyseessä on välittömästi toimitettava kustomoitu digituote, ja luovun 14 päivän peruutusoikeudestani (EU-direktiivi 2011/83/EU 16(m) art.). Hyväksyn <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
+      go:'Jatka turvalliseen maksuun',cancel:'Ei nyt',
+      noemail:'Avaa jäsenalueesi uudelleen sähköpostilinkistä ja yritä uudelleen.',
+      err:'Jotain meni vikaan. Yritä uudelleen tai ota yhteyttä: support@debt-free.world.'}
+};
+function upT(){return UP_T[(window.DFWI18n&&DFWI18n.current)||'EN']||UP_T.EN;}
+function openUpgradeModal(){
+  var T=upT();
+  $u('um_title').textContent=T.title; $u('um_price').textContent=T.price;
+  $u('um_b1').textContent=T.b1; $u('um_b2').textContent=T.b2; $u('um_b3').textContent=T.b3;
+  $u('um_consent').innerHTML=T.consent;
+  $u('umGo').textContent=T.go; $u('um_cancel').textContent=T.cancel;
+  $u('umConsent').checked=false; $u('umGo').disabled=true; $u('umErr').textContent='';
+  $u('upModal').classList.add('open'); if(window.icons)icons();
+}
+function closeUpgradeModal(){$u('upModal').classList.remove('open');}
+function umToggle(){$u('umGo').disabled=!$u('umConsent').checked;}
+async function umCheckout(){
+  var T=upT();
+  if(!window.M||!M.email){$u('umErr').textContent=T.noemail;return;}
+  $u('umGo').disabled=true; $u('umErr').textContent='';
+  try{
+    var r=await fetch(WORKER_URL+'/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
+        successUrl:'https://www.debt-free.world/thank-you-premium.html',
+        cancelUrl:'https://www.debt-free.world/member-free/', email:M.email})});
+    var d=await r.json();
+    if(d&&d.url){window.location.href=d.url;} else {$u('umErr').textContent=T.err; $u('umGo').disabled=false;}
+  }catch(e){$u('umErr').textContent=T.err; $u('umGo').disabled=false;}
+}
 </script>
+<style>
+.up-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(9,50,24,.55);align-items:center;justify-content:center;padding:20px;}
+.up-modal.open{display:flex;}
+.up-modal-card{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:28px 26px;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.up-modal-x{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:#7a8a80;padding:4px;line-height:0;}
+.up-modal-card h3{font-family:var(--serif);font-size:22px;color:var(--green-deep);margin:0 0 12px;font-weight:400;}
+.up-modal-price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.up-modal-price .amt{font-family:var(--serif);font-size:28px;color:var(--green);}
+.up-modal-price #um_price{font-size:13px;color:#5a6a60;}
+.up-modal-benes{list-style:none;padding:0;margin:0 0 18px;}
+.up-modal-benes li{display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2b20;padding:5px 0;}
+.up-modal-benes i{width:18px;height:18px;color:var(--green);}
+.up-modal-consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#3a4a40;line-height:1.55;margin-bottom:18px;cursor:pointer;}
+.up-modal-consent input{margin-top:2px;flex-shrink:0;width:16px;height:16px;accent-color:var(--green);}
+.up-modal-consent a{color:var(--green);}
+.up-modal-go{width:100%;background:var(--green);color:#fff;border:none;border-radius:26px;padding:14px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:6px;}
+.up-modal-go:disabled{opacity:.45;cursor:not-allowed;}
+.up-modal-cancel{width:100%;background:none;border:none;color:#7a8a80;font-family:inherit;font-size:13px;cursor:pointer;padding:8px;}
+.up-modal-err{color:#b00020;font-size:12.5px;margin:6px 0 0;min-height:1px;}
+</style>
+<div class="up-modal" id="upModal" role="dialog" aria-modal="true" aria-labelledby="um_title">
+  <div class="up-modal-card">
+    <button class="up-modal-x" onclick="closeUpgradeModal()" aria-label="Close"><i data-lucide="x"></i></button>
+    <h3 id="um_title"></h3>
+    <div class="up-modal-price"><span class="amt">19 €</span><span id="um_price"></span></div>
+    <ul class="up-modal-benes">
+      <li><i data-lucide="mail-plus"></i><span id="um_b1"></span></li>
+      <li><i data-lucide="shield"></i><span id="um_b2"></span></li>
+      <li><i data-lucide="calendar-clock"></i><span id="um_b3"></span></li>
+    </ul>
+    <label class="up-modal-consent"><input type="checkbox" id="umConsent" onchange="umToggle()"><span id="um_consent"></span></label>
+    <button class="up-modal-go" id="umGo" onclick="umCheckout()" disabled></button>
+    <button class="up-modal-cancel" id="um_cancel" onclick="closeUpgradeModal()"></button>
+    <p class="up-modal-err" id="umErr"></p>
+  </div>
+</div>
 </body>
 </html>
