@@ -1571,13 +1571,13 @@ var $u=function(id){return document.getElementById(id);};
 var UP_T={
   EN:{title:'Unlock Debt Recovery',price:'· one-time · 90 days · no subscription',
       b1:'Pre-filled creditor letters',b2:'Crisis plans for the worst weeks',b3:'A debt-free date that moves',
-      consent:'I understand this is a personalised digital product delivered immediately, and I waive my 14-day right of withdrawal (EU Directive 2011/83/EU Art. 16(m)). I accept the <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
+      consent:'I understand this is a personalised digital product, created from my own information and delivered immediately, and I waive my 14-day right of withdrawal (EU Directive 2011/83/EU Art. 16(m)). I accept the <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
       go:'Continue to secure checkout',cancel:'Not now',
       noemail:'Please re-open your member area from your email link, then try again.',
       err:'Something went wrong. Please try again or contact support@debt-free.world.'},
   FI:{title:'Avaa Debt Recovery',price:'· kertamaksu · 90 päivää · ei tilausta',
       b1:'Esitäytetyt velkojakirjeet',b2:'Kriisisuunnitelmat pahimpiin viikkoihin',b3:'Velaton-päivä joka liikkuu',
-      consent:'Ymmärrän että kyseessä on välittömästi toimitettava kustomoitu digituote, ja luovun 14 päivän peruutusoikeudestani (EU-direktiivi 2011/83/EU 16(m) art.). Hyväksyn <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
+      consent:'Ymmärrän että kyseessä on kustomoitu, omilla tiedoillani luotu digituote joka toimitetaan välittömästi, ja luovun 14 päivän peruutusoikeudestani (EU-direktiivi 2011/83/EU 16(m) art.). Hyväksyn <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
       go:'Jatka turvalliseen maksuun',cancel:'Ei nyt',
       noemail:'Avaa jäsenalueesi uudelleen sähköpostilinkistä ja yritä uudelleen.',
       err:'Jotain meni vikaan. Yritä uudelleen tai ota yhteyttä: support@debt-free.world.'}
@@ -1596,7 +1596,7 @@ function closeUpgradeModal(){$u('upModal').classList.remove('open');}
 function umToggle(){$u('umGo').disabled=!$u('umConsent').checked;}
 async function umCheckout(){
   var T=upT();
-  if(!window.M||!M.email){$u('umErr').textContent=T.noemail;return;}
+  if(!M||!M.email){$u('umErr').textContent=T.noemail;return;}
   $u('umGo').disabled=true; $u('umErr').textContent='';
   try{
     var r=await fetch(WORKER_URL+'/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},
