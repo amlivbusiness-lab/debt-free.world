@@ -1596,13 +1596,15 @@ function closeUpgradeModal(){$u('upModal').classList.remove('open');}
 function umToggle(){$u('umGo').disabled=!$u('umConsent').checked;}
 async function umCheckout(){
   var T=upT();
-  if(!M||!M.email){$u('umErr').textContent=T.noemail;return;}
+  if(!M){$u('umErr').textContent=T.noemail;return;}   /* only block if not logged in at all */
   $u('umGo').disabled=true; $u('umErr').textContent='';
   try{
-    var r=await fetch(WORKER_URL+'/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
+    var payload={priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
         successUrl:'https://www.debt-free.world/thank-you-premium.html',
-        cancelUrl:'https://www.debt-free.world/member-free/', email:M.email})});
+        cancelUrl:'https://www.debt-free.world/member-free/'};
+    if(M.email)payload.email=M.email;   /* best-effort email lock; Stripe collects it if absent */
+    var r=await fetch(WORKER_URL+'/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)});
     var d=await r.json();
     if(d&&d.url){window.location.href=d.url;} else {$u('umErr').textContent=T.err; $u('umGo').disabled=false;}
   }catch(e){$u('umErr').textContent=T.err; $u('umGo').disabled=false;}
