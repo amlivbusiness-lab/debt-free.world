@@ -707,8 +707,8 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
   <div class="q-section">
     <div class="field">
-      <label class="field-label" data-i18n="act_q4_title">On top of your minimum payments, how much could you put toward debt each month?</label>
-      <div class="field-hint" data-i18n="act_q4_hint">This sets your starting point.</div>
+      <label class="field-label" data-i18n="act_q4_title">How much would you like to put toward debt each month?</label>
+      <div class="field-hint" data-i18n="act_q4_hint">Your plan works out a realistic figure from your income and costs — this is just your own goal.</div>
       <div class="amount-row">
         <input type="number" id="act_extra" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
         <span id="act_extra_cur" style="align-self:center;font-weight:600;color:var(--green);padding:0 10px;">EUR</span>
@@ -928,8 +928,8 @@ EN: {
   act_worry_job:'Losing income / my job',act_worry_illness:'Illness or sick leave',
   act_worry_separation:'A separation or divorce',act_worry_sudden:'A sudden large cost',
   act_worry_none:'Nothing specific right now',
-  act_q4_title:'On top of your minimum payments, how much could you realistically put toward debt each month?',
-  act_q4_hint:'This sets your starting point. Every extra payment you log moves your debt-free date closer.',
+  act_q4_title:'How much would you like to put toward debt each month?',
+  act_q4_hint:'Your plan works out a realistic figure from your income and costs \u2014 this is just your own goal.',
   act_q5_title:'How would you like us to check in with you?',
   act_tone_ph:'— Select —',
   act_tone_gentle:'Gently and encouraging',act_tone_firm:'Direct and firm',
@@ -1095,8 +1095,8 @@ FI: {
   act_worry_job:'Tulojen / työn menetys',act_worry_illness:'Sairaus tai sairausloma',
   act_worry_separation:'Ero tai avioero',act_worry_sudden:'Äkillinen iso kulu',
   act_worry_none:'Ei mitään erityistä juuri nyt',
-  act_q4_title:'Minimimaksujen päälle — paljonko voisit realistisesti laittaa velkaan kuukaudessa?',
-  act_q4_hint:'Tämä asettaa lähtötason. Jokainen kirjaamasi extralyhennys siirtää velaton-päivääsi lähemmäs.',
+  act_q4_title:'Paljonko haluaisit laittaa velkaan kuukaudessa?',
+  act_q4_hint:'Suunnitelmasi laskee realistisen summan tuloistasi ja kuluistasi \u2014 tämä on vain oma tavoitteesi.',
   act_q5_title:'Miten haluat että pidämme sinuun yhteyttä?',
   act_tone_ph:'— Valitse —',
   act_tone_gentle:'Lempeästi ja kannustaen',act_tone_firm:'Suoraan ja jämäkästi',
@@ -1168,7 +1168,8 @@ function showPrefillSummary(data) {
     try { return new Intl.NumberFormat('en',{style:'currency',currency:cur,maximumFractionDigits:0}).format(Math.round(val)); }
     catch(_) { return cur+' '+Math.round(val).toLocaleString(); }
   }
-  const dfdMonths = surplus > 0 && totalDebt > 0 ? Math.ceil(totalDebt/surplus) : null;
+  const dfdBudget = surplus>0?(surplus-Math.round(surplus*0.2)):surplus; // mirror member/ debtBudget
+    const dfdMonths = dfdBudget > 0 && totalDebt > 0 ? Math.ceil(totalDebt/dfdBudget) : null;
   const dfdDate = dfdMonths ? (() => { const d=new Date(); d.setMonth(d.getMonth()+dfdMonths); return d.toLocaleDateString('en',{month:'short',year:'numeric'}); })() : null;
 
   statsEl.innerHTML = `
@@ -1419,6 +1420,7 @@ function buildPrompt(d) {
   const planLang=langNames[d.language]||'English';
   const cur=d.currency||'EUR';
   const surplus=(parseFloat(d.income)||0)+(parseFloat(d.extra_amount)||0)-(parseFloat(d.housing_cost)||0)-(parseFloat(d.other_costs)||0);
+  const debtBudget=surplus>0?(surplus-Math.round(surplus*0.2)):surplus; // mirrors member/ LIFE_ALLOWANCE_PCT=0.20 -> one reconciling number
   const debtDetail=d.debts&&d.debts.length>0
     ? d.debts.map(x=>`  • ${x.type}${x.creditor?' ('+x.creditor+')':''}: ${x.amount} ${x.currency||cur}${x.interest>0?' at '+x.interest+'% interest':' — interest rate unknown'}`).join('\n')
     : `  • Total debt: ${d.total_debt||'unknown'} ${cur} (${d.debt_types||'unspecified types'})`;
@@ -1451,7 +1453,8 @@ FINANCIAL PROFILE:
   Monthly income: ${d.income} ${cur}${parseFloat(d.extra_amount)>0?' + '+d.extra_amount+' '+cur+' additional':''}
   Housing cost: ${d.housing_cost} ${cur}/month
   Other fixed costs: ${d.other_costs} ${cur}/month
-  Monthly surplus: ${Math.round(surplus)} ${cur}
+  Monthly surplus (money left after living costs): ${Math.round(surplus)} ${cur}
+  Recommended monthly toward debt (after a 20% room-for-life reserve): ${Math.round(debtBudget)} ${cur}
   Savings / buffer: ${d.savings||'unknown'}
   Collections status: ${d.collections||'unknown'}
   Situation: ${d.situation}
@@ -1465,7 +1468,7 @@ ${toneRules.length>0?toneRules.map(r=>'→ '+r).join('\n'):'→ Warm, direct, ho
 PLAN STRUCTURE — write entirely in ${planLang}:
 1. OPENING (2 sentences): Address ${d.firstname||'them'} by name. Acknowledge their situation and the courage it took to begin.
 2. YOUR COMPLETE PICTURE: Show the surplus calculation with their numbers. Total debt, estimated months at current pace, monthly interest cost on most expensive debt. Which debt is most urgent and why.
-3. YOUR DEBT-FREE DATE: Realistic estimate based on surplus and total debt. Show the calculation. One comparison: what happens if they find 50 ${cur} more per month.
+3. YOUR DEBT-FREE DATE: Realistic estimate based on the RECOMMENDED monthly toward debt (${Math.round(debtBudget)} ${cur}, which already reserves 20% for living) and total debt \u2014 use THIS figure, not the raw surplus, so it matches the member area exactly. Show the calculation. One comparison: what happens if they add 50 ${cur} more per month on top.
 4. YOUR 90-DAY ACTION PLAN: Three phases — Days 1–30 (stabilise and understand), Days 31–60 (build momentum), Days 61–90 (accelerate). Each phase: 3 specific numbered actions, not generic advice. Name creditors explicitly where known.
 5. EMERGENCY ACTION CARD: The single most important financial action for THIS WEEK. Exactly 3 concrete steps — numbered, specific.
 6. LOCAL SUPPORT — VERIFIED ONLY: List organisations for ${d.country} matching their profile. Include full name, website URL, what they help with, free or paid. If you cannot verify an organisation: write instead "Contact us at support@debt-free.world for verified local resources for ${d.country}."
