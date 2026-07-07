@@ -967,11 +967,17 @@ const LIFE_ALLOWANCE_PCT=0.20;
    unchanged so the stabilisation guard (amortise -> months=null) still fires. Mirrored in
    AI-prompt + onboarding prefill so all four surfaces reconcile to ONE number. */
 function debtBudget(m){return m.surplus>0?(m.surplus-Math.round(m.surplus*LIFE_ALLOWANCE_PCT)):m.surplus;}
+/* Shared rate-state (single source): 'all' = every debt has a rate, 'some' = mixed,
+   'none' = no rate known. Drives the honest "assuming no interest" label so the
+   snapshot headline and income tool never show a hard date the data can't support
+   (matches updDfd). interest=0 = unknown by product convention (#9). */
+function rateStateOf(m){const w=(m.debts||[]).filter(d=>num(d.interest)>0).length,n=(m.debts||[]).length;return (n>0&&w===n)?'all':(w>0?'some':'none');}
 function renderSnapshot(){
   const m=model();
   const surplusPos=m.surplus>=0;
   const months=monthsToFree(m.totalDebt,debtBudget(m));
   const dfd=dateFromMonths(months);
+  const rateState=rateStateOf(m);
 
   /* Personalisation — MIRROR lifeLineHtml exactly; never assume children. Default is self. */
   const hh=(M.household||(M.onboarding&&M.onboarding.household)||'');
@@ -1024,7 +1030,7 @@ function renderSnapshot(){
 
   /* ── LAYER 3 · DEBT-FREE DATE — behaviour preserved exactly ── */
   if(months){
-    html+=`<div class="snap-hero"><div class="sh-icon"><i data-lucide="calendar-check"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(dfd)}</div><div class="sh-note">${esc(t('snap_dfd_note'))}</div></div></div>`;
+    html+=`<div class="snap-hero"><div class="sh-icon"><i data-lucide="calendar-check"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(dfd)}</div><div class="sh-note">${esc(t('snap_dfd_note'))}${rateState==='none'?' \u00b7 '+esc(t('dfd_date_approx')):''}</div></div></div>`;
   }else{
     html+=`<div class="snap-hero" style="background:var(--green-dark)"><div class="sh-icon"><i data-lucide="life-buoy"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(t('snap_dfd_stabilise'))}</div><div class="sh-note">${esc(t('snap_dfd_stab_note'))}</div></div></div>`;
     html+=`<div class="snap-note">${esc(t('snap_surplus_neg'))}</div>`;
@@ -1411,7 +1417,8 @@ const TOOLS={
        abstract number. Reuses the shared monthsToFree engine — no new logic. */
     const baseMonths=(m.surplus>0)?monthsToFree(m.totalDebt,debtBudget(m)):null;
     const baseDate=baseMonths?dateFromMonths(baseMonths):'—';
-    return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div><div class="tr-base" id="incBase">${esc(t('income_base',{date:baseDate}))}</div></div>
+    const rateState=rateStateOf(m);
+    return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div><div class="tr-base" id="incBase">${esc(t('income_base',{date:baseDate}))}${rateState==='none'?' \u00b7 '+esc(t('dfd_date_approx')):''}</div></div>
       <div class="slider-row"><label>${esc(t('income_add'))}<span class="sv" id="incLbl">0 ${esc(m.cur)}</span></label>
       <input type="range" id="incSlider" min="0" max="500" step="25" value="0" oninput="updInc()"/></div>
       <div class="tool-note">${esc(m.surplus<=0?t('income_nostart'):t('income_note'))}</div>`;
@@ -1471,9 +1478,7 @@ function updDfd(){
   const m=model();const extra=num($('dfdSlider').value);
   $('dfdExtraLbl').textContent=fmtMoney(extra,m.cur);
   const rate=blendedRate();
-  const withRate=m.debts.filter(d=>num(d.interest)>0).length;
-  const totalD=m.debts.length;
-  const rateState=(totalD>0&&withRate===totalD)?'all':(withRate>0?'some':'none');
+  const rateState=rateStateOf(m);
   const base=amortise(m.totalDebt,debtBudget(m),rate);
   const scen=amortise(m.totalDebt,debtBudget(m)+extra,rate);
   const months=scen.months;
