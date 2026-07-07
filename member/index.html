@@ -878,7 +878,7 @@ function amortise(balance,monthlyPayment,annualRatePct){
 /* Hero helper: project a debt-free outcome at a given extra monthly amount. */
 function projectFree(extraMonthly){
   const m=model();
-  const monthly=m.surplus+num(extraMonthly||0);
+  const monthly=debtBudget(m)+num(extraMonthly||0);
   const rate=blendedRate();
   const a=amortise(m.totalDebt,monthly,rate);
   return{months:a.months,interest:a.interest,monthly,rate,date:a.months!=null?dateFromMonths(a.months):null};
@@ -1083,10 +1083,17 @@ async function toggleEmergency(i,val){
 /* UNDERSTAND */
 /* Share of positive monthly surplus reserved for living (P-D). Tunable — one number, one place. */
 const LIFE_ALLOWANCE_PCT=0.20;
+/* [ACCURACY] Single source of truth for "money directed at debt". The debt-free date and
+   every payoff projection must reflect the plan's OWN advice to reserve LIFE_ALLOWANCE_PCT
+   for living. Feed THIS into amortise/monthsToFree/simulateStrategy, NEVER raw m.surplus.
+   Raw surplus (money left over) stays for money-flow DISPLAY only. surplus<=0 returned
+   unchanged so the stabilisation guard (amortise -> months=null) still fires. Mirrored in
+   AI-prompt + onboarding prefill so all four surfaces reconcile to ONE number. */
+function debtBudget(m){return m.surplus>0?(m.surplus-Math.round(m.surplus*LIFE_ALLOWANCE_PCT)):m.surplus;}
 function renderSnapshot(){
   const m=model();
   const surplusPos=m.surplus>=0;
-  const months=monthsToFree(m.totalDebt,m.surplus);
+  const months=monthsToFree(m.totalDebt,debtBudget(m));
   const dfd=dateFromMonths(months);
 
   /* Personalisation — never assume children; default is self (mirrors the household check used elsewhere). */
@@ -1373,7 +1380,7 @@ const TOOLS={
   dfd(){
     const m=model();
     if(m.surplus<=0&&m.totalDebt>0)return `<div class="tool-note">${esc(t('dfd_stabilise'))}</div>`;
-    const maxExtra=Math.max(50,Math.round(m.surplus));
+    const maxExtra=Math.max(50,Math.round(debtBudget(m)));
     return `<div class="tool-result"><div class="tr-k">${esc(t('dfd_result_k'))}</div><div class="tr-v" id="dfdDate">—</div><div class="tr-note" id="dfdMonths"></div><div class="tr-approx" id="dfdApprox" hidden></div></div>
       <div class="slider-row"><label>${esc(t('dfd_extra'))}<span class="sv" id="dfdExtraLbl">0 ${esc(m.cur)}</span></label>
       <input type="range" id="dfdSlider" min="0" max="${maxExtra}" step="10" value="0" oninput="updDfd()"/></div>
@@ -1390,8 +1397,8 @@ const TOOLS={
        we say so and keep the concrete ordering tool below (unchanged behaviour). */
     let cmp;
     if(m.surplus>0){
-      const s=simulateStrategy(m.debts,m.surplus,'snow');
-      const a=simulateStrategy(m.debts,m.surplus,'aval');
+      const s=simulateStrategy(m.debts,debtBudget(m),'snow');
+      const a=simulateStrategy(m.debts,debtBudget(m),'aval');
       const col=(lbl,sim,firstLine)=>`<div class="scmp-col"><div class="scmp-h">${esc(lbl)}</div>`
         +`<div class="scmp-date">${sim.months!=null?esc(dateFromMonths(sim.months)):'—'}</div>`
         +`<div class="scmp-sub">${sim.months!=null?esc(t('strat_cmp_months',{m:sim.months})):''}</div>`
@@ -1452,7 +1459,7 @@ const TOOLS={
     /* before→after anchor: show the baseline free-date "as things stand now"
        so every month the slider adds becomes a concrete pull-forward, not an
        abstract number. Reuses the shared monthsToFree engine — no new logic. */
-    const baseMonths=(m.surplus>0)?monthsToFree(m.totalDebt,m.surplus):null;
+    const baseMonths=(m.surplus>0)?monthsToFree(m.totalDebt,debtBudget(m)):null;
     const baseDate=baseMonths?dateFromMonths(baseMonths):'—';
     return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div><div class="tr-base" id="incBase">${esc(t('income_base',{date:baseDate}))}</div></div>
       <div class="slider-row"><label>${esc(t('income_add'))}<span class="sv" id="incLbl">0 ${esc(m.cur)}</span></label>
@@ -1517,8 +1524,8 @@ function updDfd(){
   const withRate=m.debts.filter(d=>num(d.interest)>0).length;
   const totalD=m.debts.length;
   const rateState=(totalD>0&&withRate===totalD)?'all':(withRate>0?'some':'none');
-  const base=amortise(m.totalDebt,m.surplus,rate);
-  const scen=amortise(m.totalDebt,m.surplus+extra,rate);
+  const base=amortise(m.totalDebt,debtBudget(m),rate);
+  const scen=amortise(m.totalDebt,debtBudget(m)+extra,rate);
   const months=scen.months;
   $('dfdDate').textContent=months!=null?dateFromMonths(months):'—';
   $('dfdMonths').textContent=months!=null?t('dfd_months',{m:months}):'';
@@ -1579,8 +1586,8 @@ function setStrat(mode){
 function updInc(){
   const m=model();const add=num($('incSlider').value);
   $('incLbl').textContent=fmtMoney(add,m.cur);
-  const base=monthsToFree(m.totalDebt,m.surplus);
-  const now=monthsToFree(m.totalDebt,m.surplus+add);
+  const base=monthsToFree(m.totalDebt,debtBudget(m));
+  const now=monthsToFree(m.totalDebt,debtBudget(m)+add);
   $('incDate').textContent=now?dateFromMonths(now):'—';
   /* same engine, same calc — only the presentation of the delta is sharpened:
      when there is a real "sooner" the note is highlighted so the before→after
@@ -1956,7 +1963,7 @@ function renderCheckin(){
     trend=`<div class="ci-trend empty"><div class="ci-trend-h">${esc(t('ci_trend_title'))}</div><p class="ci-empty">${esc(t('ci_trend_empty'))}</p></div>`;
   }
   const m=model();
-  const prefill=Math.round(m.surplus>0?m.surplus:0);
+  const prefill=Math.round(debtBudget(m)>0?debtBudget(m):0);
   el.innerHTML=trend+`<div class="ci-card">
       <div class="ci-title">${esc(t('ci_title'))}</div>
       <p class="ci-lead">${esc(t('ci_lead'))}</p>
