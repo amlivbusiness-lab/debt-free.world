@@ -4,8 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta name="robots" content="noindex,nofollow"/>
-<title>My DEBT FREE Plan — Debt-Free.world</title>
-<meta name="description" content="Your personal DEBT FREE member area."/>
+<title>Your Recovery — Debt-Free.world</title>
+<meta name="description" content="Your Debt Recovery member area."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -84,8 +84,6 @@ button{font-family:var(--sans);cursor:pointer;}
 .nav-item.locked{color:var(--soft);}
 .nav-item.locked svg{color:var(--soft);}
 .nav-item .lock{margin-left:auto;width:15px;height:15px;color:var(--soft);}
-.nav-unlock{margin:8px 16px 0;display:block;text-align:center;background:var(--green);color:#fff;border-radius:24px;padding:11px;font-size:13.5px;font-weight:600;}
-.nav-unlock:hover{background:var(--green-dark);text-decoration:none;}
 .nav-foot{margin-top:6px;padding-top:10px;border-top:1px solid var(--border);}
 .nav-logout{color:var(--soft);font-weight:600;}
 .nav-logout svg{color:var(--soft);}
@@ -277,22 +275,6 @@ button{font-family:var(--sans);cursor:pointer;}
 .j-body .j-title .you{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--green);border-radius:20px;padding:2px 8px;margin-left:7px;vertical-align:middle;}
 .j-body .j-meta{font-size:12.5px;color:var(--muted);margin-top:1px;}
 
-/* upgrade */
-.upgrade{background:linear-gradient(150deg,var(--green-deep),var(--green));color:#fff;border:none;border-left:3px solid var(--green-deep);}
-.upgrade .section-eyebrow{color:#bfe6cd;}
-.upgrade h2{color:#fff;}
-.upgrade .up-lead{font-size:14px;color:rgba(255,255,255,.86);margin:8px 0 16px;}
-.up-feats{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
-.up-feat{display:flex;gap:10px;align-items:flex-start;font-size:14px;}
-.up-feat svg{width:18px;height:18px;color:#bfe6cd;flex-shrink:0;margin-top:2px;}
-.up-price{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;}
-.up-price .amt{font-family:var(--serif);font-size:30px;}
-.up-price .per{font-size:13px;opacity:.82;}
-.up-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#fff;color:var(--green-deep);border-radius:26px;padding:14px;font-size:15px;font-weight:700;}
-button.up-cta,button.nav-unlock{appearance:none;-webkit-appearance:none;border:none;cursor:pointer;font-family:inherit;}
-.up-cta:hover{background:var(--green-tint);text-decoration:none;}
-.up-cta svg{width:18px;height:18px;}
-
 /* PLAN-FIRST overlay */
 .overlay{position:fixed;inset:0;z-index:900;background:rgba(9,30,18,.55);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:5vh 16px 16px;}
 .overlay.show{display:flex;animation:fade .25s ease;}
@@ -352,6 +334,10 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .tool-note{font-size:13px;color:var(--muted);line-height:1.6;background:var(--green-pale);border-radius:11px;padding:13px 15px;}
 .tool-note strong{color:var(--text);}
 .dfd-buffer{margin-bottom:18px;padding:11px 14px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:12.5px;line-height:1.55;color:var(--text);}
+.tr-approx{font-size:12px;color:rgba(255,255,255,.82);margin-top:6px;font-style:italic;}
+.dfd-saved{margin-bottom:18px;padding:12px 15px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:13.5px;font-weight:600;color:var(--green);}
+.dfd-rateprompt{margin-bottom:18px;padding:12px 15px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:12.5px;line-height:1.6;color:var(--text);}
+.dfd-rateprompt a{color:var(--green);font-weight:700;white-space:nowrap;}
 .strat-why{margin-top:10px;padding-left:11px;border-left:3px solid var(--green);font-size:12.5px;line-height:1.55;color:var(--text);}
 /* [A1] per-tool framing intro */
 .tool-intro{font-size:13.5px;line-height:1.6;color:var(--text);background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;padding:12px 15px;margin-bottom:18px;}
@@ -450,6 +436,154 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 .glance-cell .gc-v.neg{color:var(--amber);}
 .glance-cell .gc-k{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.3;}
 @media(max-width:420px){.hero-card .hc-date{font-size:38px;}.glance-cell .gc-v{font-size:17px;}}
+/* ══ PREMIUM TOP NAV — visible, never hidden in the hamburger (user is in crisis) ══ */
+.topnav{display:none;gap:7px;max-width:var(--canvas);margin:0 auto;padding:2px 14px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.topnav::-webkit-scrollbar{display:none;}
+.topnav button{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;background:var(--white);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:13.5px;font-weight:600;border-radius:22px;padding:8px 14px;white-space:nowrap;transition:border-color .15s,background .15s,color .15s;}
+.topnav button:hover{border-color:var(--green-line);background:var(--green-pale);}
+.topnav button.active{background:var(--green);border-color:var(--green);color:#fff;}
+.topnav button svg{width:16px;height:16px;stroke-width:1.5;color:var(--green);}
+.topnav button.active svg{color:#fff;}
+/* ══ 90-DAY RECOVERY PROGRESS HERO (Pass 1) — honest figures, no fake trend line ══ */
+.prog90-card{background:var(--green);color:#fff;border-radius:16px;padding:22px 22px;box-shadow:0 10px 30px rgba(9,50,24,.16);}
+.p9-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px;}
+.p9-title{font-family:var(--serif);font-size:22px;line-height:1.12;}
+.p9-week{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,255,255,.16);border-radius:20px;padding:5px 12px;white-space:nowrap;flex-shrink:0;}
+.p9-figs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.p9-fig{background:rgba(255,255,255,.12);border-radius:12px;padding:14px 15px;}
+.p9-k{font-size:12px;opacity:.85;margin-bottom:5px;}
+.p9-v{font-family:var(--serif);font-size:24px;line-height:1.08;}
+.p9-note{font-size:13px;opacity:.9;line-height:1.5;}
+@media(max-width:420px){.p9-figs{grid-template-columns:1fr;}.p9-title{font-size:19px;}}
+/* ══ PASS 3 · WEEKLY CHECK-IN + TREND ══ */
+.ci-trend{margin-top:14px;background:var(--green-pale);border:1px solid var(--border);border-radius:14px;padding:15px 16px;}
+.ci-trend.empty{background:var(--white);}
+.ci-trend-h{font-size:12px;font-weight:600;color:var(--soft);letter-spacing:.02em;margin-bottom:10px;}
+.ci-spark{display:block;overflow:visible;}
+.ci-trend-cap{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin-top:8px;}
+.ci-empty{font-size:13.5px;color:var(--soft);line-height:1.55;margin:0;}
+.ci-card{margin-top:14px;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:14px;padding:18px 18px;}
+.ci-title{font-family:var(--serif);font-size:1.25rem;line-height:1.2;margin:0 0 5px;}
+.ci-lead{font-size:13.5px;color:var(--soft);line-height:1.55;margin:0 0 14px;}
+.ci-field{margin:0 0 13px;}
+.ci-field label{display:block;font-size:13px;font-weight:600;margin:0 0 6px;}
+.ci-field input{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:11px;padding:12px 13px;transition:border-color .15s;}
+.ci-field input:focus{outline:none;border-color:var(--green);}
+.ci-save{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border:none;border-radius:11px;padding:12px 18px;font-size:14.5px;font-weight:600;transition:opacity .15s;}
+.ci-save:hover{opacity:.92;}
+.ci-save:disabled{opacity:.55;}
+.ci-save svg{width:17px;height:17px;}
+/* ══ PASS 3 · CRISIS PLANS ══ */
+.cr-lead{font-size:14.5px;color:var(--text);line-height:1.6;margin:0 0 16px;}
+.cr-card{border:1px solid var(--border);border-left:3px solid var(--green);border-radius:13px;margin:0 0 11px;overflow:hidden;background:var(--white);}
+.cr-toggle{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:none;border:none;padding:15px 16px;}
+.cr-toggle:hover{background:var(--green-pale);}
+.cr-ic{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:var(--green-tint);color:var(--green);flex-shrink:0;}
+.cr-ic svg{width:18px;height:18px;stroke-width:1.5;}
+.cr-t{font-family:var(--serif);font-size:1.12rem;flex:1;line-height:1.2;}
+.cr-chev{width:18px;height:18px;color:var(--soft);flex-shrink:0;}
+.cr-body{padding:2px 16px 18px;animation:lwFade .22s ease;}
+.cr-intro{font-size:14px;color:var(--text);line-height:1.62;margin:4px 0 16px;}
+.cr-block{margin:0 0 15px;}
+.cr-bh{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);margin:0 0 9px;}
+.cr-bh svg{width:15px;height:15px;stroke-width:2;}
+.cr-steps{margin:0;padding:0 0 0 20px;}
+.cr-steps li{font-size:14px;line-height:1.62;margin:0 0 11px;padding-left:3px;}
+.cr-steps li::marker{color:var(--green);font-weight:700;}
+.cr-act{margin:9px 0 2px;}
+.cr-act button{display:inline-flex;align-items:center;gap:7px;background:var(--green-pale);border:1px solid var(--green-line);color:var(--green);border-radius:9px;padding:8px 13px;font-size:13px;font-weight:600;transition:background .15s,border-color .15s;}
+.cr-act button:hover{background:var(--green-tint);border-color:var(--green);}
+.cr-act button svg{width:15px;height:15px;}
+.cr-safe{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--soft);line-height:1.55;background:var(--green-pale);border-radius:10px;padding:12px 14px;margin:16px 0 0;}
+.cr-safe svg{width:16px;height:16px;color:var(--green);flex-shrink:0;margin-top:1px;}
+/* ══ PASS 3 · DOCUMENT ARCHIVE ══ */
+.arch-group{margin:0 0 22px;}
+.arch-gh{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);margin:0 0 11px;}
+.arch-gh svg{width:15px;height:15px;color:var(--green);}
+.arch-none{font-size:13.5px;color:var(--soft);margin:0 0 4px;}
+.arch-item{border:1px solid var(--border);border-radius:12px;margin:0 0 9px;overflow:hidden;background:var(--white);}
+.arch-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;padding:13px 15px;}
+.arch-row:hover{background:var(--green-pale);}
+.arch-ic{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--green-tint);color:var(--green);flex-shrink:0;}
+.arch-ic svg{width:16px;height:16px;}
+.arch-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.arch-title{font-size:14px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.arch-sub{font-size:12px;color:var(--soft);}
+.arch-chev{width:17px;height:17px;color:var(--soft);flex-shrink:0;}
+.arch-open{padding:0 15px 15px;}
+.arch-text{font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--text);white-space:pre-wrap;word-wrap:break-word;background:var(--green-pale);border-radius:10px;padding:14px 15px;margin:0 0 11px;}
+.arch-copy{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;border:none;border-radius:9px;padding:9px 15px;font-size:13px;font-weight:600;}
+.arch-copy:hover{opacity:.92;}
+.arch-copy svg{width:15px;height:15px;}
+.arch-ci{border:1px solid var(--border);border-left:3px solid var(--green);border-radius:12px;padding:13px 15px;margin:0 0 9px;background:var(--white);}
+.arch-ci-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 7px;}
+.arch-ci-wk{font-size:13.5px;font-weight:700;color:var(--green);}
+.arch-ci-date{font-size:12px;color:var(--soft);}
+.arch-ci-buf{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;}
+.arch-ci-buf span{color:var(--soft);}
+.arch-ci-note{font-size:13px;color:var(--text);line-height:1.55;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.arch-empty{text-align:center;padding:32px 16px;color:var(--soft);}
+.arch-empty svg{width:34px;height:34px;color:var(--green-line);margin-bottom:10px;}
+.arch-empty p{font-size:14px;line-height:1.55;margin:0;max-width:340px;margin-left:auto;margin-right:auto;}
+/* ══ PASS 2 · CREDITOR LETTERS ══ */
+.lw-steps{display:flex;gap:6px;margin:0 0 22px;}
+.lw-steps .lw-dot{flex:1;height:4px;border-radius:3px;background:var(--border);transition:background .2s;}
+.lw-steps .lw-dot.on{background:var(--green);}
+.lw-panel{animation:lwFade .22s ease;}
+@keyframes lwFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+.lw-q{font-family:var(--serif);font-size:1.32rem;line-height:1.25;margin:0 0 6px;}
+.lw-help{font-size:13.5px;color:var(--soft);margin:0 0 16px;}
+.lw-field{margin:0 0 16px;}
+.lw-field label{display:block;font-size:13px;font-weight:600;margin:0 0 6px;}
+.lw-field input,.lw-field textarea,.lw-field select{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:11px;padding:12px 13px;transition:border-color .15s;}
+.lw-field input:focus,.lw-field textarea:focus,.lw-field select:focus{outline:none;border-color:var(--green);}
+.lw-field textarea{min-height:88px;resize:vertical;line-height:1.55;}
+.lw-row{display:flex;gap:12px;}
+.lw-row .lw-field{flex:1;}
+.lw-row .lw-cur{flex:0 0 110px;}
+.lw-types{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 6px;}
+@media(max-width:560px){.lw-types{grid-template-columns:1fr;}.lw-row{flex-direction:column;gap:0;}.lw-row .lw-cur{flex:1;}}
+.lw-type{text-align:left;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:12px;padding:13px 14px;transition:border-color .15s,background .15s;}
+.lw-type:hover{border-color:var(--green-line);border-left-color:var(--green);background:var(--green-pale);}
+.lw-type.sel{border-color:var(--green);border-left-color:var(--green);background:var(--green-pale);}
+.lw-type .lwt-h{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14.5px;}
+.lw-type .lwt-h svg{width:17px;height:17px;stroke-width:1.6;color:var(--green);}
+.lw-type .lwt-d{font-size:12.5px;color:var(--soft);margin-top:5px;line-height:1.45;}
+.lw-caution{display:flex;gap:9px;align-items:flex-start;font-size:12.8px;line-height:1.5;color:var(--text);background:var(--green-pale);border-left:3px solid var(--green);border-radius:9px;padding:11px 13px;margin:2px 0 16px;}
+.lw-caution svg{width:16px;height:16px;stroke-width:1.6;color:var(--green);flex-shrink:0;margin-top:2px;}
+.lw-actions{display:flex;gap:10px;align-items:center;margin-top:20px;}
+.lw-actions .lw-spacer{flex:1;}
+.lw-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:24px;padding:11px 20px;transition:background .15s,border-color .15s,color .15s;}
+.lw-btn.prim{background:var(--green);border:1px solid var(--green);color:#fff;}
+.lw-btn.prim:hover{background:var(--green-dark);}
+.lw-btn.prim:disabled{opacity:.6;cursor:default;}
+.lw-btn.ghost{background:var(--white);border:1px solid var(--border);color:var(--text);}
+.lw-btn.ghost:hover{border-color:var(--green-line);}
+.lw-btn svg{width:16px;height:16px;stroke-width:1.6;}
+.lw-review{background:var(--green-pale);border-left:3px solid var(--green);border-radius:11px;padding:14px 16px;margin:0 0 6px;}
+.lw-review .lwr-row{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:4px 0;}
+.lw-review .lwr-row span{color:var(--soft);}
+.lw-review .lwr-row b{font-weight:600;text-align:right;}
+.lw-load{display:flex;align-items:center;gap:12px;color:var(--soft);font-size:14.5px;padding:26px 4px;}
+.lw-load .spin{width:20px;height:20px;border:2.5px solid var(--green-line);border-top-color:var(--green);border-radius:50%;animation:lwSpin .8s linear infinite;}
+@keyframes lwSpin{to{transform:rotate(360deg);}}
+.lw-note{font-family:var(--serif);font-size:1.05rem;line-height:1.5;color:var(--green-deep);background:var(--green-pale);border-left:3px solid var(--green);border-radius:11px;padding:14px 18px;margin:0 0 18px;}
+.lw-letter{background:var(--white);border:1px solid var(--border);border-radius:13px;padding:22px 24px;white-space:pre-wrap;font-family:var(--sans);font-size:14.5px;line-height:1.72;color:var(--text);}
+@media(max-width:560px){.lw-letter{padding:18px 16px;font-size:14px;}}
+.lw-fillhint{display:flex;gap:9px;align-items:flex-start;font-size:12.8px;line-height:1.5;color:var(--soft);margin:12px 2px 0;}
+.lw-fillhint svg{width:15px;height:15px;stroke-width:1.6;color:var(--green);flex-shrink:0;margin-top:2px;}
+.lw-out-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0;}
+.lw-next{margin:22px 0 0;border-left:3px solid var(--green);background:var(--green-pale);border-radius:11px;padding:15px 18px;}
+.lw-next h5{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+.lw-next h5 svg{width:15px;height:15px;stroke-width:1.7;}
+.lw-next ul{list-style:none;margin:0;padding:0;}
+.lw-next li{position:relative;padding:0 0 8px 20px;font-size:13.6px;line-height:1.55;color:var(--text);}
+.lw-next li:last-child{padding-bottom:0;}
+.lw-next li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);}
+.lw-next li a{font-weight:600;text-decoration:underline;text-underline-offset:2px;}
+.lw-err{background:var(--red-bg);border-left:3px solid var(--red);border-radius:10px;padding:13px 16px;font-size:14px;color:var(--red);margin:0;}
+.nav-soon{opacity:.55;}
+.nav-soon .nav-soon-tag{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);border:1px solid var(--border);border-radius:20px;padding:2px 8px;}
 </style>
 </head>
 <body>
@@ -464,6 +598,15 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div class="lang-menu" id="langMenu"><div class="lang-menu-inner" id="langMenuInner"></div></div>
     </div>
   </div>
+  <nav class="topnav" id="topnav" aria-label="Sections">
+    <button data-nav="home" onclick="dashHome()"><i data-lucide="activity"></i><span data-i18n="prog_eyebrow">Your progress</span></button>
+    <button data-nav="sec-plan" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
+    <button data-nav="sec-understand" onclick="navTo('sec-understand')"><i data-lucide="wallet"></i><span data-i18n="snap_eyebrow">Understand</span></button>
+    <button data-nav="sec-debtmap" onclick="navTo('sec-debtmap')"><i data-lucide="map"></i><span data-i18n="nav_debtmap">Debt Map</span></button>
+    <button data-nav="sec-tools" onclick="navTo('sec-tools')"><i data-lucide="wrench"></i><span data-i18n="nav_g_tools">Tools</span></button>
+    <button data-nav="sec-support" onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i><span data-i18n="nav_support">Support</span></button>
+    <button data-nav="sec-letters" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
+  </nav>
 </header>
 
 <!-- DRAWER -->
@@ -478,7 +621,6 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div class="nav-group-label"><i data-lucide="badge-check"></i><span data-i18n="nav_g_debtfree">Debt FREE</span></div>
       <div class="nav-group-sub" data-i18n="nav_g_debtfree_sub">Everything you need to see your situation clearly and plan your way out.</div>
       <button class="nav-item" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
-      <button class="nav-item" onclick="goUpdatePlan()"><i data-lucide="refresh-cw"></i><span data-i18n="nav_update">Update my numbers</span></button>
       <button class="nav-item" onclick="dashHome()"><i data-lucide="circle-alert"></i><span data-i18n="nav_emergency">Emergency Card</span></button>
       <button class="nav-item" onclick="navTo('sec-understand')"><i data-lucide="wallet"></i><span data-i18n="nav_snapshot">Financial Snapshot</span></button>
       <button class="nav-item" onclick="navTo('sec-debtmap')"><i data-lucide="map"></i><span data-i18n="nav_debtmap">Debt Map</span></button>
@@ -501,12 +643,11 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <a class="nav-item" href="/ecosystem.html"><i data-lucide="layout-grid"></i><span data-i18n="nav_ecosystem">Ecosystem</span></a>
     </div>
     <div class="nav-group">
-      <div class="nav-group-label"><i data-lucide="lock"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
+      <div class="nav-group-label"><i data-lucide="shield"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
       <div class="nav-group-sub" data-i18n="nav_g_recovery_sub">When you're ready, deeper tools to push back and rebuild.</div>
-      <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span><i data-lucide="lock" class="lock"></i></button>
-      <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="shield"></i><span data-i18n="nav_crisis">Crisis Plans</span><i data-lucide="lock" class="lock"></i></button>
-      <button class="nav-item locked" onclick="goUpgrade()"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span><i data-lucide="lock" class="lock"></i></button>
-      <button type="button" class="nav-unlock" onclick="closeDrawer();openUpgradeModal()" data-i18n="nav_unlock">Unlock Debt Recovery</button>
+      <button class="nav-item" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
+      <button class="nav-item" onclick="navTo('sec-crisis')"><i data-lucide="clipboard-list"></i><span data-i18n="nav_crisis">Crisis Plans</span></button>
+      <button class="nav-item" onclick="navTo('sec-archive')"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span></button>
     </div>
     <div class="nav-group nav-foot">
       <button class="nav-item nav-logout" onclick="logout()"><i data-lucide="log-out"></i><span data-i18n="logout">Log out</span></button>
@@ -552,16 +693,11 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <p id="anchorSub" data-i18n="hello_sub">Everything here is built around your real situation. Take it one step at a time.</p>
     </div>
 
-    <!-- 2 · HERO — interactive debt-free date -->
-    <section class="section hero-sec" id="sec-hero">
-      <div class="section-head"><i data-lucide="calendar-check"></i><span class="section-eyebrow" data-i18n="hero_eyebrow">Your debt-free date</span></div>
-      <div id="heroBody"></div>
-    </section>
-
-    <!-- 3 · SAFETY BUFFER -->
-    <section class="section" id="sec-buffer">
-      <div class="section-head"><i data-lucide="shield"></i><span class="section-eyebrow" data-i18n="buf_eyebrow">Your safety buffer</span></div>
-      <div id="bufferBody"></div>
+    <!-- 2 · HERO — 90-day recovery progress (landing view · honest figures, no fake trend) -->
+    <section class="section" id="sec-progress">
+      <div class="section-head"><i data-lucide="activity"></i><span class="section-eyebrow" data-i18n="dr_progress_title">Your 90-day recovery</span></div>
+      <div id="progBody"></div>
+      <div id="ciBody"></div>
     </section>
 
     <!-- 4 + 5 · FIRST WIN + NEXT STEP -->
@@ -571,28 +707,10 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div class="emerg" id="emergCard"></div>
     </section>
 
-    <!-- 6 · LIGHT PROGRESS -->
-    <button class="progress-marker" id="progressMarker" onclick="navTo('sec-journey')"></button>
-
     <!-- 7 · GLANCE -->
     <section class="section" id="sec-glance">
       <div class="section-head"><i data-lucide="eye"></i><span class="section-eyebrow" data-i18n="glance_eyebrow">At a glance</span></div>
       <div id="glanceBody"></div>
-    </section>
-
-    <!-- 8 · UPGRADE -->
-    <section class="section upgrade" id="sec-upgrade">
-      <div class="section-head"><span class="section-eyebrow" data-i18n="up_eyebrow">When you're ready</span></div>
-      <h2 data-i18n="up_title">You understand your situation. Now change it.</h2>
-      <p class="up-lead" data-i18n="up_lead2">In Debt Recovery you watch your buffer and your debt-free date move week by week, and we build and follow the plan with you.</p>
-      <div class="up-feats">
-        <div class="up-feat"><i data-lucide="mail-plus"></i><span data-i18n="up_f1">Creditor letters written for your exact situation</span></div>
-        <div class="up-feat"><i data-lucide="shield"></i><span data-i18n="up_f2">Crisis plans for job loss, illness, separation</span></div>
-        <div class="up-feat"><i data-lucide="folder"></i><span data-i18n="up_f3">Every letter and document saved in one place</span></div>
-        <div class="up-feat"><i data-lucide="compass"></i><span data-i18n="up_f4">A clear, guided 90-day recovery path</span></div>
-      </div>
-      <div class="up-price"><span class="amt">19 €</span><span class="per" data-i18n="up_price">one-time · 90 days · no subscription</span></div>
-      <button type="button" class="up-cta" onclick="openUpgradeModal()"><span data-i18n="nav_unlock">Unlock Debt Recovery</span><i data-lucide="arrow-right"></i></button>
     </section>
 
     </div><!-- /#dash-home -->
@@ -646,12 +764,28 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div id="supportBody"></div>
     </section>
 
-    <!-- JOURNEY -->
-    <section class="section depth" id="sec-journey">
-      <div class="section-head"><i data-lucide="route"></i><span class="section-eyebrow" data-i18n="jr_eyebrow">Your journey</span></div>
-      <h2 data-i18n="jr_title">Where this goes</h2>
-      <p class="lead" data-i18n="jr_lead">You're at the start. Each step only opens when you're ready — there's no rush.</p>
-      <div class="journey" id="journeyBody"></div>
+    <!-- CREDITOR LETTERS (Pass 2) -->
+    <section class="section depth" id="sec-letters">
+      <div class="section-head"><i data-lucide="mail-plus"></i><span class="section-eyebrow" data-i18n="letter_eyebrow">Creditor letters</span></div>
+      <h2 data-i18n="letter_title">Write a creditor letter</h2>
+      <p class="lead" data-i18n="letter_lead">A calm, honest letter to a creditor — drafted for your situation, in your language. You review it and send it yourself.</p>
+      <div id="lettersBody"></div>
+    </section>
+
+    <!-- CRISIS PLANS (Pass 3) -->
+    <section class="section depth" id="sec-crisis">
+      <div class="section-head"><i data-lucide="clipboard-list"></i><span class="section-eyebrow" data-i18n="crisis_eyebrow">Crisis plans</span></div>
+      <h2 data-i18n="crisis_title">When life suddenly changes</h2>
+      <p class="lead" data-i18n="crisis_lead">A sudden change doesn't undo your progress. Pick what's closest to your situation.</p>
+      <div id="crisisBody"></div>
+    </section>
+
+    <!-- DOCUMENT ARCHIVE (Pass 3) -->
+    <section class="section depth" id="sec-archive">
+      <div class="section-head"><i data-lucide="folder"></i><span class="section-eyebrow" data-i18n="arch_eyebrow">Document archive</span></div>
+      <h2 data-i18n="arch_title">Everything you've saved</h2>
+      <p class="lead" data-i18n="arch_lead">Your saved creditor letters and weekly check-ins, in one place. Nothing here is shared — it's yours.</p>
+      <div id="archiveBody"></div>
     </section>
 
   </div>
@@ -689,8 +823,9 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 
 <script>
 /* ════════════════════════════════════════════════
-   DEBT FREE MEMBER AREA — member-free/index.html
-   Worker v16.14 · brand #0f4d28 · DM Serif + DM Sans
+   DEBT RECOVERY MEMBER AREA — member/index.html (Pass 1)
+   Forked from member-free/index.html · Worker v16.14
+   brand #0f4d28 · DM Serif + DM Sans
    ════════════════════════════════════════════════ */
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 /* Language list + labels are owned by the shared engine (i18n.js). */
@@ -705,7 +840,7 @@ function num(v){const n=parseFloat(v);return isNaN(n)?0:n;}
 function fmtMoney(n,cur){return Math.round(num(n)).toLocaleString('en-US')+' '+(cur||M&&M.currency||'EUR');}
 function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function icons(){if(window.lucide)lucide.createIcons();}
-function showView(id){['view-gate','view-reauth','view-dash'].forEach(v=>$(v).classList.toggle('active',v===id));}
+function showView(id){['view-gate','view-reauth','view-dash'].forEach(v=>$(v).classList.toggle('active',v===id));const tn=$('topnav');if(tn)tn.style.display=(id==='view-dash')?'flex':'none';}
 function scrollToSection(id){const el=$(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
 
 /* derived financial model */
@@ -832,19 +967,8 @@ document.addEventListener('click',e=>{const w=$('langMenu');if(w.classList.conta
 /* ── DRAWER ── */
 function openDrawer(){$('drawer').classList.add('open');$('scrim').classList.add('show');}
 function closeDrawer(){$('drawer').classList.remove('open');$('scrim').classList.remove('show');}
-function navTo(id){showSection(id);}
-
-/* ── UPDATE MY NUMBERS ──
-   Sends the member back to onboarding with their saved answers pre-filled
-   (mode=update) in their current language. On submit, onboarding regenerates
-   the plan and overwrites member_plan via /onboarding/save. No auth/API change. */
-function goUpdatePlan(){
-  if(!memberToken){showReauth();return;}
-  closeDrawer();
-  const url='/onboarding-debt-free.html?token='+encodeURIComponent(memberToken)
-    +'&mode=update&lang='+encodeURIComponent(DFWI18n.current);
-  location.href=url;
-}
+function setActiveNav(key){document.querySelectorAll('#topnav button').forEach(b=>b.classList.toggle('active',b.getAttribute('data-nav')===key));}
+function navTo(id){showSection(id);setActiveNav(id);}
 
 /* ── LOG OUT ──
    The token is never persisted (it lives only in memory and is wiped from the
@@ -874,8 +998,10 @@ async function boot(){
     const res=await fetch(`${WORKER_URL}/member/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:memberToken})});
     if(!res.ok){showReauth();return;}
     const data=await res.json();
-    /* TIER GATE — validate defaults missing tier to 'premium', so test explicitly for 'free' */
-    if(data.tier!=='free'){location.replace('/member/?token='+encodeURIComponent(memberToken));return;}
+    /* TIER GATE (reversed for /member/) — this IS the Debt Recovery area.
+       Free-tier members belong in /member-free/; premium + community_access stay here.
+       validate defaults a missing tier to 'premium', so we redirect ONLY an explicit 'free'. */
+    if(data.tier==='free'){location.replace('/member-free/?token='+encodeURIComponent(memberToken));return;}
     M=data;
     /* default language from onboarding selection */
     const lang=(M.language||(M.onboarding&&M.onboarding.language)||'EN').toUpperCase();
@@ -905,9 +1031,10 @@ $('reauthEmail')&&$('reauthEmail').addEventListener('keydown',e=>{if(e.key==='En
    RENDER
    ════════════════════════════════════════════════ */
 function renderAll(){
-  renderHello();renderHero();renderBuffer();renderWin();renderEmergency();renderProgress();renderGlance();
-  renderSnapshot();renderPlan();renderDebtMap();renderSupport();renderJourney();
-  icons();
+  renderHello();renderProgress90();renderWin();renderEmergency();renderGlance();
+  renderSnapshot();renderPlan();renderDebtMap();renderSupport();
+  renderCheckin();renderCrisis();renderArchive();
+  setActiveNav('home');icons();
 }
 function firstName(){return (M.firstname||(M.onboarding&&M.onboarding.firstname)||'').trim();}
 function country(){return (M.country||(M.onboarding&&M.onboarding.country)||'').trim();}
@@ -962,7 +1089,7 @@ function renderSnapshot(){
   const months=monthsToFree(m.totalDebt,m.surplus);
   const dfd=dateFromMonths(months);
 
-  /* Personalisation — MIRROR lifeLineHtml exactly; never assume children. Default is self. */
+  /* Personalisation — never assume children; default is self (mirrors the household check used elsewhere). */
   const hh=(M.household||(M.onboarding&&M.onboarding.household)||'');
   const kids=/parent|with children/i.test(hh)||num(M.children||(M.onboarding&&M.onboarding.children))>0;
   const couple=/couple|partner|married|spouse|two adults/i.test(hh);
@@ -1052,7 +1179,7 @@ function renderPlan(){
   const plan=M.member_plan||(M.onboarding&&M.onboarding.member_plan)||'';
   const el=$('planBody');
   if(!plan){
-    el.innerHTML=`<div class="plan-empty">${esc(t('plan_empty'))}<br><a href="/onboarding-debt-free.html?token=${encodeURIComponent(memberToken)}&mode=fresh&lang=${encodeURIComponent(DFWI18n.current)}">${esc(t('plan_empty_link'))} →</a></div>`;
+    el.innerHTML=`<div class="plan-empty">${esc(t('plan_empty'))}<br><a href="/onboarding-debt-recovery.html?token=${encodeURIComponent(memberToken)}&mode=fresh&lang=${encodeURIComponent(DFWI18n.current)}">${esc(t('plan_empty_link'))} →</a></div>`;
     return;
   }
   const step=firstPlanStep(plan);
@@ -1065,11 +1192,7 @@ function renderPlan(){
       <div class="plan-next-frame">${esc(t('plan_next_frame'))}</div>
     </div>`;
   el.innerHTML=nextCard+`<div class="plan-box"><div class="plan-render collapsed" id="planRender">${planToHtml(plan)}</div><div class="plan-fade"></div></div>
-    <button class="plan-toggle" id="planToggle" onclick="togglePlan()"><span id="planToggleLbl">${esc(t('plan_expand'))}</span><i data-lucide="chevron-down"></i></button>
-    <div class="plan-update">
-      <a class="plan-update-link" onclick="goUpdatePlan()"><i data-lucide="refresh-cw"></i>${esc(t('plan_update'))}</a>
-      <span class="plan-update-sub">${esc(t('plan_update_sub'))}</span>
-    </div>`;
+    <button class="plan-toggle" id="planToggle" onclick="togglePlan()"><span id="planToggleLbl">${esc(t('plan_expand'))}</span><i data-lucide="chevron-down"></i></button>`;
   icons();
 }
 function togglePlan(){
@@ -1139,77 +1262,43 @@ function renderSupport(){
   icons();
 }
 
-/* JOURNEY */
-function renderJourney(){
-  const steps=[
-    {t:'jr_s1',m:'jr_s1m',state:'here',icon:'badge-check'},
-    {t:'jr_s2',m:'jr_s2m',state:'next',icon:'shield'},
-    {t:'jr_s3',m:'jr_s3m',state:'future',icon:'trending-up'},
-    {t:'jr_s4',m:'jr_s4m',state:'future',icon:'building-2'},
-    {t:'jr_s5',m:'jr_s5m',state:'future',icon:'rocket'}
-  ];
-  $('journeyBody').innerHTML=steps.map(s=>`<div class="j-step ${s.state==='here'?'here':''}">
-    <div class="j-dot"><i data-lucide="${s.state==='here'?'check':s.icon}"></i></div>
-    <div class="j-body"><div class="j-title">${esc(t(s.t))}${s.state==='here'?`<span class="you">${esc(t('jr_you'))}</span>`:''}</div><div class="j-meta">${esc(t(s.m))}</div></div></div>`).join('');
-  icons();
-}
-
 /* ════════════════════════════════════════════════
    HOME front-screen renders (curated composition)
    ════════════════════════════════════════════════ */
-function lifeLineHtml(){
-  const hh=(M.household||(M.onboarding&&M.onboarding.household)||'');
-  const kids=/parent|with children/i.test(hh)||num(M.children||(M.onboarding&&M.onboarding.children))>0;
-  return `<div class="hero-life">${esc(t(kids?'life_room_family':'life_room'))}</div>`;
+/* planWeek — which week of the 90-day recovery the member is in. Uses an
+   explicit plan-start timestamp when the record carries one; otherwise Week 1
+   (honest default — never a guessed week). 90 days ≈ 13 weeks (capped). */
+function planWeek(){
+  const raw=M.plan_started_at||M.member_plan_started_at||(M.onboarding&&M.onboarding.plan_started_at)||null;
+  if(raw){const d=new Date(raw);if(!isNaN(d.getTime())){const wk=Math.floor((Date.now()-d.getTime())/6048e5)+1;return Math.min(13,Math.max(1,wk));}}
+  return 1;
 }
-/* HERO — interactive debt-free date (uses the shared projectFree engine) */
-function renderHero(){
-  const m=model();const el=$('heroBody');if(!el)return;
-  if(m.totalDebt<=0){
-    el.innerHTML=`<div class="hero-nodebt">${esc(t('hero_nodebt'))}</div>`+lifeLineHtml();icons();return;
-  }
-  const base=projectFree(0);
-  /* surplus ≤ 0, or a payment that can't even cover interest → never a hopeful number */
-  if(m.surplus<=0||base.months==null){
-    el.innerHTML=`<div class="hero-locked"><div class="hl-t">${esc(t('snap_dfd_stabilise'))}</div><div class="hl-s">${esc(t('snap_surplus_neg'))}</div></div>`
-      +nextStepsHtml()+lifeLineHtml();
-    icons();return;
-  }
-  const maxExtra=Math.max(10,Math.round(m.surplus));
-  el.innerHTML=`<div class="hero-card">
-      <div class="hc-k">${esc(t('hero_eyebrow'))}</div>
-      <div class="hc-date" id="heroDate">—</div>
-      <div class="hc-sub" id="heroDateNote"></div>
-      <div class="hero-figs">
-        <div class="hero-fig"><div class="hf-v" id="heroSooner">0</div><div class="hf-k">${esc(t('hero_sooner_k'))}</div></div>
-        <div class="hero-fig"><div class="hf-v" id="heroInterest">—</div><div class="hf-k">${esc(t('hero_interest_k'))}</div></div>
+/* 90-DAY RECOVERY HERO — two honest live figures via the SHARED engine (reuse,
+   no new maths): current safety buffer (bufferInfo) + debt-free date (projectFree).
+   No trend line yet — that arrives once weekly check-in data exists (Pass 3). */
+function renderProgress90(){
+  const el=$('progBody');if(!el)return;
+  const m=model();
+  const bi=bufferInfo();
+  const proj=projectFree(0);
+  const bufStr=bi.netIncome>0?fmtMoney(bi.buffer,m.cur):'—';
+  const dfdStr=proj.date||t('snap_dfd_stabilise');
+  el.innerHTML=`<div class="prog90-card">
+      <div class="p9-head">
+        <div class="p9-title">${esc(t('dr_progress_title'))}</div>
+        <div class="p9-week">${esc(t('dr_week',{n:planWeek()}))}</div>
       </div>
-    </div>
-    <div class="hero-lever slider-row"><label>${esc(t('hero_lever'))}<span class="sv" id="heroExtraLbl">0 ${esc(m.cur)}</span></label>
-      <input type="range" id="heroSlider" min="0" max="${maxExtra}" step="10" value="0" oninput="updHero()"/></div>`
-    +lifeLineHtml();
-  icons();updHero();
+      <div class="p9-figs">
+        <div class="p9-fig"><div class="p9-k">${esc(t('dr_buffer_lbl'))}</div><div class="p9-v">${esc(bufStr)}</div></div>
+        <div class="p9-fig"><div class="p9-k">${esc(t('dr_dfd_lbl'))}</div><div class="p9-v">${esc(dfdStr)}</div></div>
+      </div>
+      <div class="p9-note">${esc(t('dr_progress_note'))}</div>
+    </div>`;
+  icons();
 }
-function updHero(){
-  const m=model();const sl=$('heroSlider');if(!sl)return;
-  const extra=num(sl.value);
-  $('heroExtraLbl').textContent=fmtMoney(extra,m.cur);
-  const base=projectFree(0),cur=projectFree(extra);
-  $('heroDate').textContent=cur.date||'—';
-  $('heroDateNote').textContent=t('hero_date_note',{monthly:fmtMoney(cur.monthly,m.cur)});
-  const sooner=(base.months!=null&&cur.months!=null)?Math.max(0,base.months-cur.months):0;
-  const so=$('heroSooner');if(so)so.textContent=sooner>0?('−'+sooner):'0';
-  const ie=$('heroInterest');
-  if(ie){
-    if(cur.rate>0){const saved=Math.max(0,(base.interest||0)-(cur.interest||0));ie.textContent='≈ '+fmtMoney(saved,m.cur);}
-    else ie.textContent='—';
-  }
-}
-/* SAFETY BUFFER — target = 6× net monthly income; states A (ladder) / B (met) / C (met + debt-free) */
-/* bufferInfo — single source for the 6× net-income emergency-buffer maths.
-   Used by renderBuffer() (dashboard) and updDfd() (dfd tool) so the cushion
-   figure is computed identically in both places. Logic + floorMap lifted
-   verbatim from the former inline block in renderBuffer(); behaviour unchanged. */
+/* SAFETY BUFFER maths — retained as a shared helper (used by renderProgress90
+   above and updDfd() in the Debt-Free Date tool) so the cushion figure is
+   computed identically in both places. target = 6× net monthly income. */
 function bufferInfo(){
   const netIncome=num(M.income||(M.onboarding&&M.onboarding.income));
   const target=Math.round(netIncome*6);
@@ -1218,43 +1307,8 @@ function bufferInfo(){
   const buffer=floorMap[savings]!==undefined?floorMap[savings]:0;
   return {netIncome,target,buffer};
 }
-function renderBuffer(){
-  const m=model();const el=$('bufferBody');if(!el)return;
-  const {netIncome,target,buffer}=bufferInfo();
-  if(netIncome<=0){ /* income near zero → defer the number, lean on the first win below */
-    el.innerHTML=`<div class="buf-card"><div class="buf-sub">${esc(t('buf_defer'))}</div></div>`;icons();return;
-  }
-  if(m.totalDebt<=0&&buffer>=target){ /* C */
-    el.innerHTML=`<div class="buf-done"><div class="bd-t">${esc(t('buf_c_title'))}</div><div class="bd-s">${esc(t('buf_c_sub'))}</div></div><div class="buf-disc">${esc(t('buf_c_disc'))}</div>`;icons();return;
-  }
-  if(buffer>=target){ /* B */
-    el.innerHTML=`<div class="buf-done"><div class="bd-t">${esc(t('buf_b_title'))}</div><div class="bd-s">${esc(t('buf_b_sub'))}</div></div>`;icons();return;
-  }
-  /* A — steady 1/16 ladder: show current rung + next rung + count only */
-  const rung=Math.max(1,Math.round(target/16));
-  const reached=Math.max(0,Math.min(16,Math.floor(buffer/rung)));
-  const nextN=Math.min(16,reached+1);
-  el.innerHTML=`<div class="buf-card">
-    <div class="buf-goal">${esc(t('buf_goal',{amt:fmtMoney(target,m.cur)}))}</div>
-    <div class="buf-rungs">
-      <div class="buf-rung"><div class="br-mark">${reached}/16</div><div class="br-lbl">${esc(t('buf_lbl_now'))} · ${esc(fmtMoney(buffer,m.cur))}</div></div>
-      <div class="buf-rung next"><div class="br-mark">${nextN}/16</div><div class="br-lbl">${esc(t('buf_lbl_next'))} · ${esc(fmtMoney(rung*nextN,m.cur))}</div></div>
-    </div>
-    ${reached>0?`<div class="buf-count"><i data-lucide="check-circle-2"></i>${esc(t('buf_count',{n:reached}))}</div>`:''}
-    <div class="buf-sub">${esc(t('buf_a_sub'))}</div>
-  </div>`;
-  icons();
-}
 /* FIRST WIN banner — guaranteed, non-financial; every member who has a plan earns it */
 function renderWin(){const el=$('winBanner');if(el)el.innerHTML=esc(t('win_banner'));}
-/* LIGHT PROGRESS — a feeling of movement, not a static summary */
-function renderProgress(){
-  const el=$('progressMarker');if(!el)return;
-  el.innerHTML=`<div class="pm-track"><div class="pm-k">${esc(t('prog_eyebrow'))}</div>
-    <div class="pm-bar"><div class="pm-fill" style="width:20%"></div></div>
-    <div class="pm-v">${esc(t('prog_step',{n:1,stage:t('jr_s1')}))}</div></div><i data-lucide="chevron-right"></i>`;
-  icons();
-}
 /* GLANCE — 2–3 key numbers, hopeful (reuses snapshot labels; not the full table) */
 function renderGlance(){
   const m=model();const el=$('glanceBody');if(!el)return;
@@ -1276,12 +1330,12 @@ function showSection(id){
   window.scrollTo(0,0);icons();
 }
 function dashHome(){
+  closeDrawer();
   const home=$('dash-home');if(home)home.style.display='';
   document.querySelectorAll('.section.depth').forEach(s=>{s.style.display='none';});
   const bar=$('depthBar');if(bar)bar.style.display='none';
-  window.scrollTo(0,0);icons();
+  setActiveNav('home');window.scrollTo(0,0);icons();
 }
-function goUpgrade(){closeDrawer();dashHome();setTimeout(()=>scrollToSection('sec-upgrade'),120);}
 
 /* ── PLAN-FIRST OVERLAY ── */
 function openOverlay(){
@@ -1320,10 +1374,12 @@ const TOOLS={
     const m=model();
     if(m.surplus<=0&&m.totalDebt>0)return `<div class="tool-note">${esc(t('dfd_stabilise'))}</div>`;
     const maxExtra=Math.max(50,Math.round(m.surplus));
-    return `<div class="tool-result"><div class="tr-k">${esc(t('dfd_result_k'))}</div><div class="tr-v" id="dfdDate">—</div><div class="tr-note" id="dfdMonths"></div></div>
+    return `<div class="tool-result"><div class="tr-k">${esc(t('dfd_result_k'))}</div><div class="tr-v" id="dfdDate">—</div><div class="tr-note" id="dfdMonths"></div><div class="tr-approx" id="dfdApprox" hidden></div></div>
       <div class="slider-row"><label>${esc(t('dfd_extra'))}<span class="sv" id="dfdExtraLbl">0 ${esc(m.cur)}</span></label>
       <input type="range" id="dfdSlider" min="0" max="${maxExtra}" step="10" value="0" oninput="updDfd()"/></div>
+      <div class="dfd-saved" id="dfdSaved" hidden></div>
       <div class="dfd-buffer" id="dfdBuffer" hidden></div>
+      <div class="dfd-rateprompt" id="dfdRatePrompt" hidden></div>
       <div class="tool-note" id="dfdNote"></div>`;
   },
   strat(){
@@ -1453,18 +1509,44 @@ const TOOL_INIT={
   strat(){setStrat('snow');},
   income(){updInc();}
 };
+function editPlanHref(){return '/onboarding-debt-recovery.html?token='+encodeURIComponent(memberToken)+'&mode=fresh&lang='+encodeURIComponent(DFWI18n.current);}
 function updDfd(){
   const m=model();const extra=num($('dfdSlider').value);
   $('dfdExtraLbl').textContent=fmtMoney(extra,m.cur);
-  const months=monthsToFree(m.totalDebt,m.surplus+extra);
-  $('dfdDate').textContent=months?dateFromMonths(months):'—';
-  $('dfdMonths').textContent=months?t('dfd_months',{m:months}):'';
+  const rate=blendedRate();
+  const withRate=m.debts.filter(d=>num(d.interest)>0).length;
+  const totalD=m.debts.length;
+  const rateState=(totalD>0&&withRate===totalD)?'all':(withRate>0?'some':'none');
+  const base=amortise(m.totalDebt,m.surplus,rate);
+  const scen=amortise(m.totalDebt,m.surplus+extra,rate);
+  const months=scen.months;
+  $('dfdDate').textContent=months!=null?dateFromMonths(months):'—';
+  $('dfdMonths').textContent=months!=null?t('dfd_months',{m:months}):'';
   $('dfdNote').textContent=t('dfd_note',{monthly:fmtMoney(m.surplus+extra,m.cur),total:fmtMoney(m.totalDebt,m.cur)});
-  /* [P-E] cushion before extra repayment — GUIDING, never blocking. The slider
-     and the projection above always work as before; this only advises when the
-     emergency buffer is below 6× net income, so a surprise bill can't become
-     new debt. When extra>0, {gap} is how far the cushion still is from that goal
-     — i.e. the very money the slider is steering to debt could go to safety first. */
+  /* Interest-blind date gets an honest label; never presented as certain. */
+  const da=$('dfdApprox');
+  if(da){da.textContent=(rateState==='none')?t('dfd_date_approx'):'';da.hidden=(rateState!=='none');}
+  /* Interest saved — computed ONLY when a rate exists. At rate 0, base.interest
+     and scen.interest are both 0 and the rateState!=='none' guard keeps this
+     hidden: we NEVER invent a saved-interest figure without a real rate. */
+  const saved=$('dfdSaved');
+  if(saved){
+    if(rateState!=='none'&&base.months!=null&&scen.months!=null&&extra>0){
+      const cut=Math.max(0,base.interest-scen.interest);
+      if(cut>0){saved.textContent=t(rateState==='some'?'dfd_saved_floor':'dfd_saved',{amt:fmtMoney(cut,m.cur)});saved.hidden=false;}
+      else{saved.textContent='';saved.hidden=true;}
+    }else{saved.textContent='';saved.hidden=true;}
+  }
+  /* No rate / partial rate → explain WHY it matters + route to edit the plan.
+     Accuracy credential: refuse to fabricate, and turn the gap into the single
+     most motivating reason to complete the data. */
+  const rp=$('dfdRatePrompt');
+  if(rp){
+    if(rateState==='none'){rp.innerHTML=esc(t('dfd_rate_why'))+' <a href="'+editPlanHref()+'">'+esc(t('dfd_rate_cta'))+' &rarr;</a>';rp.hidden=false;}
+    else if(rateState==='some'){rp.innerHTML=esc(t('dfd_rate_partial'))+' <a href="'+editPlanHref()+'">'+esc(t('dfd_rate_cta'))+' &rarr;</a>';rp.hidden=false;}
+    else{rp.innerHTML='';rp.hidden=true;}
+  }
+  /* [P-E] cushion before extra repayment — GUIDING, never blocking. */
   const buf=$('dfdBuffer');
   if(buf){
     const {target,buffer}=bufferInfo();
@@ -1564,87 +1646,422 @@ const COUNTRY_LEGAL={
 };
 
 /* ── go ── */
-window.addEventListener('DOMContentLoaded',boot);
-
-/* ââ UPGRADE MODAL (EU consent gate + v16.18 email-lock) ââ */
-var $u=function(id){return document.getElementById(id);};
-var UP_T={
-  EN:{title:'Unlock Debt Recovery',price:'· one-time · 90 days · no subscription',
-      b1:'Pre-filled creditor letters',b2:'Crisis plans for the worst weeks',b3:'A debt-free date that moves',
-      consent:'I understand this is a personalised digital product, created from my own information and delivered immediately, and I waive my 14-day right of withdrawal (EU Directive 2011/83/EU Art. 16(m)). I accept the <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
-      go:'Continue to secure checkout',cancel:'Not now',
-      noemail:'Please re-open your member area from your email link, then try again.',
-      err:'Something went wrong. Please try again or contact support@debt-free.world.'},
-  FI:{title:'Avaa Debt Recovery',price:'· kertamaksu · 90 päivää · ei tilausta',
-      b1:'Esitäytetyt velkojakirjeet',b2:'Kriisisuunnitelmat pahimpiin viikkoihin',b3:'Velaton-päivä joka liikkuu',
-      consent:'Ymmärrän että kyseessä on kustomoitu, omilla tiedoillani luotu digituote joka toimitetaan välittömästi, ja luovun 14 päivän peruutusoikeudestani (EU-direktiivi 2011/83/EU 16(m) art.). Hyväksyn <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
-      go:'Jatka turvalliseen maksuun',cancel:'Ei nyt',
-      noemail:'Avaa jäsenalueesi uudelleen sähköpostilinkistä ja yritä uudelleen.',
-      err:'Jotain meni vikaan. Yritä uudelleen tai ota yhteyttä: support@debt-free.world.'}
+/* ════════════════════════════════════════════════
+   CREDITOR LETTERS (Pass 2) — wizard + AI wiring
+   ════════════════════════════════════════════════ */
+/* English typeLabels — sent to the model AND used for the saved-document title
+   (server-stable). meta.subtype carries the raw key. */
+const typeLabels={
+  hardship:'hardship and payment difficulty',
+  settlement:'debt settlement offer',
+  stop:'cease and desist / stop contact',
+  dispute:'debt dispute',
+  plan:'proposed payment plan',
+  holiday:'payment holiday request',
+  negotiation:'general negotiation'
 };
-function upT(){return UP_T[(window.DFWI18n&&DFWI18n.current)||'EN']||UP_T.EN;}
-function openUpgradeModal(){
-  var T=upT();
-  $u('um_title').textContent=T.title; $u('um_price').textContent=T.price;
-  $u('um_b1').textContent=T.b1; $u('um_b2').textContent=T.b2; $u('um_b3').textContent=T.b3;
-  $u('um_consent').innerHTML=T.consent;
-  $u('umGo').textContent=T.go; $u('um_cancel').textContent=T.cancel;
-  $u('umConsent').checked=false; $u('umGo').disabled=true; $u('umErr').textContent='';
-  $u('upModal').classList.add('open'); if(window.icons)icons();
+/* Constructive options first; the two caution types (dispute, stop) last. */
+const LW_TYPES=[
+  {k:'hardship',ic:'heart-handshake'},
+  {k:'plan',ic:'calendar-clock'},
+  {k:'settlement',ic:'handshake'},
+  {k:'holiday',ic:'pause'},
+  {k:'negotiation',ic:'messages-square'},
+  {k:'dispute',ic:'file-question'},
+  {k:'stop',ic:'hand'}
+];
+/* Active i18n code → English language name for the letter body. */
+const LANG_NAMES={FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',NL:'Dutch',FR:'French',ES:'Spanish',IT:'Italian',PL:'Polish',PT:'Portuguese',CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
+function letterLang(){const c=(DFWI18n.current||'EN').toUpperCase();return LANG_NAMES[c]||'English';}
+
+let lwStep=1, lwReady=false, lwOut=null;
+const lwData={creditor:'',type:'',amount:'',currency:'',hardship:'',situation:''};
+
+function lwInit(){
+  const m=model();
+  lwData.currency=m.cur;
+  const named=(m.debts||[]).filter(d=>d.creditor&&String(d.creditor).trim());
+  if(named.length===1){
+    lwData.creditor=String(named[0].creditor).trim();
+    if(named[0].amount)lwData.amount=String(named[0].amount);
+    if(named[0].currency)lwData.currency=named[0].currency;
+  }
+  lwReady=true;
 }
-function closeUpgradeModal(){$u('upModal').classList.remove('open');}
-function umToggle(){$u('umGo').disabled=!$u('umConsent').checked;}
-async function umCheckout(){
-  var T=upT();
-  if(!M){$u('umErr').textContent=T.noemail;return;}   /* only block if not logged in at all */
-  $u('umGo').disabled=true; $u('umErr').textContent='';
+function openLetters(){ if(!lwReady)lwInit(); showSection('sec-letters'); setActiveNav('sec-letters'); renderLetters(); }
+
+function lwCreditorInput(v){
+  lwData.creditor=v;
+  const hit=(model().debts||[]).find(d=>d.creditor&&String(d.creditor).trim().toLowerCase()===v.trim().toLowerCase());
+  if(hit){ if(hit.amount)lwData.amount=String(hit.amount); if(hit.currency)lwData.currency=hit.currency; }
+}
+function lwPickType(k){ lwData.type=k; renderLetters(); }
+
+function lwCapture(){
+  const a=$('lwAmount'); if(a)lwData.amount=a.value.trim();
+  const c=$('lwCurrency'); if(c)lwData.currency=(c.value.trim()||lwData.currency);
+  const h=$('lwHardship'); if(h)lwData.hardship=h.value.trim();
+  const s=$('lwSituation'); if(s)lwData.situation=s.value.trim();
+}
+function lwNext(){
+  if(lwStep===1){ const el=$('lwCreditor'); if(el)lwData.creditor=el.value.trim(); if(!lwData.creditor){showToast(t('lw_need_creditor'));return;} }
+  if(lwStep===2){ if(!lwData.type){showToast(t('lw_need_type'));return;} }
+  if(lwStep===3){ lwCapture(); }
+  if(lwStep<4){ lwStep++; renderLetters(); }
+}
+function lwBack(){ if(lwStep===3)lwCapture(); if(lwStep>1){ lwStep--; renderLetters(); } }
+function lwReset(){ lwOut=null; lwStep=1; lwData.type=''; lwData.hardship=''; lwData.situation=''; renderLetters(); }
+
+/* net-new AI call — EXACT current /api/chat contract (Worker v16.14): single
+   user message, no system field, claude-sonnet-4-6, max_tokens 2000. */
+async function callAI(prompt){
+  const res=await fetch(`${WORKER_URL}/api/chat`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-member-token':memberToken},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-6',
+      max_tokens:2000,
+      messages:[{role:'user',content:prompt}]
+    })
+  });
+  if(res.status===401)throw{code:401};
+  if(res.status===429)throw{code:429};
+  if(!res.ok)throw{code:0};
+  const data=await res.json();
+  const text=data&&data.content&&data.content[0]&&data.content[0].text||'';
+  if(!text)throw{code:0};
+  return text;
+}
+/* Full instruction block lives in the user content (two-part contract). */
+function buildLetterPrompt(d){
+  const language=letterLang();
+  const typeLabel=typeLabels[d.type]||typeLabels.negotiation;
+  const cc=country()||'your country';
+  const fn=firstName();
+  const instr=
+`You are a professional debt-letter writer at Debt-Free.world.
+Return EXACTLY two parts separated by a line containing ONLY: ---LETTER---
+ABOVE the delimiter: ONE warm empathy sentence addressed to the USER, in ${language} (this is for the user's eyes only and must NEVER appear inside the letter).
+BELOW the delimiter: the formal letter ONLY — nothing else.
+The letter is of type: ${typeLabel}, from the debtor to the named creditor ${d.creditor}, in ${language}. The debtor is in ${cc}; do NOT make legal claims specific to any other jurisdiction, and do not cite specific statutes unless certain they apply in ${cc}.
+Reflect the debtor's genuine hardship and figures honestly.
+The letter MUST include a debtor identity block and clearly-marked fill-in placeholders in square brackets that the user completes before sending: the debtor's surname if not provided, [account/reference number], and [date]. NEVER invent or guess an account/reference number or a date — always leave them as bracketed fill-ins. Keep the letter concise (fits one page): date line, debtor identity, creditor name, salutation, body, sign-off.
+Rules: never threaten, never admit to more than stated, never guarantee legal outcomes, do not advise anything unlawful, keep a calm non-adversarial tone that protects the debtor's position while remaining truthful.
+For 'stop contact' letters, state the request to cease contact plainly WITHOUT overstating rights that vary by country — frame it as a request and point the reader to national free debt-help for enforcement.`;
+  const params=
+`\n\n--- LETTER PARAMETERS ---
+Creditor: ${d.creditor}
+Letter type: ${typeLabel}
+Debtor first name (use in the identity block; leave the surname as a [surname] fill-in): ${fn||'[not provided]'}
+Amount owed: ${d.amount?(d.amount+' '+(d.currency||'')).trim():'[not specified]'}
+Debtor's hardship / what changed: ${d.hardship||'[not specified]'}
+Additional context: ${d.situation||'[none]'}
+Debtor country: ${cc}
+Write the empathy sentence AND the letter in: ${language}.`;
+  return instr+params;
+}
+
+async function lwGenerate(){
+  lwCapture();
+  const body=$('lettersBody');
+  body.innerHTML=`<div class="lw-load"><span class="spin"></span><span>${esc(t('lw_generating'))}</span></div>`;
   try{
-    var payload={priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
-        successUrl:'https://www.debt-free.world/thank-you-premium.html',
-        cancelUrl:'https://www.debt-free.world/member-free/'};
-    if(M.email)payload.email=M.email;   /* best-effort email lock; Stripe collects it if absent */
-    var r=await fetch(WORKER_URL+'/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)});
-    var d=await r.json();
-    if(d&&d.url){window.location.href=d.url;} else {$u('umErr').textContent=T.err; $u('umGo').disabled=false;}
-  }catch(e){$u('umErr').textContent=T.err; $u('umGo').disabled=false;}
+    const result=await callAI(buildLetterPrompt(lwData));
+    const [note,letter]=result.includes('---LETTER---')
+      ? result.split('---LETTER---').map(s=>s.trim())
+      : ['',result.trim()];
+    lwOut={note,letter,type:lwData.type,creditor:lwData.creditor};
+    renderLetters();
+  }catch(err){
+    const code=err&&err.code;
+    const msg=code===401?t('ai_err_session'):code===429?t('ai_err_limit'):t('ai_err_generic');
+    body.innerHTML=`<div class="lw-err">${esc(msg)}</div>`
+      +`<div class="lw-actions"><button class="lw-btn ghost" onclick="renderLetters()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button></div>`;
+    icons();
+  }
 }
+
+function lwCopyFallback(txt,done){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){}document.body.removeChild(ta);}
+function lwCopy(){
+  if(!lwOut)return;
+  const txt=lwOut.letter, done=()=>showToast(t('lw_copied'));
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>lwCopyFallback(txt,done));}
+  else lwCopyFallback(txt,done);
+}
+async function lwSave(){
+  if(!lwOut)return;
+  const btn=$('lwSaveBtn'); if(btn)btn.disabled=true;
+  const title=(lwOut.creditor+' · '+(typeLabels[lwOut.type]||'')).trim();
+  try{
+    const res=await fetch(`${WORKER_URL}/member/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({document:{type:'letter',title,creditor:lwOut.creditor,subtype:lwOut.type,text:lwOut.letter}})});
+    if(!res.ok)throw 0;
+    pushDoc({type:'letter',title,creditor:lwOut.creditor,subtype:lwOut.type,text:lwOut.letter,created_at:new Date().toISOString()});
+    renderArchive();
+    showToast(t('lw_saved'));
+    if(btn){btn.innerHTML=`<i data-lucide="check"></i> ${esc(t('lw_saved'))}`;icons();}
+  }catch(_){ showToast(t('lw_save_err')); if(btn)btn.disabled=false; }
+}
+
+function lwDots(n){let h='<div class="lw-steps">';for(let i=1;i<=4;i++)h+=`<div class="lw-dot${i<=n?' on':''}"></div>`;return h+'</div>';}
+
+function lwWizardHtml(){
+  if(lwStep===1){
+    const creds=[...new Set((model().debts||[]).map(d=>String(d.creditor||'').trim()).filter(Boolean))];
+    const opts=creds.map(c=>`<option value="${esc(c)}"></option>`).join('');
+    return lwDots(1)+`<div class="lw-panel">
+      <div class="lw-q">${esc(t('lw_step_creditor'))}</div>
+      <div class="lw-help">${esc(t('lw_creditor_help'))}</div>
+      <div class="lw-field">
+        <label>${esc(t('lw_creditor_lbl'))}</label>
+        <input id="lwCreditor" list="lwCredList" value="${esc(lwData.creditor)}" oninput="lwCreditorInput(this.value)" placeholder="${esc(t('lw_creditor_ph'))}" autocomplete="off"/>
+        <datalist id="lwCredList">${opts}</datalist>
+      </div>
+      <div class="lw-actions"><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwNext()">${esc(t('lw_next'))} <i data-lucide="arrow-right"></i></button></div>
+    </div>`;
+  }
+  if(lwStep===2){
+    const cards=LW_TYPES.map(x=>`<button class="lw-type${lwData.type===x.k?' sel':''}" onclick="lwPickType('${x.k}')">
+      <div class="lwt-h"><i data-lucide="${x.ic}"></i>${esc(t('lw_t_'+x.k))}</div>
+      <div class="lwt-d">${esc(t('lw_t_'+x.k+'_d'))}</div></button>`).join('');
+    let caution='';
+    if(lwData.type==='dispute')caution=`<div class="lw-caution"><i data-lucide="alert-triangle"></i><span>${esc(t('lw_caution_dispute'))}</span></div>`;
+    else if(lwData.type==='stop')caution=`<div class="lw-caution"><i data-lucide="alert-triangle"></i><span>${esc(t('lw_caution_stop'))}</span></div>`;
+    return lwDots(2)+`<div class="lw-panel">
+      <div class="lw-q">${esc(t('lw_step_type'))}</div>
+      <div class="lw-types">${cards}</div>
+      ${caution}
+      <div class="lw-actions"><button class="lw-btn ghost" onclick="lwBack()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwNext()">${esc(t('lw_next'))} <i data-lucide="arrow-right"></i></button></div>
+    </div>`;
+  }
+  if(lwStep===3){
+    return lwDots(3)+`<div class="lw-panel">
+      <div class="lw-q">${esc(t('lw_step_details'))}</div>
+      <div class="lw-row">
+        <div class="lw-field"><label>${esc(t('lw_amount_lbl'))}</label><input id="lwAmount" inputmode="decimal" value="${esc(lwData.amount)}" oninput="lwData.amount=this.value.trim()" placeholder="0"/></div>
+        <div class="lw-field lw-cur"><label>${esc(t('lw_currency_lbl'))}</label><input id="lwCurrency" value="${esc(lwData.currency)}" oninput="lwData.currency=this.value.trim()" autocomplete="off"/></div>
+      </div>
+      <div class="lw-field"><label>${esc(t('lw_hardship_lbl'))}</label><textarea id="lwHardship" oninput="lwData.hardship=this.value.trim()" placeholder="${esc(t('lw_hardship_ph'))}">${esc(lwData.hardship)}</textarea></div>
+      <div class="lw-field"><label>${esc(t('lw_situation_lbl'))}</label><textarea id="lwSituation" oninput="lwData.situation=this.value.trim()" placeholder="${esc(t('lw_situation_ph'))}">${esc(lwData.situation)}</textarea></div>
+      <div class="lw-actions"><button class="lw-btn ghost" onclick="lwBack()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwNext()">${esc(t('lw_next'))} <i data-lucide="arrow-right"></i></button></div>
+    </div>`;
+  }
+  /* step 4 — review + generate */
+  const amt=lwData.amount?`${esc(lwData.amount)} ${esc(lwData.currency)}`:'—';
+  return lwDots(4)+`<div class="lw-panel">
+    <div class="lw-q">${esc(t('lw_step_generate'))}</div>
+    <div class="lw-review">
+      <div class="lwr-row"><span>${esc(t('lw_creditor_lbl'))}</span><b>${esc(lwData.creditor)}</b></div>
+      <div class="lwr-row"><span>${esc(t('lw_review_type'))}</span><b>${esc(t('lw_t_'+lwData.type))}</b></div>
+      <div class="lwr-row"><span>${esc(t('lw_amount_lbl'))}</span><b>${amt}</b></div>
+      <div class="lwr-row"><span>${esc(t('lw_review_lang'))}</span><b>${esc(letterLang())}</b></div>
+    </div>
+    <div class="lw-actions"><button class="lw-btn ghost" onclick="lwBack()"><i data-lucide="arrow-left"></i> ${esc(t('lw_back'))}</button><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwGenerate()"><i data-lucide="pen-line"></i> ${esc(t('lw_generate'))}</button></div>
+  </div>`;
+}
+
+function lwOutputHtml(){
+  const noteHtml=lwOut.note?`<div class="lw-note">${esc(lwOut.note)}</div>`:'';
+  /* maakohtainen signpost — SUPPORT_ORGS[country][0]; ei geneeristä ulkolinkiä */
+  const orgs=SUPPORT_ORGS[country()]||[]; const org=orgs[0];
+  let helpLink;
+  if(org&&org.url)helpLink=`<a href="https://${esc(org.url)}" target="_blank" rel="noopener">${esc(org.name)}</a>`;
+  else if(org)helpLink=`<a href="javascript:void(0)" onclick="navTo('sec-support')">${esc(org.name)}</a>`;
+  else helpLink=`<a href="javascript:void(0)" onclick="navTo('sec-support')">${esc(t('letter_next_help_generic'))}</a>`;
+  return `<div class="lw-panel">
+    ${noteHtml}
+    <div class="lw-letter" id="lwLetterText">${esc(lwOut.letter)}</div>
+    <div class="lw-fillhint"><i data-lucide="info"></i><span>${esc(t('letter_fillin_hint'))}</span></div>
+    <div class="lw-out-actions">
+      <button class="lw-btn prim" onclick="lwCopy()"><i data-lucide="copy"></i> ${esc(t('lw_copy'))}</button>
+      <button class="lw-btn ghost" id="lwSaveBtn" onclick="lwSave()"><i data-lucide="save"></i> ${esc(t('lw_save'))}</button>
+      <button class="lw-btn ghost" onclick="lwReset()"><i data-lucide="rotate-ccw"></i> ${esc(t('lw_another'))}</button>
+    </div>
+    <div class="lw-next">
+      <h5><i data-lucide="compass"></i>${esc(t('letter_next_title'))}</h5>
+      <ul>
+        <li>${esc(t('letter_next_send'))}</li>
+        <li>${esc(t('letter_next_keep'))}</li>
+        <li>${esc(t('letter_next_help'))} ${helpLink}</li>
+      </ul>
+    </div>
+  </div>`;
+}
+
+function renderLetters(){
+  if(!lwReady)lwInit();
+  const body=$('lettersBody'); if(!body)return;
+  body.innerHTML=lwOut?lwOutputHtml():lwWizardHtml();
+  icons();
+}
+
+/* ════════════════════════════════════════════════
+   PASS 3 — Crisis Plans · Weekly Check-in + Trend · Document Archive
+   All frontend. Reads M.documents (returned by /member/validate v16.16).
+   ════════════════════════════════════════════════ */
+
+/* Guarded documents accessor — house style (mirrors the M.debts guard at model()).
+   NEVER chain array methods on the raw property: it throws when it is undefined. */
+function memberDocs(){return Array.isArray(M&&M.documents)?M.documents:[];}
+/* Optimistic local append so a just-saved doc appears this session; the next
+   /member/validate reconciles with the server copy (server sets created_at, caps 50). */
+function pushDoc(doc){if(!M)return;if(!Array.isArray(M.documents))M.documents=[];M.documents.unshift(doc);}
+
+/* ── WEEKLY CHECK-IN + BUFFER TREND (inside the 90-day hero) ── */
+function checkinData(){
+  return memberDocs()
+    .filter(d=>d&&d.type==='update'&&d.subtype==='checkin')
+    .map(d=>{try{const p=JSON.parse(d.text||'{}');return {buffer:num(p.buffer),week:num(p.week)||null,note:(p.note||''),at:d.created_at||null};}catch(_){return null;}})
+    .filter(Boolean)
+    .sort((a,b)=>{const ta=a.at?new Date(a.at).getTime():0,tb=b.at?new Date(b.at).getTime():0;return ta-tb;});
+}
+/* Lightweight inline SVG sparkline — brand green #0f4d28, no library. Only ever
+   called with >=2 points (a single point never draws a fake line). */
+function trendSparkline(pts){
+  const vals=pts.map(p=>p.buffer);
+  const W=280,H=64,pad=8,n=vals.length;
+  const min=Math.min.apply(null,vals),max=Math.max.apply(null,vals),span=(max-min)||1;
+  const x=i=>pad+(i*(W-2*pad)/(n-1));
+  const y=v=>H-pad-((v-min)/span)*(H-2*pad);
+  let d='';vals.forEach((v,i)=>{d+=(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)+' ';});
+  let dots='';vals.forEach((v,i)=>{dots+=`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="2.6" fill="#0f4d28"/>`;});
+  return `<svg class="ci-spark" viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="none" role="img" aria-hidden="true"><path d="${d.trim()}" fill="none" stroke="#0f4d28" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
+}
+function renderCheckin(){
+  const el=$('ciBody'); if(!el)return;
+  const pts=checkinData();
+  let trend;
+  if(pts.length>=2){
+    trend=`<div class="ci-trend">
+        <div class="ci-trend-h">${esc(t('ci_trend_title'))}</div>
+        ${trendSparkline(pts)}
+        <div class="ci-trend-cap"><span>${esc(t('dr_week',{n:pts[0].week||1}))}</span><span>${esc(fmtMoney(pts[pts.length-1].buffer,model().cur))}</span></div>
+      </div>`;
+  }else{
+    /* Honest empty state — the Pass 1 promise: no fake trend on a single point. */
+    trend=`<div class="ci-trend empty"><div class="ci-trend-h">${esc(t('ci_trend_title'))}</div><p class="ci-empty">${esc(t('ci_trend_empty'))}</p></div>`;
+  }
+  const m=model();
+  const prefill=Math.round(m.surplus>0?m.surplus:0);
+  el.innerHTML=trend+`<div class="ci-card">
+      <div class="ci-title">${esc(t('ci_title'))}</div>
+      <p class="ci-lead">${esc(t('ci_lead'))}</p>
+      <div class="ci-field"><label for="ciBuffer">${esc(t('ci_buffer_lbl'))}</label>
+        <input id="ciBuffer" inputmode="decimal" value="${prefill}"/></div>
+      <div class="ci-field"><label for="ciNote">${esc(t('ci_note_lbl'))}</label>
+        <input id="ciNote" placeholder="${esc(t('ci_note_ph'))}" maxlength="600" autocomplete="off"/></div>
+      <button class="ci-save" id="ciSaveBtn" onclick="saveCheckin()"><i data-lucide="check-circle-2"></i> ${esc(t('ci_save'))}</button>
+    </div>`;
+  icons();
+}
+async function saveCheckin(){
+  const btn=$('ciSaveBtn'); if(btn)btn.disabled=true;
+  const buffer=num($('ciBuffer')?$('ciBuffer').value:0);
+  const note=($('ciNote')?$('ciNote').value:'').trim().slice(0,600);
+  const week=planWeek();
+  const date=new Date().toLocaleDateString(localeForLang(),{day:'numeric',month:'short'});
+  const payload=JSON.stringify({buffer:buffer,week:week,note:note});
+  try{
+    const res=await fetch(`${WORKER_URL}/member/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({document:{type:'update',subtype:'checkin',title:`Week ${week} · ${date}`,text:payload}})});
+    if(!res.ok)throw 0;
+    pushDoc({type:'update',subtype:'checkin',title:`Week ${week} · ${date}`,text:payload,created_at:new Date().toISOString()});
+    showToast(t('ci_saved'));
+    renderCheckin();renderArchive();
+  }catch(_){ showToast(t('ci_save_err')); if(btn)btn.disabled=false; }
+}
+
+/* ── CRISIS PLANS (sec-crisis) — universal, non-predatory, no country-specific
+   benefit / law / amount names; cross-links into letters, support, budget. ── */
+const CRISIS=[
+  {k:'jobloss', ic:'briefcase',       letter:'hardship'},
+  {k:'illness', ic:'heart-pulse',     letter:'hardship'},
+  {k:'sep',     ic:'users',           letter:'hardship'},
+  {k:'emerg',   ic:'alert-triangle',  letter:'holiday'}
+];
+let crisisOpen=null;
+function crisisToggle(k){crisisOpen=(crisisOpen===k)?null:k;renderCrisis();}
+function crisisOpenLetter(type){ if(!lwReady)lwInit(); lwOut=null; lwStep=1; lwData.type=type; openLetters(); }
+function renderCrisis(){
+  const el=$('crisisBody'); if(!el)return;
+  const cards=CRISIS.map(c=>{
+    const open=crisisOpen===c.k;
+    const body=open?`<div class="cr-body">
+        <p class="cr-intro">${esc(t('crisis_'+c.k+'_intro'))}</p>
+        <div class="cr-block">
+          <div class="cr-bh"><i data-lucide="zap"></i>${esc(t('crisis_immediate'))}</div>
+          <ol class="cr-steps">
+            <li>${esc(t('crisis_'+c.k+'_i1'))}</li>
+            <li>${esc(t('crisis_'+c.k+'_i2'))}<div class="cr-act"><button onclick="crisisOpenLetter('${c.letter}')"><i data-lucide="mail-plus"></i>${esc(t('crisis_act_letter'))}</button></div></li>
+            <li>${esc(t('crisis_'+c.k+'_i3'))}<div class="cr-act"><button onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i>${esc(t('crisis_act_support'))}</button></div></li>
+          </ol>
+        </div>
+        <div class="cr-block">
+          <div class="cr-bh"><i data-lucide="anchor"></i>${esc(t('crisis_stabilise'))}</div>
+          <ol class="cr-steps">
+            <li>${esc(t('crisis_'+c.k+'_s1'))}<div class="cr-act"><button onclick="openTool('budget')"><i data-lucide="piggy-bank"></i>${esc(t('crisis_act_budget'))}</button></div></li>
+            <li>${esc(t('crisis_'+c.k+'_s2'))}</li>
+            <li>${esc(t('crisis_'+c.k+'_s3'))}</li>
+          </ol>
+        </div>
+        <p class="cr-safe"><i data-lucide="info"></i><span>${esc(t('crisis_safe_note'))}</span></p>
+      </div>`:'';
+    return `<div class="cr-card${open?' open':''}">
+        <button class="cr-toggle" onclick="crisisToggle('${c.k}')" aria-expanded="${open?'true':'false'}">
+          <span class="cr-ic"><i data-lucide="${c.ic}"></i></span>
+          <span class="cr-t">${esc(t('crisis_'+c.k+'_t'))}</span>
+          <i class="cr-chev" data-lucide="chevron-${open?'up':'down'}"></i>
+        </button>${body}</div>`;
+  }).join('');
+  el.innerHTML=`<p class="cr-lead">${esc(t('crisis_lead'))}</p>${cards}`;
+  icons();
+}
+
+/* ── DOCUMENT ARCHIVE (sec-archive) — reads the guarded docs, no extra list call ── */
+let archiveOpenId=null;
+function archToggle(id){archiveOpenId=(archiveOpenId===id)?null:id;renderArchive();}
+function archCopy(id){
+  const i=parseInt(id.slice(1),10);
+  const letters=memberDocs().filter(d=>d&&d.type==='letter');
+  const d=letters[i]; if(!d)return;
+  const txt=String(d.text||''), done=()=>showToast(t('arch_copied'));
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>lwCopyFallback(txt,done));}
+  else lwCopyFallback(txt,done);
+}
+function archFmtDate(iso){if(!iso)return '';const d=new Date(iso);return isNaN(d.getTime())?'':d.toLocaleDateString(localeForLang(),{day:'numeric',month:'short',year:'numeric'});}
+function renderArchive(){
+  const el=$('archiveBody'); if(!el)return;
+  const docs=memberDocs();
+  const letters=docs.filter(d=>d&&d.type==='letter');
+  const checkins=docs.filter(d=>d&&d.type==='update'&&d.subtype==='checkin');
+  if(!letters.length&&!checkins.length){
+    el.innerHTML=`<div class="arch-empty"><i data-lucide="folder-open"></i><p>${esc(t('arch_empty'))}</p></div>`;
+    icons();return;
+  }
+  const lettersHtml=letters.length?letters.map((d,i)=>{
+    const id='L'+i, open=archiveOpenId===id, text=String(d.text||'');
+    return `<div class="arch-item${open?' open':''}">
+      <button class="arch-row" onclick="archToggle('${id}')">
+        <span class="arch-ic"><i data-lucide="mail"></i></span>
+        <span class="arch-meta"><span class="arch-title">${esc(d.title||d.creditor||t('arch_letters'))}</span><span class="arch-sub">${esc(archFmtDate(d.created_at))}</span></span>
+        <i class="arch-chev" data-lucide="chevron-${open?'up':'down'}"></i>
+      </button>
+      ${open?`<div class="arch-open"><pre class="arch-text">${esc(text)}</pre><button class="arch-copy" onclick="archCopy('${id}')"><i data-lucide="copy"></i> ${esc(t('arch_copy'))}</button></div>`:''}
+    </div>`;
+  }).join(''):`<p class="arch-none">${esc(t('arch_empty_letters'))}</p>`;
+  const ciHtml=checkins.length?checkins.slice().reverse().map(d=>{
+    let p={};try{p=JSON.parse(d.text||'{}');}catch(_){}
+    const wk=num(p.week)||null, buf=num(p.buffer), note=String(p.note||'').trim();
+    return `<div class="arch-ci">
+      <div class="arch-ci-h"><span class="arch-ci-wk">${wk?esc(t('dr_week',{n:wk})):esc(t('arch_checkins'))}</span><span class="arch-ci-date">${esc(archFmtDate(d.created_at))}</span></div>
+      <div class="arch-ci-buf"><span>${esc(t('arch_buffer'))}</span><strong>${esc(fmtMoney(buf,model().cur))}</strong></div>
+      ${note?`<div class="arch-ci-note">${esc(note)}</div>`:''}
+    </div>`;
+  }).join(''):`<p class="arch-none">${esc(t('arch_empty_checkins'))}</p>`;
+  el.innerHTML=`<div class="arch-group"><div class="arch-gh"><i data-lucide="mail"></i>${esc(t('arch_letters'))}</div>${lettersHtml}</div>
+    <div class="arch-group"><div class="arch-gh"><i data-lucide="calendar-check"></i>${esc(t('arch_checkins'))}</div>${ciHtml}</div>`;
+  icons();
+}
+
+window.addEventListener('DOMContentLoaded',boot);
 </script>
-<style>
-.up-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(9,50,24,.55);align-items:center;justify-content:center;padding:20px;}
-.up-modal.open{display:flex;}
-.up-modal-card{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:28px 26px;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
-.up-modal-x{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:#7a8a80;padding:4px;line-height:0;}
-.up-modal-card h3{font-family:var(--serif);font-size:22px;color:var(--green-deep);margin:0 0 12px;font-weight:400;}
-.up-modal-price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
-.up-modal-price .amt{font-family:var(--serif);font-size:28px;color:var(--green);}
-.up-modal-price #um_price{font-size:13px;color:#5a6a60;}
-.up-modal-benes{list-style:none;padding:0;margin:0 0 18px;}
-.up-modal-benes li{display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2b20;padding:5px 0;}
-.up-modal-benes i{width:18px;height:18px;color:var(--green);}
-.up-modal-consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#3a4a40;line-height:1.55;margin-bottom:18px;cursor:pointer;}
-.up-modal-consent input{margin-top:2px;flex-shrink:0;width:16px;height:16px;accent-color:var(--green);}
-.up-modal-consent a{color:var(--green);}
-.up-modal-go{width:100%;background:var(--green);color:#fff;border:none;border-radius:26px;padding:14px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:6px;}
-.up-modal-go:disabled{opacity:.45;cursor:not-allowed;}
-.up-modal-cancel{width:100%;background:none;border:none;color:#7a8a80;font-family:inherit;font-size:13px;cursor:pointer;padding:8px;}
-.up-modal-err{color:#b00020;font-size:12.5px;margin:6px 0 0;min-height:1px;}
-</style>
-<div class="up-modal" id="upModal" role="dialog" aria-modal="true" aria-labelledby="um_title">
-  <div class="up-modal-card">
-    <button class="up-modal-x" onclick="closeUpgradeModal()" aria-label="Close"><i data-lucide="x"></i></button>
-    <h3 id="um_title"></h3>
-    <div class="up-modal-price"><span class="amt">19 €</span><span id="um_price"></span></div>
-    <ul class="up-modal-benes">
-      <li><i data-lucide="mail-plus"></i><span id="um_b1"></span></li>
-      <li><i data-lucide="shield"></i><span id="um_b2"></span></li>
-      <li><i data-lucide="calendar-clock"></i><span id="um_b3"></span></li>
-    </ul>
-    <label class="up-modal-consent"><input type="checkbox" id="umConsent" onchange="umToggle()"><span id="um_consent"></span></label>
-    <button class="up-modal-go" id="umGo" onclick="umCheckout()" disabled></button>
-    <button class="up-modal-cancel" id="um_cancel" onclick="closeUpgradeModal()"></button>
-    <p class="up-modal-err" id="umErr"></p>
-  </div>
-</div>
 </body>
 </html>
