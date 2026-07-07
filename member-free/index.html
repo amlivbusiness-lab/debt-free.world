@@ -352,6 +352,10 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .tool-note{font-size:13px;color:var(--muted);line-height:1.6;background:var(--green-pale);border-radius:11px;padding:13px 15px;}
 .tool-note strong{color:var(--text);}
 .dfd-buffer{margin-bottom:18px;padding:11px 14px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:12.5px;line-height:1.55;color:var(--text);}
+.tr-approx{font-size:12px;color:rgba(255,255,255,.82);margin-top:6px;font-style:italic;}
+.dfd-saved{margin-bottom:18px;padding:12px 15px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:13.5px;font-weight:600;color:var(--green);}
+.dfd-rateprompt{margin-bottom:18px;padding:12px 15px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;font-size:12.5px;line-height:1.6;color:var(--text);}
+.dfd-rateprompt a{color:var(--green);font-weight:700;white-space:nowrap;}
 .strat-why{margin-top:10px;padding-left:11px;border-left:3px solid var(--green);font-size:12.5px;line-height:1.55;color:var(--text);}
 /* [A1] per-tool framing intro */
 .tool-intro{font-size:13.5px;line-height:1.6;color:var(--text);background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;padding:12px 15px;margin-bottom:18px;}
@@ -1320,10 +1324,12 @@ const TOOLS={
     const m=model();
     if(m.surplus<=0&&m.totalDebt>0)return `<div class="tool-note">${esc(t('dfd_stabilise'))}</div>`;
     const maxExtra=Math.max(50,Math.round(m.surplus));
-    return `<div class="tool-result"><div class="tr-k">${esc(t('dfd_result_k'))}</div><div class="tr-v" id="dfdDate">—</div><div class="tr-note" id="dfdMonths"></div></div>
+    return `<div class="tool-result"><div class="tr-k">${esc(t('dfd_result_k'))}</div><div class="tr-v" id="dfdDate">—</div><div class="tr-note" id="dfdMonths"></div><div class="tr-approx" id="dfdApprox" hidden></div></div>
       <div class="slider-row"><label>${esc(t('dfd_extra'))}<span class="sv" id="dfdExtraLbl">0 ${esc(m.cur)}</span></label>
       <input type="range" id="dfdSlider" min="0" max="${maxExtra}" step="10" value="0" oninput="updDfd()"/></div>
+      <div class="dfd-saved" id="dfdSaved" hidden></div>
       <div class="dfd-buffer" id="dfdBuffer" hidden></div>
+      <div class="dfd-rateprompt" id="dfdRatePrompt" hidden></div>
       <div class="tool-note" id="dfdNote"></div>`;
   },
   strat(){
@@ -1453,18 +1459,42 @@ const TOOL_INIT={
   strat(){setStrat('snow');},
   income(){updInc();}
 };
+function editPlanHref(){return '/onboarding-debt-free.html?token='+encodeURIComponent(memberToken)+'&mode=fresh&lang='+encodeURIComponent(DFWI18n.current);}
 function updDfd(){
   const m=model();const extra=num($('dfdSlider').value);
   $('dfdExtraLbl').textContent=fmtMoney(extra,m.cur);
-  const months=monthsToFree(m.totalDebt,m.surplus+extra);
-  $('dfdDate').textContent=months?dateFromMonths(months):'—';
-  $('dfdMonths').textContent=months?t('dfd_months',{m:months}):'';
+  const rate=blendedRate();
+  const withRate=m.debts.filter(d=>num(d.interest)>0).length;
+  const totalD=m.debts.length;
+  const rateState=(totalD>0&&withRate===totalD)?'all':(withRate>0?'some':'none');
+  const base=amortise(m.totalDebt,m.surplus,rate);
+  const scen=amortise(m.totalDebt,m.surplus+extra,rate);
+  const months=scen.months;
+  $('dfdDate').textContent=months!=null?dateFromMonths(months):'—';
+  $('dfdMonths').textContent=months!=null?t('dfd_months',{m:months}):'';
   $('dfdNote').textContent=t('dfd_note',{monthly:fmtMoney(m.surplus+extra,m.cur),total:fmtMoney(m.totalDebt,m.cur)});
-  /* [P-E] cushion before extra repayment — GUIDING, never blocking. The slider
-     and the projection above always work as before; this only advises when the
-     emergency buffer is below 6× net income, so a surprise bill can't become
-     new debt. When extra>0, {gap} is how far the cushion still is from that goal
-     — i.e. the very money the slider is steering to debt could go to safety first. */
+  /* Interest-blind date gets an honest label; never presented as certain. */
+  const da=$('dfdApprox');
+  if(da){da.textContent=(rateState==='none')?t('dfd_date_approx'):'';da.hidden=(rateState!=='none');}
+  /* Interest saved — ONLY when a rate exists. At rate 0, base.interest and
+     scen.interest are both 0 and the rateState!=='none' guard keeps this hidden:
+     we NEVER invent a saved-interest figure without a real rate. */
+  const saved=$('dfdSaved');
+  if(saved){
+    if(rateState!=='none'&&base.months!=null&&scen.months!=null&&extra>0){
+      const cut=Math.max(0,base.interest-scen.interest);
+      if(cut>0){saved.textContent=t(rateState==='some'?'dfd_saved_floor':'dfd_saved',{amt:fmtMoney(cut,m.cur)});saved.hidden=false;}
+      else{saved.textContent='';saved.hidden=true;}
+    }else{saved.textContent='';saved.hidden=true;}
+  }
+  /* No rate / partial rate → explain WHY it matters + route to edit the plan. */
+  const rp=$('dfdRatePrompt');
+  if(rp){
+    if(rateState==='none'){rp.innerHTML=esc(t('dfd_rate_why'))+' <a href="'+editPlanHref()+'">'+esc(t('dfd_rate_cta'))+' &rarr;</a>';rp.hidden=false;}
+    else if(rateState==='some'){rp.innerHTML=esc(t('dfd_rate_partial'))+' <a href="'+editPlanHref()+'">'+esc(t('dfd_rate_cta'))+' &rarr;</a>';rp.hidden=false;}
+    else{rp.innerHTML='';rp.hidden=true;}
+  }
+  /* [P-E] cushion before extra repayment — GUIDING, never blocking. */
   const buf=$('dfdBuffer');
   if(buf){
     const {target,buffer}=bufferInfo();
