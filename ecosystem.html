@@ -132,6 +132,26 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   .card-head-right{align-items:flex-start;text-align:left;flex-direction:row;width:100%;justify-content:space-between;}
   .footer-row{flex-direction:column;text-align:center;}
 }
+
+/* ══ PASS B: EU consent gate for direct Debt Recovery purchase (ported from member-free v2.2) ══ */
+.drc-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(9,50,24,.55);align-items:center;justify-content:center;padding:20px;}
+.drc-modal.open{display:flex;}
+.drc-modal-card{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:28px 26px;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.drc-modal-x{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:#7a8a80;padding:4px;line-height:0;}
+.drc-modal-card h3{font-family:var(--serif);font-size:22px;color:var(--green-deep);margin:0 0 12px;font-weight:400;}
+.drc-modal-price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.drc-modal-price .amt{font-family:var(--serif);font-size:28px;color:var(--green);}
+.drc-modal-price #drc_price{font-size:13px;color:#5a6a60;}
+.drc-modal-benes{list-style:none;padding:0;margin:0 0 18px;}
+.drc-modal-benes li{display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2b20;padding:5px 0;}
+.drc-modal-benes svg{width:18px;height:18px;color:var(--green);flex-shrink:0;}
+.drc-modal-consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#3a4a40;line-height:1.55;margin-bottom:18px;cursor:pointer;}
+.drc-modal-consent input{margin-top:2px;flex-shrink:0;width:16px;height:16px;accent-color:var(--green);}
+.drc-modal-consent a{color:var(--green);}
+.drc-modal-go{width:100%;background:var(--green);color:#fff;border:none;border-radius:26px;padding:14px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:6px;}
+.drc-modal-go:disabled{opacity:.45;cursor:not-allowed;}
+.drc-modal-cancel{width:100%;background:none;border:none;color:#7a8a80;font-family:inherit;font-size:13px;cursor:pointer;padding:8px;}
+.drc-modal-err{color:#b00020;font-size:12.5px;margin:6px 0 0;min-height:1px;}
 </style>
 </head>
 <body>
@@ -289,7 +309,7 @@ Yours faithfully,
 
         <!-- ══ BUY (live) vs NOTIFY (gated until go-live QA) — toggled by DR_LIVE ══ -->
         <div id="dr-buy-live" style="display:none;">
-          <a href="#" class="btn-primary" onclick="startDRCheckout(event)">Get Debt Recovery — 19 €</a>
+          <a href="#" class="btn-primary" onclick="openDRConsent(event)">Get Debt Recovery — 19 €</a>
           <span class="card-note">One-time payment. No subscription. Secure checkout via Stripe.</span>
         </div>
         <div id="dr-buy-gated">
@@ -431,8 +451,8 @@ Yours faithfully,
    To keep Community Access live independently of the purchase, set
    COMMUNITY_LIVE = true below (it defaults to following DR_LIVE).
    ══════════════════════════════════════════════════════════════════════ */
-const DR_LIVE = true;
-const COMMUNITY_LIVE = DR_LIVE; // set to `true` to open Community Access before the paid product
+const DR_LIVE = false;
+const COMMUNITY_LIVE = false; // PASS B: decoupled from DR_LIVE. No free door on cold ecosystem traffic; Community Access lives in the member-free self-select modal (spec Aalto 5). Do NOT re-couple to DR_LIVE.
 
 function toggleMenu(){
   document.getElementById('mobileMenu').classList.toggle('open');
@@ -598,7 +618,77 @@ async function notifyDR(e){
     note.style.display = COMMUNITY_LIVE ? 'none' : 'block';
   }
 })();
+
+/* ══ PASS B: EU consent gate (direct buy). Mirrors member-free v2.2 umCheckout.
+   No email-lock here: no logged-in member; Stripe collects the email.
+   Language follows the page dfw_lang store; EN/FI native, EN fallback.
+   NOTE: element id "drcGo" is intentionally distinct from function name
+   "drcCheckout" to avoid the named-element-window-shadow footgun. ══ */
+var DRC_T={
+  EN:{title:'Unlock Debt Recovery',price:'\u00b7 one-time \u00b7 90 days \u00b7 no subscription',
+      b1:'Pre-filled creditor letters',b2:'Crisis plans for the worst weeks',b3:'A debt-free date that moves',
+      consent:'I understand this is a personalised digital product, created from my own information and delivered immediately, and I waive my 14-day right of withdrawal (EU Directive 2011/83/EU Art. 16(m)). I accept the <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
+      go:'Continue to secure checkout',cancel:'Not now',
+      err:'Something went wrong. Please try again or contact support@debt-free.world.'},
+  FI:{title:'Avaa Debt Recovery',price:'\u00b7 kertamaksu \u00b7 90 p\u00e4iv\u00e4\u00e4 \u00b7 ei tilausta',
+      b1:'Esit\u00e4ytetyt velkojakirjeet',b2:'Kriisisuunnitelmat pahimpiin viikkoihin',b3:'Velaton-p\u00e4iv\u00e4 joka liikkuu',
+      consent:'Ymm\u00e4rr\u00e4n ett\u00e4 kyseess\u00e4 on kustomoitu, omilla tiedoillani luotu digituote joka toimitetaan v\u00e4litt\u00f6m\u00e4sti, ja luovun 14 p\u00e4iv\u00e4n peruutusoikeudestani (EU-direktiivi 2011/83/EU 16(m) art.). Hyv\u00e4ksyn <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
+      go:'Jatka turvalliseen maksuun',cancel:'Ei nyt',
+      err:'Jotain meni vikaan. Yrit\u00e4 uudelleen tai ota yhteytt\u00e4: support@debt-free.world.'}
+};
+function drcT(){var l=(localStorage.getItem('dfw_lang')||'EN').toUpperCase();return DRC_T[l]||DRC_T.EN;}
+function openDRConsent(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  var T=drcT();
+  document.getElementById('drc_title').textContent=T.title;
+  document.getElementById('drc_price').textContent=T.price;
+  document.getElementById('drc_b1').textContent=T.b1;
+  document.getElementById('drc_b2').textContent=T.b2;
+  document.getElementById('drc_b3').textContent=T.b3;
+  document.getElementById('drc_consent').innerHTML=T.consent;
+  document.getElementById('drcGo').textContent=T.go;
+  document.getElementById('drc_cancel').textContent=T.cancel;
+  document.getElementById('drcConsent').checked=false;
+  document.getElementById('drcGo').disabled=true;
+  document.getElementById('drcErr').textContent='';
+  document.getElementById('drcModal').classList.add('open');
+}
+function closeDRConsent(){document.getElementById('drcModal').classList.remove('open');}
+function drcToggle(){document.getElementById('drcGo').disabled=!document.getElementById('drcConsent').checked;}
+async function drcCheckout(){
+  var T=drcT();
+  document.getElementById('drcGo').disabled=true;
+  document.getElementById('drcErr').textContent='';
+  try{
+    var r=await fetch('https://debt-free-proxy.amlivbusiness.workers.dev/create-checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({priceId:'price_1TdqWbIuko2ODVfsv1xuAHsZ',
+        successUrl:'https://www.debt-free.world/thank-you-premium.html',
+        cancelUrl:'https://www.debt-free.world/ecosystem.html'})});
+    var d=await r.json();
+    if(d&&d.url){window.location.href=d.url;}
+    else{document.getElementById('drcErr').textContent=T.err;document.getElementById('drcGo').disabled=false;}
+  }catch(err){document.getElementById('drcErr').textContent=T.err;document.getElementById('drcGo').disabled=false;}
+}
 </script>
 
+
+<!-- ══ PASS B: EU consent gate for direct Debt Recovery purchase ══ -->
+<div class="drc-modal" id="drcModal" role="dialog" aria-modal="true" aria-labelledby="drc_title">
+  <div class="drc-modal-card">
+    <button class="drc-modal-x" onclick="closeDRConsent()" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <h3 id="drc_title">Unlock Debt Recovery</h3>
+    <div class="drc-modal-price"><span class="amt">19 &euro;</span><span id="drc_price"></span></div>
+    <ul class="drc-modal-benes">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b1"></span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b2"></span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b3"></span></li>
+    </ul>
+    <label class="drc-modal-consent"><input type="checkbox" id="drcConsent" onchange="drcToggle()"><span id="drc_consent"></span></label>
+    <button class="drc-modal-go" id="drcGo" onclick="drcCheckout()" disabled></button>
+    <button class="drc-modal-cancel" id="drc_cancel" onclick="closeDRConsent()"></button>
+    <p class="drc-modal-err" id="drcErr"></p>
+  </div>
+</div>
 </body>
 </html>
