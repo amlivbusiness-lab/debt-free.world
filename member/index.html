@@ -1745,7 +1745,7 @@ ABOVE the delimiter: ONE warm empathy sentence addressed to the USER, in ${langu
 BELOW the delimiter: the formal letter ONLY — nothing else.
 The letter is of type: ${typeLabel}, from the debtor to the named creditor ${d.creditor}, in ${language}. The debtor is in ${cc}; do NOT make legal claims specific to any other jurisdiction, and do not cite specific statutes unless certain they apply in ${cc}.
 Reflect the debtor's genuine hardship and figures honestly.
-The letter MUST include a debtor identity block and clearly-marked fill-in placeholders in square brackets that the user completes before sending: the debtor's surname if not provided, [account/reference number], and [date]. NEVER invent or guess an account/reference number or a date — always leave them as bracketed fill-ins. Keep the letter concise (fits one page): date line, debtor identity, creditor name, salutation, body, sign-off.
+The letter MUST include a debtor identity block and clearly-marked fill-in placeholders in square brackets that the user completes before sending: the debtor's surname if not provided, [account/reference number], and [date]. NEVER invent or guess an account/reference number or a date — always leave them as bracketed fill-ins. Keep the letter concise (fits one page): date line, debtor identity, creditor name, salutation, body, sign-off. Output PLAIN TEXT ONLY \u2014 no Markdown. Do not use asterisks (*), underscores (_), hash marks (#) or backticks anywhere for bold, italics, or headings; a formal letter must contain none of these as formatting.
 Rules: never threaten, never admit to more than stated, never guarantee legal outcomes, do not advise anything unlawful, keep a calm non-adversarial tone that protects the debtor's position while remaining truthful.
 For 'stop contact' letters, state the request to cease contact plainly WITHOUT overstating rights that vary by country — frame it as a request and point the reader to national free debt-help for enforcement.`;
   const params=
@@ -1761,6 +1761,21 @@ Write the empathy sentence AND the letter in: ${language}.`;
   return instr+params;
 }
 
+/* Defensive: models occasionally emit Markdown; a formal creditor letter must be
+   clean plain text. Strip emphasis/heading/code markers WITHOUT touching lone
+   symbols (paired-only), applied once at generation so render+copy+save are all clean. */
+function stripLetterMd(x){
+  x=String(x||'');
+  x=x.replace(/```([\s\S]*?)```/g,'$1');   // code fences -> keep content
+  x=x.replace(/`([^`]+)`/g,'$1');            // inline code
+  x=x.replace(/\*\*([\s\S]+?)\*\*/g,'$1'); // **bold**
+  x=x.replace(/__([\s\S]+?)__/g,'$1');      // __bold__
+  x=x.replace(/\*([^*\n]+)\*/g,'$1');       // *italic* (paired, single line)
+  x=x.replace(/^\s{0,3}#{1,6}\s+/gm,'');     // # headings
+  x=x.replace(/^\s{0,3}>\s?/gm,'');          // > blockquotes
+  x=x.replace(/\*\*/g,'').replace(/`/g,'');  // strip any stray leftovers
+  return x;
+}
 async function lwGenerate(){
   lwCapture();
   const body=$('lettersBody');
@@ -1770,7 +1785,7 @@ async function lwGenerate(){
     const [note,letter]=result.includes('---LETTER---')
       ? result.split('---LETTER---').map(s=>s.trim())
       : ['',result.trim()];
-    lwOut={note,letter,type:lwData.type,creditor:lwData.creditor};
+    lwOut={note,letter:stripLetterMd(letter),type:lwData.type,creditor:lwData.creditor};
     renderLetters();
   }catch(err){
     const code=err&&err.code;
