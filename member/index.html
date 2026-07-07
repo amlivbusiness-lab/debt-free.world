@@ -1708,6 +1708,11 @@ function lwInit(){
 }
 function openLetters(){ if(!lwReady)lwInit(); showSection('sec-letters'); setActiveNav('sec-letters'); renderLetters(); }
 
+function lwCreditorSelect(){
+  const sel=$('lwCreditorSel'),oth=$('lwCreditorOther'); if(!sel)return;
+  if(sel.value==='__other__'){ if(oth){oth.style.display='';oth.value='';oth.focus();} lwData.creditor=''; }
+  else { if(oth)oth.style.display='none'; lwCreditorInput(sel.value); }
+}
 function lwCreditorInput(v){
   lwData.creditor=v;
   const hit=(model().debts||[]).find(d=>d.creditor&&String(d.creditor).trim().toLowerCase()===v.trim().toLowerCase());
@@ -1722,7 +1727,7 @@ function lwCapture(){
   const s=$('lwSituation'); if(s)lwData.situation=s.value.trim();
 }
 function lwNext(){
-  if(lwStep===1){ const el=$('lwCreditor'); if(el)lwData.creditor=el.value.trim(); if(!lwData.creditor){showToast(t('lw_need_creditor'));return;} }
+  if(lwStep===1){ const sel=$('lwCreditorSel'),oth=$('lwCreditorOther'); let c=''; if(sel&&sel.value&&sel.value!=='__other__')c=sel.value.trim(); else if(oth)c=oth.value.trim(); lwData.creditor=c; if(!lwData.creditor){showToast(t('lw_need_creditor'));return;} }
   if(lwStep===2){ if(!lwData.type){showToast(t('lw_need_type'));return;} }
   if(lwStep===3){ lwCapture(); }
   if(lwStep<4){ lwStep++; renderLetters(); }
@@ -1840,14 +1845,19 @@ function lwDots(n){let h='<div class="lw-steps">';for(let i=1;i<=4;i++)h+=`<div 
 function lwWizardHtml(){
   if(lwStep===1){
     const creds=[...new Set((model().debts||[]).map(d=>String(d.creditor||'').trim()).filter(Boolean))];
-    const opts=creds.map(c=>`<option value="${esc(c)}"></option>`).join('');
+    const isOther=lwData.creditor&&!creds.includes(lwData.creditor);
+    const credOpts=creds.map(c=>`<option value="${esc(c)}"${lwData.creditor===c?' selected':''}>${esc(c)}</option>`).join('');
     return lwDots(1)+`<div class="lw-panel">
       <div class="lw-q">${esc(t('lw_step_creditor'))}</div>
       <div class="lw-help">${esc(t('lw_creditor_help'))}</div>
       <div class="lw-field">
         <label>${esc(t('lw_creditor_lbl'))}</label>
-        <input id="lwCreditor" list="lwCredList" value="${esc(lwData.creditor)}" oninput="lwCreditorInput(this.value)" placeholder="${esc(t('lw_creditor_ph'))}" autocomplete="off"/>
-        <datalist id="lwCredList">${opts}</datalist>
+        ${creds.length?`<select id="lwCreditorSel" onchange="lwCreditorSelect()">
+          <option value=""${!lwData.creditor?' selected':''} disabled hidden>${esc(t('lw_creditor_ph'))}</option>
+          ${credOpts}
+          <option value="__other__"${isOther?' selected':''}>${esc(t('lw_creditor_other'))}</option>
+        </select>
+        <input id="lwCreditorOther" type="text" value="${isOther?esc(lwData.creditor):''}" oninput="lwCreditorInput(this.value)" placeholder="${esc(t('lw_creditor_ph'))}" autocomplete="off" style="margin-top:8px;${isOther?'':'display:none;'}"/>`:`<input id="lwCreditorOther" type="text" value="${esc(lwData.creditor)}" oninput="lwCreditorInput(this.value)" placeholder="${esc(t('lw_creditor_ph'))}" autocomplete="off"/>`}
       </div>
       <div class="lw-actions"><span class="lw-spacer"></span><button class="lw-btn prim" onclick="lwNext()">${esc(t('lw_next'))} <i data-lucide="arrow-right"></i></button></div>
     </div>`;
