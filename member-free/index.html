@@ -742,9 +742,13 @@ function amortise(balance,monthlyPayment,annualRatePct){
   const r=num(annualRatePct)/100/12;
   if(r<=0){const m=Math.ceil(balance/monthlyPayment);return{months:m,interest:0};}
   if(monthlyPayment<=balance*r)return{months:null,interest:0}; // payment doesn't cover interest
-  const n=Math.ceil(-Math.log(1-(r*balance/monthlyPayment))/Math.log(1+r));
-  const interest=Math.max(0,Math.round(n*monthlyPayment-balance)); // ≈ total interest (last payment rounds up)
-  return{months:n,interest};
+  // Accurate month-by-month amortisation: exact months AND exact total interest,
+  // monotonic in payment. The old closed-form interest (n*payment-balance) over-counted
+  // the partial final payment -> non-monotonic sawtooth (+180/mo could show LESS interest
+  // saved than +170). Date (months) is unchanged; only the interest figure is corrected.
+  let bal=balance,months=0,interest=0;
+  while(bal>0&&months<1200){const i=bal*r;interest+=i;bal+=i;bal-=Math.min(monthlyPayment,bal);months++;}
+  return{months,interest:Math.max(0,Math.round(interest))};
 }
 /* Hero helper: project a debt-free outcome at a given extra monthly amount. */
 function projectFree(extraMonthly){
