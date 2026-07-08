@@ -717,11 +717,15 @@ function scrollToSection(id){const el=$(id);if(el)el.scrollIntoView({behavior:'s
 /* derived financial model */
 function model(){
   const income=num(M.income), extra=num(M.extra_amount), housing=num(M.housing_cost), other=num(M.other_costs);
-  const surplus=income+extra-housing-other;
   const debts=Array.isArray(M.debts)?M.debts:[];
+  /* [Vaihe 0 · N4] trueDisposable: what is genuinely left AFTER the debt payments
+     the person already commits each month. Missing payment -> num()=0 -> sum 0 ->
+     identical to the old figure (safe migration for records without per-debt payment). */
+  const debtPayments=debts.reduce((s,d)=>s+num(d.payment),0);
+  const surplus=income+extra-housing-other-debtPayments;
   const totalDebt=debts.length?debts.reduce((s,d)=>s+num(d.amount),0):num(M.total_debt);
   const highestRate=debts.length?Math.max(...debts.map(d=>num(d.interest))):0;
-  return {income,extra,housing,other,surplus,debts,totalDebt,highestRate,cur:M.currency||'EUR'};
+  return {income,extra,housing,other,surplus,debtPayments,debts,totalDebt,highestRate,cur:M.currency||'EUR'};
 }
 /* ── DEBT-FREE-DATE ENGINE (single shared source — hero AND TOOLS.dfd/income use this) ──
    Interest-aware amortisation. With rate 0 (no/unknown interest) it reduces to the
@@ -729,11 +733,15 @@ function model(){
    When a payment cannot cover the monthly interest, payoff is impossible → months=null
    (never a hopeful number you can't afford). */
 function blendedRate(){
-  const ds=model().debts;
+  /* [Vaihe 0 · N2] interest===0 means "rate unknown", NOT 0%. Unknown-rate debts are
+     excluded from the weighted average so they can never drag the blend toward
+     interest-free (which made the hero date optimistic). If every rate is unknown this
+     returns 0 and rateStateOf(m)==='none' already shows the "add your rate" marker. */
+  const ds=model().debts.filter(d=>num(d.interest)>0);
   const tot=ds.reduce((s,d)=>s+num(d.amount),0);
   if(tot<=0)return 0;
   const w=ds.reduce((s,d)=>s+num(d.amount)*num(d.interest),0);
-  return w/tot; // weighted-average annual rate %
+  return w/tot; // weighted-average annual rate % over KNOWN-rate debts only
 }
 function amortise(balance,monthlyPayment,annualRatePct){
   balance=num(balance);monthlyPayment=num(monthlyPayment);
@@ -773,12 +781,22 @@ function simulateStrategy(debts,monthly,mode){
   monthly=num(monthly);
   let bal=(Array.isArray(debts)?debts:[]).map(d=>({
     amount:Math.max(0,num(d.amount)),
-    rate:Math.max(0,num(d.interest))/100/12
+    rate:Math.max(0,num(d.interest))/100/12,
+    known:num(d.interest)>0
   })).filter(d=>d.amount>0);
-  if(!bal.length)return{months:0,totalInterest:0,firstCleared:0};
-  if(monthly<=0)return{months:null,totalInterest:null,firstCleared:null};
+  if(!bal.length)return{months:0,totalInterest:0,firstCleared:0,rateUnknown:false};
+  if(monthly<=0)return{months:null,totalInterest:null,firstCleared:null,rateUnknown:false};
+  const rateUnknown=bal.some(d=>!d.known);
   if(mode==='snow')bal.sort((a,b)=>a.amount-b.amount);
-  else bal.sort((a,b)=>b.rate-a.rate||a.amount-b.amount);
+  /* [Vaihe 0 · N2] Avalanche must not treat an unknown rate as 0% and bury it at the
+     tail as "cheapest, pay last". We invent no rate: unknown-rate debts are ordered by
+     balance and attacked EARLY (the conservative direction — an unknown rate could be a
+     payday loan), and rateUnknown flags the UI to ask for the missing rate. */
+  else bal.sort((a,b)=>{
+    if(a.known&&b.known)return b.rate-a.rate||a.amount-b.amount;
+    if(!a.known&&!b.known)return b.amount-a.amount;
+    return a.known?1:-1;
+  });
   const totalOf=()=>bal.reduce((s,d)=>s+d.amount,0);
   let months=0,totalInterest=0,firstCleared=null;const CAP=600;
   while(totalOf()>0.005&&months<CAP){
@@ -793,11 +811,11 @@ function simulateStrategy(debts,monthly,mode){
       d.amount-=cut;pay-=cut;
       if(d.amount<=0.005){d.amount=0;if(firstCleared==null)firstCleared=months;}
     }
-    if(totalOf()>=before-0.005)return{months:null,totalInterest:null,firstCleared:null};
+    if(totalOf()>=before-0.005)return{months:null,totalInterest:null,firstCleared:null,rateUnknown};
   }
-  if(totalOf()>0.005)return{months:null,totalInterest:null,firstCleared:null};
+  if(totalOf()>0.005)return{months:null,totalInterest:null,firstCleared:null,rateUnknown};
   totalInterest=isFinite(totalInterest)?Math.max(0,Math.round(totalInterest)):0;
-  return{months,totalInterest,firstCleared:firstCleared==null?months:firstCleared};
+  return{months,totalInterest,firstCleared:firstCleared==null?months:firstCleared,rateUnknown};
 }
 function dateFromMonths(m){if(m==null)return null;const d=new Date();d.setMonth(d.getMonth()+m);return d.toLocaleDateString(localeForLang(),{month:'short',year:'numeric'});}
 function localeForLang(){const map={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',NO:'nb-NO',DA:'da-DK',NL:'nl-NL',ES:'es-ES',FR:'fr-FR',IT:'it-IT',PL:'pl-PL',PT:'pt-PT',CS:'cs-CZ',ET:'et-EE',LV:'lv-LV',LT:'lt-LT',HU:'hu-HU',RO:'ro-RO',HR:'hr-HR'};return map[DFWI18n.current]||'en-GB';}
@@ -1036,7 +1054,7 @@ function renderSnapshot(){
 
   /* ── LAYER 3 · DEBT-FREE DATE — behaviour preserved exactly ── */
   if(months){
-    html+=`<div class="snap-hero"><div class="sh-icon"><i data-lucide="calendar-check"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(dfd)}</div><div class="sh-note">${esc(t('snap_dfd_note'))}${rateState==='none'?' \u00b7 '+esc(t('dfd_date_approx')):''}</div></div></div>`;
+    html+=`<div class="snap-hero"><div class="sh-icon"><i data-lucide="calendar-check"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(dfd)}</div><div class="sh-note">${esc(t('snap_dfd_note'))}${rateState!=='all'?' \u00b7 '+esc(t('dfd_date_approx')):''}</div></div></div>`;
   }else{
     html+=`<div class="snap-hero" style="background:var(--green-dark)"><div class="sh-icon"><i data-lucide="life-buoy"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(t('snap_dfd_stabilise'))}</div><div class="sh-note">${esc(t('snap_dfd_stab_note'))}</div></div></div>`;
     html+=`<div class="snap-note">${esc(t('snap_surplus_neg'))}</div>`;
@@ -1424,7 +1442,7 @@ const TOOLS={
     const baseMonths=(m.surplus>0)?monthsToFree(m.totalDebt,debtBudget(m)):null;
     const baseDate=baseMonths?dateFromMonths(baseMonths):'—';
     const rateState=rateStateOf(m);
-    return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div><div class="tr-base" id="incBase">${esc(t('income_base',{date:baseDate}))}${rateState==='none'?' \u00b7 '+esc(t('dfd_date_approx')):''}</div></div>
+    return `<div class="tool-result"><div class="tr-k">${esc(t('income_k'))}</div><div class="tr-v" id="incDate">—</div><div class="tr-note" id="incSooner"></div><div class="tr-base" id="incBase">${esc(t('income_base',{date:baseDate}))}${rateState!=='all'?' \u00b7 '+esc(t('dfd_date_approx')):''}</div></div>
       <div class="slider-row"><label>${esc(t('income_add'))}<span class="sv" id="incLbl">0 ${esc(m.cur)}</span></label>
       <input type="range" id="incSlider" min="0" max="500" step="25" value="0" oninput="updInc()"/></div>
       <div class="tool-note">${esc(m.surplus<=0?t('income_nostart'):t('income_note'))}</div>`;
@@ -1493,7 +1511,7 @@ function updDfd(){
   $('dfdNote').textContent=t('dfd_note',{monthly:fmtMoney(m.surplus+extra,m.cur),total:fmtMoney(m.totalDebt,m.cur)});
   /* Interest-blind date gets an honest label; never presented as certain. */
   const da=$('dfdApprox');
-  if(da){da.textContent=(rateState==='none')?t('dfd_date_approx'):'';da.hidden=(rateState!=='none');}
+  if(da){da.textContent=(rateState!=='all')?t('dfd_date_approx'):'';da.hidden=(rateState==='all');}
   /* Interest saved — ONLY when a rate exists. At rate 0, base.interest and
      scen.interest are both 0 and the rateState!=='none' guard keeps this hidden:
      we NEVER invent a saved-interest figure without a real rate. */
