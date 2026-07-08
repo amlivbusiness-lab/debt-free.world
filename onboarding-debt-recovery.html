@@ -421,16 +421,6 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     <span style="font-size:17px;line-height:1;">+</span>
     <span id="addDebtLabel">Add a debt</span>
   </button>
-  <div class="q-section">
-    <span class="q-section-label" id="lbl_collections_section" data-i18n="lbl_collections_section">Collections &amp; enforcement</span>
-    <p class="field-hint" style="margin-bottom:12px;" id="hint_collections" data-i18n="hint_collections">Is any debt already being handled by a collections agency or court enforcement?</p>
-    <div class="opts grid2" id="opts_collections">
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="No"><span class="opt-label" id="col_no" data-i18n="col_no">No</span></button>
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Yes — collections agency"><span class="opt-label" id="col_agency" data-i18n="col_agency">Collections agency</span></button>
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Yes — court or enforcement"><span class="opt-label" id="col_court" data-i18n="col_court">Court / enforcement</span></button>
-      <button class="opt" onclick="selectOpt(this,'collections')" data-val="Not sure"><span class="opt-label" id="col_unknown" data-i18n="col_unknown">Not sure</span></button>
-    </div>
-  </div>
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(3)" id="back3" data-i18n="btn_back">Back</button>
     <button class="btn-next" onclick="goNext(3)" id="btn3" data-i18n="btn_next">Continue</button>
@@ -1334,7 +1324,7 @@ function validateStep(step) {
     if (!co.value)        { setFieldErr('wrap_country','err_country');    ok=false; } else clearFieldErr('wrap_country');
   }
   if (step===2) { if (multiSelects.situation.length===0) { toast(t('toast_situation')); ok=false; } }
-  if (step===3) { if (!formData.collections) { toast(t('toast_collections')); ok=false; } }
+  if(step===3){ /* collections derived from per-debt enforcement in collectStep */ }
   if (step===4) {
     if (!document.getElementById('f_income').value)       { setFieldErr('wrap_income','err_income');   ok=false; } else clearFieldErr('wrap_income');
     if (!document.getElementById('f_housing_cost').value) { setFieldErr('wrap_housing','err_housing'); ok=false; } else clearFieldErr('wrap_housing');
@@ -1360,7 +1350,7 @@ function toast(msg) { if(!msg)return; const el=document.getElementById('toast');
 function collectStep(step) {
   if (step===1) { formData.firstname=document.getElementById('f_firstname').value.trim(); formData.language=document.getElementById('f_language').value; formData.country=document.getElementById('f_country').value; }
   if (step===2) { formData.situation=multiSelects.situation.join(' | '); }
-  if (step===3) { formData.debts=debts; formData.total_debt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0); formData.debt_count=debts.length; formData.debt_types=[...new Set(debts.map(d=>d.type))].join(', '); }
+  if (step===3) { formData.debts=debts; formData.total_debt=debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0); formData.debt_count=debts.length; formData.debt_types=[...new Set(debts.map(d=>d.type))].join(', '); formData.collections=debts.some(d=>d.enforcement==='agency'||d.enforcement==='court')?'Yes — court or enforcement':'No'; }
   if (step===4) { formData.income=document.getElementById('f_income').value; formData.currency=document.getElementById('f_currency').value; formData.extra_amount=document.getElementById('f_extra_amount').value||'0'; formData.housing_cost=document.getElementById('f_housing_cost').value; formData.other_costs=document.getElementById('f_other_costs').value; formData.employment=document.getElementById('f_employment').value; formData.household=document.getElementById('f_household').value; formData.children=document.getElementById('f_children').value; }
   if (step===5) { formData.confidence=confidenceVal; }
   if (step===6) { formData.own_words=document.getElementById('f_own_words').value.trim(); }
