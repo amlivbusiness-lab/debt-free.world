@@ -329,7 +329,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
   </div>
 
-  <div class="cta-row"><button class="btn-next" onclick="goNext(1)" id="btn1" data-i18n="btn_next">Continue</button></div>
+  <div class="cta-row"><button class="btn-next" onclick="goNext(1)" id="btn1" data-i18n="btn_next" disabled>Continue</button></div>
 </div>
 
 <!-- ══ STEP 2 — SITUATION ══ -->
@@ -353,7 +353,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(2)" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(2)" id="btn2" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(2)" id="btn2" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -445,7 +445,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(3)" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(3)" id="btn3" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(3)" id="btn3" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -494,7 +494,6 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
       <input type="number" id="f_extra_amount" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;"/>
     </div>
 
-    <button class="btn-continue-group" id="s4btn1" onclick="revealS4Group(2)" data-i18n="btn_next">Continue →</button>
   </div>
 
   <!-- GROUP 2: Fixed costs -->
@@ -512,7 +511,6 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
       <input type="number" id="f_other_costs" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;" oninput="onCostInput()"/>
       <div class="err-msg" id="err_other" data-i18n="err_required">Required.</div>
     </div>
-    <button class="btn-continue-group" id="s4btn2" onclick="revealS4Group(3)" data-i18n="btn_next">Continue →</button>
   </div>
 
   <!-- GROUP 3: Buffer -->
@@ -576,7 +574,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(4)" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(4)" id="btn4" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(4)" id="btn4" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -633,7 +631,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(5)" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(5)" id="btn5" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(5)" id="btn5" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -680,7 +678,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(6)" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(6)" id="btn6" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(6)" id="btn6" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -721,7 +719,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     </div>
   </div>
 
-  <button class="btn-full" onclick="submitForm()" id="btnSubmit"><span id="submitText" data-i18n="submitText">Build my plan</span></button>
+  <button class="btn-full" onclick="submitForm()" id="btnSubmit" disabled><span id="submitText" data-i18n="submitText">Build my plan</span></button>
   <p class="submit-note" id="submitNote" data-i18n="submitNote">This takes about 30 seconds. Your plan will be waiting for you.</p>
 </div>
 
@@ -1261,6 +1259,7 @@ function showStep(n){
   document.getElementById('progressFill').style.width=STEP_PCT[n]+'%';
   const tbs=document.getElementById('topbarStep'); if(tbs)tbs.textContent=t('topStep').replace('{n}',n);
   for(let i=1;i<=7;i++){ document.getElementById('ps'+i)?.classList.toggle('active',i<=n); }
+  if(typeof refreshGate==='function') refreshGate();
 }
 
 /* ── PROGRESSIVE DISCLOSURE — STEP 4 (Finances) ──
@@ -1272,13 +1271,10 @@ function showStep(n){
    the actual point of doing this digitally at all. */
 function onIncomeInput(){
   const income = parseFloat(document.getElementById('f_income').value) || 0;
-  const btn = document.getElementById('s4btn1');
   if(income > 0){
-    btn.classList.add('show');
+    const g2=document.getElementById('s4group2'); if(g2) g2.classList.remove('pending');
     const cur = document.getElementById('f_currency').value || 'EUR';
     showMicroSummary('s4', t('ms_income_noted').replace('{amount}', fmtNum(income)+' '+cur));
-  } else {
-    btn.classList.remove('show');
   }
 }
 function revealS4Group(n){
@@ -1290,9 +1286,8 @@ function onCostInput(){
   const income = parseFloat(document.getElementById('f_income').value) || 0;
   const housing = parseFloat(document.getElementById('f_housing_cost').value) || 0;
   const other = parseFloat(document.getElementById('f_other_costs').value) || 0;
-  const btn = document.getElementById('s4btn2');
   if(housing > 0 && other > 0){
-    btn.classList.add('show');
+    const g3=document.getElementById('s4group3'); if(g3) g3.classList.remove('pending');
     const cur = document.getElementById('f_currency').value || 'EUR';
     const surplus = income - housing - other - (typeof debts!=='undefined'?debts:[]).reduce((s,d)=>s+(parseFloat(d.payment)||0),0);
     const msg = surplus >= 0
@@ -1351,6 +1346,28 @@ function validateStep(step){
   if(step===7){ if(!formData.immediate_focus){ showInlineErr('err_focus'); ok=false; } }
   return ok;
 }
+
+/* ── CTA GATING (Vaihe0.5) — main Continue disabled until the step's required
+   fields are answered. stepComplete() mirrors validateStep()'s rules with NO
+   side-effects; a global input/click/change listener refreshes the current
+   step's button so no field can be forgotten. Step 3 has no required field
+   (the no-debt path is intentionally supported). */
+function stepComplete(step){
+  if(step===1) return !!document.getElementById('f_firstname').value.trim() && !!document.getElementById('f_country').value;
+  if(step===2) return multiSelects.situation.length>0;
+  if(step===3) return true;
+  if(step===4) return !!document.getElementById('f_income').value && !!document.getElementById('f_housing_cost').value && !!document.getElementById('f_other_costs').value && !!document.getElementById('f_employment').value && !!formData.savings;
+  if(step===5) return !!formData.barrier && !!formData.support_network;
+  if(step===6) return !!formData.primary_goal;
+  if(step===7) return !!formData.immediate_focus;
+  return true;
+}
+function gateBtnId(step){ return step===7 ? 'btnSubmit' : ('btn'+step); }
+function refreshGate(){ var b=document.getElementById(gateBtnId(currentStep)); if(b) b.disabled=!stepComplete(currentStep); }
+document.addEventListener('input', refreshGate, true);
+document.addEventListener('change', refreshGate, true);
+document.addEventListener('click', function(){ setTimeout(refreshGate,0); }, true);
+window.addEventListener('load', function(){ setTimeout(refreshGate,0); });
 function setFieldErr(wrapId,errId){ document.getElementById(wrapId)?.classList.add('has-error'); const e=document.getElementById(errId); if(e)e.style.display='block'; }
 function clearFieldErr(wrapId){ document.getElementById(wrapId)?.classList.remove('has-error'); }
 function showInlineErr(errId){ const e=document.getElementById(errId); if(e){ e.style.display='block'; setTimeout(()=>e.style.display='none',3000); } }
