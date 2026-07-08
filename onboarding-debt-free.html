@@ -368,7 +368,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   <div class="debt-mini-form" id="debtMiniForm">
     <div class="field">
       <label class="field-label" data-i18n="lbl_mini_type">Type of debt</label>
-      <select id="mini_type">
+      <select id="mini_type" onchange="miniTypeChanged()">
         <option value="" data-i18n="mini_type_ph">— Select type —</option>
         <option value="Consumer loan" data-i18n="dt_consumer">Consumer loan / personal loan</option>
         <option value="Credit card" data-i18n="dt_card">Credit card</option>
@@ -411,6 +411,26 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
       <label class="field-label" data-i18n="lbl_mini_interest">Roughly what interest rate?</label>
       <div class="field-hint" data-i18n="hint_mini_interest">Don't know? Leave it as 0 — I'll treat it as "unknown", not as interest-free.</div>
       <input type="number" id="mini_interest" placeholder="0" min="0" max="150" step="0.1" inputmode="decimal"/>
+    </div>
+    <div class="field">
+      <label class="field-label" data-i18n="lbl_mini_payment">Monthly payment right now</label>
+      <div class="field-hint" data-i18n="hint_mini_payment">What you currently pay toward this debt each month. Leave 0 if nothing right now.</div>
+      <input type="number" id="mini_payment" placeholder="0" min="0" max="9999999" step="1" inputmode="decimal"/>
+    </div>
+    <div class="field">
+      <label class="field-label" data-i18n="lbl_mini_enforcement">Where is this debt right now?</label>
+      <select id="mini_enforcement">
+        <option value="none" data-i18n="enf_none">Still with the original lender</option>
+        <option value="agency" data-i18n="enf_agency">With a collection agency</option>
+        <option value="court" data-i18n="enf_court">In court / enforcement</option>
+        <option value="unknown" data-i18n="enf_unknown">I'm not sure</option>
+      </select>
+    </div>
+    <div class="field">
+      <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer;">
+        <input type="checkbox" id="mini_secured" onchange="miniSecuredTouched()" style="margin-top:3px;flex:none;"/>
+        <span class="field-label" data-i18n="lbl_mini_secured" style="margin:0;">This debt is secured against something I own (home, car…)</span>
+      </label>
     </div>
     <div style="display:flex;gap:8px;margin-top:4px;">
       <button class="btn-next" style="padding:12px 16px;font-size:13px;" onclick="addDebt()" data-i18n="addDebtConfirm">Add debt</button>
@@ -499,7 +519,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     </div>
     <div class="field" id="wrap_other">
       <label class="field-label" data-i18n="lbl_other_costs">What about everything else?</label>
-      <div class="field-hint" data-i18n="hint_other">Food, transport, bills, phone — your other fixed costs.</div>
+      <div class="field-hint" data-i18n="hint_other">Food, transport, bills, phone — your other fixed costs, not debt payments.</div>
       <input type="number" id="f_other_costs" placeholder="0" min="0" inputmode="decimal" style="font-size:17px;padding:14px 15px;" oninput="onCostInput()"/>
       <div class="err-msg" id="err_other" data-i18n="err_required">Required.</div>
     </div>
@@ -772,6 +792,7 @@ EN: {
   s3title:'Now, tell me about your debts.',
   s3sub:"Add each one separately — this is how I work out what to tackle first, instead of guessing. Rough numbers are completely fine.",
   lbl_mini_type:'Type of debt',mini_type_ph:'— Select type —',
+  lbl_mini_payment:'Monthly payment right now',hint_mini_payment:'What you currently pay toward this debt each month. Leave 0 if nothing right now.',lbl_mini_enforcement:'Where is this debt right now?',enf_none:'Still with the original lender',enf_agency:'With a collection agency',enf_court:'In court / enforcement',enf_unknown:"I'm not sure",lbl_mini_secured:'This debt is secured against something I own (home, car…)',
   dt_consumer:'Consumer loan / personal loan',dt_card:'Credit card',dt_car:'Car loan',dt_payday:'Payday loan / fast loan',
   dt_mortgage:'Mortgage / home loan',dt_student:'Student loan',dt_tax:'Tax debt',dt_medical:'Medical debt',
   dt_rent:'Rent arrears',dt_business:'Business debt',dt_collections:'Debt in collections / enforcement',
@@ -798,7 +819,7 @@ EN: {
   lbl_extra_amount:'Roughly how much extra, per month?',
   lbl_expenses_section:'Fixed costs',
   lbl_housing_cost:"What's your housing cost?",hint_housing:'Rent, mortgage, or maintenance fee.',
-  lbl_other_costs:'What about everything else?',hint_other:'Food, transport, bills, phone — your other fixed costs.',
+  lbl_other_costs:'What about everything else?',hint_other:'Food, transport, bills, phone — your other fixed costs, not debt payments.',
   err_required:'Required.',
   lbl_buffer_section:'A little about your safety net',
   lbl_savings:'Do you have any savings or emergency buffer right now?',
@@ -901,6 +922,7 @@ FI: {
   s3title:'Kerro nyt veloistasi.',
   s3sub:'Lisää jokainen erikseen — näin selvitän mitä kannattaa hoitaa ensin, arvaamisen sijaan. Arviot käyvät täysin hyvin.',
   lbl_mini_type:'Velkatyyppi',mini_type_ph:'— Valitse tyyppi —',
+  lbl_mini_payment:'Kuukausierä juuri nyt',hint_mini_payment:'Mitä maksat tälle velalle tällä hetkellä kuukaudessa. Jätä 0, jos et maksa nyt mitään.',lbl_mini_enforcement:'Missä tämä velka on nyt?',enf_none:'Vielä alkuperäisellä luotonantajalla',enf_agency:'Perintätoimistolla',enf_court:'Oikeudessa / ulosotossa',enf_unknown:'En ole varma',lbl_mini_secured:'Tämä velka on vakuudellinen (koti, auto…)',
   dt_consumer:'Kulutusluotto / henkilökohtainen laina',dt_card:'Luottokortti',dt_car:'Autolaina',dt_payday:'Pikavippi / pikalaina',
   dt_mortgage:'Asuntolaina',dt_student:'Opintolaina',dt_tax:'Verovelka',dt_medical:'Sairauskulut',
   dt_rent:'Vuokrarästi',dt_business:'Yritysvelka',dt_collections:'Perinnässä / ulosotossa oleva velka',
@@ -927,7 +949,7 @@ FI: {
   lbl_extra_amount:'Arviolta kuinka paljon lisää kuukaudessa?',
   lbl_expenses_section:'Kiinteät kulut',
   lbl_housing_cost:'Mitkä ovat asumiskustannuksesi?',hint_housing:'Vuokra, asuntolaina tai yhtiövastike.',
-  lbl_other_costs:'Mitä muuta?',hint_other:'Ruoka, liikenne, laskut, puhelin — muut kiinteät kulusi.',
+  lbl_other_costs:'Mitä muuta?',hint_other:'Ruoka, liikenne, laskut, puhelin — muut kiinteät kulusi, ei velkamaksuja.',
   err_required:'Pakollinen.',
   lbl_buffer_section:'Hieman turvaverkostasi',
   lbl_savings:'Onko sinulla säästöjä tai hätäpuskuria juuri nyt?',
@@ -1286,7 +1308,7 @@ function onCostInput(){
   if(housing > 0 && other > 0){
     btn.classList.add('show');
     const cur = document.getElementById('f_currency').value || 'EUR';
-    const surplus = income - housing - other;
+    const surplus = income - housing - other - (typeof debts!=='undefined'?debts:[]).reduce((s,d)=>s+(parseFloat(d.payment)||0),0);
     const msg = surplus >= 0
       ? t('ms_surplus_positive').replace('{amount}', fmtNum(surplus)+' '+cur)
       : t('ms_surplus_negative');
@@ -1373,12 +1395,15 @@ function toggleOpt(btn,field){
 }
 
 /* ── DEBT MANAGEMENT ── */
+let _securedTouched=false;
+function miniSecuredTouched(){_securedTouched=true;}
+function miniTypeChanged(){if(!_securedTouched){var el=document.getElementById('mini_type'),s=document.getElementById('mini_secured');if(el&&s)s.checked=/^(Mortgage|Car loan)$/.test(el.value);}}
 function openMiniForm(){ document.getElementById('debtMiniForm').classList.add('open'); document.querySelector('.add-debt-btn').style.display='none'; setTimeout(()=>document.getElementById('mini_type').focus(),100); }
-function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.querySelector('.add-debt-btn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; }); }
+function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.querySelector('.add-debt-btn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest','mini_payment'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; });var _e=document.getElementById('mini_enforcement');if(_e)_e.value='none';var _s=document.getElementById('mini_secured');if(_s)_s.checked=false;_securedTouched=false; }
 function addDebt(){
   const type=document.getElementById('mini_type').value; const amt=document.getElementById('mini_amount').value;
   if(!type||!amt){ toast(t('toast_debt_type')); return; }
-  debts.push({type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0});
+  debts.push({type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0,payment:parseFloat(document.getElementById('mini_payment').value)||0,enforcement:(document.getElementById('mini_enforcement')||{}).value||'none',secured:!!(document.getElementById('mini_secured')||{}).checked});
   renderDebts(); closeMiniForm();
 }
 function removeDebt(i){ debts.splice(i,1); renderDebts(); }
@@ -1437,8 +1462,9 @@ function buildPrompt(d){
     CS:'Czech',ET:'Estonian',LV:'Latvian',LT:'Lithuanian',HU:'Hungarian',RO:'Romanian',HR:'Croatian'};
   const planLang=langNames[d.language]||'English';
   const cur=d.currency||'EUR';
+  const debtPayments=(d.debts||[]).reduce((s,x)=>s+(parseFloat(x.payment)||0),0);
   const surplus=(parseFloat(d.income)||0)+(parseFloat(d.extra_amount)||0)
-    -(parseFloat(d.housing_cost)||0)-(parseFloat(d.other_costs)||0);
+    -(parseFloat(d.housing_cost)||0)-(parseFloat(d.other_costs)||0)-debtPayments;
   const debtDetail=d.debts&&d.debts.length>0
     ? d.debts.map(x=>`  • ${x.type}${x.creditor?' ('+x.creditor+')':''}: ${x.amount} ${x.currency||cur}${x.interest>0?' at '+x.interest+'% interest':' — interest rate unknown'}`).join('\n')
     : `  • Total debt: ${d.total_debt||'unknown'} ${cur} (${d.debt_types||'unspecified types'})`;
