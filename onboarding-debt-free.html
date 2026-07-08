@@ -788,7 +788,7 @@ EN: {
   hint_mini_creditor:"A company or person's name — Nordea, Klarna, your landlord. This helps me personalise your plan.",
   lbl_mini_amount:'Roughly how much?',lbl_mini_interest:'Roughly what interest rate?',
   hint_mini_interest:"Don't know? Leave it as 0 — I'll treat it as \"unknown\", not as interest-free.",
-  addDebtLabel:'Add a debt',addAnotherDebtLabel:'Add another debt',addDebtConfirm:'Add debt',cancelDebtBtn:'Cancel',
+  addDebtLabel:'Add a debt',addAnotherDebtLabel:'Add another debt',addDebtConfirm:'Add debt',saveDebtBtn:'Save',cancelDebtBtn:'Cancel',
   debtLabel_unknown_rate:'unknown rate',
   lbl_collections_section:'Collections & enforcement',
   hint_collections:'Is any of this already with a collections agency or in court?',
@@ -918,7 +918,7 @@ FI: {
   hint_mini_creditor:'Yrityksen tai henkilön nimi — Nordea, Klarna, vuokranantajasi. Tämä auttaa personoimaan suunnitelmasi.',
   lbl_mini_amount:'Arviolta kuinka paljon?',lbl_mini_interest:'Arviolta mikä korko?',
   hint_mini_interest:'Etkö tiedä? Jätä se 0:ksi — käsittelen sen "tuntemattomana", en korkovapaana.',
-  addDebtLabel:'Lisää velka',addAnotherDebtLabel:'Lisää toinen velka',addDebtConfirm:'Lisää velka',cancelDebtBtn:'Peruuta',
+  addDebtLabel:'Lisää velka',addAnotherDebtLabel:'Lisää toinen velka',addDebtConfirm:'Lisää velka',saveDebtBtn:'Tallenna',cancelDebtBtn:'Peruuta',
   debtLabel_unknown_rate:'korko tuntematon',
   lbl_collections_section:'Perintä ja ulosotto',
   hint_collections:'Onko jokin näistä jo perintätoimistossa tai oikeudessa?',
@@ -1398,18 +1398,35 @@ function toggleOpt(btn,field){
 }
 
 /* ── DEBT MANAGEMENT ── */
-let _securedTouched=false;
+let _securedTouched=false; let _editIndex=null;
 function miniSecuredTouched(){_securedTouched=true;}
 function miniTypeChanged(){if(!_securedTouched){var el=document.getElementById('mini_type'),s=document.getElementById('mini_secured');if(el&&s)s.checked=/^(Mortgage|Car loan)$/.test(el.value);}}
 function openMiniForm(){ document.getElementById('debtMiniForm').classList.add('open'); document.querySelector('.add-debt-btn').style.display='none'; setTimeout(()=>document.getElementById('mini_type').focus(),100); }
-function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.querySelector('.add-debt-btn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest','mini_payment'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; });var _e=document.getElementById('mini_enforcement');if(_e)_e.value='none';var _s=document.getElementById('mini_secured');if(_s)_s.checked=false;_securedTouched=false; }
+function closeMiniForm(){ document.getElementById('debtMiniForm').classList.remove('open'); document.querySelector('.add-debt-btn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest','mini_payment'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; });var _e=document.getElementById('mini_enforcement');if(_e)_e.value='none';var _s=document.getElementById('mini_secured');if(_s)_s.checked=false;_securedTouched=false; _editIndex=null; var _cf=document.querySelector('[data-i18n="addDebtConfirm"]'); if(_cf)_cf.textContent=t('addDebtConfirm'); }
 function addDebt(){
   const type=document.getElementById('mini_type').value; const amt=document.getElementById('mini_amount').value;
   if(!type||!amt){ toast(t('toast_debt_type')); return; }
-  debts.push({type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0,payment:parseFloat(document.getElementById('mini_payment').value)||0,enforcement:(document.getElementById('mini_enforcement')||{}).value||'none',secured:!!(document.getElementById('mini_secured')||{}).checked});
+  const _debt={type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0,payment:parseFloat(document.getElementById('mini_payment').value)||0,enforcement:(document.getElementById('mini_enforcement')||{}).value||'none',secured:!!(document.getElementById('mini_secured')||{}).checked};
+  if(_editIndex!=null && debts[_editIndex]){ debts[_editIndex]=_debt; } else { debts.push(_debt); }
   renderDebts(); closeMiniForm();
 }
 function removeDebt(i){ debts.splice(i,1); renderDebts(); }
+function editDebt(i){
+  const d=debts[i]; if(!d) return;
+  document.getElementById('mini_type').value=d.type||'';
+  document.getElementById('mini_creditor').value=d.creditor||'';
+  document.getElementById('mini_amount').value=(d.amount||d.amount===0)?d.amount:'';
+  var _mc=document.getElementById('mini_currency'); if(_mc&&d.currency)_mc.value=d.currency;
+  document.getElementById('mini_interest').value=(d.interest||d.interest===0)?d.interest:'';
+  document.getElementById('mini_payment').value=(d.payment||d.payment===0)?d.payment:'';
+  var _me=document.getElementById('mini_enforcement'); if(_me)_me.value=d.enforcement||'none';
+  var _ms=document.getElementById('mini_secured'); if(_ms)_ms.checked=!!d.secured;
+  _securedTouched=true; _editIndex=i;
+  document.getElementById('debtMiniForm').classList.add('open');
+  var _ab=document.querySelector('.add-debt-btn'); if(_ab)_ab.style.display='none';
+  var _cf=document.querySelector('[data-i18n="addDebtConfirm"]'); if(_cf)_cf.textContent=t('saveDebtBtn');
+  setTimeout(()=>document.getElementById('mini_type').focus(),100);
+}
 function renderDebts(){
   const list=document.getElementById('debtList'); if(!list)return;
   const cur=formData.currency||'EUR';
@@ -1418,7 +1435,7 @@ function renderDebts(){
     const el=document.createElement('div'); el.className='debt-row';
     const creditorStr=d.creditor?` — ${d.creditor}`:'';
     const rateStr=d.interest>0?`${d.interest}%`:t('debtLabel_unknown_rate');
-    el.innerHTML=`<div class="debt-row-info"><span class="debt-row-type">${esc(d.type)}${esc(creditorStr)}</span><span class="debt-row-creditor">${esc(rateStr)}</span></div><div class="debt-row-right"><span class="debt-row-amount">${d.amount.toLocaleString('en-US')} ${d.currency||cur}</span></div><button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
+    el.innerHTML=`<div class="debt-row-info"><span class="debt-row-type">${esc(d.type)}${esc(creditorStr)}</span><span class="debt-row-creditor">${esc(rateStr)}</span></div><div class="debt-row-right"><span class="debt-row-amount">${d.amount.toLocaleString('en-US')} ${d.currency||cur}</span></div><button class="debt-row-remove" onclick="editDebt(${i})" aria-label="Edit" style="color:var(--green);">&#x270E;</button><button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
     list.appendChild(el);
   });
   const addLbl=document.getElementById('addDebtLabel');
