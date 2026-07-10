@@ -1273,15 +1273,54 @@ async function buildFromExisting() {
   formData.debt_count = debts.length;
   formData.debt_types = [...new Set(debts.map(d=>d.type))].join(', ');
 
-  actReturn = 'prefill';
-  openActCard();
+  if (!formData.immediate_focus) formData.immediate_focus = 'What I can realistically do this week';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  var _tb=document.getElementById('topbarStep'); if(_tb)_tb.style.display='none';
+  document.getElementById('loadingScreen').classList.add('active');
+  animateLoader();
+  let memberEmail = '';
+  if (memberToken) {
+    try {
+      const vRes = await fetch(`${WORKER_URL}/member/validate`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({token:memberToken}) });
+      if (vRes.ok) { const vData=await vRes.json(); memberEmail=vData.email||''; }
+    } catch(e) {}
+  }
+  formData.email = memberEmail;
+  await generateAndSave(memberEmail);
 }
 
 /* ── PATH A: Customer wants to update first ── */
+function _pickOpt(cid,val,field){ if(!val)return; var c=document.getElementById(cid); if(!c)return; var b=[...c.querySelectorAll('.opt')].find(function(x){return x.getAttribute('data-val')===val;}); if(b){ b.classList.add('selected'); formData[field]=val; if(field==='extra_income'){ var w=document.getElementById('wrap_extra_amount'); if(w) w.style.display=(val==='No additional income')?'none':'block'; } } }
+function prefillRecovery(){
+  var d = existingMemberData; if(!d) return;
+  var S=function(id,v){ var e=document.getElementById(id); if(e&&v!=null&&v!=='') e.value=v; };
+  S('f_firstname', d.firstname);
+  if(d.language){ S('f_language', d.language); if(typeof applyI18n==='function') applyI18n(d.language); }
+  if(d.country){ S('f_country', d.country); if(typeof onCountryChange==='function') onCountryChange(d.country); }
+  S('f_currency', d.currency);
+  if(d.situation){ var vals=String(d.situation).split(' | '); multiSelects.situation=vals; document.querySelectorAll('#opts_situation .opt').forEach(function(b){ if(vals.includes(b.getAttribute('data-val'))) b.classList.add('selected'); }); }
+  if(Array.isArray(d.debts)&&d.debts.length){ debts=d.debts.map(function(x){return Object.assign({},x);}); renderDebts(); }
+  S('f_income', d.income);
+  if(d.extra_amount && parseFloat(d.extra_amount)>0){ _pickOpt('opts_extra', d.extra_income, 'extra_income'); var w=document.getElementById('wrap_extra_amount'); if(w) w.style.display='block'; S('f_extra_amount', d.extra_amount); }
+  S('f_housing_cost', d.housing_cost);
+  S('f_other_costs', d.other_costs);
+  _pickOpt('opts_savings', d.savings, 'savings');
+  S('f_employment', d.employment);
+  S('f_household', d.household);
+  S('f_children', d.children);
+  _pickOpt('opts_barrier', d.barrier, 'barrier');
+  _pickOpt('opts_support', d.support_network, 'support_network');
+  _pickOpt('opts_goal', d.primary_goal, 'primary_goal');
+  _pickOpt('opts_focus', d.immediate_focus, 'immediate_focus');
+  S('f_own_words', d.own_words);
+  S('f_anything_else', d.anything_else);
+  if(typeof refreshGate==='function'){ refreshGate(); setTimeout(refreshGate,50); }
+}
 function startFreshForm() {
   document.getElementById('prefillCard').classList.remove('active');
   document.querySelector('.progress-wrap').style.display = '';
   document.getElementById('topbarStep').style.display = '';
+  prefillRecovery();
   showStep(1);
 }
 
