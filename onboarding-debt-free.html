@@ -1209,6 +1209,10 @@ function prefillForm(od){
     const el = document.getElementById(id);
     if(el) el.classList.remove('pending');
   });
+  /* Programmatic prefill fires no input events, so the CTA gate would stay
+     disabled on an already-valid first page (breaks plan-update on mobile,
+     where you cannot brush-click a field to wake it). Re-evaluate now. */
+  if(typeof refreshGate==='function'){ refreshGate(); setTimeout(refreshGate, 50); }
 }
 function selectExistingOpt(containerId, val, field){
   const container = document.getElementById(containerId);
@@ -1601,7 +1605,8 @@ FINANCIAL PROFILE:
   Monthly income (take-home): ${d.income} ${cur}${parseFloat(d.extra_amount)>0?' + '+d.extra_amount+' '+cur+' additional':''}
   Housing cost: ${d.housing_cost} ${cur}/month
   Other fixed costs: ${d.other_costs} ${cur}/month
-  Calculated monthly surplus: ${Math.round(surplus)} ${cur}
+  Calculated monthly surplus (already after the debt payments they make each month): ${Math.round(surplus)} ${cur}
+  → USE this Calculated monthly surplus figure exactly. Do NOT re-derive it as income minus housing minus other costs — that ignores the debt payments they already make and overstates what is free. Every "money left over" / repayment-capacity statement must use ${Math.round(surplus)} ${cur}, never a larger figure.
   Savings / emergency buffer: ${d.savings||'unknown'}
   Collections status: ${d.collections||'unknown'}
   What brought them here: ${d.situation}
