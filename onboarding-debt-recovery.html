@@ -314,7 +314,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
     </select>
     <div class="err-msg" id="err_country" data-i18n="err_country">Please select your country.</div>
   </div>
-  <div class="cta-row"><button class="btn-next" onclick="goNext(1)" id="btn1" data-i18n="btn_next">Continue</button></div>
+  <div class="cta-row"><button class="btn-next" onclick="goNext(1)" id="btn1" data-i18n="btn_next" disabled>Continue</button></div>
 </div>
 
 <!-- ══ STEP 2 — SITUATION ══ -->
@@ -335,7 +335,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(2)" id="back2" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(2)" id="btn2" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(2)" id="btn2" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -423,7 +423,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </button>
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(3)" id="back3" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(3)" id="btn3" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(3)" id="btn3" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -535,7 +535,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(4)" id="back4" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(4)" id="btn4" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(4)" id="btn4" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -590,7 +590,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(5)" id="back5" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(5)" id="btn5" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(5)" id="btn5" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -635,7 +635,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </div>
   <div class="cta-row">
     <button class="btn-back" onclick="goBack(6)" id="back6" data-i18n="btn_back">Back</button>
-    <button class="btn-next" onclick="goNext(6)" id="btn6" data-i18n="btn_next">Continue</button>
+    <button class="btn-next" onclick="goNext(6)" id="btn6" data-i18n="btn_next" disabled>Continue</button>
   </div>
 </div>
 
@@ -663,7 +663,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
       <textarea id="f_anything_else" rows="3" maxlength="400"></textarea>
     </div>
   </div>
-  <button class="btn-full" onclick="goToAct()" id="btnSubmit" data-i18n="btn_next">Continue</button>
+  <button class="btn-full" onclick="submitFromStep7()" id="btnSubmit" data-i18n="submitText" disabled>Build my 90-day plan</button>
   <p class="submit-note" id="submitNote">This takes 20–30 seconds. Your plan will be waiting in your member area.</p>
 </div>
 
@@ -819,7 +819,7 @@ EN: {
   hint_mini_creditor:"A company or person's name — Nordea, Klarna, your landlord. This helps me personalise your plan.",
   lbl_mini_amount:'Roughly how much?',lbl_mini_interest:'Roughly what interest rate?',
   hint_mini_interest:"Don't know? Leave it as 0 — I'll treat it as \"unknown\", not as interest-free.",
-  addDebtLabel:'Add a debt',addAnotherDebtLabel:'Add another debt',addDebtConfirm:'Add debt',cancelDebtBtn:'Cancel',
+  addDebtLabel:'Add a debt',addAnotherDebtLabel:'Add another debt',addDebtConfirm:'Add debt',saveDebtBtn:'Save',cancelDebtBtn:'Cancel',
   debtLabel_unknown_rate:'unknown rate',
   lbl_collections_section:'Collections & enforcement',
   hint_collections:'Is any of this already with a collections agency or in court?',
@@ -987,7 +987,7 @@ FI: {
   hint_mini_creditor:'Yrityksen tai henkilön nimi — Nordea, Klarna, vuokranantajasi. Tämä auttaa personoimaan suunnitelmasi.',
   lbl_mini_amount:'Arviolta kuinka paljon?',lbl_mini_interest:'Arviolta mikä korko?',
   hint_mini_interest:'Etkö tiedä? Jätä se 0:ksi — käsittelen sen "tuntemattomana", en korkovapaana.',
-  addDebtLabel:'Lisää velka',addAnotherDebtLabel:'Lisää toinen velka',addDebtConfirm:'Lisää velka',cancelDebtBtn:'Peruuta',
+  addDebtLabel:'Lisää velka',addAnotherDebtLabel:'Lisää toinen velka',addDebtConfirm:'Lisää velka',saveDebtBtn:'Tallenna',cancelDebtBtn:'Peruuta',
   debtLabel_unknown_rate:'korko tuntematon',
   lbl_collections_section:'Perintä ja ulosotto',
   hint_collections:'Onko jokin näistä jo perintätoimistossa tai oikeudessa?',
@@ -1311,6 +1311,7 @@ function showStep(n) {
   document.getElementById('progressFill').style.width = STEP_PCT[n]+'%';
   document.getElementById('topbarStep').textContent = t('topStep').replace('{n}', n);
   for (let i=1;i<=7;i++) { document.getElementById('ps'+i)?.classList.toggle('active', i<=n); }
+  if(typeof refreshGate==='function') refreshGate();
 }
 
 /* setLang is aliased to applyI18n above */
@@ -1340,6 +1341,27 @@ function validateStep(step) {
   if (step===7) { if (!formData.immediate_focus) { showInlineErr('err_focus'); ok=false; } }
   return ok;
 }
+
+/* ── CTA GATING (Vaihe0.5, mirror of free) — main Continue disabled until the
+   step's required fields are answered. Pure predicate (no side-effects) + global
+   listener. Step 3 has no requirement (no-debt path supported). Path A "update
+   info" lands via startFreshForm()->showStep(1), which calls refreshGate below. */
+function stepComplete(step){
+  if(step===1) return !!document.getElementById('f_firstname').value.trim() && !!document.getElementById('f_country').value;
+  if(step===2) return multiSelects.situation.length>0;
+  if(step===3) return true;
+  if(step===4) return !!document.getElementById('f_income').value && !!document.getElementById('f_housing_cost').value && !!document.getElementById('f_other_costs').value && !!document.getElementById('f_employment').value && !!formData.savings;
+  if(step===5) return !!formData.barrier && !!formData.support_network;
+  if(step===6) return !!formData.primary_goal;
+  if(step===7) return !!formData.immediate_focus;
+  return true;
+}
+function gateBtnId(step){ return step===7 ? 'btnSubmit' : ('btn'+step); }
+function refreshGate(){ var b=document.getElementById(gateBtnId(currentStep)); if(b) b.disabled=!stepComplete(currentStep); }
+document.addEventListener('input', refreshGate, true);
+document.addEventListener('change', refreshGate, true);
+document.addEventListener('click', function(){ setTimeout(refreshGate,0); }, true);
+window.addEventListener('load', function(){ setTimeout(refreshGate,0); });
 
 function setFieldErr(wrapId,errId) { document.getElementById(wrapId)?.classList.add('has-error'); const e=document.getElementById(errId);if(e)e.style.display='block'; }
 function clearFieldErr(wrapId) { document.getElementById(wrapId)?.classList.remove('has-error'); }
@@ -1373,25 +1395,42 @@ function toggleOpt(btn, field) {
 }
 
 /* ── DEBT MANAGEMENT ── */
-let _securedTouched=false;
+let _securedTouched=false; let _editIndex=null;
 function miniSecuredTouched(){_securedTouched=true;}
 function miniTypeChanged(){if(!_securedTouched){var el=document.getElementById('mini_type'),s=document.getElementById('mini_secured');if(el&&s)s.checked=/^(Mortgage|Car loan)$/.test(el.value);}}
 function openMiniForm() { document.getElementById('debtMiniForm').classList.add('open'); document.getElementById('addDebtBtn').style.display='none'; setTimeout(()=>document.getElementById('mini_amount').focus(),100); }
-function closeMiniForm() { document.getElementById('debtMiniForm').classList.remove('open'); document.getElementById('addDebtBtn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest','mini_payment'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});var _e=document.getElementById('mini_enforcement');if(_e)_e.value='none';var _s=document.getElementById('mini_secured');if(_s)_s.checked=false;_securedTouched=false; }
+function closeMiniForm() { document.getElementById('debtMiniForm').classList.remove('open'); document.getElementById('addDebtBtn').style.display='flex'; ['mini_type','mini_creditor','mini_amount','mini_interest','mini_payment'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});var _e=document.getElementById('mini_enforcement');if(_e)_e.value='none';var _s=document.getElementById('mini_secured');if(_s)_s.checked=false;_securedTouched=false; _editIndex=null; var _cf=document.querySelector('[data-i18n="addDebtConfirm"]'); if(_cf)_cf.textContent=t('addDebtConfirm'); }
 function addDebt() {
   const type=document.getElementById('mini_type').value; const amt=document.getElementById('mini_amount').value;
   if (!type||!amt) { toast(t('toast_debt_type')); return; }
-  debts.push({type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0,payment:parseFloat(document.getElementById('mini_payment').value)||0,enforcement:(document.getElementById('mini_enforcement')||{}).value||'none',secured:!!(document.getElementById('mini_secured')||{}).checked});
+  const _debt={type,creditor:document.getElementById('mini_creditor').value.trim(),amount:parseFloat(amt),currency:document.getElementById('mini_currency').value,interest:parseFloat(document.getElementById('mini_interest').value)||0,payment:parseFloat(document.getElementById('mini_payment').value)||0,enforcement:(document.getElementById('mini_enforcement')||{}).value||'none',secured:!!(document.getElementById('mini_secured')||{}).checked};
+  if(_editIndex!=null && debts[_editIndex]){ debts[_editIndex]=_debt; } else { debts.push(_debt); }
   renderDebts(); closeMiniForm();
 }
 function removeDebt(i) { debts.splice(i,1); renderDebts(); }
+function editDebt(i){
+  const d=debts[i]; if(!d) return;
+  document.getElementById('mini_type').value=d.type||'';
+  document.getElementById('mini_creditor').value=d.creditor||'';
+  document.getElementById('mini_amount').value=(d.amount||d.amount===0)?d.amount:'';
+  var _mc=document.getElementById('mini_currency'); if(_mc&&d.currency)_mc.value=d.currency;
+  document.getElementById('mini_interest').value=(d.interest||d.interest===0)?d.interest:'';
+  document.getElementById('mini_payment').value=(d.payment||d.payment===0)?d.payment:'';
+  var _me=document.getElementById('mini_enforcement'); if(_me)_me.value=d.enforcement||'none';
+  var _ms=document.getElementById('mini_secured'); if(_ms)_ms.checked=!!d.secured;
+  _securedTouched=true; _editIndex=i;
+  document.getElementById('debtMiniForm').classList.add('open');
+  var _ab=document.getElementById('addDebtBtn'); if(_ab)_ab.style.display='none';
+  var _cf=document.querySelector('[data-i18n="addDebtConfirm"]'); if(_cf)_cf.textContent=t('saveDebtBtn');
+  setTimeout(()=>document.getElementById('mini_type').focus(),100);
+}
 function renderDebts() {
   const list=document.getElementById('debtList'); const cur=formData.currency||'EUR';
   list.innerHTML='';
   debts.forEach((d,i)=>{
     const el=document.createElement('div'); el.className='debt-row';
     const rateStr=d.interest>0?`${d.interest}%`:t('debtLabel_unknown_rate');
-    el.innerHTML=`<div class="debt-row-info"><span class="debt-row-type">${esc(d.type)}${d.creditor?' — '+esc(d.creditor):''}</span><span class="debt-row-creditor">${rateStr}</span></div><div class="debt-row-right"><span class="debt-row-amount">${d.amount.toLocaleString('en')} ${d.currency||cur}</span></div><button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
+    el.innerHTML=`<div class="debt-row-info"><span class="debt-row-type">${esc(d.type)}${d.creditor?' — '+esc(d.creditor):''}</span><span class="debt-row-creditor">${rateStr}</span></div><div class="debt-row-right"><span class="debt-row-amount">${d.amount.toLocaleString('en')} ${d.currency||cur}</span></div><button class="debt-row-remove" onclick="editDebt(${i})" aria-label="Edit" style="color:var(--green);">&#x270E;</button><button class="debt-row-remove" onclick="removeDebt(${i})" aria-label="Remove">&#x2715;</button>`;
     list.appendChild(el);
   });
   const addBtn=document.getElementById('addDebtLabel');
@@ -1576,6 +1615,23 @@ function collectAct() {
 }
 
 /* ── GENERATE + SAVE (shared by Path A and Path B) ── */
+async function submitFromStep7() {
+  if (!validateStep(7)) return;
+  collectStep(7);
+  document.querySelector('.progress-wrap').style.display = 'none';
+  var _tb=document.getElementById('topbarStep'); if(_tb)_tb.style.display='none';
+  document.getElementById('loadingScreen').classList.add('active');
+  animateLoader();
+  let memberEmail = '';
+  if (memberToken) {
+    try {
+      const vRes = await fetch(`${WORKER_URL}/member/validate`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({token:memberToken}) });
+      if (vRes.ok) { const vData=await vRes.json(); memberEmail=vData.email||''; }
+    } catch(e) {}
+  }
+  formData.email = memberEmail;
+  await generateAndSave(memberEmail);
+}
 async function generateAndSave(memberEmail) {
   let plan = '';
   try {
@@ -1614,9 +1670,6 @@ async function generateAndSave(memberEmail) {
           support_network:formData.support_network, confidence:  formData.confidence,
           primary_goal:   formData.primary_goal, own_words:      formData.own_words,
           immediate_focus:formData.immediate_focus, anything_else:formData.anything_else,
-          act_creditor:      formData.act_creditor,      act_goal:          formData.act_goal,
-          act_action:        formData.act_action,        act_worry:         formData.act_worry,
-          act_monthly_extra: formData.act_monthly_extra, act_tone:          formData.act_tone,
         }
       })
     });
