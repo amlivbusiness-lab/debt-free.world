@@ -270,14 +270,20 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
     <p>We don&rsquo;t keep your information forever &mdash; and we don&rsquo;t think we should. Data retention periods are different for each plan, and depend on whether you are a free or paid member.</p>
     <ul>
       <li><strong>DEBT FREE (free plan)</strong> &mdash; your account and your My DEBT FREE Plan are kept for 90 days from your last visit. If you don&rsquo;t log in during that time, your data is automatically and permanently deleted. Logging back in resets the 90 days.</li>
-      <li><strong>Debt Recovery (90 days, paid)</strong> &mdash; your account stays fully active for 90 days from purchase. After that, your account moves to a 12-month archive: you can still log in and download your documents and letters, but no new plan updates are generated. After 12 months in archive, your data is automatically deleted. We will always email you 30 days before this happens, so you have time to download anything you want to keep.</li>
-      <li><strong>Income Builder, Wealth Architect, Business Engine</strong> &mdash; the same active-period-plus-archive model will apply once these products launch. Specific periods will be published here before each product goes live.</li>
+      <li><strong>Debt Recovery (90 days, paid)</strong> &mdash; your account is active for 90 days from purchase. On day 83 we email you your kit. On day 89 we send a short reminder. On day 90 the season closes and everything personal is permanently deleted. There is no archive period, and after day 90 we cannot restore your account, your plan or your documents &mdash; your kit is the copy you keep.</li>
+      <li><strong>Income Builder, Wealth Architect, Business Engine</strong> &mdash; the same model of a defined active period followed by deletion will apply once these products launch. Specific periods will be published here before each product goes live.</li>
     </ul>
+    <div class="highlight-box">
+      <p><strong>What happens on day 90:</strong> On day 90 we delete your plan, your answers, your documents, and everything personal inside them. What stays is the payment and consent receipt our accounting law requires — no plan, no debts, no amounts. Your kit is yours and works without us.</p>
+    </div>
+    <p><strong>Your kit, and why deletion costs you nothing.</strong> On day 83 &mdash; seven days before the season closes &mdash; we email you a single HTML file containing your plan, your progress, your debt-free date and your letters. It is self-contained: it opens in any browser without an internet connection, it does not call back to our servers, and it keeps working even if Debt-Free.world ceases to exist. Deletion removes our copy, not yours. Please save it somewhere you will find it again, because it cannot be regenerated after day 90.</p>
+    <p><strong>The receipt we keep, and what is in it.</strong> After the deletion, exactly one record about you remains. It has six fields and nothing else: your email address, the Stripe session identifier for the purchase, whether terms consent was required, whether you accepted it, when you accepted it, and the date the deletion ran. Finnish accounting law requires proof of payment and consent to be retained for seven years, which is how long this record is kept and the only reason it exists.</p>
+    <p>It contains <strong>no plan, no debts, no amounts, no name, no onboarding answers and no documents</strong>. No page you can log into reads it, and it is not used to contact you.</p>
     <p>This retention schedule applies to your email address, your onboarding answers, your generated plan, and any letters or documents you created with us.</p>
     <p>Other data retention periods:</p>
     <ul>
       <li><strong>Newsletter email address</strong> &mdash; retained in Brevo until you unsubscribe or request deletion</li>
-      <li><strong>Payment records</strong> &mdash; retained as required by Finnish accounting law (7 years)</li>
+      <li><strong>Payment and consent receipt</strong> &mdash; the six fields described above, retained as required by Finnish accounting law (7 years)</li>
     </ul>
   </div>
 </div>
@@ -296,6 +302,10 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
     <div class="highlight-box">
       <p><strong>How we protect you in research use:</strong> This anonymised data is completely separated from your name, email address, and any free-text answers, and stored independently of your personal account record. It is not pseudonymised &mdash; meaning we keep no key, table, or reference anywhere that could link it back to you. It cannot reasonably be used to identify you as an individual. This process never delays or prevents the deletion of your personal data on its scheduled date. We will not share identifiable personal data with researchers, partners, or funders &mdash; ever.</p>
     </div>
+    <p><strong>What the anonymous record actually contains.</strong> It is a single row of fourteen fields and it has the same shape for everyone: the version of the record format; the month your season started, as a month only and never a day; your country as a two-letter code; your language; whether you joined as a paying member or through Community Access; which companion mode you used; your household type; how many children you have, recorded as 0, 1, 2 or 3+; your employment situation; a start snapshot and an end snapshot, each holding only ranges (total debt, number of debts, monthly surplus, projected months to debt-free, and whether enforcement was involved); how much your projected payoff time improved, as a range; four engagement counts, each as a range; and the fact that the season completed.</p>
+    <p>Household type, number of children and employment situation come from answers you already gave during onboarding. We did not add any new question to collect them. Nothing in the row is an exact figure, an exact date or a free-text answer.</p>
+    <p><strong>Small groups are never shown.</strong> When these rows are counted, any group of fewer than 20 rows is not shown in any form. The number is not rounded, not banded and not published elsewhere &mdash; our internal tool returns a suppression marker in place of the count. A breakdown may combine at most two characteristics at a time. Both limits are enforced in our code, not left to policy or to the judgment of whoever runs the query.</p>
+    <p><strong>What we never collect.</strong> We do not ask for and do not store your age, your date of birth, your gender, or any location more precise than your country &mdash; neither in your account nor in the anonymous record. Free-text answers you write during onboarding are stored in your account only to generate your plan, are deleted with it, and never enter the anonymous record.</p>
   </div>
 </div>
 
@@ -467,9 +477,9 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="prose">
     <p>We review all other refund requests individually and with genuine care. While we cannot guarantee refunds outside the situations above, we commit to:</p>
     <ul>
-      <li>Responding to every refund request within 3 business days</li>
+      <li>Responding to every refund request within 5 business days</li>
       <li>Treating every case with fairness and human judgment</li>
-      <li>Offering alternative solutions where a full refund is not appropriate &mdash; for example, extended access or personalised support</li>
+      <li>Offering alternative solutions where a full refund is not appropriate &mdash; for example, a fresh 90-day season at no charge, or personalised support</li>
     </ul>
   </div>
 </div>
@@ -484,7 +494,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
     </li>
     <li class="step-item">
       <span class="step-num">2</span>
-      <div class="step-body"><strong>We respond within 3 business days</strong>We will review your case and respond with our decision or a request for more information.</div>
+      <div class="step-body"><strong>We respond within 5 business days</strong>We will review your case and respond with our decision or a request for more information.</div>
     </li>
     <li class="step-item">
       <span class="step-num">3</span>
