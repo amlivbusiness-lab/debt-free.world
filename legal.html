@@ -109,14 +109,15 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="section-num">02</div>
   <h2>What we offer</h2>
   <div class="prose">
-    <p>Debt-Free.world is a global AI-powered financial empowerment platform. We provide personalised financial diagnostics, debt recovery tools, income building resources, and wealth building guidance &mdash; organised into four product families, each with a free and a paid tier:</p>
+    <p>Debt-Free.world is a global AI-powered financial empowerment platform. We provide personalised financial diagnostics, debt recovery tools, income building resources, and wealth building guidance. Our products are:</p>
     <ul>
-      <li><strong>Debt FREE / Debt Recovery</strong> &mdash; understand your situation, then change it (live now)</li>
-      <li><strong>Income FREE / Income Builder</strong> &mdash; tools to grow your income (coming Q4 2026)</li>
-      <li><strong>Wealth FREE / Wealth Architect</strong> &mdash; tools to build lasting wealth (coming 2028)</li>
-      <li><strong>Business FREE / Business Engine</strong> &mdash; tools to build a business or side income (coming 2029)</li>
+      <li><strong>Debt FREE</strong> &mdash; free. Understand your situation (live now)</li>
+      <li><strong>Debt Recovery</strong> &mdash; 19 &euro;, 90 days. Change it (live now)</li>
+      <li><strong>Income FREE</strong> and <strong>Income Builder</strong> &mdash; tools to grow your income (coming Q4 2026)</li>
+      <li><strong>Wealth Architect</strong> &mdash; tools to build lasting wealth (coming 2028)</li>
+      <li><strong>Business Engine</strong> &mdash; tools to build a business or side income (coming 2029)</li>
     </ul>
-    <p>Free tools are available without registration. Paid services require payment and are subject to the additional terms below.</p>
+    <p>Some free tools can be used without registering. The DEBT FREE member area requires an email address. Paid services require payment and are subject to the additional terms below.</p>
   </div>
 </div>
 
@@ -235,32 +236,42 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 <div class="section">
   <h2>What data we collect and why</h2>
   <div class="prose">
-    <p>We collect only what is necessary to provide the service you have requested.</p>
-    <p><strong>Free plan users</strong></p>
-    <p>When you submit the free debt recovery form, we collect:</p>
+    <p>We collect only what is necessary to provide the service you have requested. Both the free and the paid onboarding form save into the same record, so the list below covers both. Which questions you are actually asked depends on which product you are using, and every answer is optional.</p>
+    <p><strong>Your account</strong></p>
     <ul>
-      <li>Email address &mdash; to deliver your 90-day plan</li>
-      <li>Financial information you enter (income, debt amounts, household type, country, employment situation, housing costs) &mdash; to generate your personalised plan</li>
-      <li>Your selected language and country &mdash; to localise your plan</li>
+      <li>Email address &mdash; to deliver your plan and your sign-in link</li>
+      <li>First name, country, language and currency &mdash; to address and localise your plan</li>
+      <li>Which product you have, when your account was created, when it expires, and whether you have completed onboarding</li>
+      <li>For paid and Community Access members: the Stripe session identifier for the purchase, and whether, and when, you accepted the terms at checkout. We never see or store your card details.</li>
+    </ul>
+    <p><strong>What you tell us about your money</strong></p>
+    <ul>
+      <li>Monthly income, housing costs, other monthly costs, any extra income and the amount of it, and your savings buffer</li>
+      <li>Your total debt, how many debts you have, and what types of debt they are</li>
+      <li>A list of your individual debts &mdash; up to 20 &mdash; and for each one: the type, <strong>the creditor&rsquo;s name</strong>, the amount, the currency, the interest rate, the monthly payment, whether a collection agency or a court is involved, and whether the debt is secured</li>
+      <li>Whether you are in collections or enforcement</li>
+    </ul>
+    <p>These are stored as the exact figures you enter, not as ranges. Ranges are used only in the anonymous statistical record described further below.</p>
+    <p><strong>What you tell us about your situation</strong></p>
+    <ul>
+      <li>Your household type, how many children you have, your employment situation, and whether you have people around you who can help</li>
+      <li>Your main goal, what you want to focus on first, the biggest thing standing in your way, and how confident you feel on a scale of 0 to 10</li>
+      <li>If you use the letter tool: the creditor you are writing to, what you want from them, the action you are proposing, what you are most worried about, the tone you want, and any extra amount you can offer each month</li>
+      <li>Your companion mode and whether you want reminders</li>
+    </ul>
+    <p><strong>What we generate for you</strong></p>
+    <ul>
+      <li>Your personalised plan, generated by AI from the answers above</li>
+      <li>Any letters and documents you create, and your progress through the plan</li>
     </ul>
     <div class="highlight-box">
-      <p><strong>Free plan data storage:</strong> Financial data entered in the free plan form is used solely to generate your My DEBT FREE Plan. It is transmitted to our AI provider (Anthropic) for processing and is retained for 90 days from your last visit, as described in &ldquo;Membership periods and data retention&rdquo; below. Your email address is stored in our email system (Brevo) to deliver your plan and send relevant updates.</p>
+      <p><strong>Three questions are open text, and you can write anything in them.</strong> They are the question about your current situation (up to 500 characters), the one that invites you to describe things in your own words (400 characters), and the one at the end asking whether there is anything else we should know (500 characters). Because they are free text, you may end up writing things we never asked for &mdash; health information, or information about other people in your life. Please share only what you are comfortable sharing. What you write is sent to our AI provider to generate your plan, is stored with the rest of your answers, is deleted with them on day 90, and <strong>never enters the anonymous statistical record</strong> &mdash; free text is excluded from it by design, not by policy.</p>
+    </div>
+    <div class="highlight-box">
+      <p><strong>Where this is stored and why:</strong> Your answers and your plan are stored in Cloudflare Workers KV (a key-value database), reachable only through your secure access token. The purpose is to power your Member Area, show your plan on later visits, and let the tools work on your real numbers instead of asking you again. Your email address is also stored in our email system (Brevo) to deliver your plan and your sign-in links. Financial answers are transmitted to our AI provider (Anthropic) to generate your plan.</p>
     </div>
     <p>Note: like all internet services, our infrastructure providers (Cloudflare) may retain technical request logs for short periods for security and operational purposes. These logs do not contain your financial form data.</p>
-    <p><strong>Premium Member Area users</strong></p>
-    <p>When you purchase a Premium membership and complete the onboarding form, we collect and store:</p>
-    <ul>
-      <li>Email address</li>
-      <li>First name</li>
-      <li>Country and language</li>
-      <li>Financial information you provide: debt total range, employment situation, household type, housing situation, income range, savings buffer, collections or enforcement status, primary barrier to debt repayment</li>
-      <li>Your AI-generated personalised plan</li>
-      <li>Stripe payment metadata (transaction ID, payment date &mdash; we do not store card details)</li>
-    </ul>
-    <div class="highlight-box">
-      <p><strong>How and why Premium data is stored:</strong> This data is stored in Cloudflare Workers KV (a key-value database) associated with your secure access token. The primary purpose is to power your personalised Premium Member Area and display your plan on subsequent visits during your membership period. Data is retained for the duration of your purchased membership tier and then automatically deleted.</p>
-    </div>
-    <p>Providing this financial information is voluntary. You may access your Member Area without completing the onboarding form, but your personalised plan will not be generated.</p>
+    <p>Providing this information is voluntary. You may access your Member Area without completing the onboarding form, but your personalised plan will not be generated. You can leave any individual question blank.</p>
   </div>
 </div>
 
@@ -269,7 +280,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
   <div class="prose">
     <p>We don&rsquo;t keep your information forever &mdash; and we don&rsquo;t think we should. Data retention periods are different for each plan, and depend on whether you are a free or paid member.</p>
     <ul>
-      <li><strong>DEBT FREE (free plan)</strong> &mdash; your account and your My DEBT FREE Plan are kept for 90 days from your last visit. If you don&rsquo;t log in during that time, your data is automatically and permanently deleted. Logging back in resets the 90 days.</li>
+      <li><strong>DEBT FREE (free plan)</strong> &mdash; your account and your My DEBT FREE Plan are kept for <strong>90 days from the day you created your account</strong>. This clock is fixed. Signing in again does not extend it, and there is no way to extend it. On day 90 your account, your answers and your plan are automatically and permanently deleted, and they cannot be restored afterwards. If you want to keep your plan, save or print it while your account is open.</li>
       <li><strong>Debt Recovery (90 days, paid)</strong> &mdash; your account is active for 90 days from purchase. On day 83 we email you your kit. On day 89 we send a short reminder. On day 90 the season closes and everything personal is permanently deleted. There is no archive period, and after day 90 we cannot restore your account, your plan or your documents &mdash; your kit is the copy you keep.</li>
       <li><strong>Income Builder, Wealth Architect, Business Engine</strong> &mdash; the same model of a defined active period followed by deletion will apply once these products launch. Specific periods will be published here before each product goes live.</li>
     </ul>
@@ -277,7 +288,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
       <p><strong>What happens on day 90:</strong> On day 90 we delete your plan, your answers, your documents, and everything personal inside them. What stays is the payment and consent receipt our accounting law requires — no plan, no debts, no amounts. Your kit is yours and works without us.</p>
     </div>
     <p><strong>Your kit, and why deletion costs you nothing.</strong> On day 83 &mdash; seven days before the season closes &mdash; we email you a single HTML file containing your plan, your progress, your debt-free date and your letters. It is self-contained: it opens in any browser without an internet connection, it does not call back to our servers, and it keeps working even if Debt-Free.world ceases to exist. Deletion removes our copy, not yours. Please save it somewhere you will find it again, because it cannot be regenerated after day 90.</p>
-    <p><strong>The receipt we keep, and what is in it.</strong> After the deletion, exactly one record about you remains. It has six fields and nothing else: your email address, the Stripe session identifier for the purchase, whether terms consent was required, whether you accepted it, when you accepted it, and the date the deletion ran. Finnish accounting law requires proof of payment and consent to be retained for seven years, which is how long this record is kept and the only reason it exists.</p>
+    <p><strong>The receipt we keep, and what is in it.</strong> After the deletion, exactly one record about you remains in the system that runs your membership. It has six fields and nothing else: your email address, the Stripe session identifier for the purchase, whether terms consent was required, whether you accepted it, when you accepted it, and the date the deletion ran. Finnish accounting law requires proof of payment and consent to be retained for seven years, which is how long this record is kept and the only reason it exists.</p>
     <p>It contains <strong>no plan, no debts, no amounts, no name, no onboarding answers and no documents</strong>. No page you can log into reads it, and it is not used to contact you.</p>
     <p>This retention schedule applies to your email address, your onboarding answers, your generated plan, and any letters or documents you created with us.</p>
     <p>Other data retention periods:</p>
@@ -384,11 +395,12 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
     <p>We take the following technical and organisational measures to protect your data:</p>
     <ul>
       <li>All data in transit is encrypted via HTTPS/TLS</li>
-      <li>Premium member tokens are cryptographically generated with 256-bit entropy and validated server-side on every request</li>
-      <li>Member tokens are stored in sessionStorage (not cookies or localStorage) and cleared from URLs immediately after validation</li>
-      <li>Financial data is not stored in browser storage or transmitted in page URLs</li>
+      <li>Member access tokens are generated with 256 bits of cryptographic randomness and validated server-side on every request</li>
+      <li>We never store your access token itself &mdash; only a SHA-256 hash of it. A copy of our database could not be used to sign in as you</li>
+      <li>Requesting a new sign-in link immediately invalidates the previous one</li>
+      <li>Your financial answers are never placed in a page address &mdash; they are sent in the encrypted body of the request</li>
       <li>Access to production infrastructure is restricted</li>
-      <li>Premium member data is automatically deleted after the applicable membership period</li>
+      <li>Member data is automatically deleted at the end of the retention period described above</li>
       <li>All API endpoints are rate-limited and restricted to authorised origins</li>
     </ul>
   </div>
@@ -479,7 +491,7 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
     <ul>
       <li>Responding to every refund request within 5 business days</li>
       <li>Treating every case with fairness and human judgment</li>
-      <li>Offering alternative solutions where a full refund is not appropriate &mdash; for example, a fresh 90-day season at no charge, or personalised support</li>
+      <li>Offering alternative solutions where a full refund is not appropriate &mdash; for example, personalised support, or a fresh 90-day season at no charge. A fresh season is not something you can start yourself; if we agree on it, we arrange it for you by hand and confirm by email once it is open.</li>
     </ul>
   </div>
 </div>
@@ -505,10 +517,12 @@ footer{padding:2rem 0;display:flex;justify-content:space-between;align-items:cen
 
 <div class="section">
   <div class="section-num">06</div>
-  <h2>Community Access Program</h2>
+  <h2>Community Access</h2>
   <div class="prose">
-    <p>If you genuinely cannot afford Debt Recovery but need help, you may apply to our Community Access Program &mdash; which provides free Premium access in exchange for feedback and participation in our development process.</p>
-    <p>Contact us at <a href="mailto:support@debt-free.world">support@debt-free.world</a> with the subject line &ldquo;Community Access&rdquo;.</p>
+    <p>If you cannot afford Debt Recovery, you can take it at no cost through Community Access. There is no application to write and no case to make: you select it yourself, go through the same checkout as everyone else, and the total is 0 &euro;.</p>
+    <p>You get the same 90 days of Debt Recovery as a paying member &mdash; the same tools, the same plan, the same kit before the season closes. Nothing is held back, and nothing is asked of you in return. Feedback is welcome, but it is never a condition.</p>
+    <p>Because nothing is paid, there is nothing to refund, and there is no right of withdrawal to waive &mdash; so you are not asked to accept the withdrawal waiver described in section 01.</p>
+    <p>If you cannot find the option, email <a href="mailto:support@debt-free.world">support@debt-free.world</a> and we will send you the link.</p>
   </div>
 </div>
 
