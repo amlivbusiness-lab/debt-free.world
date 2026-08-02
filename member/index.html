@@ -81,8 +81,6 @@ button{font-family:var(--sans);cursor:pointer;}
 .nav-item{display:flex;align-items:center;gap:12px;width:100%;background:none;border:none;text-align:left;padding:11px 14px;border-radius:10px;color:var(--text);font-size:14.5px;font-weight:500;border-left:3px solid transparent;}
 .nav-item:hover{background:var(--green-pale);}
 .nav-item svg{width:18px;height:18px;color:var(--green);flex-shrink:0;stroke-width:1.5;}
-.nav-item.locked{color:var(--soft);}
-.nav-item.locked svg{color:var(--soft);}
 .nav-item .lock{margin-left:auto;width:15px;height:15px;color:var(--soft);}
 .nav-foot{margin-top:6px;padding-top:10px;border-top:1px solid var(--border);}
 .nav-logout{color:var(--soft);font-weight:600;}
@@ -139,14 +137,6 @@ button{font-family:var(--sans);cursor:pointer;}
 .emerg-next .en-step:last-child{margin-bottom:0;}
 .emerg-next .en-step svg{width:15px;height:15px;color:var(--green);flex-shrink:0;margin-top:3px;stroke-width:1.5;}
 
-/* snapshot grid */
-.snap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.snap-cell{background:var(--green-pale);border-radius:11px;padding:13px 14px;}
-.snap-cell .k{font-size:11.5px;color:var(--muted);font-weight:500;margin-bottom:3px;display:flex;align-items:center;gap:6px;}
-.snap-cell .k svg{width:14px;height:14px;color:var(--green);}
-.snap-cell .v{font-family:var(--serif);font-size:20px;color:var(--text);}
-.snap-cell .v.pos{color:var(--green);}
-.snap-cell .v.neg{color:var(--red);}
 .snap-hero{background:var(--green);color:#fff;border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:14px;}
 .snap-hero .sh-icon{width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .snap-hero .sh-icon svg{width:22px;height:22px;color:#fff;}
@@ -197,11 +187,6 @@ button{font-family:var(--sans);cursor:pointer;}
 .plan-toggle.open svg{transform:rotate(180deg);}
 .plan-empty{font-size:14px;color:var(--muted);background:var(--green-pale);border-radius:11px;padding:16px;}
 .plan-empty a{font-weight:600;}
-.plan-update{margin-top:18px;padding:14px 16px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:8px;}
-.plan-update-link{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:600;font-size:14.5px;cursor:pointer;}
-.plan-update-link svg{width:17px;height:17px;stroke-width:1.5;}
-.plan-update-link:hover{text-decoration:underline;}
-.plan-update-sub{display:block;margin-top:6px;font-size:13px;color:var(--muted);}
 /* plan — your next move (always visible) */
 .plan-next{background:var(--green-pale);border-left:3px solid var(--green);border-radius:12px;padding:18px 20px;margin-bottom:20px;}
 .plan-next-eyebrow{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:11px;}
@@ -259,22 +244,6 @@ button{font-family:var(--sans);cursor:pointer;}
 .sup-verified svg{width:14px;height:14px;color:var(--green);flex-shrink:0;}
 .disclaimer{font-size:12px;color:var(--soft);margin-top:14px;line-height:1.5;}
 
-/* journey */
-.journey{position:relative;padding-left:6px;}
-.j-step{display:flex;gap:14px;padding-bottom:18px;position:relative;}
-.j-step:last-child{padding-bottom:0;}
-.j-step::before{content:"";position:absolute;left:13px;top:28px;bottom:-2px;width:2px;background:var(--border);}
-.j-step:last-child::before{display:none;}
-.j-dot{width:28px;height:28px;border-radius:50%;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
-.j-dot svg{width:15px;height:15px;color:var(--soft);}
-.j-step.here .j-dot{background:var(--green);border-color:var(--green);}
-.j-step.here .j-dot svg{color:#fff;}
-.j-step.done .j-dot{border-color:var(--green);}
-.j-step.done .j-dot svg{color:var(--green);}
-.j-body .j-title{font-weight:600;font-size:14.5px;}
-.j-body .j-title .you{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--green);border-radius:20px;padding:2px 8px;margin-left:7px;vertical-align:middle;}
-.j-body .j-meta{font-size:12.5px;color:var(--muted);margin-top:1px;}
-
 /* PLAN-FIRST overlay */
 .overlay{position:fixed;inset:0;z-index:900;background:rgba(9,30,18,.55);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:5vh 16px 16px;}
 .overlay.show{display:flex;animation:fade .25s ease;}
@@ -315,10 +284,6 @@ button{font-family:var(--sans);cursor:pointer;}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:var(--green-tint);outline:none;}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--green);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 5px rgba(9,50,24,.3);}
 input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--green);cursor:pointer;border:3px solid #fff;}
-.tool-field{margin-bottom:14px;}
-.tool-field label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;}
-.tool-field input{width:100%;font-family:var(--sans);font-size:15px;border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;outline:none;}
-.tool-field input:focus{border-color:var(--green);}
 .seg{display:flex;gap:8px;margin-bottom:16px;}
 .seg button{flex:1;padding:10px;border:1.5px solid var(--border);background:var(--white);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--muted);}
 .seg button.on{border-color:var(--green);background:var(--green-pale);color:var(--green);}
@@ -376,7 +341,6 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 }
 @media(max-width:480px){
   .hello h1{font-size:25px;}
-  .snap-grid{grid-template-columns:1fr 1fr;}
   .tools-grid{grid-template-columns:1fr;}
   .section{padding:18px 16px;}
 }
@@ -386,58 +350,27 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 .depth-bar{display:none;margin:0 0 10px;}
 .depth-back{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--green);background:var(--green-pale);border:1px solid var(--green-line);border-radius:11px;padding:9px 14px;}
 .depth-back svg{width:16px;height:16px;stroke-width:1.5;}
-/* Hero — debt-free date */
-.hero-card{background:var(--green);color:#fff;border-radius:16px;padding:26px 22px;text-align:center;box-shadow:0 10px 30px rgba(9,50,24,.16);}
-.hero-card .hc-k{font-size:12px;letter-spacing:.05em;text-transform:uppercase;opacity:.82;margin-bottom:6px;}
-.hero-card .hc-date{font-family:var(--serif);font-size:46px;line-height:1.04;}
-.hero-card .hc-sub{font-size:13px;opacity:.85;margin-top:7px;}
-.hero-figs{display:flex;gap:10px;margin-top:16px;}
-.hero-fig{flex:1;background:var(--white);border-radius:12px;border-left:3px solid var(--green);padding:13px 12px;text-align:left;}
-.hero-fig .hf-v{font-family:var(--serif);font-size:21px;color:var(--green);line-height:1.1;}
-.hero-fig .hf-k{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.35;}
-.hero-lever{margin-top:18px;}
-.hero-life{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.5;}
-.hero-locked{background:var(--green-dark);color:#fff;border-radius:16px;padding:24px 22px;}
-.hero-locked .hl-t{font-family:var(--serif);font-size:21px;line-height:1.18;margin-bottom:8px;}
-.hero-locked .hl-s{font-size:13.5px;opacity:.92;line-height:1.55;}
-.hero-nodebt{background:var(--green);color:#fff;border-radius:16px;padding:28px 22px;text-align:center;font-family:var(--serif);font-size:23px;line-height:1.22;}
-/* Safety buffer */
-.buf-card{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:18px;}
-.buf-goal{font-size:13px;color:var(--muted);margin-bottom:14px;}
-.buf-goal strong{color:var(--text);}
-.buf-rungs{display:flex;align-items:flex-end;gap:10px;margin-bottom:14px;}
-.buf-rung{flex:1;text-align:center;}
-.buf-rung .br-mark{font-family:var(--serif);font-size:15px;color:#fff;background:var(--green);border-radius:10px;padding:11px 0;}
-.buf-rung.next .br-mark{background:var(--white);color:var(--green);border:1.5px dashed var(--green-line);}
-.buf-rung .br-lbl{font-size:11.5px;color:var(--muted);margin-top:6px;}
-.buf-count{font-size:13.5px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:7px;margin-bottom:7px;}
-.buf-count svg{width:15px;height:15px;stroke-width:1.5;}
-.buf-sub{font-size:13px;color:var(--text);line-height:1.55;}
-.buf-done{background:var(--green);color:#fff;border-radius:14px;padding:20px;}
-.buf-done .bd-t{font-family:var(--serif);font-size:20px;line-height:1.2;margin-bottom:7px;}
-.buf-done .bd-s{font-size:13.5px;opacity:.92;line-height:1.55;}
-.buf-disc{font-size:11.5px;color:var(--muted);margin-top:10px;font-style:italic;line-height:1.45;}
 /* First win */
 .win-banner{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:15px 16px;font-size:14.5px;color:var(--text);line-height:1.5;margin-bottom:16px;}
 .win-banner strong{color:var(--green);}
-/* Light progress */
-.progress-marker{display:flex;width:100%;align-items:center;gap:13px;text-align:left;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:6px 0 4px;transition:border-color .15s;}
-.progress-marker:hover{border-color:var(--green-line);}
-.pm-track{flex:1;min-width:0;}
-.pm-k{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-.pm-bar{height:6px;border-radius:6px;background:var(--green-line);overflow:hidden;}
-.pm-fill{height:100%;background:var(--green);border-radius:6px;}
-.pm-v{font-size:13.5px;font-weight:600;color:var(--text);margin-top:7px;}
-.progress-marker>svg{width:18px;height:18px;color:var(--green);flex-shrink:0;stroke-width:1.5;}
 /* Glance */
 .glance-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
 .glance-cell{background:var(--green-pale);border-radius:12px;padding:15px 10px;text-align:center;}
 .glance-cell .gc-v{font-family:var(--serif);font-size:20px;color:var(--green);line-height:1.08;word-break:break-word;}
 .glance-cell .gc-v.neg{color:var(--amber);}
 .glance-cell .gc-k{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.3;}
-@media(max-width:420px){.hero-card .hc-date{font-size:38px;}.glance-cell .gc-v{font-size:17px;}}
+@media(max-width:420px){.glance-cell .gc-v{font-size:17px;}}
 /* ══ PREMIUM TOP NAV — visible, never hidden in the hamburger (user is in crisis) ══ */
-.topnav{display:none;gap:7px;max-width:var(--canvas);margin:0 auto;padding:2px 14px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.topnav-wrap{display:none;position:relative;}
+.topnav{display:flex;gap:7px;max-width:var(--canvas);margin:0 auto;padding:2px 14px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+/* Scroll affordance: on a narrow screen the rail scrolls, so the right edge fades
+   to say so. It disappears once the last item is reached (tnFade). Nothing is
+   hidden behind a menu — everything on the rail is reachable by swiping it. */
+.topnav-wrap::after{content:'';position:absolute;top:0;right:0;bottom:10px;width:38px;pointer-events:none;background:linear-gradient(to right,rgba(246,248,246,0),rgba(246,248,246,1));opacity:1;transition:opacity .18s;}
+.topnav-wrap.at-end::after{opacity:0;}
+/* Wide screens: no scrolling at all — the rail wraps and every tool is visible
+   at once, which is the locked requirement. */
+@media(min-width:900px){.topnav{flex-wrap:wrap;overflow-x:visible;justify-content:center;}.topnav-wrap::after{display:none;}}
 .topnav::-webkit-scrollbar{display:none;}
 .topnav button{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;background:var(--white);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:13.5px;font-weight:600;border-radius:22px;padding:8px 14px;white-space:nowrap;transition:border-color .15s,background .15s,color .15s;}
 .topnav button:hover{border-color:var(--green-line);background:var(--green-pale);}
@@ -582,8 +515,98 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 .lw-next li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);}
 .lw-next li a{font-weight:600;text-decoration:underline;text-underline-offset:2px;}
 .lw-err{background:var(--red-bg);border-left:3px solid var(--red);border-radius:10px;padding:13px 16px;font-size:14px;color:var(--red);margin:0;}
-.nav-soon{opacity:.55;}
-.nav-soon .nav-soon-tag{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);border:1px solid var(--border);border-radius:20px;padding:2px 8px;}
+/* ══ COMPANION (Malli C) — season clock · situation routing · week chain · momentum · kit ══
+   Server owns every number and every unlock here. This layer only renders. ══ */
+.cmp-season{display:flex;gap:12px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 13px 13px 0;padding:14px 17px;margin-bottom:20px;}
+.cmp-season.final{background:var(--green-pale);}
+.cmp-season.ended{border-left-color:var(--soft);}
+.cmp-season>svg{width:19px;height:19px;color:var(--green);flex-shrink:0;margin-top:2px;stroke-width:1.5;}
+.cmp-season-main{flex:1;min-width:0;}
+.cmp-season-k{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green);}
+.cmp-season-v{font-size:13.5px;color:var(--text);line-height:1.55;margin-top:3px;}
+.cmp-bar{height:5px;border-radius:5px;background:var(--green-line);overflow:hidden;margin-top:10px;}
+.cmp-bar span{display:block;height:100%;background:var(--green);border-radius:5px;}
+.cmp-lead{font-size:14.5px;color:var(--text);line-height:1.6;margin:0 0 16px;}
+.cmp-sub{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0 0 14px;}
+.cmp-choice{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green-line);border-radius:0 13px 13px 0;padding:16px 17px;margin:0 0 11px;transition:border-color .15s,background .15s;}
+.cmp-choice:hover{border-left-color:var(--green);background:var(--green-pale);}
+.cmp-choice .cc-ic{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:var(--green-tint);color:var(--green);flex-shrink:0;}
+.cmp-choice .cc-ic svg{width:18px;height:18px;stroke-width:1.5;}
+.cmp-choice>span:last-child{flex:1;min-width:0;}
+.cmp-choice .cc-t{display:block;font-family:var(--serif);font-size:1.12rem;line-height:1.24;color:var(--text);}
+.cmp-choice .cc-s{display:block;font-size:13.5px;color:var(--muted);line-height:1.55;margin-top:5px;}
+.cmp-primary{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 13px 13px 0;padding:18px 19px;margin:0 0 14px;}
+.cmp-primary .cp-k{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.cmp-primary .cp-t{font-family:var(--serif);font-size:1.28rem;line-height:1.25;margin-bottom:7px;}
+.cmp-primary .cp-s{font-size:14px;color:var(--text);line-height:1.6;}
+.cmp-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:24px;padding:11px 20px;transition:background .15s,border-color .15s,opacity .15s;}
+.cmp-btn.prim{background:var(--green);border:1px solid var(--green);color:#fff;}
+.cmp-btn.prim:hover{background:var(--green-dark);}
+.cmp-btn.ghost{background:var(--white);border:1px solid var(--border);color:var(--text);}
+.cmp-btn.ghost:hover{border-color:var(--green-line);}
+.cmp-btn:disabled{opacity:.55;cursor:default;}
+.cmp-btn svg{width:16px;height:16px;stroke-width:1.6;}
+.cmp-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;}
+.cmp-switch{display:inline-flex;align-items:center;gap:7px;background:none;border:none;color:var(--green);font-size:13.5px;font-weight:600;padding:0;margin-top:14px;}
+.cmp-switch svg{width:15px;height:15px;stroke-width:1.6;}
+.cmp-switch:hover{text-decoration:underline;}
+.cmp-week-k{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 12px;}
+.cmp-task{display:flex;gap:13px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:15px 16px;margin:0 0 10px;}
+.cmp-task.done{background:var(--green-pale);border-left-color:var(--green-line);}
+.cmp-task.waiting{border-left-color:var(--border);}
+.cmp-task-body{flex:1;min-width:0;}
+.cmp-task-t{font-weight:600;font-size:14.5px;line-height:1.35;}
+.cmp-task.done .cmp-task-t{color:var(--soft);}
+.cmp-task-s{font-size:13px;color:var(--muted);line-height:1.55;margin-top:4px;}
+.cmp-task-mark{display:inline-flex;align-items:center;gap:7px;background:var(--green-pale);border:1px solid var(--green-line);color:var(--green);border-radius:9px;padding:8px 13px;font-size:13px;font-weight:600;margin-top:11px;transition:background .15s,border-color .15s;}
+.cmp-task-mark:hover{background:var(--green-tint);border-color:var(--green);}
+.cmp-task-mark:disabled{opacity:.55;cursor:default;}
+.cmp-task-mark svg{width:15px;height:15px;}
+.cmp-task-ic{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--green-tint);color:var(--green);flex-shrink:0;}
+.cmp-task.done .cmp-task-ic{background:var(--green);color:#fff;}
+.cmp-task-ic svg{width:16px;height:16px;stroke-width:1.6;}
+.cmp-mr{background:var(--green);color:#fff;border-radius:14px;padding:20px 20px;margin:0 0 16px;}
+.cmp-mr-k{font-size:12px;opacity:.85;margin-bottom:4px;}
+.cmp-mr-v{font-family:var(--serif);font-size:30px;line-height:1.08;}
+.cmp-mr-note{font-size:13px;opacity:.92;line-height:1.5;margin-top:8px;}
+.cmp-mr-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.cmp-mr-cell{background:rgba(255,255,255,.12);border-radius:11px;padding:12px 13px;}
+.cmp-mr-cell .k{font-size:11.5px;opacity:.85;margin-bottom:3px;line-height:1.35;}
+.cmp-mr-cell .v{font-family:var(--serif);font-size:19px;line-height:1.1;}
+@media(max-width:420px){.cmp-mr-split{grid-template-columns:1fr;}.cmp-mr-v{font-size:26px;}}
+.cmp-field{margin:0 0 14px;}
+.cmp-field label{display:block;font-size:13px;font-weight:600;margin:0 0 6px;}
+.cmp-field input{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:11px;padding:12px 13px;transition:border-color .15s;}
+.cmp-field input:focus{outline:none;border-color:var(--green);}
+.cmp-subs{margin:0 0 14px;}
+.cmp-sub-row{display:flex;gap:9px;align-items:center;margin:0 0 9px;}
+.cmp-sub-row input.nm{flex:1;min-width:0;font-family:var(--sans);font-size:14.5px;color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px 12px;}
+.cmp-sub-row input.am{flex:0 0 96px;font-family:var(--sans);font-size:14.5px;color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-align:right;}
+.cmp-sub-row input:focus{outline:none;border-color:var(--green);}
+.cmp-sub-row .cut{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;border:1px solid var(--border);background:var(--white);color:var(--soft);}
+.cmp-sub-row .cut svg{width:17px;height:17px;stroke-width:1.6;}
+.cmp-sub-row .cut.on{background:var(--green);border-color:var(--green);color:#fff;}
+.cmp-sub-row.cancelled input.nm{color:var(--soft);text-decoration:line-through;}
+.cmp-subtotal{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 11px 11px 0;padding:13px 15px;font-size:14px;line-height:1.55;color:var(--text);margin:0 0 14px;}
+.cmp-subtotal b{font-family:var(--serif);font-size:18px;font-weight:400;}
+.cmp-kit{background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 13px 13px 0;padding:18px 19px;margin:0 0 16px;}
+.cmp-kit .ck-t{font-family:var(--serif);font-size:1.22rem;line-height:1.25;margin-bottom:8px;}
+.cmp-kit .ck-s{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:6px;}
+.cmp-kit .ck-warn{font-size:13px;color:var(--amber);line-height:1.55;margin-top:10px;}
+.cmp-msg{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:16px 17px;font-size:14px;line-height:1.6;color:var(--text);}
+.cmp-msg .cm-t{font-weight:600;margin-bottom:5px;}
+.cmp-msg.quiet{border-left-color:var(--green-line);color:var(--muted);}
+.cmp-load{display:flex;align-items:center;gap:12px;color:var(--soft);font-size:14px;padding:14px 2px;}
+.cmp-load .spin{width:18px;height:18px;border:2.5px solid var(--green-line);border-top-color:var(--green);border-radius:50%;animation:lwSpin .8s linear infinite;}
+.cmp-note{font-size:12.5px;color:var(--soft);line-height:1.55;margin-top:12px;}
+/* B3 · canonical retention sentence. Quiet, permanent, never behind a tap. */
+.del90{font-size:12.5px;line-height:1.6;color:var(--muted);background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:12px 14px;margin:10px 0 18px;}
+.center-card .del90{text-align:left;margin:18px 0 0;}
+/* B4 · sign-in confirmation. Left-aligned: it is read, not glanced at. */
+.reauth-msg{display:none;text-align:left;margin-top:16px;font-size:13.5px;line-height:1.6;color:var(--text);}
+.reauth-msg p{margin:0 0 10px;}
+.reauth-msg p:last-child{margin-bottom:0;}
+.reauth-msg .rm-lead{color:var(--green);font-weight:600;}
 </style>
 </head>
 <body>
@@ -598,15 +621,26 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div class="lang-menu" id="langMenu"><div class="lang-menu-inner" id="langMenuInner"></div></div>
     </div>
   </div>
-  <nav class="topnav" id="topnav" aria-label="Sections">
+  <!-- B2 · Crisis Plans and Document Archive were reachable ONLY from the drawer.
+       Both are now on the rail. Order is crisis-first: on a narrow screen the rail
+       scrolls, so position IS visibility, and the three surfaces a member reaches
+       for under pressure (letters, crisis plans, what they have already written)
+       sit ahead of the analytical ones. The drawer keeps every entry as well. -->
+  <div class="topnav-wrap" id="topnavWrap">
+  <nav class="topnav" id="topnav" aria-label="Sections" onscroll="tnFade()">
     <button data-nav="home" onclick="dashHome()"><i data-lucide="activity"></i><span data-i18n="prog_eyebrow">Your progress</span></button>
+    <button data-nav="sec-week" onclick="navTo('sec-week')"><i data-lucide="list-checks"></i><span id="navWeekLbl">This week</span></button>
+    <button data-nav="sec-letters" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
+    <button data-nav="sec-crisis" onclick="navTo('sec-crisis')"><i data-lucide="clipboard-list"></i><span data-i18n="nav_crisis">Crisis Plans</span></button>
+    <button data-nav="sec-archive" onclick="navTo('sec-archive')"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span></button>
+    <button data-nav="sec-momentum" onclick="navTo('sec-momentum')"><i data-lucide="rocket"></i><span id="navMomLbl">Momentum</span></button>
     <button data-nav="sec-plan" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
     <button data-nav="sec-understand" onclick="navTo('sec-understand')"><i data-lucide="wallet"></i><span data-i18n="snap_eyebrow">Understand</span></button>
     <button data-nav="sec-debtmap" onclick="navTo('sec-debtmap')"><i data-lucide="map"></i><span data-i18n="nav_debtmap">Debt Map</span></button>
     <button data-nav="sec-tools" onclick="navTo('sec-tools')"><i data-lucide="wrench"></i><span data-i18n="nav_g_tools">Tools</span></button>
     <button data-nav="sec-support" onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i><span data-i18n="nav_support">Support</span></button>
-    <button data-nav="sec-letters" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
   </nav>
+  </div>
 </header>
 
 <!-- DRAWER -->
@@ -645,6 +679,8 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="shield"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
       <div class="nav-group-sub" data-i18n="nav_g_recovery_sub">When you're ready, deeper tools to push back and rebuild.</div>
+      <button class="nav-item" onclick="navTo('sec-week')"><i data-lucide="list-checks"></i><span id="drawerWeekLbl">This week</span></button>
+      <button class="nav-item" onclick="navTo('sec-momentum')"><i data-lucide="rocket"></i><span id="drawerMomLbl">Momentum</span></button>
       <button class="nav-item" onclick="openLetters()"><i data-lucide="mail-plus"></i><span data-i18n="nav_letters">Creditor Letters</span></button>
       <button class="nav-item" onclick="navTo('sec-crisis')"><i data-lucide="clipboard-list"></i><span data-i18n="nav_crisis">Crisis Plans</span></button>
       <button class="nav-item" onclick="navTo('sec-archive')"><i data-lucide="folder"></i><span data-i18n="nav_archive">Document Archive</span></button>
@@ -668,12 +704,21 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 <div class="view" id="view-reauth">
   <div class="center-card">
     <h2 data-i18n="reauth_title">Welcome back.</h2>
-    <p data-i18n="reauth_sub">Enter your email and we'll send a fresh access link straight away. It's always free.</p>
+    <!-- B4 · the old line was data-i18n="reauth_sub" and read "…we'll send a fresh
+         access link straight away. It's always free." Two false statements on the
+         PAID product's sign-in screen: a link is not always sent, and this area is
+         not free. The dictionary key is dropped rather than reused, so the old
+         sentence cannot come back through /i18n-dict.js; the text is set from
+         showReauth() via tx() under a NEW key. -->
+    <p id="reauthSub">Enter the email address you used. If your member area is still open, we will send an access link to it.</p>
     <div class="field">
       <input type="email" id="reauthEmail" placeholder="your@email.com" data-i18n-placeholder="email_ph" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false"/>
     </div>
     <button class="btn-primary" id="reauthBtn" onclick="requestLink()" data-i18n="reauth_btn">Send my access link</button>
-    <p id="reauthMsg" style="margin-top:14px;display:none;font-size:13.5px;color:var(--green);"></p>
+    <div id="reauthMsg" class="reauth-msg"></div>
+    <!-- B3 · canonical retention sentence, place 2 of 4. Literal U+2014. No
+         data-i18n attribute: it must never be translated or replaced. -->
+    <p class="del90">On day 90 we delete your plan, your answers, your documents, and everything personal inside them. What stays is the payment and consent receipt our accounting law requires — no plan, no debts, no amounts. Your kit is yours and works without us.</p>
   </div>
 </div>
 
@@ -685,6 +730,9 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 
     <!-- ════════ HOME — the curated front screen ════════ -->
     <div id="dash-home">
+
+    <!-- 0 · SEASON CLOCK (server truth — never derived in the browser) -->
+    <div id="cmpSeason"></div>
 
     <!-- 1 · ANCHOR -->
     <div class="hello">
@@ -698,6 +746,12 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div class="section-head"><i data-lucide="activity"></i><span class="section-eyebrow" data-i18n="dr_progress_title">Your 90-day recovery</span></div>
       <div id="progBody"></div>
       <div id="ciBody"></div>
+    </section>
+
+    <!-- 3 · COMPANION — situation routing / primary surface for the active mode -->
+    <section class="section" id="sec-companion">
+      <div class="section-head"><i data-lucide="compass"></i><span class="section-eyebrow" id="cmpHomeEyebrow">Your companion</span></div>
+      <div id="cmpHomeBody"></div>
     </section>
 
     <!-- 4 + 5 · FIRST WIN + NEXT STEP -->
@@ -763,6 +817,22 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <p class="lead" id="supLead" data-i18n="sup_lead">Free and trusted services in your country. You don't have to do this alone.</p>
       <div class="legal-signpost" style="margin-bottom:16px;"><i data-lucide="shield-check"></i><span data-i18n="disclaimer_independent">debt-free.world is an independent service by Amliv Oy (Finland). We are not a government agency and are not affiliated with any. The national services we point you to are official and always free.</span></div>
       <div id="supportBody"></div>
+    </section>
+
+    <!-- THIS WEEK — task chain. unlocked / completed / next all come from the server. -->
+    <section class="section depth" id="sec-week">
+      <div class="section-head"><i data-lucide="list-checks"></i><span class="section-eyebrow" id="weekEyebrow">This week</span></div>
+      <h2 id="weekTitle">Your week</h2>
+      <p class="lead" id="weekLead">One step at a time, in the order that helps most. Nothing here is late.</p>
+      <div id="weekBody"></div>
+    </section>
+
+    <!-- MOMENTUM — subscription audit, guilt-free allowance, live debt-free date -->
+    <section class="section depth" id="sec-momentum">
+      <div class="section-head"><i data-lucide="rocket"></i><span class="section-eyebrow" id="momEyebrow">Momentum</span></div>
+      <h2 id="momTitle">Money you already have</h2>
+      <p class="lead" id="momLead">Small, dull changes move your debt-free date more than most people expect. Nothing here asks you to stop living.</p>
+      <div id="momBody"></div>
     </section>
 
     <!-- CREDITOR LETTERS (Pass 2) -->
@@ -839,10 +909,23 @@ let memberToken = null;
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function num(v){const n=parseFloat(v);return isNaN(n)?0:n;}
-function fmtMoney(n,cur){return Math.round(num(n)).toLocaleString('en-US')+' '+(cur||M&&M.currency||'EUR');}
+/* CURRENCY — locked global rule: amount first, space, symbol. "240 €", never "€240".
+   Symbol where one is unambiguous, ISO code otherwise ("5 200 SEK"). Grouping follows
+   the member's active language, so a Finnish member sees 5 200 and a British one 5,200.
+   fmtCur is the canonical name; fmtMoney is kept as a thin alias so every existing
+   call site keeps working without being touched. */
+const CUR_SYM={EUR:'\u20ac',GBP:'\u00a3',USD:'$'};
+function curCode(cur){return String(cur||(M&&M.currency)||'EUR').trim().toUpperCase();}
+function curLabel(cur){const c=curCode(cur);return CUR_SYM[c]||c;}
+function fmtCur(n,cur){
+  let v=Math.round(num(n)); if(Object.is(v,-0))v=0;
+  let g; try{g=v.toLocaleString(localeForLang());}catch(_){g=String(v);}
+  return g+' '+curLabel(cur);
+}
+function fmtMoney(n,cur){return fmtCur(n,cur);}
 function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function icons(){if(window.lucide)lucide.createIcons();}
-function showView(id){['view-gate','view-reauth','view-dash'].forEach(v=>$(v).classList.toggle('active',v===id));const tn=$('topnav');if(tn)tn.style.display=(id==='view-dash')?'flex':'none';}
+function showView(id){['view-gate','view-reauth','view-dash'].forEach(v=>$(v).classList.toggle('active',v===id));const tw=$('topnavWrap');if(tw){tw.style.display=(id==='view-dash')?'block':'none';if(id==='view-dash')tnFade();}}
 function scrollToSection(id){const el=$(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
 
 /* derived financial model */
@@ -963,6 +1046,18 @@ function localeForLang(){const map={EN:'en-GB',FI:'fi-FI',SV:'sv-SE',DE:'de-DE',
 /* t() delegates to the shared engine — every existing t('key') call works unchanged. */
 function t(key,vars){return DFWI18n.t(key,vars);}
 
+/* tx(key, englishFallback, vars) — for strings shipped BEFORE the translation team
+   adds them to /i18n-dict.js. If the dictionary has the key it wins; otherwise the
+   English fallback below is used and {placeholders} are interpolated locally. This
+   is what lets the companion ship today without editing the shared dictionary. */
+function tx(key,fallback,vars){
+  let v=null; try{v=t(key,vars);}catch(_){}
+  if(v!=null&&v!==''&&v!==key)return v;
+  let out=String(fallback==null?'':fallback);
+  if(vars)Object.keys(vars).forEach(function(k){out=out.split('{'+k+'}').join(String(vars[k]));});
+  return out;
+}
+
 /* applyI18n delegates to the shared engine. Member-area side effects
    (member-record sync, label, menu rebuild, dashboard re-render) run via
    the engine's onChange hook, registered once below. Persistence to
@@ -991,7 +1086,29 @@ document.addEventListener('click',e=>{const w=$('langMenu');if(w.classList.conta
 /* ── DRAWER ── */
 function openDrawer(){$('drawer').classList.add('open');$('scrim').classList.add('show');}
 function closeDrawer(){$('drawer').classList.remove('open');$('scrim').classList.remove('show');}
-function setActiveNav(key){document.querySelectorAll('#topnav button').forEach(b=>b.classList.toggle('active',b.getAttribute('data-nav')===key));}
+/* B2 · On a narrow screen the rail scrolls, so "visible in the main nav" is only
+   true if the active item is actually brought into view. Scrolling is done on the
+   rail's own scrollLeft — never scrollIntoView(), which would also move the page. */
+function setActiveNav(key){
+  let act=null;
+  document.querySelectorAll('#topnav button').forEach(b=>{
+    const on=b.getAttribute('data-nav')===key;
+    b.classList.toggle('active',on);
+    if(on){b.setAttribute('aria-current','true');act=b;}else b.removeAttribute('aria-current');
+  });
+  const n=$('topnav');
+  if(act&&n&&n.scrollWidth>n.clientWidth+2){
+    const left=Math.max(0,act.offsetLeft-(n.clientWidth-act.offsetWidth)/2);
+    try{n.scrollTo({left:left,behavior:'smooth'});}catch(_){n.scrollLeft=left;}
+  }
+  tnFade();
+}
+/* Hides the right-edge fade once there is nothing more to scroll to. */
+function tnFade(){
+  const w=$('topnavWrap'), n=$('topnav'); if(!w||!n)return;
+  w.classList.toggle('at-end',n.scrollLeft+n.clientWidth>=n.scrollWidth-2);
+}
+window.addEventListener('resize',tnFade);
 function navTo(id){showSection(id);setActiveNav(id);}
 
 /* ── LOG OUT ──
@@ -1033,6 +1150,9 @@ async function boot(){
     showView('view-dash');
     renderAll();
     icons();
+    /* Companion state is fetched after the page is already usable: if the endpoint
+       is down, everything else on this screen still works. */
+    loadCompanion();
     /* Plan-First overlay: forced on fresh arrival from onboarding, else once per browser */
     const seenKey='dfw_planseen_'+(M.email||'x');
     let seen=false;try{seen=localStorage.getItem(seenKey)==='1';}catch(_){}
@@ -1041,15 +1161,42 @@ async function boot(){
     try{history.replaceState({},'',location.pathname);}catch(_){}
   }catch(e){showReauth();}
 }
-function showReauth(){showView('view-reauth');applyI18n(DFWI18n.current);icons();}
+function showReauth(){showView('view-reauth');applyI18n(DFWI18n.current);reauthCopy();icons();}
+/* B4 · The sign-in copy is set here, from THIS file, under keys the shared
+   dictionary does not yet hold. Two reasons it is not left on the old keys:
+   the old reauth_sub claims this area is free (it is the 19 € product), and the
+   old reauth_sent claims a link was sent. Reusing either key would let
+   /i18n-dict.js put the false sentence back without anyone editing this file. */
+function reauthCopy(){
+  const sub=$('reauthSub');
+  if(sub)sub.textContent=tx('reauth_sub_m2','Enter the email address you used. If your member area is still open, we will send an access link to it.');
+}
+/* /member/request-magic-link answers 200 {"ok":true} to EVERY case — unknown
+   address, purged account, live account, rate-limited request (worker v16.26,
+   four separate return paths, proven byte-identical by test D-4). That is the
+   enumeration protection and it is deliberate. The browser therefore cannot know
+   which case it is in, and must not pretend to. The wording below is true in all
+   four, and it is written so that a customer who paid 19 € and whose 90 days have
+   ended can work out what happened without anyone telling them. */
 async function requestLink(){
   const email=$('reauthEmail').value.trim();
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast(t('reauth_invalid'));return;}
-  $('reauthBtn').disabled=true;
+  const btn=$('reauthBtn'); if(btn)btn.disabled=true;
   try{await fetch(`${WORKER_URL}/member/request-magic-link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});}catch(_){}
-  const msg=$('reauthMsg');msg.textContent=t('reauth_sent');msg.style.display='block';
+  const msg=$('reauthMsg');
+  msg.innerHTML=
+    '<p class="rm-lead">'+esc(tx('reauth_sent_1','Your request is with us.'))+'</p>'
+   +'<p>'+esc(tx('reauth_sent_2','If that address has a member area that is still open, a link is on its way — usually within a few minutes. Check your spam folder too. We send only a few links to the same address in an hour, so if you have just asked several times, wait a little before asking again.'))+'</p>'
+   +'<p>'+esc(tx('reauth_sent_3','If nothing arrives, the most likely reason is that the address no longer has an open member area. Either it was never registered with us, or its 90 days have ended and everything personal was deleted on day 90. If you bought Debt Recovery and your 90 days are over, that is what has happened, and nothing has gone wrong.'))+'</p>'
+   +'<p>'+esc(tx('reauth_sent_4','We never say which of the two it is, for any address, so that nobody can use this form to find out whether a person has an account here. If you believe your 90 days are still running, write to support@debt-free.world and we will look.'))+'</p>';
+  msg.style.display='block';
+  /* The button is released again: a mistyped address must not lock a member out
+     of the only form they have. The worker rate-limits per address and per IP, so
+     re-enabling costs nothing on the server side. */
+  setTimeout(()=>{const b=$('reauthBtn');if(b)b.disabled=false;},20000);
 }
 $('reauthEmail')&&$('reauthEmail').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();requestLink();}});
+$('reauthEmail')&&$('reauthEmail').addEventListener('input',()=>{const b=$('reauthBtn');if(b)b.disabled=false;});
 
 /* ════════════════════════════════════════════════
    RENDER
@@ -1058,6 +1205,7 @@ function renderAll(){
   renderHello();renderProgress90();renderWin();renderEmergency();renderGlance();
   renderSnapshot();renderPlan();renderDebtMap();renderSupport();
   renderCheckin();renderCrisis();renderArchive();
+  renderCompanion();
   setActiveNav('home');icons();
 }
 function firstName(){return (M.firstname||(M.onboarding&&M.onboarding.firstname)||'').trim();}
@@ -1081,9 +1229,8 @@ function renderEmergency(){
   $('emergCard').innerHTML=html;icons();
 }
 /* (g) Progress-aware TODAY: once the base emergency actions are done, show
-   situation-appropriate NEXT steps for the free tier. These are free actions
-   only — they never promise paid companion features. Steering
-   toward Debt Recovery stays as the single UPGRADE card, untouched. */
+   situation-appropriate NEXT steps. This is the paid Debt Recovery area: there is
+   no upgrade card here and there must never be one — this member has already paid. */
 function nextStepsHtml(){
   const m=model();
   const col=(M.collections||(M.onboarding&&M.onboarding.collections)||'').toString();
@@ -1306,6 +1453,11 @@ function renderSupport(){
    explicit plan-start timestamp when the record carries one; otherwise Week 1
    (honest default — never a guessed week). 90 days ≈ 13 weeks (capped). */
 function planWeek(){
+  /* [COMPANION] The season clock belongs to the server (API contract §6.1). When
+     /companion/state has answered, its week is the only week we display. The local
+     fallback below is kept only for the case where the companion is unreachable,
+     so the weekly check-in still gets an honest label instead of breaking. */
+  if(CS&&CS.week)return CS.week;
   const raw=M.plan_started_at||M.member_plan_started_at||(M.onboarding&&M.onboarding.plan_started_at)||null;
   if(raw){const d=new Date(raw);if(!isNaN(d.getTime())){const wk=Math.floor((Date.now()-d.getTime())/6048e5)+1;return Math.min(13,Math.max(1,wk));}}
   return 1;
@@ -1319,7 +1471,11 @@ function renderProgress90(){
   const bi=bufferInfo();
   const proj=projectFree(0);
   const bufStr=bi.netIncome>0?fmtMoney(bi.buffer,m.cur):'—';
-  const dfdStr=proj.date||t('snap_dfd_stabilise');
+  /* [COMPANION] Never show two different debt-free dates. Once the server has
+     recomputed one (momentum_update), that is the figure — the local projection is
+     only the fallback for members with no momentum record yet. */
+  const srvDate=(CS&&CS.momentum&&CS.momentum.payoff_date)?fmtServerDate(CS.momentum.payoff_date):null;
+  const dfdStr=srvDate||proj.date||t('snap_dfd_stabilise');
   el.innerHTML=`<div class="prog90-card">
       <div class="p9-head">
         <div class="p9-title">${esc(t('dr_progress_title'))}</div>
@@ -1753,14 +1909,18 @@ function lwNext(){
 function lwBack(){ if(lwStep===3)lwCapture(); if(lwStep>1){ lwStep--; renderLetters(); } }
 function lwReset(){ lwOut=null; lwStep=1; lwData.type=''; lwData.hardship=''; lwData.situation=''; renderLetters(); }
 
-/* net-new AI call — EXACT current /api/chat contract (Worker v16.14): single
-   user message, no system field, claude-sonnet-4-6, max_tokens 2000. */
+/* AI model — single point of truth for this file. NOTE FOR TRACK W: the Worker's
+   model allowlist on /api/chat must accept this string before this file is pushed,
+   otherwise letter generation returns an error. Do not change it in two places. */
+const AI_MODEL='claude-sonnet-5';
+/* net-new AI call — /api/chat contract: single user message, no system field,
+   AI_MODEL, max_tokens 2000. */
 async function callAI(prompt){
   const res=await fetch(`${WORKER_URL}/api/chat`,{
     method:'POST',
     headers:{'Content-Type':'application/json','x-member-token':memberToken},
     body:JSON.stringify({
-      model:'claude-sonnet-4-6',
+      model:AI_MODEL,
       max_tokens:2000,
       messages:[{role:'user',content:prompt}]
     })
@@ -1851,8 +2011,12 @@ async function lwSave(){
   try{
     const res=await fetch(`${WORKER_URL}/member/save-document`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({document:{type:'letter',title,creditor:lwOut.creditor,subtype:lwOut.type,text:lwOut.letter}})});
     if(!res.ok)throw 0;
+    let savedId=null; try{const d=await res.json(); savedId=(d&&(d.doc_id||d.id))||null;}catch(_){}
     pushDoc({type:'letter',title,creditor:lwOut.creditor,subtype:lwOut.type,text:lwOut.letter,created_at:new Date().toISOString()});
     renderArchive();
+    /* Companion bookkeeping only — the letter is already saved. A failure here must
+       never surface as a save error to someone who just wrote to a creditor. */
+    cmpNotifyLetterSaved(savedId);
     showToast(t('lw_saved'));
     if(btn){btn.innerHTML=`<i data-lucide="check"></i> ${esc(t('lw_saved'))}`;icons();}
   }catch(_){ showToast(t('lw_save_err')); if(btn)btn.disabled=false; }
@@ -2120,6 +2284,501 @@ function renderArchive(){
   el.innerHTML=`<div class="arch-group"><div class="arch-gh"><i data-lucide="mail"></i>${esc(t('arch_letters'))}</div>${lettersHtml}</div>
     <div class="arch-group"><div class="arch-gh"><i data-lucide="calendar-check"></i>${esc(t('arch_checkins'))}</div>${ciHtml}</div>`;
   icons();
+}
+
+/* ════════════════════════════════════════════════
+   COMPANION — Malli C · built against API-KONTRAKTI rev 1.0 (Worker v16.21)
+   The endpoints do not exist yet. Everything below fails closed: if the server
+   does not answer, the companion shows an honest message and the rest of the
+   member area keeps working. Nothing here is ever derived in the browser —
+   season day, week number, unlocks and the debt-free date all come from the
+   server (contract §2.1, §6.1, §6.2).
+   ════════════════════════════════════════════════ */
+let CS=null;              /* last known /companion/state — server truth only     */
+let cmpStatus='idle';     /* idle | loading | ok | unavailable | not_started | purged | forbidden */
+let cmpBusy=false;        /* one mutation at a time (rate limit: 60 events/h)    */
+let cmpKitBusy=false;
+
+/* ── transport ───────────────────────────────────────────────────────────── */
+async function companionCall(path,body){
+  const opt={method:body?'POST':'GET',headers:{'x-member-token':memberToken}};
+  if(body){opt.headers['Content-Type']='application/json';opt.body=JSON.stringify(body);}
+  const res=await fetch(WORKER_URL+path,opt);
+  let data=null; try{data=await res.json();}catch(_){}
+  if(res.ok)return data;
+  throw {status:res.status,code:(data&&data.code)||''};
+}
+/* A response is only accepted as state when it actually carries a season. An empty
+   or malformed 200 is treated as unavailable — never as "season started, nothing
+   unlocked", which would silently lie to the member. */
+let cmpSynced=false;
+function cmpApply(state){
+  if(state&&state.season&&state.season.phase){CS=state;cmpStatus='ok';}
+  else{CS=null;cmpStatus='unavailable';}
+  momReported=0;
+  momFresh=true;
+  renderCompanion();
+  cmpSyncHero();
+}
+/* The 90-day hero and the weekly check-in were rendered before the companion
+   answered. Refresh them once so the season week and the debt-free date on screen
+   are the server's, not the local fallback. The check-in is refreshed only on the
+   first sync — never again, so it can't wipe something being typed. */
+function cmpSyncHero(){
+  if(!M)return;
+  try{
+    renderProgress90();
+    if(!cmpSynced){cmpSynced=true;renderCheckin();renderArchive();}
+    icons();
+  }catch(_){}
+}
+function cmpFail(err){
+  const st=err&&err.status, code=err&&err.code;
+  if(st===401||code==='INVALID_TOKEN'){showReauth();return;}
+  if(st===410||code==='SEASON_PURGED')cmpStatus='purged';
+  else if(st===409||code==='SEASON_NOT_STARTED')cmpStatus='not_started';
+  else if(st===403)cmpStatus='forbidden';
+  else cmpStatus='unavailable';
+  CS=null;renderCompanion();cmpSyncHero();
+}
+async function loadCompanion(){
+  if(!memberToken){cmpStatus='unavailable';renderCompanion();return;}
+  cmpStatus='loading';renderCompanion();
+  try{cmpApply(await companionCall('/companion/state'));}catch(e){cmpFail(e);}
+}
+/* B1 · THE FIX.
+   Before: cmpApply() — and therefore renderCompanion() — ran INSIDE the try block,
+   while cmpBusy was still true. Lines 2488 and 2588 read cmpBusy when they build
+   their markup, so every task button and "Update my date" was painted with the
+   disabled attribute. finally lowered the flag afterwards, but nothing re-rendered,
+   so one completed task locked every remaining button until some unrelated event
+   happened to redraw. The error path did the same through cmpFail().
+   After: the flag is lowered BEFORE any render runs, on both paths. Every render
+   in this function now draws live controls. Nothing else about the call changed. */
+async function cmpEvent(ev){
+  if(cmpStatus==='purged')return;
+  if(cmpBusy){showToast(tx('cmp_busy','One moment — we are still saving your last step.'));return;}
+  cmpBusy=true;
+  let state=null, err=null;
+  try{state=await companionCall('/companion/event',ev);}
+  catch(e){err=e;}
+  cmpBusy=false;                       /* <- down first, then paint */
+  if(err){cmpFail(err);showToast(tx('cmp_err_toast','We could not save that just now. Nothing is lost — try again in a moment.'));return;}
+  cmpApply(state);
+}
+/* Fired after a letter is already saved. Silent by design (contract §2.2). */
+async function cmpNotifyLetterSaved(docId){
+  if(cmpStatus!=='ok')return;
+  const ev={type:'letter_saved'}; if(docId)ev.doc_id=docId;
+  try{cmpApply(await companionCall('/companion/event',ev));}catch(_){}
+}
+
+/* ── small helpers ───────────────────────────────────────────────────────── */
+/* Formats a date the SERVER calculated. This is presentation only — the UI never
+   works out a payoff date of its own inside the momentum tool (contract §6.2). */
+function fmtServerDate(iso){
+  if(!iso)return null;
+  const d=new Date(String(iso).length===10?String(iso)+'T00:00:00Z':iso);
+  if(isNaN(d.getTime()))return null;
+  try{return d.toLocaleDateString(localeForLang(),{month:'short',year:'numeric'});}catch(_){return String(iso);}
+}
+function cmpPhase(){return (CS&&CS.season&&CS.season.phase)||null;}
+function cmpMode(){return (CS&&CS.mode)||'unset';}
+function cmpLive(){return cmpStatus==='ok'&&cmpPhase()!=='graduated';}
+
+/* Task copy ships with this file: the server sends keys, not sentences. A key the
+   frontend has never seen degrades to a readable label — we render no invented
+   description for it. Translations, when they land in /i18n-dict.js, win. */
+const TASK_LIB={
+  w1_map_creditors:{t:'Map your creditors',s:'Write down who you owe, roughly how much, and which ones are actually chasing you. Ten minutes of honesty here makes every step after it easier.'},
+  w1_stop_the_bleed:{t:'Stop the bleeding',s:'Find the one thing costing you most right now and deal with that alone. Not all of it. One.'},
+  w2_letter_intro:{t:'Your first creditor letter',s:'Asking a creditor for room is not an admission of failure. It is the ordinary, expected way to ask for time when money is short.'}
+};
+function humaniseKey(k){
+  const raw=String(k||'').replace(/^w\d+_/,'').replace(/_/g,' ').trim();
+  return raw?raw.charAt(0).toUpperCase()+raw.slice(1):tx('cmp_task_generic','Your next step');
+}
+/* Task keys are interpolated into an onclick handler. The contract defines them as
+   snake_case identifiers; anything else is stripped rather than trusted. */
+function safeKey(k){return String(k||'').replace(/[^A-Za-z0-9_-]/g,'');}
+function taskTitle(k){const l=TASK_LIB[k];return tx('task_'+k+'_t',l?l.t:humaniseKey(k));}
+function taskSub(k){const l=TASK_LIB[k];return tx('task_'+k+'_s',l?l.s:'');}
+
+/* ── render entry point ──────────────────────────────────────────────────── */
+function renderCompanion(){
+  cmpApplyLabels();
+  renderSeasonStrip();
+  renderCmpHome();
+  renderWeek();
+  renderMomentum();
+  icons();
+}
+function cmpApplyLabels(){
+  const wk=tx('cmp_nav_week','This week'), mo=tx('cmp_nav_momentum','Momentum');
+  ['navWeekLbl','drawerWeekLbl'].forEach(id=>{const e=$(id);if(e)e.textContent=wk;});
+  ['navMomLbl','drawerMomLbl'].forEach(id=>{const e=$(id);if(e)e.textContent=mo;});
+  const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+  set('weekEyebrow',wk);
+  set('weekTitle',tx('cmp_week_title','Your week'));
+  set('weekLead',tx('cmp_week_lead','One step at a time, in the order that helps most. Nothing here is late.'));
+  set('momEyebrow',mo);
+  set('momTitle',tx('cmp_mom_title','Money you already have'));
+  set('momLead',tx('cmp_mom_lead','Small, dull changes move your debt-free date more than most people expect. Nothing here asks you to stop living.'));
+  set('cmpHomeEyebrow',tx('cmp_home_eyebrow','Your companion'));
+}
+
+/* ── season clock ────────────────────────────────────────────────────────── */
+/* B3 · canonical retention sentence, place 1 of 4 (this file holds 1 and 2; the
+   other two are legal.html and the graduation kit footer). English in every
+   language by decision, never routed through t()/tx(), so no dictionary entry can
+   translate, shorten or replace it. Byte-identical to the copy on the sign-in
+   screen — both are emitted from this one constant. Em dash is literal U+2014. */
+const DFW_DEL90='On day 90 we delete your plan, your answers, your documents, and everything personal inside them. What stays is the payment and consent receipt our accounting law requires — no plan, no debts, no amounts. Your kit is yours and works without us.';
+function del90Html(){return '<p class="del90">'+esc(DFW_DEL90)+'</p>';}
+
+function renderSeasonStrip(){
+  const el=$('cmpSeason'); if(!el)return;
+  /* The retention sentence is shown whatever the companion is doing. It is true
+     when the endpoint is down, and this is the place where the member sees the
+     state of their season, so it belongs here rather than behind a working API. */
+  if(cmpStatus!=='ok'){el.innerHTML=del90Html();return;}
+  const ph=cmpPhase(), day=num(CS.season.day), left=num(CS.season.days_left);
+  const pct=Math.max(0,Math.min(100,Math.round(day/90*100)));
+  let cls='',k='',v='',bar=true;
+  if(ph==='final_week'){
+    cls=' final';
+    k=tx('cmp_season_final_k','Final week');
+    v=tx('cmp_season_final_v','{n} days left in your season. Everything you have built is ready to take with you.',{n:left});
+  }else if(ph==='graduated'){
+    cls=' ended';bar=false;
+    k=tx('cmp_season_done_k','Season complete');
+    v=tx('cmp_season_done_v','Your 90 days are done. Your kit is below — it is yours, and it does not need us to open it.');
+  }else{
+    k=tx('cmp_season_k','Your 90-day season');
+    v=tx('cmp_season_v','Day {day} · {n} days left',{day:day,n:left});
+  }
+  el.innerHTML=`<div class="cmp-season${cls}">
+    <i data-lucide="${ph==='graduated'?'award':'calendar-days'}"></i>
+    <div class="cmp-season-main">
+      <div class="cmp-season-k">${esc(k)}</div>
+      <div class="cmp-season-v">${esc(v)}</div>
+      ${bar?`<div class="cmp-bar"><span style="width:${pct}%"></span></div>`:''}
+    </div>
+  </div>`+del90Html();
+}
+
+/* ── shared status block (used wherever the companion cannot render) ─────── */
+function cmpStatusHtml(){
+  if(cmpStatus==='loading')
+    return `<div class="cmp-load"><span class="spin"></span><span>${esc(tx('cmp_loading','Opening your companion…'))}</span></div>`;
+  if(cmpStatus==='purged')
+    return `<div class="cmp-msg quiet"><div class="cm-t">${esc(tx('cmp_purged_t','Your season is complete.'))}</div>${esc(tx('cmp_purged_s','We have deleted our copy of your personal information, exactly as we said we would. Your kit is yours and works without us. The free services for your country are still here whenever you need them.'))}</div>`;
+  if(cmpStatus==='not_started')
+    return `<div class="cmp-msg"><div class="cm-t">${esc(tx('cmp_nostart_t','Your companion season is not set up on this account yet.'))}</div>${esc(tx('cmp_nostart_s','Your plan and your documents are safe — this is only the season clock. Write to support@debt-free.world and we will sort it out.'))}</div>`;
+  if(cmpStatus==='forbidden')
+    return `<div class="cmp-msg"><div class="cm-t">${esc(tx('cmp_forbidden_t','This part is not available on your account.'))}</div>${esc(tx('cmp_forbidden_s','Everything else on this page works as normal.'))}</div>`;
+  return `<div class="cmp-msg"><div class="cm-t">${esc(tx('cmp_down_t','We cannot reach your companion right now.'))}</div>${esc(tx('cmp_down_s','This is on our side, not yours, and nothing has been lost. Everything else on this page still works.'))}
+    <div class="cmp-actions"><button class="cmp-btn ghost" onclick="loadCompanion()"><i data-lucide="refresh-cw"></i>${esc(tx('cmp_retry','Try again'))}</button></div></div>`;
+}
+
+/* ── home surface: situation routing, then the primary tool for that mode ── */
+function renderCmpHome(){
+  const el=$('cmpHomeBody'); if(!el)return;
+  if(cmpStatus!=='ok'){el.innerHTML=cmpStatusHtml();return;}
+  if(cmpPhase()==='graduated'){el.innerHTML=kitHtml();return;}
+
+  const mode=cmpMode();
+  if(mode!=='hardship'&&mode!=='momentum'){el.innerHTML=routingHtml();return;}
+
+  let html=(cmpPhase()==='final_week')?kitHtml():'';
+  html+=(mode==='hardship')?hardshipPrimaryHtml():momentumPrimaryHtml();
+  html+=nextStepPreviewHtml();
+  html+=`<button class="cmp-switch" onclick="cmpAskSwitch()"><i data-lucide="repeat"></i>${esc(tx('cmp_switch','My situation has changed'))}</button>`;
+  el.innerHTML=html;
+}
+
+/* Situation routing. Two honest answers, no guessing, no default. The wording
+   never implies one answer is the better kind of person to be. */
+function routingHtml(){
+  return `<p class="cmp-lead">${esc(tx('cmp_route_lead','One honest answer and everything here lines up behind it. You can change it whenever life changes — that is normal, not a setback.'))}</p>
+  <button class="cmp-choice" onclick="cmpSetMode('hardship')">
+    <span class="cc-ic"><i data-lucide="life-buoy"></i></span>
+    <span><span class="cc-t">${esc(tx('cmp_route_hardship_t','I cannot cover my payments right now'))}</span>
+    <span class="cc-s">${esc(tx('cmp_route_hardship_s','We start by asking your creditors for room — a payment holiday, a smaller instalment, time. You do not have to pay what you do not have.'))}</span></span>
+  </button>
+  <button class="cmp-choice" onclick="cmpSetMode('momentum')">
+    <span class="cc-ic"><i data-lucide="trending-up"></i></span>
+    <span><span class="cc-t">${esc(tx('cmp_route_momentum_t','I have something left over each month'))}</span>
+    <span class="cc-s">${esc(tx('cmp_route_momentum_s','We find money you are already spending without noticing, point it at your debt, and show you exactly how much sooner you are free.'))}</span></span>
+  </button>
+  <p class="cmp-note">${esc(tx('cmp_route_note','Both tools stay available either way. This only decides what greets you first.'))}</p>`;
+}
+async function cmpSetMode(mode){
+  if(mode!=='hardship'&&mode!=='momentum')return;
+  await cmpEvent({type:'set_mode',mode:mode});
+}
+function cmpAskSwitch(){
+  const el=$('cmpHomeBody'); if(!el)return;
+  el.innerHTML=`<p class="cmp-lead">${esc(tx('cmp_switch_lead','Where are you now? Changing this changes nothing you have already done.'))}</p>`+routingHtml();
+  icons();
+}
+
+/* hardship = cannot pay → creditor letters first (contract §2.1, locked routing) */
+function hardshipPrimaryHtml(){
+  const n=num(CS.letters_count);
+  return `<div class="cmp-primary">
+    <div class="cp-k">${esc(tx('cmp_hard_k','Start here'))}</div>
+    <div class="cp-t">${esc(tx('cmp_hard_t','Ask your creditors for room'))}</div>
+    <div class="cp-s">${esc(tx('cmp_hard_s','A letter asking for a payment holiday or a smaller instalment is not a confession. It is the normal way this is done, and it is the fastest way to take the pressure down while you steady yourself.'))}</div>
+    <div class="cmp-actions">
+      <button class="cmp-btn prim" onclick="openLetters()"><i data-lucide="mail-plus"></i>${esc(tx('cmp_hard_cta','Write a creditor letter'))}</button>
+      <button class="cmp-btn ghost" onclick="navTo('sec-support')"><i data-lucide="life-buoy"></i>${esc(tx('cmp_hard_cta2','Free help in your country'))}</button>
+    </div>
+    ${n>0?`<p class="cmp-note">${esc(tx('cmp_hard_count','You have written {n} so far. Each one is a step you took, not a step that happened to you.',{n:n}))}</p>`:''}
+  </div>`;
+}
+
+/* momentum = there is surplus → momentum tool first (contract §2.1) */
+function momentumPrimaryHtml(){
+  const mo=CS.momentum||null;
+  const date=mo?fmtServerDate(mo.payoff_date):null;
+  const saved=mo?num(mo.months_saved_vs_baseline):0;
+  return `<div class="cmp-primary">
+    <div class="cp-k">${esc(tx('cmp_mom_k','Your momentum'))}</div>
+    <div class="cp-t">${esc(date?tx('cmp_mom_date','Debt-free: {d}',{d:date}):tx('cmp_mom_nodate','Let us find your date'))}</div>
+    <div class="cp-s">${esc(saved>0?tx('cmp_mom_saved','That is {n} months earlier than where you started. You did that with decisions, not luck.',{n:saved}):tx('cmp_mom_start','Point a little of what you already have at your debt and watch this date move.'))}</div>
+    <div class="cmp-actions">
+      <button class="cmp-btn prim" onclick="navTo('sec-momentum')"><i data-lucide="rocket"></i>${esc(tx('cmp_mom_cta','Open the momentum tool'))}</button>
+    </div>
+  </div>`;
+}
+
+/* One-line preview of the next open step — the full chain lives in "This week". */
+function nextStepPreviewHtml(){
+  const open=cmpOpenTasks();
+  if(!open.length)return '';
+  return `<div class="cmp-primary" style="background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);">
+    <div class="cp-k">${esc(tx('cmp_next_k','Next step'))}</div>
+    <div class="cp-t" style="font-size:1.12rem;">${esc(taskTitle(open[0]))}</div>
+    <div class="cmp-actions"><button class="cmp-btn ghost" onclick="navTo('sec-week')"><i data-lucide="list-checks"></i>${esc(tx('cmp_next_cta','See this week'))}</button></div>
+  </div>`;
+}
+/* Unlocked and not yet completed — both lists come from the server, in its order. */
+function cmpOpenTasks(){
+  if(cmpStatus!=='ok')return [];
+  const done=Array.isArray(CS.completed)?CS.completed:[];
+  return (Array.isArray(CS.unlocked)?CS.unlocked:[]).filter(k=>done.indexOf(k)<0);
+}
+
+/* ── THIS WEEK — the task chain ──────────────────────────────────────────── */
+function renderWeek(){
+  const el=$('weekBody'); if(!el)return;
+  if(cmpStatus!=='ok'){el.innerHTML=cmpStatusHtml();return;}
+  if(cmpPhase()==='graduated'){
+    el.innerHTML=`<div class="cmp-msg quiet"><div class="cm-t">${esc(tx('cmp_week_done_t','Your season is complete.'))}</div>${esc(tx('cmp_week_done_s','There is nothing left to tick. What you built is in your kit.'))}</div>`+kitHtml();
+    return;
+  }
+  const done=Array.isArray(CS.completed)?CS.completed:[];
+  const unlocked=Array.isArray(CS.unlocked)?CS.unlocked:[];
+  let html=`<div class="cmp-week-k">${esc(tx('cmp_week_no','Week {n}',{n:num(CS.week)||1}))}</div>`;
+
+  if(!unlocked.length){
+    html+=`<div class="cmp-msg quiet">${esc(tx('cmp_week_empty','Nothing new is open right now. That is not you falling behind — the season is paced on purpose.'))}</div>`;
+  }else{
+    html+=unlocked.map(k=>{
+      const isDone=done.indexOf(k)>=0;
+      const sub=taskSub(k);
+      return `<div class="cmp-task${isDone?' done':''}">
+        <span class="cmp-task-ic"><i data-lucide="${isDone?'check':'circle-dashed'}"></i></span>
+        <div class="cmp-task-body">
+          <div class="cmp-task-t">${esc(taskTitle(k))}</div>
+          ${sub?`<div class="cmp-task-s">${esc(sub)}</div>`:''}
+          ${isDone?'':`<button class="cmp-task-mark" onclick="cmpCompleteTask('${safeKey(k)}')"${cmpBusy?' disabled':''}><i data-lucide="check"></i>${esc(tx('cmp_task_mark','Mark as done'))}</button>`}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  /* "next" is whatever the server says comes after — including when it is not yet
+     open. The browser never works this out for itself (contract §6.1). */
+  const nx=CS.next;
+  if(nx&&nx.key&&unlocked.indexOf(nx.key)<0){
+    const when=nx.available_now
+      ? tx('cmp_next_now','Open now')
+      : (nx.opens_on_day?tx('cmp_next_day','Opens on day {n} of your season',{n:num(nx.opens_on_day)}):tx('cmp_next_later','Opens later in your season'));
+    html+=`<div class="cmp-task waiting">
+      <span class="cmp-task-ic"><i data-lucide="clock"></i></span>
+      <div class="cmp-task-body">
+        <div class="cmp-task-t">${esc(taskTitle(nx.key))}</div>
+        <div class="cmp-task-s">${esc(when)}</div>
+      </div>
+    </div>`;
+  }
+  html+=`<p class="cmp-note">${esc(tx('cmp_week_note','Steps open as you go, so there is never a wall of them waiting for you.'))}</p>`;
+  el.innerHTML=html;
+}
+/* The cmpBusy test used to live here too and returned silently, so a second tap
+   did nothing and said nothing. cmpEvent is now the single gate and it answers. */
+async function cmpCompleteTask(key){
+  if(!key)return;
+  await cmpEvent({type:'complete_task',task_key:key});
+  if(cmpStatus==='ok')showToast(tx('cmp_task_done_toast','Done. That counts.'));
+}
+
+/* ── MOMENTUM TOOL ───────────────────────────────────────────────────────── */
+/* The subscription worksheet lives in this window only — we do not store the list
+   of what someone pays for. What reaches the server is the amount they choose to
+   direct at their debts and how many subscriptions they have cancelled. */
+let momSubs=[{name:'',amount:0,cancelled:false},{name:'',amount:0,cancelled:false},{name:'',amount:0,cancelled:false}];
+let momReported=0;  /* session cancellations already included in the server count */
+let momFresh=true;  /* true = next render takes the amount from the server answer  */
+
+function momCancelledCount(){return momSubs.filter(r=>r.cancelled&&num(r.amount)>0).length;}
+function momCancelledSum(){return momSubs.reduce((s,r)=>s+(r.cancelled?num(r.amount):0),0);}
+
+function renderMomentum(){
+  const el=$('momBody'); if(!el)return;
+  if(cmpStatus!=='ok'){el.innerHTML=cmpStatusHtml();return;}
+  if(cmpPhase()==='graduated'){
+    el.innerHTML=`<div class="cmp-msg quiet">${esc(tx('cmp_mom_graduated','Your season is complete, so this tool has stopped. The habit it built is yours to keep, and your kit has the numbers.'))}</div>`;
+    return;
+  }
+  if(cmpMode()!=='momentum'){
+    el.innerHTML=`<div class="cmp-msg quiet"><div class="cm-t">${esc(tx('cmp_mom_off_t','This tool is built for months when there is something left over.'))}</div>${esc(tx('cmp_mom_off_s','Right now we are working on getting your creditors to give you room, which matters more. When things ease up, switch over — it takes one tap and costs you nothing you have done.'))}
+      <div class="cmp-actions"><button class="cmp-btn ghost" onclick="cmpSetMode('momentum')"><i data-lucide="trending-up"></i>${esc(tx('cmp_mom_switch','Switch to momentum'))}</button></div></div>`;
+    return;
+  }
+  const mo=CS.momentum||{};
+  const cur=(model()||{}).cur;
+  const date=fmtServerDate(mo.payoff_date);
+  const saved=num(mo.months_saved_vs_baseline);
+  const cancelled=num(mo.subscriptions_cancelled);
+  const allowance=(mo.guilt_free_allowance==null)?null:num(mo.guilt_free_allowance);
+
+  /* Result strip — every figure here was calculated by the server. */
+  let html=`<div class="cmp-mr">
+    <div class="cmp-mr-k">${esc(tx('cmp_mr_k','Your debt-free date'))}</div>
+    <div class="cmp-mr-v">${esc(date||tx('cmp_mr_none','Not set yet'))}</div>
+    ${saved>0?`<div class="cmp-mr-note">${esc(tx('cmp_mr_saved','{n} months earlier than where you started.',{n:saved}))}</div>`
+             :`<div class="cmp-mr-note">${esc(tx('cmp_mr_nosaved','Change the amount below and this date moves with it.'))}</div>`}
+    <div class="cmp-mr-split">
+      <div class="cmp-mr-cell"><div class="k">${esc(tx('cmp_mr_budget','Going to your debts each month'))}</div><div class="v">${esc(fmtCur(num(mo.debt_budget),cur))}</div></div>
+      ${allowance!=null?`<div class="cmp-mr-cell"><div class="k">${esc(tx('cmp_mr_allow','Yours to spend, no explanation'))}</div><div class="v">${esc(fmtCur(allowance,cur))}</div></div>`:''}
+    </div>
+  </div>`;
+
+  /* Subscription audit */
+  html+=`<div class="cmp-subs">
+    <div class="cmp-week-k">${esc(tx('cmp_sub_k','What leaves your account every month'))}</div>
+    <p class="cmp-sub">${esc(tx('cmp_sub_lead','Write down the payments that repeat — streaming, apps, gym, insurance you doubled up on. Tick the ones you are ready to stop. Nobody is judging what is on this list.'))}</p>
+    ${momSubs.map((r,i)=>`<div class="cmp-sub-row${r.cancelled?' cancelled':''}">
+      <input class="nm" value="${esc(r.name)}" placeholder="${esc(tx('cmp_sub_name','What is it?'))}" oninput="momEdit(${i},'name',this.value)" autocomplete="off"/>
+      <input class="am" value="${r.amount?esc(String(r.amount)):''}" placeholder="0" inputmode="decimal" oninput="momEdit(${i},'amount',this.value)"/>
+      <button class="cut${r.cancelled?' on':''}" onclick="momToggle(${i})" aria-label="${esc(tx('cmp_sub_toggle','Mark as cancelled'))}"><i data-lucide="${r.cancelled?'check':'scissors'}"></i></button>
+    </div>`).join('')}
+    <button class="cmp-btn ghost" onclick="momAddRow()"><i data-lucide="plus"></i>${esc(tx('cmp_sub_add','Add another'))}</button>
+  </div>`;
+
+  const freed=momCancelledSum();
+  if(freed>0){
+    html+=`<div class="cmp-subtotal">${esc(tx('cmp_sub_freed','You have freed'))} <b>${esc(fmtCur(freed,cur))}</b> ${esc(tx('cmp_sub_freed2','a month. That is not a small thing — it is a decision you made.'))}</div>`;
+  }
+
+  /* The one number that goes to the server. */
+  /* After a server answer the field shows the server's figure. Between answers it
+     keeps whatever the member has typed, so ticking a subscription can't wipe it. */
+  const liveBudget=$('momBudget');
+  const budgetVal=(!momFresh&&liveBudget)?liveBudget.value:String(Math.round(num(mo.debt_budget)));
+  momFresh=false;
+  html+=`<div class="cmp-field">
+    <label for="momBudget">${esc(tx('cmp_budget_lbl','How much goes to your debts each month'))}</label>
+    <input id="momBudget" inputmode="decimal" value="${esc(budgetVal)}"/>
+  </div>
+  <div class="cmp-actions">
+    <button class="cmp-btn prim" id="momSaveBtn" onclick="momUpdate()"${cmpBusy?' disabled':''}><i data-lucide="refresh-cw"></i>${esc(tx('cmp_budget_cta','Update my date'))}</button>
+    ${freed>0?`<button class="cmp-btn ghost" onclick="momAddFreed()"><i data-lucide="arrow-right"></i>${esc(tx('cmp_budget_add','Add the {a} I freed',{a:fmtCur(freed,cur)}))}</button>`:''}
+  </div>
+  <p class="cmp-note">${esc(tx('cmp_mom_privacy','This list stays in this window only — we never store what you spend money on. What we save is the amount you direct at your debts and how many subscriptions you have stopped.'))}</p>
+  <p class="cmp-note">${esc(tx('cmp_mom_life','Leave yourself something. A plan you cannot live inside is a plan you will quit, and quitting costs more than the takeaway did.'))}</p>`;
+  el.innerHTML=html;
+}
+/* Text edits must not re-render (it would steal focus mid-typing). */
+function momEdit(i,field,val){
+  if(!momSubs[i])return;
+  momSubs[i][field]=(field==='amount')?num(val):String(val||'');
+}
+function momToggle(i){
+  if(!momSubs[i])return;
+  momSubs[i].cancelled=!momSubs[i].cancelled;
+  renderMomentum();icons();
+}
+function momAddRow(){
+  momSubs.push({name:'',amount:0,cancelled:false});
+  renderMomentum();icons();
+}
+function momAddFreed(){
+  const el=$('momBudget'); if(!el)return;
+  el.value=String(Math.round(num(el.value)+momCancelledSum()));
+  el.focus();
+}
+/* Sends the budget; the SERVER returns the new payoff date and we render that.
+   Cancellations are sent as a delta on top of the server's own count so repeated
+   updates in one session can never double-count. */
+async function momUpdate(){
+  if(cmpStatus!=='ok')return;
+  /* Same defect class as B1: the button was disabled here, then cmpEvent could
+     return early on the busy flag and nothing would ever re-enable it. The busy
+     test now happens BEFORE the button is touched, and answers the member. */
+  if(cmpBusy){showToast(tx('cmp_busy','One moment — we are still saving your last step.'));return;}
+  const el=$('momBudget'); if(!el)return;
+  const budget=Math.max(0,num(el.value));
+  const base=num((CS.momentum||{}).subscriptions_cancelled);
+  const total=Math.max(0,base+(momCancelledCount()-momReported));
+  const sent=momCancelledCount();
+  const btn=$('momSaveBtn'); if(btn)btn.disabled=true;
+  await cmpEvent({type:'momentum_update',debt_budget:budget,subscriptions_cancelled:total});
+  if(cmpStatus==='ok'){momReported=sent;renderCompanion();showToast(tx('cmp_budget_toast','Updated.'));}
+  else{const b=$('momSaveBtn'); if(b)b.disabled=false;}   /* belt: if no render replaced it */
+}
+
+/* ── GRADUATION KIT ──────────────────────────────────────────────────────── */
+function kitHtml(){
+  if(cmpStatus!=='ok')return '';
+  const kit=CS.kit||{};
+  const can=kit.available===true;
+  return `<div class="cmp-kit">
+    <div class="ck-t">${esc(tx('cmp_kit_t','Your graduation kit'))}</div>
+    <div class="ck-s">${esc(tx('cmp_kit_s','One file with your plan, your progress, your debt-free date, every letter you wrote, and the free services in your country. It opens on any device, works without internet, and belongs to you.'))}</div>
+    <div class="ck-warn">${esc(tx('cmp_kit_warn','When your season ends we delete our copy of your personal information. That is the promise, and it means the kit cannot be made again afterwards — download it and put it somewhere you will find it.'))}</div>
+    <div class="cmp-actions">
+      <button class="cmp-btn prim" id="kitBtn" onclick="downloadKit()"${can?'':' disabled'}><i data-lucide="download"></i>${esc(tx('cmp_kit_cta','Download my kit'))}</button>
+    </div>
+    ${can?'':`<p class="cmp-note">${esc(tx('cmp_kit_soon','Your kit is prepared towards the end of your season. The button turns on then.'))}</p>`}
+  </div>`;
+}
+async function downloadKit(){
+  if(cmpKitBusy||cmpStatus!=='ok')return;
+  cmpKitBusy=true;
+  const btn=$('kitBtn'); if(btn)btn.disabled=true;
+  try{
+    const data=await companionCall('/companion/graduation-kit',{});
+    if(!data||!data.html_base64)throw {status:0,code:''};
+    const bin=atob(data.html_base64);
+    const arr=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+    const url=URL.createObjectURL(new Blob([arr],{type:'text/html;charset=utf-8'}));
+    const a=document.createElement('a');
+    a.href=url;a.download=data.filename||'My-DEBT-FREE-Plan.html';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>{try{URL.revokeObjectURL(url);}catch(_){}} ,4000);
+    showToast(tx('cmp_kit_ok','Saved. It is yours now.'));
+  }catch(e){
+    if(e&&(e.status===410||e.code==='SEASON_PURGED')){cmpFail(e);}
+    else showToast(tx('cmp_kit_err','We could not build your kit just now. Try again in a moment — nothing is lost.'));
+  }finally{
+    cmpKitBusy=false;
+    const b=$('kitBtn'); if(b)b.disabled=false;
+  }
 }
 
 window.addEventListener('DOMContentLoaded',boot);
