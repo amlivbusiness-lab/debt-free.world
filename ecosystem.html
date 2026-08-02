@@ -145,9 +145,8 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
 .drc-modal-benes{list-style:none;padding:0;margin:0 0 18px;}
 .drc-modal-benes li{display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2b20;padding:5px 0;}
 .drc-modal-benes svg{width:18px;height:18px;color:var(--green);flex-shrink:0;}
-.drc-modal-consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#3a4a40;line-height:1.55;margin-bottom:18px;cursor:pointer;}
-.drc-modal-consent input{margin-top:2px;flex-shrink:0;width:16px;height:16px;accent-color:var(--green);}
-.drc-modal-consent a{color:var(--green);}
+.drc-modal-note{font-size:12.5px;color:#3a4a40;line-height:1.55;margin:0 0 18px;border-left:3px solid var(--green);padding-left:12px;}
+.drc-modal-note a{color:var(--green);}
 .drc-modal-go{width:100%;background:var(--green);color:#fff;border:none;border-radius:26px;padding:14px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:6px;}
 .drc-modal-go:disabled{opacity:.45;cursor:not-allowed;}
 .drc-modal-cancel{width:100%;background:none;border:none;color:#7a8a80;font-family:inherit;font-size:13px;cursor:pointer;padding:8px;}
@@ -256,7 +255,10 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   <div class="card" id="card-2">
     <div class="card-head">
       <div class="card-head-left">
-        <span class="card-num">Phase 02 · Live now</span>
+        <!-- Phase label is driven by DR_LIVE in the go-live gate below. The markup
+             carries the gated wording so a no-JS render still tells the truth; the
+             gate rewrites both halves from the one flag. Do not hardcode here. -->
+        <span class="card-num muted" id="dr-phase">Phase 02 · Opening soon</span>
         <div class="card-title">Debt Recovery</div>
         <div class="card-tagline">Knowing the plan and living it are two different things.</div>
       </div>
@@ -611,6 +613,13 @@ async function notifyDR(e){
     live.style.display  = DR_LIVE ? 'block' : 'none';
     gated.style.display = DR_LIVE ? 'none'  : 'block';
   }
+  // E-PASS: the phase label reads from the same flag as the buy/notify swap.
+  // It said "Live now" while the body said the opposite; one flag now owns both.
+  var phase = document.getElementById('dr-phase');
+  if(phase){
+    phase.textContent = 'Phase 02 · ' + (DR_LIVE ? 'Live now' : 'Opening soon');
+    phase.classList.toggle('muted', !DR_LIVE);
+  }
   var cta = document.getElementById('community-cta');
   var note = document.getElementById('community-gated-note');
   if(cta && note){
@@ -619,7 +628,9 @@ async function notifyDR(e){
   }
 })();
 
-/* ══ PASS B: EU consent gate (direct buy). Mirrors member-free v2.2 umCheckout.
+/* ══ PASS B / E-PASS: pre-checkout modal (direct buy). Mirrors member-free v2.2
+   umCheckout. This is NOT a consent gate — consent is collected in Stripe only
+   (worker TOS_CONSENT_MESSAGE); here we state it in advance, in plain text.
    No email-lock here: no logged-in member; Stripe collects the email.
    Language follows the page dfw_lang store; EN/FI native, EN fallback.
    NOTE: element id "drcGo" is intentionally distinct from function name
@@ -627,12 +638,12 @@ async function notifyDR(e){
 var DRC_T={
   EN:{title:'Unlock Debt Recovery',price:'\u00b7 one-time \u00b7 90 days \u00b7 no subscription',
       b1:'Pre-filled creditor letters',b2:'Crisis plans for the worst weeks',b3:'A debt-free date that moves',
-      consent:'I understand this is a personalised digital product, created from my own information and delivered immediately, and I waive my 14-day right of withdrawal (EU Directive 2011/83/EU Art. 16(m)). I accept the <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
+      note:'At secure checkout you\'ll confirm one box: you\'re asking us to start straight away, and once your plan is created you lose your 14-day right to cancel. The same box accepts our <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
       go:'Continue to secure checkout',cancel:'Not now',
       err:'Something went wrong. Please try again or contact support@debt-free.world.'},
   FI:{title:'Avaa Debt Recovery',price:'\u00b7 kertamaksu \u00b7 90 p\u00e4iv\u00e4\u00e4 \u00b7 ei tilausta',
       b1:'Esit\u00e4ytetyt velkojakirjeet',b2:'Kriisisuunnitelmat pahimpiin viikkoihin',b3:'Velaton-p\u00e4iv\u00e4 joka liikkuu',
-      consent:'Ymm\u00e4rr\u00e4n ett\u00e4 kyseess\u00e4 on kustomoitu, omilla tiedoillani luotu digituote joka toimitetaan v\u00e4litt\u00f6m\u00e4sti, ja luovun 14 p\u00e4iv\u00e4n peruutusoikeudestani (EU-direktiivi 2011/83/EU 16(m) art.). Hyv\u00e4ksyn <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
+      note:'Turvallisessa maksussa vahvistat yhden kohdan: pyyd\u00e4t meit\u00e4 aloittamaan heti, ja kun suunnitelmasi on luotu, menet\u00e4t 14 p\u00e4iv\u00e4n peruutusoikeutesi. Samassa kohdassa hyv\u00e4ksyt <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
       go:'Jatka turvalliseen maksuun',cancel:'Ei nyt',
       err:'Jotain meni vikaan. Yrit\u00e4 uudelleen tai ota yhteytt\u00e4: support@debt-free.world.'}
 };
@@ -645,16 +656,16 @@ function openDRConsent(e){
   document.getElementById('drc_b1').textContent=T.b1;
   document.getElementById('drc_b2').textContent=T.b2;
   document.getElementById('drc_b3').textContent=T.b3;
-  document.getElementById('drc_consent').innerHTML=T.consent;
+  document.getElementById('drc_note').innerHTML=T.note;
   document.getElementById('drcGo').textContent=T.go;
   document.getElementById('drc_cancel').textContent=T.cancel;
-  document.getElementById('drcConsent').checked=false;
-  document.getElementById('drcGo').disabled=true;
+  // E-PASS: no tick state to reset, no button gate. The button opens enabled;
+  // drcCheckout() still disables it for the duration of the request only.
+  document.getElementById('drcGo').disabled=false;
   document.getElementById('drcErr').textContent='';
   document.getElementById('drcModal').classList.add('open');
 }
 function closeDRConsent(){document.getElementById('drcModal').classList.remove('open');}
-function drcToggle(){document.getElementById('drcGo').disabled=!document.getElementById('drcConsent').checked;}
 async function drcCheckout(){
   var T=drcT();
   document.getElementById('drcGo').disabled=true;
@@ -673,7 +684,8 @@ async function drcCheckout(){
 </script>
 
 
-<!-- ══ PASS B: EU consent gate for direct Debt Recovery purchase ══ -->
+<!-- ══ PASS B / E-PASS: pre-checkout modal for direct Debt Recovery purchase.
+     Consent itself is collected in Stripe, not here. ══ -->
 <div class="drc-modal" id="drcModal" role="dialog" aria-modal="true" aria-labelledby="drc_title">
   <div class="drc-modal-card">
     <button class="drc-modal-x" onclick="closeDRConsent()" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -684,8 +696,11 @@ async function drcCheckout(){
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b2"></span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b3"></span></li>
     </ul>
-    <label class="drc-modal-consent"><input type="checkbox" id="drcConsent" onchange="drcToggle()"><span id="drc_consent"></span></label>
-    <button class="drc-modal-go" id="drcGo" onclick="drcCheckout()" disabled></button>
+    <!-- E-PASS: consent is collected in Stripe checkout (worker TOS_CONSENT_MESSAGE),
+         never here. This is advance notice in plain text — nothing to tick, nothing
+         recorded. Bootstrap §3.3 items 11–13. -->
+    <p class="drc-modal-note" id="drc_note"></p>
+    <button class="drc-modal-go" id="drcGo" onclick="drcCheckout()"></button>
     <button class="drc-modal-cancel" id="drc_cancel" onclick="closeDRConsent()"></button>
     <p class="drc-modal-err" id="drcErr"></p>
   </div>
