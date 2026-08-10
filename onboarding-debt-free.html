@@ -192,6 +192,38 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   .cta-row{flex-direction:column-reverse;}
   .btn-back{text-align:center;}
 }
+/* ══ CRISIS GUIDANCE (raita A1) — additive. Nothing above this line changed. ══ */
+.crisis-inline{display:block;width:100%;text-align:left;margin:0 0 20px;padding:12px 14px;
+  border-left:3px solid var(--green);background:#f5f9f6;border-radius:8px;
+  font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--text);
+  text-decoration:none;cursor:pointer;border-top:none;border-right:none;border-bottom:none;}
+.crisis-inline:hover{background:#eef5f0;}
+.crisis-foot{max-width:560px;margin:26px auto 0;text-align:center;}
+.crisis-foot .crisis-inline{display:inline-block;width:auto;text-align:center;
+  background:transparent;border-left:none;padding:8px 4px;font-size:12.5px;opacity:0.85;}
+.crisis-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,20,0.55);
+  z-index:10000;padding:20px;overflow-y:auto;}
+.crisis-overlay.open{display:flex;align-items:center;justify-content:center;}
+.crisis-panel{background:var(--white);border-radius:16px;max-width:440px;width:100%;
+  padding:30px 26px;box-shadow:0 20px 60px rgba(0,0,0,0.28);font-family:var(--sans);}
+.crisis-h{font-family:var(--serif);font-size:21px;line-height:1.35;color:var(--green);
+  margin:0 0 12px;}
+.crisis-p{font-size:14px;line-height:1.7;color:var(--text);margin:0 0 22px;font-weight:300;}
+.crisis-btn-primary{width:100%;background:var(--green);color:var(--white);border:none;
+  border-radius:30px;padding:15px 18px;font-size:15px;font-weight:600;cursor:pointer;
+  font-family:var(--sans);}
+.crisis-btn-secondary{width:100%;background:transparent;color:var(--text);border:none;
+  padding:14px 18px;font-size:14px;cursor:pointer;font-family:var(--sans);
+  text-decoration:underline;margin-top:6px;opacity:0.75;}
+.crisis-help{display:none;margin:20px 0 4px;padding-top:18px;border-top:1px solid var(--border);}
+.crisis-help-h{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--green);margin:0 0 12px;font-weight:600;}
+.crisis-line{margin:0 0 12px;}
+.crisis-line-num{font-family:var(--serif);font-size:19px;color:var(--text);}
+.crisis-line-meta{font-size:12.5px;line-height:1.5;color:var(--text);opacity:0.7;}
+.crisis-directory{display:inline-block;margin-top:6px;font-size:13px;color:var(--green);
+  text-decoration:underline;}
+@media(max-width:480px){.crisis-panel{padding:24px 18px;}}
 </style>
 </head>
 <body>
@@ -235,6 +267,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   <span class="q-eyebrow" data-i18n="topStep1">Step 1 of 7</span>
   <h1 class="q-title" data-i18n="s1title">Hello. I'm glad you're here.</h1>
   <p class="q-sub" data-i18n="s1sub">Whatever brought you here, you're not alone — and you're already doing the hardest part by showing up. Your information is kept private and secure, and your plan will be built around your real life, not a template.</p>
+  <a class="crisis-inline" id="crisisLinkTop" href="javascript:void(0)" onclick="crisisOpen(false)" data-i18n="crisis_link">If things feel heavy right now, free and anonymous support is available. See where →</a>
 
   <div style="margin-top:22px;">
   <div class="two-col">
@@ -737,17 +770,350 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
   </ul>
 </div>
 
+<div class="crisis-foot">
+  <a class="crisis-inline" id="crisisLinkFoot" href="javascript:void(0)" onclick="crisisOpen(false)" data-i18n="crisis_link">If things feel heavy right now, free and anonymous support is available. See where →</a>
+</div>
 </div><!-- /wrap -->
+
+<!-- ══ CRISIS GUIDANCE (raita A1) — no background-click close, no Escape close ══ -->
+<div class="crisis-overlay" id="crisisView" role="dialog" aria-modal="true" aria-labelledby="crisisTitle">
+  <div class="crisis-panel">
+    <h2 class="crisis-h" id="crisisTitle" data-i18n="crisis_title">You don't have to hold this alone.</h2>
+    <p class="crisis-p" data-i18n="crisis_body">There are people whose whole job is this — to listen, and to stay with you while you talk. It costs nothing, you do not have to give your name, and you do not have to put it into words first.</p>
+    <button type="button" class="crisis-btn-primary" id="crisisHelpBtn" data-i18n="crisis_cta_help">Show me where to get help now</button>
+    <button type="button" class="crisis-btn-secondary" id="crisisContinueBtn" data-i18n="crisis_cta_continue">Continue where I left off</button>
+    <div class="crisis-help" id="crisisHelp">
+      <p class="crisis-help-h" data-i18n="crisis_help_title">Free, anonymous help</p>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script src="/support-data.js"></script>
+<script src="/crisis-data.js"></script>
 <script>
 /* ── CONFIG ── */
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 const STEP_PCT = [0,14,28,42,57,71,86,100];
 
+/* ══════════════════════════════════════════════════════════════════════════
+   CRISIS GUIDANCE — BEGIN
+   Raita A1 · malli C · 10.8.2026
+
+   ⚠ HARDEST RULE IN THIS BLOCK:
+   Nothing this block detects ever leaves the browser. The result of
+   detectCrisisSignal() is a boolean that lives for the length of one
+   function call. It is never written to formData, never sent with
+   /onboarding/save, never put in the AI prompt, never stored in
+   localStorage or sessionStorage, never logged. There is no fetch and no
+   XMLHttpRequest anywhere in this block. If a future change would make
+   detection more accurate but break that, do not make it.
+
+   This block is byte-identical in onboarding-debt-recovery.html and
+   onboarding-debt-free.html. Keep it that way — test_kriisiohjaus.mjs K-14
+   fails if the two copies drift apart.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────────────────────
+   THE KEYWORD LIST — Vilma reads this. Plain-language description first.
+
+   These are the phrases that make the form stop and offer help. They are
+   only the ones that say, fairly plainly, that a person is thinking about
+   ending their life, wishing they were dead, or hurting themselves.
+
+   They are written WITHOUT accents and WITHOUT apostrophes on purpose,
+   because the text is stripped of both before it is compared (so "en jaksa
+   enää elää" is compared as "en jaksa enaa elaa", and "I can't go on" as
+   "i cant go on").
+
+   What is deliberately NOT here: everyday exhaustion and everyday debt
+   language. "olen ihan lopussa", "en jaksa enää", "this is killing me",
+   "I'm drowning in debt", "there is no way out" — none of these trigger
+   anything. A false alarm interrupts someone for nothing and teaches them
+   to click past the screen, which is worse than missing one.
+
+   FINNISH and ENGLISH only. Both lists were checked by a human. There is
+   deliberately no list for the other 17 languages: a missing detection is
+   better than a wrong one. Both lists are scanned regardless of which plan
+   language the person picked, because people write in whichever language
+   comes to them.
+   ────────────────────────────────────────────────────────────────────────── */
+const CRISIS_KEYWORDS = {
+
+  /* SUOMI — tarkistettu ihmisen toimesta 10.8.2026 */
+  FI: [
+    /* suora itsetuhoisuus */
+    'itsemurha',
+    'tappaa itseni',
+    'tapan itseni',
+    'riistaa henkeni',
+    'riistan henkeni',
+    'ottaa hengen itseltani',
+    'lopettaa elamani',
+    'lopetan elamani',
+    'en halua enaa elaa',
+    'en jaksa enaa elaa',
+    /* oman kuoleman toivominen passiivisesti */
+    'haluan kuolla',
+    'haluaisin kuolla',
+    'toivon etten heraisi',
+    'toivoisin etten heraisi',
+    'kunpa en heraisi',
+    'olisi parempi jos en olisi',
+    'olisi helpompi jos en olisi',
+    'kaikilla olisi parempi ilman minua',
+    /* toivottomuus jossa on lopullisuuden savy */
+    'ei ole mitaan syyta jatkaa',
+    'ei ole enaa mitaan jarkea elaa',
+    'elamalla ei ole enaa merkitysta',
+    /* itsensa vahingoittaminen */
+    'satuttaa itseani',
+    'satutan itseani',
+    'satuttanut itseani',
+    'vahingoittaa itseani',
+    'viillan itseani',
+    'viiltely'
+  ],
+
+  /* ENGLISH — human-checked 10.8.2026 */
+  EN: [
+    /* direct suicidality */
+    'kill myself',
+    'killing myself',
+    'end my life',
+    'ending my life',
+    'take my own life',
+    'taking my own life',
+    'commit suicide',
+    'thinking about suicide',
+    'thoughts of suicide',
+    'suicidal',
+    'end it all',
+    /* passive death wish */
+    'want to die',
+    'wish i was dead',
+    'wish i were dead',
+    'want to be dead',
+    'better off dead',
+    'better off without me',
+    'dont want to wake up',
+    /* hopelessness carrying finality */
+    'no reason to live',
+    'nothing to live for',
+    'cant go on living',
+    'cannot go on living',
+    /* self-harm */
+    'hurt myself',
+    'hurting myself',
+    'harm myself',
+    'harming myself',
+    'cutting myself'
+  ]
+
+  /* No other language has a list. CRISIS_KEYWORDS.DE, .SV, .PL … are
+     undefined by design, and crisisKeywordsFor() returns [] for them. */
+};
+
+/* Returns the checked list for a language code, or an empty list for every
+   language that has not been human-checked. */
+function crisisKeywordsFor(langCode){
+  return (CRISIS_KEYWORDS && CRISIS_KEYWORDS[langCode]) ? CRISIS_KEYWORDS[langCode] : [];
+}
+
+/* Lowercases, drops accents and apostrophes, turns every other non-letter
+   into a space and collapses runs of spaces. No network, no storage. */
+function normalizeForCrisisScan(text){
+  if(!text) return '';
+  var s = String(text).toLowerCase();
+  s = s.normalize ? s.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : s;
+  s = s.replace(/[\u2018\u2019'`\u00b4]/g, '');
+  s = s.replace(/[^a-z0-9]+/g, ' ');
+  return ' ' + s.trim() + ' ';
+}
+
+/* The whole of the detection. Returns a boolean and nothing else. The
+   boolean is consumed by the caller in the same tick and discarded. */
+function detectCrisisSignal(text){
+  var s = normalizeForCrisisScan(text);
+  if(s.length < 3) return false;
+  var lists = [crisisKeywordsFor('FI'), crisisKeywordsFor('EN')];
+  for(var i = 0; i < lists.length; i++){
+    for(var j = 0; j < lists[i].length; j++){
+      if(s.indexOf(lists[i][j]) !== -1) return true;
+    }
+  }
+  return false;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   WHICH COUNTRY'S NUMBERS TO SHOW
+   Unknown or missing country → the universal route. Never an empty view,
+   never an error, never a guess.
+   ────────────────────────────────────────────────────────────────────────── */
+function crisisCountryCode(value){
+  var d = window.CRISIS_DATA;
+  if(!d || !value) return null;
+  var key = String(value).trim().toLowerCase();
+  if(d.aliases && d.aliases[key]) return d.aliases[key];
+  var up = String(value).trim().toUpperCase();
+  if(d.countries && d.countries[up]) return up;
+  return null;
+}
+function crisisLookup(value){
+  var d = window.CRISIS_DATA;
+  var universal = (d && d.universal) ? d.universal : {
+    emergency_note: 'If you are in immediate danger, call your local emergency number.',
+    directory_url:  'https://findahelpline.com',
+    directory_name: 'Find A Helpline'
+  };
+  var code = crisisCountryCode(value);
+  var entry = (code && d && d.countries) ? d.countries[code] : null;
+  return {
+    code:      code,
+    lines:     (entry && entry.lines) ? entry.lines : [],
+    emergency: (entry && entry.emergency) ? entry.emergency : '',
+    universal: universal
+  };
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   THE VIEW
+   Asking for attention, not blocking. It does not close on a background
+   click and it does not close on Escape — but "continue" always exists,
+   because locking someone out of their own decisions is its own harm.
+   ────────────────────────────────────────────────────────────────────────── */
+let crisisViewOpen = false;
+let crisisInterruptUsed = false; /* in memory only — never stored anywhere */
+
+function crisisSelectedCountry(){
+  var el = document.getElementById('f_country');
+  if(el && el.value) return el.value;
+  if(typeof formData === 'object' && formData && formData.country) return formData.country;
+  return '';
+}
+
+function crisisRenderHelp(){
+  var box = document.getElementById('crisisHelp');
+  if(!box) return;
+  var info = crisisLookup(crisisSelectedCountry());
+  var html = '';
+  for(var i = 0; i < info.lines.length; i++){
+    var L = info.lines[i];
+    html += '<div class="crisis-line">' +
+              '<div class="crisis-line-num">' + L.number + '</div>' +
+              '<div class="crisis-line-meta">' + L.name +
+                (L.language ? ' · ' + L.language : '') +
+                (L.hours ? ' · ' + L.hours : '') +
+              '</div>' +
+            '</div>';
+  }
+  if(info.emergency){
+    html += '<div class="crisis-line">' +
+              '<div class="crisis-line-num">' + info.emergency + '</div>' +
+              '<div class="crisis-line-meta">' + info.universal.emergency_note + '</div>' +
+            '</div>';
+  } else {
+    html += '<div class="crisis-line">' +
+              '<div class="crisis-line-meta">' + info.universal.emergency_note + '</div>' +
+            '</div>';
+  }
+  html += '<a class="crisis-directory" target="_blank" rel="noopener noreferrer" href="' +
+            info.universal.directory_url + '">' +
+            (typeof t === 'function' ? t('crisis_directory') : info.universal.directory_name) +
+          ' →</a>';
+  box.innerHTML = html;
+}
+
+function crisisOpen(fromInterrupt){
+  var el = document.getElementById('crisisView');
+  if(!el) return;
+  if(fromInterrupt){
+    if(crisisInterruptUsed) return;   /* once per session, not once per field */
+    crisisInterruptUsed = true;
+  }
+  var helpBox = document.getElementById('crisisHelp');
+  if(helpBox) helpBox.style.display = 'none';
+  el.classList.add('open');
+  crisisViewOpen = true;
+  var btn = document.getElementById('crisisHelpBtn');
+  if(btn) btn.focus();
+}
+
+function crisisShowHelp(){
+  crisisRenderHelp();
+  var box = document.getElementById('crisisHelp');
+  if(box) box.style.display = 'block';
+}
+
+/* The only thing that closes this view. */
+function crisisClose(){
+  var el = document.getElementById('crisisView');
+  if(el) el.classList.remove('open');
+  crisisViewOpen = false;
+}
+
+/* Escape must NOT close it. Swallowed in the capture phase so that no other
+   handler, now or later, can turn Escape into a dismissal. */
+document.addEventListener('keydown', function(e){
+  if(crisisViewOpen && (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27)){
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}, true);
+
+/* ──────────────────────────────────────────────────────────────────────────
+   WHERE IT LISTENS
+   On blur of the free-text fields, and once more when the person moves
+   forward a step. Not on every keystroke.
+   ────────────────────────────────────────────────────────────────────────── */
+const CRISIS_TEXT_FIELDS = ['f_own_words', 'f_anything_else'];
+
+function crisisScanValue(value){
+  if(detectCrisisSignal(value)) crisisOpen(true);
+}
+function crisisScanAllFields(){
+  for(var i = 0; i < CRISIS_TEXT_FIELDS.length; i++){
+    var el = document.getElementById(CRISIS_TEXT_FIELDS[i]);
+    if(el && el.value) crisisScanValue(el.value);
+  }
+}
+
+document.addEventListener('blur', function(e){
+  if(e.target && e.target.id && CRISIS_TEXT_FIELDS.indexOf(e.target.id) !== -1){
+    crisisScanValue(e.target.value);
+  }
+}, true);
+
+window.addEventListener('DOMContentLoaded', function(){
+  var help = document.getElementById('crisisHelpBtn');
+  if(help) help.addEventListener('click', crisisShowHelp);
+  var cont = document.getElementById('crisisContinueBtn');
+  if(cont) cont.addEventListener('click', crisisClose);
+
+  /* Step advance. goNext() itself is untouched — this wraps it additively. */
+  if(typeof window.goNext === 'function' && !window.goNext.__crisisWrapped){
+    var _goNext = window.goNext;
+    var wrapped = function(){ try{ crisisScanAllFields(); }catch(_e){} return _goNext.apply(this, arguments); };
+    wrapped.__crisisWrapped = true;
+    window.goNext = wrapped;
+  }
+});
+/* ══ CRISIS GUIDANCE — END ══════════════════════════════════════════════ */
+
+
 const I18N = {
 EN: {
+
+  /* ── CRISIS GUIDANCE (raita A1) ── EN is also the fallback for the 17
+     languages that have no human-checked crisis translation yet. */
+  crisis_link:'If things feel heavy right now, free and anonymous support is available. See where →',
+  crisis_title:"You don't have to hold this alone.",
+  crisis_body:'There are people whose whole job is this — to listen, and to stay with you while you talk. It costs nothing, you do not have to give your name, and you do not have to put it into words first.',
+  crisis_cta_help:'Show me where to get help now',
+  crisis_cta_continue:'Continue where I left off',
+  crisis_help_title:'Free, anonymous help',
+  crisis_emergency:'If you are in immediate danger, call your local emergency number.',
+  crisis_directory:'Find a helpline in your country',
   topStep:'Step {n} of 7',
   topStep1:'Step 1 of 7',topStep2:'Step 2 of 7',topStep3:'Step 3 of 7',topStep4:'Step 4 of 7',topStep5:'Step 5 of 7',topStep6:'Step 6 of 7',topStep7:'Step 7 of 7',
   ps1:'You',ps2:'Situation',ps3:'Debts',ps4:'Finances',ps5:'Mindset',ps6:'Goals',ps7:'Ready',
@@ -878,6 +1244,16 @@ EN: {
   toast_link_fail:'Could not send link. Please email support@debt-free.world'
 },
 FI: {
+
+  /* ── CRISIS GUIDANCE (raita A1) ── */
+  crisis_link:'Jos olo on juuri nyt raskas, apua on saatavilla maksutta ja nimettömästi. Katso mistä →',
+  crisis_title:'Sinun ei tarvitse kantaa tätä yksin.',
+  crisis_body:'On ihmisiä joiden koko työ on tämä — kuunnella ja pysyä rinnalla sen ajan kun puhut. Se ei maksa mitään, nimeä ei tarvitse kertoa, eikä mitään tarvitse osata sanoa valmiiksi.',
+  crisis_cta_help:'Näytä mistä saan apua nyt',
+  crisis_cta_continue:'Jatkan siitä mihin jäin',
+  crisis_help_title:'Maksutonta ja nimetöntä apua',
+  crisis_emergency:'Jos olet välittömässä vaarassa, soita hätänumeroon.',
+  crisis_directory:'Etsi tukipuhelin omasta maastasi',
   topStep:'Vaihe {n} / 7',
   topStep1:'Vaihe 1 / 7',topStep2:'Vaihe 2 / 7',topStep3:'Vaihe 3 / 7',topStep4:'Vaihe 4 / 7',topStep5:'Vaihe 5 / 7',topStep6:'Vaihe 6 / 7',topStep7:'Vaihe 7 / 7',
   ps1:'Sinä',ps2:'Tilanne',ps3:'Velat',ps4:'Talous',ps5:'Tuntemukset',ps6:'Tavoitteet',ps7:'Valmis',
