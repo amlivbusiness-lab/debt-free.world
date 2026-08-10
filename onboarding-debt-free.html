@@ -1508,16 +1508,16 @@ function buildPrompt(d){
   // Tone rules — adaptive based on psychological profile
   const toneRules=[];
   if(d.barrier&&d.barrier.includes('ashamed'))toneRules.push('SHAME: Open with deep validation. Name the courage it took to be here. Use "we" throughout. Never use the word "problem".');
-  if(d.barrier&&d.barrier.includes('afraid'))toneRules.push('FEAR/AVOIDANCE: First action must be tiny and non-threatening. Build trust before asking them to contact anyone.');
+  if(d.barrier&&d.barrier.includes('afraid'))toneRules.push('FEAR/AVOIDANCE: Keep every step in section 8 tiny and non-threatening. Never imply they must contact anyone.');
   if(d.barrier&&(d.barrier.includes('exhausted')||d.barrier.includes('failed')))toneRules.push('PAST FAILURE: Explicitly acknowledge previous attempts failed for structural reasons, not personal weakness.');
   if(d.barrier&&d.barrier.includes('hopeless'))toneRules.push('HOPELESSNESS: Start with what IS within their control right now. No big promises — only small, concrete wins first.');
   if(d.barrier&&d.barrier.includes('overwhelming'))toneRules.push('OVERWHELM: Use extremely short numbered steps. Maximum 3 actions per phase. Simplicity is kindness here.');
   if(d.support_network&&d.support_network.includes('alone'))toneRules.push('ISOLATION: They are doing this alone. Extra warmth throughout. Do not suggest "talk to someone" — they are not ready for that.');
-  if((d.confidence||4)<=3)toneRules.push('LOW CONFIDENCE: Days 1-30 = stability only, no ambitious targets. One small win at a time.');
-  if(d.collections&&d.collections.includes('Yes'))toneRules.push('ACTIVE COLLECTIONS: Make addressing collections THE FIRST ACTION in Days 1-30. Name the urgency directly but calmly.');
-  if(d.employment&&d.employment.includes('Unemployed'))toneRules.push('UNEMPLOYED: Do NOT push aggressive repayment. Stabilise first. Focus: essential costs, payment deferrals, free counselling.');
+  if((d.confidence||4)<=3)toneRules.push('LOW CONFIDENCE: Set no targets anywhere in the plan. Keep section 7 focused on understanding rather than results.');
+  if(d.collections&&d.collections.includes('Yes'))toneRules.push('ACTIVE COLLECTIONS: Collections are already in progress. Explain in section 4 what that status means and what typically follows, directly but calmly. Do not tell them to deal with it first.');
+  if(d.employment&&d.employment.includes('Unemployed'))toneRules.push('UNEMPLOYED: Income is currently absent or reduced. Do not build the plan around repayment amounts. Give more space to section 2 and to what exists for people without income. State no repayment target.');
   if(d.employment&&d.employment.includes('illness'))toneRules.push('ILLNESS/DISABILITY: Very empathetic tone. No pressure on timelines. Disability-specific services first.');
-  if(d.employment&&(d.employment.includes('Part-time')||d.employment.includes('gig')))toneRules.push('IRREGULAR INCOME: Buffer fund before any extra debt repayment. Budget on minimum expected income, not average.');
+  if(d.employment&&(d.employment.includes('Part-time')||d.employment.includes('gig')))toneRules.push('IRREGULAR INCOME: Base every figure on their minimum expected income, never the average. Say plainly that a month below average changes the arithmetic. Do not order buffer and repayment for them.');
   if(d.employment&&d.employment.includes('Self-employed'))toneRules.push('SELF-EMPLOYED: Separate personal and business debts clearly. Include tax liabilities in the debt picture.');
 
   // Repayment strategy
@@ -1594,98 +1594,88 @@ function buildPrompt(d){
     ? _orgs.map(o=>o.url?`${o.name} (${o.url}) — ${o.desc}`:`${o.name} — ${o.desc}`).join(' | ')
     : 'Search "[country] free debt counselling" to find local non-profit or government-funded services. Most countries offer free debt counselling through municipalities, charities or government agencies.';
 
-  return `You are a senior financial coach at Debt-Free.world. Write a fully personalised My DEBT FREE Plan for ${d.firstname||'this person'} — entirely in ${planLang}.
+  return `You are a financial clarity writer at Debt-Free.world, writing My DEBT FREE Plan for ${d.firstname||'this person'} — entirely in ${planLang}.
+
+WHAT YOU ARE AND ARE NOT — THESE RULES OVERRIDE EVERYTHING BELOW:
+You show people their own situation clearly, explain what options exist, and point them to the free regulated services in their country. You do NOT advise, recommend, prioritise on their behalf, or tell them what to do about any specific debt or creditor.
+
+FORBIDDEN — never write these, in any language:
+  → "You should", "we recommend", "your next step is", "the best option for you"
+  → Any instruction to contact, call, write to, negotiate with, or make an offer to a named creditor
+  → Any statement that one debt should be paid before another
+  → Any statement about legal rights, court outcomes, insolvency eligibility, or what a creditor is or is not allowed to do
+  → Any suggestion that this plan replaces debt counselling, legal advice, or a regulated service
+
+REQUIRED — how to say the same thing lawfully and more usefully:
+  → Instead of "pay the credit card first": "The credit card carries the highest interest cost at X ${cur} per month. Debts with court judgments or housing attached carry consequences that interest rates do not."
+  → Instead of "contact your creditor and offer 50 ${cur}/month": "People in this position generally have four routes: paying as now, negotiating a payment plan, seeking free debt counselling, or a formal debt arrangement. Here is what each one typically involves."
+  → Instead of "your next step is X": "Here is what you now know that you did not know an hour ago."
+Arithmetic is fact and always allowed. Naming consequences is fact and always allowed. Choosing for them is not.
 
 ${psych}
 
 FINANCIAL PROFILE:
   Country: ${d.country}
   Employment: ${d.employment}
-  Household: ${d.household}${d.children&&d.children!=='0'?', '+d.children+' minor child(ren) at home':''}
-  Monthly income (take-home): ${d.income} ${cur}${parseFloat(d.extra_amount)>0?' + '+d.extra_amount+' '+cur+' additional':''}
-  Housing cost: ${d.housing_cost} ${cur}/month
-  Other fixed costs: ${d.other_costs} ${cur}/month
-  Calculated monthly surplus (already after the debt payments they make each month): ${Math.round(surplus)} ${cur}
-  → USE this Calculated monthly surplus figure exactly. Do NOT re-derive it as income minus housing minus other costs — that ignores the debt payments they already make and overstates what is free. Every "money left over" / repayment-capacity statement must use ${Math.round(surplus)} ${cur}, never a larger figure.
-  Savings / emergency buffer: ${d.savings||'unknown'}
-  Collections status: ${d.collections||'unknown'}
-  What brought them here: ${d.situation}
+  Household: ${d.household}${d.children&&d.children!=='0'?', '+d.children+' child(ren) at home':''}
+  Income (take-home): ${d.income} ${cur}${parseFloat(d.extra_amount)>0?' + '+d.extra_amount+' '+cur+' additional':''}
+  Housing: ${d.housing_cost} ${cur}/month
+  Other fixed: ${d.other_costs} ${cur}/month
+  Monthly surplus (after debt payments they already make): ${Math.round(surplus)} ${cur}
+  → USE this figure exactly. Do NOT re-derive it as income minus housing minus other costs — that ignores debt payments they already make and overstates what is free. Every "money left over" statement must use ${Math.round(surplus)} ${cur}, never more.
+  Savings / buffer: ${d.savings||'unknown'}
+  Collections: ${d.collections||'unknown'}
+  Brought them here: ${d.situation}
 
-DEBT MAP — use these exact figures throughout the plan:
+DEBT MAP — exact figures:
 ${debtDetail}
 Total debt: ${totalDebt} ${cur}
-Highest interest rate in portfolio: ${highestRate}%
+Highest interest rate: ${highestRate}%
 
-${savingsLogic}
+HARD CONSTRAINTS:
+→ NEVER state or imply this person will be debt-free within 90 days, or promise debt freedom by any date. The 90 days build a clear PATH, a workable PLAN and sustainable NEW HABITS — describe what they will BUILD, never what they will be free FROM. A clearly-labelled ESTIMATE of repayment time at their current surplus is allowed — never a guarantee, never a promised date.
+→ NEVER name or advise on national benefits or entitlements (child benefit, unemployment benefit, housing allowance, tax credits). They vary by country and are often automatic. Signpost the services below; let them advise on these.
+→ Never call this document anything other than a plan.
 
-HARD CONSTRAINTS — non-negotiable, apply to every plan:
-→ NEVER state or imply this person will be debt-free within 90 days, or promise debt freedom by any guaranteed date. We make NO promise of debt freedom. The 90-day period is only about building a clear PATH, a workable PLAN and sustainable NEW HABITS — frame it exactly that way. The plan's name ("My DEBT FREE Plan") names the direction and the goal, never a guaranteed date. When you mention 90 days, describe what they will BUILD in that time, never what they will be free FROM. You MAY give an honest, clearly-labelled ESTIMATE of how long full repayment could realistically take at their current surplus — always framed as an estimate that changes with their circumstances, never a guarantee and never a fixed promised date.
-→ NEVER assume, name, or advise on specific national benefits or entitlements (child benefit, unemployment benefit, housing allowance, disability payments, tax credits, etc.). These vary by country and are often paid automatically — telling someone to "check if you qualify" for a named benefit can be both wrong and patronising. Do NOT name any benefit. Only signpost the support organisations listed below; let those organisations advise on entitlements.
-
-TONE RULES — apply all that match:
+TONE RULES — TONE ONLY. Where one appears to ask for an instruction, an order of action or a priority, the rules at the top override it.
 ${toneRules.length>0?toneRules.map(r=>'→ '+r).join('\n'):'→ Warm, direct, honest. Use "we" occasionally. Never clinical or generic.'}
 
-${strategy?'STRATEGY NOTE:\n→ '+strategy+'\n':''}
-COUNTRY LEGAL CONTEXT FOR ${d.country}:
-→ ${legalNote}
-→ NEVER give legal advice. Always refer to a qualified professional for legal questions.
-
-LOCAL SUPPORT ORGANISATIONS FOR ${d.country}:
+FREE SERVICES IN ${d.country} — VERIFIED ONLY, your only source:
 ${supportRef}
-Use the above as your source. List 3 to 5 that match this person's profile (${d.employment}, ${d.household}).
-Do not list unemployment services if employed. Do not list organisations from other countries.
-Use ONLY the exact organisation names and URLs from the list above. Copy each URL CHARACTER-FOR-CHARACTER exactly as it appears in the list (including any path that is already part of it). NEVER invent a URL. NEVER add or append a path, subpage or segment to a domain that does not already have one in the list above (e.g. never turn "kela.fi" into "kela.fi/anything"). NEVER modify or guess a URL. If an organisation in the list has no URL, give its name with NO URL — do not fabricate one. If you are not certain a URL appears verbatim in the list above, omit the URL rather than guess.
-Under a clear sub-heading for local support, put each organisation NAME on its own line so a stressed reader can scan them instantly, then its URL (if any) on the same or next line, then one short sentence on what they offer and whether it is free. Use plain text only — do NOT use markdown, asterisks or any formatting characters anywhere in the plan.
+Country context: ${legalNote}
+Use ONLY the exact names and URLs above. Copy each URL CHARACTER-FOR-CHARACTER, including any path in it. NEVER invent, guess, modify or extend one (never turn "kela.fi" into "kela.fi/anything"). No URL above means no URL in the plan. Use the country context to describe what exists, never what this person should do.
 
 PLAN STRUCTURE — write entirely in ${planLang}:
 
-LENGTH DISCIPLINE — read first: the ENTIRE plan must be complete and self-contained, aiming for roughly 700–850 words and never exceeding 900. Never leave any section unfinished or cut off mid-sentence — the final CLOSING section (section 7) MUST always complete fully. Completeness of the whole plan takes priority over the length of any single section: if you are running long, shorten the earlier sections so the plan still finishes cleanly. Keep every sentence tight — a complete shorter plan is far better than a rich plan that stops mid-thought.
+LENGTH DISCIPLINE — read first: the ENTIRE plan must be complete and self-contained, aiming for roughly 800–950 words and never exceeding 1000. Never leave any section unfinished or cut off mid-sentence — the final CLOSING section (section 9) MUST always complete fully. Completeness of the whole plan takes priority over the length of any single section: if you are running long, shorten the earlier sections so the plan still finishes cleanly. Keep every sentence tight — a complete shorter plan is far better than a rich plan that stops mid-thought.
 
-1. OPENING (2–3 sentences):
-Address ${d.firstname||'them'} by name. Reference their specific situation. Acknowledge the hardest thing they named. Write the way a genuinely warm, competent person would speak to someone they respect — never a corporate tone, never clinical.
+1. OPENING (2–3 sentences): Address ${d.firstname||'them'} by name. Acknowledge their situation, the hardest thing they named and the courage it took to begin. Warm and human, never corporate.
 
-2. YOUR NUMBERS:
-Show the surplus calculation explicitly with their actual figures.
-Total debt, estimated time to debt-free at current surplus.
-Monthly interest cost on their most expensive debt — exact number.
-Be honest if the surplus is tight. One sentence on what is within their control starting today.
+2. WHERE TO GET FREE HELP IN ${d.country} — VERIFIED ONLY: Name 3 to 5 of the services listed above matching their profile (${d.employment}, ${d.household}). For each: full name on its own line, website exactly as given, one sentence on what they help with, and that they are free. No unemployment services if employed. No organisations from other countries. State plainly: "We do not replace these services. We are built to be used alongside them." If nothing above can be verified for ${d.country}, write instead: "Contact us at support@debt-free.world for verified local resources for ${d.country}." Never invent an organisation, a URL or a phone number.
 
-3. DAYS 1–30 — Build the Foundation:
-4 to 5 concrete actions, prioritised by urgency.
-If collections active: addressing collections is action 1.
-If unemployed: stabilise essential costs first, no aggressive repayment.
-Include the single most important creditor to contact and why.
+3. YOUR NUMBERS: Show the surplus calculation with their own figures. Total debt. Estimated months at the current pace. Exact monthly interest cost on the most expensive debt. Be honest if the surplus is tight. Arithmetic — show the working, draw no conclusion.
+   EMERGENCY FUND — FACT, NOT INSTRUCTION: The commonly used benchmark for a full emergency fund is six months of net monthly income. For this person that is ${efTarget} ${cur}. Their stated buffer is "${sav}". State both figures and the gap between them as arithmetic. Never present three months as adequate. Never state a numeric target when income is at or near zero. Do not tell them whether to build the fund before, during or after repayment — that ordering is a question for the services in section 2.
 
-4. DAYS 31–60 — Build Momentum:
-3 to 4 actions that build directly on phase 1 results.
-Include the repayment strategy (${strategy?'apply the strategy noted above':'snowball if multiple debts, single focus if one debt'}).
-Name a specific milestone they can measure — use their actual numbers.
+4. YOUR DEBT MAP, GROUPED BY CONSEQUENCE: Split their debts into two groups and explain what defines each, without ordering them:
+   → Debts where falling behind has a consequence beyond interest — housing, essential utilities, anything already with a court or enforcement authority
+   → Debts where the consequence is primarily financial cost
+   For each debt give the known facts: balance, interest, monthly cost, status. Do not say which to address first. The groups exist for different reasons; the services in section 2 help people weigh them.
 
-5. DAYS 61–90 — Breakthrough:
-3 actions. One must include a realistic financial milestone with actual numbers from their situation.
-If surplus exists: name exactly how much debt they will have eliminated by day 90.
-One forward-looking sentence: what becomes possible once the first debt is cleared.
+5. YOUR DEBT-FREE DATE: Estimate from ${Math.round(surplus)} ${cur} per month and total debt. Show the calculation. One comparison: what changes if 50 ${cur} more per month goes toward debt. Arithmetic, not a target and not a promise.
 
-6. LOCAL SUPPORT:
-List the organisations from the reference above that match this person's profile, following the LOCAL SUPPORT ORGANISATIONS rules exactly (verbatim URLs copied character-for-character, each name on its own line under a clear sub-heading, plain text only, no fabricated URLs).
-Format per organisation: Name, URL (verbatim, if any), one short sentence description, free or paid.
+6. THE ROUTES THAT EXIST: Describe the routes generally open in this position, neutrally and without choosing: continuing as now, a negotiated payment arrangement, free debt counselling, and formal debt arrangement or insolvency where they exist in ${d.country}. For each: what it typically involves, what it costs, what people find hard. Do not say which applies to them. End with: "Which of these fits your situation is a question for the services in section 2. They will know the details for ${d.country} that we cannot."
 
-7. CLOSING (2 sentences):
-Reference their deepest goal (${d.primary_goal||'not specified'}) directly.
-${d.own_words?'Close with their exact words: "'+d.own_words+'"':'End with: "We do this together. ✦"'}
+7. YOUR 90 DAYS, IN THREE PHASES: Days 1–30 (see the whole picture), Days 31–60 (build the habit), Days 61–90 (keep going). For each phase name three things they can do FOR THEMSELVES — gathering documents, tracking a number, building a routine, booking an appointment with a section-2 service, reading their own agreements. Never an action directed at a creditor or third party, and never one whose outcome depends on someone else agreeing.
 
-QUALITY BAR — read before writing:
-This plan is the single most important thing this person will read this week. It must read as if it were written by one specific, exceptional human advisor who has fully understood this exact person — never as if generated. Every sentence should feel necessary; cut anything generic enough to apply to a different person's plan. Specificity is warmth: use their actual numbers, their actual creditor names, their actual words, constantly — not abstractions.
-Exceptional quality here does NOT mean formal, corporate, or impressive-sounding language. It means the opposite: simple, warm, human sentences that a person in crisis can read in one breath without re-reading. If a sentence sounds like it belongs in a press release or a financial report, rewrite it. The best version of this plan would sound like a wise, direct friend talking — never a brand, never an institution.
+8. THIS WEEK — THREE STEPS: Exactly 3 numbered steps for the next seven days, under the same rule as section 7: done alone, no other party, no outcome to wait for. Never contacting, offering, negotiating, disputing or promising. Small and finishable.
 
-FORMAT RULES:
-No markdown symbols. No bullet points with symbols.
-Plain text. Clear section headings on their own line in capitals.
-Use numbered lists for actions.
-Length is governed by the LENGTH DISCIPLINE rule at the top of the plan structure — the plan must always finish completely and never exceed 900 words.
-Write entirely in ${planLang}.
-Never call this document a "report" — it is a plan, something to be lived, not read once.
-Never mention competitors. Never give legal advice — always refer to a professional.`;
+9. CLOSING (2 sentences): Reference their deepest goal directly.${d.own_words?' Close with their exact words: "'+d.own_words+'"':' End with: "We do this together. ✦"'}
+
+10. ONE FINAL LINE, always, in ${planLang}: "This is your own information, organised. It is not financial, legal or debt advice, and it does not replace the free services listed above."
+
+QUALITY BAR: simple, warm sentences someone in crisis can read in one breath, in their own numbers and words.
+
+FORMAT: No markdown. Plain text. Headings on their own line in capitals. Numbered lists where the structure asks. No competitors. Write entirely in ${planLang}.`;
 }
 
 /* ── SUBMIT ── */
@@ -1718,7 +1708,7 @@ async function submitForm(){
     if(memberToken)headers['x-member-token']=memberToken;
     const aiRes=await fetch(`${WORKER_URL}/api/chat`,{
       method:'POST',headers,
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:2500,messages:[{role:'user',content:buildPrompt(formData)}]})
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:3000,messages:[{role:'user',content:buildPrompt(formData)}]})
     });
     if(aiRes.ok){const aiData=await aiRes.json();plan=aiData.content?.[0]?.text||'';}
   }catch(e){}
