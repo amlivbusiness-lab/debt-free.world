@@ -4,8 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta name="robots" content="noindex,nofollow"/>
-<title>Your Recovery — Debt-Free.world</title>
-<meta name="description" content="Your Debt Recovery member area."/>
+<title>Your Recovery — Debt-Free.World</title>
+<meta name="description" content="Your The 90-Day Companion member area."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -615,7 +615,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 <header class="topbar">
   <div class="topbar-inner">
     <button class="icon-btn" onclick="openDrawer()" aria-label="Menu" data-i18n-aria="aria_menu"><i data-lucide="menu"></i></button>
-    <span class="wordmark"><span class="spark">✦</span> Debt-Free.world</span>
+    <span class="wordmark"><span class="spark">✦</span> Debt-Free.World</span>
     <div class="lang-wrap">
       <button class="lang-btn" id="langBtn" onclick="toggleLang(event)"><i data-lucide="globe"></i><span id="langLabel">EN</span></button>
       <div class="lang-menu" id="langMenu"><div class="lang-menu-inner" id="langMenuInner"></div></div>
@@ -647,12 +647,12 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 <nav class="drawer" id="drawer" aria-label="Main">
   <div class="drawer-head">
-    <span class="wordmark"><span class="spark">✦</span> Debt-Free.world</span>
+    <span class="wordmark"><span class="spark">✦</span> Debt-Free.World</span>
     <button class="icon-btn" onclick="closeDrawer()" aria-label="Close"><i data-lucide="x"></i></button>
   </div>
   <div class="drawer-nav">
     <div class="nav-group">
-      <div class="nav-group-label"><i data-lucide="badge-check"></i><span data-i18n="nav_g_debtfree">Debt FREE</span></div>
+      <div class="nav-group-label"><i data-lucide="badge-check"></i><span data-i18n="nav_g_debtfree">90-Day Plan</span></div>
       <div class="nav-group-sub" data-i18n="nav_g_debtfree_sub">Everything you need to see your situation clearly and plan your way out.</div>
       <button class="nav-item" onclick="navTo('sec-plan')"><i data-lucide="file-text"></i><span data-i18n="nav_plan">My Plan</span></button>
       <button class="nav-item" onclick="dashHome()"><i data-lucide="circle-alert"></i><span data-i18n="nav_emergency">Emergency Card</span></button>
@@ -663,7 +663,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
     <div class="nav-group">
       <div class="nav-group-label"><i data-lucide="wrench"></i><span data-i18n="nav_g_tools">Tools</span></div>
       <div class="nav-group-sub" data-i18n="nav_g_tools_sub">Six calculators. Each answers one real question about your money.</div>
-      <button class="nav-item" onclick="openTool('dfd')"><i data-lucide="calendar-check"></i><span data-i18n="tool_dfd_n">Debt-Free Date Calculator</span></button>
+      <button class="nav-item" onclick="openTool('dfd')"><i data-lucide="calendar-check"></i><span data-i18n="tool_dfd_n">Payoff Date Calculator</span></button>
       <button class="nav-item" onclick="openTool('strat')"><i data-lucide="layers"></i><span data-i18n="tool_strat_n">Snowball vs Avalanche</span></button>
       <button class="nav-item" onclick="openTool('budget')"><i data-lucide="piggy-bank"></i><span data-i18n="tool_budget_n">Crisis Budget Planner</span></button>
       <button class="nav-item" onclick="openTool('income')"><i data-lucide="trending-up"></i><span data-i18n="tool_income_n">Extra Income Simulator</span></button>
@@ -677,7 +677,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <a class="nav-item" href="/ecosystem.html"><i data-lucide="layout-grid"></i><span data-i18n="nav_ecosystem">Ecosystem</span></a>
     </div>
     <div class="nav-group">
-      <div class="nav-group-label"><i data-lucide="shield"></i><span data-i18n="nav_g_recovery">Debt Recovery</span></div>
+      <div class="nav-group-label"><i data-lucide="shield"></i><span data-i18n="nav_g_recovery">The 90-Day Companion</span></div>
       <div class="nav-group-sub" data-i18n="nav_g_recovery_sub">When you're ready, deeper tools to push back and rebuild.</div>
       <button class="nav-item" onclick="navTo('sec-week')"><i data-lucide="list-checks"></i><span id="drawerWeekLbl">This week</span></button>
       <button class="nav-item" onclick="navTo('sec-momentum')"><i data-lucide="rocket"></i><span id="drawerMomLbl">Momentum</span></button>
@@ -774,7 +774,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
     <!-- PLAN -->
     <section class="section depth" id="sec-plan">
       <div class="section-head"><i data-lucide="file-text"></i><span class="section-eyebrow" data-i18n="plan_eyebrow">Your plan</span></div>
-      <h2 data-i18n="plan_title">My DEBT FREE Plan</h2>
+      <h2 data-i18n="plan_title">My 90-Day Plan</h2>
       <p class="lead" data-i18n="plan_lead">Written for your situation — something to live, not read once.</p>
       <div id="planBody"></div>
     </section>
@@ -801,7 +801,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <h2 data-i18n="tools_title">Work it through yourself</h2>
       <p class="lead" data-i18n="tools_lead">Each tool starts from your own numbers. Change anything and see what happens.</p>
       <div class="tools-grid">
-        <button class="tool-card" onclick="openTool('dfd')"><span class="ti"><i data-lucide="calendar-check"></i></span><span class="tn" data-i18n="tool_dfd_n">Debt-Free Date Calculator</span><span class="td" data-i18n="tool_dfd_d">See the date you could be free — and how to pull it closer.</span></button>
+        <button class="tool-card" onclick="openTool('dfd')"><span class="ti"><i data-lucide="calendar-check"></i></span><span class="tn" data-i18n="tool_dfd_n">Payoff Date Calculator</span><span class="td" data-i18n="tool_dfd_d">See the date you could be free — and how to pull it closer.</span></button>
         <button class="tool-card" onclick="openTool('strat')"><span class="ti"><i data-lucide="layers"></i></span><span class="tn" data-i18n="tool_strat_n">Snowball vs Avalanche</span><span class="td" data-i18n="tool_strat_d">Two proven orders. See which clears your debts faster.</span></button>
         <button class="tool-card" onclick="openTool('budget')"><span class="ti"><i data-lucide="piggy-bank"></i></span><span class="tn" data-i18n="tool_budget_n">Crisis Budget Planner</span><span class="td" data-i18n="tool_budget_d">Essentials first. See exactly what's left for debt.</span></button>
         <button class="tool-card" onclick="openTool('income')"><span class="ti"><i data-lucide="trending-up"></i></span><span class="tn" data-i18n="tool_income_n">Extra Income Simulator</span><span class="td" data-i18n="tool_income_d">Even a little extra each month moves your free date.</span></button>
@@ -827,11 +827,11 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
       <div id="weekBody"></div>
     </section>
 
-    <!-- MOMENTUM — subscription audit, guilt-free allowance, live debt-free date -->
+    <!-- MOMENTUM — subscription audit, guilt-free allowance, live payoff date -->
     <section class="section depth" id="sec-momentum">
       <div class="section-head"><i data-lucide="rocket"></i><span class="section-eyebrow" id="momEyebrow">Momentum</span></div>
       <h2 id="momTitle">Money you already have</h2>
-      <p class="lead" id="momLead">Small, dull changes move your debt-free date more than most people expect. Nothing here asks you to stop living.</p>
+      <p class="lead" id="momLead">Small, dull changes move your payoff date more than most people expect. Nothing here asks you to stop living.</p>
       <div id="momBody"></div>
     </section>
 
@@ -872,7 +872,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 <div class="overlay" id="planOverlay">
   <div class="overlay-card">
     <div class="overlay-eyebrow" data-i18n="ov_eyebrow">Your plan is ready</div>
-    <h2 id="ovTitle" class="serif">Here's your DEBT FREE Plan.</h2>
+    <h2 id="ovTitle" class="serif">Here's your 90-Day Plan.</h2>
     <p class="ov-sub" data-i18n="ov_sub">Read this first. It was written for your situation — everything else in your member area supports it.</p>
     <div class="overlay-plan" id="ovPlan"></div>
     <button class="btn-primary" onclick="closeOverlay()" data-i18n="ov_btn">Take me to my member area</button>
@@ -895,7 +895,7 @@ button.legal-signpost{cursor:pointer;margin:16px 0 0;}
 
 <script>
 /* ════════════════════════════════════════════════
-   DEBT RECOVERY MEMBER AREA — member/index.html (Pass 1)
+   THE 90-DAY COMPANION MEMBER AREA — member/index.html (Pass 1)
    Forked from member-free/index.html · Worker v16.14
    brand #0f4d28 · DM Serif + DM Sans
    ════════════════════════════════════════════════ */
@@ -941,7 +941,7 @@ function model(){
   const highestRate=debts.length?Math.max(...debts.map(d=>num(d.interest))):0;
   return {income,extra,housing,other,surplus,debtPayments,debts,totalDebt,highestRate,cur:M.currency||'EUR'};
 }
-/* ── DEBT-FREE-DATE ENGINE (single shared source — hero AND TOOLS.dfd/income use this) ──
+/* ── PAYOFF-DATE ENGINE (single shared source — hero AND TOOLS.dfd/income use this) ──
    Interest-aware amortisation. With rate 0 (no/unknown interest) it reduces to the
    previous naive total/monthly, so existing tool output is preserved when rate is 0.
    When a payment cannot cover the monthly interest, payoff is impossible → months=null
@@ -972,7 +972,7 @@ function amortise(balance,monthlyPayment,annualRatePct){
   while(bal>0&&months<1200){const i=bal*r;interest+=i;bal+=i;bal-=Math.min(monthlyPayment,bal);months++;}
   return{months,interest:Math.max(0,Math.round(interest))};
 }
-/* Hero helper: project a debt-free outcome at a given extra monthly amount. */
+/* Hero helper: project a payoff projection at a given extra monthly amount. */
 function projectFree(extraMonthly){
   const m=model();
   const monthly=debtBudget(m)+num(extraMonthly||0);
@@ -1139,7 +1139,7 @@ async function boot(){
     const res=await fetch(`${WORKER_URL}/member/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:memberToken})});
     if(!res.ok){showReauth();return;}
     const data=await res.json();
-    /* TIER GATE (reversed for /member/) — this IS the Debt Recovery area.
+    /* TIER GATE (reversed for /member/) — this IS the the 90-Day Companion area.
        Free-tier members belong in /member-free/; premium + community_access stay here.
        validate defaults a missing tier to 'premium', so we redirect ONLY an explicit 'free'. */
     if(data.tier==='free'){location.replace('/member-free/?token='+encodeURIComponent(memberToken));return;}
@@ -1187,7 +1187,7 @@ async function requestLink(){
   msg.innerHTML=
     '<p class="rm-lead">'+esc(tx('reauth_sent_1','Your request is with us.'))+'</p>'
    +'<p>'+esc(tx('reauth_sent_2','If that address has a member area that is still open, a link is on its way — usually within a few minutes. Check your spam folder too. We send only a few links to the same address in an hour, so if you have just asked several times, wait a little before asking again.'))+'</p>'
-   +'<p>'+esc(tx('reauth_sent_3','If nothing arrives, the most likely reason is that the address no longer has an open member area. Either it was never registered with us, or its 90 days have ended and everything personal was deleted on day 90. If you bought Debt Recovery and your 90 days are over, that is what has happened, and nothing has gone wrong.'))+'</p>'
+   +'<p>'+esc(tx('reauth_sent_3','If nothing arrives, the most likely reason is that the address no longer has an open member area. Either it was never registered with us, or its 90 days have ended and everything personal was deleted on day 90. If you bought the 90-Day Companion and your 90 days are over, that is what has happened, and nothing has gone wrong.'))+'</p>'
    +'<p>'+esc(tx('reauth_sent_4','We never say which of the two it is, for any address, so that nobody can use this form to find out whether a person has an account here. If you believe your 90 days are still running, write to support@debt-free.world and we will look.'))+'</p>';
   msg.style.display='block';
   /* The button is released again: a mistyped address must not lock a member out
@@ -1229,7 +1229,7 @@ function renderEmergency(){
   $('emergCard').innerHTML=html;icons();
 }
 /* (g) Progress-aware TODAY: once the base emergency actions are done, show
-   situation-appropriate NEXT steps. This is the paid Debt Recovery area: there is
+   situation-appropriate NEXT steps. This is the paid the 90-Day Companion area: there is
    no upgrade card here and there must never be one — this member has already paid. */
 function nextStepsHtml(){
   const m=model();
@@ -1254,7 +1254,7 @@ async function toggleEmergency(i,val){
 /* UNDERSTAND */
 /* Share of positive monthly surplus reserved for living (P-D). Tunable — one number, one place. */
 const LIFE_ALLOWANCE_PCT=0.20;
-/* [ACCURACY] Single source of truth for "money directed at debt". The debt-free date and
+/* [ACCURACY] Single source of truth for "money directed at debt". The payoff date and
    every payoff projection must reflect the plan's OWN advice to reserve LIFE_ALLOWANCE_PCT
    for living. Feed THIS into amortise/monthsToFree/simulateStrategy, NEVER raw m.surplus.
    Raw surplus (money left over) stays for money-flow DISPLAY only. surplus<=0 returned
@@ -1322,7 +1322,7 @@ function renderSnapshot(){
     </div>`;
   }
 
-  /* ── LAYER 3 · DEBT-FREE DATE — behaviour preserved exactly ── */
+  /* ── LAYER 3 · PAYOFF DATE — behaviour preserved exactly ── */
   if(months){
     html+=`<div class="snap-hero"><div class="sh-icon"><i data-lucide="calendar-check"></i></div><div><div class="sh-k">${esc(t('snap_dfd'))}</div><div class="sh-v">${esc(dfd)}</div><div class="sh-note">${esc(t('snap_dfd_note'))}${rateState!=='all'?' \u00b7 '+esc(t('dfd_date_approx')):''}</div></div></div>`;
   }else{
@@ -1463,7 +1463,7 @@ function planWeek(){
   return 1;
 }
 /* 90-DAY RECOVERY HERO — two honest live figures via the SHARED engine (reuse,
-   no new maths): current safety buffer (bufferInfo) + debt-free date (projectFree).
+   no new maths): current safety buffer (bufferInfo) + payoff date (projectFree).
    No trend line yet — that arrives once weekly check-in data exists (Pass 3). */
 function renderProgress90(){
   const el=$('progBody');if(!el)return;
@@ -1471,7 +1471,7 @@ function renderProgress90(){
   const bi=bufferInfo();
   const proj=projectFree(0);
   const bufStr=bi.netIncome>0?fmtMoney(bi.buffer,m.cur):'—';
-  /* [COMPANION] Never show two different debt-free dates. Once the server has
+  /* [COMPANION] Never show two different payoff dates. Once the server has
      recomputed one (momentum_update), that is the figure — the local projection is
      only the fallback for members with no momentum record yet. */
   const srvDate=(CS&&CS.momentum&&CS.momentum.payoff_date)?fmtServerDate(CS.momentum.payoff_date):null;
@@ -1490,7 +1490,7 @@ function renderProgress90(){
   icons();
 }
 /* SAFETY BUFFER maths — retained as a shared helper (used by renderProgress90
-   above and updDfd() in the Debt-Free Date tool) so the cushion figure is
+   above and updDfd() in the Payoff Date tool) so the cushion figure is
    computed identically in both places. target = 6× net monthly income. */
 function bufferInfo(){
   const netIncome=num(M.income||(M.onboarding&&M.onboarding.income));
@@ -1940,7 +1940,7 @@ function buildLetterPrompt(d){
   const cc=country()||'your country';
   const fn=firstName();
   const instr=
-`You are a professional debt-letter writer at Debt-Free.world.
+`You are a professional debt-letter writer at Debt-Free.World.
 Return EXACTLY two parts separated by a line containing ONLY: ---LETTER---
 ABOVE the delimiter: ONE warm empathy sentence addressed to the USER, in ${language} (this is for the user's eyes only and must NEVER appear inside the letter).
 BELOW the delimiter: the formal letter ONLY — nothing else.
@@ -2291,7 +2291,7 @@ function renderArchive(){
    The endpoints do not exist yet. Everything below fails closed: if the server
    does not answer, the companion shows an honest message and the rest of the
    member area keeps working. Nothing here is ever derived in the browser —
-   season day, week number, unlocks and the debt-free date all come from the
+   season day, week number, unlocks and the payoff date all come from the
    server (contract §2.1, §6.1, §6.2).
    ════════════════════════════════════════════════ */
 let CS=null;              /* last known /companion/state — server truth only     */
@@ -2321,7 +2321,7 @@ function cmpApply(state){
   cmpSyncHero();
 }
 /* The 90-day hero and the weekly check-in were rendered before the companion
-   answered. Refresh them once so the season week and the debt-free date on screen
+   answered. Refresh them once so the season week and the payoff date on screen
    are the server's, not the local fallback. The check-in is refreshed only on the
    first sync — never again, so it can't wipe something being typed. */
 function cmpSyncHero(){
@@ -2423,7 +2423,7 @@ function cmpApplyLabels(){
   set('weekLead',tx('cmp_week_lead','One step at a time, in the order that helps most. Nothing here is late.'));
   set('momEyebrow',mo);
   set('momTitle',tx('cmp_mom_title','Money you already have'));
-  set('momLead',tx('cmp_mom_lead','Small, dull changes move your debt-free date more than most people expect. Nothing here asks you to stop living.'));
+  set('momLead',tx('cmp_mom_lead','Small, dull changes move your payoff date more than most people expect. Nothing here asks you to stop living.'));
   set('cmpHomeEyebrow',tx('cmp_home_eyebrow','Your companion'));
 }
 
@@ -2545,7 +2545,7 @@ function momentumPrimaryHtml(){
   const saved=mo?num(mo.months_saved_vs_baseline):0;
   return `<div class="cmp-primary">
     <div class="cp-k">${esc(tx('cmp_mom_k','Your momentum'))}</div>
-    <div class="cp-t">${esc(date?tx('cmp_mom_date','Debt-free: {d}',{d:date}):tx('cmp_mom_nodate','Let us find your date'))}</div>
+    <div class="cp-t">${esc(date?tx('cmp_mom_date','Payoff date: {d}',{d:date}):tx('cmp_mom_nodate','Let us find your date'))}</div>
     <div class="cp-s">${esc(saved>0?tx('cmp_mom_saved','That is {n} months earlier than where you started. You did that with decisions, not luck.',{n:saved}):tx('cmp_mom_start','Point a little of what you already have at your debt and watch this date move.'))}</div>
     <div class="cmp-actions">
       <button class="cmp-btn prim" onclick="navTo('sec-momentum')"><i data-lucide="rocket"></i>${esc(tx('cmp_mom_cta','Open the momentum tool'))}</button>
@@ -2657,7 +2657,7 @@ function renderMomentum(){
 
   /* Result strip — every figure here was calculated by the server. */
   let html=`<div class="cmp-mr">
-    <div class="cmp-mr-k">${esc(tx('cmp_mr_k','Your debt-free date'))}</div>
+    <div class="cmp-mr-k">${esc(tx('cmp_mr_k','Your payoff date'))}</div>
     <div class="cmp-mr-v">${esc(date||tx('cmp_mr_none','Not set yet'))}</div>
     ${saved>0?`<div class="cmp-mr-note">${esc(tx('cmp_mr_saved','{n} months earlier than where you started.',{n:saved}))}</div>`
              :`<div class="cmp-mr-note">${esc(tx('cmp_mr_nosaved','Change the amount below and this date moves with it.'))}</div>`}
@@ -2748,7 +2748,7 @@ function kitHtml(){
   const can=kit.available===true;
   return `<div class="cmp-kit">
     <div class="ck-t">${esc(tx('cmp_kit_t','Your graduation kit'))}</div>
-    <div class="ck-s">${esc(tx('cmp_kit_s','One file with your plan, your progress, your debt-free date, every letter you wrote, and the free services in your country. It opens on any device, works without internet, and belongs to you.'))}</div>
+    <div class="ck-s">${esc(tx('cmp_kit_s','One file with your plan, your progress, your payoff date, every letter you wrote, and the free services in your country. It opens on any device, works without internet, and belongs to you.'))}</div>
     <div class="ck-warn">${esc(tx('cmp_kit_warn','When your season ends we delete our copy of your personal information. That is the promise, and it means the kit cannot be made again afterwards — download it and put it somewhere you will find it.'))}</div>
     <div class="cmp-actions">
       <button class="cmp-btn prim" id="kitBtn" onclick="downloadKit()"${can?'':' disabled'}><i data-lucide="download"></i>${esc(tx('cmp_kit_cta','Download my kit'))}</button>
@@ -2768,7 +2768,7 @@ async function downloadKit(){
     for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
     const url=URL.createObjectURL(new Blob([arr],{type:'text/html;charset=utf-8'}));
     const a=document.createElement('a');
-    a.href=url;a.download=data.filename||'My-DEBT-FREE-Plan.html';
+    a.href=url;a.download=data.filename||'My-90-Day-Plan.html';
     document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>{try{URL.revokeObjectURL(url);}catch(_){}} ,4000);
     showToast(tx('cmp_kit_ok','Saved. It is yours now.'));
