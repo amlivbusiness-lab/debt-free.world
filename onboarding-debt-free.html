@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 <meta name="robots" content="noindex,nofollow"/>
-<title>Build My Plan — Debt-Free.world</title>
+<title>Build My Plan — Debt-Free.World</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -229,7 +229,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <body>
 
 <nav class="topbar">
-  <span class="topbar-logo">Debt-Free.world</span>
+  <span class="topbar-logo">Debt-Free.World</span>
   <span class="topbar-step" id="topbarStep" data-i18n="topStep">Step 1 of 7</span>
 </nav>
 <div class="progress-wrap">
@@ -671,7 +671,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <!-- ══ STEP 6 — GOALS (progressive disclosure) ══ -->
 <div class="q-card" id="step6">
   <span class="q-eyebrow" data-i18n="topStep6">Step 6 of 7</span>
-  <h1 class="q-title" data-i18n="s6title">What does "debt-free" really mean to you?</h1>
+  <h1 class="q-title" data-i18n="s6title">What does "out of debt" really mean to you?</h1>
   <p class="q-sub" data-i18n="s6sub">Your plan will end with your own words — this matters more than it might seem.</p>
 
   <div class="micro-summary" id="s6MicroSummary"><span class="dot"></span><span id="s6MicroSummaryText"></span></div>
@@ -1208,7 +1208,7 @@ EN: {
   conf_low_lbl:'Not confident at all',conf_high_lbl:'Completely confident',
   ms_thanks_sharing:"Thank you for sharing that — it helps me write this the right way for you.",
 
-  s6title:'What does "debt-free" really mean to you?',
+  s6title:'What does "out of debt" really mean to you?',
   s6sub:'Your plan will end with your own words — this matters more than it might seem.',
   lbl_primary_goal:"What's the real reason you want this?",
   goal1:'Peace of mind — I want to stop feeling anxious about money every day',
@@ -1855,7 +1855,7 @@ function animateLoader(){
   function next(){ if(i>0){const prev=document.getElementById(ids[i-1]);if(prev)prev.classList.add('ls-done');} if(i<ids.length){const cur=document.getElementById(ids[i]);if(cur)cur.classList.add('ls-active');i++;setTimeout(next,i===ids.length?99999:4500);} }
   next();
 }
-/* ── BUILD AI PROMPT — My DEBT FREE Plan ── */
+/* ── BUILD AI PROMPT — My 90-Day Plan ── */
 function buildPrompt(d){
   const langNames={EN:'English',FI:'Finnish',SV:'Swedish',DE:'German',NO:'Norwegian',DA:'Danish',
     NL:'Dutch',ES:'Spanish',FR:'French',IT:'Italian',PL:'Polish',PT:'Portuguese',
@@ -1970,7 +1970,7 @@ function buildPrompt(d){
     ? _orgs.map(o=>o.url?`${o.name} (${o.url}) — ${o.desc}`:`${o.name} — ${o.desc}`).join(' | ')
     : 'Search "[country] free debt counselling" to find local non-profit or government-funded services. Most countries offer free debt counselling through municipalities, charities or government agencies.';
 
-  return `You are a financial clarity writer at Debt-Free.world, writing My DEBT FREE Plan for ${d.firstname||'this person'} — entirely in ${planLang}.
+  return `You are a financial clarity writer at Debt-Free.World, writing My 90-Day Plan for ${d.firstname||'this person'} — entirely in ${planLang}.
 
 WHAT YOU ARE AND ARE NOT — THESE RULES OVERRIDE EVERYTHING BELOW:
 You show people their own situation clearly, explain what options exist, and point them to the free regulated services in their country. You do NOT advise, recommend, prioritise on their behalf, or tell them what to do about any specific debt or creditor.

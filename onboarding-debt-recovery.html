@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 <meta name="robots" content="noindex,nofollow"/>
-<title>Build My Plan — Debt-Free.world</title>
+<title>Build My Plan — Debt-Free.World</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -226,7 +226,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <body>
 
 <nav class="topbar">
-  <span class="topbar-logo">✦ Debt-Free.world</span>
+  <span class="topbar-logo">✦ Debt-Free.World</span>
   <span class="topbar-step" id="topbarStep">Step 1 of 7</span>
 </nav>
 <div class="progress-wrap">
@@ -257,7 +257,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <div class="prefill-card" id="prefillCard">
   <span class="prefill-eyebrow" data-i18n="pf_eyebrow">Welcome back</span>
   <h1 class="prefill-title" id="prefillTitle">Ready to build your 90-day plan.</h1>
-  <p class="prefill-sub" id="prefillSub" data-i18n="pf_sub">We have your information from your DEBT FREE plan. Your 90-day Debt Recovery plan will be built on top of it — personalised to your exact situation.</p>
+  <p class="prefill-sub" id="prefillSub" data-i18n="pf_sub">We have your information from your 90-Day Plan. Your 90-day Companion plan will be built on top of it — personalised to your exact situation.</p>
 
   <div class="prefill-stats" id="prefillStats"></div>
 
@@ -630,7 +630,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <!-- ══ STEP 6 — GOALS ══ -->
 <div class="q-card" id="step6">
   <span class="q-eyebrow" id="s6ey" data-i18n="topStep6">Step 6 of 7</span>
-  <h1 class="q-title" id="s6title" data-i18n="s6title">What does debt-free mean to you?</h1>
+  <h1 class="q-title" id="s6title" data-i18n="s6title">What does being out of debt mean to you?</h1>
   <p class="q-sub" id="s6sub" data-i18n="s6sub">Your plan will close with your own words. This matters more than it might seem.</p>
   <div class="field">
     <label class="field-label" id="lbl_primary_goal" data-i18n="lbl_primary_goal">What is your deepest reason for wanting this?</label>
@@ -1239,7 +1239,7 @@ EN: {
   conf_low_lbl:'Not confident at all',conf_high_lbl:'Completely confident',
   ms_thanks_sharing:"Thank you for sharing that — it helps me write this the right way for you.",
 
-  s6title:'What does "debt-free" really mean to you?',
+  s6title:'What does "out of debt" really mean to you?',
   s6sub:'Your plan will end with your own words — this matters more than it might seem.',
   lbl_primary_goal:"What's the real reason you want this?",
   goal1:'Peace of mind — I want to stop feeling anxious about money every day',
@@ -1276,7 +1276,7 @@ EN: {
   invalid_sub:"Magic links are valid for 7 days. Enter your email and we'll send a fresh one right away.",
   submitText:'Build my 90-day plan',
   pf_eyebrow:'Welcome back',
-  pf_sub:'We have your information from your DEBT FREE plan. Your 90-day Debt Recovery plan will be built on top of it — personalised to your exact situation.',
+  pf_sub:'We have your information from your 90-Day Plan. Your 90-day Companion plan will be built on top of it — personalised to your exact situation.',
   pf_title_named:'{name}, ready to build your 90-day plan.',
   pf_title_anon:'Ready to build your 90-day plan.',
   pf_toggle_show:'Show debts ▾',pf_toggle_hide:'Hide debts ▴',
@@ -1454,7 +1454,7 @@ FI: {
   invalid_sub:'Linkit ovat voimassa 7 päivää. Syötä sähköpostiosoitteesi ja lähetämme uuden heti.',
   submitText:'Rakenna 90 päivän suunnitelmani',
   pf_eyebrow:'Tervetuloa takaisin',
-  pf_sub:'Meillä on tietosi DEBT FREE -suunnitelmastasi. 90 päivän Debt Recovery -suunnitelmasi rakennetaan sen päälle — juuri sinun tilanteeseesi räätälöitynä.',
+  pf_sub:'Meillä on tietosi 90-Day Plan -suunnitelmastasi. 90 päivän the 90-Day Companion -suunnitelmasi rakennetaan sen päälle — juuri sinun tilanteeseesi räätälöitynä.',
   pf_title_named:'{name}, valmiina rakentamaan 90 päivän suunnitelmasi.',
   pf_title_anon:'Valmiina rakentamaan 90 päivän suunnitelmasi.',
   pf_toggle_show:'Näytä velat ▾',pf_toggle_hide:'Piilota velat ▴',
@@ -1568,7 +1568,7 @@ function showPrefillSummary(data) {
       <span class="prefill-stat-sub">${fmt(income)} in — ${fmt(expenses)} out</span>
     </div>
     <div class="prefill-stat">
-      <span class="prefill-stat-label">Debt-free date</span>
+      <span class="prefill-stat-label">Payoff date</span>
       <span class="prefill-stat-value">${dfdDate || '—'}</span>
       <span class="prefill-stat-sub">${dfdMonths ? '≈ '+dfdMonths+' months at current pace' : surplus<=0?'Surplus needed':'Enter debts to calculate'}</span>
     </div>`;
@@ -1906,7 +1906,7 @@ function buildPrompt(d) {
   if((d.confidence||4)<=3)toneRules.push('LOW CONFIDENCE: Avoid ambitious targets. Focus on stability and understanding first.');
   if(d.collections&&d.collections.includes('Yes'))toneRules.push('ACTIVE COLLECTIONS: Collections are already in progress. Explain in section 4 what that status means and what typically follows, calmly and without alarm. Do not tell them to deal with it first.');
 
-  return `You are a financial clarity writer at Debt-Free.world. You are writing a personalised 90-day picture for ${d.firstname||'this person'} — entirely in ${planLang}.
+  return `You are a financial clarity writer at Debt-Free.World. You are writing a personalised 90-day picture for ${d.firstname||'this person'} — entirely in ${planLang}.
 
 WHAT YOU ARE AND ARE NOT — THESE RULES OVERRIDE EVERYTHING BELOW:
 You show people their own situation clearly, explain what options exist, and point them to the free regulated services in their country. You do NOT advise, recommend, prioritise on their behalf, or tell them what to do about any specific debt or creditor.

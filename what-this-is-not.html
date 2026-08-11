@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>What this is not — Debt-Free.World</title>
+<meta name="description" content="What Debt-Free.World does not do: it does not represent you, does not negotiate with your creditors, does not handle your money, does not give legal advice, and does not replace debt counselling."/>
+<link rel="canonical" href="https://www.debt-free.world/what-this-is-not.html"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#0f4d28;--green-dark:#0a3a1d;--green-deep:#072713;
+  --text:#111;--text-soft:#2b2b2b;--white:#fff;
+  --serif:"DM Serif Display",serif;--sans:"DM Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 6% 0;}
+.logo{font-family:var(--serif);font-size:21px;color:var(--text);letter-spacing:-0.3px;text-decoration:none;}
+.topbar-right{display:flex;align-items:center;gap:30px;}
+nav{display:flex;align-items:center;gap:28px;}
+nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;}
+nav a.active{color:var(--green);}
+.lang-wrap{position:relative;}
+.lang-pill{font-size:13px;color:var(--text);border:1px solid #e8e8e3;border-radius:20px;padding:6px 16px;cursor:pointer;background:none;font-family:var(--sans);font-weight:500;}
+.lang-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e8e8e3;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.08);min-width:160px;max-height:320px;overflow-y:auto;z-index:50;}
+.lang-menu.open{display:block;}
+.lang-menu button{display:block;width:100%;text-align:left;padding:10px 16px;background:none;border:none;font-size:13.5px;color:var(--text);cursor:pointer;font-family:var(--sans);}
+.lang-menu button:hover{background:#fafaf8;}
+.hamburger{display:none;width:36px;height:36px;border:1px solid #e8e8e3;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;background:none;}
+.hamburger svg{width:16px;height:16px;}
+
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;background:#fff;z-index:9998;padding:24px 6% 28px;box-shadow:0 4px 24px rgba(0,0,0,0.1);}
+.mobile-menu.open{display:block;}
+.mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mobile-menu-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft);line-height:1;}
+.mobile-menu a{display:block;font-size:17px;font-weight:500;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:0.5px solid #eee;}
+.mobile-menu a:last-child{border-bottom:none;}
+
+.hero{padding:90px 6% 0;max-width:1040px;margin:0 auto;text-align:center;}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-soft);font-weight:500;margin-bottom:24px;display:block;}
+.hero h1{font-family:var(--serif);font-size:42px;line-height:1.3;color:var(--text);font-weight:400;margin-bottom:20px;}
+.hero-lead{font-size:16px;line-height:1.75;color:var(--text-soft);font-weight:300;max-width:600px;margin:0 auto;}
+
+.section{padding:56px 6% 0;max-width:1040px;margin:0 auto;}
+.section-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:24px;display:block;}
+.stmt-list{list-style:none;display:flex;flex-direction:column;gap:14px;max-width:760px;}
+.stmt-list li{border:1px solid #e8e8e3;border-radius:8px;padding:20px 22px;font-size:15px;line-height:1.7;color:var(--text-soft);font-weight:300;}
+.stmt-list.does li{border-left:3px solid var(--green);}
+
+.repeat-bar{margin:64px 6% 0;max-width:1040px;margin-left:auto;margin-right:auto;background:#fafaf8;border-left:3px solid var(--green);padding:32px 36px;}
+.repeat-bar p{font-size:16px;line-height:1.6;color:var(--text);font-weight:500;max-width:640px;}
+
+.contact-line{padding:34px 6% 90px;max-width:1040px;margin:0 auto;font-size:14px;color:var(--text-soft);font-weight:300;}
+.contact-line a{color:var(--green);font-weight:500;}
+
+footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6% 22px;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-brand{font-family:var(--serif);font-size:14.5px;color:#fff;}
+.footer-legal{font-size:11.5px;color:rgba(255,255,255,0.5);}
+.footer-tagline{font-size:11.5px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:7px;}
+.footer-links{display:flex;gap:18px;font-size:11.5px;}
+.footer-links a{color:rgba(255,255,255,0.65);text-decoration:none;}
+.footer-links a:hover{color:#fff;}
+
+@media(max-width:900px){
+  .topbar-right nav{display:none;}
+  .hamburger{display:flex;}
+  .hero h1{font-size:30px;}
+  .footer-row{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="logo">Debt-Free.World</a>
+  <div class="topbar-right">
+    <nav>
+      <a href="/ecosystem.html" data-i18n="h_nav_eco">Ecosystem</a>
+      <a href="/about.html" data-i18n="h_nav_story">Our Story</a>
+      <a href="/blog/" data-i18n="h_nav_blog">Blog</a>
+      <a href="/faq.html" data-i18n="h_nav_faq">FAQ</a>
+    </nav>
+    <div class="lang-wrap">
+      <button class="lang-pill" id="langBtn" onclick="document.getElementById('langMenu').classList.toggle('open')">EN ▾</button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu" data-i18n-aria="h_aria_menu">
+      <svg viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="logo">Debt-Free.World</span>
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <a href="/" data-i18n="h_nav_home">Home</a>
+  <a href="/ecosystem.html" data-i18n="h_nav_eco">Ecosystem</a>
+  <a href="/about.html" data-i18n="h_nav_story">Our Story</a>
+  <a href="/blog/" data-i18n="h_nav_blog">Blog</a>
+  <a href="/faq.html" data-i18n="h_nav_faq">FAQ</a>
+</div>
+
+<div class="hero">
+  <span class="hero-eyebrow" data-i18n="wtin_not_label">What this product does not do</span>
+  <h1 data-i18n="wtin_title">What Debt-Free.World is not</h1>
+  <p class="hero-lead" data-i18n="wtin_lead">This page exists so that nobody has to work it out from the marketing. Five things this product does not do, and three it does.</p>
+</div>
+
+<div class="section">
+  <span class="section-label" data-i18n="wtin_not_label">What this product does not do</span>
+  <ul class="stmt-list">
+    <li data-i18n="wtin_not_1">It does not represent you to anyone. Not to a creditor, not to a court, not to an authority. Nothing is filed, sent or signed on your behalf.</li>
+    <li data-i18n="wtin_not_2">It does not negotiate with your creditors. There is no contact between Debt-Free.World and anyone you owe money to, at any point.</li>
+    <li data-i18n="wtin_not_3">It does not handle your money and does not take payments meant for creditors. Payments to creditors are made by you, directly to them. The only money that ever reaches us is the 19 € for the 90-Day Companion, if you choose it.</li>
+    <li data-i18n="wtin_not_4">It does not give legal advice. It can say what a term means and what a consequence normally is; it cannot say what your legal position is.</li>
+    <li data-i18n="wtin_not_5">It does not replace debt counselling or financial counselling. Those services are licensed in many countries and this one is not. That is the reason the national organisations appear on every page.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <span class="section-label" data-i18n="wtin_does_label">What it does instead</span>
+  <ul class="stmt-list does">
+    <li data-i18n="wtin_does_1">It puts your own numbers in one place — every debt, every rate, every date — and does the arithmetic that follows from them.</li>
+    <li data-i18n="wtin_does_2">It sets out the routes that exist in your situation and what each one leads to, side by side. Which route to take is yours to decide.</li>
+    <li data-i18n="wtin_does_3">It shows the national organisations that can act where we cannot, from the first page onwards — not in a footnote at the end.</li>
+  </ul>
+</div>
+
+<div class="repeat-bar">
+  <p data-i18n="sup_pub_repeat">We do not replace these services. We are built to be used alongside them.</p>
+</div>
+
+<div class="contact-line">
+  <span data-i18n="wtin_contact">Questions about anything on this page: support@debt-free.world</span>
+</div>
+
+<footer>
+  <div class="footer-row">
+    <div>
+      <div class="footer-brand">Debt-Free.World</div>
+      <div class="footer-legal">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
+    </div>
+    <div class="footer-links">
+      <a href="/legal.html#privacy" data-i18n="h_foot_privacy">Privacy</a>
+      <a href="/legal.html#terms" data-i18n="h_foot_terms">Terms</a>
+      <a href="/what-this-is-not.html" data-i18n="wtin_foot_link">What this is not</a>
+      <a href="mailto:support@debt-free.world" data-i18n="h_foot_contact">Contact</a>
+    </div>
+    <div class="footer-tagline" data-i18n="h_foot_tagline">🌍 Free forever for those who need it most</div>
+  </div>
+</footer>
+
+<script src="/i18n.js"></script>
+<script src="/i18n-dict.js"></script>
+<script>
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+/* Language selector — built ONLY from languages that actually have a
+   dictionary (DFWI18n.available()), exactly as on index.html. This page is
+   fully keyed, so documentElement.lang is left as the engine sets it. */
+function buildLangMenu(){
+  var menu=document.getElementById('langMenu');
+  if(!menu||!window.DFWI18n)return;
+  var cur=DFWI18n.current;
+  menu.innerHTML=DFWI18n.available().map(function(code){
+    var act=code===cur?' style="font-weight:600;color:var(--green);"':'';
+    return '<button type="button" data-lang="'+code+'"'+act+'>'+DFWI18n.label(code)+'</button>';
+  }).join('');
+  Array.prototype.forEach.call(menu.querySelectorAll('button'),function(b){
+    b.addEventListener('click',function(){
+      DFWI18n.applyLang(b.getAttribute('data-lang'));
+      menu.classList.remove('open');
+    });
+  });
+}
+
+document.addEventListener('click', function(e){
+  var wrap = document.querySelector('.lang-wrap');
+  var menu = document.getElementById('langMenu');
+  if(wrap && menu && !wrap.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+
+function loadTracking(){
+  if(localStorage.getItem('cookie-consent')==='accepted'){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-P67WN08EMJ';
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-P67WN08EMJ',{anonymize_ip:true});
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','x6r2dfxj3l');
+  }
+}
+function setCookieConsent(choice){
+  localStorage.setItem('cookie-consent',choice);
+  document.getElementById('dfwCookieBanner').style.display='none';
+  if(choice==='accepted')loadTracking();
+}
+
+window.addEventListener('DOMContentLoaded',function(){
+  if(window.DFWI18n){
+    DFWI18n.onChange(function(code){
+      var btn=document.getElementById('langBtn');
+      if(btn) btn.innerHTML=code+' ▾';
+      buildLangMenu();
+    });
+    DFWI18n.init();
+    buildLangMenu();
+  }
+  if(!localStorage.getItem('cookie-consent')){
+    document.getElementById('dfwCookieBanner').style.display='flex';
+  }
+  loadTracking();
+});
+</script>
+
+<div id="dfwCookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:1rem 1.5rem;z-index:9999;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;line-height:1.5;font-family:sans-serif;">
+  <span><span data-i18n="h_cookie_text">We use Google Analytics and Microsoft Clarity to understand how visitors use our site. No advertising or remarketing.</span> <a href="/legal.html#privacy" style="color:#86c9a0;" data-i18n="h_cookie_privacy">Privacy Policy</a></span>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="setCookieConsent('declined')" style="padding:8px 18px;border:1px solid #444;border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:#ccc;font-family:sans-serif;" data-i18n="h_cookie_decline">Decline</button>
+    <button onclick="setCookieConsent('accepted')" style="padding:8px 18px;border:none;border-radius:20px;font-size:13px;cursor:pointer;background:#0f4d28;color:#fff;font-family:sans-serif;" data-i18n="h_cookie_accept">Accept analytics</button>
+  </div>
+</div>
+
+</body>
+</html>
