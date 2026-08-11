@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>The Ecosystem — Debt-Free.world</title>
+<title>The Ecosystem — Debt-Free.World</title>
 <link rel="canonical" href="https://www.debt-free.world/ecosystem"/>
-<meta name="description" content="One path, five stages. From Debt FREE to Debt Recovery, Income Builder, Wealth Architect and Business Engine — see the complete picture and choose how far you go."/>
+<meta name="description" content="One path, five stages. From 90-Day Plan to the 90-Day Companion, Income Builder, Wealth Architect and Business Engine — see the complete picture and choose how far you go."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -133,7 +133,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   .footer-row{flex-direction:column;text-align:center;}
 }
 
-/* ══ PASS B: EU consent gate for direct Debt Recovery purchase (ported from member-free v2.2) ══ */
+/* ══ PASS B: EU consent gate for direct the 90-Day Companion purchase (ported from member-free v2.2) ══ */
 .drc-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(9,50,24,.55);align-items:center;justify-content:center;padding:20px;}
 .drc-modal.open{display:flex;}
 .drc-modal-card{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:28px 26px;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
@@ -151,12 +151,38 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
 .drc-modal-go:disabled{opacity:.45;cursor:not-allowed;}
 .drc-modal-cancel{width:100%;background:none;border:none;color:#7a8a80;font-family:inherit;font-size:13px;cursor:pointer;padding:8px;}
 .drc-modal-err{color:#b00020;font-size:12.5px;margin:6px 0 0;min-height:1px;}
+/* ══ Track B1 · support-organisations block (sisältölaki rule 5) ══ */
+.dfw-sup{padding:56px 6%;background:#fafaf8;border-top:1px solid #ecece6;border-bottom:1px solid #ecece6;}
+.dfw-sup-inner{max-width:820px;margin:0 auto;}
+.dfw-sup-h{font-family:var(--serif,serif);font-size:26px;font-weight:400;color:var(--text,#111);margin-bottom:12px;line-height:1.3;}
+.dfw-sup-intro{font-size:14.5px;line-height:1.7;color:var(--text-soft,#2b2b2b);font-weight:300;margin-bottom:22px;}
+.dfw-sup-pick{display:flex;flex-direction:column;gap:6px;max-width:360px;margin-bottom:22px;}
+.dfw-sup-pick label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green,#0f4d28);font-weight:600;}
+.dfw-sup-pick select{font-family:var(--sans,sans-serif);font-size:14.5px;color:var(--text,#111);background:#fff;border:1px solid #dddad4;border-radius:4px;padding:11px 12px;width:100%;cursor:pointer;}
+.dfw-sup-out{margin-bottom:20px;}
+.dfw-sup-empty{font-size:14.5px;line-height:1.7;color:var(--text-soft,#2b2b2b);font-weight:300;}
+.dfw-sup-empty a{color:var(--green,#0f4d28);font-weight:500;}
+.dfw-sup-badge{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.4px;background:var(--green,#0f4d28);color:#fff;padding:4px 10px;border-radius:3px;margin-bottom:14px;}
+.dfw-sup-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;}
+.dfw-sup-list li{border-left:2px solid var(--green,#0f4d28);padding-left:14px;}
+.dfw-sup-name{font-size:14.5px;font-weight:600;color:var(--text,#111);}
+.dfw-sup-name a{color:var(--green,#0f4d28);text-decoration:none;}
+.dfw-sup-name a:hover{text-decoration:underline;}
+.dfw-sup-desc{font-size:13.5px;line-height:1.6;color:var(--text-soft,#2b2b2b);font-weight:300;margin-top:3px;}
+.dfw-sup-note{font-size:12.5px;line-height:1.6;color:#6b6b62;font-weight:300;margin-top:16px;}
+.dfw-sup-repeat{font-size:14.5px;line-height:1.65;color:var(--text,#111);font-weight:500;border-top:1px solid #e4e4dc;padding-top:18px;}
+.dfw-sup.compact{padding:0;background:none;border:none;border-top:1px solid #e5e7eb;margin:1.25rem 0;padding-top:1.25rem;}
+.dfw-sup.compact .dfw-sup-h{font-size:16px;margin-bottom:8px;}
+.dfw-sup.compact .dfw-sup-pick{max-width:100%;margin-bottom:14px;}
+.dfw-sup.compact .dfw-sup-out{margin-bottom:14px;}
+.dfw-sup.compact .dfw-sup-repeat{font-size:13px;padding-top:12px;}
+@media(max-width:700px){.dfw-sup{padding:40px 6%;}.dfw-sup-h{font-size:22px;}}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <a href="/" class="logo">Debt-Free.world</a>
+  <a href="/" class="logo">Debt-Free.World</a>
   <div class="topbar-right">
     <nav>
       <a href="/ecosystem" class="active">Ecosystem</a>
@@ -176,7 +202,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
 
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top">
-    <span class="logo">Debt-Free.world</span>
+    <span class="logo">Debt-Free.World</span>
     <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
   </div>
   <a href="/">Home</a>
@@ -187,7 +213,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
 </div>
 
 <div class="page-intro">
-  <span class="page-eyebrow">The Debt-Free.world Ecosystem</span>
+  <span class="page-eyebrow">The Debt-Free.World Ecosystem</span>
   <h1>One path. Five stages. Always your choice how far you go.</h1>
   <p>Most people only ever need the first stage — and it is <strong>free, forever</strong>. Income Builder, the next stage we're building, will open with a free tier too. The rest exists for when you want it, not because you have to.</p>
 </div>
@@ -196,11 +222,11 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   <div class="rail-track">
     <div class="rail-step live first" onclick="document.getElementById('card-1').scrollIntoView({behavior:'smooth',block:'center'})">
       <div class="rail-dot">1</div>
-      <div class="rail-label">Debt FREE</div>
+      <div class="rail-label">90-Day Plan</div>
     </div>
     <div class="rail-step live" onclick="document.getElementById('card-2').scrollIntoView({behavior:'smooth',block:'center'})">
       <div class="rail-dot">2</div>
-      <div class="rail-label">Debt Recovery</div>
+      <div class="rail-label">The 90-Day Companion</div>
     </div>
     <div class="rail-step" onclick="document.getElementById('card-3').scrollIntoView({behavior:'smooth',block:'center'})">
       <div class="rail-dot">3</div>
@@ -223,7 +249,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
     <div class="card-head">
       <div class="card-head-left">
         <span class="card-num">Phase 01 · Live now</span>
-        <div class="card-title">Debt FREE</div>
+        <div class="card-title">90-Day Plan</div>
         <div class="card-tagline">Understand your full situation, completely free, forever.</div>
       </div>
       <div class="card-head-right">
@@ -239,14 +265,14 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
     </div>
     <div class="card-body">
       <div class="card-body-inner">
-        <p class="card-lead">Most people spend months guessing what to do about debt. Debt FREE replaces guessing with a personalised plan built from your real numbers — in about two minutes, at no cost, with no catch.</p>
+        <p class="card-lead">Most people spend months guessing what to do about debt. 90-Day Plan replaces guessing with a personalised plan built from your real numbers — in about two minutes, at no cost, with no catch.</p>
         <div class="feat-grid">
           <div class="feat-row"><span class="feat-dash">—</span><span>A personalised plan built from your real numbers <span class="feat-mean">— not advice that could apply to anyone</span></span></div>
-          <div class="feat-row"><span class="feat-dash">—</span><span>Your exact debt-free date, and what moves it <span class="feat-mean">— so the end stops being a guess</span></span></div>
+          <div class="feat-row"><span class="feat-dash">—</span><span>Your exact payoff date, and what moves it <span class="feat-mean">— so the end stops being a guess</span></span></div>
           <div class="feat-row"><span class="feat-dash">—</span><span>The one thing to deal with first, and why <span class="feat-mean">— so you stop carrying the whole weight at once</span></span></div>
           <div class="feat-row"><span class="feat-dash">—</span><span>Verified local support for your country <span class="feat-mean">— real help, not a generic list</span></span></div>
         </div>
-        <a href="/signup-free" class="btn-primary">Build my Debt FREE plan</a>
+        <a href="/signup-free" class="btn-primary">Build my 90-Day Plan</a>
         <span class="card-note">Takes about 2 minutes. No card, no trial, no catch.</span>
       </div>
     </div>
@@ -259,7 +285,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
              carries the gated wording so a no-JS render still tells the truth; the
              gate rewrites both halves from the one flag. Do not hardcode here. -->
         <span class="card-num muted" id="dr-phase">Phase 02 · Opening soon</span>
-        <div class="card-title">Debt Recovery</div>
+        <div class="card-title">The 90-Day Companion</div>
         <div class="card-tagline">Knowing the plan and living it are two different things.</div>
       </div>
       <div class="card-head-right">
@@ -275,7 +301,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
     </div>
     <div class="card-body">
       <div class="card-body-inner">
-        <p class="card-lead">Debt Recovery is the 90-day companion that turns your plan into daily action — built for the moments your free plan can't walk through with you.</p>
+        <p class="card-lead">The 90-Day Companion turns your plan into daily action — built for the moments your free plan can't walk through with you.</p>
         <div class="feat-grid">
           <div class="feat-row"><span class="feat-dash">—</span><span>Creditor letters written for you <span class="feat-mean">— hardship, payment plans, settlement, and more</span></span></div>
           <div class="feat-row"><span class="feat-dash">—</span><span>Progress tracking <span class="feat-mean">— so the next 90 days have real structure</span></span></div>
@@ -311,14 +337,14 @@ Yours faithfully,
 
         <!-- ══ BUY (live) vs NOTIFY (gated until go-live QA) — toggled by DR_LIVE ══ -->
         <div id="dr-buy-live" style="display:none;">
-          <a href="#" class="btn-primary" onclick="openDRConsent(event)">Get Debt Recovery — 19 €</a>
+          <a href="#" class="btn-primary" onclick="openDRConsent(event)">Get The 90-Day Companion — 19 €</a>
           <span class="card-note">One-time payment. No subscription. Secure checkout via Stripe.</span>
         </div>
         <div id="dr-buy-gated">
           <div class="notify-lead">We're finishing final checks before this opens. Leave your email and you'll be first through the door — no spam.</div>
           <div class="waitlist-form">
             <input type="email" placeholder="Your email address" id="notify-dr"/>
-            <a href="#" class="btn-primary" onclick="notifyDR(event)">Debt Recovery opens soon — notify me</a>
+            <a href="#" class="btn-primary" onclick="notifyDR(event)">The 90-Day Companion opens soon — notify me</a>
           </div>
         </div>
       </div>
@@ -344,7 +370,7 @@ Yours faithfully,
     </div>
     <div class="card-body">
       <div class="card-body-inner">
-        <p class="card-lead">Once your debt is under control, the next real lever is income — not another round of cutting back. Income Builder will help you find realistic, achievable ways to earn more, built around your actual time and skills. Like Debt FREE, the first tier will cost nothing.</p>
+        <p class="card-lead">Once your debt is under control, the next real lever is income — not another round of cutting back. Income Builder will help you find realistic, achievable ways to earn more, built around your actual time and skills. Like 90-Day Plan, the first tier will cost nothing.</p>
         <div class="waitlist-form">
           <input type="email" placeholder="Your email address" id="waitlist-3"/>
           <a href="#" class="btn-waitlist" onclick="joinWaitlist(event,'income-builder',3)">Join the waitlist</a>
@@ -414,26 +440,41 @@ Yours faithfully,
 
 <section class="community-band">
   <h3>No one is turned away for money.</h3>
-  <p>Debt Recovery is 19 € because building it and keeping it accurate costs money. But if paying it would mean choosing between this and something essential, you don't have to. <strong>Community Access</strong> gives you the full 90-day companion, free — no explanation needed. It's here for people who genuinely can't pay right now, offered the way we'd want it offered to us.</p>
+  <p>The 90-Day Companion is 19 € because building it and keeping it accurate costs money. But if paying it would mean choosing between this and something essential, you don't have to. <strong>Community Access</strong> gives you the full 90-day companion, free — no explanation needed. It's here for people who genuinely can't pay right now, offered the way we'd want it offered to us.</p>
   <a href="#" class="community-link" id="community-cta" onclick="startCommunityAccess(event)">Get Community Access — free</a>
-  <div class="notify-lead" id="community-gated-note" style="display:none;">Community Access opens together with Debt Recovery — we're finishing final checks. It'll be here the moment we open.</div>
+  <div class="notify-lead" id="community-gated-note" style="display:none;">Community Access opens together with the 90-Day Companion — we're finishing final checks. It'll be here the moment we open.</div>
 </section>
 
 <div class="closing">
   <h3>Not sure where you stand yet?</h3>
   <p>Start with the one stage that costs nothing. Two minutes, no card, no commitment.</p>
-  <a href="/signup-free" class="btn-primary">Build my Debt FREE plan</a>
+  <a href="/signup-free" class="btn-primary">Build my 90-Day Plan</a>
 </div>
+
+<!-- ══ Track B1 · support organisations · sisältölaki rule 5 ══ -->
+<section class="dfw-sup" data-dfw-sup>
+  <div class="dfw-sup-inner">
+    <h2 class="dfw-sup-h" data-i18n="sup_pub_title">The help that already exists in your country</h2>
+    <p class="dfw-sup-intro" data-i18n="sup_pub_intro">These are national organisations, independent of Debt-Free.World. There is no commercial relationship in either direction: they do not pay us and we do not pay them.</p>
+    <div class="dfw-sup-pick">
+      <label for="dfwSupCountry" data-i18n="sup_pub_country_label">Your country</label>
+      <select id="dfwSupCountry" data-dfw-sup-select></select>
+    </div>
+    <div class="dfw-sup-out" data-dfw-sup-out></div>
+    <p class="dfw-sup-repeat" data-i18n="sup_pub_repeat">We do not replace these services. We are built to be used alongside them.</p>
+  </div>
+</section>
 
 <footer>
   <div class="footer-row">
     <div>
-      <div class="footer-brand">Debt-Free.world</div>
+      <div class="footer-brand">Debt-Free.World</div>
       <div class="footer-legal">Amliv Oy · VAT FI32503518 · Nokia, Finland</div>
     </div>
     <div class="footer-links">
       <a href="/legal#privacy">Privacy</a>
       <a href="/legal#terms">Terms</a>
+      <a href="/what-this-is-not.html" data-i18n="wtin_foot_link">What this is not</a>
       <a href="mailto:support@debt-free.world">Contact</a>
     </div>
     <div class="footer-tagline">🌍 Free forever for those who need it most</div>
@@ -442,7 +483,7 @@ Yours faithfully,
 
 <script>
 /* ══════════════════════════════════════════════════════════════════════
-   GO-LIVE GATE — Debt Recovery purchase stays closed until BOTH go-live
+   GO-LIVE GATE — The 90-Day Companion purchase stays closed until BOTH go-live
    gates pass: (1) live E2E smoke test (/api/chat + /member/save-document),
    (2) AI letter-QA across 7 letter types × countries (no hallucinated
    jurisdiction claims). Flip to true ONLY after both are signed off.
@@ -510,7 +551,7 @@ document.addEventListener('click', function(e){
   });
 })();
 
-// Debt Recovery checkout — calls the existing Worker endpoint used
+// The 90-Day Companion checkout — calls the existing Worker endpoint used
 // elsewhere on the site for the paid Stripe flow.
 async function startDRCheckout(e){
   e.preventDefault();
@@ -579,7 +620,7 @@ async function joinWaitlist(e, phase, cardNum){
   }
 }
 
-// Debt Recovery pre-launch notify — reuses the existing Brevo subscribe
+// The 90-Day Companion pre-launch notify — reuses the existing Brevo subscribe
 // endpoint, tagged distinctly so these warm leads can be converted the
 // moment DR_LIVE flips. Vilma: create a Brevo list/segment keyed on
 // waitlist === 'debt-recovery-prelaunch' to capture this exact intent.
@@ -636,12 +677,12 @@ async function notifyDR(e){
    NOTE: element id "drcGo" is intentionally distinct from function name
    "drcCheckout" to avoid the named-element-window-shadow footgun. ══ */
 var DRC_T={
-  EN:{title:'Unlock Debt Recovery',price:'\u00b7 one-time \u00b7 90 days \u00b7 no subscription',
-      b1:'Pre-filled creditor letters',b2:'Crisis plans for the worst weeks',b3:'A debt-free date that moves',
+  EN:{title:'Unlock The 90-Day Companion',price:'\u00b7 one-time \u00b7 90 days \u00b7 no subscription',
+      b1:'Pre-filled creditor letters',b2:'Crisis plans for the worst weeks',b3:'A payoff date that moves',
       note:'At secure checkout you\'ll confirm one box: you\'re asking us to start straight away, and once your plan is created you lose your 14-day right to cancel. The same box accepts our <a href="/legal.html#terms" target="_blank" rel="noopener">Terms</a>.',
       go:'Continue to secure checkout',cancel:'Not now',
       err:'Something went wrong. Please try again or contact support@debt-free.world.'},
-  FI:{title:'Avaa Debt Recovery',price:'\u00b7 kertamaksu \u00b7 90 p\u00e4iv\u00e4\u00e4 \u00b7 ei tilausta',
+  FI:{title:'Avaa 90-Day Companion',price:'\u00b7 kertamaksu \u00b7 90 p\u00e4iv\u00e4\u00e4 \u00b7 ei tilausta',
       b1:'Esit\u00e4ytetyt velkojakirjeet',b2:'Kriisisuunnitelmat pahimpiin viikkoihin',b3:'Velaton-p\u00e4iv\u00e4 joka liikkuu',
       note:'Turvallisessa maksussa vahvistat yhden kohdan: pyyd\u00e4t meit\u00e4 aloittamaan heti, ja kun suunnitelmasi on luotu, menet\u00e4t 14 p\u00e4iv\u00e4n peruutusoikeutesi. Samassa kohdassa hyv\u00e4ksyt <a href="/legal.html#terms" target="_blank" rel="noopener">ehdot</a>.',
       go:'Jatka turvalliseen maksuun',cancel:'Ei nyt',
@@ -684,12 +725,12 @@ async function drcCheckout(){
 </script>
 
 
-<!-- ══ PASS B / E-PASS: pre-checkout modal for direct Debt Recovery purchase.
+<!-- ══ PASS B / E-PASS: pre-checkout modal for direct the 90-Day Companion purchase.
      Consent itself is collected in Stripe, not here. ══ -->
 <div class="drc-modal" id="drcModal" role="dialog" aria-modal="true" aria-labelledby="drc_title">
   <div class="drc-modal-card">
     <button class="drc-modal-x" onclick="closeDRConsent()" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <h3 id="drc_title">Unlock Debt Recovery</h3>
+    <h3 id="drc_title">Unlock The 90-Day Companion</h3>
     <div class="drc-modal-price"><span class="amt">19 &euro;</span><span id="drc_price"></span></div>
     <ul class="drc-modal-benes">
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b1"></span></li>
@@ -705,5 +746,118 @@ async function drcCheckout(){
     <p class="drc-modal-err" id="drcErr"></p>
   </div>
 </div>
+<script src="/i18n.js"></script>
+<script src="/support-data.js"></script>
+<script src="/i18n-dict.js"></script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   Track B1 · shared-i18n bootstrap for a page whose own copy is still
+   English-only. The engine is loaded so the new sisältölaki elements (the
+   support block and the "What this is not" footer link) render in the
+   language the visitor has already chosen elsewhere on the site.
+   documentElement.lang is deliberately restored to 'en': claiming lang="fi"
+   on a page that is otherwise English would mislead screen readers. Delete
+   the restore line when track B2 translates the rest of this page.
+   The click hook is additive — it does not modify the existing language
+   pill, it only re-applies the language after the pill has stored it.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  if(!window.DFWI18n) return;
+  function apply(){
+    try { DFWI18n.applyLang(localStorage.getItem('dfw_lang') || 'EN'); } catch(e){ DFWI18n.applyLang('EN'); }
+    document.documentElement.lang = 'en';
+  }
+  apply();
+  var m = document.getElementById('langMenu');
+  if(m) m.addEventListener('click', function(){ setTimeout(apply, 0); });
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   Track B1 · SUPPORT-ORGANISATIONS BLOCK  (sisältölaki rule 5)
+   Reads window.SUPPORT_DATA (canonical file, never inlined or edited) and
+   the shared dictionary via DFWI18n. No organisation, URL or description
+   is written into this page. Country is CHOSEN, never inferred from the
+   interface language: DE = Germany, Austria and Switzerland; EN = UK,
+   Ireland, USA, Australia, New Zealand and South Africa. Showing the wrong
+   country's organisation is worse than showing none.
+   The choice is stored under its own key, separate from dfw_lang.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  var STORE = 'dfw_support_country';
+  var OTHER = '__other__';
+  var choice = read();
+
+  function read(){ try { return localStorage.getItem(STORE) || ''; } catch(e){ return ''; } }
+  function save(v){ try { v ? localStorage.setItem(STORE, v) : localStorage.removeItem(STORE); } catch(e){} }
+  function T(k){ return (window.DFWI18n && DFWI18n.t) ? DFWI18n.t(k) : k; }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function mailify(s){ return esc(s).replace('support@debt-free.world',
+    '<a href="mailto:support@debt-free.world">support@debt-free.world</a>'); }
+  function countries(){
+    var d = window.SUPPORT_DATA || {};
+    return Object.keys(d).filter(function(k){ return k.charAt(0) !== '_'; }).sort();
+  }
+
+  function renderOne(sec){
+    var sel = sec.querySelector('[data-dfw-sup-select]');
+    var out = sec.querySelector('[data-dfw-sup-out]');
+    if(!sel || !out) return;
+    var compact = sec.hasAttribute('data-dfw-sup-compact');
+
+    var opts = '<option value="">' + esc(T('sup_pub_country_choose')) + '</option>';
+    countries().forEach(function(c){ opts += '<option value="' + esc(c) + '">' + esc(c) + '</option>'; });
+    opts += '<option value="' + OTHER + '">' + esc(T('sup_pub_country_other')) + '</option>';
+    sel.innerHTML = opts;
+    sel.value = choice;
+    if(sel.value !== choice){ choice = ''; sel.value = ''; save(''); }
+
+    if(!choice){
+      out.innerHTML = '<p class="dfw-sup-empty">' + esc(T('sup_pub_empty')) + '</p>';
+      return;
+    }
+    var data = (window.SUPPORT_DATA || {})[choice];
+    if(choice === OTHER || !data || !data.length){
+      /* Unknown country: generic fallback, no verified badge, ever. */
+      out.innerHTML = '<p class="dfw-sup-empty">' + mailify(T('sup_pub_other_body')) + '</p>';
+      return;
+    }
+    var h = '<span class="dfw-sup-badge">' + esc(T('sup_pub_verified')) + '</span><ul class="dfw-sup-list">';
+    data.forEach(function(o){
+      var nm = o.url
+        ? '<a href="https://' + esc(o.url) + '" target="_blank" rel="noopener noreferrer">' + esc(o.name) + '</a>'
+        : esc(o.name);
+      h += '<li><div class="dfw-sup-name">' + nm + '</div>';
+      if(!compact && o.desc) h += '<div class="dfw-sup-desc">' + esc(o.desc) + '</div>';
+      h += '</li>';
+    });
+    h += '</ul>';
+    if(!compact) h += '<p class="dfw-sup-note">' + esc(T('sup_pub_verified_note')) + ' ' + esc(T('sup_pub_fees_note')) + '</p>';
+    out.innerHTML = h;
+  }
+
+  function renderAll(){
+    Array.prototype.forEach.call(document.querySelectorAll('[data-dfw-sup]'), renderOne);
+  }
+
+  function boot(){
+    var secs = document.querySelectorAll('[data-dfw-sup]');
+    if(!secs.length) return;
+    Array.prototype.forEach.call(secs, function(sec){
+      var sel = sec.querySelector('[data-dfw-sup-select]');
+      if(sel) sel.addEventListener('change', function(){ choice = sel.value; save(choice); renderAll(); });
+    });
+    renderAll();
+    if(window.DFWI18n && DFWI18n.onChange) DFWI18n.onChange(renderAll);
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
 </body>
 </html>
