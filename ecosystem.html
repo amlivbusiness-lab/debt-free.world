@@ -253,12 +253,12 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
         <div class="card-tagline">Understand your full situation, completely free, forever.</div>
       </div>
       <div class="card-head-right">
-        <span class="card-price">0 € forever</span>
+        <span class="card-price">0€ forever</span>
         
       </div>
     </div>
     <div class="card-chips">
-      <span class="chip">No card, ever</span>
+      <span class="chip">No payment card, ever</span>
       <span class="chip">90-day roadmap</span>
       <span class="chip">19 languages</span>
       <span class="chip">Local support included</span>
@@ -273,7 +273,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
           <div class="feat-row"><span class="feat-dash">—</span><span>Verified local support for your country <span class="feat-mean">— real help, not a generic list</span></span></div>
         </div>
         <a href="/signup-free" class="btn-primary">Build my 90-Day Plan</a>
-        <span class="card-note">Takes about 2 minutes. No card, no trial, no catch.</span>
+        <span class="card-note">Takes about 2 minutes. No payment card, no trial, no catch.</span>
       </div>
     </div>
   </div>
@@ -289,7 +289,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
         <div class="card-tagline">Knowing the plan and living it are two different things.</div>
       </div>
       <div class="card-head-right">
-        <span class="card-price">19 € once</span>
+        <span class="card-price">19€ once</span>
         
       </div>
     </div>
@@ -308,7 +308,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
           <div class="feat-row"><span class="feat-dash">—</span><span>Real support through setbacks <span class="feat-mean">— job loss, illness, the moments plans don't predict</span></span></div>
           <div class="feat-row"><span class="feat-dash">—</span><span>Behaviour tools that outlast the 90 days <span class="feat-mean">— so old patterns don't quietly come back</span></span></div>
         </div>
-        <!-- ══ PRE-PURCHASE ARTEFACTS — show the depth before asking 19 € ══ -->
+        <!-- ══ PRE-PURCHASE ARTEFACTS — show the depth before asking 19€ ══ -->
         <div class="pp-artifact">
           <div class="pp-eyebrow">This is the kind of letter we write for you — in seconds</div>
           <pre class="pp-letter">[Your name]
@@ -337,7 +337,7 @@ Yours faithfully,
 
         <!-- ══ BUY (live) vs NOTIFY (gated until go-live QA) — toggled by DR_LIVE ══ -->
         <div id="dr-buy-live" style="display:none;">
-          <a href="#" class="btn-primary" onclick="openDRConsent(event)">Get The 90-Day Companion — 19 €</a>
+          <a href="#" class="btn-primary" onclick="openDRConsent(event)">Get The 90-Day Companion — 19€</a>
           <span class="card-note">One-time payment. No subscription. Secure checkout via Stripe.</span>
         </div>
         <div id="dr-buy-gated">
@@ -354,7 +354,7 @@ Yours faithfully,
   <div class="card" id="card-3">
     <div class="card-head">
       <div class="card-head-left">
-        <span class="card-num muted">Phase 03 · Coming 2026</span>
+        <span class="card-num muted">Phase 03 · Coming Q1 2027</span>
         <div class="card-title">Income Builder</div>
         <div class="card-tagline">Reducing expenses has a ceiling. Increasing income does not. A free tier is planned here too.</div>
       </div>
@@ -366,7 +366,7 @@ Yours faithfully,
     <div class="card-chips">
       <span class="chip">More income, not less spending</span>
       <span class="chip">Free tier planned</span>
-      <span class="chip">Coming 2026</span>
+      <span class="chip">Coming Q1 2027</span>
     </div>
     <div class="card-body">
       <div class="card-body-inner">
@@ -440,14 +440,14 @@ Yours faithfully,
 
 <section class="community-band">
   <h3>No one is turned away for money.</h3>
-  <p>The 90-Day Companion is 19 € because building it and keeping it accurate costs money. But if paying it would mean choosing between this and something essential, you don't have to. <strong>Community Access</strong> gives you the full 90-day companion, free — no explanation needed. It's here for people who genuinely can't pay right now, offered the way we'd want it offered to us.</p>
+  <p>The 90-Day Companion is 19€ because building it and keeping it accurate costs money. But if paying it would mean choosing between this and something essential, you don't have to. <strong>Community Access</strong> gives you the full 90-day companion, free — no explanation needed. It's here for people who genuinely can't pay right now, offered the way we'd want it offered to us.</p>
   <a href="#" class="community-link" id="community-cta" onclick="startCommunityAccess(event)">Get Community Access — free</a>
   <div class="notify-lead" id="community-gated-note" style="display:none;">Community Access opens together with the 90-Day Companion — we're finishing final checks. It'll be here the moment we open.</div>
 </section>
 
 <div class="closing">
   <h3>Not sure where you stand yet?</h3>
-  <p>Start with the one stage that costs nothing. Two minutes, no card, no commitment.</p>
+  <p>Start with the one stage that costs nothing. Two minutes, no payment card, no commitment.</p>
   <a href="/signup-free" class="btn-primary">Build my 90-Day Plan</a>
 </div>
 
@@ -731,7 +731,7 @@ async function drcCheckout(){
   <div class="drc-modal-card">
     <button class="drc-modal-x" onclick="closeDRConsent()" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <h3 id="drc_title">Unlock The 90-Day Companion</h3>
-    <div class="drc-modal-price"><span class="amt">19 &euro;</span><span id="drc_price"></span></div>
+    <div class="drc-modal-price"><span class="amt">19&euro;</span><span id="drc_price"></span></div>
     <ul class="drc-modal-benes">
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b1"></span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="drc_b2"></span></li>

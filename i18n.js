@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════════
-   Debt-Free.world — SHARED i18n ENGINE  (single source of truth)
+   Debt-Free.World — SHARED i18n ENGINE  (single source of truth)
    One engine for the whole project. Pages register nothing of their
    own — they load this file + i18n-dict.js, then call DFWI18n.init()
    (homepage) or drive it from boot() (member area).
