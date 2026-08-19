@@ -909,7 +909,9 @@ let memberToken = null;
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function num(v){const n=parseFloat(v);return isNaN(n)?0:n;}
-/* CURRENCY — locked global rule: amount first, space, symbol. "240 €", never "€240".
+/* CURRENCY — locked global rule (18.8.2026): amount first, symbol flush, NO space.
+   Write the amount, then the symbol, with nothing between them: "240€".
+   Never the pre-18.8 form with a space before the symbol, and never symbol-first.
    Symbol where one is unambiguous, ISO code otherwise ("5 200 SEK"). Grouping follows
    the member's active language, so a Finnish member sees 5 200 and a British one 5,200.
    fmtCur is the canonical name; fmtMoney is kept as a thin alias so every existing
@@ -920,7 +922,9 @@ function curLabel(cur){const c=curCode(cur);return CUR_SYM[c]||c;}
 function fmtCur(n,cur){
   let v=Math.round(num(n)); if(Object.is(v,-0))v=0;
   let g; try{g=v.toLocaleString(localeForLang());}catch(_){g=String(v);}
-  return g+' '+curLabel(cur);
+  const lab=curLabel(cur);
+  /* symbol sits flush against the amount; an ISO code still needs its space */
+  return CUR_SYM[curCode(cur)] ? g+lab : g+' '+lab;
 }
 function fmtMoney(n,cur){return fmtCur(n,cur);}
 function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
@@ -1164,7 +1168,7 @@ async function boot(){
 function showReauth(){showView('view-reauth');applyI18n(DFWI18n.current);reauthCopy();icons();}
 /* B4 · The sign-in copy is set here, from THIS file, under keys the shared
    dictionary does not yet hold. Two reasons it is not left on the old keys:
-   the old reauth_sub claims this area is free (it is the 19 € product), and the
+   the old reauth_sub claims this area is free (it is the 19€ product), and the
    old reauth_sent claims a link was sent. Reusing either key would let
    /i18n-dict.js put the false sentence back without anyone editing this file. */
 function reauthCopy(){
@@ -1176,7 +1180,7 @@ function reauthCopy(){
    four separate return paths, proven byte-identical by test D-4). That is the
    enumeration protection and it is deliberate. The browser therefore cannot know
    which case it is in, and must not pretend to. The wording below is true in all
-   four, and it is written so that a customer who paid 19 € and whose 90 days have
+   four, and it is written so that a customer who paid 19€ and whose 90 days have
    ended can work out what happened without anyone telling them. */
 async function requestLink(){
   const email=$('reauthEmail').value.trim();
