@@ -133,7 +133,7 @@ footer{background:var(--green-deep);color:rgba(255,255,255,0.85);padding:26px 6%
   .footer-row{flex-direction:column;text-align:center;}
 }
 
-/* ══ PASS B: EU consent gate for direct the 90-Day Companion purchase (ported from member-free v2.2) ══ */
+/* ══ PASS B: EU consent gate for a direct 90-Day Companion purchase (ported from member-free v2.2) ══ */
 .drc-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(9,50,24,.55);align-items:center;justify-content:center;padding:20px;}
 .drc-modal.open{display:flex;}
 .drc-modal-card{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:28px 26px;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
@@ -326,7 +326,7 @@ Please confirm this in writing and pause further charges or collection activity 
 
 Yours faithfully,
 [Your name]</pre>
-          <div class="pp-note">Every field in brackets is filled from your own plan — a template we personalise, not a blank page you face alone. Seven letter types: hardship, payment plan, settlement, and more.</div>
+          <div class="pp-note">Every field in brackets is filled from your own plan — a template we personalise, not a blank page you face alone. Five letter templates: hardship notice, payment plan, settlement offer, payment holiday, and opening a conversation.</div>
         </div>
 
         <div class="pp-artifact">
@@ -485,7 +485,7 @@ Yours faithfully,
 /* ══════════════════════════════════════════════════════════════════════
    GO-LIVE GATE — The 90-Day Companion purchase stays closed until BOTH go-live
    gates pass: (1) live E2E smoke test (/api/chat + /member/save-document),
-   (2) AI letter-QA across 7 letter types × countries (no hallucinated
+   (2) letter-template QA across 5 templates × countries (no hallucinated
    jurisdiction claims). Flip to true ONLY after both are signed off.
    While false: the buy path is replaced by an email-capture ("notify me")
    that tags interest as 'debt-recovery-prelaunch' for launch-day conversion.

@@ -242,7 +242,10 @@ async function handleSignup(){
     const res = await fetch(`${WORKER_URL}/member/create-free`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({email, return_token: true})
+      /* lang travels with the signup so the worker can set LANGUAGE on the
+         Brevo contact. Without it the day-80 notice cannot be sent in the
+         language the person actually reads. */
+      body: JSON.stringify({email, return_token: true, lang: sfLang()})
     });
 
     // Parse JSON safely

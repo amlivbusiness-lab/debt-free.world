@@ -1402,7 +1402,12 @@ function t(key){
 
 function applyI18n(langCode){
   currentLang = I18N[langCode] ? langCode : 'EN';
-  formData.language = currentLang;
+  /* The UI language and the PLAN language are two different things. This form's
+     own UI exists in EN/FI only, but f_language offers all 19 languages and the
+     plan is generated in whichever one is selected. Repainting the UI must never
+     overwrite the plan language — read it back from the select. */
+  const langSelEl = document.getElementById('f_language');
+  formData.language = (langSelEl && langSelEl.value) ? langSelEl.value : currentLang;
 
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.getAttribute('data-i18n');
@@ -1454,7 +1459,19 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('active'));
   document.getElementById('invalidWrap').style.display='none';
 
-  if (urlLang) applyI18n(urlLang);
+  /* The visitor has already chosen a language on the site. Set the SELECT, not
+     just the text: collectStep(1) reads the select back into formData.language,
+     and that value is what the plan and the member area are generated in.
+     Without this, a Finnish visitor silently receives an English plan.
+     Two conditions on purpose: the select is set if the language is one of the
+     19 it offers; applyI18n runs only if this file has an I18N block for it
+     (EN/FI). A Danish visitor therefore gets an English FORM and a Danish PLAN. */
+  const chosen = (urlLang || (function(){ try { return localStorage.getItem('dfw_lang'); } catch(e){ return null; } })() || '').toUpperCase() || null;
+  if (chosen) {
+    const sel = document.getElementById('f_language');
+    if (sel && [...sel.options].some(o => o.value === chosen)) sel.value = chosen;
+    if (I18N[chosen]) applyI18n(chosen);
+  }
 
   const loadEl=document.getElementById('tokenLoading');
   if(loadEl)loadEl.style.display='block';

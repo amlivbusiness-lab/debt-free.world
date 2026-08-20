@@ -257,7 +257,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <div class="prefill-card" id="prefillCard">
   <span class="prefill-eyebrow" data-i18n="pf_eyebrow">Welcome back</span>
   <h1 class="prefill-title" id="prefillTitle">Ready to build your 90-day plan.</h1>
-  <p class="prefill-sub" id="prefillSub" data-i18n="pf_sub">We have your information from your 90-Day Plan. Your 90-day Companion plan will be built on top of it — personalised to your exact situation.</p>
+  <p class="prefill-sub" id="prefillSub" data-i18n="pf_sub">We have your information from your 90-Day Plan. Your 90-Day Companion plan will be built on top of it — personalised to your exact situation.</p>
 
   <div class="prefill-stats" id="prefillStats"></div>
 
@@ -1276,7 +1276,7 @@ EN: {
   invalid_sub:"Magic links are valid for 7 days. Enter your email and we'll send a fresh one right away.",
   submitText:'Build my 90-day plan',
   pf_eyebrow:'Welcome back',
-  pf_sub:'We have your information from your 90-Day Plan. Your 90-day Companion plan will be built on top of it — personalised to your exact situation.',
+  pf_sub:'We have your information from your 90-Day Plan. Your 90-Day Companion plan will be built on top of it — personalised to your exact situation.',
   pf_title_named:'{name}, ready to build your 90-day plan.',
   pf_title_anon:'Ready to build your 90-day plan.',
   pf_toggle_show:'Show debts ▾',pf_toggle_hide:'Hide debts ▴',
@@ -1454,7 +1454,7 @@ FI: {
   invalid_sub:'Linkit ovat voimassa 7 päivää. Syötä sähköpostiosoitteesi ja lähetämme uuden heti.',
   submitText:'Rakenna 90 päivän suunnitelmani',
   pf_eyebrow:'Tervetuloa takaisin',
-  pf_sub:'Meillä on tietosi 90-Day Plan -suunnitelmastasi. 90 päivän the 90-Day Companion -suunnitelmasi rakennetaan sen päälle — juuri sinun tilanteeseesi räätälöitynä.',
+  pf_sub:'Meillä on tietosi 90-Day Plan -suunnitelmastasi. 90-Day Companion -suunnitelmasi rakennetaan sen päälle — juuri sinun tilanteeseesi räätälöitynä.',
   pf_title_named:'{name}, valmiina rakentamaan 90 päivän suunnitelmasi.',
   pf_title_anon:'Valmiina rakentamaan 90 päivän suunnitelmasi.',
   pf_toggle_show:'Näytä velat ▾',pf_toggle_hide:'Piilota velat ▴',
@@ -1497,7 +1497,14 @@ function t(key){ const d=I18N[currentLang]||I18N.EN; return (d && d[key]!==undef
 function applyI18n(langCode){
   currentLang = I18N[langCode] ? langCode : 'EN';
   lang = currentLang;
-  formData.language = currentLang;
+  /* The UI language and the PLAN language are two different things. This form's
+     own UI exists in EN/FI only, but f_language offers all 19 languages and the
+     plan is generated in whichever one is selected. Repainting the UI must never
+     overwrite the plan language — read it back from the select. Without this,
+     openActCard() -> applyI18n(currentLang) resets a Danish member to EN after
+     collectStep(1) had already read DA out of the select. */
+  const langSelEl = document.getElementById('f_language');
+  formData.language = (langSelEl && langSelEl.value) ? langSelEl.value : currentLang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = t(el.getAttribute('data-i18n')); });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{ el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder'))); });
   const tbs=document.getElementById('topbarStep');
@@ -1522,10 +1529,21 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (!res.ok) { showInvalidScreen(); return; }
     const data = await res.json();
 
-    const initLang = (data.language && I18N[data.language]) ? data.language : 'EN';
+    /* The member has already chosen a language — on the site, or in the free
+       onboarding whose value the worker returns as data.language. Set the
+       SELECT, not just the text: collectStep(1) reads the select back into
+       formData.language, and that value is what the plan is generated in.
+       Two conditions on purpose: the select is set if the language is one of
+       the 19 it offers; applyI18n runs only if this file has an I18N block for
+       it (EN/FI). A Danish member therefore gets an English FORM and a Danish
+       PLAN. The old single condition set the select to EN for all 17 other
+       languages and so destroyed a correct stored value. */
+    const urlLang = params.get('lang');
+    const storedLang = (function(){ try { return localStorage.getItem('dfw_lang'); } catch(e){ return null; } })();
+    const initLang = String(data.language || urlLang || storedLang || 'EN').toUpperCase();
     const langSel = document.getElementById('f_language');
-    if (langSel) langSel.value = initLang;
-    applyI18n(initLang);
+    if (langSel && [...langSel.options].some(o => o.value === initLang)) langSel.value = initLang;
+    applyI18n(I18N[initLang] ? initLang : 'EN');
 
     // PATH A: existing member with data
     if (data.prefilled_from_free || (data.firstname && data.total_debt)) {
