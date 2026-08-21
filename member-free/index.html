@@ -992,6 +992,29 @@ async function toggleEmergency(i,val){
   try{await fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify({emergency_card_checked:arr})});}catch(_){}
 }
 
+/* ── v16.30 · T7 · behavioural signal, free path ───────────────────────────
+   One fire-and-forget line on a call the page ALREADY makes (/member/update,
+   the same door toggleEmergency uses). No new endpoint, no event stream, no
+   ordering: the Worker keeps a per-tool tally only, which cannot reconstruct
+   a session path.
+
+   Two locks on the same door: the Worker allowlists the six free-tool ids and
+   DROPS anything else rather than storing it as 'other' (a free-text channel
+   into Tier 1 is the one thing this design cannot allow), and the page refuses
+   to send anything outside the same six.
+
+   Crisis signposting is NOT in this file and is never counted here or anywhere
+   — its result reaches no variable in the product. A counter would turn it
+   into a record of who is suicidal.
+
+   Failure is silent by design. A lost counter must never cost a member a
+   working member area. */
+const T7_TOOLS=['budget','collect','dfd','income','legal','strat'];
+function t7Ping(payload){
+  if(!memberToken||memberToken.length!==64)return;
+  try{fetch(`${WORKER_URL}/member/update`,{method:'POST',headers:{'Content-Type':'application/json','x-member-token':memberToken},body:JSON.stringify(payload)}).catch(function(){});}catch(_){}
+}
+
 /* UNDERSTAND */
 /* Share of positive monthly surplus reserved for living (P-D). Tunable — one number, one place. */
 const LIFE_ALLOWANCE_PCT=0.20;
@@ -1164,6 +1187,8 @@ function downloadPlan(){
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(()=>{try{URL.revokeObjectURL(url);}catch(_){}} ,4000);
     showToast(t('mf_dl_ok'));
+    /* inside try, after the click: only a download that actually happened */
+    t7Ping({plan_exported:true});
   }catch(e){
     showToast(t('mf_dl_err'));
   }
@@ -1448,6 +1473,8 @@ function openTool(id){
   $('toolModal').classList.add('show');
   icons();
   if(TOOL_INIT[id])TOOL_INIT[id]();
+  /* last line: the UI is already on screen, so the counter can never delay it */
+  if(T7_TOOLS.includes(id))t7Ping({tool:id});
 }
 function closeTool(){$('toolModal').classList.remove('show');}
 
