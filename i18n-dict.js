@@ -49,7 +49,7 @@ DFWI18n.register('EN', 'English', {
   "mf_x_created": "Created on",
   "mf_x_plan_h": "Your plan",
   "mf_x_repeat": "We do not replace these services. We are built to be used alongside them.",
-  "mf_x_del90": "On day 90 we delete your plan, your answers, your documents, and everything personal inside them. What stays is the consent receipt our accounting law requires — no plan, no debts, no amounts. Your plan is yours and works without us.",
+  "mf_x_del90": "On day 90 we delete your plan, your answers, your documents, and everything personal inside them. Nothing of yours stays in our service. Your plan is yours and works without us.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "When life suddenly changes",
@@ -579,7 +579,7 @@ DFWI18n.register('FI', 'Suomi', {
   "mf_x_created": "Laadittu",
   "mf_x_plan_h": "Suunnitelmasi",
   "mf_x_repeat": "Emme korvaa näitä palveluita. Meidät on rakennettu käytettäväksi niiden rinnalla.",
-  "mf_x_del90": "Päivänä 90 poistamme suunnitelmasi, vastauksesi, asiakirjasi ja kaiken henkilökohtaisen niiden sisällä. Jäljelle jää suostumustosite, jota kirjanpitolaki meiltä edellyttää — ei suunnitelmaa, ei velkoja, ei summia. Suunnitelmasi on sinun ja toimii ilman meitä.",
+  "mf_x_del90": "Päivänä 90 poistamme suunnitelmasi, vastauksesi, asiakirjasi ja kaiken henkilökohtaisen niiden sisällä. Palveluumme ei jää sinusta mitään. Suunnitelmasi on sinun ja toimii ilman meitä.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Kriisisuunnitelmat",
   "crisis_title": "Kun elämä yhtäkkiä muuttuu",
@@ -1117,7 +1117,7 @@ DFWI18n.register('SV', "Svenska", {
   "mf_x_created": "Skapad",
   "mf_x_plan_h": "Din plan",
   "mf_x_repeat": "Vi ersätter inte dessa tjänster. Vi är byggda för att användas vid sidan av dem.",
-  "mf_x_del90": "På dag 90 raderar vi din plan, dina svar, dina dokument och allt personligt i dem. Kvar blir det samtyckeskvitto som bokföringslagen kräver av oss — ingen plan, inga skulder, inga belopp. Din plan är din och fungerar utan oss.",
+  "mf_x_del90": "På dag 90 raderar vi din plan, dina svar, dina dokument och allt personligt i dem. Ingenting av ditt blir kvar i vår tjänst. Din plan är din och fungerar utan oss.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Krisplaner",
   "crisis_title": "När livet plötsligt förändras",
@@ -1643,7 +1643,7 @@ DFWI18n.register('DE', "Deutsch", {
   "mf_x_created": "Erstellt am",
   "mf_x_plan_h": "Dein Plan",
   "mf_x_repeat": "Wir ersetzen diese Angebote nicht. Wir sind dafür gemacht, neben ihnen genutzt zu werden.",
-  "mf_x_del90": "An Tag 90 löschen wir deinen Plan, deine Antworten, deine Dokumente und alles Persönliche darin. Was bleibt, ist der Einwilligungsbeleg, den unser Buchhaltungsgesetz verlangt — kein Plan, keine Schulden, keine Beträge. Dein Plan gehört dir und funktioniert ohne uns.",
+  "mf_x_del90": "An Tag 90 löschen wir deinen Plan, deine Antworten, deine Dokumente und alles Persönliche darin. In unserem Dienst bleibt nichts von dir. Dein Plan gehört dir und funktioniert ohne uns.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Krisenpläne",
   "crisis_title": "Wenn sich das Leben plötzlich ändert",
@@ -2169,7 +2169,7 @@ DFWI18n.register('NO', "Norsk", {
   "mf_x_created": "Opprettet",
   "mf_x_plan_h": "Planen din",
   "mf_x_repeat": "Vi erstatter ikke disse tjenestene. Vi er laget for å brukes ved siden av dem.",
-  "mf_x_del90": "På dag 90 sletter vi planen din, svarene dine, dokumentene dine og alt personlig i dem. Det som blir igjen, er samtykkekvitteringen som regnskapsloven krever av oss — ingen plan, ingen gjeld, ingen beløp. Planen din er din og fungerer uten oss.",
+  "mf_x_del90": "På dag 90 sletter vi planen din, svarene dine, dokumentene dine og alt personlig i dem. Ingenting av ditt blir igjen i tjenesten vår. Planen din er din og fungerer uten oss.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Kriseplaner",
   "crisis_title": "Når livet plutselig endrer seg",
@@ -2695,7 +2695,7 @@ DFWI18n.register('DA', "Dansk", {
   "mf_x_created": "Oprettet",
   "mf_x_plan_h": "Din plan",
   "mf_x_repeat": "Vi erstatter ikke disse tjenester. Vi er bygget til at blive brugt ved siden af dem.",
-  "mf_x_del90": "På dag 90 sletter vi din plan, dine svar, dine dokumenter og alt personligt i dem. Tilbage bliver den samtykkekvittering, som bogføringsloven kræver af os — ingen plan, ingen gæld, ingen beløb. Din plan er din og fungerer uden os.",
+  "mf_x_del90": "På dag 90 sletter vi din plan, dine svar, dine dokumenter og alt personligt i dem. Intet af dit bliver tilbage i vores tjeneste. Din plan er din og fungerer uden os.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Kriseplaner",
   "crisis_title": "Når livet pludselig ændrer sig",
@@ -3221,7 +3221,7 @@ DFWI18n.register('NL', "Nederlands", {
   "mf_x_created": "Gemaakt op",
   "mf_x_plan_h": "Je plan",
   "mf_x_repeat": "Wij vervangen deze diensten niet. We zijn gemaakt om naast hen te worden gebruikt.",
-  "mf_x_del90": "Op dag 90 verwijderen we je plan, je antwoorden, je documenten en alles persoonlijks daarin. Wat blijft, is het toestemmingsbewijs dat onze boekhoudwet vereist — geen plan, geen schulden, geen bedragen. Je plan is van jou en werkt zonder ons.",
+  "mf_x_del90": "Op dag 90 verwijderen we je plan, je antwoorden, je documenten en alles persoonlijks daarin. In onze dienst blijft niets van jou achter. Je plan is van jou en werkt zonder ons.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisisplannen",
   "crisis_title": "Als het leven plotseling verandert",
@@ -3747,7 +3747,7 @@ DFWI18n.register('ES', "Español", {
   "mf_x_created": "Creado el",
   "mf_x_plan_h": "Tu plan",
   "mf_x_repeat": "No sustituimos estos servicios. Estamos hechos para usarse junto a ellos.",
-  "mf_x_del90": "El día 90 eliminamos tu plan, tus respuestas, tus documentos y todo lo personal que contienen. Lo que queda es el comprobante de consentimiento que exige nuestra ley de contabilidad — sin plan, sin deudas, sin importes. Tu plan es tuyo y funciona sin nosotros.",
+  "mf_x_del90": "El día 90 eliminamos tu plan, tus respuestas, tus documentos y todo lo personal que contienen. Nada tuyo se queda en nuestro servicio. Tu plan es tuyo y funciona sin nosotros.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Planes de crisis",
   "crisis_title": "Cuando la vida cambia de golpe",
@@ -4273,7 +4273,7 @@ DFWI18n.register('FR', "Français", {
   "mf_x_created": "Créé le",
   "mf_x_plan_h": "Votre plan",
   "mf_x_repeat": "Nous ne remplaçons pas ces services. Nous sommes conçus pour être utilisés à leurs côtés.",
-  "mf_x_del90": "Le 90e jour, nous supprimons votre plan, vos réponses, vos documents et tout ce qu'ils contiennent de personnel. Ce qui reste, c'est le justificatif de consentement qu'exige notre loi comptable — pas de plan, pas de dettes, pas de montants. Votre plan est à vous et fonctionne sans nous.",
+  "mf_x_del90": "Le 90e jour, nous supprimons votre plan, vos réponses, vos documents et tout ce qu'ils contiennent de personnel. Rien de ce qui vous appartient ne reste dans notre service. Votre plan est à vous et fonctionne sans nous.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Plans de crise",
   "crisis_title": "Quand la vie bascule soudain",
@@ -4799,7 +4799,7 @@ DFWI18n.register('IT', "Italiano", {
   "mf_x_created": "Creato il",
   "mf_x_plan_h": "Il tuo piano",
   "mf_x_repeat": "Non sostituiamo questi servizi. Siamo fatti per essere usati accanto a loro.",
-  "mf_x_del90": "Il giorno 90 eliminiamo il tuo piano, le tue risposte, i tuoi documenti e tutto ciò che di personale contengono. Resta la ricevuta di consenso che la nostra legge contabile richiede — nessun piano, nessun debito, nessun importo. Il tuo piano è tuo e funziona senza di noi.",
+  "mf_x_del90": "Il giorno 90 eliminiamo il tuo piano, le tue risposte, i tuoi documenti e tutto ciò che di personale contengono. Niente di tuo resta nel nostro servizio. Il tuo piano è tuo e funziona senza di noi.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Piani di crisi",
   "crisis_title": "Quando la vita cambia di colpo",
@@ -5325,7 +5325,7 @@ DFWI18n.register('PT', "Português", {
   "mf_x_created": "Criado a",
   "mf_x_plan_h": "O teu plano",
   "mf_x_repeat": "Não substituímos estes serviços. Fomos feitos para ser usados a par deles.",
-  "mf_x_del90": "No dia 90 eliminamos o teu plano, as tuas respostas, os teus documentos e tudo o que neles é pessoal. Fica o recibo de consentimento que a nossa lei de contabilidade exige — sem plano, sem dívidas, sem valores. O teu plano é teu e funciona sem nós.",
+  "mf_x_del90": "No dia 90 eliminamos o teu plano, as tuas respostas, os teus documentos e tudo o que neles é pessoal. Nada teu fica no nosso serviço. O teu plano é teu e funciona sem nós.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Planos de crise",
   "crisis_title": "Quando a vida muda de repente",
@@ -5851,7 +5851,7 @@ DFWI18n.register('PL', "Polski", {
   "mf_x_created": "Utworzono",
   "mf_x_plan_h": "Twój plan",
   "mf_x_repeat": "Nie zastępujemy tych usług. Powstaliśmy po to, by korzystać z nas razem z nimi.",
-  "mf_x_del90": "W 90. dniu usuwamy Twój plan, Twoje odpowiedzi, Twoje dokumenty i wszystko, co w nich osobiste. Zostaje potwierdzenie zgody, którego wymaga nasze prawo o rachunkowości — bez planu, bez długów, bez kwot. Twój plan należy do Ciebie i działa bez nas.",
+  "mf_x_del90": "W 90. dniu usuwamy Twój plan, Twoje odpowiedzi, Twoje dokumenty i wszystko, co w nich osobiste. W naszym serwisie nie zostaje nic Twojego. Twój plan należy do Ciebie i działa bez nas.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "Gdy życie nagle się zmienia",
@@ -6377,7 +6377,7 @@ DFWI18n.register('CS', "Čeština", {
   "mf_x_created": "Vytvořeno",
   "mf_x_plan_h": "Tvůj plán",
   "mf_x_repeat": "Tyto služby nenahrazujeme. Vznikli jsme proto, abys nás používal vedle nich.",
-  "mf_x_del90": "V den 90 mažeme tvůj plán, tvé odpovědi, tvé dokumenty a všechno osobní, co je v nich. Zůstává doklad o souhlasu, který vyžaduje náš zákon o účetnictví — žádný plán, žádné dluhy, žádné částky. Tvůj plán je tvůj a funguje i bez nás.",
+  "mf_x_del90": "V den 90 mažeme tvůj plán, tvé odpovědi, tvé dokumenty a všechno osobní, co je v nich. V naší službě nic tvého nezůstává. Tvůj plán je tvůj a funguje i bez nás.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "Když se život náhle změní",
@@ -6903,7 +6903,7 @@ DFWI18n.register('ET', "Eesti", {
   "mf_x_created": "Koostatud",
   "mf_x_plan_h": "Sinu plaan",
   "mf_x_repeat": "Me ei asenda neid teenuseid. Oleme tehtud selleks, et meid nende kõrval kasutada.",
-  "mf_x_del90": "90. päeval kustutame su plaani, su vastused, su dokumendid ja kõik isikliku, mis nende sees on. Alles jääb nõusolekukinnitus, mida meie raamatupidamisseadus nõuab — ilma plaanita, ilma võlgadeta, ilma summadeta. Su plaan on sinu oma ja töötab ka ilma meieta.",
+  "mf_x_del90": "90. päeval kustutame su plaani, su vastused, su dokumendid ja kõik isikliku, mis nende sees on. Meie teenusesse ei jää sinust midagi. Su plaan on sinu oma ja töötab ka ilma meieta.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "Kui elu ootamatult muutub",
@@ -7429,7 +7429,7 @@ DFWI18n.register('LV', "Latviešu", {
   "mf_x_created": "Izveidots",
   "mf_x_plan_h": "Tavs plāns",
   "mf_x_repeat": "Mēs neaizstājam šos pakalpojumus. Esam veidoti tā, lai mūs izmantotu tiem līdzās.",
-  "mf_x_del90": "90. dienā mēs dzēšam tavu plānu, tavas atbildes, tavus dokumentus un visu personisko, kas tajos ir. Paliek piekrišanas apliecinājums, ko prasa mūsu grāmatvedības likums — bez plāna, bez parādiem, bez summām. Tavs plāns ir tavs un darbojas arī bez mums.",
+  "mf_x_del90": "90. dienā mēs dzēšam tavu plānu, tavas atbildes, tavus dokumentus un visu personisko, kas tajos ir. Nekas no tava nepaliek mūsu pakalpojumā. Tavs plāns ir tavs un darbojas arī bez mums.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "Kad dzīve pēkšņi mainās",
@@ -7955,7 +7955,7 @@ DFWI18n.register('LT', "Lietuvių", {
   "mf_x_created": "Sukurta",
   "mf_x_plan_h": "Tavo planas",
   "mf_x_repeat": "Mes nepakeičiame šių paslaugų. Esame sukurti tam, kad mus naudotum kartu su jomis.",
-  "mf_x_del90": "90-ąją dieną ištriname tavo planą, tavo atsakymus, tavo dokumentus ir viską, kas juose asmeniška. Lieka sutikimo patvirtinimas, kurio reikalauja mūsų buhalterinės apskaitos įstatymas — be plano, be skolų, be sumų. Tavo planas yra tavo ir veikia be mūsų.",
+  "mf_x_del90": "90-ąją dieną ištriname tavo planą, tavo atsakymus, tavo dokumentus ir viską, kas juose asmeniška. Mūsų paslaugoje nelieka nieko, kas tavo. Tavo planas yra tavo ir veikia be mūsų.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "Kai gyvenimas staiga pasikeičia",
@@ -8481,7 +8481,7 @@ DFWI18n.register('HU', "Magyar", {
   "mf_x_created": "Készült",
   "mf_x_plan_h": "A terved",
   "mf_x_repeat": "Nem helyettesítjük ezeket a szolgáltatásokat. Arra készültünk, hogy mellettük használj minket.",
-  "mf_x_del90": "A 90. napon töröljük a tervedet, a válaszaidat, a dokumentumaidat és mindent, ami személyes bennük. Ami marad, az a hozzájárulási visszaigazolás, amelyet a számviteli törvényünk megkövetel — terv nélkül, tartozások nélkül, összegek nélkül. A terved a tiéd, és nélkülünk is működik.",
+  "mf_x_del90": "A 90. napon töröljük a tervedet, a válaszaidat, a dokumentumaidat és mindent, ami személyes bennük. A szolgáltatásunkban semmi sem marad abból, ami a tiéd. A terved a tiéd, és nélkülünk is működik.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "Amikor az élet hirtelen megváltozik",
@@ -9007,7 +9007,7 @@ DFWI18n.register('RO', "Română", {
   "mf_x_created": "Creat la",
   "mf_x_plan_h": "Planul tău",
   "mf_x_repeat": "Nu înlocuim aceste servicii. Suntem făcuți ca să fim folosiți alături de ele.",
-  "mf_x_del90": "În ziua 90 ștergem planul tău, răspunsurile tale, documentele tale și tot ce este personal în ele. Rămâne chitanța de consimțământ pe care o cere legea noastră contabilă — fără plan, fără datorii, fără sume. Planul tău este al tău și funcționează fără noi.",
+  "mf_x_del90": "În ziua 90 ștergem planul tău, răspunsurile tale, documentele tale și tot ce este personal în ele. În serviciul nostru nu rămâne nimic din ce este al tău. Planul tău este al tău și funcționează fără noi.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Planuri de criză",
   "crisis_title": "Când viața se schimbă brusc",
@@ -9533,7 +9533,7 @@ DFWI18n.register('HR', "Hrvatski", {
   "mf_x_created": "Izrađeno",
   "mf_x_plan_h": "Tvoj plan",
   "mf_x_repeat": "Ne zamjenjujemo ove službe. Napravljeni smo da nas koristiš uz njih.",
-  "mf_x_del90": "90. dana brišemo tvoj plan, tvoje odgovore, tvoje dokumente i sve osobno u njima. Ostaje potvrda o privoli koju traži naš računovodstveni zakon — bez plana, bez dugova, bez iznosa. Tvoj plan je tvoj i radi bez nas.",
+  "mf_x_del90": "90. dana brišemo tvoj plan, tvoje odgovore, tvoje dokumente i sve osobno u njima. U našoj usluzi ne ostaje ništa tvoje. Tvoj plan je tvoj i radi bez nas.",
   /* ── Pass 3 · Crisis Plans · Weekly Check-in · Document Archive ── */
   "crisis_eyebrow": "Crisis plans",
   "crisis_title": "Kad se život iznenada promijeni",
