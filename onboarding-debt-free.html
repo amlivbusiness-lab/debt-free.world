@@ -791,6 +791,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 
 <script src="/support-data.js"></script>
 <script src="/crisis-data.js"></script>
+<script src="/onboarding-free-i18n.js"></script>
 <script>
 /* ── CONFIG ── */
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
@@ -1384,6 +1385,10 @@ FI: {
   toast_link_fail:'Linkin lähetys ei onnistunut. Lähetä sähköpostia support@debt-free.world'
 }
 };
+/* v16.30 · L1 · additional languages from an external file. EN and FI stay in
+   this file as the fallback route: if the load fails, the form works in
+   English exactly as before, and not a single step breaks. */
+if (window.DFW_ONB_FREE_I18N) Object.assign(I18N, window.DFW_ONB_FREE_I18N);
 
 /* ── I18N ──
    Same architecture as the member area: data-i18n attributes walked at
