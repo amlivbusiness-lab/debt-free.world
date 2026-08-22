@@ -811,6 +811,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--green-pale);min-
 <div class="toast" id="toast"></div>
 
 <script src="/crisis-data.js"></script>
+<script src="/onboarding-dr-i18n.js"></script>
 <script>
 const WORKER_URL = 'https://debt-free-proxy.amlivbusiness.workers.dev';
 const STEP_PCT = [0,14,28,42,57,71,86,100];
@@ -1491,6 +1492,10 @@ FI: {
   act_tone_gentle:'Lempeästi ja kannustaen',act_tone_firm:'Suoraan ja jämäkästi',
 }
 };
+/* v16.30 · L1b · additional languages from an external file. EN and FI stay in
+   this file as the fallback route: if the load fails, the form works in
+   English exactly as before, and not a single step breaks. */
+if (window.DFW_ONB_DR_I18N) Object.assign(I18N, window.DFW_ONB_DR_I18N);
 
 let currentLang = 'EN';
 function t(key){ const d=I18N[currentLang]||I18N.EN; return (d && d[key]!==undefined)?d[key]:(I18N.EN[key]||key); }
